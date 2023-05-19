@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-af
+	<jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/>
 </body>
 </html>
