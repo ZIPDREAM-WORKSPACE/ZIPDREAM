@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>zipdream</title>
+<style>
+	.footer{
+		width:100%;
+		height:200px;
+		background: 
+	}
+</style>
 </head>
 <body>
-af
+	<div class="footer">
+		<div class="footer_inner">
+			
+		</div>
+	</div>
 </body>
 </html>

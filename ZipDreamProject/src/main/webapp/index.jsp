@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ZIPDREAM</title>
 </head>
 <body>
 <button onclick="location.href='<%= request.getContextPath()%>/home'">asdf</button>
+//<jsp:include page="WEB-INF/views/common/footer.jsp" />
+
+<jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/>
 </body>
 </html>
