@@ -59,6 +59,16 @@
 </style>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -70,7 +80,17 @@
 				  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 				</svg>
 				<input type="text" style="width: 70%; height: 95%; border: none;  outline: none; font-size: 18px;">
-				
+				<div class="dropdown">
+					<div class="dropdown-menu">
+						<a class="dropdown-item"></a>
+						<a class="dropdown-item"></a>
+						<a class="dropdown-item"></a>
+					</div>
+					<div class="dropdown-menu">
+					</div>
+					<div class="dropdown-menu">
+					</div>
+				</div>
 			</div>
 			<div class="listWrap">
 				<div class="object">
@@ -88,7 +108,10 @@
 </body>
 
 <script>
-	$("#search>input").
+	$("#search>input").click(function(){
+		/* 세부리스트 보여짐 */
+		
+	});
 </script>
 
 </html>
