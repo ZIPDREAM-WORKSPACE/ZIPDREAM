@@ -7,6 +7,10 @@
 <title>ZIPDREAM</title>
 </head>
 <body>
+
 <jsp:include page="WEB-INF/views/common/footer.jsp" />
+
+	<jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/>
+
 </body>
 </html>
