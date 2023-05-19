@@ -6,10 +6,8 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
+<jsp:include page="/WEB-INF/views/common/adminSideBar.jsp"/>	
+<div style="display:inline-block;">asdf</div>
 </body>
 </html>
