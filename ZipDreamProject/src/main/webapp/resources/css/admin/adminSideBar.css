@@ -1,0 +1,43 @@
+@charset "UTF-8";
+.side_bar {
+	display: inline-block;
+	min-width: 250px;
+	max-width: 250px;
+	height: 1240px;
+	background-color: #FFFFFF;
+}
+
+.side_bar nav {
+	height: 44px;
+	display: flex;
+	position: relative;
+	align-items: center;
+}
+
+.side_bar nav>span {
+	padding-left: 16px;
+}
+
+.side_title {
+	padding: 10px 20px;
+}
+
+.side_menu {
+	margin: 4px 8px 4px 10px;
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
+	cursor: pointer;
+}
+
+.side_img {
+	margin-left: 15px;
+}
+
+.side_arrow {
+	position: absolute;
+	right: 20px;
+}
+
+.clicked {
+	background-color: '326CF9';
+}
