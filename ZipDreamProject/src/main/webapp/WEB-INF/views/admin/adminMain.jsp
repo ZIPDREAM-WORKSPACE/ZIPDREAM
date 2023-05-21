@@ -9,38 +9,38 @@
 	</div>
 	<div class="content-view">
 		<div class="content-view-item">
-			<div class="donut" data-percent="83"></div>
+			<div class="donut" data-percent="${countNumbers.licenseUserCount.percent}"></div>
 			<div>
 				<p class="text-gray">공인중개사</p>
-				<h4>${countNumbers.licenseUserCount}</h4>
+				<h4>${countNumbers.licenseUserCount.num}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
-			<div class="donut" data-percent="30.4"></div>
+			<div class="donut" data-percent="${countNumbers.userCount.percent}"></div>
 			<div>
 				<p class="text-gray">사용자</p>
-				<h4>${countNumbers.userCount}</h4>
+				<h4>${countNumbers.userCount.num}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
-			<div class="donut" data-percent="350"></div>
+			<div class="donut" data-percent="${countNumbers.objectCount.percent}"></div>
 			<div>
 				<p class="text-gray">매물</p>
-				<h4>${countNumbers.objectCount}</h4>
+				<h4>${countNumbers.objectCount.num}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
-			<div class="donut" data-percent="10.5"></div>
+			<div class="donut" data-percent="${countNumbers.reportCount.percent}"></div>
 			<div>
 				<p class="text-gray">신고</p>
-				<h4>${countNumbers.reportCount}</h4>
+				<h4>${countNumbers.reportCount.num}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
-			<div class="donut" data-percent="9"></div>
+			<div class="donut" data-percent="${countNumbers.eventCount.percent}"></div>
 			<div>
 				<p class="text-gray">이벤트</p>
-				<h4>${countNumbers.eventCount}</h4>
+				<h4>${countNumbers.eventCount.num}</h4>
 			</div>
 		</div>
 	</div>
@@ -150,12 +150,12 @@
 		</div>
 		<div class="content-main-chat">
 			<div style="text-align: center;">
-				<b class="content-main-chat-no">50</b> <br> <span
+				<b class="content-main-chat-no">${countNumbers.chattingCount.chatRoom}</b> <br> <span
 					class="text-gray">현재 채팅 문의</span>
 			</div>
 			<div style="border-right: 1px solid gray;"></div>
 			<div style="text-align: center;">
-				<b class="content-main-chat-no">20</b> <br> <span
+				<b class="content-main-chat-no">${countNumbers.chattingCount.chattingRoom}</b> <br> <span
 					class="text-gray">답변 중인 문의</span>
 			</div>
 		</div>

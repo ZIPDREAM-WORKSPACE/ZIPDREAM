@@ -12,9 +12,9 @@
 		-->
 	</settings>
 	
-	<!-- <typeAliases>
-		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="member"/>
-	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="com.kh.zipdream.admin.model.vo.MemberApply" alias="memberApply"/>
+	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mapper/mapper.xml" />
