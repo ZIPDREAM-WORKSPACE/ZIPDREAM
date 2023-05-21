@@ -12,35 +12,35 @@
 			<div class="donut" data-percent="83"></div>
 			<div>
 				<p class="text-gray">공인중개사</p>
-				<h4>4600</h4>
+				<h4>${countNumbers.licenseUserCount}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
 			<div class="donut" data-percent="30.4"></div>
 			<div>
 				<p class="text-gray">사용자</p>
-				<h4>4600</h4>
+				<h4>${countNumbers.userCount}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
-			<div class="donut" data-percent="50"></div>
+			<div class="donut" data-percent="350"></div>
 			<div>
 				<p class="text-gray">매물</p>
-				<h4>4600</h4>
+				<h4>${countNumbers.objectCount}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
 			<div class="donut" data-percent="10.5"></div>
 			<div>
 				<p class="text-gray">신고</p>
-				<h4>4600</h4>
+				<h4>${countNumbers.reportCount}</h4>
 			</div>
 		</div>
 		<div class="content-view-item">
 			<div class="donut" data-percent="9"></div>
 			<div>
 				<p class="text-gray">이벤트</p>
-				<h4>4600</h4>
+				<h4>${countNumbers.eventCount}</h4>
 			</div>
 		</div>
 	</div>
@@ -50,44 +50,44 @@
 			<table class="rwd-table">
 				<tbody>
 					<tr>
-						<th>Supplier Code</th>
-						<th>Supplier Name</th>
-						<th>Invoice Number</th>
-						<th>Invoice Date</th>
-						<th>Due Date</th>
-						<th>Net Amount</th>
+						<th>신고자</th>
+						<th>대상자</th>
+						<th>내용</th>
+						<th>타입</th>
+						<th>처리 여부</th>
+						<th>처리 내용</th>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">UPS5005</td>
-						<td data-th="Supplier Name">UPS</td>
-						<td data-th="Invoice Number">ASDF19218</td>
-						<td data-th="Invoice Date">06/25/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$8,322.12</td>
+						<td>UPS5005</td>
+						<td>UPS</td>
+						<td>ASDF19218</td>
+						<td>06/25/2016</td>
+						<td>12/25/2016</td>
+						<td>$8,322.12</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">UPS3449</td>
-						<td data-th="Supplier Name">UPS South Inc.</td>
-						<td data-th="Invoice Number">ASDF29301</td>
-						<td data-th="Invoice Date">6/24/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$3,255.49</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">BOX5599</td>
-						<td data-th="Supplier Name">BOX Pro West</td>
-						<td data-th="Invoice Number">ASDF43000</td>
-						<td data-th="Invoice Date">6/27/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$45,255.49</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">PAN9999</td>
-						<td data-th="Supplier Name">Pan Providers and Co.</td>
-						<td data-th="Invoice Number">ASDF33433</td>
-						<td data-th="Invoice Date">6/29/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$12,335.69</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 				</tbody>
 			</table>
@@ -98,44 +98,52 @@
 			<table class="rwd-table">
 				<tbody>
 					<tr>
-						<th>Supplier Code</th>
-						<th>Supplier Name</th>
-						<th>Invoice Number</th>
-						<th>Invoice Date</th>
-						<th>Due Date</th>
-						<th>Net Amount</th>
+						<th>이벤트 번호</th>
+						<th>카테고리</th>
+						<th>이벤트 이름</th>
+						<th>이벤트 시작일</th>
+						<th>이벤트 종료일</th>
+						<th>쿠폰 번호</th>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">UPS5005</td>
-						<td data-th="Supplier Name">UPS</td>
-						<td data-th="Invoice Number">ASDF19218</td>
-						<td data-th="Invoice Date">06/25/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$8,322.12</td>
+						<td>UPS5005</td>
+						<td>UPS</td>
+						<td>ASDF19218</td>
+						<td>06/25/2016</td>
+						<td>12/25/2016</td>
+						<td>$8,322.12</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">UPS3449</td>
-						<td data-th="Supplier Name">UPS South Inc.</td>
-						<td data-th="Invoice Number">ASDF29301</td>
-						<td data-th="Invoice Date">6/24/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$3,255.49</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">BOX5599</td>
-						<td data-th="Supplier Name">BOX Pro West</td>
-						<td data-th="Invoice Number">ASDF43000</td>
-						<td data-th="Invoice Date">6/27/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$45,255.49</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 					<tr>
-						<td data-th="Supplier Code">PAN9999</td>
-						<td data-th="Supplier Name">Pan Providers and Co.</td>
-						<td data-th="Invoice Number">ASDF33433</td>
-						<td data-th="Invoice Date">6/29/2016</td>
-						<td data-th="Due Date">12/25/2016</td>
-						<td data-th="Net Amount">$12,335.69</td>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
+					</tr>
+					<tr>
+						<td>UPS3449</td>
+						<td>UPS South Inc.</td>
+						<td>ASDF29301</td>
+						<td>6/24/2016</td>
+						<td>12/25/2016</td>
+						<td>$3,255.49</td>
 					</tr>
 				</tbody>
 			</table>
@@ -155,6 +163,46 @@
 		<div class="content-main-apply">
 			<h3 style="margin-bottom: 32px;">공인중개사 신청</h3>
 
+			<div class="content-main-apply-item">
+				<div class="apply-item-wrap">
+					<div class="apply-item-circle"></div>
+					<div class="apply-item-line"></div>
+				</div>
+				<div style="margin-top: 10px;">
+					<h5>사랑 공인중개사</h5>
+					<p class="text-gray">2023-05-20 13:12</p>
+				</div>
+			</div>
+			<div class="content-main-apply-item">
+				<div class="apply-item-wrap">
+					<div class="apply-item-circle"></div>
+					<div class="apply-item-line"></div>
+				</div>
+				<div style="margin-top: 10px;">
+					<h5>사랑 공인중개사</h5>
+					<p class="text-gray">2023-05-20 13:12</p>
+				</div>
+			</div>
+			<div class="content-main-apply-item">
+				<div class="apply-item-wrap">
+					<div class="apply-item-circle"></div>
+					<div class="apply-item-line"></div>
+				</div>
+				<div style="margin-top: 10px;">
+					<h5>사랑 공인중개사</h5>
+					<p class="text-gray">2023-05-20 13:12</p>
+				</div>
+			</div>
+			<div class="content-main-apply-item">
+				<div class="apply-item-wrap">
+					<div class="apply-item-circle"></div>
+					<div class="apply-item-line"></div>
+				</div>
+				<div style="margin-top: 10px;">
+					<h5>사랑 공인중개사</h5>
+					<p class="text-gray">2023-05-20 13:12</p>
+				</div>
+			</div>
 			<div class="content-main-apply-item">
 				<div class="apply-item-wrap">
 					<div class="apply-item-circle"></div>
