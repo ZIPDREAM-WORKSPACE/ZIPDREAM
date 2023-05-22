@@ -6,11 +6,11 @@ import com.kh.zipdream.map.model.dao.MapDao;
 
 public class MapServiceImpl implements MapService{
 
-	@Autowired
-	private MapDao mapDao;
-	
-	@override
-	public ArrayList<??> selectKeywordList(String keyword){
-		return mapDao.selectkeywordList(String keyword);
-	}
+	/*
+	 * @Autowired private MapDao mapDao;
+	 */
+	/*
+	 * @override public ArrayList<??> selectKeywordList(String keyword){ return
+	 * mapDao.selectkeywordList(String keyword); }
+	 */
 }
