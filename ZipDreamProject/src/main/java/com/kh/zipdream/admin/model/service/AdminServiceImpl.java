@@ -1,5 +1,6 @@
 package com.kh.zipdream.admin.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	public double getPercent(int num1, int num2) {
-		return ((double)num1 / ((double)num2 == 0 ? 1 : (double)num2)) * 100;
+
+		return ((double)(num1-num2) / ((double)num2 == 0 ? 1 : (double)num2)) * 100;
 	}
 	
 	public Map<String,Object> countUser() {
@@ -71,14 +73,17 @@ public class AdminServiceImpl implements AdminService{
 		return map;
 	}
 	
-	public Map<String, MemberApply> selectApplyListLimit5(){
-		Map<String,MemberApply> map = new HashMap<String,MemberApply>();
+	public List<Map<String,String>> selectApplyListLimit5(){
+		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
 		List<MemberApply>list = dao.selectApplyListLimit5();
 		for(int i = 0; i < list.size(); i++) {
-			map.put(i+"", list.get(i));
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("userName", list.get(i).getUserName());
+			map.put("applyDateTime", list.get(i).getApplyDateTime());
+			listResult.add(map);
 		}
 		
-		return map; 
+		return listResult; 
 	}
 }
