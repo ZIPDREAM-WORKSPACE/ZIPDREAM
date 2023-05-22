@@ -13,8 +13,14 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 	
-	@GetMapping("/currentPage")
-	public String moveCurrentPageController() {
-		return "mypage/currentPage";
+
+	@GetMapping("/currentPage") public String moveCurrentPageController() {
+		return "mypage/currentPage"; 
+	
+	}
+	
+	@GetMapping("/couponlist")
+	public String moveCouponListController(){
+		return "mypage/couponList";
 	}
 }
