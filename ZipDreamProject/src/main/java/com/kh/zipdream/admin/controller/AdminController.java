@@ -31,7 +31,7 @@ public class AdminController {
 		countNumbers.put("chattingCount", service.countChattingRoom());
 		
 		model.addAttribute("countNumbers",countNumbers);
-		model.addAttribute("ApplyList",service.selectApplyListLimit5());
+		model.addAttribute("applyList",service.selectApplyListLimit5());
 		return "admin/adminMain";
 	}
 }
