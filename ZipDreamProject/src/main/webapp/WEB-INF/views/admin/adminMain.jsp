@@ -4,11 +4,11 @@
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
-	<div class="content-header">
+	<header class="content-header">
 		<h2>집드림 현황</h2>
 		<p>항상 집드림을 위해 일하시는 여러분께 감사드리며 오늘 하루도 화이팅!</p>
-	</div>
-	<div class="content-view">
+	</header>
+	<section class="content-view">
 		<div class="content-view-item">
 			<div class="donut" data-percent="${countNumbers.licenseUserCount.percent}"></div>
 			<div>
@@ -44,9 +44,9 @@
 				<h4>${countNumbers.eventCount.num}</h4>
 			</div>
 		</div>
-	</div>
-	<div class="content-main">
-		<div class="content-main-report">
+	</section>
+	<section class="content-main">
+		<article class="content-main-report">
 			<h3 style="margin: 0px 25px 15px;">신고 현황</h3>
 			<table class="rwd-table">
 				<tbody>
@@ -92,9 +92,9 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</article>
 
-		<div class="content-main-event">
+		<article class="content-main-event">
 			<h3 style="margin: 0px 25px 15px;">현재 진행중 이벤트</h3>
 			<table class="rwd-table">
 				<tbody>
@@ -148,8 +148,8 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="content-main-chat">
+		</article>
+		<article class="content-main-chat">
 			<div style="text-align: center;">
 				<b class="content-main-chat-no">${countNumbers.chattingCount.chatRoom}</b> <br> <span
 					class="text-gray">현재 채팅 문의</span>
@@ -159,9 +159,9 @@
 				<b class="content-main-chat-no">${countNumbers.chattingCount.chattingRoom}</b> <br> <span
 					class="text-gray">답변 중인 문의</span>
 			</div>
-		</div>
+		</article>
 
-		<div class="content-main-apply">
+		<article class="content-main-apply">
 			<h3 style="margin-bottom: 32px;">공인중개사 신청</h3>
 			
 			<c:forEach var="apply" items="${applyList}">
@@ -177,8 +177,8 @@
 				</div>
 			</c:forEach>
 			
-		</div>
-	</div>
+		</article>
+	</section>
 
 </section>
 <script>

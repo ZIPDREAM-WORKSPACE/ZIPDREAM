@@ -75,10 +75,27 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countNoticeBoard");
 	}
 	
-	public ArrayList<NoticeBoard> selectNoticeBoard(PageInfo pi){
+	public ArrayList<NoticeBoard> selectNoticeBoardList(PageInfo pi){
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		return (ArrayList) sqlSession.selectList("admin-mapper.selectNoticeBoard","",rowBounds);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectNoticeBoardList","",rowBounds);
 	}
+	
+	public int insertNoticeBoard(NoticeBoard nb) {
+		return sqlSession.insert("admin-mapper.insertNoticeBoard",nb);
+	}
+
+	public int updateNoticeBoard(NoticeBoard nb) {
+		return sqlSession.update("admin-mapper.updateNoticeBoard",nb);
+	}
+	
+	public NoticeBoard selectNoticeBoard(int boardNo) {
+		return sqlSession.selectOne("admin-mapper.selectNoticeBoard",boardNo);
+	}
+	
+	public int deleteNoticeBoard(int boardNo) {
+		return sqlSession.delete("admin-mapper.deleteNoticeBoard",boardNo);
+	}
+	
 }

@@ -26,7 +26,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${noticeBoardList.list}" var="b">
-								<tr>
+								<tr onclick="location.href='<%=request.getContextPath()%>/admin/notice/detail?boardNo=${b.noticeBoardNo}'">
 									<td>${b.noticeBoardNo }</td>
 									<td>${b.noticeBoardContent }...</td>
 									<td>${b.noticeBoardTitle }</td>

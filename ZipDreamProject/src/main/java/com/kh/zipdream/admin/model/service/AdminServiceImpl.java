@@ -93,13 +93,29 @@ public class AdminServiceImpl implements AdminService{
 		return listResult; 
 	}
 	
-	public void selectNoticeBoard(int cp,Map<String, Object> map){
+	public void selectNoticeBoardList(int cp,Map<String, Object> map){
 		int listCount = dao.countNoticeBoard();
 		int pageLimit = 10;
 		int boardLimit = 10;
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
 		map.put("pi", pi);
-		map.put("list", dao.selectNoticeBoard(pi));
+		map.put("list", dao.selectNoticeBoardList(pi));
+	}
+	
+	public int insertNoticeBoard(NoticeBoard nb) {
+		return dao.insertNoticeBoard(nb);
+	}
+	
+	public int updateNoticeBoard(NoticeBoard nb) {
+		return dao.updateNoticeBoard(nb);
+	}
+	
+	public NoticeBoard selectNoticeBoard(int boardNo) {
+		return dao.selectNoticeBoard(boardNo);
+	}
+	
+	public int deleteNoticeBoard(int boardNo) {
+		return dao.deleteNoticeBoard(boardNo);
 	}
 }

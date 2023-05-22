@@ -83,8 +83,33 @@
 		SELECT COUNT(*) FROM USER.NOTICE_BOARD
 	</select>
 	
-	<select id="selectNoticeBoard" resultMap="noticeBoardResultSet">
-		SELECT NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, MID(NOTICE_BOARD_CONTENT,1,15) AS NOTICE_BOARD_CONTENT, CREATE_DATETIME
+	<select id="selectNoticeBoardList" resultMap="noticeBoardResultSet">
+		SELECT 
+			NOTICE_BOARD_NO, 
+			NOTICE_BOARD_TITLE, 
+			<![CDATA[replace(MID(NOTICE_BOARD_CONTENT,1,15),'<p>','') AS NOTICE_BOARD_CONTENT]]>,
+			CREATE_DATETIME
 		FROM USER.NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
 	</select>
+	
+	<insert id="insertNoticeBoard" parameterType="noticeBoard">
+		INSERT INTO USER.NOTICE_BOARD (NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENT, CREATE_DATETIME)
+		VALUES (#{noticeBoardTitle},#{noticeBoardContent},SYSDATE())
+	</insert>
+	
+	<update id="updateNoticeBoard" parameterType="noticeBoard">
+		UPDATE USER.NOTICE_BOARD SET 
+			 NOTICE_BOARD_TITLE = #{noticeBoardTitle},
+			 NOTICE_BOARD_CONTENT = #{noticeBoardContent}			
+		WHERE NOTICE_BOARD_NO = #{noticeBoardNo}
+			
+	</update>
+	
+	<select id="selectNoticeBoard" resultMap="noticeBoardResultSet">
+		SELECT * FROM USER.NOTICE_BOARD WHERE NOTICE_BOARD_NO = #{boardNo}
+	</select>
+	
+	<delete id="deleteNoticeBoard">
+		DELETE FROM USER.NOTICE_BOARD WHERE NOTICE_BOARD_NO = #{boardNo}
+	</delete>
 </mapper>
