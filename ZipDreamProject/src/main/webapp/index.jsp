@@ -11,6 +11,14 @@
 <button onclick="location.href='<%= request.getContextPath()%>/home'">asdf</button>
 <jsp:include page="WEB-INF/views/common/header.jsp" />
 
+
 <%-- <jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/> --%>
+
+<jsp:include page="WEB-INF/views/main/main.jsp" />
+	<%-- <jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/> --%>
+
+
+
+
 </body>
 </html>
