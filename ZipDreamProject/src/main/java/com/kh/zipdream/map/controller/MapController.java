@@ -15,29 +15,29 @@ import com.kh.zipdream.map.model.service.MapService;
 @RequestMapping("/map")
 public class MapController {
 	
-	private MapService mapService;
-	
-	@Autowired
-	public MapController(MapService mapService) {
-		this.mapService = mapService;
-	}
-	
-	public MapController() {
-		
-	}
+	/*
+	 * private MapService mapService;
+	 * 
+	 * @Autowired public MapController(MapService mapService) { this.mapService =
+	 * mapService; }
+	 * 
+	 * public MapController() {
+	 * 
+	 * }
+	 */
 	
 	@GetMapping("/main")
 	public String moveMapController(){
 		return "map/mapFirstPage";
 	}
 	
-	@GetMapping("/jqAutoSearch")
-	public String autoSearch(String keyword) {
-		
-		ArrayList<??> list = mapService.selectKeywordList(keyword);
-		
-		
-		return new Gson().toJson(list);
-	}
+	/*
+	 * @GetMapping("/jqAutoSearch") public String autoSearch(String keyword) {
+	 * 
+	 * ArrayList<??> list = mapService.selectKeywordList(keyword);
+	 * 
+	 * 
+	 * return new Gson().toJson(list); }
+	 */
 	
 }

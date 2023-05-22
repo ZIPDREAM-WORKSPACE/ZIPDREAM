@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MapDao {
 
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	
-	public ArrayList<??> selectKeywordList(){
-		return (ArrayList) sqlSession.selectKeywordList("");
-	}
+	/*
+	 * @Autowired private SqlSessionTemplate sqlSession;
+	 */	
+	/*
+	 * public ArrayList<??> selectKeywordList(){ return (ArrayList)
+	 * sqlSession.selectKeywordList(""); }
+	 */
 }
