@@ -5,31 +5,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>zipdream</title>
+<title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
+	
+
 <!-- Jquey 라이브러리 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 부트스트랩에서 제공하있는 스타일 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- 부투스트랩에서 제공하고있는 스크립트 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+ <!-- 부트스트랩에서 제공하있는 스타일  -->
+ <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+<!-- 부투스트랩에서 제공하고있는 스크립트   -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-<!-- Default theme -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-<!-- Semantic UI theme -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
 
+<!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+
+<!-- 	
+<!-- 슬릭 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"> 
+
+
+
+<!-- aos 라이브러리 -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+
 
 <style>
 * {
@@ -71,6 +80,7 @@
 	line-height : 40px;
 	box-shadow: 0 17px 20px -18px rgba(0, 0, 0, 1);
 	cursor: pointer;
+	font-weight: 500;
 }
 .login>a{
 	color:white;
@@ -93,8 +103,8 @@
 }
 
 #logo {
-	width: 5vw;
-	height: 4vw;
+	width: 4.5vw;
+	height: 3.5vw;
 	cursor: pointer;
 	justify-content: center;
 	min-width: 50px;
@@ -108,7 +118,7 @@
 	width: 18%;
 	text-align: center;
 	cursor: pointer;
-	text-align: center;
+	font-weight: 500;
 }
 
 .h_text>a:hover {
@@ -145,6 +155,7 @@
             </c:if>
 			<div class="login"><a href="#">로그인</a></div>
 		</div>
+		
 	</div>
 
 </body>
