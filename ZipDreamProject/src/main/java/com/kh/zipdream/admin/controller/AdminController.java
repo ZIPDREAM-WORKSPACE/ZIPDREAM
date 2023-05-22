@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.zipdream.admin.model.service.AdminService;
 
@@ -33,5 +34,20 @@ public class AdminController {
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
 		return "admin/adminMain";
+	}
+	
+	@GetMapping("/notice")
+	public String notice(Model model,
+						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						 ) {
+		Map<String, Object> map = new HashMap();
+		service.selectNoticeBoard(cp,map);
+		model.addAttribute("noticeBoardList",map);
+		return "admin/adminNotice";
+	}
+	
+	@GetMapping("/notice/enrollForm")
+	public String noticeEnrollForm() {
+		return "admin/adminNoticeEnrollForm";
 	}
 }
