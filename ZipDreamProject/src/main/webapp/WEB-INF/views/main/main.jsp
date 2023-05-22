@@ -9,9 +9,6 @@
 	object-fit: cover;
 }
 
-/* body {
-	overflow-x: hidden;
-} */
 
 .slider {
 	position: relative;
@@ -98,9 +95,8 @@
 	margin: auto;
 	text-align: center;
 	line-height: 400px;
-	font-size: 30px;
+	font-size: 35px;
 	font-weight: 600;
-	font-size: 30px;
 	color: #1F4B6B;
 }
 
@@ -128,12 +124,22 @@
 }
 
 .main_text {
+	width:100%;
 	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	text-align:center;
+	top:30%;
 	color: white;
 	font-weight: 600;
+	font-size:45px;
+}
+.main_text2 {
+	width:100%;
+	position: absolute;
+	text-align:center;
+	top:40%;
+	color: white;
+	font-weight: 400;
+	font-size:20px;
 }
 
 .search {
@@ -150,7 +156,7 @@
 	color: white;
 	margin: auto;
 	text-align: center;
-	font-size: 30px;
+	font-size: 35px;
 	font-weight: 600;
 }
 
@@ -215,6 +221,8 @@
 		margin: auto;
 	}
 }
+
+
 
 .news_title {
 	font-weight: 500;
@@ -299,29 +307,107 @@
 	margin-left:5px;
 	 animation: move 0.7s ease-in-out infinite;
 }
-.main_ad2{
-	height:700px;
-	width:100%;
-	background: #F4F9FF;
+
+
+
+
+@media only screen and (max-width: 1200px) {
+	.main_ad_inner{
 	
-}
-.main_ad_inner{
 	height:700px;
 	width:55%;
 	margin: auto;
-	display: flex;
+	display: block;
 	align-items:center;
-}
-.main_ad_text{
-	height:700px;
-	width:50%;
+	
+	}
+	.main_ad_text{
+	height:500px;
+	width:100%;
 	padding-top:20%;
 	
+	}
+	.main_ad_text>h1{
+		font-weight: 600;
+		
+	}
+	.mImage>img{
+		width:100%;
+		height:100%;
+		object-fit:cover;
+	}
+	.mImage{
+		width:100%;
+		height:100%;
+	}
+	.main_ad_image{
+		width:100%;
+		height:40%;
+		background: black;
+		box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+	}
+	.main_ad2{
+		height:900px;
+		width:100%;
+		background: #F4F9FF;
+		
+	}
+		#main_ad22{
+		height:700px;
+		width:100%;
+		background: #F4F9FF;
+		padding-top:70px;
+		
+	}
+
 }
-.main_ad_text>h1{
-	font-weight: 600;
-	
+
+
+@media only screen and (min-width: 1200px) {
+	.main_ad2{
+		height:700px;
+		width:100%;
+		background: #F4F9FF;
+		
+	}
+		.main_ad_inner{
+		
+		height:700px;
+		width:55%;
+		margin: auto;
+		display: flex;
+		align-items:center;
+		
+		}
+		.main_ad_text{
+		height:700px;
+		width:50%;
+		padding-top:20%;
+		
+	}
+	.main_ad_text>h1{
+		font-weight: 600;
+		
+	}
+	.mImage>img{
+		width:100%;
+		height:100%;
+		object-fit:cover;
+	}
+	.mImage{
+		width:100%;
+		height:100%;
+	}
+	.main_ad_image{
+		width:50%;
+		height:40%;
+		background: black;
+		box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+	}
+
+
 }
+
 .more_btn{
 	height:45px;
 	width:135px;
@@ -338,21 +424,7 @@
 	color:rgb(169, 192, 212);
 	transition : 0.2s;
 }
-.mImage>img{
-	width:100%;
-	height:100%;
-	object-fit:cover;
-}
-.mImage{
-	width:100%;
-	height:100%;
-}
-.main_ad_image{
-	width:50%;
-	height:40%;
-	background: black;
-	box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
-}
+
 .main_h5{
 	color:rgb(62, 44, 168);
 }
@@ -363,7 +435,7 @@
 	color:white;
 }
 .login_inner{
-	width:40%;
+	width:100%;
 	height:150px;
 	margin: auto;
 	text-align: center;
@@ -413,6 +485,39 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 50%{top:40px;}
 100%{top:28px;}
 }
+.text_size{
+	font-weight: 600;
+	font-size:35px;
+}
+
+
+.slick-arrow{
+	width: 30px; 
+	height:30px;
+}
+
+.notice .slick-prev:before , .notice .slick-next:before{
+	color: black;
+	font-size: 40px;
+	padding-bottom:30px;
+}
+
+.notice .slick-prev {
+	left:-45px;
+}
+.notice .slick-next, .notice .slick-prev{
+	top:45%;
+}
+
+#slider-div  .slick-dots li button:before{
+	font-size:30px;
+
+	
+}
+
+#slider-div .slick-dots li{
+	margin: 0 30px;
+}
 
 </style>
 </head>
@@ -424,19 +529,20 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 		<div id="slider-div">
 			<div class="main_ad">
 				<img class="s_image" src='https://ifh.cc/g/oJ1bpk.jpg' border='0'>
-				<h1 class="main_text" style="font-size: 50px">집드림이 드리는 혜택</h1>
+				<div class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</div>
+				<div class="main_text2" data-aos="fade-down"  data-aos-duration="2000">복비 할인, 기프티콘 증정</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
 					src="<%=request.getContextPath()%>/resources/images/main2.png"
 					border='0'>
-				<h1 class="main_text" style="font-size: 50px">집드림이 드리는 혜택</h1>
+				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
 					src="<%=request.getContextPath()%>/resources/images/main3.png"
 					border='0'>
-				<h1 class="main_text" style="font-size: 50px">집드림이 드리는 혜택</h1>
+				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
 			</div>
 
 		</div>
@@ -575,9 +681,9 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 	</div>
 	<div class="main_ad2" style="margin-top:200px;">
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><h1 data-aos="fade-down-right" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</h1><br>
-					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물, 제일 먼저 확보하세요</h5><br>
+			<div class="main_ad_text"><div class="text_size" data-aos="fade-down-right" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
+					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물,</h5><h5 class="main_h5" data-aos="flip-up">제일 먼저 확보하세요</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
 			<div class="main_ad_image" data-aos="fade-down"
@@ -588,7 +694,7 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 		</div>
 		
 	</div>
-	<div class="main_ad2" >
+	<div class="main_ad2" id="main_ad22" >
 		<div class="main_ad_inner">
 			<div class="main_ad_image" data-aos="fade-down"
 					     data-aos-easing="linear"
@@ -596,8 +702,8 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
 			</div>
 			<div class="main_ad_text" style="text-align:right;">
-					<h1 data-aos="fade-down-left" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine" >다양한 이벤트를<br>만나보세요.</h1><br>
+					<div class="text_size" data-aos="fade-down-left" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine" >다양한 이벤트를<br>만나보세요.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">첫 가입시 10% 복비 할인</h5>
 					<h5 class="main_h5" data-aos="flip-up"> 첫 거래시 복비 할인 쿠폰</h5><br>
 					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up">더 알아보기</div>
@@ -605,10 +711,10 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 		</div>
 		
 	</div>
-	<div class="main_ad2">
+	<div class="main_ad2" >
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><h1 data-aos="fade-down" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">지역 내 베테랑 부동산이<br>당신의 거래를 책임집니다.</h1><br>
+			<div class="main_ad_text"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine">지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">집드림과 지역 전문 중개사들이</h5><h5 class="main_h5" data-aos="flip-up">함께합니다.</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
@@ -661,7 +767,7 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 			});
 
 			$('#slider-div').slick('slickPlay');
-			$('.slick-dots').css('bottom', '-15px');
+			$('.slick-dots').css('bottom', '50px');
 
 			$('.slider').slick({
 				// centerMode: true,
