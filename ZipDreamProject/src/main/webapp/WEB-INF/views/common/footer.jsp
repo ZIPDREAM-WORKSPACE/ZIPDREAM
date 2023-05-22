@@ -44,8 +44,9 @@
 	height: 30px;
 	background: #515151;
 	text-align: center;
-	line-height: 30px;
 	cursor: pointer;
+	padding-top:2px;
+	
 }
 
 .footer a {
@@ -91,8 +92,8 @@
 				(주)내집마련<br>주소 : 서울시 강남구 테헤란로 14길 6 남도빌딩
 			</div>
 			<div class="btn">
-				<span class="btn_inner" id="chat_btn"><a href="#">1:1문의</a></span>&nbsp;
-				<span class="btn_inner" id="q_btn"><a href="#">자주묻는 질문</a></span>
+				<span class="btn_inner" id="chat_btn"><a href="#" >1:1문의</a></span>&nbsp;
+				<span class="btn_inner" id="q_btn"><a href="#" >자주묻는 질문</a></span>
 			</div>
 			<div>KH, Inc. All rights reserved.</div>
 			<div>
