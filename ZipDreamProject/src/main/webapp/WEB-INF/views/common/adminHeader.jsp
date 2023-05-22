@@ -62,6 +62,7 @@ div {
 	justify-content: center;
 	border-right: 1px solid #E9ECEF;
 	border-bottom: 1px solid #E9ECEF;
+	cursor: pointer;
 }
 
 .header_user {
@@ -84,10 +85,10 @@ div {
 </style>
 </head>
 <body>
-	<section class="header">
-		<div class="logo">
+	<header class="header">
+		<nav class="logo" onclick="location.href='<%=request.getContextPath()%>/admin/main'">
 			<img src="<%=request.getContextPath()%>/resources/images/logo4.png" height="43">
-		</div>
+		</nav>
 		<div class="header_user">
 			<img
 				src="<%=request.getContextPath()%>/resources/images/personIcon.png" height="50">
@@ -96,6 +97,6 @@ div {
 				<div>관리자</div>
 			</div>
 		</div>
-	</section>
+	</header>
 </body>
 </html>
