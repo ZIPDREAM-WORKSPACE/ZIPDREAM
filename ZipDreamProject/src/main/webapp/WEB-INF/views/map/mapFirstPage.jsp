@@ -412,19 +412,44 @@ function removeAllChildNods(el) {
 </script>
 
 <script>
-	<%-- $(function(){
-		$("#keyword").keyup(function(e){
-			$.ajax({
-				url: "<%= request.getContextPath() %>/map/jqAutoSearch",
-				data: {
-					keyword : $("#keyword").val()
-				},
-				success : function(data){
-					
+$(function(){
+	$(".searchBtn").click(()=>{
+		$.ajax({
+			  url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&stdt="+,
+			  success : function(data){
+				let ficheader = "<tr><th>???</th><th>??</th></tr>";  
+				let itheader = ficheader;
+				
+				console.log(data);
+				
+				let entity = $(data).find(":root");
+				console.log(entity);
+				
+				let apartments = $(entity).find("apartment");
+				console.log(apartments);
+				
+				apartments.each(function(index , item){
+				let info = "<tr>"
+							 + "<td>"+$(item).find("").text()+"</td>"
+							 + "<td>"+$(item).find("").text()+"</td>"
+						 + "</tr>";
+				let subject = $(item).find("").text();
+				if(subject == ""){
+					ficheader += info;
+				}else if(subject == ""){
+					itheader += info;
 				}
-			})
-		});
-	}) --%>
+					
+				})
+				
+				$("").html(ficheader);
+				$("").html(itheader);
+			}
+		
+		  }
+		);
+	});
+});
 </script>
 
 	
