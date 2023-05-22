@@ -7,6 +7,13 @@
 		<result column="APPLY_DATETIME" property="applyDateTime"/>
 	</resultMap>	
 	
+	<resultMap type="noticeBoard" id="noticeBoardResultSet">
+		<id column="NOTICE_BOARD_NO" property="noticeBoardNo"/>
+		<result column="NOTICE_BOARD_TITLE" property="noticeBoardTitle"/>
+		<result column="NOTICE_BOARD_CONTENT" property="noticeBoardContent"/>
+		<result column="CREATE_DATETIME" property="createDateTime"/>
+	</resultMap>	
+	
 	<select id="countUser" resultType="_int">
 		SELECT COUNT(*) FROM USER.MEMBER WHERE LICENSE_INT IS NULL AND STATUS = 'Y'
 	</select>
@@ -70,5 +77,14 @@
 		FROM USER.MEMBER_APPLY 
 		JOIN USER.MEMBER ON(USER_NO = REF_UNO) 
 		ORDER BY APPLY_DATETIME DESC LIMIT 5
+	</select>
+	
+	<select id="countNoticeBoard" resultType="_int">
+		SELECT COUNT(*) FROM USER.NOTICE_BOARD
+	</select>
+	
+	<select id="selectNoticeBoard" resultMap="noticeBoardResultSet">
+		SELECT NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, MID(NOTICE_BOARD_CONTENT,1,15) AS NOTICE_BOARD_CONTENT, CREATE_DATETIME
+		FROM USER.NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
 	</select>
 </mapper>

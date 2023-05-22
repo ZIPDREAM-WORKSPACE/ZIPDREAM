@@ -1,12 +1,4 @@
 @charset "UTF-8";
-	.content {
-		min-width: 1553px;
-		width: calc(100% - 300px); 
-		min-height: 900px;
-		position: absolute;
-		top: 80px;
-		left: 250px;
-	}
 	
 	.content-header {
         height: 150px;
@@ -116,12 +108,12 @@
     }
 
     .rwd-table tr:nth-child(odd):not(:first-child) {
-    background-color: #ebf3f9;
+    	background-color: #ebf3f9;
     }
 
     .rwd-table tr:hover:not(:first-child) {
         background-color: #d8e7f3;
-    }
+    }	
     
     .rwd-table th,
     .rwd-table td {
