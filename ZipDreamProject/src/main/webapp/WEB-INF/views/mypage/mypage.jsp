@@ -10,7 +10,6 @@
 		/* border: 1px solid red; */
 	}
 	.listWrap>div{
-		display: inline-block;
 		font-size: 25px;
 		width: 200px;
 		height: 70px;
@@ -23,6 +22,7 @@
 		margin-top:30px;
 		margin-left:24%;
 		height: 70px;
+		display: flex;
 		
 	}
 	.list>a{

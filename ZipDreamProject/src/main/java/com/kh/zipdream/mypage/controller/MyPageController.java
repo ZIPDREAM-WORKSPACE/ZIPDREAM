@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
 
 	@GetMapping("/mypage")
-	public String moveMapController(){
+	public String moveMypageController(){
 		return "mypage/mypage";
+	}
+	
+	@GetMapping("/currentPage")
+	public String moveCurrentPageController() {
+		return "mypage/currentPage";
 	}
 }
