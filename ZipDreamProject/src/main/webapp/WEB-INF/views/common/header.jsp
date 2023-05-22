@@ -147,7 +147,7 @@
 				<li class="h_list"><a href="#"><img id="logo"
 						src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
 				<li class="h_text"><a href="#">알림</a></li>
-				<li class="h_text"><a href="#">마이페이지</a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/mypage">마이페이지</a></li>
 			</ul>
 			<c:if test="${ empty sessionScope.loginUser}"> 
             		<div class="login"><a href="#">로그인</a></div>
