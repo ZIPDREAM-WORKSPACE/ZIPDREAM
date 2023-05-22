@@ -263,7 +263,7 @@
 	margin-bottom:9px;
 }
 #more{
-	width:43%;
+	width:40%;
 	height:30px;
 	text-align:right;
 	margin: auto;
@@ -283,15 +283,20 @@
 #more_text{
 	width:50px;
 	height:26px;
-	border: 2px solid black;
-	margin-left:90%;
-	text-align: center;
-	border-radius: 6px;
+	position: relative;
+	color:black;
+	
 }
+#more_text:hover{
+	text-decoration: none;
+}
+
 #arrow{
+	position:absolute;
 	width:18px;
 	height:18px;
-	padding-bottom: 3px;
+	margin-top: 3px;
+	margin-left:5px;
 	 animation: move 0.7s ease-in-out infinite;
 }
 .main_ad2{
@@ -364,6 +369,51 @@
 	text-align: center;
 	padding-top:80px;
 }
+#login_btn{
+	height:45px;
+	width:135px;
+	border: 3px solid white;
+	font-weight: 600;
+	border-radius: 30px;
+	text-align: center;
+	font-size:20px;
+	cursor: pointer;
+	padding-top:5px;
+	color:white;
+	margin: auto;
+}
+#login_btn:hover{
+		border: 3px solid rgb(56, 28, 211);
+	color:rgb(56, 28, 211);
+	transition : 0.2s;
+}
+#login_ani{
+	height:100px;
+	width:135px;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 50px;
+	
+}
+.s1_arrow{display:inline-block; position:relative; top:28px; text-align:center; animation:arrow_down 1.5s infinite;}
+.scroll-arrow {width:20px; height:20px; border-right: 3px solid white; border-bottom: 3px solid white;
+transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg);  -ms-transform: rotate(45deg);
+animation: arrow-wave 1s infinite; animation-direction: alternate;}
+.scroll-arrow:nth-child(1) {animation-delay: 0.1s;}
+.scroll-arrow:nth-child(2) {margin-top:6px; animation-delay: 0.2s;}
+.scroll-arrow:nth-child(3) {margin-top:6px; animation-delay: 0.3s;}
+
+@keyframes arrow-wave {
+0% {opacity: 0;}
+50% {opacity: .5;}
+100% {opacity: 1;}
+}
+@keyframes arrow_down{
+0%{top:28px;}
+50%{top:40px;}
+100%{top:28px;}
+}
+
 </style>
 </head>
 <body>
@@ -520,7 +570,7 @@
 			</div>
 		</div>
 		<div id="more">
-			<div id="more_text"><span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span></div>
+			<a href="#" id="more_text">더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
 		</div>
 	</div>
 	<div class="main_ad2" style="margin-top:200px;">
@@ -571,9 +621,17 @@
 	</div>
 	<div class="main_login">
 		<div class="login_inner">
-			<div id="login_text"><h1>이 모든 놀라운 기능을</h1><h1>지금 이용해보세요.</h1></div>
-			<div id="login_ani"></div>
-			<div id="login_btn"></div>
+			<div id="login_text" data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500"><h1>이 모든 놀라운 기능을</h1><h1>지금 이용해보세요.</h1></div>
+			<div id="login_ani" >
+				<div class="s1_arrow">
+  <div class="scroll-arrow"></div>
+  <div class="scroll-arrow"></div>
+  <div class="scroll-arrow"></div>
+</div>
+			</div>
+			<div id="login_btn" data-aos="zoom-out-up"  data-aos-duration="3000">로그인</div>
 		</div>
 	</div>
 
