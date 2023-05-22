@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ZIPDREAM</title>
+
 
 <style>
 .s_image {
@@ -352,7 +348,22 @@
 	background: black;
 	box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
-
+.main_h5{
+	color:rgb(62, 44, 168);
+}
+.main_login{
+	height:500px;
+	width:100%;
+	background: black;
+	color:white;
+}
+.login_inner{
+	width:40%;
+	height:150px;
+	margin: auto;
+	text-align: center;
+	padding-top:80px;
+}
 </style>
 </head>
 <body>
@@ -514,14 +525,14 @@
 	</div>
 	<div class="main_ad2" style="margin-top:200px;">
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><h1 data-aos="fade-right" data-aos-duration="1500"
+			<div class="main_ad_text"><h1 data-aos="fade-down-right" data-aos-duration="1500"
      				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</h1><br>
-					<h5 data-aos="flip-up" style="color:grey;">싸고 좋은 매물, 제일 먼저 확보하세요</h5><br>
-					<div class="more_btn">더 알아보기</div>
+					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물, 제일 먼저 확보하세요</h5><br>
+					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
 			<div class="main_ad_image" data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="1500">
+								     data-aos-easing="linear"
+								     data-aos-duration="1500">
 				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
 			</div>
 		</div>
@@ -529,60 +540,43 @@
 	</div>
 	<div class="main_ad2" >
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><h1 data-aos="fade-right" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</h1><br>
-					<h5 data-aos="flip-up" style="color:grey;">싸고 좋은 매물, 제일 먼저 확보하세요</h5><br>
-					<div class="more_btn">더 알아보기</div>
-				</div>
 			<div class="main_ad_image" data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="1500">
+					     data-aos-easing="linear"
+					     data-aos-duration="1500">
 				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
 			</div>
+			<div class="main_ad_text" style="text-align:right;">
+					<h1 data-aos="fade-down-left" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine" >다양한 이벤트를<br>만나보세요.</h1><br>
+					<h5 class="main_h5" data-aos="flip-up">첫 가입시 10% 복비 할인</h5>
+					<h5 class="main_h5" data-aos="flip-up"> 첫 거래시 복비 할인 쿠폰</h5><br>
+					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up">더 알아보기</div>
+				</div>
 		</div>
 		
 	</div>
 	<div class="main_ad2">
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><h1 data-aos="fade-right" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</h1><br>
-					<h5 data-aos="flip-up" style="color:grey;">싸고 좋은 매물, 제일 먼저 확보하세요</h5><br>
-					<div class="more_btn">더 알아보기</div>
+			<div class="main_ad_text"><h1 data-aos="fade-down" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine">지역 내 베테랑 부동산이<br>당신의 거래를 책임집니다.</h1><br>
+					<h5 class="main_h5" data-aos="flip-up">집드림과 지역 전문 중개사들이</h5><h5 class="main_h5" data-aos="flip-up">함께합니다.</h5><br>
+					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
-			<div class="main_ad_image" data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="1500">
+			<div class="main_ad_image"  data-aos="fade-left"
+									     data-aos-easing="linear"
+									     data-aos-duration="1500">
 				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
 			</div>
 		</div>
-		
 	</div>
-	
-<!-- Button trigger modal -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
+	<div class="main_login">
+		<div class="login_inner">
+			<div id="login_text"><h1>이 모든 놀라운 기능을</h1><h1>지금 이용해보세요.</h1></div>
+			<div id="login_ani"></div>
+			<div id="login_btn"></div>
+		</div>
+	</div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-     <div class="modal-body">
-  <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a> have tooltips on hover.</p>
-  <hr>
-  <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a> have tooltips on hover.</p>
-</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 	<script>
 	  
 	
@@ -656,8 +650,4 @@
 		
 	</script>
 
-
-
 	<jsp:include page="../common/footer.jsp" />
-</body>
-</html>
