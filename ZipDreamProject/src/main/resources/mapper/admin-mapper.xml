@@ -92,6 +92,12 @@
 		FROM USER.NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
 	</select>
 	
+		<select id="selectNoticeList" resultMap="noticeBoardResultSet">
+		SELECT *
+		FROM USER.NOTICE_BOARD 
+		ORDER BY CREATE_DATETIME DESC
+	</select>
+	
 	<insert id="insertNoticeBoard" parameterType="noticeBoard">
 		INSERT INTO USER.NOTICE_BOARD (NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENT, CREATE_DATETIME)
 		VALUES (#{noticeBoardTitle},#{noticeBoardContent},SYSDATE())

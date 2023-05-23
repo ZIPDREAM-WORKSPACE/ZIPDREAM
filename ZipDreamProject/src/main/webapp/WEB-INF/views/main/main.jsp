@@ -15,6 +15,7 @@
 	width: 40%;
 	margin: auto;
 }
+
 .news_slider{
 	
 	position: relative;
@@ -226,7 +227,7 @@
 
 
 .news_title {
-	font-weight: 500;
+	font-weight: 600;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -554,53 +555,8 @@ right:-45px;
 
 	<div class="notice">
 		<div class="notice_text" data-aos="fade-up"  data-aos-duration="2000"> 집드림의 부동산 가이드</div>
-		<div class="slider">
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner">
-						<div class="nlist_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner">
-						<div class="nlist_text">임대차 계약</div>
-					</div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
+		<div class="slider" id="n_slider">
+		
 		</div>
 
 	</div>
@@ -624,60 +580,6 @@ right:-45px;
 	<div class="notice">
 		<div class="notice_text" data-aos="fade-up"  data-aos-duration="3000">집드림의 부동산 뉴스</div>
 		<div class="news_slider">
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_title">서울보다 지방이 더 올랐다…분양가 고공행진, 집값 기름붓나</div>
-						<div class="news_content">
-							<div class="news_text">
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어</div>
-							</div>
-							<hr class="hr_color">
-						<div class="news_name">신용수
-							기자&nbsp;&nbsp;|&nbsp;&nbsp;23-05-06</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_title">서울보다 지방이 더 올랐다…분양가 고공행진, 집값 기름붓나</div>
-						<div class="news_content">
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어
-							</div>
-							<hr class="hr_color">
-						<div class="news_name">신용수
-							기자&nbsp;&nbsp;|&nbsp;&nbsp;23-05-06</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div id="more">
 			<a href="https://land.naver.com/news/headline.naver" id="more_text" >더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
@@ -772,72 +674,102 @@ right:-45px;
 			$('#slider-div').slick('slickPlay');
 			$('.slick-dots').css('bottom', '50px');
 
-			$('.slider').slick({
-				// centerMode: true,
-				// centerPadding: '60px',
-				slidesToShow : 3,
-				responsive : [ {
-					breakpoint : 1100,
-					settings : {
-						arrows : true,
-						centerMode : true,
-						centerPadding : '10px',
-						slidesToShow : 2
-					}
-				}, {
-					breakpoint : 800,
-					settings : {
-						arrows : true,
-						centerMode : true,
-						centerPadding : '10px',
-						slidesToShow : 1
-					}
-				} ]
-			});
 			
+			
+			
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/admin/noticeList",
+		 		type : "get",
+		 		dataType : "JSON",
+		 		success : function(result){
+		 			console.log(result);
+		 			let text="";
+		 			for(let i = 0; i<result.list.length; i++){
+		 				text +=
+		 				'<div class="notice_list"><img class="pin"'+
+							'src="<%=request.getContextPath()%>/resources/images/pin.png">'+
+						'<div class="nlist"><div class="nlist_inner">'+
+								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div></div></div></div>'
+		 			
+		 			}
+		 			$("#n_slider").html(text);
+		 			
+		 			
+		 			
+		 			$('#n_slider').slick({
+						// centerMode: true,
+						// centerPadding: '60px',
+						slidesToShow : 3,
+						responsive : [ {
+							breakpoint : 1100,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : 2
+							}
+						}, {
+							breakpoint : 800,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : 1
+							}
+						} ]
+					});
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 		}
+		 	});
+		 	
+		 	
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/naver/news",
+		 		type : "get",
+		 		dataType : "JSON",
+		 		success : function(result){
+		 			let text = "";
+		 			
+		 			for(let i = 0; i<result.items.length; i++){
+		 			
+		 			text +=
+		 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+		 			'<div class="news_title">'+result.items[i].title+'</div>'+
+					'<div class="news_content">'+result.items[i].description+'</div>'+
+						'<hr class="hr_color">'+
+					'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
+					'</div></div></div>';
+		 			}
+					$(".news_slider").html(text);
+					$('.news_slider').slick({
+						// centerMode: true,
+						// centerPadding: '60px',
+						slidesToShow : 2,
+						responsive : [ {
+							breakpoint : 1100,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : 1
+							}
+						} ]
+					
+					});
+		 			console.log(result);
+		 			AOS.init();
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 		}
+		 	})
 	
 			 
-			 	$.ajax({
-			 		url : "<%=request.getContextPath()%>/naver/news",
-			 		type : "get",
-			 		dataType : "JSON",
-			 		success : function(result){
-			 			let text = "";
-			 			
-			 			for(let i = 0; i<result.items.length; i++){
-			 			
-			 			text +=
-			 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
-			 			'<div class="news_title">'+result.items[i].title+'</div>'+
-						'<div class="news_content">'+result.items[i].description+'</div>'+
-							'<hr class="hr_color">'+
-						'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
-						'</div></div></div>';
-			 			}
-						$(".news_slider").html(text);
-						$('.news_slider').slick({
-							// centerMode: true,
-							// centerPadding: '60px',
-							slidesToShow : 2,
-							responsive : [ {
-								breakpoint : 1100,
-								settings : {
-									arrows : true,
-									centerMode : true,
-									centerPadding : '10px',
-									slidesToShow : 1
-								}
-							} ]
-						
-						});
-			 			console.log(result);
-			 			AOS.init();
-			 		},
-			 		error : function(request){
-			 			console.log("에러발생");
-			 			console.log("에러코드 : "+request.status);
-			 		}
-			 	})
+			
 			 	
 		
 				
