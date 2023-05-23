@@ -14,7 +14,7 @@ import com.kh.zipdream.map.model.service.MapService;
 @Controller
 @RequestMapping("/map")
 public class MapController {
-	
+
 	/*
 	 * private MapService mapService;
 	 * 
@@ -25,19 +25,11 @@ public class MapController {
 	 * 
 	 * }
 	 */
-	
+
 	@GetMapping("/main")
-	public String moveMapController(){
+	public String moveMapController() {
 		return "map/mapFirstPage";
 	}
-	
-	/*
-	 * @GetMapping("/jqAutoSearch") public String autoSearch(String keyword) {
-	 * 
-	 * ArrayList<??> list = mapService.selectKeywordList(keyword);
-	 * 
-	 * 
-	 * return new Gson().toJson(list); }
-	 */
+
 	
 }
