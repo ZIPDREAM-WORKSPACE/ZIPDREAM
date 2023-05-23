@@ -3,11 +3,14 @@ package com.kh.zipdream.admin.model.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.zipdream.admin.model.vo.MemberApply;
+import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.common.model.vo.PageInfo;
 
 
 @Repository
@@ -67,4 +70,32 @@ public class AdminDao {
 	public List<MemberApply> selectApplyListLimit5() {
 		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
 	}
+	
+	public int countNoticeBoard() {
+		return sqlSession.selectOne("admin-mapper.countNoticeBoard");
+	}
+	
+	public ArrayList<NoticeBoard> selectNoticeBoardList(PageInfo pi){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectNoticeBoardList","",rowBounds);
+	}
+	
+	public int insertNoticeBoard(NoticeBoard nb) {
+		return sqlSession.insert("admin-mapper.insertNoticeBoard",nb);
+	}
+
+	public int updateNoticeBoard(NoticeBoard nb) {
+		return sqlSession.update("admin-mapper.updateNoticeBoard",nb);
+	}
+	
+	public NoticeBoard selectNoticeBoard(int boardNo) {
+		return sqlSession.selectOne("admin-mapper.selectNoticeBoard",boardNo);
+	}
+	
+	public int deleteNoticeBoard(int boardNo) {
+		return sqlSession.delete("admin-mapper.deleteNoticeBoard",boardNo);
+	}
+	
 }

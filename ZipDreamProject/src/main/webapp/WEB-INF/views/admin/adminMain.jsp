@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
-	<div class="content-header">
+	<header class="content-header">
 		<h2>집드림 현황</h2>
 		<p>항상 집드림을 위해 일하시는 여러분께 감사드리며 오늘 하루도 화이팅!</p>
-	</div>
-	<div class="content-view">
+	</header>
+	<section class="content-view">
 		<div class="content-view-item">
 			<div class="donut" data-percent="${countNumbers.licenseUserCount.percent}"></div>
 			<div>
@@ -43,9 +44,9 @@
 				<h4>${countNumbers.eventCount.num}</h4>
 			</div>
 		</div>
-	</div>
-	<div class="content-main">
-		<div class="content-main-report">
+	</section>
+	<section class="content-main">
+		<article class="content-main-report">
 			<h3 style="margin: 0px 25px 15px;">신고 현황</h3>
 			<table class="rwd-table">
 				<tbody>
@@ -91,9 +92,9 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</article>
 
-		<div class="content-main-event">
+		<article class="content-main-event">
 			<h3 style="margin: 0px 25px 15px;">현재 진행중 이벤트</h3>
 			<table class="rwd-table">
 				<tbody>
@@ -147,8 +148,8 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="content-main-chat">
+		</article>
+		<article class="content-main-chat">
 			<div style="text-align: center;">
 				<b class="content-main-chat-no">${countNumbers.chattingCount.chatRoom}</b> <br> <span
 					class="text-gray">현재 채팅 문의</span>
@@ -158,74 +159,26 @@
 				<b class="content-main-chat-no">${countNumbers.chattingCount.chattingRoom}</b> <br> <span
 					class="text-gray">답변 중인 문의</span>
 			</div>
-		</div>
+		</article>
 
-		<div class="content-main-apply">
+		<article class="content-main-apply">
 			<h3 style="margin-bottom: 32px;">공인중개사 신청</h3>
-
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
+			
+			<c:forEach var="apply" items="${applyList}">
+				<div class="content-main-apply-item">
+					<div class="apply-item-wrap">
+						<div class="apply-item-circle"></div>
+						<div class="apply-item-line"></div>
+					</div>
+					<div style="margin-top: 10px;">
+						<h5>${apply.userName}</h5>
+						<p class="text-gray">${apply.applyDateTime}</p>
+					</div>
 				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-
-		</div>
-	</div>
+			</c:forEach>
+			
+		</article>
+	</section>
 
 </section>
 <script>

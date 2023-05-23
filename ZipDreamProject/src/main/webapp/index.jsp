@@ -9,12 +9,7 @@
 </head>
 <body>
 
-
-<%-- <jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/> --%>
-
 <jsp:include page="WEB-INF/views/main/main.jsp" />
-	<%-- <jsp:include page="WEB-INF/views/map/mapFirstPage.jsp"/> --%>
-
 
 
 

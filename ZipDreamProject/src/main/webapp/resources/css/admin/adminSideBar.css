@@ -7,14 +7,14 @@
 	background-color: #FFFFFF;
 }
 
-.side_bar nav {
+.side_bar aside {
 	height: 44px;
 	display: flex;
 	position: relative;
 	align-items: center;
 }
 
-.side_bar nav>span {
+.side_bar aside>span {
 	padding-left: 16px;
 }
 
