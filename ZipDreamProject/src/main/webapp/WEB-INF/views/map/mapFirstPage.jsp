@@ -411,6 +411,22 @@ function removeAllChildNods(el) {
 }
 </script>
 
+<script>
+	<%-- $(function(){
+		$("#keyword").keyup(function(e){
+			$.ajax({
+				url: "<%= request.getContextPath() %>/map/jqAutoSearch",
+				data: {
+					keyword : $("#keyword").val()
+				},
+				success : function(data){
+					
+				}
+			})
+		});
+	}) --%>
+</script>
+
 	
 </body>
 
