@@ -3,6 +3,9 @@
 
 
 <style>
+
+
+
 .s_image {
 	width: 100%;
 	height: 700px;
@@ -16,13 +19,7 @@
 	margin: auto;
 }
 
-.news_slider{
-	
-	position: relative;
-	width: 40%;
-	margin: auto;
 
-}
 
 .slider .slick-list,  .news_slider .slick-list{
 	margin: 0 -20px;
@@ -361,6 +358,13 @@
 		padding-top:70px;
 		
 	}
+		.news_slider{
+		
+		position: relative;
+		width:50%;
+		margin: auto;
+	
+	}
 
 }
 
@@ -405,6 +409,13 @@
 		height:40%;
 		background: black;
 		box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+	}
+	.news_slider{
+		
+		position: relative;
+		width:80%;
+		margin: auto;
+	
 	}
 
 
@@ -524,37 +535,146 @@ right:-45px;
 	margin: 0 30px;
 }
 
+
+.ad_image{
+	width: 60px;
+	height: 60px;
+	object-fit:cover;
+}
+.chat{
+	width:100px;
+	height:100px;
+	position: fixed;
+	bottom:3%;
+	right:3%;
+	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 10px;
+	border-radius: 50px;
+	z-index: 99;
+	text-align: center;
+	font-weight: 500;
+	background: white;
+	padding-top:5px;
+	font-size:20px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.chat>img{
+	width:60%;
+	margin-left:5%;
+	object-fit:cover;
+	
+}
+.chatting{
+	width:300px;
+	height:500px;
+	background: #D4E1EF;
+	bottom:3%;
+	right:3%;
+	position: fixed;
+	z-index: 99;
+	border-radius: 10px;
+	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 20px;
+	display: none;
+	
+}
+.chatting_inner{
+	width:300px;
+	height:350px;
+	margin-top:75px;
+	background: white;
+	border-bottom:1px solid rgb(234, 234, 234);
+	border-top:1px solid rgb(212, 212, 212);
+	
+}
+.chat_header{
+	position:absolute;
+	top:25px;
+	width: 100%;
+	text-align: center;
+	font-weight: 600;
+}
+.chat_header>img{
+	width:17px;
+	height:17px;
+	margin-bottom:3px;
+}
+#x{
+	position: absolute;
+	right:13px;
+	top:-10px;
+	width:12px;
+	height:12px;
+	cursor: pointer;
+	
+}
+.chat_bottom{
+	width:90%;
+	height:40px;
+	background: white;
+	border-radius: 30px;
+	margin: auto;
+	margin-top:17px;
+	border : 1px solid grey;
+	
+}
+#chat_msg{
+	margin-left:10px;
+	margin-top:5px;
+	border: none;
+
+}
+#chat_msg:focus{
+	outline: none;
+	!
+	important;
+}
+#send{
+	width:30px;
+	height:30px;
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
 
 	<jsp:include page="../common/header.jsp" />
-
+	<div class="chat" ><img src='https://ifh.cc/g/mQ6LcQ.png' ><br>채팅</div>
+	<div class="chatting">
+		<div class="chat_header"><img id="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
+		<div class="chatting_inner"> </div>
+		<div class="chat_bottom"><input type="text" id="chat_msg"></input><img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
+	</div>
+	
+	
 	<div style="padding: 0; background-color: white;">
 		<div id="slider-div">
 			<div class="main_ad">
 				<img class="s_image" src='https://ifh.cc/g/oJ1bpk.jpg' border='0'>
-				<div class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</div>
-				<div class="main_text2" data-aos="fade-down"  data-aos-duration="2000">복비 할인, 기프티콘 증정</div>
+				<div class="main_text " >집드림이 드리는 혜택</div>
+				<div class="main_text2">복비 할인, 기프티콘 증정</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
 					src="<%=request.getContextPath()%>/resources/images/main2.png"
 					border='0'>
-				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
+				<h1 class="main_text">집드림이 드리는 혜택</h1>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
 					src="<%=request.getContextPath()%>/resources/images/main3.png"
 					border='0'>
-				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
+				<h1 class="main_text" >집드림이 드리는 혜택</h1>
 			</div>
 
 		</div>
 	</div>
 
 	<div class="notice">
-		<div class="notice_text" data-aos="fade-up"  data-aos-duration="2000"> 집드림의 부동산 가이드</div>
+		<div class="notice_text" data-aos="fade-up"  data-aos-duration="2000">
+			<img class="ad_image" src='https://ifh.cc/g/s8kd0C.gif'>
+		 집드림의 부동산 가이드</div>
 		<div class="slider" id="n_slider">
 		
 		</div>
@@ -578,7 +698,9 @@ right:-45px;
 
 
 	<div class="notice">
-		<div class="notice_text" data-aos="fade-up"  data-aos-duration="3000">집드림의 부동산 뉴스</div>
+		<div class="notice_text" data-aos="fade-up"  data-aos-duration="3000">
+		<img class="ad_image" src='https://ifh.cc/g/5MrNyC.gif' border='0'>
+		집드림의 부동산 뉴스</div>
 		<div class="news_slider">
 		</div>
 		<div id="more">
@@ -735,29 +857,56 @@ right:-45px;
 		 			
 		 			for(let i = 0; i<result.items.length; i++){
 		 			
-		 			text +=
-		 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
-		 			'<div class="news_title">'+result.items[i].title+'</div>'+
-					'<div class="news_content">'+result.items[i].description+'</div>'+
-						'<hr class="hr_color">'+
-					'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
-					'</div></div></div>';
+		 			
+		 			if(i%2==0){
+		 				text +=
+			 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+			 			'<div class="news_title">'+result.items[i].title+'</div>'+
+						'<div class="news_content">'+result.items[i].description+'</div>'+
+							'<hr class="hr_color">'+
+						'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
+						'</div></div></div>';
+		 				}else{
+		 					text +=
+		 					'<div class="news" style="margin-top:50%;" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+		 					'<div class="news_title">'+result.items[i].title+'</div>'+
+							'<div class="news_content">'+result.items[i].description+'</div>'+
+								'<hr class="hr_color">'+
+							'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
+							'</div></div></div>';
+		 				}
+		 			
 		 			}
 					$(".news_slider").html(text);
 					$('.news_slider').slick({
 						// centerMode: true,
 						// centerPadding: '60px',
-						slidesToShow : 2,
+						slidesToShow : 5,
 						responsive : [ {
-							breakpoint : 1100,
+							breakpoint : 1400,
 							settings : {
 								arrows : true,
 								centerMode : true,
 								centerPadding : '10px',
-								slidesToShow : 1
+								slidesToShow : 4
 							}
-						} ]
-					
+						} , {
+						breakpoint : 1200,
+						settings : {
+							arrows : true,
+							centerMode : true,
+							centerPadding : '10px',
+							slidesToShow : 2
+						}
+					} ,{
+						breakpoint : 900,
+						settings : {
+							arrows : true,
+							centerMode : true,
+							centerPadding : '10px',
+							slidesToShow : 1
+							}
+						}]					
 					});
 		 			console.log(result);
 		 			AOS.init();
@@ -771,7 +920,16 @@ right:-45px;
 			 
 			
 			 	
-		
+		$(".chat").click(function(){
+			$(".chatting").css("display","block");
+			$(".chat").css("display","none");
+			
+		});
+	 	$("#x").click(function(){
+	 		$(".chatting").css("display","none");
+			$(".chat").css("display","block");
+			
+		});
 				
 				
 				 
