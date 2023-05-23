@@ -14,7 +14,8 @@ public class MyPageController {
 	}
 	
 
-	@GetMapping("/currentPage") public String moveCurrentPageController() {
+	@GetMapping("/currentPage") 
+	public String moveCurrentPageController() {
 		return "mypage/currentPage"; 
 	
 	}
