@@ -1,53 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<section class="side_bar">
-	<nav class="side_title">
+<nav class="side_bar">
+	<div class="side_title">
 		<b>Home</b>
-	</nav>
-	<nav class="side_menu">
+	</div>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Category.svg" width="25px" height="25px" class="side_img"> 
 		<span>메뉴</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_title">
+	</aside>
+	<div class="side_title" data-href="main">
 		<b>Pages</b>
-	</nav>
-	<nav class="side_menu">
+	</div>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Messages.svg" width="25px" height="25px" class="side_img"> 
 		<span>회원조회</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Shield Done.svg" width="25px" height="25px" class="side_img"> 
 		<span>공인중개사 승인</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="notice">
 		<img src="<%=request.getContextPath()%>/resources/images/Shield Done-1.svg" width="25px" height="25px" class="side_img"> 
 		<span>공지사항 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Info Circle.svg" width="25px" height="25px" class="side_img"> 
 		<span>신고 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Shield Done-2.svg" width="25px" height="25px" class="side_img"> 
 		<span>이벤트 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Frame 35287.svg" width="25px" height="25px" class="side_img"> 
 		<span>채팅 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
-	<nav class="side_menu">
+	</aside>
+	<aside class="side_menu" data-href="main">
 		<img src="<%=request.getContextPath()%>/resources/images/Wallet.svg" width="25px" height="25px" class="side_img"> 
 		<span>매물 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
-	</nav>
+	</aside>
 	<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="150.000000pt" height="130.000000pt"
          viewBox="0 0 150.000000 130.000000" preserveAspectRatio="xMidYMid meet" style="opacity: 0.15;position: absolute;top:1050px;">
 
@@ -76,34 +76,52 @@
             7z" />
         </g>
     </svg>
-</section>
+</nav>
 
 <script>
-	$(".side_menu").click(function() {
-		let menus = $('.side_menu');
-		for (let i = 0; i < menus.length; i++) {
-			let menu = menus.eq(i);
-			if (menu.hasClass("clicked")) {
-				menu.removeClass("clicked");
-				let src = menu.children('.side_img').attr('src')
-						.replace("_white", "");
-				menu.children('.side_img').attr('src', src);
-				menu.css('background-color', '#FFFFFF');
-				menu.children()[1].style.color = 'black';
-				menu.children('.side_arrow').attr('src',
-						'<%=request.getContextPath()%>/resources/images/Dropdown.svg');
-			}
-		}
-
-		if (!$(this).hasClass("clicked")) {
-			$(this).addClass("clicked");
-			let src = $(this).children('.side_img').attr('src')
-					.replace(".svg", "").concat("_white.svg");
-			$(this).children('.side_img').attr('src', src);
-			$(this).css('background-color', '#326CF9');
-			$(this).children()[1].style.color = '#FFFFFF';
-			$(this).children('.side_arrow').attr('src',
-					'<%=request.getContextPath()%>/resources/images/Dropdown_white.svg');
-		}
-	});
+	// 클릭 css
+	let pathName = window.location.pathname;
+	let pathArray = pathName.split("/");
+	
+	let index = 0;
+	switch(menuPathName = pathArray[3]){
+	case "main" :
+		index = 0;
+        break;
+	case "notice" :
+		index = 3;
+        break;
+   /*  case "user" :
+        index = 1;
+        break;
+    case 값C :
+        값이 C일 때 실행할 명령문;
+        break;
+    case 값D :
+        값이 D일 때 실행할 명령문;
+        break;
+    case 값E :
+        값이 E일 때 실행할 명령문;
+        break; */
+	}
+	
+	let menu = $('.side_menu').eq(index);
+	
+	menu.addClass("clicked");	
+	let src = menu.children('.side_img').attr('src')
+		.replace(".svg", "").concat("_white.svg");
+	menu.children('.side_img')	.attr('src', src);
+	menu.css('background-color', '#326CF9');
+	menu.children()[1].style.color = '#FFFFFF';
+	menu.children('.side_arrow').attr('src',
+		'<%=request.getContextPath()%>/resources/images/Dropdown_white.svg');
+	
+	// 페이지 이동
+	let menus = $('.side_menu');
+	for(item of menus){
+		let pathName = item.dataset.href;
+		item.addEventListener("click", function(){
+			location.href = "<%=request.getContextPath()%>/admin/"+ pathName;
+		});
+	}
 </script>
