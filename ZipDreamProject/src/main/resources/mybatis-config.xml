@@ -19,6 +19,7 @@
 	<mappers>
 		<mapper resource="/mapper/mapper.xml" />
 		<mapper resource="/mapper/admin-mapper.xml" />
+		<mapper resource="/mapper/map-mapper.xml" />
 	</mappers>
 
 </configuration>

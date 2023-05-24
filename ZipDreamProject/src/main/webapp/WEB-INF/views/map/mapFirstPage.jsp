@@ -428,8 +428,19 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            /* var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : ''; */
-            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+           var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+           /*  var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; */
+            
+            /* var detailAddrClob = result[0].address.address_name; */
+            var detailAddrClob = result[0].road_address.address_name;
+            console.log(detailAddrClob);
+            
+            /* var deAddrArr = detailAddrClob.replace('논현로 508', ''); */
+            
+            
+           /*  console.log(deAddrArr); */
+            
+         
             
             var content = '<div class="bAddr">' +
                             '<span class="title">법정동 주소정보</span>' + 
@@ -444,23 +455,26 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             infowindow.setContent(content);
             infowindow.open(map, marker);
             
-            /* console.log(detailAddr); */
-            function centerAddr(detailAddr){
+            console.log(detailAddrClob);
+            $(function (){
+            	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
+            	// result 에 그 지역코드가 저장될 것이고
+            	// result를 콘솔에 찍은후 result값을 활용해준다.
+            	console.log(detailAddrClob)
+            	
             	$.ajax({
-  				  url : "http://apis.data.go.kr/1741000/StanReginCd/getStanReginCdList?ServiceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&type=xml&pageNo=1&numOfRows=3&flag=Y&locatadd_nm="+detailAddr,
-  				  method: "GET",
-  				  contentType: "application/json;charset=utf-8",
-  				  dataType: "json",
-  				  
-  				  success : function(result){
-  					
-  					  console.log("code="+result);
-  					  
-  				}
-  			
-  			  }
-  			);
-            }
+    				  url : "<%= request.getContextPath() %>/map/bjdCode",
+    				  method: "post",
+    				  data: {detailAddrClob : detailAddrClob},
+    				  dataType: "html",
+    				  success : function(result){
+    					  console.log("bjdCode : "+result);
+    		
+    				}
+    			
+    			  }
+    			);
+              });
         }   
     });
 });
@@ -488,7 +502,7 @@ function displayCenterInfo(result, status) {
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
             if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
+                /* infoDiv.innerHTML = result[i].address_name; */
                 break;
             }
         }
