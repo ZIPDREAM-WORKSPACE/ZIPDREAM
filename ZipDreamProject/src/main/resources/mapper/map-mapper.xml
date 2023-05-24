@@ -6,6 +6,6 @@
 		SELECT BJD_CODE
 		FROM USER.BEOPJEONGDONG
 		WHERE BJD_NAME = #{detailAddrClob}
-		AND STATUS = '존재'
+		AND STATUS like '존%'
 	</select>
 </mapper>
