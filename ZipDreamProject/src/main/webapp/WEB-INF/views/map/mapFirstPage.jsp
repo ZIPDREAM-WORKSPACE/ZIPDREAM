@@ -429,11 +429,15 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-           /*  var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; */
+           detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; 
+           // 지번주소 로만 데이터 움직이기
+           
+           let adressNameArray = result[0].address.address_name.split(' ');
+           var detailAddrClob = adressNameArray[0] + ' ' + adressNameArray[1] + ' ' + adressNameArray[2];
+           detailAddrClob = detailAddrClob.replace("서울","서울특별시");
+           /*  var detailAddrClob = result[0].road_address.address_name; */
             
-            /* var detailAddrClob = result[0].address.address_name; */
-            var detailAddrClob = result[0].road_address.address_name;
-            console.log(detailAddrClob);
+            /* console.log(result[0].road_address); */
             
             /* var deAddrArr = detailAddrClob.replace('논현로 508', ''); */
             
@@ -466,10 +470,10 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     				  url : "<%= request.getContextPath() %>/map/bjdCode",
     				  method: "post",
     				  data: {detailAddrClob : detailAddrClob},
-    				  dataType: "html",
+    				  dataType: "text",
     				  success : function(result){
     					  console.log("bjdCode : "+result);
-    		
+    					  
     				}
     			
     			  }
