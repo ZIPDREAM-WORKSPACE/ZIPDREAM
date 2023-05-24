@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!-- Jquery 라이브러리 -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" crossorigin="anonymous"></script>
 <!-- 부트스트랩에서 제공하고있는 스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 부트스트랩에서 제공하있는 스타일 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -27,6 +27,8 @@ rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminFooter.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminMain.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminNotice.css">
+
+<script src="<%=request.getContextPath()%>/resources/js/admin/donut.js"></script>
 <style>
 * {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -81,6 +83,30 @@ div {
 	position: absolute;
 	top: 80px;
 	left: 250px;
+}
+
+.donut {
+    width: 70px;
+    padding-bottom: 70px;
+    position: relative;
+    text-align: center;
+    transition: background .3s ease-in-out;
+    border-radius: 50%;
+    background: conic-gradient(#3F8BC9 0% 0%, rgba(222, 222, 222, 0.098) 0% 100%);
+}
+
+.donut::before {
+    width: 71.5%;
+    padding: 13.2px 0px;
+    position: absolute;
+    left: 14.7%;
+    top: 14.7%;
+    display: block;
+    content: attr(data-percent);
+    transform: skew(-0.03deg);
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #000000;
 }
 </style>
 </head>
