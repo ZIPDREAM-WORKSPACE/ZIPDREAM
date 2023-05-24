@@ -138,7 +138,7 @@
 	top:40%;
 	color: white;
 	font-weight: 400;
-	font-size:20px;
+	font-size:23px;
 }
 
 .search {
@@ -323,9 +323,15 @@
 	.main_ad_text{
 	height:500px;
 	width:100%;
-	padding-top:20%;
+	padding-top:15%;
 	
 	}
+	#main_ad3{
+		height:550px;
+	width:100%;
+	padding-top:15%;
+	}
+	
 	.main_ad_text>h1{
 		font-weight: 600;
 		
@@ -351,8 +357,8 @@
 		background: #F4F9FF;
 		
 	}
-		#main_ad22{
-		height:700px;
+		#main_ad2{
+		height:770px;
 		width:100%;
 		background: #F4F9FF;
 		padding-top:70px;
@@ -370,6 +376,9 @@
 
 
 @media only screen and (min-width: 1200px) {
+.news2{
+	margin-top:50%;
+}
 	.main_ad2{
 		height:700px;
 		width:100%;
@@ -388,7 +397,7 @@
 		.main_ad_text{
 		height:700px;
 		width:50%;
-		padding-top:20%;
+		padding-top:15%;
 		
 	}
 	.main_ad_text>h1{
@@ -566,8 +575,8 @@ right:-45px;
 	
 }
 .chatting{
-	width:300px;
-	height:500px;
+	width:350px;
+	height:600px;
 	background: #D4E1EF;
 	bottom:3%;
 	right:3%;
@@ -579,8 +588,8 @@ right:-45px;
 	
 }
 .chatting_inner{
-	width:300px;
-	height:350px;
+	width:350px;
+	height:450px;
 	margin-top:75px;
 	background: white;
 	border-bottom:1px solid rgb(234, 234, 234);
@@ -622,6 +631,7 @@ right:-45px;
 	margin-left:10px;
 	margin-top:5px;
 	border: none;
+	width:260px;
 
 }
 #chat_msg:focus{
@@ -633,6 +643,23 @@ right:-45px;
 	width:30px;
 	height:30px;
 	cursor: pointer;
+}
+.modal-title{
+	width:60%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.modal-body{
+box-sizing: border-box;
+	overflow:auto;
+}
+#m_date{
+ width:40%; 
+ height:30px; 
+ line-height:30px; 
+ text-align:right;
 }
 
 </style>
@@ -651,21 +678,23 @@ right:-45px;
 	<div style="padding: 0; background-color: white;">
 		<div id="slider-div">
 			<div class="main_ad">
-				<img class="s_image" src='https://ifh.cc/g/oJ1bpk.jpg' border='0'>
+				<img class="s_image" src="https://ifh.cc/g/WmqQ9P.jpg" border='0'>
 				<div class="main_text " >집드림이 드리는 혜택</div>
 				<div class="main_text2">복비 할인, 기프티콘 증정</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
-					src="<%=request.getContextPath()%>/resources/images/main2.png"
+					src="https://ifh.cc/g/5yxa4t.jpg""
 					border='0'>
-				<h1 class="main_text">집드림이 드리는 혜택</h1>
+				<div class="main_text " style="color:rgb(25, 23, 130);">부동산 필수 웹, 집드림</div>
+				<div class="main_text2" style="color:rgb(25, 23, 130);">이런 서비스 이용해보셨나요?</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
-					src="<%=request.getContextPath()%>/resources/images/main3.png"
+					src="https://ifh.cc/g/JgzQJ1.jpg"
 					border='0'>
-				<h1 class="main_text" >집드림이 드리는 혜택</h1>
+				<div class="main_text ">새집 줄게 헌집 다오</div>
+				<div class="main_text2">아파트는 집드림이 대세!</div>
 			</div>
 
 		</div>
@@ -710,7 +739,7 @@ right:-45px;
 	<div class="main_ad2" style="margin-top:200px;">
 		<div class="main_ad_inner">
 			<div class="main_ad_text"><div class="text_size" data-aos="fade-down-right" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
+     				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/ct4KOO.png'><br>원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
 					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물,</h5><h5 class="main_h5" data-aos="flip-up">제일 먼저 확보하세요</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
@@ -722,16 +751,16 @@ right:-45px;
 		</div>
 		
 	</div>
-	<div class="main_ad2" id="main_ad22" >
+	<div class="main_ad2" id="main_ad2" >
 		<div class="main_ad_inner">
 			<div class="main_ad_image" data-aos="fade-down"
 					     data-aos-easing="linear"
 					     data-aos-duration="1500">
-				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
+				<div class="mImage"><img src="https://ifh.cc/g/JwNfdb.jpg"></div>
 			</div>
 			<div class="main_ad_text" style="text-align:right;">
 					<div class="text_size" data-aos="fade-down-left" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine" >다양한 이벤트를<br>만나보세요.</div><br>
+     				data-aos-offset="100" data-aos-easing="ease-in-sine" ><img class="ad_image" src='https://ifh.cc/g/Nqrk4w.png'><br>다양한 이벤트를<br>만나보세요.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">첫 가입시 10% 복비 할인</h5>
 					<h5 class="main_h5" data-aos="flip-up"> 첫 거래시 복비 할인 쿠폰</h5><br>
 					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up">더 알아보기</div>
@@ -741,15 +770,16 @@ right:-45px;
 	</div>
 	<div class="main_ad2" >
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
+			<div class="main_ad_text" id="main_ad3"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/W8ptpC.png'><br>지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">집드림과 지역 전문 중개사들이</h5><h5 class="main_h5" data-aos="flip-up">함께합니다.</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
 			<div class="main_ad_image"  data-aos="fade-left"
 									     data-aos-easing="linear"
 									     data-aos-duration="1500">
-				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
+									     
+				<div class="mImage"><img src="https://ifh.cc/g/hYzCZ9.jpg"></div>
 			</div>
 		</div>
 	</div>
@@ -769,9 +799,33 @@ right:-45px;
 		</div>
 	</div>
 	
+	
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5><span id="m_date"></span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="border:none; background: white; font-size:20px;"> 
+        	<span aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
 	<script>
-	  
+
+	 	function noticeModal(index){
+	 		$("#exampleModalLabel").text(noticeBoardList.list[index].noticeBoardTitle);
+			$("#m_date").text(noticeBoardList.list[index].createDateTime);
+	    	$('#exampleModal').modal("show");
+	    	$(".modal-body").html(noticeBoardList.list[index].noticeBoardContent);
+		}
 	
 		$(function() {
 			$('#slider-div').slick({
@@ -797,26 +851,26 @@ right:-45px;
 			$('.slick-dots').css('bottom', '50px');
 
 			
-			
-			
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/admin/noticeList",
 		 		type : "get",
 		 		dataType : "JSON",
 		 		success : function(result){
+		 			
 		 			console.log(result);
 		 			let text="";
+		 			
+		 			noticeBoardList = result;
+		 			
 		 			for(let i = 0; i<result.list.length; i++){
 		 				text +=
-		 				'<div class="notice_list"><img class="pin"'+
+		 				'<div class="notice_list" onClick="noticeModal('+i+');"><img class="pin"'+
 							'src="<%=request.getContextPath()%>/resources/images/pin.png">'+
 						'<div class="nlist"><div class="nlist_inner">'+
-								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div></div></div></div>'
-		 			
+								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div></div></div></div>';
 		 			}
+		 			
 		 			$("#n_slider").html(text);
-		 			
-		 			
 		 			
 		 			$('#n_slider').slick({
 						// centerMode: true,
@@ -848,6 +902,13 @@ right:-45px;
 		 	});
 		 	
 		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/naver/news",
 		 		type : "get",
@@ -868,7 +929,7 @@ right:-45px;
 						'</div></div></div>';
 		 				}else{
 		 					text +=
-		 					'<div class="news" style="margin-top:50%;" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+		 					'<div class="news news2" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
 		 					'<div class="news_title">'+result.items[i].title+'</div>'+
 							'<div class="news_content">'+result.items[i].description+'</div>'+
 								'<hr class="hr_color">'+
@@ -930,8 +991,7 @@ right:-45px;
 			$(".chat").css("display","block");
 			
 		});
-				
-				
+		
 				 
 				
 		})
