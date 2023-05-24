@@ -182,24 +182,17 @@
 
 </section>
 <script>
-	    let donuts = document.getElementsByClassName("donut");
-	    
-	    function donutAnimation(donut) {
-	    	let total = donut.dataset.percent;
-	        let number = 0;
-	        let donutAnimation = setInterval(() => {
-	            donut.dataset.percent = number;
-	            if(number >= total){
-	            	clearInterval(donutAnimation);	
-	            }
-	            number = (number+0.1).toFixed(12) * 1;
-	            donut.style.background = `conic-gradient(#4F98FF 0 \${number}%, #DEDEDE \${number}% 100% )`;
-	        }, 3);
-	    }
-	
-	    for(let i = 0; i < donuts.length; i++){
-	        donut = donuts.item(i);
-	        donutAnimation(donut);
-	    }
-	</script>
+    let donuts = document.getElementsByClassName("donut");
+    
+
+    for(let i = 0; i < donuts.length; i++){
+        donut = donuts.item(i);
+        if(i % 2 == 0){
+        	donutAnimation(donut, '#4F98FF');
+        }else {
+        	donutAnimation(donut, '#08B1BA');
+        }
+    }
+
+</script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

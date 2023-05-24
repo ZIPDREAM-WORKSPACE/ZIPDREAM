@@ -184,6 +184,7 @@
 		        <hr>
 		        <ul id="placesList"></ul>
 		        <div id="pagination"></div>
+		        <div class="keywordPlaceList"></div>
 		    </div>
 	   </div>
 </div>
@@ -204,6 +205,10 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+var center = map.getCenter();
+var Latitude = center.getLat(); // 위도
+var longitude = center.getLng(); // 경도
 
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
@@ -409,22 +414,129 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+ 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+           var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+           detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; 
+           // 지번주소 로만 데이터 움직이기
+           
+           let adressNameArray = result[0].address.address_name.split(' ');
+           var detailAddrClob = adressNameArray[0] + ' ' + adressNameArray[1] + ' ' + adressNameArray[2];
+           detailAddrClob = detailAddrClob.replace("서울","서울특별시");
+           /*  var detailAddrClob = result[0].road_address.address_name; */
+            
+            /* console.log(result[0].road_address); */
+            
+            /* var deAddrArr = detailAddrClob.replace('논현로 508', ''); */
+            
+            
+           /*  console.log(deAddrArr); */
+            
+         
+            
+            var content = '<div class="bAddr">' +
+                            '<span class="title">법정동 주소정보</span>' + 
+                            detailAddr + 
+                        '</div>';
+
+            // 마커를 클릭한 위치에 표시합니다 
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
+
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+            
+            console.log(detailAddrClob);
+            $(function (){
+            	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
+            	// result 에 그 지역코드가 저장될 것이고
+            	// result를 콘솔에 찍은후 result값을 활용해준다.
+            	console.log(detailAddrClob)
+            	
+            	$.ajax({
+    				  url : "<%= request.getContextPath() %>/map/bjdCode",
+    				  method: "post",
+    				  data: {detailAddrClob : detailAddrClob},
+    				  dataType: "text",
+    				  success : function(result){
+    					  console.log("bjdCode : "+result);
+    					  
+    				}
+    			
+    			  }
+    			);
+              });
+        }   
+    });
+});
+
+// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'idle', function() {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+});
+
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+
+        for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                /* infoDiv.innerHTML = result[i].address_name; */
+                break;
+            }
+        }
+    }    
+} 
+
+ 
 </script>
 
 <script>
-	<%-- $(function(){
-		$("#keyword").keyup(function(e){
+
+
+/* $(function(){
+	$(".searchBtn").click(()=>{
+		function keywordList(pageNo, lawdCd, dealYmd){
 			$.ajax({
-				url: "<%= request.getContextPath() %>/map/jqAutoSearch",
-				data: {
-					keyword : $("#keyword").val()
-				},
-				success : function(data){
-					
+				  url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo="+pageNo+"&numOfRows=10&LAWD_CD="+lawdCd+"&DEAL_YMD="+dealYmd,
+				  method: "GET",
+				  contentType: "application/json;charset=utf-8",
+				  dataType: "json",
+				  
+				  success : function(result){
+					if(typeof result.)
 				}
-			})
-		});
-	}) --%>
+			
+			  }
+			);
+		}
+	});
+}); */ 
 </script>
 
 	
