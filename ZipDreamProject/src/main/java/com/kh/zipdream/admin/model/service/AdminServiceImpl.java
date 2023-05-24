@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.MemberApply;
+import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.common.model.vo.PageInfo;
+import com.kh.zipdream.common.template.Pagination;
 
 @Service
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	private AdminDao dao;
+	
+	@Autowired
+	private Pagination pagination;
 	
 	public Map<String,Object> getMap(int o1, int o2){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -85,5 +91,31 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return listResult; 
+	}
+	
+	public void selectNoticeBoardList(int cp,Map<String, Object> map){
+		int listCount = dao.countNoticeBoard();
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		map.put("pi", pi);
+		map.put("list", dao.selectNoticeBoardList(pi));
+	}
+	
+	public int insertNoticeBoard(NoticeBoard nb) {
+		return dao.insertNoticeBoard(nb);
+	}
+	
+	public int updateNoticeBoard(NoticeBoard nb) {
+		return dao.updateNoticeBoard(nb);
+	}
+	
+	public NoticeBoard selectNoticeBoard(int boardNo) {
+		return dao.selectNoticeBoard(boardNo);
+	}
+	
+	public int deleteNoticeBoard(int boardNo) {
+		return dao.deleteNoticeBoard(boardNo);
 	}
 }
