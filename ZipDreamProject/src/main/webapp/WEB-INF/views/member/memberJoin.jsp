@@ -312,11 +312,12 @@
   //mail인증하기 버튼 클릭 
     $("#emailcheck").on("click",function(){
         isMailAuthed=true;
+        let memMail = $("input[name='memMail']").val();
         $.ajax({
-            url : "<%= request.getContextPath()%>/memeber/join/mailAuth.wow" 
-            ,data : {"mail" : $("input[name='memMail']").val()}
-            ,type : "GET"
-            , dataType : "TEXT"
+        	url : "<%= request.getContextPath()%>/member/mailAuth"
+        	,type : "get"
+            ,data : {"mail" : memMail}
+	 		,dataType : "TEXT"       
             ,success: function(data){
                alert(data);
             },error : function(req,status,err){
