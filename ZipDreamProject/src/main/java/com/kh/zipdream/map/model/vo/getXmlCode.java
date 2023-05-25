@@ -1,4 +1,4 @@
-package com.kh.zipdream.map.controller;
+package com.kh.zipdream.map.model.vo;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -8,54 +8,18 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
-import com.kh.zipdream.map.model.service.MapService;
-import com.kh.zipdream.map.model.vo.getXmlCode;
 @CrossOrigin(originPatterns = "http://localhost:8006")
-@Controller
-@RequestMapping("/map")
-public class MapController {
+@Component
+public class getXmlCode {
 
-   @Autowired
-   private MapService mapService;
-   
-   @Autowired
-   private getXmlCode getXmlCode;
-   
-   @GetMapping("/main")
-   public String moveMapController() {
-      return "map/mapFirstPage";
-   }
-   
-   @ResponseBody
-   @PostMapping("/bjdCode")
-   public int bjdCode(@RequestParam("detailAddrClob") String detailAddrClob,
-                  Model model) {
-      
-      int bjdCode = mapService.selectBjbCode(detailAddrClob);
-         
-      model.addAttribute("bjdCode", bjdCode);
-      System.out.println(bjdCode);
-      return bjdCode;
-   }
-   
-   @GetMapping("/getXmlCode")
-   @ResponseBody
-   public String getXmlCodeToAjax(int code) {
-	      Map<String, Object> nodeMapData = new HashMap<String, Object>();
+   public static String getXmlCodeToAjax(int code) {
+      Map<String, Object> nodeMapData = new HashMap<String, Object>();
               try {
         
                   String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=10&LAWD_CD="+code+"&DEAL_YMD=201512";
@@ -75,6 +39,7 @@ public class MapController {
                   Node firstNode = document.getElementsByTagName("HIT").item(0);
                   NodeList childNodeList = firstNode.getChildNodes();
                   nodeMapData = getNodeList(childNodeList);
+                  System.out.println(nodeMapData.toString());
               } catch (Exception e){
                   e.printStackTrace();
               }
@@ -97,6 +62,6 @@ public class MapController {
               return dataMap;
           }
 
-	      
+      
    
 }
