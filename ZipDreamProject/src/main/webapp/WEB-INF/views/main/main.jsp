@@ -5,7 +5,7 @@
 <style>
 .s_image {
 	width: 100%;
-	height: 800px;
+	height: 700px;
 	object-fit: cover;
 }
 
@@ -121,6 +121,7 @@
 
 .main_ad {
 	position: relative;
+	cursor: grab;
 }
 
 .main_text {
@@ -503,10 +504,13 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 }
 
 .notice .slick-prev {
-	left:-45px;
+	left:-65px;
 }
 .notice .slick-next, .notice .slick-prev{
 	top:45%;
+}
+.notice .slick-next{
+right:-45px;
 }
 
 #slider-div  .slick-dots li button:before{
@@ -676,7 +680,7 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 			</div>
 		</div>
 		<div id="more">
-			<a href="#" id="more_text">더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
+			<a href="https://land.naver.com/news/headline.naver" id="more_text" >더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
 		</div>
 	</div>
 	<div class="main_ad2" style="margin-top:200px;">
@@ -740,13 +744,12 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 			<div id="login_btn" data-aos="zoom-out-up"  data-aos-duration="3000">로그인</div>
 		</div>
 	</div>
+	
 
 	<script>
 	  
 	
 		$(function() {
-		
-			
 			$('#slider-div').slick({
 				slide : 'div', //슬라이드 되어야 할 태그 ex) div, li 
 				infinite : true, //무한 반복 옵션	 
@@ -776,7 +779,7 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 				responsive : [ {
 					breakpoint : 1100,
 					settings : {
-						arrows : false,
+						arrows : true,
 						centerMode : true,
 						centerPadding : '10px',
 						slidesToShow : 2
@@ -784,7 +787,7 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 				}, {
 					breakpoint : 800,
 					settings : {
-						arrows : false,
+						arrows : true,
 						centerMode : true,
 						centerPadding : '10px',
 						slidesToShow : 1
@@ -792,26 +795,58 @@ animation: arrow-wave 1s infinite; animation-direction: alternate;}
 				} ]
 			});
 			
-			$('.news_slider').slick({
-				// centerMode: true,
-				// centerPadding: '60px',
-				slidesToShow : 2,
-				responsive : [ {
-					breakpoint : 1100,
-					settings : {
-						arrows : false,
-						centerMode : true,
-						centerPadding : '10px',
-						slidesToShow : 1
-					}
-				} ]
-			
-			});
-			 AOS.init();
+	
 			 
-			
+			 	$.ajax({
+			 		url : "<%=request.getContextPath()%>/naver/news",
+			 		type : "get",
+			 		dataType : "JSON",
+			 		success : function(result){
+			 			let text = "";
+			 			
+			 			for(let i = 0; i<result.items.length; i++){
+			 			
+			 			text +=
+			 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+			 			'<div class="news_title">'+result.items[i].title+'</div>'+
+						'<div class="news_content">'+result.items[i].description+'</div>'+
+							'<hr class="hr_color">'+
+						'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
+						'</div></div></div>';
+			 			}
+						$(".news_slider").html(text);
+						$('.news_slider').slick({
+							// centerMode: true,
+							// centerPadding: '60px',
+							slidesToShow : 2,
+							responsive : [ {
+								breakpoint : 1100,
+								settings : {
+									arrows : true,
+									centerMode : true,
+									centerPadding : '10px',
+									slidesToShow : 1
+								}
+							} ]
+						
+						});
+			 			console.log(result);
+			 			AOS.init();
+			 		},
+			 		error : function(request){
+			 			console.log("에러발생");
+			 			console.log("에러코드 : "+request.status);
+			 		}
+			 	})
+			 	
+		
+				
+				
+				 
+				
 		})
 		
 	</script>
+	
 
 	<jsp:include page="../common/footer.jsp" />
