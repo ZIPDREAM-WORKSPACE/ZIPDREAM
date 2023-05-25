@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ZIPDREAM</title>
 <style>
-	div{
-		/* border: 1px solid red; */
-	}
+
 	.listWrap>div{
 		font-size: 25px;
-		width: 200px;
+		width: 400px;
 		height: 70px;
 		text-align:center;
 		line-height:70px;
@@ -35,24 +28,22 @@
 		color: white;	
 	}
 	.list:hover{
-		background-color: #171F45;
+		background-color: black;
 		
 	}
 	
 </style>
-</head>
+
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<div style="text-align: center; font-size: 40px; margin-top: 20px;">MY DREAM</div>	
+	<div style="text-align: center; font-size: 40px; margin-top: 20px;">알림</div>	
 	<div class="listWrap">
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage">최근 본 방</a></div>
-		<div class="list"><a href="#">내 매물</a></div>
-		<div class="list"><a href="#">찜하기</a></div>
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></div>
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></div>
+		<div class="list"><a href="#">운영 알림</a></div>
+		<div class="list"><a href="#">관심 분양 알림</a></div>
+		
 	</div>
-	
 </body>
+
 
 <script>
 	// 클릭 css
@@ -61,7 +52,7 @@
 	
 	let index = 0;
 	switch(menuPathName = pathArray[3]){
-	case "currentPage" :
+/* 	case "currentPage" :
 		index = 0;
         break;
 	case "myInfo" :
@@ -69,15 +60,14 @@
         break;
 	case "couponlist" :
 		index = 4;
-        break;
+        break; */
 
 	}
 	
 	let menu = $('.list').eq(index);
 	
 	menu.addClass("clicked");	
-	menu.css('background-color', '#171F45');
+	menu.css('background-color', 'black');
 	menu.children()[0].style.color = '#FFFFFF';
 
 </script>
-</html>

@@ -877,7 +877,7 @@ box-sizing: border-box;
 						// centerPadding: '60px',
 						slidesToShow : 3,
 						responsive : [ {
-							breakpoint : 1100,
+							breakpoint : 1300,
 							settings : {
 								arrows : true,
 								centerMode : true,
@@ -885,7 +885,7 @@ box-sizing: border-box;
 								slidesToShow : 2
 							}
 						}, {
-							breakpoint : 800,
+							breakpoint : 1000,
 							settings : {
 								arrows : true,
 								centerMode : true,

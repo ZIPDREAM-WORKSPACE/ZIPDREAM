@@ -148,8 +148,8 @@
 				<li class="h_text"><a href="#">분양</a></li>
 				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"
 						src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
-				<li class="h_text"><a href="#">알림</a></li>
-				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/mypage">마이페이지</a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 			</ul>
 			<c:if test="${ empty sessionScope.loginUser}"> 
             		<div class="login"><a href="#">로그인</a></div>
