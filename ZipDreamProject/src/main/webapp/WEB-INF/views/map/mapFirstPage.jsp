@@ -475,27 +475,27 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     					  console.log("bjdCode : "+result);
     					  let bjdCodeFirst = result.substring(0, 5)
     					  
-    					  console.log(bjdCodeFirst);	
+    					  console.log('codedd:'+bjdCodeFirst);	
     					  
     					  $.ajax({
-    						url: "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=10&LAWD_CD="+bjdCodeFirst+"&DEAL_YMD=202002",
-    						method: "get",
-    						dataType: "xml",
-    						crossDomain :true,
-    						success: function(resultData){
-    							console.log( typeof(resultData) );
-    							console.log("resultData : "+resultData);
-    						},
-    						error: function(){
-    							console.log("에러남");
-    						}
-    							
-    					  })
-    				}
+    	                      url: "<%= request.getContextPath() %>/map/getXmlCode",
+    	                      method: "get",
+    	                      data: {'code' : bjdCodeFirst},
+    	                      dataType: "text",
+    	                      /* crossDomain :true, */
+    	                      success: function(resultData){
+    	                         console.log("resultData : "+resultData);
+    	                      },
+    	                      error: function(){
+    	                         console.log("에러남");
+    	                      }
+    	                         
+    	                     })
     			
     			  }
-    			);
+    			
               });
+            })
         }   
     });
 });
