@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/sell")
 public class SellController {
 	
-//	@GetMapping("/insert")
-//	public String main() {
-//		return "sell/sellEnrollForm";
-//	}
-	
-	@GetMapping("/detail")
+	@GetMapping("/insert")
 	public String main() {
-		return "sell/sellDetail";
+		return "sell/sellEnrollForm";
 	}
+	
+//	@GetMapping("/detail")
+//	public String main() {
+//		return "sell/sellDetail";
+//	}
 }

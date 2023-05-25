@@ -252,6 +252,14 @@
 		    <version>2.14.2</version>
 		</dependency>
 		
+		<!-- 이메일인증 api : 나훈 -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		
 		<!-- springQuartz 시작 -->
 		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 		<dependency>
@@ -292,6 +300,18 @@
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
+		
+
+		
+		
+		
+		
+		
+
+
+		
+		
+		
 		
 	</dependencies>
     <build>

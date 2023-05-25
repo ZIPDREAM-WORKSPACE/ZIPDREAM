@@ -697,7 +697,7 @@
                 </div>
                 <hr>
                 <div class="modal_body">
-                    <img src="resuorces/imgs/fnvl.jpg" width="200px" style="border-radius: 50%;">
+                    <img src="https://ifh.cc/g/rK1zPs.jpg" width="200px" style="border-radius: 50%;">
                     <p id="seller_name">내돈내산공인중개사</p>
                     <p id="seller_address">소재지 : 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층</p>
                     <p id="seller_number">중개등록번호 : 12345-677-123123</p>
@@ -746,69 +746,6 @@
             </div>
         </div>
     </div>
-<script>
-    $(function(){
-        $(".market").on("click", function(){
-            $(".market_info").show();
-            $(".subway_info").hide();
-            $(".school_info").hide();
-            $(".hospital_info").hide();
-        })
-        $(".subway").on("click", function(){
-            $(".market_info").hide();
-            $(".subway_info").show();
-            $(".school_info").hide();
-            $(".hospital_info").hide();
-        })
-        $(".hospital").on("click", function(){
-            $(".market_info").hide();
-            $(".subway_info").hide();
-            $(".school_info").hide();
-            $(".hospital_info").show();
-        })
-        $(".school").on("click", function(){
-            $(".market_info").hide();
-            $(".subway_info").hide();
-            $(".school_info").show();
-            $(".hospital_info").hide();
-        })
-    })
-    
-    $(function(){
-        $(".contect").on("click",function(){
-            $(".modal-overlay").show();
-            $(".seller_contect_modal").show();
-        })
-        $(".apply").on("click",function(){
-            $(".seller_contect_modal").hide();
-            $(".seller_contect_modal2").show();
-        })
-        $(".meet, .untact").on("click",function(){
-            $(".seller_contect_modal").hide();
-            $(".seller_contect_modal2").hide();
-            $(".finish_apply").show();
-        })
-        $(".close_apply").on("click",function(){
-            $(".seller_contect_modal").hide();
-            $(".seller_contect_modal2").hide();
-            $(".finish_apply").hide();
-            $(".modal-overlay").hide();
-        })
-    })
-    
-    $(function() {
-		$(".right").on("click",function() {
-			$(".picture_two").show();
-			$(".picture_one").hide();
-			$(".left").show();
-			$(".right").hide();
-		})
-		$(".left").on("click",function() {
-			$(".picture_one").show();
-			$(".picture_two").hide();
-			$(".right").show();
-			$(".left").hide();
-		})
-</script>
+    <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
 </body>
 </html>
