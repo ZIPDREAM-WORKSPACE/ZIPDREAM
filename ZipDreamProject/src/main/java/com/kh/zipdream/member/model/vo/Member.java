@@ -22,14 +22,14 @@ public class Member {
 	private String userName;
 	private String email;
 	private String phone;
-	private String nickname;
 	private String address;
 	private Date modifyDateTime;
 	private Date enrollDateTime;
 	private String status;
-	private String license;
 	private String withdraw;
-	private int licenseInt;
+	private String office;
+	private int userLevel;
+
 	
 
 }
