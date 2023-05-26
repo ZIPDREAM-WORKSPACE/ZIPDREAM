@@ -1,38 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+tbody::-webkit-scrollbar {
+    width: 10px;  
+ 
+}
+  tbody::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
 	.notice_table{
 		margin: auto;
-		width:800px;
+		width:1000px;
 		height:480px;
 		border: 1px solid grey;
 		margin-top:50px;
 		margin-bottom:50px;
-	
+		
 	}
-	
 	thead{
 		 display:block;
-		  height:60px;
+		 height:60px;
+		 background: rgb(242, 242, 242);
 	}
 	tbody{
-		  display:block;
+	display:block;
     overflow:auto;
     height:420px;
-    width:100%;
+   
+   border-top: 2px solid grey;
+    border-bottom: 1px solid grey;
+    
 	}
 	table{
     	table-layout: fixed;
     border-collapse: collapse;
 	}
 	  th {
-    border-bottom: 1px solid #444444;
-    border-right: 1px solid #444444;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+  }
+  th:last-child{
+  	border:none;
   }
   tr{
   	height:60px;
-  	 border-bottom: 1px solid #444444;
+  	 border-bottom: 1px solid grey;
   }
+  
 	.notice_table *{
 		
 		text-align: center;
@@ -41,10 +56,10 @@
 		width:100px;
 	}
 	.title{
-		width:200px;
+		width:300px;
 	}
 	.content{
-		width:500px;
+		width:600px;
 	}
 	
 </style>

@@ -9,12 +9,9 @@ tbody::-webkit-scrollbar {
     background: grey;
     border-radius: 10px;
   }
-  tbody::-webkit-scrollbar-track {
-    background: rgb(237, 238, 248);
-  }
 	.notice_table{
 		margin: auto;
-		width:800px;
+		width:1000px;
 		height:480px;
 		border: 1px solid grey;
 		margin-top:50px;
@@ -24,7 +21,7 @@ tbody::-webkit-scrollbar {
 	thead{
 		 display:block;
 		 height:60px;
-		 background: rgb(239, 240, 247);
+		 background: rgb(242, 242, 242);
 	}
 	tbody{
 	display:block;
@@ -59,10 +56,10 @@ tbody::-webkit-scrollbar {
 		width:100px;
 	}
 	.title{
-		width:200px;
+		width:300px;
 	}
 	.content{
-		width:500px;
+		width:600px;
 	}
 	
 </style>

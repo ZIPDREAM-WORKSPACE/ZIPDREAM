@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
 
@@ -31,16 +31,20 @@
 
 .notice_list {
 	height: 300px;
-	background: rgb(36, 43, 106);
+	background: rgb(242, 242, 242);
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
-	color: white;
+	color: black;
 	position: relative;
 	margin-bottom: 20px;
 	cursor: pointer;
 }
-
+.notice_list:hover {
+	
+	background: blue;
+	
+}
 .news {
 	height: 300px;
 	background: rgb(236, 236, 236);
@@ -662,7 +666,24 @@ box-sizing: border-box;
  line-height:30px; 
  text-align:right;
 }
-
+.login_service{
+	width:300px;
+	height:50px;
+	background: grey;
+	text-align: center;
+	margin: auto;
+	line-height:50px;
+	margin-top:50px;
+	background: #1F4B6B;
+	color:white;
+}
+#chat_rooo_btn{
+	width:100px;
+	height:30px;
+	background: green;
+	border: none;
+	align:right;
+}
 </style>
 </head>
 <body>
@@ -671,8 +692,32 @@ box-sizing: border-box;
 	<div class="chat" ><img src='https://ifh.cc/g/mQ6LcQ.png' ><br>채팅</div>
 	<div class="chatting">
 		<div class="chat_header"><img id="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
-		<div class="chatting_inner"> </div>
-		<div class="chat_bottom"><input type="text" id="chat_msg"></input><img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
+		<div class="chatting_inner">
+			<c:choose>  	
+				<c:when test="${empty sessionScope.loginUser}">
+					<div class="login_service">로그인 후 이용가능한 서비스입니다.</div>
+				</c:when> 
+				<c:otherwise> 
+					<div class="chat_open">운영자와 채팅하기</div>
+				</c:otherwise> 
+			</c:choose> 
+			
+			
+		 </div>
+		 
+		<div class="chat_bottom">
+	
+         
+         <c:choose>  	
+			<c:when test="${empty sessionScope.loginUser}">
+				<input type="text" id="chat_msg" readonly></input>
+			</c:when> 
+			<c:otherwise> 
+				<input type="text" id="chat_msg"></input>
+			</c:otherwise> 
+		</c:choose> 
+		
+		<img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
 	</div>
 	
 	
@@ -855,7 +900,7 @@ box-sizing: border-box;
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/admin/noticeList",
 		 		type : "get",
-		 		dataType : "JSON",
+		 		
 		 		success : function(result){
 		 			
 		 			console.log(result);
@@ -903,8 +948,7 @@ box-sizing: border-box;
 		 	});
 		 	
 		 	
-		 	
-		 	
+	
 		 	
 		 	
 		 	
@@ -993,9 +1037,24 @@ box-sizing: border-box;
 			
 		});
 		
-				 
-				
+	 	$(".chat_open").click(function(){
+		 	/* 채팅 */
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
+		 		type : "get",
+		 		success : function(){
+		 			
+		 				console.log("okay");
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 		}
+		 	});
+	 	});	
+	 	
 		})
+		
 		
 	</script>
 	
