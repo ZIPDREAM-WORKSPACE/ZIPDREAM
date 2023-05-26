@@ -119,8 +119,17 @@ div {
 			<img
 				src="<%=request.getContextPath()%>/resources/images/personIcon.png" height="50">
 			<div style="padding-left: 20px;">
-				<b>류준하</b>
-				<div>관리자</div>
+				<c:if test="${not empty sessionScope.loginUser} ">
+					<b>류준하</b>
+					<div>관리자</div>				
+				</c:if>
+				<c:if test="${empty sessionScope.loginUser}">
+					<form action="<%=request.getContextPath() %>/member/memberLogin">
+						<input type="text" name="id">
+						<input type="text" name="password">			
+						<button type="submit">로그인</button>
+					</form>
+				</c:if>
 			</div>
 		</div>
 	</header>
