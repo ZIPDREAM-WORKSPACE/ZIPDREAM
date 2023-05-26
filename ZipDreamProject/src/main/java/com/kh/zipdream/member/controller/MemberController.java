@@ -86,21 +86,23 @@ public class MemberController {
 	}
 
 	
-	  @GetMapping("/insert") public String enrollForm() {
-		  	return "member/memberLogin"; 
-		  	
-	  }
-	  
-	  @PostMapping("/insert") public String insertMember(Member m, HttpSession session, Model model) {
-	  
-	  int result = memberService.insertMember(m);
-	  
-	  String url = ""; if (result > 0) { session.setAttribute("alertMsg", "회원가입");
-	  					url = "redirect:/"; } else { model.addAttribute("errorMsg", "회원가입 실패"); url = "common/errorPage"; }
-	  
-	  return url; 
-	  }
-	  
+	/*
+	 * @GetMapping("/insert") public String enrollForm() { return
+	 * "member/memberLogin";
+	 * 
+	 * }
+	 * 
+	 * @PostMapping("/insert") public String insertMember(Member m, HttpSession
+	 * session, Model model) {
+	 * 
+	 * int result = memberService.insertMember(m);
+	 * 
+	 * String url = ""; if (result > 0) { session.setAttribute("alertMsg", "회원가입");
+	 * url = "redirect:/"; } else { model.addAttribute("errorMsg", "회원가입 실패"); url =
+	 * "common/errorPage"; }
+	 * 
+	 * return url; }
+	 */  
   }
 	 
 

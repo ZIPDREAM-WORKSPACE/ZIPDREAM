@@ -60,7 +60,7 @@
 
     #id-text{
         width: 150px;
-        height: 40px;
+        height: 45px;
         left: 5px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
@@ -77,7 +77,7 @@
 
     #emailcheck{
 		position: absolute;
-	    width: 100px;
+	    width: 115px;
 	    height: 45px;
 	    left: 440px;
 	    top: 135px;
@@ -87,12 +87,12 @@
 
     #ok{
         position: absolute;
-        width: 100px;
-        height: 47px;
-        left: 450px;
-        top: 280px;
-        background-color: #4C69A2;
-        color: white;
+	    width: 114px;
+	    height: 45px;
+	    left: 440px;
+	    top: 190px;
+	    background-color: #4C69A2;
+	    color: white;
     }
 
     #pwd-text{
@@ -129,47 +129,48 @@
     
     #emailchecknumber{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        top: 210px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 335px;
+	    height: 45px;
+	    top: 190px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
     #password{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        top: 390px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 335px;
+	    height: 45px;
+	    top: 290px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
     #confirmPassword{
         position: absolute;
         width: 360px;
         height: 45px;
-        top: 535px;
+        /* top: 535px; */
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
 
     #name{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        bottom: 480px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 360px;
+	    height: 45px;
+	    bottom: 480px;
+	    top: 540px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
     #phone{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        bottom: 380px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 360px;
+	    height: 45px;
+	    bottom: 510px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
     #address{
@@ -235,7 +236,7 @@
                     <button type="button" id="emailcheck" name="emailcheck" >인증번호 전송</button><br><br>
                     
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                    <button type="button" id="ok">확인</button><br>
+                    <button type="button" id="ok">확인</button>
                     
 
                 <h4>비밀번호</h4>
@@ -247,10 +248,10 @@
 
                 <h4>비밀번호 확인</h4>
                 <input type="password" id="confirmPassword" name="userPwdCheck" onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required><br><br>
-                <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br><br>
+                <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
 
                 <h4>이름</h4>
-                <input type="text" id="name" name="username" placeholder="이름을 입력해주세요."><br><br>
+                <input type="text" id="name" name="username" placeholder="이름을 입력해주세요."><br><br><br>
 
                 <h4>전화번호</h4>
                 <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br>

@@ -9,10 +9,13 @@
 		<result column="USER_NAME" property="userName" />
 		<result column="PHONE" property="phone"/>
 		<result column="EMAIL" property="email" />
+		<result column="ADDRESS" property="address"/>
+		<result column="OFFICE" property="office"/>
 		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
 		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
 		<result column="NICKNAME" property="nickname" />
 		<result column="STATUS" property="status" />
+		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
 	
 	
@@ -25,20 +28,20 @@
 	</select>
 	
 <!-- 일반고객 회원가입 -->
-	<insert id="insertMember" parameterType="member">
+	<!-- <insert id="insertMember" parameterType="member">
 		INSERT INTO
 		MEMBER(USER_NO
-		, USER_ID
-		, USER_PWD
-		, USER_NAME
-		, EMAIL)
+			, USER_ID
+			, USER_PWD
+			, USER_NAME
+			, EMAIL)
 		VALUES(SEQ_UNO.NEXTVAL
-		, #{userId}
-		, #{userPwd}
-		, #{userName}
-		, #{email}
-		, 1)
-	</insert> 
+			, #{userId}
+			, #{userPwd}
+			, #{userName}
+			, #{email}
+			, 1)
+	</insert>  -->
 	
 	
 </mapper>
