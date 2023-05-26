@@ -15,10 +15,13 @@
 	<typeAliases>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.MemberApply" alias="memberApply"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.NoticeBoard" alias="noticeBoard"/>
+		<typeAlias type="com.kh.zipdream.sell.model.vo.SellDetail" alias="sellDetail"/>
+		<typeAlias type="com.kh.zipdream.attachment.model.vo.Attachment" alias="attachment"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mapper/admin-mapper.xml" />
+		<mapper resource="/mapper/sell-mapper.xml" />
 	</mappers>
 
 </configuration>

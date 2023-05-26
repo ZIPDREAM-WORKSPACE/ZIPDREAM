@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sellMapper">
+ 
+ 	<insert id="insertSell" useGeneratedKeys="true" parameterType="sellDetail" >
+ 		<selectKey keyProperty="sellNo" resultType="_int" order="BEFORE">
+ 			SELECT NEXTVLA(SELL_NO) FROM DUAL
+ 		</selectKey>
+ 		
+ 		INSERT INTO SELLDETAIL(SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_MAINTENANCE, SELL_PARKING, SELL_SHIRTTERM,
+ 							   SELL_TYPE, SELL_FLOOR, SELL_PRIVATE_AREA, SELL_PROVIDE_AREA, SELL_ALL_FLOOR, SELL_ROOM_COUNT,
+ 							   SELL_TOLET_COUNT, SELL_WAY, SELL_HOUSEHOLD, SELL_ENTRANCE, SELL_MOVE_DATETIME, SELL_BULDTYPE,
+ 							   SELL_INSTALLATION, SELL_AIRCONDITION, SELL_HEATING, PARKING_COUNT, SELL_APPROVAL_DATETIME,
+ 							   COMPLEX_APPLY_DATETIME, WING_COUNT, HOUSEHOLD_COUNT, OPTION, SECURITY, 
+ 							   INSTALLATION_TYPE, INSTALLATION_NAME, INSTALLATION_INFO)
+ 		VALUES(#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{shirtterm}, #{sellType},
+ 			   #{sellPrivateArea}, #{sellFloor}, #{sellRoomCount},#{sellWay}, #{sellHousehold} )
+ 	</insert>
+ 	
+ 
+</mapper>
