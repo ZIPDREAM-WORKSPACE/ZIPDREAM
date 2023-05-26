@@ -7,35 +7,42 @@
 		<result column="APPLY_DATETIME" property="applyDateTime"/>
 	</resultMap>	
 	
+	<resultMap type="noticeBoard" id="noticeBoardResultSet">
+		<id column="NOTICE_BOARD_NO" property="noticeBoardNo"/>
+		<result column="NOTICE_BOARD_TITLE" property="noticeBoardTitle"/>
+		<result column="NOTICE_BOARD_CONTENT" property="noticeBoardContent"/>
+		<result column="CREATE_DATETIME" property="createDateTime"/>
+	</resultMap>	
+	
 	<select id="countUser" resultType="_int">
-		SELECT COUNT(*) FROM USER.MEMBER WHERE LICENSE_INT IS NULL AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 AND STATUS = 'Y'
 	</select>
 	
 	<select id="countUserYesterday" resultType="_int">
-		SELECT COUNT(*) FROM USER.MEMBER 
-		<![CDATA[WHERE LICENSE_INT IS NULL AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		SELECT COUNT(*) FROM MEMBER 
+		<![CDATA[WHERE USER_LEVEL = 1 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countLicenseUser" resultType="_int">
-		SELECT COUNT(*) FROM USER.MEMBER WHERE LICENSE_INT IS NOT NULL AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 2 AND STATUS = 'Y'
 	</select>
 	
 	<select id="countLicenseUserYesterday" resultType="_int">
-		SELECT COUNT(*) FROM USER.MEMBER 
-		<![CDATA[WHERE LICENSE_INT IS NOT NULL AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		SELECT COUNT(*) FROM MEMBER 
+		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countObject" resultType="_int">
-		SELECT COUNT(*) FROM USER.selldetail
+		SELECT COUNT(*) FROM SELLDETAIL
 	</select>
 	
 	<select id="countObjectYesterday" resultType="_int">
-		SELECT COUNT(*) FROM USER.selldetail 
+		SELECT COUNT(*) FROM SELLDETAIL
 		<![CDATA[WHERE SELL_ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countReport" resultType="_int">
-		SELECT COUNT(*) FROM USER.REPORT WHERE REPORT_STATUS = 'N'
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
 	</select>
 	
 	<!-- <select id="countReportYesterday">
@@ -43,23 +50,23 @@
 	</select> -->
 	
 	<select id="countEvent" resultType="_int">
-		SELECT COUNT(*) FROM USER.PROMOTION
+		SELECT COUNT(*) FROM PROMOTION
 	</select>
 	
 	<select id="countEventYesterday" resultType="_int">
-		SELECT COUNT(*) FROM USER.PROMOTION 
+		SELECT COUNT(*) FROM PROMOTION 
 		<![CDATA[WHERE PROMOTION_START_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">
-		SELECT COUNT(*) FROM USER.CHAT_ROOM WHERE STATUS = 'Y'
+		SELECT COUNT(*) FROM CHAT_ROOM WHERE STATUS = 'Y'
 	</select>
 	
 	<select id="countChattingRoom" resultType="_int">
 		SELECT COUNT(*) FROM (
 			SELECT CHAT_ROOM_NO , COUNT(*) as 'COUNT' , 'STATUS' 
-			FROM USER.CHAT_ROOM_JOIN 
-			JOIN USER.CHAT_ROOM USING(CHAT_ROOM_NO) 
+			FROM CHAT_ROOM_JOIN 
+			JOIN CHAT_ROOM USING(CHAT_ROOM_NO) 
 			GROUP BY CHAT_ROOM_NO HAVING STATUS = 'Y'
 		) C 
 		WHERE COUNT > 1
@@ -67,8 +74,43 @@
 	
 	<select id="selectApplyListLimit5" resultMap="memberApplyResultSet">
 		SELECT USER_NAME, APPLY_DATETIME 
-		FROM USER.MEMBER_APPLY 
-		JOIN USER.MEMBER ON(USER_NO = REF_UNO) 
+		FROM MEMBER_APPLY 
+		JOIN MEMBER ON(USER_NO = REF_UNO) 
+		WHERE STATUS='N'
 		ORDER BY APPLY_DATETIME DESC LIMIT 5
 	</select>
+	
+	<select id="countNoticeBoard" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_BOARD
+	</select>
+	
+	<select id="selectNoticeBoardList" resultMap="noticeBoardResultSet">
+		SELECT 
+			NOTICE_BOARD_NO, 
+			NOTICE_BOARD_TITLE, 
+			<![CDATA[REGEXP_REPLACE(NOTICE_BOARD_CONTENT,'<[^>]+>','') AS NOTICE_BOARD_CONTENT]]>,
+			CREATE_DATETIME
+		FROM NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
+	</select>
+	
+	<insert id="insertNoticeBoard" parameterType="noticeBoard">
+		INSERT INTO NOTICE_BOARD (NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENT, CREATE_DATETIME)
+		VALUES (#{noticeBoardTitle},#{noticeBoardContent},SYSDATE())
+	</insert>
+	
+	<update id="updateNoticeBoard" parameterType="noticeBoard">
+		UPDATE NOTICE_BOARD SET 
+			 NOTICE_BOARD_TITLE = #{noticeBoardTitle},
+			 NOTICE_BOARD_CONTENT = #{noticeBoardContent}			
+		WHERE NOTICE_BOARD_NO = #{noticeBoardNo}
+			
+	</update>
+	
+	<select id="selectNoticeBoard" resultMap="noticeBoardResultSet">
+		SELECT * FROM NOTICE_BOARD WHERE NOTICE_BOARD_NO = #{boardNo}
+	</select>
+	
+	<delete id="deleteNoticeBoard">
+		DELETE FROM NOTICE_BOARD WHERE NOTICE_BOARD_NO = #{boardNo}
+	</delete>
 </mapper>

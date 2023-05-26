@@ -129,6 +129,8 @@
 	text-decoration-line: none;
 	color: black;
 }
+
+
 </style>
 </head>
 <body>
@@ -153,7 +155,7 @@
             		<div class="login"><a href="#">로그인</a></div>
 
             </c:if>
-			<div class="login"><a href="#">로그인</a></div>
+			<div class="login"><a href="<%=request.getContextPath()%>/member/login">로그인</a></div>
 		</div>
 		
 	</div>
