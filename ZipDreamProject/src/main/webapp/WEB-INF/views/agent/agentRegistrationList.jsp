@@ -32,6 +32,13 @@
 	.block{
 		height:30rem;
 	}
+	.registration{
+		width : 150px;
+    	height : 3rem;
+    	background-color: white;
+    	border-radius: 30px;
+    	margin-left: 25px;
+	}
 </style>
 </head>
 <body>
