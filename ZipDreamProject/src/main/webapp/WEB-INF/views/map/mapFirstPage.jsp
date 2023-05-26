@@ -464,7 +464,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
             	// result를 콘솔에 찍은후 result값을 활용해준다.
-            	console.log(detailAddrClob)
+            	console.log(detailAddrClob);
             	
             	$.ajax({
     				  url : "<%= request.getContextPath() %>/map/bjdCode",
@@ -473,12 +473,30 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     				  dataType: "text",
     				  success : function(result){
     					  console.log("bjdCode : "+result);
+    					  let bjdCodeFirst = result.substring(0, 5);
     					  
-    				}
+    					  console.log('코드:'+bjdCodeFirst);	
+    					  
+    					  $.ajax({
+    	                      url: "<%= request.getContextPath() %>/map/getXmlCode",
+    	                      method: "get",
+    	                      data: {'code' : bjdCodeFirst},
+    	                      dataType: "text",
+    	                      contentType : "text/plain; charset:UTF-8",
+    	                      /* crossDomain :true, */
+    	                      success: function(resultData){
+    	                         console.log("resultData : "+resultData);
+    	                      },
+    	                      error: function(){
+    	                         console.log("에러남");
+    	                      }
+    	                         
+    	                     })
     			
     			  }
-    			);
+    			
               });
+            })
         }   
     });
 });
