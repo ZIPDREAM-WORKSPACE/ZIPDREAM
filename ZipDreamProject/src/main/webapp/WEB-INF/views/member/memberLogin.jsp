@@ -157,6 +157,7 @@
     </div>
   </div>
     
+    <form action="<%=request.getContextPath()%>/member/memberLogin" method="post">
         <div class="content" id="content">
             <div class="login1">
                 <h2 id="login-text">로그인</h2> 
@@ -168,26 +169,23 @@
                 <h4>비밀번호</h4>
                 <input type="password" id="pwd-text" name="userPwd" placeholder="비밀번호를 입력해주세요"><br><br>
 
-                <input type="checkbox">아이디저장<br></input>
+                <input type="checkbox" name="saveId">아이디저장<br></input>
 
                 <div id="login_search">
                     <button type="button" id="btn1" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
                     <button type="button" id="btn2" onclick="">아이디, 비밀번호 찾기</button>
                 </div><br>
                 
-                <a href="" ><button type="submit" id="loginbtn">로그인</button></a><br><br>
+                <button type="submit" id="loginbtn">로그인</button><br><br>
                 
                 <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>
                 <a href=""><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
 
 
-                
-
-
             </div>
             
         </div>
-
+	</form>
        
     </div>
 
