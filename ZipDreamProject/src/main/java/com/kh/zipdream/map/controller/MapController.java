@@ -1,10 +1,13 @@
 package com.kh.zipdream.map.controller;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -23,7 +26,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import com.kh.zipdream.map.model.service.MapService;
-import com.kh.zipdream.map.model.vo.getXmlCode;
 @CrossOrigin(originPatterns = "http://localhost:8006")
 @Controller
 @RequestMapping("/map")
@@ -31,9 +33,6 @@ public class MapController {
 
    @Autowired
    private MapService mapService;
-   
-   @Autowired
-   private getXmlCode getXmlCode;
    
    @GetMapping("/main")
    public String moveMapController() {
@@ -52,32 +51,43 @@ public class MapController {
       return bjdCode;
    }
    
-   @GetMapping("/getXmlCode")
+   @GetMapping(value="/getXmlCode", produces = "application/text; charset=UTF-8")
    @ResponseBody
    public String getXmlCodeToAjax(int code) {
-	      Map<String, Object> nodeMapData = new HashMap<String, Object>();
+	   		System.out.println("code:"+code);
+	      
+	   		Map<String, Object> nodeMapData = new HashMap<String, Object>();
+	      
               try {
         
                   String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=10&LAWD_CD="+code+"&DEAL_YMD=201512";
-                  //OpenAPI URL 정보 읽기
+                  //OWpenAPI URL 정보 읽기
                   URL obj = new URL(openApiUrl);
                   HttpURLConnection con = (HttpURLConnection)obj.openConnection();
                   con.setDoOutput(true);
-                  con.setRequestProperty("Accept", "application/json");
+                  con.setRequestProperty("CONTENT-TYPE","text/xml"); 
                   con.setRequestMethod("GET");
+                  
                   //받아온 XML문서 파싱 => document인스턴스에 저장
                   DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                   DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                  Document document = (Document) docBuilder.parse(new InputSource(con.getInputStream()));
+                  // UTF-8 설정
+                  Reader reader = new InputStreamReader(con.getInputStream(),"UTF-8");
+                  Document document = (Document) docBuilder.parse(new InputSource(reader));
                   //Dom Tree를 XML문서의 구조대로 완성
                   document.getDocumentElement().normalize();
-                  //HIT Tag 정보들을  검색
-                  Node firstNode = document.getElementsByTagName("HIT").item(0);
+                  //items Tag 정보들을  검색
+                  
+                  // items가지고와서 for문 돌리기 하나씩전달하기
+				  Node firstNode = document.getElementsByTagName("items").item(0);
+                  
+                  
                   NodeList childNodeList = firstNode.getChildNodes();
                   nodeMapData = getNodeList(childNodeList);
               } catch (Exception e){
                   e.printStackTrace();
               }
+              System.out.println( nodeMapData.toString() );
               return nodeMapData.toString();
           }
 
