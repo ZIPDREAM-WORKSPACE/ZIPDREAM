@@ -538,13 +538,13 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         var dataArr = resultData.split("{");
     	                         console.log(dataArr);
     	                         console.log(dataArr.length);
+    	                        
+    	                    	 for(int i=0 ; i<dataArr.length;i++){
+    	                    		 
+    	                    	 
+    	                    	      
+    	                    	 }
     	                         
-    	                         let str = "";
-    	                         
-    	                         for(let i=0; i<dataArr.length ; i++){
-    	                         	str = dataArr[i];
-    	                         	
-    	                         }
     	                         
     	                         
     	                         
