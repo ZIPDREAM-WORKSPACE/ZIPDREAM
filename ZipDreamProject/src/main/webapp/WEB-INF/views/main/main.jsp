@@ -440,6 +440,7 @@
 	font-size:20px;
 	cursor: pointer;
 	padding-top:5px;
+	background: white;
 }
 .more_btn:hover{
 	border: 3px solid rgb(169, 192, 212);

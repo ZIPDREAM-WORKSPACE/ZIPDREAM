@@ -17,5 +17,10 @@ public class NoticeController {
 	public String moveManageController(){
 		return "notice/manage";
 	}
+	
+	@GetMapping("/interest")
+	public String moveInterestController(){
+		return "notice/interest";
+	}
 
 }

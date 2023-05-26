@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+tbody::-webkit-scrollbar {
+    width: 10px;  
+ 
+}
+  tbody::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
+  tbody::-webkit-scrollbar-track {
+    background: rgb(237, 238, 248);
+  }
 	.notice_table{
 		margin: auto;
 		width:800px;
@@ -8,31 +19,38 @@
 		border: 1px solid grey;
 		margin-top:50px;
 		margin-bottom:50px;
-	
 		
 	}
 	thead{
 		 display:block;
+		 height:60px;
+		 background: rgb(239, 240, 247);
 	}
 	tbody{
-		  display:block;
+	display:block;
     overflow:auto;
     height:420px;
-    width:100%;
+   
+   border-top: 2px solid grey;
+    border-bottom: 1px solid grey;
+    
 	}
 	table{
-	 border-bottom: 1px solid #444444;
     	table-layout: fixed;
     border-collapse: collapse;
 	}
 	  th {
-    border-bottom: 1px solid #444444;
-    border-right: 1px solid #444444;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+  }
+  th:last-child{
+  	border:none;
   }
   tr{
   	height:60px;
-  	 border-bottom: 1px solid #444444;
+  	 border-bottom: 1px solid grey;
   }
+  
 	.notice_table *{
 		
 		text-align: center;
@@ -59,7 +77,7 @@
 					<th class="content">내용</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody >
 				<tr>
 					<td class="num">1</td>
 					<td class="title">첫 가입 이벤트 혜택</td>

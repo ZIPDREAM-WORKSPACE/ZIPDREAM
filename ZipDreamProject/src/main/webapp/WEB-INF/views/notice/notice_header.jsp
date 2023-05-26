@@ -38,8 +38,8 @@
 	<jsp:include page="../common/header.jsp" />
 	<div style="text-align: center; font-size: 40px; margin-top: 20px;">알림</div>	
 	<div class="listWrap">
-		<div class="list"><a href="#">운영 알림</a></div>
-		<div class="list"><a href="#">관심 분양 알림</a></div>
+		<div class="list"><a href="<%=request.getContextPath()%>/notice/manage">운영 알림</a></div>
+		<div class="list"><a href="<%=request.getContextPath()%>/notice/interest">관심 분양 알림</a></div>
 		
 	</div>
 </body>
@@ -52,16 +52,12 @@
 	
 	let index = 0;
 	switch(menuPathName = pathArray[3]){
-/* 	case "currentPage" :
+ 	case "manage" :
 		index = 0;
         break;
-	case "myInfo" :
-		index = 3;
+	case "interest" :
+		index = 1;
         break;
-	case "couponlist" :
-		index = 4;
-        break; */
-
 	}
 	
 	let menu = $('.list').eq(index);
