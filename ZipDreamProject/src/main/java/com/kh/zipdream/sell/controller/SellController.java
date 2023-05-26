@@ -19,5 +19,11 @@ public class SellController {
 	public String main() {
 		return "sell/sellEnrollForm";
 	}
+	
+	//sell_detail페이지 이동
+	@GetMapping("/detail")
+	public String sellDetail() {
+		return "sell/sellDetail";
+	}
 		
 }

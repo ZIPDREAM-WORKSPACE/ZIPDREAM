@@ -62,7 +62,7 @@
 	
 	.sell_address, .seller_address {
 		width: 70%;
-		font-size: 1rem;
+		font-size: 0.8rem;
 		color: #6E7C7C;
 	}
 	
@@ -122,7 +122,9 @@
 	.price, .info, .arround, .option, .sale {
 		width: 90%;
 	}
-	
+	#secondImg{
+		margin-left: 14%;
+	}
 	.content4 {
 		height: 90rem;
 	}
@@ -199,12 +201,10 @@
 <body>
 	<jsp:include page="../../views/common/header.jsp" />
 	
-	 <form action="<%=request.getContextPath()%>/sell/sellInsert" entype="multipart/form-data" method="post">
+	 <form action="<%=request.getContextPath()%>/sell/sellInsert" enctype="multipart/form-data" method="post">
         <div class="content1 margin">
             <div class="sell_title">
-                <div class="sell_no radius">
                     <span><input type="hidden" name="sellNo"></span>
-                </div>
                 <div class="sell_name">
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
@@ -216,13 +216,13 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                    내돈내산공인중개사
+                    <input type="text" size="15" name="sellAgent" value="내돈내산공인중개소">
                 </div>
                 <div class="seller_name">
-                    <input type="text" size="10" name="sellerName">
+                    <input type="text" size="10" name="sellerName" value="김예진">
                 </div>
                 <div class="seller_address">
-                    <input type="text" size="20" name="sellerAddress">
+                    <input type="text" size="50" name="sellerAddress" value="서울특별시 강남구 테헤란로 14길 6 남도빌딩">
                 </div>
             </div>
         </div>
