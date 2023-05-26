@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>zipdream</title>
+
 <style>
 .footer {
 	width: 100%;
@@ -14,12 +10,12 @@
 }
 
 .footer_inner {
-	width: 60%;
+	width: 70%;
 	height: 80%;
-	margin-left: 20%;
-	margin-right: 20%;
+	margin-left: 15%;
+	margin-right: 15%;
 	position: absolute;
-	top:10%;
+	top: 30px;
 }
 
 .footer_inner>ul {
@@ -48,37 +44,39 @@
 	height: 30px;
 	background: #515151;
 	text-align: center;
-	line-height: 30px;
 	cursor: pointer;
+	padding-top:2px;
+	
 }
 
 .footer a {
 	text-decoration-line: none;
 	color: white;
-	font-size: 0.6vw;
-	
+	font-size: 12px;
 }
 
 .btn {
 	display: flex;
 	margin-top: 8px;
 	margin-bottom: 8px;
+	padding: 0px;
 }
 
 .footer>* {
-	font-size: 0.6vw;
+	font-size: 12px;
 	color: white;
 }
-#top_logo{
-	width:1.6vw;
-	height:1vw;
-	min-width:24px;
-	min-height:15px;
-	position:absolute;
-	right:10px;
-	top: 10px;
-	
+
+#top_logo {
+	width: 30px;
+	height: 17px;
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	top: 0px;
 }
+
+
 </style>
 </head>
 <body>
@@ -94,12 +92,23 @@
 				(주)내집마련<br>주소 : 서울시 강남구 테헤란로 14길 6 남도빌딩
 			</div>
 			<div class="btn">
-				<span class="btn_inner" id="chat_btn"><a href="#">1:1문의</a></span>&nbsp;
-				<span class="btn_inner" id="q_btn"><a href="#">자주묻는 질문</a></span>
+				<span class="btn_inner" id="chat_btn"><a href="#" >1:1문의</a></span>&nbsp;
+				<span class="btn_inner" id="q_btn"><a href="#" >자주묻는 질문</a></span>
 			</div>
 			<div>KH, Inc. All rights reserved.</div>
-			<div><a href="javascript:window.scrollTo(0,0);"><img id="top_logo" src="<%=request.getContextPath()%>/resources/images/top.png"></a></div>
+			<div>
+				<img id="top_logo"
+					src="<%=request.getContextPath()%>/resources/images/top.png">
+			</div>
 		</div>
 	</div>
+
+	<script>
+		$("#top_logo").click(function() {
+			window.scrollTo({
+				top : 0,
+				behavior : 'smooth'
+			});
+		});
+	</script>
 </body>
-</html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -162,68 +163,20 @@
 
 		<div class="content-main-apply">
 			<h3 style="margin-bottom: 32px;">공인중개사 신청</h3>
-
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
+			
+			<c:forEach var="apply" items="${applyList}">
+				<div class="content-main-apply-item">
+					<div class="apply-item-wrap">
+						<div class="apply-item-circle"></div>
+						<div class="apply-item-line"></div>
+					</div>
+					<div style="margin-top: 10px;">
+						<h5>${apply.userName}</h5>
+						<p class="text-gray">${apply.applyDateTime}</p>
+					</div>
 				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-			<div class="content-main-apply-item">
-				<div class="apply-item-wrap">
-					<div class="apply-item-circle"></div>
-					<div class="apply-item-line"></div>
-				</div>
-				<div style="margin-top: 10px;">
-					<h5>사랑 공인중개사</h5>
-					<p class="text-gray">2023-05-20 13:12</p>
-				</div>
-			</div>
-
+			</c:forEach>
+			
 		</div>
 	</div>
 
