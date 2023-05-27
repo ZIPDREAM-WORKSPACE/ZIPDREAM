@@ -41,6 +41,7 @@
 	
 </style>
 </head>
+
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div style="text-align: center; font-size: 40px; margin-top: 20px;">MY DREAM</div>	
