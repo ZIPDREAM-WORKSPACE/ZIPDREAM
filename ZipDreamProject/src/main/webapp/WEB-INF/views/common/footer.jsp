@@ -45,7 +45,7 @@
 	background: #515151;
 	text-align: center;
 	cursor: pointer;
-	padding-top:2px;
+	padding-top:5px;
 	
 }
 
@@ -55,7 +55,7 @@
 	font-size: 12px;
 }
 
-.btn {
+#btn {
 	display: flex;
 	margin-top: 8px;
 	margin-bottom: 8px;
@@ -91,7 +91,7 @@
 			<div>
 				(주)내집마련<br>주소 : 서울시 강남구 테헤란로 14길 6 남도빌딩
 			</div>
-			<div class="btn">
+			<div id="btn">
 				<span class="btn_inner" id="chat_btn"><a href="#" >1:1문의</a></span>&nbsp;
 				<span class="btn_inner" id="q_btn"><a href="#" >자주묻는 질문</a></span>
 			</div>

@@ -24,4 +24,9 @@ public class MyPageController {
 	public String moveCouponListController(){
 		return "mypage/couponList";
 	}
+	
+	@GetMapping("/myInfo")
+	public String moveMyInfoController(){
+		return "mypage/myInfo";
+	}
 }

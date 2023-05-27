@@ -99,8 +99,20 @@ public class AdminServiceImpl implements AdminService{
 		int boardLimit = 10;
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
+		ArrayList<NoticeBoard> list = dao.selectNoticeBoardList(pi);
+		
+		for(int i = 0; i < list.size(); i++) {
+			NoticeBoard board = list.get(i);
+			board.setNoticeBoardContent(board.getNoticeBoardContent().trim());
+			
+			board.setNoticeBoardContent(board.getNoticeBoardContent().substring(0,
+					board.getNoticeBoardContent().length() > 15 ? 15 : board.getNoticeBoardContent().length()-1));
+			
+		}
+		
 		map.put("pi", pi);
-		map.put("list", dao.selectNoticeBoardList(pi));
+		map.put("list", list);
+		
 	}
 	
 	public int insertNoticeBoard(NoticeBoard nb) {
@@ -117,5 +129,10 @@ public class AdminServiceImpl implements AdminService{
 	
 	public int deleteNoticeBoard(int boardNo) {
 		return dao.deleteNoticeBoard(boardNo);
+	}
+	
+	public void selectNoticeBoardList(Map<String, Object> map){
+		
+		map.put("list", dao.selectNoticeBoardList());
 	}
 }
