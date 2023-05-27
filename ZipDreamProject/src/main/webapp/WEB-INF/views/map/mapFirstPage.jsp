@@ -532,13 +532,19 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                      contentType : "text/plain; charset:UTF-8",
     	                      /* crossDomain :true, */
     	                      success: function(resultData){
-    	                         console.log("resultData : "+resultData);
-    	                         console.log( typeof(resultData) );
-    	                         
-    	                         /* var dataArr = resultData.split("{");
-    	                         console.log(dataArr);
-    	                         console.log(dataArr.length); */
-    	                        
+    	                    	  
+    	                    	 /*  let rdReplace = resultData.replace(/=/gi,":");
+    	                    	  let array = JSON.parse(JSON.stringify(rdReplace));
+    	                          console.log("array: "+array);
+    	                         for(var i in array){
+    	                        	 console.log(i+ " : " +array[i]);
+    	                         } */
+    	                         /* console.log(JSON.parse(resultData)); */
+    	                         let result = JSON.parse(resultData);
+    	                         let result0 = JSON.parse(result[0]);
+    	                         let keys = Object.keys(result0);
+    	                         console.log(keys);
+    	                         console.log(result0["도로명코드"]);
     	                         
     	                         
     	                         
