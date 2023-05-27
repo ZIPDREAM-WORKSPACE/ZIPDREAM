@@ -19,7 +19,7 @@
 						<th>작성일</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty noticeBoardList.list } ">
+						<c:when test="${empty noticeBoardList.list} ">
 							<tr>
 								<td colspan="4">게시글이 없습니다.</td>
 							</tr>
