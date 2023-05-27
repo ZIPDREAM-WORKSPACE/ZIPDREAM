@@ -19,6 +19,7 @@ import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
+import com.kh.zipdream.map.controller.MapController;
 import com.kh.zipdream.member.model.vo.Member;
 
 @Service
@@ -176,7 +177,7 @@ public class AdminServiceImpl implements AdminService{
 			
 			for(int i = 0; i < list.size(); i++) {
 				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
-				JSONObject jsonObj = (JSONObject) new JSONParser().parse(getJsonStringFromMap(map));
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(new MapController().getJsonStringFromMap(map));
 				
 				jArray.add(jsonObj);
 			}
