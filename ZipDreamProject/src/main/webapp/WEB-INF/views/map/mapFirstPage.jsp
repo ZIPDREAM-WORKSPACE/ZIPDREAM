@@ -425,8 +425,8 @@ var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
 // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
+    searchDetailAddrFromCoords(map.getCenter(), function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; 
@@ -434,7 +434,54 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
            
            let adressNameArray = result[0].address.address_name.split(' ');
            var detailAddrClob = adressNameArray[0] + ' ' + adressNameArray[1] + ' ' + adressNameArray[2];
-           detailAddrClob = detailAddrClob.replace("서울","서울특별시");
+           /* detailAddrClob = detailAddrClob.replace("서울","서울특별시"); */
+           switch(detailAddrClob.split(" ")[0]){
+	           case "서울":
+	        	   detailAddrClob = detailAddrClob.replace("서울","서울특별시");
+	        	   break;
+	           case "부산":
+	        	   detailAddrClob = detailAddrClob.replace("부산","부산광역시");
+	        	   break;
+	           case "대구":
+	        	   detailAddrClob = detailAddrClob.replace("대구","대구광역시");
+	        	   break;
+	           case "인천":
+	        	   detailAddrClob = detailAddrClob.replace("인천","인천광역시");
+	        	   break;
+	           case "광주":
+	        	   detailAddrClob = detailAddrClob.replace("광주","광주광역시");
+	        	   break;
+	           case "대전":
+	        	   detailAddrClob = detailAddrClob.replace("대전","대전광역시");
+	        	   break;
+	           case "울산":
+	        	   detailAddrClob = detailAddrClob.replace("울산","울산광역시");
+	        	   break;
+	           case "경기":
+	        	   detailAddrClob = detailAddrClob.replace("경기","경기도");
+	        	   break;
+	           case "강원":
+	        	   detailAddrClob = detailAddrClob.replace("강원","강원도");
+	        	   break;
+	           case "충북":
+	        	   detailAddrClob = detailAddrClob.replace("충북","충청북도");
+	        	   break;
+	           case "충남":
+	        	   detailAddrClob = detailAddrClob.replace("충남","충청남도");
+	        	   break;
+	           case "전북":
+	        	   detailAddrClob = detailAddrClob.replace("전북","전라북도");
+	        	   break;
+	           case "전남":
+	        	   detailAddrClob = detailAddrClob.replace("전남","전라남도");
+	        	   break;
+	           case "경북":
+	        	   detailAddrClob = detailAddrClob.replace("경북","경상북도");
+	        	   break;
+	           case "경남":
+	        	   detailAddrClob = detailAddrClob.replace("경남","경상남도");
+	        	   break;
+           }
            /*  var detailAddrClob = result[0].road_address.address_name; */
             
             /* console.log(result[0].road_address); */
@@ -451,15 +498,15 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                             detailAddr + 
                         '</div>';
 
-            // 마커를 클릭한 위치에 표시합니다 
+            /* // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
 
             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
             infowindow.setContent(content);
-            infowindow.open(map, marker);
+            infowindow.open(map, marker); */
             
-            console.log(detailAddrClob);
+            console.log(detailAddrClob.split(" ")[0]);
             $(function (){
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
@@ -473,29 +520,45 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     				  dataType: "text",
     				  success : function(result){
     					  console.log("bjdCode : "+result);
-    					  let bjdCodeFirst = result.substring(0, 5)
+    					  let bjdCodeFirst = result.substring(0, 5);
     					  
-    					  console.log(bjdCodeFirst);	
+    					  console.log('코드:'+bjdCodeFirst);	
     					  
     					  $.ajax({
-    						url: "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=10&LAWD_CD="+bjdCodeFirst+"&DEAL_YMD=202002",
-    						method: "get",
-    						dataType: "xml",
-    						crossDomain :true,
-    						success: function(resultData){
-    							console.log( typeof(resultData) );
-    							console.log("resultData : "+resultData);
-    						},
-    						error: function(){
-    							console.log("에러남");
-    						}
-    							
-    					  })
-    				}
+    	                      url: "<%= request.getContextPath() %>/map/getXmlCode",
+    	                      method: "get",
+    	                      data: {'code' : bjdCodeFirst},
+    	                      dataType: "text",
+    	                      contentType : "text/plain; charset:UTF-8",
+    	                      /* crossDomain :true, */
+    	                      success: function(resultData){
+    	                    	  
+    	                    	 /*  let rdReplace = resultData.replace(/=/gi,":");
+    	                    	  let array = JSON.parse(JSON.stringify(rdReplace));
+    	                          console.log("array: "+array);
+    	                         for(var i in array){
+    	                        	 console.log(i+ " : " +array[i]);
+    	                         } */
+    	                         /* console.log(JSON.parse(resultData)); */
+    	                         let result = JSON.parse(resultData);
+    	                         let result0 = JSON.parse(result[0]);
+    	                         let keys = Object.keys(result0);
+    	                         console.log(keys);
+    	                         console.log(result0["도로명코드"]);
+    	                         
+    	                         
+    	                         
+    	                      },
+    	                      error: function(){
+    	                         console.log("에러남");
+    	                      }
+    	                         
+    	                     })
     			
     			  }
-    			);
+    			
               });
+            })
         }   
     });
 });
