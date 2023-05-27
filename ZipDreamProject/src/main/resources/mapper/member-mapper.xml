@@ -24,7 +24,7 @@
 		resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER
-		WHERE USER_ID = #{userId}
+		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
 	
 <!-- 일반고객 회원가입 -->
