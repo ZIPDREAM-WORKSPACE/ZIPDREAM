@@ -15,21 +15,21 @@
 	</resultMap>	
 	
 	<select id="countUser" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE LICENSE_INT IS NULL AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 AND STATUS = 'Y'
 	</select>
 	
 	<select id="countUserYesterday" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
-		<![CDATA[WHERE LICENSE_INT IS NULL AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE USER_LEVEL = 1 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countLicenseUser" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE LICENSE_INT IS NOT NULL AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 2 AND STATUS = 'Y'
 	</select>
 	
 	<select id="countLicenseUserYesterday" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
-		<![CDATA[WHERE LICENSE_INT IS NOT NULL AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
 	</select>
 	
 	<select id="countObject" resultType="_int">
@@ -91,6 +91,12 @@
 			<![CDATA[REGEXP_REPLACE(NOTICE_BOARD_CONTENT,'<[^>]+>','') AS NOTICE_BOARD_CONTENT]]>,
 			CREATE_DATETIME
 		FROM NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
+	</select>
+	
+		<select id="selectNoticeList" resultMap="noticeBoardResultSet">
+		SELECT *
+		FROM USER.NOTICE_BOARD 
+		ORDER BY CREATE_DATETIME DESC
 	</select>
 	
 	<insert id="insertNoticeBoard" parameterType="noticeBoard">

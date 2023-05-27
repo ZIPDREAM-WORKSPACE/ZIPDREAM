@@ -130,4 +130,9 @@ public class AdminServiceImpl implements AdminService{
 	public int deleteNoticeBoard(int boardNo) {
 		return dao.deleteNoticeBoard(boardNo);
 	}
+	
+	public void selectNoticeBoardList(Map<String, Object> map){
+		
+		map.put("list", dao.selectNoticeBoardList());
+	}
 }

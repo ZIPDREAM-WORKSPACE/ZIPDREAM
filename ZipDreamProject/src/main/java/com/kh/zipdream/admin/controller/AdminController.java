@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
@@ -80,5 +81,14 @@ public class AdminController {
 		service.deleteNoticeBoard(boardNo);
 		
 		return "redirect:/admin/notice";
+	}
+	
+	@ResponseBody
+	@GetMapping("/noticeList")
+	public Map<String, Object> notice(Model model) {
+		
+		Map<String, Object> map = new HashMap();
+		service.selectNoticeBoardList(map);
+		return map;
 	}
 }

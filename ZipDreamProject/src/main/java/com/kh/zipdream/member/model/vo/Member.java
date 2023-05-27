@@ -20,13 +20,16 @@ public class Member {
 	private String userId;
 	private String userPwd;
 	private String userName;
-	private String mail;
+	private String email;
 	private String phone;
 	private String address;
-	private Date modifyDate;
-	private Date enrollDate;
+	private Date modifyDateTime;
+	private Date enrollDateTime;
 	private String status;
-	private String license;
+	private String withdraw;
+	private String office;
+	private int userLevel;
+
 	
-	
+
 }
