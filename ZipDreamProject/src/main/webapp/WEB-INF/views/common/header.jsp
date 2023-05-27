@@ -129,7 +129,47 @@
 	text-decoration-line: none;
 	color: black;
 }
+.login2 {
+	position: absolute;
+	right: 5%;
+	top: 15%;
+	width: 9%;
+	height: 40px;
+	font-size: 1.1vw;
+	text-align: center;
+	border-radius: 10px;
+	min-width:70px;
+	line-height : 40px;
+	font-weight: 500;
+}
+#logout_bt{
+position: absolute;
+	right: 5%;
+	top: 65%;
+	color:red;
+	font-size: 0.8vw;
+	height:30px;
+	width: 9%;
+	text-align: center;
+	min-width:70px;
+}
+#logout_bt>a:hover{
 
+	color:red;
+	text-decoration: none;
+
+}
+#logout_bt>a{
+
+	color:red;
+
+}
+#profile_img{
+	width:23px;
+	heght:23px;
+	padding-bottom:5px;
+	margin-right:5px;
+}
 
 </style>
 </head>
@@ -146,21 +186,25 @@
 			<ul class="header_list">
 				<li class="h_text"><a href="<%=request.getContextPath()%>/map/main">지도</a></li>
 				<li class="h_text"><a href="#">분양</a></li>
-				<li class="h_list"><a href="#"><img id="logo"
+				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"
 						src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
-				<li class="h_text"><a href="#">알림</a></li>
-				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/mypage">마이페이지</a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 			</ul>
 			<c:if test="${ empty sessionScope.loginUser}"> 
-            		<div class="login"><a href="#">로그인</a></div>
+            		<div class="login"><a href="<%=request.getContextPath()%>/member/login">로그인</a></div>
 
             </c:if>
-			<div class="login"><a href="<%=request.getContextPath()%>/member/login">로그인</a></div>
+            <c:if test="${!empty sessionScope.loginUser}"> 
+            		<div class="login2"><img id="profile_img" src="https://ifh.cc/g/bbzopf.png">${loginUser.userName} 님</div><div id="logout_bt"><a href="<%=request.getContextPath()%>/member/logout">로그아웃</a></div>
+
+            </c:if>
 		</div>
 		
 	</div>
 	
 	<script>
+
 	</script>
 </body>
 </html>

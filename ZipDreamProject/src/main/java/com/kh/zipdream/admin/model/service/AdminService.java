@@ -16,6 +16,7 @@ public interface AdminService {
 	public List<Map<String,String>> selectApplyListLimit5();
 	
 	public void selectNoticeBoardList(int cp, Map<String, Object> map);
+	public void selectNoticeBoardList(Map<String, Object> map);
 	public int insertNoticeBoard(NoticeBoard nb);
 	public int updateNoticeBoard(NoticeBoard nb);
 	public NoticeBoard selectNoticeBoard(int boardNo);
