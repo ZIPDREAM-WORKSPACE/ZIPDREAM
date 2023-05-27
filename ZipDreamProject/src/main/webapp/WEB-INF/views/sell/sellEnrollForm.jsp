@@ -62,7 +62,7 @@
 	
 	.sell_address, .seller_address {
 		width: 70%;
-		font-size: 1rem;
+		font-size: 0.8rem;
 		color: #6E7C7C;
 	}
 	
@@ -90,10 +90,10 @@
 		font-weight: 500;
 	}
 	
-	.content2 {
+/* 	.content2 {
 		height: 40rem;
 		margin-top: 50px;
-	}
+	} */
 	
 	.picture_one, .picture_two {
 		display: inline-block;
@@ -114,27 +114,24 @@
 		height: 20rem;
 	}
 	
-	.price_name, .info_name, .arround_name, .option_name, .othier_info {
+	.price_name, .info_name, .arround_name, .option_name, .othier_infom, .sale_name {
 		font-size: 1.5rem;
 		font-weight: 600;
 	}
 	
-	.price, .info, .arround, .option {
+	.price, .info, .arround, .option, .sale {
 		width: 90%;
 	}
-	
+	#secondImg{
+		margin-left: 14%;
+	}
 	.content4 {
 		height: 90rem;
 	}
-	
-	.info_pic {
-		border: 1px solid red;
-		height: 30rem;
-		width: 70%;
-	}
-	
+
 	.content5 {
 		height: 15rem;
+		margin-top : 100px;
 	}
 	
 	.table>tbody>tr>th {
@@ -196,16 +193,18 @@
 	.submit {
 		margin-right: 50px;
 	}
+	.block{
+		height:30rem;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="../../views/common/header.jsp" />
-	 <form action="<%=request.getContextPath()%>/sell/insert" entype="multipart/form-data" method="post">
+	
+	 <form action="<%=request.getContextPath()%>/sell/sellInsert" enctype="multipart/form-data" method="post">
         <div class="content1 margin">
             <div class="sell_title">
-                <div class="sell_no radius">
-                    <span>매물번호 : 12345678910</span>
-                </div>
+                    <span><input type="hidden" name="sellNo"></span>
                 <div class="sell_name">
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
@@ -217,13 +216,13 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                    내돈내산공인중개사
+                    <input type="text" size="15" name="sellAgent" value="내돈내산공인중개소">
                 </div>
                 <div class="seller_name">
-                    대표  : 김예진
+                    <input type="text" size="10" name="sellerName" value="김예진">
                 </div>
                 <div class="seller_address">
-                    소재지 : 서울특별시 어쩔저쩔 ㅇ
+                    <input type="text" size="50" name="sellerAddress" value="서울특별시 강남구 테헤란로 14길 6 남도빌딩">
                 </div>
             </div>
         </div>
@@ -231,20 +230,21 @@
             <div id="picture">
                 <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;">
                 <div id="file-area" style="display:none;">
-                    <input type="file" id="file1" name="file1" onchange="loadImg(this, 1);" required>
-                    <input type="file" id="file2" name="file2" onchange="loadImg(this, 2);" >
-                    <input type="file" id="file3" name="file3" onchange="loadImg(this, 3);" >
-                    <input type="file" id="file4" name="file4" onchange="loadImg(this, 4);" >
-                    <input type="file" id="file5" name="file5" onchange="loadImg(this, 5);" >
-                    <input type="file" id="file6" name="file6" onchange="loadImg(this, 6);" >
-                    <input type="file" id="file7" name="file7" onchange="loadImg(this, 7);" >
-                    <input type="file" id="file8" name="file8" onchange="loadImg(this, 8);" >
-                    <input type="file" id="file9" name="file9" onchange="loadImg(this, 9);" >
-                    <input type="file" id="file10" name="file10" onchange="loadImg(this, 10);" >
-                    <input type="file" id="file11" name="file11" onchange="loadImg(this, 11);" >
-                    <input type="file" id="file12" name="file12" onchange="loadImg(this, 12);" >
-                    <input type="file" id="file13" name="file13" onchange="loadImg(this, 13);" >
-                    <input type="file" id="file14" name="file14" onchange="loadImg(this, 14);" >
+                    <input type="file" id="file1" name="imges" onchange="loadImg(this, 1);" required>
+                    <input type="file" id="file2" name="imges" onchange="loadImg(this, 2);" >
+                    <input type="file" id="file3" name="imges" onchange="loadImg(this, 3);" >
+                    <input type="file" id="file4" name="imges" onchange="loadImg(this, 4);" >
+                    <input type="file" id="file5" name="imges" onchange="loadImg(this, 5);" >
+                    <input type="file" id="file6" name="imges" onchange="loadImg(this, 6);" >
+                    <input type="file" id="file7" name="imges" onchange="loadImg(this, 7);" >
+                    <input type="file" id="file8" name="imges" onchange="loadImg(this, 8);" >
+                    <input type="file" id="file9" name="imges" onchange="loadImg(this, 9);" >
+                    <input type="file" id="file10" name="imges" onchange="loadImg(this, 10);" >
+                    <input type="file" id="file11" name="imges" onchange="loadImg(this, 11);" >
+                    <input type="file" id="file12" name="imges" onchange="loadImg(this, 12);" >
+                    <input type="file" id="file13" name="imges" onchange="loadImg(this, 13);" >
+                    <input type="file" id="file14" name="imges" onchange="loadImg(this, 14);" >
+                    <input type="file" id="file15" name="imges" onchange="loadImg(this, 15);">
                 </div>
                 <div>
                     
@@ -319,7 +319,10 @@
         <div class="content4 margin content">
             <p class="info_name">[상세정보]</p>
             <hr class="hr">
-            <div class="info_pic margin"></div>
+            <div class="margin">
+            	<input type="file" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
+            	<img id="secondImg" width="900" height="500">
+            </div>
             <div class="info margin">
                 <table class="table">
                     <tbody>
@@ -369,7 +372,7 @@
                         </tr>
                         <tr>
                             <th>냉/난방시설</th>
-                            <td><input type="text" name="sellAircondition" required size="45">/<input type="text" name="sellHeating" required size="45">></td>
+                            <td><input type="text" name="sellAircondition" required size="45">/<input type="text" name="sellHeating" required size="45"></td>
                         </tr>
                         <tr>
                             <th>주차시설</th>
@@ -435,148 +438,182 @@
         </div>
 
         <div class="content7 margin content">
-            <p class="option_name">[실매매가]</p>
+          <p class="sale_name">[실매매가]</p>
+            <hr>
+            <div class="sale margin">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>2022년 4월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                        <tr>
+                            <th>2021년 5월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                        <tr>
+                            <th>2021년 3월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                        <tr>
+                            <th>2021년 2월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                        <tr>
+                            <th>2020년 12월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                        <tr>
+                            <th>2020년 11월</th>
+                            <td>13억 8,000 (10층)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+   
 
         <div class="content8 margin content">
             <img src="https://ifh.cc/g/RorFkp.png" width="50px">
             <span class="othier_info">[주변정보]</span>
             <hr class="hr">
             <div class="btn-group margin">
-                <button class="market button">
-                    <img src="https://ifh.cc/g/sOFp8v.png" width="34px">
+            	<div class="market button radius">
+            		<img src="https://ifh.cc/g/sOFp8v.png" width="34px">
                     <span>편의시설</span>
-                </button>
-                <button class="subway button">
+            	</div>
+                <div class="subway button radius">
                     <img src="https://ifh.cc/g/bfoaJM.png" width="40px">
                     <span>대중교통</span>
-                </button>
-                <button class="hospital button">
+                </div>
+                <div class="hospital button radius">
                     <img src="https://ifh.cc/g/r0Ta4O.png" width="40px">
                     <span>병원시설</span>
-                </button>
-                <button class="school button">
+                </div>
+                <div class="school button radius">
                     <img src="https://ifh.cc/g/27sfFC.png" width="40px" height="35px">
                     <span>학교정보</span>
-                </button>
+                </div>
             </div>
             <div class="infogroup">
-                <div class="market_info info margin">
+                <div class="market_info info margin" name="1">
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+            					<th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+            					<th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+								<th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             
-                <div class="hospital_info info margin">
+                <div class="hospital_info info margin" name="2">
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             
-                <div class="subway_info info margin">
+                <div class="subway_info info margin" name="3">
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
-                            <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                                        <tr>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             
-                <div class="school_info info margin">
+                <div class="school_info info margin" name="4">
                     <table class="table info_table">
                         <tbody>
-                            <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                             <tr>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
-                            <tr>
-                                <th><input type="text" required size="20"></th>
-                                <td><input type="text" required size="100"></td>
+                                                        <tr>
+                                <th><input type="text" required size="20" name="installationName"></th>
+                                <td><input type="text" required size="100" name="installationInfo"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
+		<input type="hidden" name="mode" value="${param.mode}">
         <div class="content9 content margin">
             <button type="submit" class="submit last_btn">등록하기</button>
             <input type="button" class="cansle last_btn" value="뒤로가기">
         </div>
     </form>
     
+    <div class="block"></div>
+    <jsp:include page="../../views/common/footer.jsp" />
 </body>
 
 <script>
@@ -611,7 +648,11 @@
 		$("#titleImg").click(function() {
 			$("#file1").click();
 		});
-
+		
+		$("#secondImg").click(function(){
+			$("#secondfile").click();
+		});
+		
 		$("[id^=contentImg]").each(function(index, item) {
 			$(item).click(function() {
 				$("#file" + (index + 2)).click();
@@ -620,7 +661,29 @@
 		})
 
 	})
+	
+ 	function loadSeconImg(inputFile, num){
+		if (inputFile.files.length != 0) {
+			let reader = new FileReader();
 
+			reader.readAsDataURL(inputFile.files[0]);
+
+			reader.onload = function(e) {
+
+				let url = e.target.result;
+				
+				switch(num){
+				case 1 : $("#secondImg").attr("src",url); break;
+			}
+		}
+
+		}else{
+			switch(num){
+			case 1 : $("#secondImg").attr("src",url); break;
+		}
+	  }
+	}
+ 
 	function loadImg(inputFile, num) {
 		console.log(inputFile.files.length);
 		if (inputFile.files.length != 0) {
@@ -637,16 +700,18 @@
 				case 2:$("#contentImg1").attr("src", url);break;
 				case 3:$("#contentImg2").attr("src", url);break;
 				case 4:$("#contentImg3").attr("src", url);break;
-				case 5:$("#contentImg3").attr("src", url);break;
-				case 6:$("#contentImg3").attr("src", url);break;
-				case 7:$("#contentImg3").attr("src", url);break;
-				case 8:$("#contentImg3").attr("src", url);break;
-				case 9:$("#contentImg3").attr("src", url);break;
-				case 10:$("#contentImg3").attr("src", url);break;
-				case 11:$("#contentImg3").attr("src", url);break;
-				case 12:$("#contentImg3").attr("src", url);break;
-				case 13:$("#contentImg3").attr("src", url);break;
-				case 14:$("#contentImg3").attr("src", url);break;
+				case 5:$("#contentImg4").attr("src", url);break;
+				case 6:$("#contentImg5").attr("src", url);break;
+				case 7:$("#contentImg6").attr("src", url);break;
+				case 8:$("#contentImg7").attr("src", url);break;
+				case 9:$("#contentImg8").attr("src", url);break;
+				case 10:$("#contentImg9").attr("src", url);break;
+				case 11:$("#contentImg10").attr("src", url);break;
+				case 12:$("#contentImg11").attr("src", url);break;
+				case 13:$("#contentImg12").attr("src", url);break;
+				case 14:$("#contentImg13").attr("src", url);break;
+				case 15:$("#contentImg14").attr("src", url);break;
+				
 				}
 			}
 		} else {
@@ -655,16 +720,18 @@
 			case 2:$("#contentImg1").attr("src", url);break;
 			case 3:$("#contentImg2").attr("src", url);break;
 			case 4:$("#contentImg3").attr("src", url);break;
-			case 5:$("#contentImg3").attr("src", url);break;
-			case 6:$("#contentImg3").attr("src", url);break;
-			case 7:$("#contentImg3").attr("src", url);break;
-			case 8:$("#contentImg3").attr("src", url);break;
-			case 9:$("#contentImg3").attr("src", url);break;
-			case 10:$("#contentImg3").attr("src", url);break;
-			case 11:$("#contentImg3").attr("src", url);break;
-			case 12:$("#contentImg3").attr("src", url);break;
-			case 13:$("#contentImg3").attr("src", url);break;
-			case 14:$("#contentImg3").attr("src", url);break;
+			case 5:$("#contentImg4").attr("src", url);break;
+			case 6:$("#contentImg5").attr("src", url);break;
+			case 7:$("#contentImg6").attr("src", url);break;
+			case 8:$("#contentImg7").attr("src", url);break;
+			case 9:$("#contentImg8").attr("src", url);break;
+			case 10:$("#contentImg9").attr("src", url);break;
+			case 11:$("#contentImg10").attr("src", url);break;
+			case 12:$("#contentImg11").attr("src", url);break;
+			case 13:$("#contentImg12").attr("src", url);break;
+			case 14:$("#contentImg13").attr("src", url);break;
+			case 15:$("#contentImg14").attr("src", url);break;
+			case 16:$("#secondImg").attr("src",url); break;
 			}
 		}
 	}
