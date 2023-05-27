@@ -82,6 +82,10 @@ public class AdminDao {
 		return (ArrayList) sqlSession.selectList("admin-mapper.selectNoticeBoardList","",rowBounds);
 	}
 	
+	public ArrayList<NoticeBoard> selectNoticeBoardList(){
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectNoticeList");
+	}
+	
 	public int insertNoticeBoard(NoticeBoard nb) {
 		return sqlSession.insert("admin-mapper.insertNoticeBoard",nb);
 	}
