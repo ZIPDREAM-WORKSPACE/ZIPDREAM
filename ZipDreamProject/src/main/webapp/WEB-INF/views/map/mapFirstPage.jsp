@@ -535,16 +535,10 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         console.log("resultData : "+resultData);
     	                         console.log( typeof(resultData) );
     	                         
-    	                         var dataArr = resultData.split("{");
+    	                         /* var dataArr = resultData.split("{");
     	                         console.log(dataArr);
-    	                         console.log(dataArr.length);
+    	                         console.log(dataArr.length); */
     	                        
-    	                    	 for(int i=0 ; i<dataArr.length;i++){
-    	                    		 
-    	                    	 
-    	                    	      
-    	                    	 }
-    	                         
     	                         
     	                         
     	                         
