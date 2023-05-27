@@ -5,14 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -135,4 +142,56 @@ public class AdminServiceImpl implements AdminService{
 		
 		map.put("list", dao.selectNoticeBoardList());
 	}
+	
+	public void selectUserList(int cp, int type, Map<String, Object> map) {
+		int listCount = 0;
+		
+		if(type == 1) {
+			listCount = dao.countUser();
+		}else {
+			listCount = dao.countLicenseUser();
+		}
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<NoticeBoard> list = dao.selectUserList(pi,type);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public JSONObject getReportList(int cp, int userNo) {
+		int listCount = dao.countReport();				
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Report> list = dao.getReportList(pi, userNo);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jArray = new JSONArray();	
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			
+			for(int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(getJsonStringFromMap(map));
+				
+				jArray.add(jsonObj);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();	
+		};
+		
+		obj.put("pi", pi);
+		obj.put("array", jArray);
+		return obj;
+	
+	}
+	
+	public int updateMemberStatus(Member m) {
+		return dao.updateMemberStatus(m);
+	}
+
 }
