@@ -12,6 +12,5 @@
 <jsp:include page="WEB-INF/views/main/main.jsp" />
 
 
-
 </body>
 </html>
