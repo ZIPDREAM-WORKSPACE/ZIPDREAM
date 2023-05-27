@@ -4,9 +4,9 @@
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
-	<section class="content-notice">
+	<section class="content-wrap">
 		<form action="<%= request.getContextPath() %>/admin/notice/enroll" method="post">
-			<div class="content-notice-title">
+			<div class="content-title">
 				<h1>공지사항 보기</h1>
 				<div style="width:500px;height:100px;display:flex;">
 					<button type="submit">등록</button>

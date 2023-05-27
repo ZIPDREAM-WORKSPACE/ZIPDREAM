@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.common.model.vo.PageInfo;
+import com.kh.zipdream.member.model.vo.Member;
 
 
 @Repository
@@ -102,4 +104,21 @@ public class AdminDao {
 		return sqlSession.delete("admin-mapper.deleteNoticeBoard",boardNo);
 	}
 	
+	public ArrayList<NoticeBoard> selectUserList(PageInfo pi, int type){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectUserList",type,rowBounds);
+	}
+	
+	public ArrayList<Report> getReportList(PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",userNo,rowBounds);
+	}
+	
+	public int updateMemberStatus(Member m) {
+		return sqlSession.update("admin-mapper.updateMemberStatus",m);
+	}
 }

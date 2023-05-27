@@ -7,11 +7,40 @@
 		<result column="APPLY_DATETIME" property="applyDateTime"/>
 	</resultMap>	
 	
+	<resultMap type="member" id="memberResultSet">
+		<id column="USER_NO" property="userNo" />
+		<result column="USER_ID" property="userId" />
+		<result column="USER_PWD" property="userPwd" />
+		<result column="USER_NAME" property="userName" />
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email" />
+		<result column="ADDRESS" property="address"/>
+		<result column="OFFICE" property="office"/>
+		<result column="ENROLL_DATETIME" property="enrollDateTime" />
+		<result column="MODIFY_DATETIME" property="modifyDateTime" />
+		<result column="NICKNAME" property="nickname" />
+		<result column="STATUS" property="status" />
+		<result column="USER_LEVEL" property="userLevel" />
+	</resultMap>
+	
 	<resultMap type="noticeBoard" id="noticeBoardResultSet">
 		<id column="NOTICE_BOARD_NO" property="noticeBoardNo"/>
 		<result column="NOTICE_BOARD_TITLE" property="noticeBoardTitle"/>
 		<result column="NOTICE_BOARD_CONTENT" property="noticeBoardContent"/>
 		<result column="CREATE_DATETIME" property="createDateTime"/>
+	</resultMap>	
+	
+	<resultMap type="report" id="reportResultSet">
+		<id column="REPORT_NO" property="reportNo"/>
+		<result column="REF_RUNO" property="refRuno"/>
+		<result column="REF_TUNO" property="refTuno"/>
+		<result column="R_NAME" property="rName"/>
+		<result column="T_NAME" property="tName"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+		<result column="REPORT_RESULT" property="reportResult"/>
+		<result column="REPORT_TYPE" property="reportType"/>
+		<result column="REPORT_DATE" property="reportDate"/>
 	</resultMap>	
 	
 	<select id="countUser" resultType="_int">
@@ -42,7 +71,7 @@
 	</select>
 	
 	<select id="countReport" resultType="_int">
-		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
+		SELECT COUNT(*) FROM REPORT
 	</select>
 	
 	<!-- <select id="countReportYesterday">
@@ -93,7 +122,7 @@
 		FROM NOTICE_BOARD ORDER BY CREATE_DATETIME DESC
 	</select>
 	
-		<select id="selectNoticeList" resultMap="noticeBoardResultSet">
+	<select id="selectNoticeList" resultMap="noticeBoardResultSet">
 		SELECT *
 		FROM USER.NOTICE_BOARD 
 		ORDER BY CREATE_DATETIME DESC
@@ -119,4 +148,34 @@
 	<delete id="deleteNoticeBoard">
 		DELETE FROM NOTICE_BOARD WHERE NOTICE_BOARD_NO = #{boardNo}
 	</delete>
+	
+	<select id="selectUserList" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_LEVEL = #{type}
+		ORDER BY ENROLL_DATETIME DESC
+	</select>
+	
+	<select id="getReportList" parameterType="_int" resultMap="reportResultSet">
+		SELECT REPORT_NO,
+			   REF_RUNO,
+			   REF_TUNO,
+			   M.USER_NAME AS R_NAME,
+			   M2.USER_NAME AS T_NAME,
+			   REPORT_CONTENT,
+			   REPORT_STATUS,
+			   REPORT_RESULT,
+			   REPORT_TYPE,
+			   REPORT_DATE
+		FROM REPORT R LEFT JOIN MEMBER M
+		ON R.REF_RUNO = M.USER_NO
+        LEFT JOIN MEMBER M2
+        ON R.REF_TUNO = M2.USER_NO
+		WHERE REF_RUNO = #{userNo}
+		ORDER BY REPORT_DATE DESC;
+	</select>
+	
+	<update id="updateMemberStatus" parameterType="member">
+		UPDATE MEMBER SET 
+			 STATUS = #{status}		
+		WHERE USER_NO = #{userNo}
+	</update>
 </mapper>

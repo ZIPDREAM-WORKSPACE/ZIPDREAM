@@ -3,7 +3,10 @@ package com.kh.zipdream.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.member.model.vo.Member;
 
 public interface AdminService {
 	
@@ -21,4 +24,7 @@ public interface AdminService {
 	public int updateNoticeBoard(NoticeBoard nb);
 	public NoticeBoard selectNoticeBoard(int boardNo);
 	public int deleteNoticeBoard(int boardNo);
+	public void selectUserList(int cp, int type, Map<String, Object> map);
+	public JSONObject getReportList(int cp, int userNo);
+	public int updateMemberStatus(Member m);
 }
