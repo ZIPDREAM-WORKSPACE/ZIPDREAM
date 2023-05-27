@@ -666,7 +666,7 @@ box-sizing: border-box;
  line-height:30px; 
  text-align:right;
 }
-.login_service{
+.login_service, .chat_open{
 	width:300px;
 	height:50px;
 	background: grey;
@@ -677,13 +677,30 @@ box-sizing: border-box;
 	background: #1F4B6B;
 	color:white;
 }
-#chat_rooo_btn{
-	width:100px;
-	height:30px;
-	background: green;
-	border: none;
-	align:right;
-}
+.display-chatting{
+		width: 100%;
+		height: 450px;
+		border : 1px solid black;
+		overflow: auto;
+		list-style : none;
+		padding : 10px 10px;
+		
+	}
+	   .myChat{
+      text-align: right;
+   }
+   .myChat > p {
+      background-color : gold;
+   }
+   .chatDate{
+      font-size : 10px;
+   }
+	   .chatP{
+      display : inline-block;
+      border-radius : 5px;
+      padding : 5px;
+      background-color : #eee;
+   }
 </style>
 </head>
 <body>
@@ -698,7 +715,10 @@ box-sizing: border-box;
 					<div class="login_service">로그인 후 이용가능한 서비스입니다.</div>
 				</c:when> 
 				<c:otherwise> 
+				
 					<div class="chat_open">운영자와 채팅하기</div>
+					<ul class="display-chatting">
+					</ul>
 				</c:otherwise> 
 			</c:choose> 
 			
@@ -865,7 +885,17 @@ box-sizing: border-box;
 </div>
 
 	<script>
-
+	
+	 
+	 
+	 	const refUno ='${loginUser.userNo}';
+		const userId ='${loginUser.userId}';
+		const userName = '${loginUser.userName}';
+		
+		
+		
+		
+	 
 	 	function noticeModal(index){
 	 		$("#exampleModalLabel").text(noticeBoardList.list[index].noticeBoardTitle);
 			$("#m_date").text(noticeBoardList.list[index].createDateTime);
@@ -903,7 +933,6 @@ box-sizing: border-box;
 		 		
 		 		success : function(result){
 		 			
-		 			console.log(result);
 		 			let text="";
 		 			
 		 			noticeBoardList = result;
@@ -917,6 +946,7 @@ box-sizing: border-box;
 		 			}
 		 			
 		 			$("#n_slider").html(text);
+		 			let nsize = $('.notice_list').length;
 		 			
 		 			$('#n_slider').slick({
 						// centerMode: true,
@@ -928,7 +958,7 @@ box-sizing: border-box;
 								arrows : true,
 								centerMode : true,
 								centerPadding : '10px',
-								slidesToShow : 2
+								slidesToShow : nsize >= 2 ? 2 : nsize,
 							}
 						}, {
 							breakpoint : 1000,
@@ -1014,7 +1044,6 @@ box-sizing: border-box;
 							}
 						}]					
 					});
-		 			console.log(result);
 		 			AOS.init();
 		 		},
 		 		error : function(request){
@@ -1038,25 +1067,39 @@ box-sizing: border-box;
 		});
 		
 	 	$(".chat_open").click(function(){
+	 		
 		 	/* 채팅 */
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
 		 		type : "get",
-		 		success : function(){
-		 			
-		 				console.log("okay");
+		 		success : function(result){
+		 				
+		 				chatRoomNo = result;
+		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
+		 				addEventChat();
 		 		},
 		 		error : function(request){
 		 			console.log("에러발생");
 		 			console.log("에러코드 : "+request.status);
+		 			
 		 		}
 		 	});
+		 	$(".chat_open").css("display","none");
+		 	
 	 	});	
 	 	
+		$("#login_btn").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
+
+		
+		
 		})
 		
 		
 	</script>
 	
+<script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 
 	<jsp:include page="../common/footer.jsp" />
