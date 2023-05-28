@@ -316,13 +316,13 @@
 		<div class="selectHouseGuide">
 			<div class="category_swipperWrap mt-5">
 				<div class="category_swiper">
-					<a class="category_button" type="button" name="category">주택청약가이드</a>
+					<a href="<%=request.getContextPath()%>/sales/guide" class="category_button" type="button" name="category">주택청약가이드</a>
 				</div>
 				<div class="category_swiper">
-					<a class="category_button" type="button" name="category">분양용어</a>
+					<a href="<%=request.getContextPath()%>/sales/term" class="category_button" type="button" name="category">분양용어</a>
 				</div>
 				<div class="category_swiper">
-					<a class="category_button" type="button" name="category">자주하는질문</a>
+					<a href="<%=request.getContextPath()%>/sales/faq"  class="category_button" type="button" name="category">자주하는질문</a>
 				</div>
 			</div>
 		</div>
@@ -719,6 +719,6 @@
         };
     </script>
 
-<jsp:include page="../common/footer.jsp" /></
-							body>
+<jsp:include page="../common/footer.jsp" />
+</body>
 </html>
