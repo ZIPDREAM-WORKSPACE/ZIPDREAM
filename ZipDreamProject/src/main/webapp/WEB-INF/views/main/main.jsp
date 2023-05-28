@@ -676,6 +676,9 @@ box-sizing: border-box;
 	margin-top:50px;
 	background: #1F4B6B;
 	color:white;
+	cursor:pointer;
+	border-radius: 10px;
+	 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 .display-chatting{
 		width: 100%;
@@ -688,18 +691,28 @@ box-sizing: border-box;
 	}
 	   .myChat{
       text-align: right;
+      margin-bottom: 5px;
    }
    .myChat > p {
-      background-color : gold;
+      background-color :rgb(25, 83, 125);
+      color:white;
    }
+
    .chatDate{
       font-size : 10px;
    }
 	   .chatP{
       display : inline-block;
       border-radius : 5px;
-      padding : 5px;
-      background-color : #eee;
+      padding : 4px 8px 4px 8px;
+      margin:0;
+      max-width: 250px;
+       overflow:hidden;
+    word-wrap:break-word;
+       text-align: left;
+       box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+        background-color :rgb(242, 249, 254);
+      
    }
 </style>
 </head>
@@ -717,7 +730,7 @@ box-sizing: border-box;
 				<c:otherwise> 
 				
 					<div class="chat_open">운영자와 채팅하기</div>
-					<ul class="display-chatting">
+					<ul class="display-chatting" style="display:none">
 					</ul>
 				</c:otherwise> 
 			</c:choose> 
@@ -932,7 +945,7 @@ box-sizing: border-box;
 		 		type : "get",
 		 		
 		 		success : function(result){
-		 			
+		 			console.log(result);
 		 			let text="";
 		 			
 		 			noticeBoardList = result;
@@ -1068,6 +1081,7 @@ box-sizing: border-box;
 		
 	 	$(".chat_open").click(function(){
 	 		
+	 		
 		 	/* 채팅 */
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
@@ -1077,6 +1091,10 @@ box-sizing: border-box;
 		 				chatRoomNo = result;
 		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
 		 				addEventChat();
+		 				$("#x").click(function(){
+		 					exitChatRoom();
+		 					
+		 				});
 		 		},
 		 		error : function(request){
 		 			console.log("에러발생");
@@ -1085,6 +1103,7 @@ box-sizing: border-box;
 		 		}
 		 	});
 		 	$(".chat_open").css("display","none");
+		 	$(".display-chatting").css({"display":"block","border":"none"});
 		 	
 	 	});	
 	 	
@@ -1092,10 +1111,33 @@ box-sizing: border-box;
 		 	location.href="<%=request.getContextPath()%>/member/login";
 	 	});	
 	 	
-
+		$(".login_service").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
 		
 		
 		})
+		
+		function exitChatRoom(){
+			if(confirm("채팅방에서 나가시겠습니까?")){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+				
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							location.href="<%=request.getContextPath()%>"
+						}else{
+							alert("채팅방 나가기에 실패했습니다.");
+						}
+						// result == 0 실패 
+						
+					}
+				})
+			}	
+			
+		};
 		
 		
 	</script>

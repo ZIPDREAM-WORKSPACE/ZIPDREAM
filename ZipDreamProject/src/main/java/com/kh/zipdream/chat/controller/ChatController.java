@@ -92,7 +92,6 @@ public class ChatController {
 	public int exitChatRoom(@ModelAttribute("loginUser") Member loginUser,
 							ChatRoomJoin join) {
 		join.setRefUno(loginUser.getUserNo());
-		
 		return service.exitChatRoom(join);
 	
 	}
