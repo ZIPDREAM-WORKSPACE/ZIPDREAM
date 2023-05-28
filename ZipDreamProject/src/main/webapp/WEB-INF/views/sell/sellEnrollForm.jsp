@@ -204,7 +204,7 @@
 	 <form action="<%=request.getContextPath()%>/sell/sellInsert" enctype="multipart/form-data" method="post">
         <div class="content1 margin">
             <div class="sell_title">
-                    <span><input type="hidden" name="sellNo"></span>
+                    <span><input type="hidden" name="sellNo" vlaues="${empty b.boardNo ? 0 : b.boardNo}"></span>
                 <div class="sell_name">
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
@@ -216,13 +216,16 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                    <input type="text" size="15" name="sellAgent" value="내돈내산공인중개소">
+                	<p>내돈내산공인중개소</p>
+                    <!-- <input type="text" size="15" name="sellAgent" value="내돈내산공인중개소"> -->
                 </div>
                 <div class="seller_name">
-                    <input type="text" size="10" name="sellerName" value="김예진">
+                	<p>김예진</p>
+                    <!-- <input type="text" size="10" name="sellerName" value="김예진"> -->
                 </div>
                 <div class="seller_address">
-                    <input type="text" size="50" name="sellerAddress" value="서울특별시 강남구 테헤란로 14길 6 남도빌딩">
+                	<p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p>
+                    <!-- <input type="text" size="50" name="sellerAddress" value="서울특별시 강남구 테헤란로 14길 6 남도빌딩"> -->
                 </div>
             </div>
         </div>
@@ -309,7 +312,7 @@
                         </tr>
                         <tr>
                             <th>단기임대</th>
-                            <td><input type="text" name="shirtterm" required size="100"></td>
+                            <td><input type="text" name="shortterm" required size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -364,19 +367,15 @@
                         </tr>
                         <tr>
                             <th>건축물용도</th>
-                            <td><input type="text" name="sellBuldtype" required size="100"></td>
+                            <td><input type="text" name="sellBuildtype" required size="100"></td>
                         </tr>
                         <tr>
                             <th>승강시설</th>
-                            <td><input type="text" name=sellInstallation"" required size="100"></td>
+                            <td><input type="text" name=sellInstallation" required size="100"></td>
                         </tr>
                         <tr>
                             <th>냉/난방시설</th>
                             <td><input type="text" name="sellAircondition" required size="45">/<input type="text" name="sellHeating" required size="45"></td>
-                        </tr>
-                        <tr>
-                            <th>주차시설</th>
-                            <td><input type="text" required size="100"></td>
                         </tr>
                         <tr>
                             <th>세대주차대수</th>
@@ -411,7 +410,7 @@
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="housholdCount" required size="100"></td>
+                            <td><input type="text" name="hoseholdCount" required size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -500,24 +499,24 @@
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>슈퍼1</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>슈퍼2</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-            					<th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>슈퍼3</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-            					<th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>슈퍼4</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-								<th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>슈퍼5</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                         </tbody>
                     </table>
@@ -527,24 +526,24 @@
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>병원1</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>병원2</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>병원3</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>병원4</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>병원5</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                         </tbody>
                     </table>
@@ -554,24 +553,24 @@
                     <table class="table info_table">
                         <tbody>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>전철1</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>전철2</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>전철3</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>전철4</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
-                                                        <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                            <tr>
+                                <th>전철5</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                         </tbody>
                     </table>
@@ -580,25 +579,25 @@
                 <div class="school_info info margin" name="4">
                     <table class="table info_table">
                         <tbody>
-                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                            <tr>
+                                <th>학교1</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>학교2</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>학교3</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                             <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                                <th>학교4</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
-                                                        <tr>
-                                <th><input type="text" required size="20" name="installationName"></th>
-                                <td><input type="text" required size="100" name="installationInfo"></td>
+                            <tr>
+                                <th>학교5</th>
+                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
                             </tr>
                         </tbody>
                     </table>
