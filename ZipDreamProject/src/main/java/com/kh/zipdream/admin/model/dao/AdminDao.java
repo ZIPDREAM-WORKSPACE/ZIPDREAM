@@ -78,6 +78,10 @@ public class AdminDao {
 		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
 	}
 	
+	public List<Report> selectReportListLimit4() {
+		return sqlSession.selectList("admin-mapper.selectReportListLimit4");
+	}
+	
 	public int countNoticeBoard() {
 		return sqlSession.selectOne("admin-mapper.countNoticeBoard");
 	}

@@ -101,6 +101,25 @@ public class AdminServiceImpl implements AdminService{
 		return listResult; 
 	}
 	
+	public List<Map<String,String>> selectReportListLimit4() {
+		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
+		
+		List<Report>list = dao.selectReportListLimit4();
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("reportNo", list.get(i).getReportNo()+"");
+			map.put("rname", list.get(i).getRName());
+			map.put("tname", list.get(i).getTName());
+			map.put("reportContent", list.get(i).getReportContent());
+			map.put("reportType", list.get(i).getReportType()+"");
+			map.put("reportStatus", list.get(i).getReportStatus()+"");
+			map.put("reportDate", list.get(i).getReportDate()+"");
+			listResult.add(map);
+		}
+		
+		return listResult; 
+	}
+	
 	public void selectNoticeBoardList(int cp,Map<String, Object> map){
 		int listCount = dao.countNoticeBoard();
 		int pageLimit = 10;

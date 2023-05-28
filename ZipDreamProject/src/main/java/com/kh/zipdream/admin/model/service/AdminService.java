@@ -17,6 +17,7 @@ public interface AdminService {
 	public Map<String,Object> countEvent();
 	public Map<String,Object> countChattingRoom();
 	public List<Map<String,String>> selectApplyListLimit5();
+	public List<Map<String,String>> selectReportListLimit4();
 	
 	public void selectNoticeBoardList(int cp, Map<String, Object> map);
 	public void selectNoticeBoardList(Map<String, Object> map);

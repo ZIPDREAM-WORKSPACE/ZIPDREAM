@@ -38,6 +38,7 @@ public class AdminController {
 		
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
+		model.addAttribute("reportList",service.selectReportListLimit4());
 		return "admin/adminMain";
 	}
 	
