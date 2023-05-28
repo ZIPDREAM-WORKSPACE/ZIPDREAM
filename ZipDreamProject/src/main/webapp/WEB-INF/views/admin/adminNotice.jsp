@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
-	<section class="content-notice">
-		<div class="content-notice-title">
+	<section class="content-wrap">
+		<div class="content-title">
 			<h1>공지사항 관리</h1>
 			<button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/notice/enrollForm'">공지사항 작성</button>
 		</div>
@@ -19,7 +20,7 @@
 						<th>작성일</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty noticeBoardList.list } ">
+						<c:when test="${fn: length(noticeBoardList.list) == 0} ">
 							<tr>
 								<td colspan="4">게시글이 없습니다.</td>
 							</tr>

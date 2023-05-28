@@ -67,7 +67,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberLogin")
-	public String loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
+	public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
 			HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 			@RequestParam(value = "saveId", required = false) String saveId) {
 
@@ -78,11 +78,15 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		} else { // 성공
 			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("redirect:/");
+			if(loginUser.getUserLevel() == 3) {
+				mv.setViewName("redirect:/admin/main");
+			}else {				
+				mv.setViewName("redirect:/");
+			}
 			System.out.println(session.getAttribute("loginUser"));
 
 		}
-		return "redirect:/";
+		return mv;
 	}
 
 	

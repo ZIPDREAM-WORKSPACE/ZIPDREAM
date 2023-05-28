@@ -189,9 +189,8 @@ position: absolute;
 		<div class="header_inner">
 			<ul class="header_list">
 				<li class="h_text"><a href="<%=request.getContextPath()%>/map/main">지도</a></li>
-				<li class="h_text"><a href="#">분양</a></li>
-				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"
-						src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
+				<li class="h_text"><a href="<%=request.getContextPath()%>/sales/schedule">분양</a></li>
+				<li class="h_list"><a href="#"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 			</ul>

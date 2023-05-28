@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -44,6 +45,15 @@
 	
 	<context:component-scan base-package="com.kh.zipdream" />
 	
+
+	<mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/admin/**"/>
+	 			<beans:bean class="com.kh.zipdream.common.interceptor.AdminIdCheckInterceptor"/>
+	 	</mvc:interceptor>
+ 	</mvc:interceptors>
+ 	
+
 		 <!-- 트랜잭션 처리시 필요한 @Transactional 어노테이션 활성화 시키기. 
 	 	@Transactional : 클래스 혹은 메소드 수행 후에 트랜잭션을 처리하라고 알려주는 어노테이션 
 	 -->
@@ -71,4 +81,5 @@
 	 	<websocket:sockjs />
 	 </websocket:handlers>
 	
+
 </beans:beans>

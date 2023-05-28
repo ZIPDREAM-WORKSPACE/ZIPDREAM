@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +60,7 @@ public class MapController {
 	   		System.out.println("code:"+code);
 	        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 	   		Map<String, Object> nodeMapData = new HashMap<String, Object>();
-	      
+	   	   
 	   		try {
 	   	        
                 String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=100&LAWD_CD="+code+"&DEAL_YMD=201512";
@@ -87,32 +89,36 @@ public class MapController {
 				 * 
 				 * 
 				 */
+                
+                // 하나씩 돌린 item의 값을 뽑아서 전달하기
                 System.out.println("node Length"+length);
                 for(int i=0; i < length; i++) {
-                	System.out.println(1);
+				  
                   Node childNode = document.getElementsByTagName("item").item(i);
                   NodeList childNodeList = childNode.getChildNodes();
               	  nodeMapData = getNodeList(childNodeList);
+              	  getJsonStringFromMap(nodeMapData);
+              	  
               	  list.add(nodeMapData);
+              	
                 }
-					
-				  
-                System.out.println( list );
                 
             } catch (Exception e){
                 e.printStackTrace();
             }
 	   		
-            return list.toString();
+	   		String listResult = getJsonStringFromList(list);
+	   		
+            return listResult;
             
         }
 
 	   public static Map<String,Object> getNodeList(NodeList nodeList){
 	       Map<String, Object> dataMap = new HashMap<>();
 	       for(int i = 0; i < nodeList.getLength(); i++){
-	           String tagName = nodeList.item(i).getNodeName();
+	    	   String tagName = nodeList.item(i).getNodeName();
 	           if(!"#text".equals(tagName)){
-	               
+                   System.out.println("tagName = " + tagName);
 	               if(nodeList.item(i).getChildNodes().getLength()>1){
 	                   dataMap.put(tagName,getNodeList(nodeList.item(i).getChildNodes()));
 	               }else{
@@ -123,6 +129,25 @@ public class MapController {
 	       return dataMap;
 	   }
 
-	      
+	   public static String getJsonStringFromMap(Map<String, Object> map) {
+
+	        JSONObject json = new JSONObject();
+
+	        for (Map.Entry<String, Object> entry : map.entrySet()) {
+	            json.put(entry.getKey(), entry.getValue());
+	        }
+
+	        return json.toJSONString();
+	    }
    
+	   public static String getJsonStringFromList(List<Map<String, Object>> list) {
+
+	        JSONArray jsonArray = new JSONArray();
+
+	        for (Map<String, Object> map : list) {
+	            jsonArray.add(getJsonStringFromMap(map));
+	        }
+
+	        return jsonArray.toJSONString();
+	    }
 }
