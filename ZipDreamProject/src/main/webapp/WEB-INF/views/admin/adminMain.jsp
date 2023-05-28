@@ -56,40 +56,18 @@
 						<th>내용</th>
 						<th>타입</th>
 						<th>처리 여부</th>
-						<th>처리 내용</th>
+						<th>신고 일자</th>
 					</tr>
-					<tr>
-						<td>UPS5005</td>
-						<td>UPS</td>
-						<td>ASDF19218</td>
-						<td>06/25/2016</td>
-						<td>12/25/2016</td>
-						<td>$8,322.12</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
+					<c:forEach var="report" items="${reportList}">
+						<tr>
+							<td>${report.rname }</td>
+							<td>${report.tname }</td>
+							<td>${report.reportContent }</td>
+							<td>${report.reportType }</td>
+							<td>${report.reportStatus }</td>
+							<td>${report.reportDate }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</article>
