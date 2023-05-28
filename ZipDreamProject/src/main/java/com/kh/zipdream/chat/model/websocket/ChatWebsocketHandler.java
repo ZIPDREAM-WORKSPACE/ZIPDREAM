@@ -51,7 +51,7 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 		
 		// WebSocketSession : 웹소켓에 접속/요청한 클라이언트의 세션정보 
 		System.out.println(session.getId()+"가 연결함");
-	
+		
 		
 		sessions.add(session); // 전달받은 session을 set에 추가  
 	}
@@ -88,10 +88,8 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 		if(result > 0) {
 			// 같은방에 접속중인 클라이언트에게 전달받은 메세지 뿌리기 
 			for( WebSocketSession s: sessions) {
-				
 				// 반복을 진행중인 WebSocketSession안에 담겨있는 방번호 == 메세지 안에 담겨있는 방번호가 일치하는 경우 메세지 뿌리기
 				int chatRoomNo = (int)s.getAttributes().get("chatRoomNo");
-				
 				// 메세지에 담겨있는 채팅반 번호와 chatRoomNo 일치하는지 비교 
 				if(chatMessage.getChatRoomNo() == chatRoomNo) {
 					// 같은방 클라이언트에게 JSON 형태로 메세지를 보냄. 
