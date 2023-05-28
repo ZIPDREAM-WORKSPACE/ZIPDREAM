@@ -75,17 +75,17 @@
 	<!-- 채팅방 나가기 -->
 	<delete id="exitChatRoom" parameterType="chatRoomJoin">
 		DELETE FROM CHAT_ROOM_JOIN
-		WHERE USER_NO = #{userNo} 
+		WHERE REF_UNO = #{refUno} 
 		AND CHAT_ROOM_NO = #{chatRoomNo}  
 	</delete>
-<!-- 	
-	채팅방 인원 수 확인
+	
+	<!--채팅방 인원 수 확인-->
 	<select id="countChatRoomMember" resultType="_int">
 		SELECT
 			COUNT(*)
 		FROM CHAT_ROOM_JOIN
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
-	</select> -->
+	</select>
 	
 	<!-- 채팅방 닫기 -->
 	<update id="closeChatRoom">
