@@ -44,21 +44,27 @@
 	</resultMap>	
 	
 	<select id="countUser" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 
+		<if test='type == 1'>
+			AND STATUS = 'Y'
+		</if>
 	</select>
 	
 	<select id="countUserYesterday" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
-		<![CDATA[WHERE USER_LEVEL = 1 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE USER_LEVEL = 1 AND STATUS = 'Y' AND ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countLicenseUser" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 2 AND STATUS = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 2
+		<if test='type == 1'>
+			AND STATUS = 'Y'
+		</if>
 	</select>
 	
 	<select id="countLicenseUserYesterday" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
-		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countObject" resultType="_int">
@@ -67,16 +73,25 @@
 	
 	<select id="countObjectYesterday" resultType="_int">
 		SELECT COUNT(*) FROM SELLDETAIL
-		<![CDATA[WHERE SELL_ENROLL_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE SELL_ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countReport" resultType="_int">
-		SELECT COUNT(*) FROM REPORT
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
 	</select>
 	
-	<!-- <select id="countReportYesterday">
-		SELECT COUNT(*) FROM USER.REPORT WHERE REPORT_STATUS = 'N' AND
-	</select> -->
+	<select id="countUserReport" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE 
+		<choose>
+				<when test='type == 1'> REF_RUNO = #{userNo}  </when>
+		    	<when test='type == 2'> REF_TUNO = #{userNo}  </when>
+    	</choose>
+	</select>
+	
+	<select id="countReportYesterday" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
+		<![CDATA[AND REPORT_DATE < CURDATE()]]>
+	</select>
 	
 	<select id="countEvent" resultType="_int">
 		SELECT COUNT(*) FROM PROMOTION
@@ -84,7 +99,7 @@
 	
 	<select id="countEventYesterday" resultType="_int">
 		SELECT COUNT(*) FROM PROMOTION 
-		<![CDATA[WHERE PROMOTION_START_DATETIME <= (CURDATE() - INTERVAL 1 DAY)]]>
+		<![CDATA[WHERE PROMOTION_START_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">
@@ -154,7 +169,34 @@
 		ORDER BY ENROLL_DATETIME DESC
 	</select>
 	
-	<select id="getReportList" parameterType="_int" resultMap="reportResultSet">
+	<select id="selectUserSearchCount" parameterType="HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_LEVEL = #{type}
+		 	<if test='keyword != null and keyword != ""'>
+			  	AND
+				  <choose>
+					<when test='condition.equals("name")'> USER_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("id")'> USER_ID LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
+	</select>
+	
+	<select id="selectUserSearch" parameterType="HashMap" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_LEVEL = #{type}
+		 	<if test='keyword != null and keyword != ""'>
+			  	AND
+				  <choose>
+					<when test='condition.equals("name")'> USER_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("id")'> USER_ID LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
+		ORDER BY ENROLL_DATETIME DESC
+	</select>
+	
+	<select id="getReportList" parameterType="hashMap" resultMap="reportResultSet">
 		SELECT REPORT_NO,
 			   REF_RUNO,
 			   REF_TUNO,
@@ -169,7 +211,11 @@
 		ON R.REF_RUNO = M.USER_NO
         LEFT JOIN MEMBER M2
         ON R.REF_TUNO = M2.USER_NO
-		WHERE REF_RUNO = #{userNo}
+		WHERE 
+		<choose>
+				<when test='type == 1'> REF_RUNO = #{userNo}  </when>
+		    	<when test='type == 2'> REF_TUNO = #{userNo}  </when>
+    	</choose>
 		ORDER BY REPORT_DATE DESC;
 	</select>
 	

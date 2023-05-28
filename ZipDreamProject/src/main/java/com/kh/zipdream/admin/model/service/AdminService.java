@@ -25,6 +25,7 @@ public interface AdminService {
 	public NoticeBoard selectNoticeBoard(int boardNo);
 	public int deleteNoticeBoard(int boardNo);
 	public void selectUserList(int cp, int type, Map<String, Object> map);
-	public JSONObject getReportList(int cp, int userNo);
+	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
+	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public int updateMemberStatus(Member m);
 }
