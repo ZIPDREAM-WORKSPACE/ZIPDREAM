@@ -48,12 +48,12 @@ public class AdminServiceImpl implements AdminService{
 	
 	public Map<String,Object> countUser() {
 		
-		return getMap(dao.countUser(),dao.countUserYesterday());
+		return getMap(dao.countUser(1),dao.countUserYesterday());
 	}
 	
 	public Map<String,Object> countLicenseUser() {
 		
-		return getMap(dao.countLicenseUser(),dao.countLicenseUserYesterday());		
+		return getMap(dao.countLicenseUser(1),dao.countLicenseUserYesterday());		
 	}
 	
 	public Map<String,Object> countObject() {		
@@ -66,10 +66,10 @@ public class AdminServiceImpl implements AdminService{
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		int num = dao.countReport();
-//		double percent = getPercent(num , dao.countReportYesterday());
+		double percent = getPercent(num , dao.countReportYesterday());
 
 		map.put("num", num);
-//		map.put("percent", percent);
+		map.put("percent", percent);
 		return map;
 	}
 	
@@ -95,6 +95,25 @@ public class AdminServiceImpl implements AdminService{
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("userName", list.get(i).getUserName());
 			map.put("applyDateTime", list.get(i).getApplyDateTime());
+			listResult.add(map);
+		}
+		
+		return listResult; 
+	}
+	
+	public List<Map<String,String>> selectReportListLimit4() {
+		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
+		
+		List<Report>list = dao.selectReportListLimit4();
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("reportNo", list.get(i).getReportNo()+"");
+			map.put("rname", list.get(i).getRName());
+			map.put("tname", list.get(i).getTName());
+			map.put("reportContent", list.get(i).getReportContent());
+			map.put("reportType", list.get(i).getReportType()+"");
+			map.put("reportStatus", list.get(i).getReportStatus()+"");
+			map.put("reportDate", list.get(i).getReportDate()+"");
 			listResult.add(map);
 		}
 		
@@ -148,27 +167,37 @@ public class AdminServiceImpl implements AdminService{
 		int listCount = 0;
 		
 		if(type == 1) {
-			listCount = dao.countUser();
+			listCount = dao.countUser(2);
 		}else {
-			listCount = dao.countLicenseUser();
+			listCount = dao.countLicenseUser(2);
 		}
 		int pageLimit = 10;
 		int boardLimit = 10;
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
-		ArrayList<NoticeBoard> list = dao.selectUserList(pi,type);
+		ArrayList<Member> list = dao.selectUserList(pi,type);
 		
 		map.put("pi", pi);
 		map.put("list", list);
 	}
 	
-	public JSONObject getReportList(int cp, int userNo) {
-		int listCount = dao.countReport();				
+	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map) {
+		int listCount = dao.selectUserSearchCount(paramMap);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
+		ArrayList<Member> list = dao.selectUserSearch(pi, paramMap);
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public JSONObject getReportList(int cp, Map<String, Object> paramMap) {
+		int listCount = dao.countUserReport(paramMap);				
 		int pageLimit = 10;
 		int boardLimit = 10;
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
-		ArrayList<Report> list = dao.getReportList(pi, userNo);
+		ArrayList<Report> list = dao.getReportList(pi, paramMap);
 		
 		JSONObject obj = new JSONObject();
 		JSONArray jArray = new JSONArray();	

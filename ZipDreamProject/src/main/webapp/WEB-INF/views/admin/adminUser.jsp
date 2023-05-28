@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:if test="${ !empty param.condition }">
+	<c:set var="sUrl" value="&condition=${param.condition }&keyword=${param.keyword }"/>
+</c:if>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -13,6 +16,19 @@
 				<button type="button" onclick="location.href='<%= request.getContextPath()%>/admin/user?type=2&cpage=1'">공인중개사</button>
 			</div>
 		</div>
+		<form id="searchForm" action="<%= request.getContextPath() %>/admin/user" method="get" align="center" style="display:flex;justify-content:flex-start;margin-bottom:25px;gap:10px;">
+			<input type="hidden" name="type" value="${type }">
+			<div class="select">
+				<select class="custom-select" name="condition">
+					<option value="name" ${param.condition == 'name' ? 'selected':'' }>이름</option>
+					<option value="id" ${param.condition == 'id' ? 'selected':'' }>아이디</option>
+				</select>
+			</div>
+			<div class="text">
+				<input type="text" class="form-control" name="keyword" value="${param.keyword }">
+			</div>
+			<button type="submit" class="searchBtn btn btn-secondary">검색</button>
+		</form>
 		<div class="content-notice-table">
 			<table class="rwd-table">
 				<tbody>
@@ -75,7 +91,7 @@
 			</div>
 		</div>
 		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-xl">
+		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">회원 상세 조회</h5>
@@ -118,10 +134,10 @@
 						</div>
 						<div class="user-more">
 							<div class="user-content-nav" style="display:flex;">
-								<button type="button" class="btn btn-primary" style="border-radius:8px 8px 0px 0px;">신고 기록</button>
-
+								<button type="button" id="reportHistory" class="btn btn-primary" style="border-radius:8px 8px 0px 0px;">신고 기록</button>
+								<button type="button" id="reportedHistory" class="btn" style="border-radius:8px 8px 0px 0px;">피신고 기록</button>
 							</div>
-							<div class="user-content" style="padding:12px;border:5px solid #007bff;border-radius:0px 8px 8px 8px;">
+							<div class="user-content" style="padding:12px;border:5px solid #007bff;">
 								<table class="rwd-table" style="margin-bottom:30px;">
 									<tbody class="user-tbody">
 										
@@ -136,7 +152,7 @@
 						</div>
 					</div>
 					<div class="modal-footer" style="justify-content:space-between;">
-						<button class="btn btn-danger" onclick="deleteMember();">회원 탈퇴</button>
+						<button class="btn btn-danger" onclick="deleteMember();">회원 상태 변경</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
 	                        data-dismiss="modal">닫기</button>
       				</div>
@@ -172,23 +188,48 @@
 					$(".user-modifyDateTime").text("${user.modifyDateTime}");
 				}
 			</c:forEach>
-			getReportList(userNo,uPage);
+			getReportList(userNo,uPage,1);
+			
+			$("#reportHistory").on('click',function(){
+				$(this).addClass("btn-primary");
+				$("#reportedHistory").removeClass("btn-primary");
+				$(".user-content").css({'border-top-left-radius':"0px"});
+				getReportList(userNo,uPage,1);
+			});
+			
+			$("#reportedHistory").on('click',function(){
+				$(this).addClass("btn-primary");
+				$("#reportHistory").removeClass("btn-primary");
+				$(".user-content").css({'border-radius':"8px"});
+				getReportList(userNo,uPage,2);
+			});
+			
 			$('#userModal').modal("show");
 		});
 	}
 	
-	function getReportList(userNo,cPage){
+	function getReportList(userNo,cPage,type){
 		$.ajax({
 			  url : "<%= request.getContextPath() %>/admin/getReportList",
 			  method: "get",
-			  data: {userNo, cPage},
+			  data: {userNo, cPage, type},
 			  contentType:'application/json;charset=utf-8',
 	    	  dataType:'json',
 			  success : function(result){
-				  let html = "<tr><td>대상자</td><td>신고내용</td><td>처리여부</td><td>처리내용</td><td>타입</td><td>신고일자</td></tr>";
+				  $(".user-tbody").html("");
+				  $(".user-pagination").html("");
+				  
+				  
+				  let html = "";
+				  if(type == 1){
+				  	html = "<tr><td>대상자</td><td>신고내용</td><td>처리여부</td><td>처리내용</td><td>타입</td><td>신고일자</td></tr>";					  
+				  }else {
+					html = "<tr><td>신고자</td><td>신고내용</td><td>처리여부</td><td>처리내용</td><td>타입</td><td>신고일자</td></tr>";  
+				  }
+				  
 				  for(let i = 0; i < result.array.length; i++){
 					let report = result.array[i];
-				  	html += "<tr><td>"+report.tname+"</td><td>"+ report.reportContent+"</td>";
+				  	html += "<tr><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
 				  	html += "<td>"+report.reportStatus+"</td><td>"+report.reportResult+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
 					  
 				  }
@@ -200,23 +241,24 @@
 				  if(result.pi.currentPage == 1){
 					  userPage += "<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>";
 				  }else {
-					  userPage += "<li class='page-item'><a class='page-link' onclick='getReportList(" +uno +","+ (uPage-1) + "); uPage--;'" +
+					  userPage += "<li class='page-item'><a class='page-link' onclick='getReportList(" +uno +","+ (uPage-1) +","+ type + "); uPage--;'" +
 							">이전</a></li>";
 				  }
-				  for(let i = result.pi.startPage; i< result.pi.endPage; i++){
+				  for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
 					  userPage += '<li class="page-item"><a class="page-link" '+
-							'onclick="getReportList(' +uno +','+ i + ')">${item }'+i+'</a></li>';
+							'onclick="getReportList(' +uno +','+ i  +','+ type + ')">${item }'+i+'</a></li>';
 				  }
 				  if(result.pi.currentPage == result.pi.maxPage){
 					  userPage += '<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>';
 				  }else {
-					  userPage += "<li class='page-item'><a class='page-link' onclick='getReportList(" +uno +","+ (uPage+1) + "); uPage++;'" +
+					  userPage += "<li class='page-item'><a class='page-link' onclick='getReportList(" +uno +","+ (uPage+1) +","+ type + "); uPage++;'" +
 						">다음</a></li>";
 				  }
 				  $(".user-pagination").html(userPage);
+				  
 			  },
               error: function(){
-                  console.log("에러남");
+                  console.log("error");
                }
                   
         });

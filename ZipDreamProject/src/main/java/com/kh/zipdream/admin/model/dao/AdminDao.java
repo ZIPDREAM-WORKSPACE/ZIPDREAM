@@ -2,6 +2,7 @@ package com.kh.zipdream.admin.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,16 +22,16 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int countUser() {
-		return sqlSession.selectOne("admin-mapper.countUser");
+	public int countUser(int type) {
+		return sqlSession.selectOne("admin-mapper.countUser",type);
 	}
 	
 	public int countUserYesterday() {
 		return sqlSession.selectOne("admin-mapper.countUserYesterday");
 	}
 	
-	public int countLicenseUser() {
-		return sqlSession.selectOne("admin-mapper.countLicenseUser");
+	public int countLicenseUser(int type) {
+		return sqlSession.selectOne("admin-mapper.countLicenseUser",type);
 	}
 	
 	public int countLicenseUserYesterday() {
@@ -49,9 +50,13 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countReport");
 	}
 	
-//	public int countReportYesterday() {
-//		return sqlSession.selectOne("admin-mapper.countReportYesterday");
-//	}
+	public int countReportYesterday() {
+		return sqlSession.selectOne("admin-mapper.countReportYesterday");
+	}
+	
+	public int countUserReport(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("admin-mapper.countUserReport",paramMap);
+	}
 	
 	public int countEvent() {
 		return sqlSession.selectOne("admin-mapper.countEvent");
@@ -71,6 +76,10 @@ public class AdminDao {
 	
 	public List<MemberApply> selectApplyListLimit5() {
 		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
+	}
+	
+	public List<Report> selectReportListLimit4() {
+		return sqlSession.selectList("admin-mapper.selectReportListLimit4");
 	}
 	
 	public int countNoticeBoard() {
@@ -104,18 +113,30 @@ public class AdminDao {
 		return sqlSession.delete("admin-mapper.deleteNoticeBoard",boardNo);
 	}
 	
-	public ArrayList<NoticeBoard> selectUserList(PageInfo pi, int type){
+	public ArrayList<Member> selectUserList(PageInfo pi, int type){
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList) sqlSession.selectList("admin-mapper.selectUserList",type,rowBounds);
 	}
 	
-	public ArrayList<Report> getReportList(PageInfo pi, int userNo){
+	public int selectUserSearchCount(Map<String, Object> paramMap) {		
+		return sqlSession.selectOne("admin-mapper.selectUserSearchCount",paramMap);
+	}
+	
+	public ArrayList<Member> selectUserSearch(PageInfo pi, Map<String, Object> paramMap) {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",userNo,rowBounds);
+		System.out.println(paramMap);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectUserSearch", paramMap, rowBounds);
+	}
+	
+	public ArrayList<Report> getReportList(PageInfo pi, Map<String, Object> paramMap){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",paramMap,rowBounds);
 	}
 	
 	public int updateMemberStatus(Member m) {

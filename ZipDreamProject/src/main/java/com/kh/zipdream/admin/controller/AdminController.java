@@ -38,6 +38,7 @@ public class AdminController {
 		
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
+		model.addAttribute("reportList",service.selectReportListLimit4());
 		return "admin/adminMain";
 	}
 	
@@ -97,10 +98,16 @@ public class AdminController {
 	@GetMapping("/user")
 	public String user(Model model,
 					   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
-					   @RequestParam(value="type", required=false, defaultValue="1") int type) {
+					   @RequestParam(value="type", required=false, defaultValue="1") int type,
+					   @RequestParam Map<String, Object> paramMap) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		service.selectUserList(cp,type,map);
-		
+		if(paramMap.get("condition") == null) {
+			service.selectUserList(cp,type,map);
+		}else {
+			paramMap.put("cp", cp);
+			paramMap.put("type", type);
+			service.selectUserSearch(paramMap,map);
+		}
 		model.addAttribute("userList",map);
 		model.addAttribute("type",type);
 		
@@ -109,9 +116,12 @@ public class AdminController {
 	
 	@GetMapping("/getReportList")
 	@ResponseBody
-	public JSONObject getReportList(int userNo, int cPage) {
+	public JSONObject getReportList(int userNo, int cPage, int type) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
-		JSONObject result = service.getReportList(cPage, userNo);
+		paramMap.put("userNo", userNo);
+		paramMap.put("type", type);
+		JSONObject result = service.getReportList(cPage, paramMap);
 		
 		return result;
 	}
