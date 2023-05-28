@@ -17,5 +17,15 @@ public class SalesController {
 	public String moveSalesGuide() {
 		return "sales/salesGuide";
 	}
+	
+	@GetMapping("/term")
+	public String moveSalesTerm() {
+		return "sales/salesTerm";
+	}
+	
+	@GetMapping("/faq")
+	public String moveSalesFaq() {
+		return "sales/salesFaq";
+	}
 
 }
