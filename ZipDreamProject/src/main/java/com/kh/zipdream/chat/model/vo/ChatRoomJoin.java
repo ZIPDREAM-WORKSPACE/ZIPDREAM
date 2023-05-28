@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChatRoomJoin {
-	private int userNo; 
+	private int refUno; 
 	private int chatRoomNo;
 	
 }
