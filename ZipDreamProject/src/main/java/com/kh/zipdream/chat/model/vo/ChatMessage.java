@@ -10,7 +10,7 @@ public class ChatMessage {
 	private String message;
 	private Date createDate;
 	private int chatRoomNo;
-	private int userNo;
-	
+	private int refUno;
+	private String userName;
 	
 }

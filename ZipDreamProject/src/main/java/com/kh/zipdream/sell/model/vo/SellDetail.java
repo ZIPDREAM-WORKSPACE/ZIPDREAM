@@ -49,8 +49,5 @@ public class SellDetail {
 	private int householdCount;				//	HOUSEHOLD_COUNT int 
 	private String option;					//	OPTION varchar(100) 
 	private String secutity;				//	SECURITY varchar(100) 
-	private String installationType;		//	INSTALLATION_TYPE varchar(100) 
-	private String installationName;		//	INSTALLATION_NAME varchar(100) 
-	private String installationInfo;		//	INSTALLATION_INFO
 	
 }

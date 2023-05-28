@@ -44,6 +44,14 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
+	public void joinChatRoomUser(ChatRoomJoin join){
+		
+		
+			dao.joinChatRoom(join);
+			
+	}
+	
+	@Override
 	public int insertMessage(ChatMessage chatMessage) {
 		
 		return dao.insertMessage(chatMessage);

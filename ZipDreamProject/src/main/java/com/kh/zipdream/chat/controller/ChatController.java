@@ -42,7 +42,7 @@ public class ChatController {
 	// 채팅방 만들기
 	@ResponseBody
 	@GetMapping("/chat/openChatRoom")
-	public void openChatRoom(
+	public int openChatRoom(
 					@ModelAttribute("loginUser") Member loginUser,
 					Model model,
 					RedirectAttributes ra
@@ -50,12 +50,16 @@ public class ChatController {
 		ChatRoom room = new ChatRoom();
 		room.setTitle(loginUser.getUserId()+"님의 채팅");
 		room.setStatus("Y");
-		room.setUserNo(loginUser.getUserNo());
+		room.setRefUno(loginUser.getUserNo());
 		int chatRoomNo = service.openChatRoom(room); // 생성된 채팅반 번호 
+		model.addAttribute("chatRoomNo",chatRoomNo);
+		System.out.println(chatRoomNo);
 		ChatRoomJoin join = new ChatRoomJoin();
-		join.setUserNo(loginUser.getUserNo());
+		join.setRefUno(loginUser.getUserNo());
 		join.setChatRoomNo(chatRoomNo);
+		service.joinChatRoomUser(join);
 		
+		return chatRoomNo;
 	}
 	
 	@GetMapping("/chat/room/{chatRoomNo}")
@@ -68,7 +72,7 @@ public class ChatController {
 				ChatRoomJoin join, 
 				RedirectAttributes ra
 			) {
-		join.setUserNo(loginUser.getUserNo());
+		join.setRefUno(loginUser.getUserNo());
 		List<ChatMessage> list = service.joinChatRoom(join);
 		
 		if(list !=null) {
@@ -87,8 +91,7 @@ public class ChatController {
 	@ResponseBody
 	public int exitChatRoom(@ModelAttribute("loginUser") Member loginUser,
 							ChatRoomJoin join) {
-		join.setUserNo(loginUser.getUserNo());
-		
+		join.setRefUno(loginUser.getUserNo());
 		return service.exitChatRoom(join);
 	
 	}

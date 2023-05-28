@@ -666,7 +666,7 @@ box-sizing: border-box;
  line-height:30px; 
  text-align:right;
 }
-.login_service{
+.login_service, .chat_open{
 	width:300px;
 	height:50px;
 	background: grey;
@@ -676,14 +676,44 @@ box-sizing: border-box;
 	margin-top:50px;
 	background: #1F4B6B;
 	color:white;
+	cursor:pointer;
+	border-radius: 10px;
+	 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
-#chat_rooo_btn{
-	width:100px;
-	height:30px;
-	background: green;
-	border: none;
-	align:right;
-}
+.display-chatting{
+		width: 100%;
+		height: 450px;
+		border : 1px solid black;
+		overflow: auto;
+		list-style : none;
+		padding : 10px 10px;
+		
+	}
+	   .myChat{
+      text-align: right;
+      margin-bottom: 5px;
+   }
+   .myChat > p {
+      background-color :rgb(25, 83, 125);
+      color:white;
+   }
+
+   .chatDate{
+      font-size : 10px;
+   }
+	   .chatP{
+      display : inline-block;
+      border-radius : 5px;
+      padding : 4px 8px 4px 8px;
+      margin:0;
+      max-width: 250px;
+       overflow:hidden;
+    word-wrap:break-word;
+       text-align: left;
+       box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+        background-color :rgb(242, 249, 254);
+      
+   }
 </style>
 </head>
 <body>
@@ -698,7 +728,10 @@ box-sizing: border-box;
 					<div class="login_service">로그인 후 이용가능한 서비스입니다.</div>
 				</c:when> 
 				<c:otherwise> 
+				
 					<div class="chat_open">운영자와 채팅하기</div>
+					<ul class="display-chatting" style="display:none">
+					</ul>
 				</c:otherwise> 
 			</c:choose> 
 			
@@ -865,7 +898,17 @@ box-sizing: border-box;
 </div>
 
 	<script>
-
+	
+	 
+	 
+	 	const refUno ='${loginUser.userNo}';
+		const userId ='${loginUser.userId}';
+		const userName = '${loginUser.userName}';
+		
+		
+		
+		
+	 
 	 	function noticeModal(index){
 	 		$("#exampleModalLabel").text(noticeBoardList.list[index].noticeBoardTitle);
 			$("#m_date").text(noticeBoardList.list[index].createDateTime);
@@ -902,7 +945,6 @@ box-sizing: border-box;
 		 		type : "get",
 		 		
 		 		success : function(result){
-		 			
 		 			console.log(result);
 		 			let text="";
 		 			
@@ -917,6 +959,7 @@ box-sizing: border-box;
 		 			}
 		 			
 		 			$("#n_slider").html(text);
+		 			let nsize = $('.notice_list').length;
 		 			
 		 			$('#n_slider').slick({
 						// centerMode: true,
@@ -928,7 +971,7 @@ box-sizing: border-box;
 								arrows : true,
 								centerMode : true,
 								centerPadding : '10px',
-								slidesToShow : 2
+								slidesToShow : nsize >= 2 ? 2 : nsize,
 							}
 						}, {
 							breakpoint : 1000,
@@ -1014,7 +1057,6 @@ box-sizing: border-box;
 							}
 						}]					
 					});
-		 			console.log(result);
 		 			AOS.init();
 		 		},
 		 		error : function(request){
@@ -1038,25 +1080,68 @@ box-sizing: border-box;
 		});
 		
 	 	$(".chat_open").click(function(){
+	 		
+	 		
 		 	/* 채팅 */
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
 		 		type : "get",
-		 		success : function(){
-		 			
-		 				console.log("okay");
+		 		success : function(result){
+		 				
+		 				chatRoomNo = result;
+		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
+		 				addEventChat();
+		 				$("#x").click(function(){
+		 					exitChatRoom();
+		 					
+		 				});
 		 		},
 		 		error : function(request){
 		 			console.log("에러발생");
 		 			console.log("에러코드 : "+request.status);
+		 			
 		 		}
 		 	});
+		 	$(".chat_open").css("display","none");
+		 	$(".display-chatting").css({"display":"block","border":"none"});
+		 	
 	 	});	
 	 	
+		$("#login_btn").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
+		$(".login_service").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
+		
+		
 		})
+		
+		function exitChatRoom(){
+			if(confirm("채팅방에서 나가시겠습니까?")){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+				
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							location.href="<%=request.getContextPath()%>"
+						}else{
+							alert("채팅방 나가기에 실패했습니다.");
+						}
+						// result == 0 실패 
+						
+					}
+				})
+			}	
+			
+		};
 		
 		
 	</script>
 	
+<script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 
 	<jsp:include page="../common/footer.jsp" />
