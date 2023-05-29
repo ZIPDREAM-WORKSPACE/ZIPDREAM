@@ -10,7 +10,7 @@
 			<h1>공지사항 관리</h1>
 			<button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/notice/enrollForm'">공지사항 작성</button>
 		</div>
-		<div class="content-notice-table">
+		<div class="content-table">
 			<table class="rwd-table">
 				<tbody>
 					<tr>

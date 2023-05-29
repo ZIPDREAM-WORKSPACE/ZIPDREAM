@@ -190,7 +190,7 @@ position: absolute;
 			<ul class="header_list">
 				<li class="h_text"><a href="<%=request.getContextPath()%>/map/main">지도</a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/sales/schedule">분양</a></li>
-				<li class="h_list"><a href="#"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
+				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 			</ul>
@@ -207,7 +207,36 @@ position: absolute;
 	</div>
 	
 	<script>
-
+	
+<%-- 	let url = "<%=request.getContextPath()%>";
+ 	let currentUrl = "<%=request.getRequestURI()%>";
+ 	
+ 	if(!url===currentUrl){
+ 		
+ 		exitChatRoom();
+ 	} 
+	
+	function exitChatRoom(){
+		if(confirm("채팅방에서 나가시겠습니까?")){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/chat/exit",
+				data:{ chatRoomNo},
+				success : function(result){
+					// result == 1 나가기 성공
+					if(result == 1){
+						location.href="<%=request.getContextPath()%>"
+					}else{
+						alert("채팅방 나가기에 실패했습니다.");
+					}
+					// result == 0 실패 
+					
+				}
+			})
+		}	
+		
+	}; --%>
+	
+	
 	</script>
 </body>
 </html>
