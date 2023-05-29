@@ -1129,7 +1129,7 @@ box-sizing: border-box;
 		
 		
 		
-	 	 window.onbeforeunload = function (event) {
+		window.addEventListener('beforeunload', (event) => {
 		    event.preventDefault();
 		    let userNo = '${loginUser.userNo}';
 		    // ajax 호출
@@ -1165,12 +1165,8 @@ box-sizing: border-box;
 			})
 			
 	 	} 
-
-			
-		
-	
 	 	
-		};
+		});
 		
 		
 		})
