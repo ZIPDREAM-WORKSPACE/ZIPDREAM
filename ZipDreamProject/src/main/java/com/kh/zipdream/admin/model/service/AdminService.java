@@ -13,12 +13,12 @@ public interface AdminService {
 	public Map<String,Object> countUser();
 	public Map<String,Object> countLicenseUser();
 	public Map<String,Object> countObject();
-	public Map<String,Object> countReport();
+	public Map<String,Object> countReport(int type);
 	public Map<String,Object> countEvent();
 	public Map<String,Object> countChattingRoom();
 	public List<Map<String,String>> selectApplyListLimit5();
-	public List<Map<String,String>> selectReportListLimit4();
-	
+	public List<Map<String,String>> selectReportList(int type);
+	public List<Map<String,String>> selectReportList(int type,int cp, Map<String, Object> map);
 	public void selectNoticeBoardList(int cp, Map<String, Object> map);
 	public void selectNoticeBoardList(Map<String, Object> map);
 	public int insertNoticeBoard(NoticeBoard nb);
@@ -29,4 +29,6 @@ public interface AdminService {
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public int updateMemberStatus(Member m);
+	
+	public void selectChatRoomList(int cp, Map<String, Object> map);
 }

@@ -23,6 +23,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
+	public int selectChatRoom(int uno){
+		return dao.selectChatRoom(uno);
+	}
+	
+	@Override
 	public int openChatRoom(ChatRoom chatRoom) {
 		return dao.openChatRoom(chatRoom);
 	}
@@ -70,6 +75,7 @@ public class ChatServiceImpl implements ChatService{
 			
 			// 0명일경우 방을 닫기
 			if(cnt == 0) {
+				dao.deleteChatMessage(join.getChatRoomNo());
 				result = dao.closeChatRoom(join.getChatRoomNo());
 			}
 		}

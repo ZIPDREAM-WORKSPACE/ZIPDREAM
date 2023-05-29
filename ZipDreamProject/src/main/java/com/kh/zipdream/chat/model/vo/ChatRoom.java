@@ -8,5 +8,6 @@ public class ChatRoom {
 	private String title;
 	private String status;
 	private int refUno;
+	private String userId;
 	
 }

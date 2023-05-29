@@ -19,4 +19,6 @@ public interface ChatService {
 	int insertMessage(ChatMessage cm); 
 	
 	int exitChatRoom(ChatRoomJoin crj);
+	
+	int selectChatRoom(int uno);
 }

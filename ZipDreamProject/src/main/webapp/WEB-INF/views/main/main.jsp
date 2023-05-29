@@ -1105,7 +1105,17 @@ box-sizing: border-box;
 		 	$(".chat_open").css("display","none");
 		 	$(".display-chatting").css({"display":"block","border":"none"});
 		 	
+		 	
+		 	
 	 	});	
+	 	
+	<%-- 	let url = "<%=request.getContextPath()%>";
+	 	let currentUrl = "<%=request.getRequestURI()%>";
+	 	
+	 	if(!url.equals(currentUrl)){
+	 		
+	 		exitChatRoom();
+	 	}  --%>
 	 	
 		$("#login_btn").click(function(){
 		 	location.href="<%=request.getContextPath()%>/member/login";
@@ -1117,13 +1127,55 @@ box-sizing: border-box;
 	 	
 		
 		
+		
+		
+		window.addEventListener('beforeunload', (event) => {
+		    event.preventDefault();
+		    let userNo = '${loginUser.userNo}';
+		    // ajax 호출
+		
+		if(userNo!=''){
+		
+		 	$.ajax({
+				url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
+				type : "get",
+				success : function(result){
+					// result == 1 나가기 성공
+					if(result >= 1){
+						$.ajax({
+							url:"<%=request.getContextPath()%>/chat/exit",
+							data:{ chatRoomNo},
+							success : function(data){
+								if(data == 1){
+								}else{
+									alert("채팅방 나가기에 실패했습니다.");
+								}
+								
+							}
+						})
+						
+					}else{
+					}
+					// result == 0 실패 
+					
+				},     error: function(){
+		            console.log("에러남");
+		        }
+				
+			})
+			
+	 	} 
+	 	
+		});
+		
+		
 		})
 		
 		function exitChatRoom(){
-			if(confirm("채팅방에서 나가시겠습니까?")){
+			if(confirm("대화를 종료하시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
-				
+					data:{ chatRoomNo},
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){
@@ -1139,6 +1191,25 @@ box-sizing: border-box;
 			
 		};
 		
+		<%-- function exitChatRoom2(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+					data:{ chatRoomNo},
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							location.href="<%=request.getRequestURI()%>"
+						}else{
+							alert("채팅방 나가기에 실패했습니다.");
+						}
+						// result == 0 실패 
+						
+					}
+				})
+			
+		}; --%>
+		
+ 	
 		
 	</script>
 	

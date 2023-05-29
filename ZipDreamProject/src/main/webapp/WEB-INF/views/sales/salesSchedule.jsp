@@ -220,6 +220,98 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp" />
+	
+	<script>
+		$(function(){
+			
+			/* let today = new Date();
+			
+			console.log(today); */
+			$.ajax({
+				url:"<%=request.getContextPath()%>/sales/apiData",
+				method:"get",
+				/* data:{today}, */
+				dataType:"text",
+				contentTYpe :"text.plain; charset:UTF-8",
+				success:function(result){
+					data = JSON.parse(result).data;
+					
+					resultHtml(data);
+				},
+				error:function(){
+					console.log("에러발생");
+				}
+			})
+		});
+		
+		function resultHtml(data){
+			var html = "<tbody>"
+			$.each(data, function(key, value){
+				var houseCode = value.HOUSE_MANAGE_NO;
+				
+				html += "<tr>";
+				html += "<td><p class='tagAccept'>접수</p></td>";
+				html += "<td><p>" + value.HOUSE_SECD_NM + "</p></td>";
+				html += "<td><p>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
+				html += "<td><div class='appInfo'><p class='appInfoTitle'><a href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
+				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
+				html += "<p class='appDday'>모집공고일 : "+ value.RCRIT_PBLANC_DE +"</p></div></td>";
+				let p = aptPrice(houseCode);
+				let s = aptSuply(houseCode);
+				
+				
+				html += "<td><p>" + p + "</p></td>";
+				html += "<td><p>" + s + "</p></td>";
+				html += "<td><p>" + "" + "</p></td>";
+				html += "<td><img class='sellHousealarm' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
+			});
+			
+			html += "</tbody>"
+			$(".sellHouseTable").append(html);
+		}
+		
+		/* 아파트 가격 불러오기  */
+		function aptPrice(houseCode){
+			var aptPrice;
+			$.ajax({
+				url:"<%=request.getContextPath()%>/sales/houseInfo",
+				method:"get",
+				async: false,
+				data:{houseCode},
+				contentType:"text.plain; charset:UTF-8",
+				success:function(result){
+					/* console.log(result.data[0].LTTOT_TOP_AMOUNT); */
+					aptPrice = result.data[0].LTTOT_TOP_AMOUNT;
+					/* console.log(value.HOUSE_NM + " 가격은 : "+ aptPrice); */
+					
+				},
+				error:function(){
+					cosole.log("에러발생");
+				}
+			});
+			return aptPrice;
+		}
+		
+		function aptSuply(houseCode){
+			var aptSuply;
+			$.ajax({
+				url:"<%=request.getContextPath()%>/sales/houseInfo",
+				method:"get",
+				ansyc: false,
+				data:{housCode},
+				contentType:"text.plain; charset:UTF-8",
+				success:function(result){
+					aptSuply = result.data[0].SPSPLY_HSHLDCO;
+				},
+				error:function(){
+					console.log("에러발생");
+				}
+			});
+			return aptSuply;
+		}
+	
+	</script>
+	
 
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
@@ -232,7 +324,7 @@
 		<div class="sellHouseTitleWrap">
 			<h1 class="sellHouseTitle">분양일정</h1>
 		</div>
-		<div>
+		<div style="margin-bottom: 100px;">
 			<div class="sellHouseCalendar">
 				<div class="calendar month">
 					<div class="calendar-header">
@@ -261,7 +353,7 @@
 								<th>건물유형</th>
 								<th>공급유형</th>
 								<th style="width: 200px; text-align: left;">단지명/위치</th>
-								<th>분양가</th>
+								<th>분양가(단위:만원)</th>
 								<th>세대수</th>
 								<th>전용면적</th>
 								<th>찜하기</th>
