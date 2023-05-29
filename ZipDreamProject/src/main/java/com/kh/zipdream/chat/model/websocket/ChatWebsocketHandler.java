@@ -59,6 +59,7 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 	// 클라이언트와 연결이 종료되면 수행
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
+		
 		sessions.remove(session);
 		// 웹소켓 연결이 종료되는 경우, sessions안에 저장되어있던 클라이언트의 session정보를 삭제 
 	}

@@ -17,7 +17,12 @@ public class AdminIdCheckInterceptor extends HandlerInterceptorAdapter {
 		boolean result = false;
 		
 		HttpSession session = request.getSession();
-		
+		String url = request.getRequestURI().split("/")[3];
+
+		if(url.equals("noticeList")) {
+			result = true;
+			
+		}
 		if(session.getAttribute("loginUser") != null) {
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			if(loginUser.getUserLevel() == 3) {

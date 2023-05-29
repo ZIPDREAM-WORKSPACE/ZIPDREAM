@@ -70,6 +70,7 @@ public class ChatServiceImpl implements ChatService{
 			
 			// 0명일경우 방을 닫기
 			if(cnt == 0) {
+				dao.deleteChatMessage(join.getChatRoomNo());
 				result = dao.closeChatRoom(join.getChatRoomNo());
 			}
 		}
