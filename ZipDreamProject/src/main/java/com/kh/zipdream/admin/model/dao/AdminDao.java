@@ -46,8 +46,8 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countObjectYesterday");
 	}
 	
-	public int countReport() {
-		return sqlSession.selectOne("admin-mapper.countReport");
+	public int countReport(int type) {
+		return sqlSession.selectOne("admin-mapper.countReport",type);
 	}
 	
 	public int countReportYesterday() {
@@ -78,8 +78,16 @@ public class AdminDao {
 		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
 	}
 	
-	public List<Report> selectReportListLimit4() {
-		return sqlSession.selectList("admin-mapper.selectReportListLimit4");
+	public List<Report> selectReportList(int type) {
+		return sqlSession.selectList("admin-mapper.selectReportList",type);
+	}
+	
+	public List<Report> selectReportList(int type,PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return sqlSession.selectList("admin-mapper.selectReportList",type,rowBounds);
 	}
 	
 	public int countNoticeBoard() {

@@ -32,13 +32,13 @@ public class AdminController {
 		countNumbers.put("licenseUserCount", service.countLicenseUser());
 		countNumbers.put("userCount", service.countUser());
 		countNumbers.put("objectCount", service.countObject());
-		countNumbers.put("reportCount", service.countReport());
+		countNumbers.put("reportCount", service.countReport(1));
 		countNumbers.put("eventCount", service.countEvent());
 		countNumbers.put("chattingCount", service.countChattingRoom());
 		
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
-		model.addAttribute("reportList",service.selectReportListLimit4());
+		model.addAttribute("reportList",service.selectReportList(1));
 		return "admin/adminMain";
 	}
 	
@@ -138,6 +138,17 @@ public class AdminController {
 		return "redirect:/admin/user";
 	}
 	
+	@GetMapping("/report")
+	public String report(Model model,
+						@RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						 ) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		service.selectReportList(2,cp,map);
+		
+		model.addAttribute("reportList",map);
+		return "admin/adminReport";
+	}
+	
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -147,5 +158,7 @@ public class AdminController {
 		model.addAttribute("selectChatRoomList",map);
 		return "admin/adminChat";
 	}
+	
+	
 	
 }
