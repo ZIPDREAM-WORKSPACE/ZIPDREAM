@@ -111,15 +111,15 @@ function addEventChat(){
  	const now = new Date();
  	
  	const time =
- 			    addZero(now.getHours()) <13 ? "오전 "+ addZero(now.getHours()) : "오후 "+ addZero(now.getHours()) + ":"
- 			   + addZero(now.getMinutes()); 
+ 			    (addZero(now.getHours()) < 13 ? "오전 "+addZero(now.getHours()):"오후 "+addZero(now.getHours()))
+ 			   +  ":" +addZero(now.getMinutes()); 
  			   
  	return "\n"+time; 
  }
  
  // 10보다 작은 숫자일경우 앞에 0을 붙여주는 함수 
 function addZero(number){
-	return number < 10 ? "0"+number :+number;
+	return number < 10 ? "0"+number :number;
 }
  
  

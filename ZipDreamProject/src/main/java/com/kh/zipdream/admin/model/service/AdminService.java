@@ -29,4 +29,6 @@ public interface AdminService {
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public int updateMemberStatus(Member m);
+	
+	public void selectChatRoomList(int cp, Map<String, Object> map);
 }

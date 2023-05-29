@@ -52,6 +52,7 @@ public class AdminController {
 		return "admin/adminNotice";
 	}
 	
+
 	@GetMapping("/notice/enrollForm")
 	public String noticeEnrollForm() {
 		return "admin/adminNoticeEnrollForm";
@@ -136,4 +137,15 @@ public class AdminController {
 		
 		return "redirect:/admin/user";
 	}
+	
+	@GetMapping("/chat")
+	public String chat(Model model,
+						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						 ) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		service.selectChatRoomList(cp,map);
+		model.addAttribute("selectChatRoomList",map);
+		return "admin/adminChat";
+	}
+	
 }
