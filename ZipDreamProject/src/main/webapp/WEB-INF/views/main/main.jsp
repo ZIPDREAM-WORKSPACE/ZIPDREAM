@@ -1105,7 +1105,17 @@ box-sizing: border-box;
 		 	$(".chat_open").css("display","none");
 		 	$(".display-chatting").css({"display":"block","border":"none"});
 		 	
+		 	
+		 	
 	 	});	
+	 	
+	<%-- 	let url = "<%=request.getContextPath()%>";
+	 	let currentUrl = "<%=request.getRequestURI()%>";
+	 	
+	 	if(!url.equals(currentUrl)){
+	 		
+	 		exitChatRoom();
+	 	}  --%>
 	 	
 		$("#login_btn").click(function(){
 		 	location.href="<%=request.getContextPath()%>/member/login";
@@ -1123,7 +1133,7 @@ box-sizing: border-box;
 			if(confirm("채팅방에서 나가시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
-				
+					data:{ chatRoomNo},
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){

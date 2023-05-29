@@ -17,6 +17,8 @@ import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.chat.model.dao.ChatDAO;
+import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
@@ -27,6 +29,9 @@ public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	private AdminDao dao;
+	
+	@Autowired
+	private ChatDAO chatDao;
 	
 	@Autowired
 	private Pagination pagination;
@@ -222,6 +227,19 @@ public class AdminServiceImpl implements AdminService{
 	
 	public int updateMemberStatus(Member m) {
 		return dao.updateMemberStatus(m);
+	}
+	
+	public void selectChatRoomList(int cp,Map<String, Object> map){
+		int listCount = chatDao.countChatRoom();
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<ChatRoom> list = chatDao.selectChatRoomList(pi);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+		
 	}
 
 }

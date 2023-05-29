@@ -111,8 +111,8 @@ function addEventChat(){
  	const now = new Date();
  	
  	const time =
- 			    addZero(now.getHours()) <13 ? "오전 "+ addZero(now.getHours()) : "오후 "+ addZero(now.getHours()) + ":"
- 			   + addZero(now.getMinutes()); 
+ 			    (addZero(now.getHours()) < 13 ? "오전 "+addZero(now.getHours()):"오후 "+addZero(now.getHours()))
+ 			   +  ":" +addZero(now.getMinutes()); 
  			   
  	return "\n"+time; 
  }
