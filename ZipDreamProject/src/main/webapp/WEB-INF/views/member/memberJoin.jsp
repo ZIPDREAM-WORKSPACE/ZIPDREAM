@@ -59,7 +59,7 @@
     }
 
     #id-text{
-        width: 150px;
+        width: 170px;
         height: 45px;
         left: 5px;
         background: #FFFFFF;
@@ -67,20 +67,21 @@
     }
 
     #emailct{
-        width: 180px;
-        height: 45px;
-        left: 5px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
-        text-align: center;
+        width: 186px;
+	    height: 45px;
+	    left: 5px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
+	    text-align: center;
+}
     }
 
     #emailcheck{
 		position: absolute;
-	    width: 115px;
+	    width: 114px;
 	    height: 45px;
-	    left: 440px;
-	    top: 135px;
+	    left: 800px;
+	    top: 190px;
 	    background-color: #4C69A2;
 	    color: white;
     }
@@ -128,17 +129,17 @@
         }
     
     #emailchecknumber{
-        position: absolute;
-	    width: 335px;
-	    height: 45px;
-	    top: 190px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+           position: absolute;
+		    width: 360px;
+		    height: 45px;
+		    top: 190px;
+		    background: #FFFFFF;
+		    border: 0.5px solid #000000;
     }
 
     #password{
         position: absolute;
-	    width: 335px;
+	    width: 360px;
 	    height: 45px;
 	    top: 290px;
 	    background: #FFFFFF;
@@ -175,29 +176,30 @@
 
     #address{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        bottom: 270px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 360px;
+	    height: 45px;
+	    bottom: 340px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
     #adsearch{
-        position: absolute;
-        width: 100px;
-        height: 47px;
-        left: 450px;
-        top: 880px;
-        background: #4C69A2;
-        color: white;
+            position: absolute;
+		    width: 114px;
+		    height: 45px;
+		    left: 450px;
+		    top: 814px;
+		    background: #4C69A2;
+		    color: white;
     }
 
     #detailaddress{
-        position: absolute;
-        width: 360px;
-        height: 45px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+            position: absolute;
+		    width: 360px;
+		    height: 45px;
+		    top: 755px;
+		    background: #FFFFFF;
+		    border: 0.5px solid #000000;
 
     }
 
@@ -225,6 +227,7 @@
     <div class="wrap">
         <div class="content" id="content">
             <div class="login1">
+              
                 <h2 id="login-text">회원정보입력</h2> 
                 <p>서비스 이용을 위해 아래내용을 입력해주세요.</p>
 
@@ -232,7 +235,7 @@
                 <input type="text" id="id-text" class="userEmail" name="userEmail" required> <select id="emailct" class="userEmail2" name="userEmail2">
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
-                    <option value="@gmail.com">@gmail.com</option></select><br><br>
+                    <option value="@gmail.com">@gmail.com</option></select>
                     <button type="button" id="emailcheck" name="emailcheck" >인증번호 전송</button><br><br>
                     
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
@@ -254,7 +257,7 @@
                 <input type="text" id="name" name="username" placeholder="이름을 입력해주세요."><br><br><br>
 
                 <h4>전화번호</h4>
-                <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br>
+                <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
 
                 <h4>주소</h4>
                 <input type="text" id="address" name="address" placeholder="우편번호"><br><br>
@@ -263,7 +266,7 @@
                 
                 <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
 
-
+				
             </div>
             
         </div>
@@ -313,13 +316,14 @@
     }
     	
   //mail인증하기 버튼 클릭 
-    $("#emailcheck").on("click",function(){
+     $("#emailcheck").on("click",function(){
         isMailAuthed=true;
-        let memMail = $("input[name='memMail']").val();
+        let memMail = $("#id-text").val();
+        console.log(memMail);
         $.ajax({
         	url : "<%= request.getContextPath()%>/member/mailAuth"
-        	,type : "get"
-            ,data : {"mail" : memMail}
+            ,data : {mail : memMail}
+        	,method : "get"
 	 		,dataType : "TEXT"       
             ,success: function(data){
                alert(data);
@@ -327,7 +331,7 @@
                 console.log(req);
             }
         });//ajax
-    });//mailCheck
+    });//mailCheck 
     
    
    </script>

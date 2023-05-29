@@ -43,5 +43,25 @@
 			, 1)
 	</insert>  -->
 	
+	<insert id="insertMailAuth" >
+    INSERT INTO mail_auth (mail,auth_key,is_auth)
+    values (#{mail},#{authKey},0)
+</insert>
+<select id="getMailAuth" parameterType="String" resultType="mailAuth">
+    SELECT mail, auth_key, is_auth
+    FROM mail_auth
+    WHERE mail=#{mail}   
+</select>
+<update id="updateMailAuth" parameterType="String">
+    UPDATE mail_auth 
+    SET auth_key=#{authKey}
+    ,is_auth=0
+    WHERE mail=#{mail}
+</update>
+<update id="completeAuth" parameterType="String">
+    UPDATE mail_auth SET is_auth=1
+    WHERE mail=#{mail}
+</update>
+	
 	
 </mapper>

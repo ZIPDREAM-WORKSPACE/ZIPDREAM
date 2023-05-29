@@ -1,5 +1,8 @@
 package com.kh.zipdream.member.controller;
 
+import java.net.http.HttpRequest;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.mail.model.service.MailSendService;
+import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 
@@ -42,7 +45,9 @@ public class MemberController {
 
 	@GetMapping("/mailAuth")
 	@ResponseBody
-	public String mailAuth(String mail, HttpServletResponse resp) throws Exception {
+	public String mailAuth(@RequestParam("mail")String mail) throws Exception {
+		
+		System.out.println(mail);
 		String authKey = mailSendService.sendAuthMail(mail); // 사용자가 입력한 메일주소로 메일을 보냄
 		return authKey;
 	}
@@ -67,28 +72,76 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberLogin")
-	public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
-			HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
-			@RequestParam(value = "saveId", required = false) String saveId) {
+	   public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
+	         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
+	         @RequestParam(value = "saveId", required = false) String saveId) {
 
-		// 암호화 전 loginUser처리
-		Member loginUser = memberService.loginMember(m);
-		if (loginUser == null) { // 실패
-			mv.addObject("errorMsg", "로그인 실패");
-			mv.setViewName("common/errorPage");
-		} else { // 성공
-			session.setAttribute("loginUser", loginUser);
-			if(loginUser.getUserLevel() == 3) {
-				mv.setViewName("redirect:/admin/main");
-			}else {				
-				mv.setViewName("redirect:/");
-			}
-			System.out.println(session.getAttribute("loginUser"));
+	      // 암호화 전 loginUser처리
+	      Member loginUser = memberService.loginMember(m);
+	      if (loginUser == null) { // 실패
+	         mv.addObject("errorMsg", "로그인 실패");
+	         mv.setViewName("common/errorPage");
+	      } else { // 성공
+	         session.setAttribute("loginUser", loginUser);
+	         if(loginUser.getUserLevel() == 3) {
+	            mv.setViewName("redirect:/admin/main");
+	         }else {            
+	            mv.setViewName("redirect:/");
+	         }
+	         System.out.println(session.getAttribute("loginUser"));
 
-		}
-		return mv;
+	      }
+	      return mv;
+	   }
+
+		/*이메일*/
+	
+
+	@RequestMapping("/join/mailAuth.wow")
+	@ResponseBody
+	public String mailAuth(MailAuth mailAuth, HttpServletResponse resp) throws Exception {
+		String authKey = mailSendService.sendAuthMail(mailAuth.getMail()); //사용자가 입력한 메일주소로 메일을 보냄
+		memberService.registMailAuth(mailAuth);	//메일보냄과 동시에 DB저장	
+		return authKey;
 	}
+	
 
+	
+	// 자식창 생성
+	@RequestMapping("/join/mailWindow.wow")
+	public String mailWindow(String mail, HttpServletResponse resp) throws Exception {
+		return "join/mailWindow";  //step2.jsp화면에서 mail인증하기 버튼 누르면 자식창생김. 거기서 사용자는 authKey입력
+	}
+	
+	//자식창에서 authKey맞는지확인
+	@RequestMapping(value="/join/authKeyCompare.wow", produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String authKeyCompare(MailAuth mailAuth) {
+		try{
+			memberService.authKeyCompare(mailAuth); //authKey는 사용자가 입력한 값
+			return "authKeySame";
+		} catch (Exception e) {
+			return "somethingWrong";
+		}
+	}
+	//다음버튼눌렀을 때 isAuth=1인지 확인
+	@RequestMapping(value="/join/isMailAuthed.wow" ,produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String isMailAuthed(String mail) {
+		int isAuth= memberService.isMailAuthed(mail);
+		if(isAuth==1) return "메일인증완";
+		else return "인증안됨";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * @GetMapping("/insert") public String enrollForm() { return
@@ -107,15 +160,6 @@ public class MemberController {
 	 * 
 	 * return url; }
 	 */  
-	
-	
-	@GetMapping("/logout")
-	public String logoutMember(HttpSession session,
-							SessionStatus status) {
-		 
-		status.setComplete(); // 세션 할일이 완료됨 -> 없앰 
-		return "redirect:/";
-	}
   }
 	 
 

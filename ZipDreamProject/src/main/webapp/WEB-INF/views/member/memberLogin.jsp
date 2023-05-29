@@ -114,17 +114,17 @@
         	margin-top: 250px;
         }
         
-        #naverlogo{
+        /* #naverlogo{
             width: 150px;
             bottom: 100px;
             margin-left: 65px;
-        }
+        } */
         
         #kakaologo{
-        	width: 150px;
-        	height:57px;
-            bottom: 100px;
-            margin-left: 30px;
+        	width: 330px;
+		    height: 55px;
+		    bottom: 100px;
+		    margin-left: 65px;
         }
         
         
@@ -178,7 +178,7 @@
                 
                 <button type="submit" id="loginbtn">로그인</button><br><br>
                 
-                <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>
+                <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
                 <a href=""><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
 
 
