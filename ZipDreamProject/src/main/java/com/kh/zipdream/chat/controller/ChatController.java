@@ -1,6 +1,9 @@
 package com.kh.zipdream.chat.controller;
 
+import java.net.http.HttpRequest;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,6 +23,7 @@ import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.member.model.vo.Member;
+
 
 @Controller
 @SessionAttributes({"loginUser", "chatRoomNo"})
@@ -36,6 +41,16 @@ public class ChatController {
 		model.addAttribute("chatRoomList", crList);
 		
 		return "chat/chatRoomList";
+				
+	}
+	
+	@ResponseBody
+	@GetMapping("/chat/chatRoomSelect")
+	public int selectChatRoom(@ModelAttribute("loginUser") Member loginUser, Model model) {
+		
+		int result = service.selectChatRoom(loginUser.getUserNo());
+		
+		return result;
 				
 	}
 	
@@ -89,8 +104,9 @@ public class ChatController {
 	//채팅방나가기
 	@GetMapping("/chat/exit")
 	@ResponseBody
-	public int exitChatRoom(@ModelAttribute("loginUser") Member loginUser,
-							ChatRoomJoin join) {
+	public int exitChatRoom(
+							ChatRoomJoin join, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		join.setRefUno(loginUser.getUserNo());
 		
 		return service.exitChatRoom(join);

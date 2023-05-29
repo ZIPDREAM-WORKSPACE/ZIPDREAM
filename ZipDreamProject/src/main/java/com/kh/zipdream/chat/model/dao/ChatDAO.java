@@ -87,5 +87,10 @@ public class ChatDAO {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
 	}
+	
+	// 채팅방 조회
+	public int selectChatRoom(int refUno){
+		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
+	}
 
 }

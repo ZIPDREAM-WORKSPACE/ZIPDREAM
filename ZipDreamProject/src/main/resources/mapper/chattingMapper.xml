@@ -31,6 +31,16 @@
 		ORDER BY CHAT_ROOM_NO DESC
 	</select>
 	
+		<select id="selectChatRoom" resultType="_int" >
+		SELECT 
+			count(*)
+			
+		FROM CHAT_ROOM
+		WHERE STATUS = 'Y' AND
+		REF_UNO = #{refUno}
+		
+	</select>
+	
 	<insert id="openChatRoom" useGeneratedKeys="true" keyProperty="chatRoomNo" >
 		<!-- <selectKey keyProperty="chatRoomNo" resultType="int" order="BEFORE">
 			SELECT 	CHAT_ROOM_NO.NEXTVAL FROM DUAL
