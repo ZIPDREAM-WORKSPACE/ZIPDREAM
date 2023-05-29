@@ -494,9 +494,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
                         '</div>';
-			
+            var positions = [];
 			/* var marker;
-            var positions;    */
+                */
             /* // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
@@ -540,7 +540,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         } */
     	                         /* console.log(JSON.parse(resultData)); */
     	                         let result = JSON.parse(resultData);
-    	                         console.log(result);
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
     	                         console.log(keys);
@@ -562,70 +561,42 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         console.log(result0["거래금액"]);
     	                         console.log(result0["층"]);
     	                        
-    	                         
-    	                         
-    	                         
-    	                          var callback = function (result, status) {
-    	                        	  result = JSON.parse(resultData);
-    	                        	  /* console.log("callbackresult : "+result); */
-    	                        	  for(var i=0; i<result.length ; i++){
-    	                        		  /* console.log(result[i]); */
-	    	                              if (status === kakao.maps.services.Status.OK) {
+    	                         for(var i=0; result.length ;i++){
+	   	                        	  let addressToXy = JSON.parse(result[i]);
+	   	                          	  console.log(addressToXy)
+	   	                        	 
+	   	                        	var callback = function(result, status) {
+	    	                        	 
+    	                              if (status === kakao.maps.services.Status.OK) {
+    	                                  
+			    	                         
+			    	                       	  for(var i=0; i<result.length;i++){
+			    	                       			positions.push({latlng: new kakao.maps.LatLng(result[i].y, result[i].x)})
+			    	                       	  }
+			    	                         
+	    	                                   for (var i = 0; i < positions.length; i ++) {
+	    	    	                        	    // 마커를 생성합니다
+	    	    	                        	    marker = new kakao.maps.Marker({
+	    	    	                        	        map: map, // 마커를 표시할 지도
+	    	    	                        	        position: positions[i].latlng // 마커의 위치
+	    	    	                         			
+	    	    	                        	    }); 
+	    	    	                        	    
+	    	    	                         }
 	    	                                  
-				    	                         
-				    	                       	  
-				    	                                  positions = [
-				    	                                	  {
-				    	                                		  
-				    	                                		  latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
-				    	                                	  }
-				    	                                  ];
-				    	                                  
-				    	                         
-		    	                                   for (var i = 0; i < positions.length; i ++) {
-		    	    	                        	    // 마커를 생성합니다
-		    	    	                        	    marker = new kakao.maps.Marker({
-		    	    	                        	        map: map, // 마커를 표시할 지도
-		    	    	                        	        position: positions[i].latlng // 마커의 위치
-		    	    	                         			
-		    	    	                        	    }); 
-		    	    	                        	    
-		    	    	                         }
-		    	                                  
-		    	                              }
-	    	                          		};
-    	                        	  }
+	    	                              }
+    	                          
+   	                        	  }
+	   	                        	geocoder.addressSearch(addressToXy['도로명'] , callback);
+	   	                          }
+    	                         
+    	                         
+    	                          
     	                          
     	                         
     	                          
-    	                          geocoder.addressSearch(detailAddrClob, callback);
     	                          
-    	                         /* positions = [
-    	                        	    {
-    	                        	        content: '<div>카카오</div>', 
-    	                        	        latlng: new kakao.maps.LatLng(37.5007861, 127.0368861)
-    	                        	    },
-    	                        	    {
-    	                        	        content: '<div>생태연못</div>', 
-    	                        	        latlng: new kakao.maps.LatLng(37.5007861, 127.0368861)
-    	                        	    },
-    	                        	    {
-    	                        	        content: '<div>텃밭</div>', 
-    	                        	        latlng: new kakao.maps.LatLng(37.5007861, 127.0368861)
-    	                        	    },
-    	                        	    {
-    	                        	        content: '<div>근린공원</div>',
-    	                        	        latlng: new kakao.maps.LatLng(37.5007861, 127.0368861)
-    	                        	    }
-    	                        	]; */
-    	                         
-    	                         /* for (var i = 0; i < positions.length; i ++) {
-    	                        	    // 마커를 생성합니다
-    	                        	    marker = new kakao.maps.Marker({
-    	                        	        map: map, // 마커를 표시할 지도
-    	                        	        position: positions[i].latlng // 마커의 위치
-    	                         		});
-    	                         } */
+    	  
     	                         
     	                      },
     	                      error: function(){
