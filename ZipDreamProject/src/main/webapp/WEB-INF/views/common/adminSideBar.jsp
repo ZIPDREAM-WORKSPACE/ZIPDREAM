@@ -13,7 +13,7 @@
 	<div class="side_title" data-href="main">
 		<b>Pages</b>
 	</div>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="user">
 		<img src="<%=request.getContextPath()%>/resources/images/Messages.svg" width="25px" height="25px" class="side_img"> 
 		<span>회원조회</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -38,7 +38,7 @@
 		<span>이벤트 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="chat">
 		<img src="<%=request.getContextPath()%>/resources/images/Frame 35287.svg" width="25px" height="25px" class="side_img"> 
 		<span>채팅 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -88,13 +88,17 @@
 	case "main" :
 		index = 0;
         break;
+    case "user" :
+        index = 1;
+        break;
 	case "notice" :
 		index = 3;
         break;
-   /*  case "user" :
-        index = 1;
-        break;
-    case 값C :
+	case "chat" :
+		index = 6;
+        break;    
+      
+    /*  case 값C :
         값이 C일 때 실행할 명령문;
         break;
     case 값D :

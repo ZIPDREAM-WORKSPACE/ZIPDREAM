@@ -85,6 +85,23 @@ div {
 	left: 250px;
 }
 
+.content-wrap {
+	width: 1500px;
+	height: 1100px;
+	padding: 25px;
+   	position: absolute;
+   	top: 30px;
+   	left : 30px;
+   	border-radius: 10px;
+   	background-color: #FFFFFF;
+   	box-shadow: 0px 10px 13px rgba(17, 38, 146, 0.05);
+}
+
+.content-title {
+	display:flex;
+	justify-content:space-between;
+}
+
 .donut {
     width: 70px;
     padding-bottom: 70px;
@@ -103,7 +120,6 @@ div {
     top: 14.7%;
     display: block;
     content: attr(data-percent);
-    transform: skew(-0.03deg);
     border-radius: 50%;
     background: #FFFFFF;
     color: #000000;
@@ -119,9 +135,10 @@ div {
 			<img
 				src="<%=request.getContextPath()%>/resources/images/personIcon.png" height="50">
 			<div style="padding-left: 20px;">
-				<b>류준하</b>
-				<div>관리자</div>
+					<b>${sessionScope.loginUser.userName}</b>
+					<div>관리자</div>				
 			</div>
+			<button type="button" class="btn btn-secondary" onclick="location.href='<%= request.getContextPath()%>/member/logout'" style="margin-left:100px;">로그아웃</button>
 		</div>
 	</header>
 </body>

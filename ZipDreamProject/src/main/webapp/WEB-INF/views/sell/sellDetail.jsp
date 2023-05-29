@@ -66,7 +66,7 @@
 	.sell_like{
 	    width: 12%;
 	}
-	#sellLike , .notify{
+	#sellLike {
 	    border: 1px solid black;
 	    height: 2.3rem;
 	}
@@ -95,12 +95,14 @@
 	    font-weight: 500;
 	}
 	.contect{
+		width:160px;
+		margin-right:50px;
 	    background-color: #0A2647;
 	    color: white;
 	}
 	/*허위매물신고*/
 	.notify{
-	    width: 15%;
+ 	    width: 150px;
 	    background-color: #2C74B3;
 	    color: white;
 	}
@@ -176,9 +178,11 @@
 	.hospital_info, .school_info, .subway_info{
 	    display: none;
 	}
-	.last_btn{
-	    width: 25%;
+	.content9{
+		margin-top: 50px;
+		text-align: center;
 	}
+	
 	/*모달창*/
 	#modal.modal-overlay {
 	    width: 100%;
@@ -551,7 +555,7 @@
         <hr class="hr">
         <div class="btn-group margin">
             <button class="market button">
-                <img src="https://ifh.cc/g/sOFp8v.png" width="34px">
+                <img src="https://ifh.cc/g/XXq5Xh.png" width="34px">
                 <span>편의시설</span>
             </button>
             <button class="subway button">

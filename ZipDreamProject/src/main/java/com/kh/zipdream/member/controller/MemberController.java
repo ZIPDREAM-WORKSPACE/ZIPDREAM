@@ -1,6 +1,5 @@
 package com.kh.zipdream.member.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,7 +67,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberLogin")
-	public String loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
+	public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
 			HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 			@RequestParam(value = "saveId", required = false) String saveId) {
 
@@ -78,11 +78,15 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		} else { // 성공
 			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("redirect:/");
+			if(loginUser.getUserLevel() == 3) {
+				mv.setViewName("redirect:/admin/main");
+			}else {				
+				mv.setViewName("redirect:/");
+			}
 			System.out.println(session.getAttribute("loginUser"));
 
 		}
-		return "redirect:/";
+		return mv;
 	}
 
 	
@@ -103,6 +107,15 @@ public class MemberController {
 	 * 
 	 * return url; }
 	 */  
+	
+	
+	@GetMapping("/logout")
+	public String logoutMember(HttpSession session,
+							SessionStatus status) {
+		 
+		status.setComplete(); // 세션 할일이 완료됨 -> 없앰 
+		return "redirect:/";
+	}
   }
 	 
 

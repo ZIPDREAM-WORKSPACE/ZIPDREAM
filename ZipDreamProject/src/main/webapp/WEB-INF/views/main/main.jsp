@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
+
+
+
 .s_image {
 	width: 100%;
 	height: 700px;
@@ -15,13 +18,8 @@
 	width: 40%;
 	margin: auto;
 }
-.news_slider{
-	
-	position: relative;
-	width: 40%;
-	margin: auto;
 
-}
+
 
 .slider .slick-list,  .news_slider .slick-list{
 	margin: 0 -20px;
@@ -33,16 +31,20 @@
 
 .notice_list {
 	height: 300px;
-	background: rgb(36, 43, 106);
+	background: rgb(242, 242, 242);
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
-	color: white;
+	color: black;
 	position: relative;
 	margin-bottom: 20px;
 	cursor: pointer;
 }
-
+.notice_list:hover {
+	
+	background: blue;
+	
+}
 .news {
 	height: 300px;
 	background: rgb(236, 236, 236);
@@ -140,7 +142,7 @@
 	top:40%;
 	color: white;
 	font-weight: 400;
-	font-size:20px;
+	font-size:23px;
 }
 
 .search {
@@ -226,7 +228,7 @@
 
 
 .news_title {
-	font-weight: 500;
+	font-weight: 600;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -325,9 +327,15 @@
 	.main_ad_text{
 	height:500px;
 	width:100%;
-	padding-top:20%;
+	padding-top:15%;
 	
 	}
+	#main_ad3{
+		height:550px;
+	width:100%;
+	padding-top:15%;
+	}
+	
 	.main_ad_text>h1{
 		font-weight: 600;
 		
@@ -353,18 +361,28 @@
 		background: #F4F9FF;
 		
 	}
-		#main_ad22{
-		height:700px;
+		#main_ad2{
+		height:770px;
 		width:100%;
 		background: #F4F9FF;
 		padding-top:70px;
 		
+	}
+		.news_slider{
+		
+		position: relative;
+		width:50%;
+		margin: auto;
+	
 	}
 
 }
 
 
 @media only screen and (min-width: 1200px) {
+.news2{
+	margin-top:50%;
+}
 	.main_ad2{
 		height:700px;
 		width:100%;
@@ -383,7 +401,7 @@
 		.main_ad_text{
 		height:700px;
 		width:50%;
-		padding-top:20%;
+		padding-top:15%;
 		
 	}
 	.main_ad_text>h1{
@@ -405,6 +423,13 @@
 		background: black;
 		box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 	}
+	.news_slider{
+		
+		position: relative;
+		width:80%;
+		margin: auto;
+	
+	}
 
 
 }
@@ -419,6 +444,7 @@
 	font-size:20px;
 	cursor: pointer;
 	padding-top:5px;
+	background: white;
 }
 .more_btn:hover{
 	border: 3px solid rgb(169, 192, 212);
@@ -523,84 +549,242 @@ right:-45px;
 	margin: 0 30px;
 }
 
+
+.ad_image{
+	width: 60px;
+	height: 60px;
+	object-fit:cover;
+}
+.chat{
+	width:100px;
+	height:100px;
+	position: fixed;
+	bottom:3%;
+	right:3%;
+	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 10px;
+	border-radius: 50px;
+	z-index: 99;
+	text-align: center;
+	font-weight: 500;
+	background: white;
+	padding-top:5px;
+	font-size:20px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.chat>img{
+	width:60%;
+	margin-left:5%;
+	object-fit:cover;
+	
+}
+.chatting{
+	width:350px;
+	height:600px;
+	background: #D4E1EF;
+	bottom:3%;
+	right:3%;
+	position: fixed;
+	z-index: 99;
+	border-radius: 10px;
+	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 20px;
+	display: none;
+	
+}
+.chatting_inner{
+	width:350px;
+	height:450px;
+	margin-top:75px;
+	background: white;
+	border-bottom:1px solid rgb(234, 234, 234);
+	border-top:1px solid rgb(212, 212, 212);
+	
+}
+.chat_header{
+	position:absolute;
+	top:25px;
+	width: 100%;
+	text-align: center;
+	font-weight: 600;
+}
+.chat_header>img{
+	width:17px;
+	height:17px;
+	margin-bottom:3px;
+}
+#x{
+	position: absolute;
+	right:13px;
+	top:-10px;
+	width:12px;
+	height:12px;
+	cursor: pointer;
+	
+}
+.chat_bottom{
+	width:90%;
+	height:40px;
+	background: white;
+	border-radius: 30px;
+	margin: auto;
+	margin-top:17px;
+	border : 1px solid grey;
+	
+}
+#chat_msg{
+	margin-left:10px;
+	margin-top:5px;
+	border: none;
+	width:260px;
+
+}
+#chat_msg:focus{
+	outline: none;
+	!
+	important;
+}
+#send{
+	width:30px;
+	height:30px;
+	cursor: pointer;
+}
+.modal-title{
+	width:60%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.modal-body{
+box-sizing: border-box;
+	overflow:auto;
+}
+#m_date{
+ width:40%; 
+ height:30px; 
+ line-height:30px; 
+ text-align:right;
+}
+.login_service, .chat_open{
+	width:300px;
+	height:50px;
+	background: grey;
+	text-align: center;
+	margin: auto;
+	line-height:50px;
+	margin-top:50px;
+	background: #1F4B6B;
+	color:white;
+	cursor:pointer;
+	border-radius: 10px;
+	 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+}
+.display-chatting{
+		width: 100%;
+		height: 450px;
+		border : 1px solid black;
+		overflow: auto;
+		list-style : none;
+		padding : 10px 10px;
+		
+	}
+	   .myChat{
+      text-align: right;
+      margin-bottom: 5px;
+   }
+   .myChat > p {
+      background-color :rgb(25, 83, 125);
+      color:white;
+   }
+
+   .chatDate{
+      font-size : 10px;
+   }
+	   .chatP{
+      display : inline-block;
+      border-radius : 5px;
+      padding : 4px 8px 4px 8px;
+      margin:0;
+      max-width: 250px;
+       overflow:hidden;
+    word-wrap:break-word;
+       text-align: left;
+       box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+        background-color :rgb(242, 249, 254);
+      
+   }
 </style>
 </head>
 <body>
 
 	<jsp:include page="../common/header.jsp" />
-
+	<div class="chat" ><img src='https://ifh.cc/g/mQ6LcQ.png' ><br>채팅</div>
+	<div class="chatting">
+		<div class="chat_header"><img id="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
+		<div class="chatting_inner">
+			<c:choose>  	
+				<c:when test="${empty sessionScope.loginUser}">
+					<div class="login_service">로그인 후 이용가능한 서비스입니다.</div>
+				</c:when> 
+				<c:otherwise> 
+				
+					<div class="chat_open">운영자와 채팅하기</div>
+					<ul class="display-chatting" style="display:none">
+					</ul>
+				</c:otherwise> 
+			</c:choose> 
+			
+			
+		 </div>
+		 
+		<div class="chat_bottom">
+	
+         
+         <c:choose>  	
+			<c:when test="${empty sessionScope.loginUser}">
+				<input type="text" id="chat_msg" readonly></input>
+			</c:when> 
+			<c:otherwise> 
+				<input type="text" id="chat_msg"></input>
+			</c:otherwise> 
+		</c:choose> 
+		
+		<img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
+	</div>
+	
+	
 	<div style="padding: 0; background-color: white;">
 		<div id="slider-div">
 			<div class="main_ad">
-				<img class="s_image" src='https://ifh.cc/g/oJ1bpk.jpg' border='0'>
-				<div class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</div>
-				<div class="main_text2" data-aos="fade-down"  data-aos-duration="2000">복비 할인, 기프티콘 증정</div>
+				<img class="s_image" src="https://ifh.cc/g/WmqQ9P.jpg" border='0'>
+				<div class="main_text " >집드림이 드리는 혜택</div>
+				<div class="main_text2">복비 할인, 기프티콘 증정</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
-					src="<%=request.getContextPath()%>/resources/images/main2.png"
+					src="https://ifh.cc/g/5yxa4t.jpg""
 					border='0'>
-				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
+				<div class="main_text " style="color:rgb(25, 23, 130);">부동산 필수 웹, 집드림</div>
+				<div class="main_text2" style="color:rgb(25, 23, 130);">이런 서비스 이용해보셨나요?</div>
 			</div>
 			<div class="main_ad">
 				<img class="s_image"
-					src="<%=request.getContextPath()%>/resources/images/main3.png"
+					src="https://ifh.cc/g/JgzQJ1.jpg"
 					border='0'>
-				<h1 class="main_text" data-aos="fade-down"  data-aos-duration="2000">집드림이 드리는 혜택</h1>
+				<div class="main_text ">새집 줄게 헌집 다오</div>
+				<div class="main_text2">아파트는 집드림이 대세!</div>
 			</div>
 
 		</div>
 	</div>
 
 	<div class="notice">
-		<div class="notice_text" data-aos="fade-up"  data-aos-duration="2000"> 집드림의 부동산 가이드</div>
-		<div class="slider">
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner">
-						<div class="nlist_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner">
-						<div class="nlist_text">임대차 계약</div>
-					</div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
-			<div class="notice_list">
-				<img class="pin"
-					src="<%=request.getContextPath()%>/resources/images/pin.png">
-				<div class="nlist">
-					<div class="nlist_inner"></div>
-				</div>
-			</div>
+		<div class="notice_text" data-aos="fade-up"  data-aos-duration="2000">
+			<img class="ad_image" src='https://ifh.cc/g/s8kd0C.gif'>
+		 집드림의 부동산 가이드</div>
+		<div class="slider" id="n_slider">
+		
 		</div>
 
 	</div>
@@ -622,62 +806,10 @@ right:-45px;
 
 
 	<div class="notice">
-		<div class="notice_text" data-aos="fade-up"  data-aos-duration="3000">집드림의 부동산 뉴스</div>
+		<div class="notice_text" data-aos="fade-up"  data-aos-duration="3000">
+		<img class="ad_image" src='https://ifh.cc/g/5MrNyC.gif' border='0'>
+		집드림의 부동산 뉴스</div>
 		<div class="news_slider">
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_title">서울보다 지방이 더 올랐다…분양가 고공행진, 집값 기름붓나</div>
-						<div class="news_content">
-							<div class="news_text">
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어</div>
-							</div>
-							<hr class="hr_color">
-						<div class="news_name">신용수
-							기자&nbsp;&nbsp;|&nbsp;&nbsp;23-05-06</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_title">서울보다 지방이 더 올랐다…분양가 고공행진, 집값 기름붓나</div>
-						<div class="news_content">
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어!
-							알아두면 좋은 부동산 용어! 알아두면 좋은 부동산 용어
-							</div>
-							<hr class="hr_color">
-						<div class="news_name">신용수
-							기자&nbsp;&nbsp;|&nbsp;&nbsp;23-05-06</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
-			<div class="news">
-				<div class="news_list">
-					<div class="news_inner">
-						<div class="news_text">알아두면 좋은 부동산 용어!</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div id="more">
 			<a href="https://land.naver.com/news/headline.naver" id="more_text" >더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
@@ -686,7 +818,7 @@ right:-45px;
 	<div class="main_ad2" style="margin-top:200px;">
 		<div class="main_ad_inner">
 			<div class="main_ad_text"><div class="text_size" data-aos="fade-down-right" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
+     				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/ct4KOO.png'><br>원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
 					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물,</h5><h5 class="main_h5" data-aos="flip-up">제일 먼저 확보하세요</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
@@ -698,16 +830,16 @@ right:-45px;
 		</div>
 		
 	</div>
-	<div class="main_ad2" id="main_ad22" >
+	<div class="main_ad2" id="main_ad2" >
 		<div class="main_ad_inner">
 			<div class="main_ad_image" data-aos="fade-down"
 					     data-aos-easing="linear"
 					     data-aos-duration="1500">
-				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
+				<div class="mImage"><img src="https://ifh.cc/g/JwNfdb.jpg"></div>
 			</div>
 			<div class="main_ad_text" style="text-align:right;">
 					<div class="text_size" data-aos="fade-down-left" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine" >다양한 이벤트를<br>만나보세요.</div><br>
+     				data-aos-offset="100" data-aos-easing="ease-in-sine" ><img class="ad_image" src='https://ifh.cc/g/Nqrk4w.png'><br>다양한 이벤트를<br>만나보세요.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">첫 가입시 10% 복비 할인</h5>
 					<h5 class="main_h5" data-aos="flip-up"> 첫 거래시 복비 할인 쿠폰</h5><br>
 					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up">더 알아보기</div>
@@ -717,15 +849,16 @@ right:-45px;
 	</div>
 	<div class="main_ad2" >
 		<div class="main_ad_inner">
-			<div class="main_ad_text"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
-     				data-aos-offset="100" data-aos-easing="ease-in-sine">지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
+			<div class="main_ad_text" id="main_ad3"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
+     				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/W8ptpC.png'><br>지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">집드림과 지역 전문 중개사들이</h5><h5 class="main_h5" data-aos="flip-up">함께합니다.</h5><br>
 					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
 				</div>
 			<div class="main_ad_image"  data-aos="fade-left"
 									     data-aos-easing="linear"
 									     data-aos-duration="1500">
-				<div class="mImage"><img src="<%=request.getContextPath()%>/resources/images/main4.png"></div>
+									     
+				<div class="mImage"><img src="https://ifh.cc/g/hYzCZ9.jpg"></div>
 			</div>
 		</div>
 	</div>
@@ -745,9 +878,43 @@ right:-45px;
 		</div>
 	</div>
 	
+	
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5><span id="m_date"></span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="border:none; background: white; font-size:20px;"> 
+        	<span aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
 	<script>
-	  
+	
+	 
+	 
+	 	const refUno ='${loginUser.userNo}';
+		const userId ='${loginUser.userId}';
+		const userName = '${loginUser.userName}';
+		
+		
+		
+		
+	 
+	 	function noticeModal(index){
+	 		$("#exampleModalLabel").text(noticeBoardList.list[index].noticeBoardTitle);
+			$("#m_date").text(noticeBoardList.list[index].createDateTime);
+	    	$('#exampleModal').modal("show");
+	    	$(".modal-body").html(noticeBoardList.list[index].noticeBoardContent);
+		}
 	
 		$(function() {
 			$('#slider-div').slick({
@@ -772,81 +939,219 @@ right:-45px;
 			$('#slider-div').slick('slickPlay');
 			$('.slick-dots').css('bottom', '50px');
 
-			$('.slider').slick({
-				// centerMode: true,
-				// centerPadding: '60px',
-				slidesToShow : 3,
-				responsive : [ {
-					breakpoint : 1100,
-					settings : {
-						arrows : true,
-						centerMode : true,
-						centerPadding : '10px',
-						slidesToShow : 2
-					}
-				}, {
-					breakpoint : 800,
-					settings : {
-						arrows : true,
-						centerMode : true,
-						centerPadding : '10px',
-						slidesToShow : 1
-					}
-				} ]
-			});
 			
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/admin/noticeList",
+		 		type : "get",
+		 		
+		 		success : function(result){
+		 			console.log(result);
+		 			let text="";
+		 			
+		 			noticeBoardList = result;
+		 			
+		 			for(let i = 0; i<result.list.length; i++){
+		 				text +=
+		 				'<div class="notice_list" onClick="noticeModal('+i+');"><img class="pin"'+
+							'src="<%=request.getContextPath()%>/resources/images/pin.png">'+
+						'<div class="nlist"><div class="nlist_inner">'+
+								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div></div></div></div>';
+		 			}
+		 			
+		 			$("#n_slider").html(text);
+		 			let nsize = $('.notice_list').length;
+		 			
+		 			$('#n_slider').slick({
+						// centerMode: true,
+						// centerPadding: '60px',
+						slidesToShow : 3,
+						responsive : [ {
+							breakpoint : 1300,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : nsize >= 2 ? 2 : nsize,
+							}
+						}, {
+							breakpoint : 1000,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : 1
+							}
+						} ]
+					});
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 		}
+		 	});
+		 	
+		 	
 	
-			 
-			 	$.ajax({
-			 		url : "<%=request.getContextPath()%>/naver/news",
-			 		type : "get",
-			 		dataType : "JSON",
-			 		success : function(result){
-			 			let text = "";
-			 			
-			 			for(let i = 0; i<result.items.length; i++){
-			 			
-			 			text +=
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/naver/news",
+		 		type : "get",
+		 		dataType : "JSON",
+		 		success : function(result){
+		 			let text = "";
+		 			
+		 			for(let i = 0; i<result.items.length; i++){
+		 			
+		 			
+		 			if(i%2==0){
+		 				text +=
 			 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
 			 			'<div class="news_title">'+result.items[i].title+'</div>'+
 						'<div class="news_content">'+result.items[i].description+'</div>'+
 							'<hr class="hr_color">'+
 						'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
 						'</div></div></div>';
-			 			}
-						$(".news_slider").html(text);
-						$('.news_slider').slick({
-							// centerMode: true,
-							// centerPadding: '60px',
-							slidesToShow : 2,
-							responsive : [ {
-								breakpoint : 1100,
-								settings : {
-									arrows : true,
-									centerMode : true,
-									centerPadding : '10px',
-									slidesToShow : 1
-								}
-							} ]
-						
-						});
-			 			console.log(result);
-			 			AOS.init();
-			 		},
-			 		error : function(request){
-			 			console.log("에러발생");
-			 			console.log("에러코드 : "+request.status);
-			 		}
-			 	})
+		 				}else{
+		 					text +=
+		 					'<div class="news news2" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+		 					'<div class="news_title">'+result.items[i].title+'</div>'+
+							'<div class="news_content">'+result.items[i].description+'</div>'+
+								'<hr class="hr_color">'+
+							'<div class="news_name">'+result.items[i].pubDate.replace('+0900','')+'</div>'+
+							'</div></div></div>';
+		 				}
+		 			
+		 			}
+					$(".news_slider").html(text);
+					$('.news_slider').slick({
+						// centerMode: true,
+						// centerPadding: '60px',
+						slidesToShow : 5,
+						responsive : [ {
+							breakpoint : 1400,
+							settings : {
+								arrows : true,
+								centerMode : true,
+								centerPadding : '10px',
+								slidesToShow : 4
+							}
+						} , {
+						breakpoint : 1200,
+						settings : {
+							arrows : true,
+							centerMode : true,
+							centerPadding : '10px',
+							slidesToShow : 2
+						}
+					} ,{
+						breakpoint : 900,
+						settings : {
+							arrows : true,
+							centerMode : true,
+							centerPadding : '10px',
+							slidesToShow : 1
+							}
+						}]					
+					});
+		 			AOS.init();
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 		}
+		 	})
+	
+			 
+			
 			 	
+		$(".chat").click(function(){
+			$(".chatting").css("display","block");
+			$(".chat").css("display","none");
+			
+		});
+	 	$("#x").click(function(){
+	 		$(".chatting").css("display","none");
+			$(".chat").css("display","block");
+			
+		});
 		
-				
-				
-				 
-				
+	 	$(".chat_open").click(function(){
+	 		
+	 		
+		 	/* 채팅 */
+		 	$.ajax({
+		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
+		 		type : "get",
+		 		success : function(result){
+		 				
+		 				chatRoomNo = result;
+		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
+		 				addEventChat();
+		 				$("#x").click(function(){
+		 					exitChatRoom();
+		 					
+		 				});
+		 		},
+		 		error : function(request){
+		 			console.log("에러발생");
+		 			console.log("에러코드 : "+request.status);
+		 			
+		 		}
+		 	});
+		 	$(".chat_open").css("display","none");
+		 	$(".display-chatting").css({"display":"block","border":"none"});
+		 	
+		 	
+		 	
+	 	});	
+	 	
+	<%-- 	let url = "<%=request.getContextPath()%>";
+	 	let currentUrl = "<%=request.getRequestURI()%>";
+	 	
+	 	if(!url.equals(currentUrl)){
+	 		
+	 		exitChatRoom();
+	 	}  --%>
+	 	
+		$("#login_btn").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
+		$(".login_service").click(function(){
+		 	location.href="<%=request.getContextPath()%>/member/login";
+	 	});	
+	 	
+		
+		
 		})
+		
+		function exitChatRoom(){
+			if(confirm("채팅방에서 나가시겠습니까?")){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+					data:{ chatRoomNo},
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							location.href="<%=request.getContextPath()%>"
+						}else{
+							alert("채팅방 나가기에 실패했습니다.");
+						}
+						// result == 0 실패 
+						
+					}
+				})
+			}	
+			
+		};
+		
 		
 	</script>
 	
+<script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 
 	<jsp:include page="../common/footer.jsp" />
