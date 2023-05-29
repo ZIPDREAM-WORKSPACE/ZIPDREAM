@@ -205,17 +205,5 @@ position: absolute;
 		</div>
 		
 	</div>
-	
-	<script>
-
- 	
- 
- 	
-
- 	
-	 
-
-	
-	</script>
 </body>
 </html>
