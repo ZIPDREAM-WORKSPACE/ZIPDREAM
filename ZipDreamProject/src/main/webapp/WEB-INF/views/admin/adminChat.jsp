@@ -9,7 +9,7 @@
          <h1>채팅방 조회</h1>
          
       </div>
-      <div class="content-notice-table">
+      <div class="content-table">
          <table class="rwd-table">
             <tbody>
                <tr>
