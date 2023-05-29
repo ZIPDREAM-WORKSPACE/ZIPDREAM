@@ -29,7 +29,7 @@
 			</div>
 			<button type="submit" class="searchBtn btn btn-secondary">검색</button>
 		</form>
-		<div class="content-notice-table">
+		<div class="content-table">
 			<table class="rwd-table">
 				<tbody>
 					<tr>

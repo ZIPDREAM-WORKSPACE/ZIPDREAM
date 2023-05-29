@@ -76,8 +76,11 @@
 		<![CDATA[WHERE SELL_ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
-	<select id="countReport" resultType="_int">
-		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
+	<select id="countReport" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REPORT 
+		<if test='type == 1'>
+			WHERE REPORT_STATUS = 'N'
+		</if>
 	</select>
 	
 	<select id="countUserReport" parameterType="_int" resultType="_int">
@@ -124,7 +127,7 @@
 		ORDER BY APPLY_DATETIME DESC LIMIT 5
 	</select>
 	
-	<select id="selectReportListLimit4" resultMap="reportResultSet">
+	<select id="selectReportList" resultMap="reportResultSet">
 		SELECT REPORT_NO,
 			   REF_RUNO,
 			   REF_TUNO,
@@ -139,7 +142,10 @@
 		ON R.REF_RUNO = M.USER_NO
         LEFT JOIN MEMBER M2
         ON R.REF_TUNO = M2.USER_NO
-        ORDER BY REPORT_DATE DESC LIMIT 4
+        ORDER BY REPORT_DATE DESC
+        <if test='type == 1'>
+			 LIMIT 4
+		</if>
 	</select>
 	
 	<select id="countNoticeBoard" resultType="_int">
