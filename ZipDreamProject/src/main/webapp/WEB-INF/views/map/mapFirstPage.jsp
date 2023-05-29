@@ -587,8 +587,25 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	    	                              }
     	                          
    	                        	  }
-	   	                        	geocoder.addressSearch(addressToXy['도로명'] , callback);
-	   	                          }
+	   	                          	$.ajax({
+	                        				url: "<%= request.getContextPath() %>/map/address",
+	                   				  		method: "post",
+		                   				  	data: {'adCode' : addressToXy['지역코드']},
+		                   				    dataType: "text",
+	                        				success: function(result){
+	                        					console.log("address:"+result);
+	                        				},
+	                        				error: function(){
+	                        					console.log("에러");
+	                        				}
+	                        			});
+	   	                          	console.log("addressToXy['지역코드']:"+addressToXy['지역코드']);
+	   	                        	geocoder.addressSearch(
+	   	                        			
+	   	                        			, callback);
+	   	                          	
+    	                         
+    	                         }
     	                         
     	                         
     	                          

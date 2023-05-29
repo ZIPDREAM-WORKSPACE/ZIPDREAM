@@ -54,6 +54,18 @@ public class MapController {
       return bjdCode;
    }
    
+   @ResponseBody
+   @PostMapping("/address")
+   public String address(@RequestParam("adCode") String adCode,
+                  Model model) {
+      
+      String address = mapService.selectAddress(adCode);
+         
+      model.addAttribute("address", address);
+      System.out.println(address);
+      return address;
+   }
+   
    @GetMapping(value="/getXmlCode", produces = "application/text; charset=UTF-8")
    @ResponseBody
    public String getXmlCodeToAjax(int code) {
