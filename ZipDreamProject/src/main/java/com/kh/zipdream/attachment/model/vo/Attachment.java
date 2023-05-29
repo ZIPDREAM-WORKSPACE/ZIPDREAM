@@ -21,5 +21,6 @@ public class Attachment {
 	private String originFile;	//	ORIGIN_FILE varchar(100) 
 	private String changeName;	//	CHANGE_NAME varchar(100) 
 	private String filePath;	//	FILE_PATH varchar(100)
+	private int fileLevel;
 
 }
