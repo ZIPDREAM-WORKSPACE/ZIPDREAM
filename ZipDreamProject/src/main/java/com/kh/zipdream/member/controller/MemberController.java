@@ -43,15 +43,6 @@ public class MemberController {
 	@Autowired
 	MailSendService mailSendService; // @Service를 붙였었다.
 
-	@GetMapping("/mailAuth")
-	@ResponseBody
-	public String mailAuth(@RequestParam("mail")String mail) throws Exception {
-		
-		System.out.println(mail);
-		String authKey = mailSendService.sendAuthMail(mail); // 사용자가 입력한 메일주소로 메일을 보냄
-		return authKey;
-	}
-
 	// 로그인 회원가입
 	@Autowired
 	private MemberService memberService;
@@ -97,10 +88,11 @@ public class MemberController {
 		/*이메일*/
 	
 
-	@RequestMapping("/join/mailAuth.wow")
+	@RequestMapping("/mailAuth")
 	@ResponseBody
 	public String mailAuth(MailAuth mailAuth, HttpServletResponse resp) throws Exception {
 		String authKey = mailSendService.sendAuthMail(mailAuth.getMail()); //사용자가 입력한 메일주소로 메일을 보냄
+		mailAuth.setAuthKey(authKey);
 		memberService.registMailAuth(mailAuth);	//메일보냄과 동시에 DB저장	
 		return authKey;
 	}

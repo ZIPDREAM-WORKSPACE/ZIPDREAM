@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	 public void registMailAuth(MailAuth mailAuth) throws Exception {
 	        MailAuth mailAuth1= memberDao.getMailAuth(mailAuth.getMail());
 	        
-	        if(mailAuth==null)memberDao.insertMailAuth(mailAuth);
+	        if(mailAuth1==null)memberDao.insertMailAuth(mailAuth);
 	        
 	        else {
 	        	memberDao.updateMailAuth(mailAuth);

@@ -18,8 +18,13 @@
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
 	
+	<resultMap type="mailAuth" id="emailResultSet">
+		<id column="MAIL" property="mail" />
+		<result column="AUTH_KEY" property="authKey" />
+		<result column="IS_AUTH" property="isAuth" />
+	</resultMap>
 	
-
+	
 	<select id="loginMember" parameterType="member"
 		resultMap="memberResultSet">
 		SELECT *
@@ -43,22 +48,22 @@
 			, 1)
 	</insert>  -->
 	
-	<insert id="insertMailAuth" >
+	<insert id="insertMailAuth" parameterType="mailAuth">
     INSERT INTO mail_auth (mail,auth_key,is_auth)
     values (#{mail},#{authKey},0)
 </insert>
-<select id="getMailAuth" parameterType="String" resultType="mailAuth">
+<select id="getMailAuth" resultMap="emailResultSet">
     SELECT mail, auth_key, is_auth
     FROM mail_auth
     WHERE mail=#{mail}   
 </select>
-<update id="updateMailAuth" parameterType="String">
+<update id="updateMailAuth" parameterType="mailAuth">
     UPDATE mail_auth 
     SET auth_key=#{authKey}
     ,is_auth=0
     WHERE mail=#{mail}
 </update>
-<update id="completeAuth" parameterType="String">
+<update id="completeAuth" parameterType="mailAuth">
     UPDATE mail_auth SET is_auth=1
     WHERE mail=#{mail}
 </update>

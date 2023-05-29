@@ -19,18 +19,18 @@ public class MemberDao {
 	}
 	
 	public int insertMailAuth(MailAuth mailAuth) {
-		return sqlSession.selectOne("member-mapper.loginMember", mailAuth);
+		return sqlSession.insert("member-mapper.insertMailAuth", mailAuth);
 	}
 	public MailAuth getMailAuth(String mail) {
-		return sqlSession.selectOne("member-mapper.loginMember", mail);
+		return sqlSession.selectOne("member-mapper.getMailAuth", mail);
 	}
 	public int updateMailAuth(MailAuth mailAuth){
-		return sqlSession.selectOne("member-mapper.loginMember", mailAuth);
+		return sqlSession.update("member-mapper.updateMailAuth", mailAuth);
 	}
 	//부모창 mail인증하기 버튼
 
 	public int completeAuth(String mail) {
-		return sqlSession.selectOne("member-mapper.loginMember", mail);
+		return sqlSession.selectOne("member-mapper.completeAuth", mail);
 	}
 
 //	public int insertMember(Member inputMember) {
