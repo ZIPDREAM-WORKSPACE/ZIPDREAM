@@ -1149,7 +1149,51 @@ box-sizing: border-box;
 			
 		};
 		
+		function exitChatRoom2(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+					data:{ chatRoomNo},
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							location.href="<%=request.getRequestURI()%>"
+						}else{
+							alert("채팅방 나가기에 실패했습니다.");
+						}
+						// result == 0 실패 
+						
+					}
+				})
+			
+		};
 		
+	 	window.onbeforeunload = function (event) {
+		    event.preventDefault();
+		    
+		    // ajax 호출
+		
+		
+		 	$.ajax({
+				url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
+				type : "get",
+				success : function(result){
+					// result == 1 나가기 성공
+					console.log(result);
+					if(result >= 1){
+						
+							exitChatRoom2();
+					 	
+						
+					}else{
+						console.log("방 없음");
+					}
+					// result == 0 실패 
+					
+				},     error: function(){
+		            console.log("에러남");
+		        }
+			})
+	 	}
 	</script>
 	
 <script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>

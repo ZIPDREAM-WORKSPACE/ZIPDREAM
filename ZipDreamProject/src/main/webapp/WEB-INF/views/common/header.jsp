@@ -207,35 +207,14 @@ position: absolute;
 	</div>
 	
 	<script>
-	
-<%-- 	let url = "<%=request.getContextPath()%>";
- 	let currentUrl = "<%=request.getRequestURI()%>";
+
  	
- 	if(!url===currentUrl){
- 		
- 		exitChatRoom();
- 	} 
-	
-	function exitChatRoom(){
-		if(confirm("채팅방에서 나가시겠습니까?")){
-			$.ajax({
-				url:"<%=request.getContextPath()%>/chat/exit",
-				data:{ chatRoomNo},
-				success : function(result){
-					// result == 1 나가기 성공
-					if(result == 1){
-						location.href="<%=request.getContextPath()%>"
-					}else{
-						alert("채팅방 나가기에 실패했습니다.");
-					}
-					// result == 0 실패 
-					
-				}
-			})
-		}	
-		
-	}; --%>
-	
+ 
+ 	
+
+ 	
+	 
+
 	
 	</script>
 </body>

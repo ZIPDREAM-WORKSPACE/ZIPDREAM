@@ -39,6 +39,16 @@ public class ChatController {
 				
 	}
 	
+	@ResponseBody
+	@GetMapping("/chat/chatRoomSelect")
+	public int selectChatRoom(@ModelAttribute("loginUser") Member loginUser, Model model) {
+		
+		int result = service.selectChatRoom(loginUser.getUserNo());
+		
+		return result;
+				
+	}
+	
 	// 채팅방 만들기
 	@ResponseBody
 	@GetMapping("/chat/openChatRoom")
