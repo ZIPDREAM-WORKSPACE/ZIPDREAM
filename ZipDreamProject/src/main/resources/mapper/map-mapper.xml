@@ -8,4 +8,11 @@
 		WHERE BJD_NAME = #{detailAddrClob}
 		AND STATUS like '존%'
 	</select>
+	
+	<select id="selectAddress" resultType="string">
+		SELECT BJD_NAME
+		FROM USER.BEOPJEONGDONG
+		WHERE BJD_CODE = #{adCode}
+		AND STATUS like '존%'
+	</select>
 </mapper>

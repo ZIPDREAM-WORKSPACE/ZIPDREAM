@@ -585,24 +585,28 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	    	    	                         }
 	    	                                  
 	    	                              }
-    	                          
-   	                        	  }
-	   	                          	$.ajax({
+    	                              
+    	                              $.ajax({
 	                        				url: "<%= request.getContextPath() %>/map/address",
 	                   				  		method: "post",
-		                   				  	data: {'adCode' : addressToXy['지역코드']},
+		                   				  	data: {'adCode' : addressToXy['법정동시군구코드'].concat(addressToXy['법정동읍면동코드']) },
 		                   				    dataType: "text",
+		                   				    contentType : "text/plain; charset:UTF-8",
 	                        				success: function(result){
 	                        					console.log("address:"+result);
+	                        					
 	                        				},
 	                        				error: function(){
 	                        					console.log("에러");
 	                        				}
 	                        			});
-	   	                          	console.log("addressToXy['지역코드']:"+addressToXy['지역코드']);
-	   	                        	geocoder.addressSearch(
-	   	                        			
-	   	                        			, callback);
+	   	                          	console.log("addressToXy['지역코드']:"+addressToXy['법정동시군구코드']+", "+addressToXy['법정동읍면동코드']);
+    	                          
+   	                        	  }
+	   	                          	
+	   	                        	/* geocoder.addressSearch(
+	   	                        			address+도로명
+	   	                        			, callback); */
 	   	                          	
     	                         
     	                         }
