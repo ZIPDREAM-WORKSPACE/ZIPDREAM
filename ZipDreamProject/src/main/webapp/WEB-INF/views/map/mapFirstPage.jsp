@@ -76,15 +76,18 @@
 		background-color: transparent;
 	}
 	.searchBtn>svg{
-		padding-top: 15px;
+		position:absolute;
+		top: 16px;
+		right:10px;
 	}
 	
 	#keyword{
 		border: 1px solid lightgray;
-		border-radius: 10px;
+		border-radius: 5px;
 		height:30px;
 		width: 180px;
-		margin-bottom: 12px;
+		margin: 10px 0;
+		margin-right: 10px;
 	}
 	
 #menu_wrap{
@@ -156,6 +159,7 @@
 	margin: 20px;
 	background-color: white;
 	border-radius: 5px;
+	cursor: pointer;
 }
 </style>
 
@@ -180,7 +184,7 @@
 		                    <input name="s" type="text" id="keyword" placeholder="키워드를 검색하세요.">
 		                    <button type="submit" class="searchBtn">
 								<svg 
-									xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 								  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg>
 							</button> 
@@ -347,7 +351,7 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    var imageSrc = '<%= request.getContextPath()%>/resources/images/marker.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
         imgOptions =  {
             spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
