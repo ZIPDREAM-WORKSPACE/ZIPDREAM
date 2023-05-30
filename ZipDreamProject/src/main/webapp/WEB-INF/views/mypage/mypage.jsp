@@ -47,7 +47,7 @@
 	<div style="text-align: center; font-size: 40px; margin-top: 20px;">MY DREAM</div>	
 	<div class="listWrap">
 		<div class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage">최근 본 방</a></div>
-		<div class="list"><a href="#">내 매물</a></div>
+		<div class="list"><a href="<%=request.getContextPath()%>/mypage/myroomlist">내 매물</a></div>
 		<div class="list"><a href="#">찜하기</a></div>
 		<div class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></div>
 		<div class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></div>
@@ -65,6 +65,9 @@
 	case "currentPage" :
 		index = 0;
         break;
+	case "myroomlist" :
+		index = 1;
+		break;
 	case "myInfo" :
 		index = 3;
         break;
