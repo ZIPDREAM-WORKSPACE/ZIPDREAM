@@ -23,6 +23,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
+	public int selectChatRoom(int uno){
+		return dao.selectChatRoom(uno);
+	}
+	
+	@Override
 	public int openChatRoom(ChatRoom chatRoom) {
 		return dao.openChatRoom(chatRoom);
 	}
