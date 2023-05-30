@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,15 +45,32 @@ public class SalesController {
 	@GetMapping("/apiData")
 	@PostMapping("/apiData")
 	@RequestMapping(value="/apiData",produces="application/json; charset=UTF-8")
-	public String getAPTLttotPblancDetail() {
+	public String getAPTLttotPblancDetail(String month) {
 		
 		StringBuffer result = new StringBuffer();
 		
-		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail?page=1&perPage=10&serviceKey=29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D";
+		if(Integer.parseInt(month) < 10) {
+			month = "0" + month;
+		}
+		
+		LocalDate now = LocalDate.now();
+		int year = now.getYear();
+		
+		String startDate = year + "-" + month + "-01"; 
+		String endDate = year + "-" + month + "-30"; 
+		
+		System.out.println(startDate+":"+endDate);
+		
+		 
+		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail?page=1&perPage=100&cond%5BRCRIT_PBLANC_DE%3A%3ALTE%5D=";
+//		2023-05-31&cond%5BRCRIT_PBLANC_DE%3A%3AGTE%5D=2023-05-01&serviceKey=29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D
+		
 		
 		URL url;
 		try {
-			url = new URL(apiUrl);
+			url = new URL(apiUrl+endDate+"&cond%5BRCRIT_PBLANC_DE%3A%3AGTE%5D="+startDate+"&serviceKey=29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D");
+			
+			
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
 			urlconnection.setRequestProperty("Content-Type", "application/json; utf-8"); //post body json으로 던지기 위함
@@ -69,7 +90,7 @@ public class SalesController {
 			e.printStackTrace();
 		}
 		
-		 return result.toString();
+		return result.toString();
 	}
 	
 	
@@ -85,7 +106,7 @@ public class SalesController {
 		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancMdl?page=1&perPage=10&cond%5BHOUSE_MANAGE_NO%3A%3AEQ%5D=";
 		//이건 내 서비스인증키
 		String serviceKey = "29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D";
-//		2020000001&serviceKey=29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D
+
 		URL url;
 		try {
 			url = new URL(apiUrl+houseCode+"&serviceKey="+serviceKey);
