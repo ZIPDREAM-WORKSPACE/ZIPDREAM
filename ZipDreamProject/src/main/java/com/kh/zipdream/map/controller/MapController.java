@@ -28,7 +28,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.google.gson.Gson;
 import com.kh.zipdream.map.model.service.MapService;
+import com.kh.zipdream.map.model.vo.beopjeongdong;
 @CrossOrigin(originPatterns = "http://localhost:8006")
 @Controller
 @RequestMapping("/map")
@@ -59,11 +61,11 @@ public class MapController {
    public String address(@RequestParam("adCode") String adCode,
                   Model model) {
       
-      String address = mapService.selectAddress(adCode);
+      List<beopjeongdong> address = mapService.selectAddress(adCode);
          
       model.addAttribute("address", address);
       System.out.println(address);
-      return address;
+      return new Gson().toJson(address);
    }
    
    @GetMapping(value="/getXmlCode", produces = "application/text; charset=UTF-8")

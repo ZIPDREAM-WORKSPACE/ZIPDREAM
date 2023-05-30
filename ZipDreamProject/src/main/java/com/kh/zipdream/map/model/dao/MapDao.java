@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.map.model.vo.beopjeongdong;
+
 @Repository
 public class MapDao {
 	@Autowired
@@ -16,7 +18,7 @@ public class MapDao {
 		return sqlSession.selectOne("mapMapper.selectBjbCode", detailAddrClob);
 	}
 	
-	public List selectAddress(String adCode) {
+	public List<beopjeongdong> selectAddress(String adCode) {
 		return sqlSession.selectList("mapMapper.selectAddress", adCode);
 	}
 }

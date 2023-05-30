@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.zipdream.map.model.dao.MapDao;
+import com.kh.zipdream.map.model.vo.beopjeongdong;
 
 @Service
 public class MapServiceImpl implements MapService{
@@ -18,7 +19,7 @@ public class MapServiceImpl implements MapService{
 		return mapdao.selectBjbCode(detailAddrClob);
 	}
 	
-	public List selectAddress(String adCode) {
+	public List<beopjeongdong> selectAddress(String adCode) {
 		return mapdao.selectAddress(adCode);
 	}
 }

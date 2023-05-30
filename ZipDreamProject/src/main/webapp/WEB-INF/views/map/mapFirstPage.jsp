@@ -14,7 +14,7 @@
 		width: 100%;
 		height: 100vw;
 		display: inline-flex;
-		border-top: 1px solid lightblue;
+		border-top: 1px solid lightgray;
 	}
 	#con1{
 		float: left;
@@ -80,7 +80,7 @@
 	}
 	
 	#keyword{
-		border: 1px solid lightblue;
+		border: 1px solid lightgray;
 		border-radius: 10px;
 		height:30px;
 		width: 180px;
@@ -104,8 +104,8 @@
 }
 
 .scrollBar::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #217af4; /* 스크롤바의 색상 */
+    height: 10%; /* 스크롤바의 길이 */
+    background: #989FA7; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }
@@ -150,7 +150,13 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px; font-size: 15px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-	
+#placesList>li{
+	font-size: 15px;
+	font-weight: bold;
+	margin: 20px;
+	background-color: white;
+	border-radius: 5px;
+}
 </style>
 
 
@@ -506,6 +512,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             infowindow.open(map, marker); */
             
             console.log(detailAddrClob.split(" ")[0]);
+            let bjdSggCode = "";
+            let bjdEmdCode = "";
+            let roadName = "";
             $(function (){
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
@@ -564,49 +573,83 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         for(var i=0; result.length ;i++){
 	   	                        	  let addressToXy = JSON.parse(result[i]);
 	   	                          	  console.log(addressToXy)
-	   	                        	 
-	   	                        	var callback = function(result, status) {
-	    	                        	 
-    	                              if (status === kakao.maps.services.Status.OK) {
-    	                                  
-			    	                         
-			    	                       	  for(var i=0; i<result.length;i++){
-			    	                       			positions.push({latlng: new kakao.maps.LatLng(result[i].y, result[i].x)})
-			    	                       	  }
-			    	                         
-	    	                                   for (var i = 0; i < positions.length; i ++) {
-	    	    	                        	    // 마커를 생성합니다
-	    	    	                        	    marker = new kakao.maps.Marker({
-	    	    	                        	        map: map, // 마커를 표시할 지도
-	    	    	                        	        position: positions[i].latlng // 마커의 위치
-	    	    	                         			
-	    	    	                        	    }); 
-	    	    	                        	    
-	    	    	                         }
-	    	                                  
-	    	                              }
-    	                              
-    	                              $.ajax({
+	   	                          	  
+	   	                          	  
+	   	                          	  listView(addressToXy);
+	   	                          	  
+	   	                          	  bjdSggCode = addressToXy['법정동시군구코드'];
+	                            	  bjdEmdCode = addressToXy['법정동읍면동코드'];
+	                            	  console.log(bjdSggCode+", "+bjdEmdCode);
+	                            	  roadName = addressToXy['도로명'];
+	                            	  console.log("도로명:"+roadName);
+    	                              <%-- $.ajax({
 	                        				url: "<%= request.getContextPath() %>/map/address",
 	                   				  		method: "post",
-		                   				  	data: {'adCode' : addressToXy['법정동시군구코드'].concat(addressToXy['법정동읍면동코드']) },
-		                   				    dataType: "text",
-		                   				    contentType : "text/plain; charset:UTF-8",
-	                        				success: function(result){
-	                        					console.log("address:"+result);
+		                   				  	data: {'adCode' : bjdSggCode.concat(bjdEmdCode) },
+		                   				    dataType : 'json',	                        				
+		                   				    success: function(result){
+		                   				    	
+	                        					console.log(result[0].bjdName);
+	                        					
+	                        					geocoder.addressSearch(result[0].bjdName+" "+roadName, callback);
+	                        					
 	                        					
 	                        				},
 	                        				error: function(){
 	                        					console.log("에러");
 	                        				}
-	                        			});
-	   	                          	console.log("addressToXy['지역코드']:"+addressToXy['법정동시군구코드']+", "+addressToXy['법정동읍면동코드']);
-    	                          
-   	                        	  }
-	   	                          	
-	   	                        	/* geocoder.addressSearch(
-	   	                        			address+도로명
-	   	                        			, callback); */
+	                        			}); --%>
+    	                          	 
+    	                              var callback = function(result, status) {
+ 	    	                        	 
+        	                              if (status === kakao.maps.services.Status.OK) {
+        	                                  
+    			    	                         
+    			    	                       	  for(var i=0; i<result.length;i++){
+    			    	                       		  console.log(result[i]);
+    			    	                       			positions.push({
+    			    	                       				content: '<div>'+result[i].address_name+'</div>',
+    			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
+    			    	                       			})
+    			    	                       	  		
+    			    	                       	  }
+    			    	                         
+    	    	                                   for (var i = 0; i < positions.length; i ++) {
+    	    	    	                        	    // 마커를 생성합니다
+    	    	    	                        	    marker = new kakao.maps.Marker({
+    	    	    	                        	        map: map, // 마커를 표시할 지도
+    	    	    	                        	        position: positions[i].latlng // 마커의 위치
+    	    	    	                         			
+    	    	    	                        	    }); 
+    	    	    	                        	    var infowindow = new kakao.maps.InfoWindow({
+    	    	    	                        	        content: positions[i].content // 인포윈도우에 표시할 내용
+    	    	    	                        	    });
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    	    	    	                         }
+    	    	                                  
+    	    	                              }
+	   	                          
+        	                              
+   	                        	 		 }
+	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
+	   	                           
+    	                           // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+    	                              function makeOverListener(map, marker, infowindow) {
+    	                                  return function() {
+    	                                      infowindow.open(map, marker);
+    	                                  };
+    	                              }
+
+    	                              // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+    	                              function makeOutListener(infowindow) {
+    	                                  return function() {
+    	                                      infowindow.close();
+    	                                  };
+    	                              }
+    	                              
+    	                              // 제대로된 주소 필요함
+    	                              geocoder.addressSearch(roadName, callback);
 	   	                          	
     	                         
     	                         }
@@ -625,6 +668,30 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                      }
     	                         
     	                     })
+    	                     
+    	                     function listView(addressToXy){
+    						  	var listEl = document.getElementById('placesList');
+    						  	var listLiTag = document.createElement("li");
+    						  	
+    						  	var str = addressToXy["거래금액"].trim();
+    						  /* 	var arr  = Array.from(str); */
+    						  
+    						    var arr = [...str];
+    						    var arrLeng = arr.length-5;  
+    						  
+    						  	console.log(Array.isArray(arr));
+    						  	console.log(arrLeng);
+    						  	arr.splice(arrLeng, 0, "억");
+    						  	console.log(arr);
+    						  	
+    						  	var resultStr = arr.join('');
+    						  	console.log(resultStr);
+
+    						  	
+    						  	
+    						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 ";
+    						  	listEl.appendChild(listLiTag);
+    					    }
     			
     			  }
     			
