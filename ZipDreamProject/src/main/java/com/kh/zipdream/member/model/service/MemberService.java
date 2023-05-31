@@ -6,6 +6,7 @@ public interface MemberService {
 	
 	public abstract Member loginMember(Member inputMember);
 	
+	public Member selectMember(int userNo);
 	/* public abstract int insertMember(Member inputMember); */
 }
 

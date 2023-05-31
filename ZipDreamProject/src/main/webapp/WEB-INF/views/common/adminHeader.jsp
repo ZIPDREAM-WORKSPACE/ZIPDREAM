@@ -27,7 +27,7 @@ rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminFooter.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminMain.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminNotice.css">
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminReportDetail.css">
 <script src="<%=request.getContextPath()%>/resources/js/admin/donut.js"></script>
 <style>
 * {
