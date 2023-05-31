@@ -20,7 +20,9 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
-
+	public Member selectMember(int userNo) {
+		return memberDao.selectMember(userNo);
+	}
 //	@Override
 //	public int insertMember(Member inputMember) {
 //

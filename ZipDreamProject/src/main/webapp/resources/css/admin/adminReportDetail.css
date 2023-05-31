@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.wrapper {
+  display: grid;
+  grid-template-columns: 150px 650px 25px 650px 100px;
+  grid-template-rows: 50px 400px 400px 200px;
+  grid-auto-flow: dense;
+  gap : 25px;
+}
+
+.item:nth-child(1) {
+	grid-column: 1/ 6;
+	grid-row: 1/ 2;
+}
+
+.item:nth-child(13) {
+	grid-column: 2/ 5;
+	grid-row: 4/ 5;
+}
+
+.item {
+	padding:25px;
+}
+
+.active {
+	background-color: #FFFFFF;
+}

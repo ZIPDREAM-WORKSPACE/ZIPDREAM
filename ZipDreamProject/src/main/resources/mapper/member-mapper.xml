@@ -27,6 +27,10 @@
 		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
 	
+	
+	<select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
+	</select>
 <!-- 일반고객 회원가입 -->
 	<!-- <insert id="insertMember" parameterType="member">
 		INSERT INTO

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.member.model.vo.Member;
 
 public interface AdminService {
@@ -29,6 +30,6 @@ public interface AdminService {
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public int updateMemberStatus(Member m);
-	
+	public Report selectReport(int reportNo);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
 }

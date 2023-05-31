@@ -254,6 +254,10 @@ public class AdminServiceImpl implements AdminService{
 		return dao.updateMemberStatus(m);
 	}
 	
+	public Report selectReport(int reportNo) {
+		return dao.selectReport(reportNo);
+	}
+	
 	public void selectChatRoomList(int cp,Map<String, Object> map){
 		int listCount = chatDao.countChatRoom();
 		int pageLimit = 10;
