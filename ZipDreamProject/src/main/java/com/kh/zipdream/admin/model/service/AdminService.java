@@ -1,5 +1,6 @@
 package com.kh.zipdream.admin.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public interface AdminService {
 	public void selectUserList(int cp, int type, Map<String, Object> map);
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
+	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap, Map<String, Object> map);
 	public int updateMemberStatus(Member m);
 	public Report selectReport(int reportNo);
 	public void selectChatRoomList(int cp, Map<String, Object> map);

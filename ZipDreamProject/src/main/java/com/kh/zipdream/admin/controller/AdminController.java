@@ -160,6 +160,7 @@ public class AdminController {
 							   @RequestParam(value="cpage", required=false, defaultValue="1") int cp) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		Report report = service.selectReport(reportNo); 
 		
 		model.addAttribute("report", report);		
@@ -168,7 +169,9 @@ public class AdminController {
 		
 		paramMap.put("userNo", report.getRefTuno());
 		paramMap.put("type", 2);
-		model.addAttribute("reportList", service.getReportList(cp, paramMap));
+		service.getReportArrayList(cp, paramMap, map);
+		
+		model.addAttribute("reportList", map);
 		
 		return "admin/adminReportDetail";
 	}
