@@ -14,7 +14,7 @@
 		width: 100%;
 		height: 100vw;
 		display: inline-flex;
-		border-top: 1px solid lightblue;
+		border-top: 1px solid lightgray;
 	}
 	#con1{
 		float: left;
@@ -76,15 +76,18 @@
 		background-color: transparent;
 	}
 	.searchBtn>svg{
-		padding-top: 15px;
+		position:absolute;
+		top: 16px;
+		right:10px;
 	}
 	
 	#keyword{
-		border: 1px solid lightblue;
-		border-radius: 10px;
+		border: 1px solid lightgray;
+		border-radius: 5px;
 		height:30px;
 		width: 180px;
-		margin-bottom: 12px;
+		margin: 10px 0;
+		margin-right: 10px;
 	}
 	
 #menu_wrap{
@@ -104,8 +107,8 @@
 }
 
 .scrollBar::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #217af4; /* 스크롤바의 색상 */
+    height: 10%; /* 스크롤바의 길이 */
+    background: #989FA7; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }
@@ -150,7 +153,14 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px; font-size: 15px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-	
+#placesList>li{
+	font-size: 15px;
+	font-weight: bold;
+	margin: 20px;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
 </style>
 
 
@@ -158,7 +168,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 </head>
 
 <body>
@@ -174,7 +184,7 @@
 		                    <input name="s" type="text" id="keyword" placeholder="키워드를 검색하세요.">
 		                    <button type="submit" class="searchBtn">
 								<svg 
-									xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 								  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg>
 							</button> 
@@ -200,7 +210,7 @@ var markers = [];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng( 37.5007861, 127.0368861), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -341,32 +351,33 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+   /*  var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
         imgOptions =  {
             spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
             spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
             offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+        }; */
+        
+	/* var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
             marker = new kakao.maps.Marker({
             position: position, // 마커의 위치
             image: markerImage 
-        });
-
+        }); */
+        
+    var markerImage = new kakao.maps.MarkerImage(
+    	    '<%= request.getContextPath()%>/resources/images/marker.png',
+    	    new kakao.maps.Size(31, 35), new kakao.maps.Point(13, 34));
+ 
+    marker.setImage(markerImage);
+        
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
     return marker;
 }
 
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
+
 
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 function displayPagination(pagination) {
@@ -431,6 +442,8 @@ var geocoder = new kakao.maps.services.Geocoder();
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
+    
+var listEl ="";    
 // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     searchDetailAddrFromCoords(map.getCenter(), function(result, status) {
@@ -506,6 +519,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             infowindow.open(map, marker); */
             
             console.log(detailAddrClob.split(" ")[0]);
+            let bjdSggCode = "";
+            let bjdEmdCode = "";
+            let roadName = "";
             $(function (){
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
@@ -532,13 +548,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                      /* crossDomain :true, */
     	                      success: function(resultData){
     	                    	  
-    	                    	 /*  let rdReplace = resultData.replace(/=/gi,":");
-    	                    	  let array = JSON.parse(JSON.stringify(rdReplace));
-    	                          console.log("array: "+array);
-    	                         for(var i in array){
-    	                        	 console.log(i+ " : " +array[i]);
-    	                         } */
-    	                         /* console.log(JSON.parse(resultData)); */
     	                         let result = JSON.parse(resultData);
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
@@ -563,40 +572,112 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                        
     	                         for(var i=0; result.length ;i++){
 	   	                        	  let addressToXy = JSON.parse(result[i]);
+	                            	  roadName = addressToXy['도로명'];
 	   	                          	  console.log(addressToXy)
-	   	                        	 
-	   	                        	var callback = function(result, status) {
-	    	                        	 
-    	                              if (status === kakao.maps.services.Status.OK) {
-    	                                  
-			    	                         
-			    	                       	  for(var i=0; i<result.length;i++){
-			    	                       			positions.push({latlng: new kakao.maps.LatLng(result[i].y, result[i].x)})
-			    	                       	  }
-			    	                         
-	    	                                   for (var i = 0; i < positions.length; i ++) {
-	    	    	                        	    // 마커를 생성합니다
-	    	    	                        	    marker = new kakao.maps.Marker({
-	    	    	                        	        map: map, // 마커를 표시할 지도
-	    	    	                        	        position: positions[i].latlng // 마커의 위치
-	    	    	                         			
-	    	    	                        	    }); 
-	    	    	                        	    
-	    	    	                         }
-	    	                                  
-	    	                              }
-    	                          
-   	                        	  }
-	   	                        	geocoder.addressSearch(addressToXy['도로명'] , callback);
-	   	                          }
+	   	                          	  
+	   	                          	  
+	   	                          	  listView(addressToXy, roadName);
+	   	                          	  
+	   	                          	  bjdSggCode = addressToXy['법정동시군구코드'];
+	                            	  bjdEmdCode = addressToXy['법정동읍면동코드'];
+	                            	  console.log(bjdSggCode+", "+bjdEmdCode);
+	                            	  console.log("도로명:"+roadName);
+    	                              <%-- $.ajax({
+	                        				url: "<%= request.getContextPath() %>/map/address",
+	                   				  		method: "post",
+		                   				  	data: {'adCode' : bjdSggCode.concat(bjdEmdCode) },
+		                   				    dataType : 'json',	                        				
+		                   				    success: function(result){
+		                   				    	
+	                        					console.log(result[0].bjdName);
+	                        					
+	                        					geocoder.addressSearch(result[0].bjdName+" "+roadName, callback);
+	                        					
+	                        					
+	                        				},
+	                        				error: function(){
+	                        					console.log("에러");
+	                        				}
+	                        			}); --%>
+    	                          	 
+    	                              var callback = function(result, status) {
+ 	    	                        	 
+        	                              if (status === kakao.maps.services.Status.OK) {
+        	                                  
+    			    	                         
+    			    	                       	  for(var i=0; i<result.length;i++){
+    			    	                       		  console.log(result[i]);
+    			    	                       			positions.push({
+    			    	                       				content: '<div>'+result[i].address_name+'</div>',
+    			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
+    			    	                       			})
+    			    	                       	  		
+    			    	                       	  }
+    			    	                         
+    	    	                                   for (var i = 0; i < positions.length; i ++) {
+    	    	                                	   removeMarker();
+    	    	    	                        	    // 마커를 생성합니다
+    	    	    	                        	    marker = new kakao.maps.Marker({
+    	    	    	                        	        map: map, // 마커를 표시할 지도
+    	    	    	                        	        position: positions[i].latlng, // 마커의 위치
+    	    	    	                        	        clickable: true 
+    	    	    	                        	        
+    	    	    	                        	        
+    	    	    	                        	    });
+    	    	    	                        	    
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'click', function() {
+    	    	    	                        	        // 마커 위에 인포윈도우를 표시합니다
+    	    	    	                        	        console.log("marker.getPosition()"+marker.getPosition());
+    	    	    	                        	        let markerPosit = marker.getPosition()+"";
+    	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
+    	    	    	                        	        /* location.href="#"+markerPosit; */
+    	    	    	                        	        var backgroundTag = document.getElementsByName(markerPosit); 
+    	    	    	                        	        
+    	    	    	                        	        if($(backgroundTag).css("background-color") != "red"){
+    	    	    	                        	        	$(backgroundTag).css("background-color", "red");
+    	    	    	                        	        }
+    	    	    	                        	    });
+    	    	    	                        	    
+    	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
+	    	    	                        	        	    'https://ifh.cc/g/xSQS2h.png',
+	    	    	                        	        	    new kakao.maps.Size(31, 35), new kakao.maps.Point(13, 34));
+	    	    	                        	     
+	    	    	                        	        marker.setImage(markerImage);
+    	    	    	                        	    
+    	    	    	                        	    var infowindow = new kakao.maps.InfoWindow({
+    	    	    	                        	        content: positions[i].content // 인포윈도우에 표시할 내용
+    	    	    	                        	    });
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    	    	    	                         }
+    	    	                                 
+    	    	                                  
+    	    	                              }
+	   	                          
+        	                              
+   	                        	 		 }
+	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
+	   	                           
+    	                           // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+    	                              function makeOverListener(map, marker, infowindow) {
+    	                                  return function() {
+    	                                      infowindow.open(map, marker);
+    	                                  };
+    	                              }
+
+    	                              // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+    	                              function makeOutListener(infowindow) {
+    	                                  return function() {
+    	                                      infowindow.close();
+    	                                  };
+    	                              }
+    	                              
+    	                              
+    	                              // 제대로된 주소 필요함
+    	                              geocoder.addressSearch(roadName, callback);
+	   	                          	
     	                         
-    	                         
-    	                          
-    	                          
-    	                         
-    	                          
-    	                          
-    	  
+    	                         }
     	                         
     	                      },
     	                      error: function(){
@@ -604,14 +685,70 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                      }
     	                         
     	                     })
-    			
-    			  }
+    	                     
+    	                     function listView(addressToXy, roadName){
+    						  	listEl = document.getElementById('placesList');
+    						  	var listLiTag = document.createElement("li");
+    						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
+    						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
+    						  	// marker.click() => location.href="#134.25252,145.12321321"
+    						  	
+    						  	geocoder.addressSearch(roadName, function(result, status){
+    						  		
+    						  		if (status === kakao.maps.services.Status.OK) {
+    						  			console.log("gg:"+result[0].y+", "+result[0].x);
+    						  			let xy = result[0].y+result[0].x;
+    						  			listLiTag.setAttribute("name", xy);
+    									
+    						  		}
+    						  		
+    						  		
+    						  	});
+    						  	
+    						  	var str = addressToXy["거래금액"].trim();
+    						  /* 	var arr  = Array.from(str); */
+    						  
+    						    var arr = [...str];
+    						    var arrLeng = arr.length-5;  
+    						  
+    						  	console.log(Array.isArray(arr));
+    						  	console.log(arrLeng);
+    						  	arr.splice(arrLeng, 0, "억");
+    						  	console.log(arr);
+    						  	
+    						  	var resultStr = arr.join('');
+    						  	console.log(resultStr);
+
+    						  	
+    						  	
+    						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 ";
+    						  	listEl.appendChild(listLiTag);
+    					    }
+    					  
+    					  function removeAllChildNods(el) {   
+    						    while (el.hasChildNodes()) {
+    						        el.removeChild (el.lastChild);
+    						    }
+    						}
+    					// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+    					  function removeMarker() {
+    					      for ( var i = 0; i < markers.length; i++ ) {
+    					          markers[i].setMap(null);
+    					      }   
+    					      markers = [];
+    					  }
+    					  
+    					  removeAllChildNods(listEl);
+    			  		  
+    				  }
     			
               });
             })
             
         }   
     });
+    
+    
 });
 
 // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
