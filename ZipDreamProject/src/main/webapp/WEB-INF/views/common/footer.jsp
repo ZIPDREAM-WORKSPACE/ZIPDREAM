@@ -93,7 +93,7 @@
 			</div>
 			<div id="btn">
 				<span class="btn_inner" id="chat_btn"><a href="#" >1:1문의</a></span>&nbsp;
-				<span class="btn_inner" id="q_btn"><a href="#" >자주묻는 질문</a></span>
+				<span class="btn_inner" id="q_btn"><a href="<%=request.getContextPath() %>/sales/faq" >자주묻는 질문</a></span>
 			</div>
 			<div>KH, Inc. All rights reserved.</div>
 			<div>

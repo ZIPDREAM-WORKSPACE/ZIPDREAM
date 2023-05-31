@@ -36,7 +36,8 @@
  		"chatRoomNo" : chatRoomNo,
 		 			"refUno" : refUno,
 		 			"message" : chatMsg.value,
-		 			"userId" : userId
+		 			"userId" : userId,
+		 			"userLevel" : userLevel
  		};
  		
  		// JSON.parse(문자열) : JSON -> JS Object
@@ -85,9 +86,13 @@ function addEventChat(){
  	 	li.append(p, span);
  	 	li.classList.add("myChat");
  	}else{ // 남이쓴거 
- 		li.innerHTML = "<b>운영자</b><br>";
+ 		if(chatMessage.userLevel == 3){
+ 		li.innerHTML = "<b>"+"운영자"+"</b><br>";
  		li.append(p, span);
- 		
+ 		}else{
+ 		li.innerHTML = "<b>"+chatMessage.userId+"</b><br>";
+ 		li.append(p, span);
+ 		}
  	}
  	
  	// 채팅창

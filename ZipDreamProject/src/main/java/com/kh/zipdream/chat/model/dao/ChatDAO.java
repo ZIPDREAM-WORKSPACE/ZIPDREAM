@@ -85,7 +85,10 @@ public class ChatDAO {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		return (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
+		ArrayList<ChatRoom> r =  (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
+		System.out.println(r);
+		
+		return r;
 	}
 	
 	// 채팅방 조회

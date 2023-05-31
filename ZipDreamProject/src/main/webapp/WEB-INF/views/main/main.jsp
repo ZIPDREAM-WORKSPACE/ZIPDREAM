@@ -903,7 +903,7 @@ box-sizing: border-box;
 	 	const refUno ='${loginUser.userNo}';
 		const userId ='${loginUser.userId}';
 		const userName = '${loginUser.userName}';
-		
+		const userLevel = '${loginUser.userLevel}';
 		
 		
 		
@@ -1092,8 +1092,14 @@ box-sizing: border-box;
 		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
 		 				addEventChat();
 		 				$("#x").click(function(){
-		 					exitChatRoom();
 		 					
+		 					let result2 = exitChatRoom();
+		 					console.log(result2);
+		 					if(result2 == 1){
+		 						$(".chat_open").css("display","block");
+		 					 	$(".display-chatting").css({"display":"none","border":"none"});
+		 					 	$(".display-chatting").html('');
+		 					}
 		 				});
 		 		},
 		 		error : function(request){
@@ -1134,13 +1140,16 @@ box-sizing: border-box;
 		});
 		
 		function exitChatRoom(){
+			let data= 0;
 			if(confirm("대화를 종료하시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
 					data:{ chatRoomNo},
+					 async:false,
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){
+							data = result;
 							alert("채팅방 나가기에 성공했습니다.");
 						}else{
 							alert("채팅방 나가기에 실패했습니다.");
@@ -1155,7 +1164,7 @@ box-sizing: border-box;
 			 		}
 				})
 			}	
-			
+			return data;
 		};
 		
 		<%-- function exitChatRoom2(){

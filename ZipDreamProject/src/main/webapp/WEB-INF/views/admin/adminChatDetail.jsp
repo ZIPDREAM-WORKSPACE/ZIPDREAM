@@ -6,7 +6,7 @@
 <style>
 .display-chatting{
 		width: 100%;
-		height: 450px;
+		height: 600px;
 		
 		overflow: auto;
 		list-style : none;
@@ -40,8 +40,8 @@
    }
 
 .chatting{
-	width:350px;
-	height:600px;
+	width:450px;
+	height:750px;
 	background: #D4E1EF;
 	z-index: 99;
 	border-radius: 10px;
@@ -50,8 +50,8 @@
 	
 }
 .chatting_inner{
-	width:350px;
-	height:450px;
+	width: 100%;
+	height:600px;
 	margin-top:25px;
 	background: white;
 	border-bottom:1px solid rgb(234, 234, 234);
@@ -105,6 +105,10 @@
 	width:30px;
 	height:30px;
 	cursor: pointer;
+	margin-bottom:23px;
+}
+.chat_btn{
+	display: flex;
 }
 </style>
 <section class="content">
@@ -113,9 +117,12 @@
          <h1>채팅 문의</h1>
       </div>
 
-	
+	<div class="chat_btn">
+		<div>뒤로 가기</div>
+		<div>방 나가기</div>
+	</div>
 	<div class="chatting">
-		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
+		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
 		<div class="chatting_inner">
 			<ul class="display-chatting" >
 				<c:forEach items="${list}" var="msg">
@@ -137,7 +144,7 @@
 			</ul>
 		 </div>
 		<div class="chat_bottom">
-				<input type="text" id="chat_msg"></input>
+				<textarea id="chat_msg" style="width:350px; height:30px; resize:none;"></textarea>
 		<img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
 	</div>
    </section>
@@ -148,6 +155,7 @@
 const refUno ='${loginUser.userNo}';
 const userId ='${loginUser.userId}';
 const chatRoomNo = '${chatRoomNo}';
+const userLevel = '${loginUser.userLevel}';
 
 
 let chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 

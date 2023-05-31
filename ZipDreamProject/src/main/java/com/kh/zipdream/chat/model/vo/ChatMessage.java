@@ -12,5 +12,6 @@ public class ChatMessage {
 	private int chatRoomNo;
 	private int refUno;
 	private String userId;
+	private int userLevel;
 	
 }

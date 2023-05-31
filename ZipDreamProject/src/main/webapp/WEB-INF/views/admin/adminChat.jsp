@@ -9,15 +9,15 @@
          <h1>채팅 문의 목록 조회</h1>
          
       </div>
-      <div class="content-table">
+      <div class="content-table" >
          <table class="rwd-table">
         
             <tbody>
                <tr>
-                  <th>번호</th>
-                  <th>내용</th>
-                  <th>제목</th>
-                 
+                  <th width="10%">번호</th>
+                  <th width="40%">내용</th>
+                  <th width="25%">회원</th>
+                  <th width="25%">생성일</th>
                </tr>
                  <c:choose>
                   <c:when test="${empty selectChatRoomList }">
@@ -31,7 +31,7 @@
 	               	 <th>${chatList.chatRoomNo} </th>
 	                   <th>${chatList.message}</th>
 	                  <th>${chatList.title} </th>
-	                 
+	                  <th>${chatList.createDate} </th>
 	               </tr>
 	               </c:forEach>
 		        </c:otherwise>
@@ -70,6 +70,10 @@
 				</ul>
 			</div>
       </div>
+      
    </section>
 </section>
+<script>
+/* setTimeout("location.reload()", 5000); */
+</script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

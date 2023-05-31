@@ -5,9 +5,7 @@
 	<resultMap type="chatRoom" id="chatRoomResultSet">
 		<result property="chatRoomNo" column="CHAT_ROOM_NO"/>
 		<result property="title" column="TITLE"/>
-		<result property="refuno" column="REF_UNO"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
 		
 	</resultMap>
 	
@@ -21,9 +19,9 @@
 	</resultMap>
 	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
-		  SELECT MAX(MESSAGE) AS MESSAGE, CHAT_ROOM_NO, TITLE
-		FROM CHAT_MESSAGE 
-        JOIN CHAT_ROOM  USING(CHAT_ROOM_NO)
+		SELECT MAX(MESSAGE) AS MESSAGE, CHAT_ROOM_NO, TITLE,  DATE_FORMAT(MAX(CREATE_DATETIME), '%Y-%m-%d %H:%i:%s') AS CREATE_DATE
+		FROM CHAT_ROOM
+        JOIN CHAT_MESSAGE USING(CHAT_ROOM_NO)
 		GROUP BY CHAT_ROOM_NO
 		ORDER BY CHAT_ROOM_NO DESC
 	</select>
