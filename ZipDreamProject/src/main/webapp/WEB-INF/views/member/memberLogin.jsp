@@ -37,12 +37,12 @@
 
     .login1{
         box-sizing: border-box;
-		top:100px;
+		/* top:100px; */
         position: absolute;
         width: 600px;
         height: 600px;
         right: 440px;
-        margin-top: 20px;
+        margin-top: 100px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

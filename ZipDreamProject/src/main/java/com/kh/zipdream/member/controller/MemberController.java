@@ -82,12 +82,51 @@ public class MemberController {
 	         System.out.println(session.getAttribute("loginUser"));
 
 	      }
-	      return mv;
+	      return mv;  
 	   }
+	
+	@GetMapping("/insert") // /spring/member/insert
+	public String enrollForm() {
+		return "member/memberEnrollForm";
+	}
 
-		/*이메일*/
+	@PostMapping("/insert")
+	public String insertMember(Member m, HttpSession session, Model model) {
+
+		int result = memberService.insertMember(m);
+
+		String url = "";
+		if (result > 0) { // 성공시 - 메인페이지로
+			session.setAttribute("alertMsg", "회원가입");
+			url = "redirect:/";
+		} else { // 실패 - 에러페이지
+			model.addAttribute("errorMsg", "회원가입 실패");
+			url = "common/errorPage";
+		}
+
+		return url;
+	}
 	
 
+	//회원가입
+	
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*이메일*/
 	@RequestMapping("/mailAuth")
 	@ResponseBody
 	public String mailAuth(MailAuth mailAuth, HttpServletResponse resp) throws Exception {
@@ -98,7 +137,6 @@ public class MemberController {
 	}
 	
 
-	
 	// 자식창 생성
 	@RequestMapping("/join/mailWindow.wow")
 	public String mailWindow(String mail, HttpServletResponse resp) throws Exception {

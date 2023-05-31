@@ -21,13 +21,15 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
-//	@Override
-//	public int insertMember(Member inputMember) {
-//
-//		int result = memberDao.insertMember(inputMember);
-//
-//		return result;
-//	}
+	@Override
+	public int insertMember(Member inputMember) {
+
+		int result = memberDao.insertMember(inputMember);
+
+		return result;
+	}
+	
+	
 	 @Override
 	 public void registMailAuth(MailAuth mailAuth) throws Exception {
 	        MailAuth mailAuth1= memberDao.getMailAuth(mailAuth.getMail());

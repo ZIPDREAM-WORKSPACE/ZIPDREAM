@@ -33,9 +33,9 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.completeAuth", mail);
 	}
 
-//	public int insertMember(Member inputMember) {
-//
-//		return sqlSession.insert("memberMapper.insertMember", inputMember);
-//	}
+	public int insertMember(Member inputMember) {
+
+		return sqlSession.insert("memberMapper.insertMember", inputMember);
+	}
 }
 
