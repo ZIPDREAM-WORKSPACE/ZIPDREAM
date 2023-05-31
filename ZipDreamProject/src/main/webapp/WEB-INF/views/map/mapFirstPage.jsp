@@ -114,7 +114,7 @@
 }
 
 .scrollBar::-webkit-scrollbar-track {
-    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+    background: rgba(211, 211, 211, 0.5);  /*스크롤바 뒷 배경 색상*/
 }
 
 	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -617,7 +617,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	                                   for (var i = 0; i < positions.length; i ++) {
     	    	                                	   removeMarker();
     	    	    	                        	    // 마커를 생성합니다
-    	    	    	                        	    marker = new kakao.maps.Marker({
+    	    	    	                        	    const marker = new kakao.maps.Marker({
     	    	    	                        	        map: map, // 마커를 표시할 지도
     	    	    	                        	        position: positions[i].latlng, // 마커의 위치
     	    	    	                        	        clickable: true 
@@ -627,11 +627,13 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	    
     	    	    	                        	    kakao.maps.event.addListener(marker, 'click', function() {
     	    	    	                        	        // 마커 위에 인포윈도우를 표시합니다
-    	    	    	                        	        console.log("marker.getPosition()"+marker.getPosition());
+    	    	    	                        	        console.log( "marker.getPosition()"+marker.getPosition());
     	    	    	                        	        let markerPosit = marker.getPosition()+"";
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
-    	    	    	                        	        var backgroundTag = document.getElementsByName(markerPosit); 
+    	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
+    	    	    	                        	        $(backgroundTag).siblings().css("background-color","white");
+    	    	    	                        	        
     	    	    	                        	        
     	    	    	                        	        if($(backgroundTag).css("background-color") != "red"){
     	    	    	                        	        	$(backgroundTag).css("background-color", "red");
@@ -647,7 +649,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	    var infowindow = new kakao.maps.InfoWindow({
     	    	    	                        	        content: positions[i].content // 인포윈도우에 표시할 내용
     	    	    	                        	    });
-    	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    	    	    	                        	    kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
     	    	    	                        	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
     	    	    	                         }
     	    	                                 
