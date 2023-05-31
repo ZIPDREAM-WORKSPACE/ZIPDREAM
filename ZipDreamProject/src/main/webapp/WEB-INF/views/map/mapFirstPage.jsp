@@ -88,7 +88,7 @@
 	}
 	
 #menu_wrap{
-	width: 300px;
+	width: 400px;
 	height: 800px;
 }
 
@@ -148,7 +148,7 @@
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
 #pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
+#pagination a {display:inline-block;margin-right:10px; font-size: 15px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 	
 </style>
@@ -187,7 +187,7 @@
 		        <div class="keywordPlaceList"></div>
 		    </div>
 	   </div>
-</div>
+	</div>
 	
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
@@ -204,7 +204,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };  
 
 // 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+map = new kakao.maps.Map(mapContainer, mapOption); 
 
 var center = map.getCenter();
 var Latitude = center.getLat(); // 위도
@@ -418,9 +418,16 @@ function removeAllChildNods(el) {
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+/* var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1});  */// 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
+    /* var callback = function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            console.log(result);
+        }
+    }; */
+
+    
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
@@ -482,22 +489,14 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	        	   detailAddrClob = detailAddrClob.replace("경남","경상남도");
 	        	   break;
            }
-           /*  var detailAddrClob = result[0].road_address.address_name; */
-            
-            /* console.log(result[0].road_address); */
-            
-            /* var deAddrArr = detailAddrClob.replace('논현로 508', ''); */
-            
-            
-           /*  console.log(deAddrArr); */
-            
-         
-            
+      
             var content = '<div class="bAddr">' +
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
                         '</div>';
-
+            var positions = [];
+			/* var marker;
+                */
             /* // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
@@ -544,9 +543,60 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
     	                         console.log(keys);
-    	                         console.log(result0["도로명코드"]);
+    	                         /* console.log(result0["도로명코드"]); */
+    	                         /* console.log(result0["법정동지번코드"]); */
+    	                         console.log(result0["지역코드"]); // 법정동코드
+    	                         let areaCode = result0["지역코드"];
+    	                         console.log(result0["년"]); // 계약년월일
+    	                         console.log(result0["월"]);
+    	                         console.log(result0["일"]);
+    	                         console.log(result0["아파트"]);
+    	                        /*  console.log(result0["지번"]); */
+    	                         console.log(result0["중개사소재지"]); // 있을수도 없을수도
+    	                         /* console.log(result0["법정동지번코드"]); */ // 지역코드와 동일
+    	                        /*  console.log(result0["도로명시군구코드"]);
+    	                         console.log(result0["도로명일련번호코드"]); */
+    	                         console.log(result0["건축년도"]); // 건축년도
+    	                         console.log(result0["전용면적"]); // m^2 단위
+    	                         console.log(result0["거래금액"]);
+    	                         console.log(result0["층"]);
+    	                        
+    	                         for(var i=0; result.length ;i++){
+	   	                        	  let addressToXy = JSON.parse(result[i]);
+	   	                          	  console.log(addressToXy)
+	   	                        	 
+	   	                        	var callback = function(result, status) {
+	    	                        	 
+    	                              if (status === kakao.maps.services.Status.OK) {
+    	                                  
+			    	                         
+			    	                       	  for(var i=0; i<result.length;i++){
+			    	                       			positions.push({latlng: new kakao.maps.LatLng(result[i].y, result[i].x)})
+			    	                       	  }
+			    	                         
+	    	                                   for (var i = 0; i < positions.length; i ++) {
+	    	    	                        	    // 마커를 생성합니다
+	    	    	                        	    marker = new kakao.maps.Marker({
+	    	    	                        	        map: map, // 마커를 표시할 지도
+	    	    	                        	        position: positions[i].latlng // 마커의 위치
+	    	    	                         			
+	    	    	                        	    }); 
+	    	    	                        	    
+	    	    	                         }
+	    	                                  
+	    	                              }
+    	                          
+   	                        	  }
+	   	                        	geocoder.addressSearch(addressToXy['도로명'] , callback);
+	   	                          }
     	                         
     	                         
+    	                          
+    	                          
+    	                         
+    	                          
+    	                          
+    	  
     	                         
     	                      },
     	                      error: function(){
@@ -559,6 +609,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			
               });
             })
+            
         }   
     });
 });
@@ -594,29 +645,6 @@ function displayCenterInfo(result, status) {
 } 
 
  
-</script>
-
-<script>
-
-
-/* $(function(){
-	$(".searchBtn").click(()=>{
-		function keywordList(pageNo, lawdCd, dealYmd){
-			$.ajax({
-				  url : "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo="+pageNo+"&numOfRows=10&LAWD_CD="+lawdCd+"&DEAL_YMD="+dealYmd,
-				  method: "GET",
-				  contentType: "application/json;charset=utf-8",
-				  dataType: "json",
-				  
-				  success : function(result){
-					if(typeof result.)
-				}
-			
-			  }
-			);
-		}
-	});
-}); */ 
 </script>
 
 	
