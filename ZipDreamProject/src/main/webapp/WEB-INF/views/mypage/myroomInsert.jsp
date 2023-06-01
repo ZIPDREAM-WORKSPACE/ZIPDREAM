@@ -432,12 +432,14 @@
 	width: 52px;
 	height: 52px;
 }
+
 #map{
     width: 100%;
     height: 100%;
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
 </style>
 
 </head>
@@ -494,6 +496,7 @@
 											<p>아파트</p>
 										</label>
 									</li>
+
 								</ul>
 							</td>
 						</tr>
@@ -501,6 +504,7 @@
 							<th>건물 유형</th>
 							<td>
 								<ul class="roomTypeList">
+
 									<li>
 										<label class="roomTypeCover"> 
 											<input type="radio" name="buildingType">
@@ -525,9 +529,10 @@
 											<p>상가</p>
 										</label>
 									</li>
+
 								</ul>
 							</td>
-						</tr>
+            </tr>
 					</tbody>
 				</table>
 			</div>
@@ -544,9 +549,11 @@
 							<td>
 								<div class="addressSearch">
 									<div class="addressInfo">
+
 										<input type="text" id="sample5_address" placeholder="주소를 검색하세요."> 
 										<input type="button" onclick="sample5_execDaumPostcode()" value="검색">
 										<br>
+
 										<input class="addressDetail" placeholder="상세주소를 입력하세요.">
 										<div class="appInfo">
 											<div class="dong">
@@ -558,11 +565,13 @@
 										</div>
 									</div>
 									<div class="addressMap" >
+
 										<div id="map" style="display:none; border-radius:0px;"></div>
 										<div id="mapImg">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                                                 <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                                                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+
                                             </svg>
 										</div>
 										<p>
@@ -588,6 +597,7 @@
 							<td>
 								<div class="dealType">
 									<ul class="roomTypeList">
+
 										<li>
 											<label class="roomTypeCover"> 
 												<input type="radio" name="dealType" checked>
@@ -606,6 +616,7 @@
 												<p>매매</p>
 											</label>
 										</li>
+
 									</ul>
 								</div>
 							</td>
@@ -620,12 +631,14 @@
                     <path
 						d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
+
 				<span>허위 매물을 등록할 경우 집드림에서 임의로 계정 및 매물 전체 삭제 처리됩니다.</span> 
 				<a href="">허위매물 제재 정책 확인하기</a>
 			</p>
 			<div class="agreeWrap">
 				<label for="agreeCheck"> 
 					<input id="agreeCheck" type="checkbox">
+
 					<p>매물관리규정을 확인하였으며, 입력한 정보는 실제 매물과 다름이 없습니다.</p>
 				</label>
 				<div class="btn-wrap">
@@ -638,7 +651,9 @@
 
 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
+
 	<script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
