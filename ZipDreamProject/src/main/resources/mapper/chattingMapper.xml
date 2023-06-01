@@ -12,7 +12,7 @@
 	<resultMap type="chatMessage" id="chatMessageResultSet">
 		<result column="CM_NO" property="cmNo" />
 		<result column="MESSAGE" property="message" />
-		<result column="CREATE_DATE" property="createDate" />
+		<result column="CREATE_DATETIME" property="createDatetime" />
 		<result column="CHAT_ROOM_NO" property="chatRoomNo" />
 		<result column="REF_UNO" property="refUno" />
 		<result column="USER_ID" property="userId" />

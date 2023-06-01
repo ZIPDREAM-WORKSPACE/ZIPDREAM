@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <style>
@@ -65,6 +66,7 @@
 	width: 100%;
 	text-align: center;
 	font-weight: 600;
+	font-size:20px;
 }
 .chat_header>img{
 	width:17px;
@@ -86,7 +88,7 @@
 	background: white;
 	border-radius: 30px;
 	margin: auto;
-	margin-top:17px;
+	margin-top:14px;
 	border : 1px solid grey;
 	z-index: 99;
 	
@@ -110,11 +112,24 @@
 .chat_btn{
 	display: flex;
 	padding:5px;
+	justify-content: center;
 }
 .chat_btn>*{
 	margin:10px;
+	width:100px;
+	height:30px;
+	cursor:pointer;
+	text-align: center;
+	line-height:30px;
+	border-radius: 5px;
+	box-shadow:rgba(0, 0, 0, 0.6) 0px 3px 5px;
 }
-
+#back{
+	background: rgb(236, 236, 236);
+}
+#exit{
+	background: rgb(236, 236, 236);
+}
 </style>
 <section class="content">
    <section class="content-wrap">
@@ -127,22 +142,23 @@
 		<div id="exit">방 나가기</div>
 	</div>
 	<div class="chatting">
-		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
+		<div class="chat_header"><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
 		<div class="chatting_inner">
 			<ul class="display-chatting" >
 				<c:forEach items="${list}" var="msg">
+			
 					<c:if test="${msg.refUno == loginUser.userNo }">
 						<li class="myChat">
-							<p class="chatP">${msg.message }</p>
-							<span class="chatDate">${msg.createDate}</span>
+							<p class="chatP">${msg.message }</p><br>
+							<span class="chatDate">${msg.createDatetime }</span>
 						</li>
 					</c:if>
 				
 					<c:if test="${msg.refUno != loginUser.userNo }">
 						<li>
 							<b>${msg.userId}</b>	<br>
-							<p class="chatP">${msg.message }</p>
-							<span class="chatDate">${msg.createDate}</span>
+							<p class="chatP">${msg.message }</p><br>
+							<span class="chatDate">${msg.createDatetime }</span>
 						</li>
 					</c:if>
 				</c:forEach> 
@@ -166,7 +182,39 @@ const userLevel = '${loginUser.userLevel}';
 let chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
 addEventChat();
 
+$("#exit").click(function(){
+	exitChatRoom();
+});
 
+$("#back").click(function(){
+	location.href="<%=request.getContextPath()%>/admin/chat";
+});
+
+function exitChatRoom(){
+	if(confirm("채팅방을 나가시겠습니까?")){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/chat/exit",
+			data:{ chatRoomNo},
+			 async:false,
+			success : function(result){
+				// result == 1 나가기 성공
+				if(result == 1){
+					alert("채팅방 나가기에 성공했습니다.");
+					location.href="<%=request.getContextPath()%>/admin/chat";
+				}else{
+					alert("채팅방 나가기에 실패했습니다.");
+				}
+				// result == 0 실패 
+				
+			},
+	 		error : function(request){
+	 			console.log("에러발생");
+	 			console.log("에러코드 : "+request.status);
+	 			
+	 		}
+		})
+	}	
+};
 
 </script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />
