@@ -50,7 +50,7 @@ public class SalesController {
 		StringBuffer result = new StringBuffer();
 		
 		if(Integer.parseInt(month) < 10) {
-			month = "0" + month;
+			month = "0" + (Integer.parseInt(month)-1);
 		}
 		
 		LocalDate now = LocalDate.now();
@@ -59,10 +59,7 @@ public class SalesController {
 		String startDate = year + "-" + month + "-01"; 
 		String endDate = year + "-" + month + "-30"; 
 		
-		System.out.println(startDate+":"+endDate);
-		
-		 
-		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail?page=1&perPage=100&cond%5BRCRIT_PBLANC_DE%3A%3ALTE%5D=";
+		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail?page=1&perPage=10000&cond%5BRCRIT_PBLANC_DE%3A%3ALTE%5D=";
 //		2023-05-31&cond%5BRCRIT_PBLANC_DE%3A%3AGTE%5D=2023-05-01&serviceKey=29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D
 		
 		
@@ -82,7 +79,6 @@ public class SalesController {
 			
 			while((returnLine = br.readLine()) != null) {
 				result.append(returnLine);
-				/* System.out.println(br.readLine()); */
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -90,6 +86,12 @@ public class SalesController {
 			e.printStackTrace();
 		}
 		
+		
+		
+		
+		
+		
+		/* System.out.println(result); */
 		return result.toString();
 	}
 	
@@ -103,7 +105,7 @@ public class SalesController {
 		
 		StringBuffer result = new StringBuffer();
 		
-		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancMdl?page=1&perPage=10&cond%5BHOUSE_MANAGE_NO%3A%3AEQ%5D=";
+		String apiUrl = "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancMdl?page=1&perPage=10000&cond%5BHOUSE_MANAGE_NO%3A%3AEQ%5D=";
 		//이건 내 서비스인증키
 		String serviceKey = "29yT0hzwPhkcH3v%2FVb1TblTy2MScYEvVCkJPq98BUa2T4VbppSCan3zrhXE8Gz%2BBagEwWPPiwfPMWcP0WSu9vg%3D%3D";
 
@@ -129,7 +131,13 @@ public class SalesController {
 			e.printStackTrace();
 		}
 		
-		 return result.toString();
+		return result.toString();
+	}
+	
+	@ResponseBody
+	@GetMapping("/mySaleHouse")
+	public void mySaleHouse(String houseCode) {
+		System.out.println("컨트롤러");
 	}
 
 }
