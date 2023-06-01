@@ -109,7 +109,12 @@
 }
 .chat_btn{
 	display: flex;
+	padding:5px;
 }
+.chat_btn>*{
+	margin:10px;
+}
+
 </style>
 <section class="content">
    <section class="content-wrap">
@@ -118,8 +123,8 @@
       </div>
 
 	<div class="chat_btn">
-		<div>뒤로 가기</div>
-		<div>방 나가기</div>
+		<div id="back">뒤로 가기</div>
+		<div id="exit">방 나가기</div>
 	</div>
 	<div class="chatting">
 		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
