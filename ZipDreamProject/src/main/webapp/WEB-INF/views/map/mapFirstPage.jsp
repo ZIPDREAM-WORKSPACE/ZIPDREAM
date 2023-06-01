@@ -161,6 +161,11 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+.price{
+	font-size: 15px;
+	font-weight: bold;
+}
+
 </style>
 
 
@@ -434,7 +439,6 @@ var geocoder = new kakao.maps.services.Geocoder();
 
     /* var callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            console.log(result);
         }
     }; */
 
@@ -518,7 +522,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             infowindow.setContent(content);
             infowindow.open(map, marker); */
             
-            console.log(detailAddrClob.split(" ")[0]);
             let bjdSggCode = "";
             let bjdEmdCode = "";
             let roadName = "";
@@ -526,7 +529,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
             	// result를 콘솔에 찍은후 result값을 활용해준다.
-            	console.log(detailAddrClob);
             	
             	$.ajax({
     				  url : "<%= request.getContextPath() %>/map/bjdCode",
@@ -534,10 +536,8 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     				  data: {detailAddrClob : detailAddrClob},
     				  dataType: "text",
     				  success : function(result){
-    					  console.log("bjdCode : "+result);
     					  let bjdCodeFirst = result.substring(0, 5);
     					  
-    					  console.log('코드:'+bjdCodeFirst);	
     					  
     					  $.ajax({
     	                      url: "<%= request.getContextPath() %>/map/getXmlCode",
@@ -551,37 +551,19 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         let result = JSON.parse(resultData);
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
-    	                         console.log(keys);
     	                         /* console.log(result0["도로명코드"]); */
     	                         /* console.log(result0["법정동지번코드"]); */
-    	                         console.log(result0["지역코드"]); // 법정동코드
     	                         let areaCode = result0["지역코드"];
-    	                         console.log(result0["년"]); // 계약년월일
-    	                         console.log(result0["월"]);
-    	                         console.log(result0["일"]);
-    	                         console.log(result0["아파트"]);
-    	                        /*  console.log(result0["지번"]); */
-    	                         console.log(result0["중개사소재지"]); // 있을수도 없을수도
-    	                         /* console.log(result0["법정동지번코드"]); */ // 지역코드와 동일
-    	                        /*  console.log(result0["도로명시군구코드"]);
-    	                         console.log(result0["도로명일련번호코드"]); */
-    	                         console.log(result0["건축년도"]); // 건축년도
-    	                         console.log(result0["전용면적"]); // m^2 단위
-    	                         console.log(result0["거래금액"]);
-    	                         console.log(result0["층"]);
     	                        
     	                         for(var i=0; result.length ;i++){
 	   	                        	  let addressToXy = JSON.parse(result[i]);
 	                            	  roadName = addressToXy['도로명'];
-	   	                          	  console.log(addressToXy)
 	   	                          	  
 	   	                          	  
 	   	                          	  listView(addressToXy, roadName);
 	   	                          	  
 	   	                          	  bjdSggCode = addressToXy['법정동시군구코드'];
 	                            	  bjdEmdCode = addressToXy['법정동읍면동코드'];
-	                            	  console.log(bjdSggCode+", "+bjdEmdCode);
-	                            	  console.log("도로명:"+roadName);
     	                              <%-- $.ajax({
 	                        				url: "<%= request.getContextPath() %>/map/address",
 	                   				  		method: "post",
@@ -606,13 +588,54 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
         	                                  
     			    	                         
     			    	                       	  for(var i=0; i<result.length;i++){
-    			    	                       		  console.log(result[i]);
+    			    	                       		  let tagNameStr = result[i].y+""+result[i].x;
+    			    	                       		  let min = "";
+    			    	                       		  let max = "";
+    			    	                       		  /* let maxArr = []; */
+    			    	                       		  for(var j=0 ; j<30 ; j++){
+    			    	                       			/* if( document.getElementsByTagName(result[i].y+""+result[i].x).length > 0 ){ */ // result[i]와 좌표가 같은 li태그가 있다면
+      			    	                        
+      			    	                       			  // 모든 li태그를 배열에 담는다
+      			    	                       			  let tagArr = document.getElementsByName(tagNameStr);
+    			    	                       			  
+    			    	                       			  let tagMoney = "";
+    			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
+    			    	                       			 for(var k=0; k<tagArr.length; k++){
+    			    	                       				 if(k==tagArr.length-1){
+    			    	                       					 tagMoney += tagArr[k].innerText.split(" ")[0].replace("억","").replace(",","");
+    			    	                       				 }else{
+	    			    	                       				 tagMoney += tagArr[k].innerText.split(" ")[0].replace("억","").replace(",","")+" ";
+    			    	                       				 }
+    			    	                       				 
+    			    	                       			 }
+    			    	                       			 
+    			    	                       			 let tagMarr = tagMoney.split(" ");
+    			    	                       			 let tagParr =  tagMarr.map(Number);
+    			    	                       			 
+    			    	                       			 
+    			    	                       			  max = Math.max.apply(null,tagParr);
+    			    	                       			  
+    			    	                       			  
+    			    	                       			  min = Math.min.apply(null,tagParr);
+    			    	                       			  console.log("max:"+max+", min:"+min+", min:"+tagParr);
+      			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
+      			    	                       			  
+      			    	                       			  break;
+      			    	                       				/* } */
+    			    	                       		  }  
+    			    	                       		    /* maxArr = [...max];
+    			    	                       		    let maxArrLeng = maxArr.length-5;
+    			    	                       		 	maxArr.splice(maxArrLeng, 0,"억"); */
+    			    	                       		 	
     			    	                       			positions.push({
-    			    	                       				content: '<div>'+result[i].address_name+'</div>',
+    			    	                       				// content안에 주소정보랑 최소금액~최대금액 표시하기
+    			    	                       				// content div안에 min과 max를 넣어준다.
+    			    	                       				content: '<div class="price">'+min+" ~ "+max+"</div>"
+    			    	                       						+"<div>"+result[i].address_name+'</div>',
     			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
     			    	                       			})
     			    	                       	  		
-    			    	                       	  }
+    			    	                       	  } 
     			    	                         
     	    	                                   for (var i = 0; i < positions.length; i ++) {
     	    	                                	   removeMarker();
@@ -627,7 +650,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	    
     	    	    	                        	    kakao.maps.event.addListener(marker, 'click', function() {
     	    	    	                        	        // 마커 위에 인포윈도우를 표시합니다
-    	    	    	                        	        console.log( "marker.getPosition()"+marker.getPosition());
     	    	    	                        	        let markerPosit = marker.getPosition()+"";
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
@@ -635,8 +657,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	        $(backgroundTag).siblings().css("background-color","white");
     	    	    	                        	        
     	    	    	                        	        
-    	    	    	                        	        if($(backgroundTag).css("background-color") != "red"){
-    	    	    	                        	        	$(backgroundTag).css("background-color", "red");
+    	    	    	                        	        if($(backgroundTag).css("background-color") != "#1F4B6B"){
+    	    	    	                        	        	$(backgroundTag).css("background-color", "#1F4B6B");
+    	    	    	                        	        	$(backgroundTag).css("color", "white");
     	    	    	                        	        }
     	    	    	                        	    });
     	    	    	                        	    
@@ -694,15 +717,19 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
+    						    
     						  	
     						  	geocoder.addressSearch(roadName, function(result, status){
     						  		
     						  		if (status === kakao.maps.services.Status.OK) {
-    						  			console.log("gg:"+result[0].y+", "+result[0].x);
     						  			let xy = result[0].y+result[0].x;
     						  			listLiTag.setAttribute("name", xy);
     									
+    						  			
     						  		}
+    						  		
+    						  		
+    						  		
     						  		
     						  		
     						  	});
@@ -713,19 +740,21 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						    var arr = [...str];
     						    var arrLeng = arr.length-5;  
     						  
-    						  	console.log(Array.isArray(arr));
-    						  	console.log(arrLeng);
+    						  	/* console.log(Array.isArray(arr));
+    						  	console.log(arrLeng); */
     						  	arr.splice(arrLeng, 0, "억");
-    						  	console.log(arr);
+    						  	/* console.log(arr); */
     						  	
     						  	var resultStr = arr.join('');
-    						  	console.log(resultStr);
+    						  	/* console.log(resultStr); */
 
     						  	
     						  	
     						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 ";
     						  	listEl.appendChild(listLiTag);
-    					    }
+    					  		
+    						  	
+    					  }
     					  
     					  function removeAllChildNods(el) {   
     						    while (el.hasChildNodes()) {
