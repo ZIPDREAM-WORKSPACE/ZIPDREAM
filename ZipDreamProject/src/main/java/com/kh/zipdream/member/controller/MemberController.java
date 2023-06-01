@@ -1,16 +1,16 @@
 package com.kh.zipdream.member.controller;
 
-import java.net.http.HttpRequest;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,11 +46,15 @@ public class MemberController {
 	// 로그인 회원가입
 	@Autowired
 	private MemberService memberService;
-
+	
+	
+	private BCryptPasswordEncoder bcryptPasswordEncoder; 
+	
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService;
-
+		this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+		
 	}
 
 	public MemberController() {
@@ -85,16 +89,27 @@ public class MemberController {
 	      return mv;  
 	   }
 	
+	//회원가입
 	@GetMapping("/insert") // /spring/member/insert
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
 
 	@PostMapping("/insert")
-	public String insertMember(Member m, HttpSession session, Model model) {
-
+	public String insertMember( 
+			Member m, HttpSession session, Model model) {
+			
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		
+		// 암호화된 pwd를 m의 userPwd다시 대입
+		
+		m.setUserPwd(encPwd);
+		
+		System.out.println("암호화 후 비밀번호 : "+m.getUserPwd());
+		System.out.println(m.getUserId());
+		
 		int result = memberService.insertMember(m);
-
+		
 		String url = "";
 		if (result > 0) { // 성공시 - 메인페이지로
 			session.setAttribute("alertMsg", "회원가입");
@@ -107,8 +122,8 @@ public class MemberController {
 		return url;
 	}
 	
+	
 
-	//회원가입
 	
     
 	

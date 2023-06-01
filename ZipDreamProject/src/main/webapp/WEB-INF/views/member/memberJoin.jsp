@@ -242,19 +242,20 @@
     <div class="wrap">
         <div class="content" id="content">
             <div class="login1">
-              <form action=""></form>
+              <form id="signUpform" action="insert" method="post" name="sign-up" >
                 <h2 id="login-text">회원정보입력</h2> 
                 <p>서비스 이용을 위해 아래내용을 입력해주세요.</p>
 
                 <h4>아이디</h4>
-                <input type="text" id="id-text" class="userEmail" name="userId" required> <select id="emailct" class="userEmail2" name="userEmail2">
+                <input type="text" id="id-text" class="userEmail" name="userEmail" required> <select id="emailct" class="userEmail2" name="userEmail2">
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option></select>
                     <button type="button" id="emailcheck" name="emailcheck" >인증번호 전송</button><br><br>
                     
+                    <input type="hidden" id="userEmail" name="userId">
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                	<button  id="ok" >확인</button><br><br>
+                	<button  type="button" id="ok" >확인</button><br><br>
                     
 			<!-- <div class="login2"></div> -->
                 <h4>비밀번호</h4>
@@ -277,13 +278,13 @@
                 <h4>주소</h4>
                 <input type="text" id="address" name="address" placeholder="우편번호"><br><br>
                 <button type="button" id="adsearch" name="adsearch">검색</button>
-                <input type="text" id="detailaddress" placeholder="상세주소를 입력해주세요.">
+            <!--     <input type="text" id="detailaddress" placeholder="상세주소를 입력해주세요."> -->
                 
                 <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
 				
-				
-            </div>
-            
+				</form>
+            	</div>
+        
         </div>
     </div>
     <jsp:include page="../common/footer.jsp" />
@@ -335,24 +336,30 @@ function ok(){
         confirmMessage.textContent = "";
       }
     };
-    	
+    var verificationNumber = ""; // 인증번호를 저장하는 변수
   //mail인증하기 버튼 클릭 
      $("#emailcheck").on("click",function(){
         isMailAuthed=true;
         let memMail = $("#id-text").val();
-        console.log(memMail);
+        let memMail2 = $("#emailct option:checked").text();
+        let Mail = memMail + memMail2;
+        $("#emailcheck").text("인증번호 재전송");
+
         $.ajax({
         	url : "<%= request.getContextPath()%>/member/mailAuth"
-            ,data : {mail : memMail}
+            ,data : {mail : Mail}
         	,method : "get"
-	 		,dataType : "TEXT"       
+	 		,dataType : "TEXT"    
+	 		,async:false
             ,success: function(data){
                alert(data);
+               verificationNumber = data;
             },error : function(req,status,err){
                 console.log(req);
             }
         });//ajax
     });//mailCheck 
+    
     
     //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
     
@@ -362,22 +369,28 @@ function ok(){
   });  */
     
     //인증번호 유효성 검사
-     document.getElementById("ok").addEventListener("click", function() {
-    // 입력한 인증번호
-    var inputCode = document.getElementById("emailchecknumber").value;
+    document.getElementById("ok").addEventListener("click", function() {
+    var inputNumber = document.getElementById("emailchecknumber").value;
+    
+	
+    
+    
+    // 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
 
-    // 서버에서 가져온 저장된 인증번호
-    var savedCode = document.getElementById("emailCheckNumber").value; 
+    if (inputNumber === verificationNumber && verificationNumber != "") {
+      let email = document.getElementById("emailct");
+      let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
 
-    // 인증번호 일치 여부 확인
-    if (inputCode === savedCode) {
-        alert("인증번호가 일치합니다.");
-        // 여기에서 추가 동작을 수행하거나 다음 단계로 진행할 수 있습니다.
+      document.getElementById("userEmail").value = value;
+      $("#id-text").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
+      $("#emailchecknumber").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
+      $("#emailct").attr('disabled',true); 
+      alert("인증번호가 일치합니다.");
     } else {
-        alert("인증번호가 일치하지 않습니다.");
-        // 여기에서 적절한 오류 처리를 수행할 수 있습니다.
-    }
-});
+      alert("인증번호가 일치하지 않습니다.");
+    } 
+      
+  }); 
      
   
 
