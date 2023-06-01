@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 
 @Controller
@@ -24,6 +26,9 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@GetMapping("/main")
 	public String main(Model model) {
 		
@@ -32,13 +37,13 @@ public class AdminController {
 		countNumbers.put("licenseUserCount", service.countLicenseUser());
 		countNumbers.put("userCount", service.countUser());
 		countNumbers.put("objectCount", service.countObject());
-		countNumbers.put("reportCount", service.countReport());
+		countNumbers.put("reportCount", service.countReport(1));
 		countNumbers.put("eventCount", service.countEvent());
 		countNumbers.put("chattingCount", service.countChattingRoom());
 		
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
-		model.addAttribute("reportList",service.selectReportListLimit4());
+		model.addAttribute("reportList",service.selectReportList(1));
 		return "admin/adminMain";
 	}
 	
@@ -138,6 +143,39 @@ public class AdminController {
 		return "redirect:/admin/user";
 	}
 	
+	@GetMapping("/report")
+	public String report(Model model,
+						@RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						 ) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		service.selectReportList(2,cp,map);
+		
+		model.addAttribute("reportList",map);
+		return "admin/adminReport";
+	}
+	
+	@GetMapping("/report/detail")
+	public String reportDetail(Model model,
+							   @RequestParam(value="reportNo", required=false, defaultValue="0") int reportNo,
+							   @RequestParam(value="cpage", required=false, defaultValue="1") int cp) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		Report report = service.selectReport(reportNo); 
+		
+		model.addAttribute("report", report);		
+		model.addAttribute("rUser", memberService.selectMember(report.getRefRuno()));
+		model.addAttribute("tUser", memberService.selectMember(report.getRefTuno()));
+		
+		paramMap.put("userNo", report.getRefTuno());
+		paramMap.put("type", 2);
+		service.getReportArrayList(cp, paramMap, map);
+		
+		model.addAttribute("reportList", map);
+		
+		return "admin/adminReportDetail";
+	}
+	
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -147,5 +185,7 @@ public class AdminController {
 		model.addAttribute("selectChatRoomList",map);
 		return "admin/adminChat";
 	}
+	
+	
 	
 }

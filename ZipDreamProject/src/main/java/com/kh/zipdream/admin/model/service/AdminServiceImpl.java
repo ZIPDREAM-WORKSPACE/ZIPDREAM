@@ -66,11 +66,11 @@ public class AdminServiceImpl implements AdminService{
 		return getMap(dao.countObject(),dao.countObjectYesterday());		
 	}
 	
-	public Map<String,Object> countReport() {
+	public Map<String,Object> countReport(int type) {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		int num = dao.countReport();
+		int num = dao.countReport(type);
 		double percent = getPercent(num , dao.countReportYesterday());
 
 		map.put("num", num);
@@ -106,10 +106,10 @@ public class AdminServiceImpl implements AdminService{
 		return listResult; 
 	}
 	
-	public List<Map<String,String>> selectReportListLimit4() {
+	public List<Map<String,String>> selectReportList(int type) {
 		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
-		List<Report>list = dao.selectReportListLimit4();
+		List<Report>list = dao.selectReportList(type);
 		for(int i = 0; i < list.size(); i++) {
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("reportNo", list.get(i).getReportNo()+"");
@@ -121,6 +121,31 @@ public class AdminServiceImpl implements AdminService{
 			map.put("reportDate", list.get(i).getReportDate()+"");
 			listResult.add(map);
 		}
+		
+		return listResult; 
+	}
+	
+	public List<Map<String,String>> selectReportList(int type,int cp, Map<String, Object> map) {
+		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
+		int listCount = dao.countReport(type);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		List<Report>list = dao.selectReportList(type,pi);
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> maplist = new HashMap<String,String>();
+			maplist.put("reportNo", list.get(i).getReportNo()+"");
+			maplist.put("rname", list.get(i).getRName());
+			maplist.put("tname", list.get(i).getTName());
+			maplist.put("reportContent", list.get(i).getReportContent());
+			maplist.put("reportType", list.get(i).getReportType()+"");
+			maplist.put("reportStatus", list.get(i).getReportStatus()+"");
+			maplist.put("reportDate", list.get(i).getReportDate()+"");
+			listResult.add(maplist);
+		}
+		map.put("pi",pi);
+		map.put("list", listResult);
 		
 		return listResult; 
 	}
@@ -225,8 +250,37 @@ public class AdminServiceImpl implements AdminService{
 	
 	}
 	
+	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap , Map<String, Object> map) {
+		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
+		int listCount = dao.countUserReport(paramMap);				
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		List<Report>list = dao.getReportList(pi, paramMap);
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> maplist = new HashMap<String,String>();
+			maplist.put("reportNo", list.get(i).getReportNo()+"");
+			maplist.put("rname", list.get(i).getRName());
+			maplist.put("tname", list.get(i).getTName());
+			maplist.put("reportContent", list.get(i).getReportContent());
+			maplist.put("reportType", list.get(i).getReportType()+"");
+			maplist.put("reportStatus", list.get(i).getReportStatus()+"");
+			maplist.put("reportDate", list.get(i).getReportDate()+"");
+			listResult.add(maplist);
+		}
+		map.put("pi",pi);
+		map.put("list", listResult);
+		
+		return listResult; 
+	}
+	
 	public int updateMemberStatus(Member m) {
 		return dao.updateMemberStatus(m);
+	}
+	
+	public Report selectReport(int reportNo) {
+		return dao.selectReport(reportNo);
 	}
 	
 	public void selectChatRoomList(int cp,Map<String, Object> map){

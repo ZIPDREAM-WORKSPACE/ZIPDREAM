@@ -12,11 +12,13 @@ public interface ChatService {
 	
 	int openChatRoom(ChatRoom cr);
 	
-	List<ChatMessage> joinChatRoom(ChatRoomJoin crj);
+	List<ChatMessage> selectChatMessage(ChatRoomJoin join);
 	
 	public void joinChatRoomUser(ChatRoomJoin crj);
 	
 	int insertMessage(ChatMessage cm); 
 	
 	int exitChatRoom(ChatRoomJoin crj);
+	
+	int selectChatRoom(int uno);
 }

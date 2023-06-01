@@ -296,10 +296,32 @@
 	border: 1px solid rgb(221, 221, 221);
 	padding: 20px;
 }
+.current{
+	background-color: #326CF9;
+	color: white;
+}
+.category_swiper>a:hover{
+	text-decoration:none;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
+	
+	<script>
+	    $(document).ready(function() {
+	        if(location.href.indexOf('<%=request.getContextPath()%>/sales/faq') > -1){ 
+	            $('#faq').addClass('current');
+	        }
+	        if(location.href.indexOf('<%=request.getContextPath()%>/sales/term') > -1) {
+				$('#term').addClass('current');
+			}
+			if (location.href.indexOf('<%=request.getContextPath()%>/sales/guide') > -1){ 
+	        	$('#guide').addClass('current');
+	        }   
+	        
+	    });
+    </script>
 	
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
@@ -316,13 +338,13 @@
 		<div class="selectHouseGuide">
 			<div class="category_swipperWrap mt-5">
 				<div class="category_swiper">
-					<a href="<%=request.getContextPath()%>/sales/guide" class="category_button" type="button" name="category">주택청약가이드</a>
+					<a href="<%=request.getContextPath()%>/sales/guide" class="category_button" type="button" id="guide">주택청약가이드</a>
 				</div>
 				<div class="category_swiper">
-					<a href="<%=request.getContextPath()%>/sales/term" class="category_button" type="button" name="category">분양용어</a>
+					<a href="<%=request.getContextPath()%>/sales/term" class="category_button" type="button" id="term">분양용어</a>
 				</div>
 				<div class="category_swiper">
-					<a href="<%=request.getContextPath()%>/sales/faq"  class="category_button" type="button" name="category">자주하는질문</a>
+					<a href="<%=request.getContextPath()%>/sales/faq"  class="category_button" type="button" id="faq">자주하는질문</a>
 				</div>
 			</div>
 		</div>

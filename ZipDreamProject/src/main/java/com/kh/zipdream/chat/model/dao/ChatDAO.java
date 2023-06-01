@@ -47,8 +47,8 @@ public class ChatDAO {
 	}
 	
 	// 채팅방 메세지 목록 조회
-	public List<ChatMessage> selectChatMessage(int chatRoomNo){
-		return sqlSession.selectList("chattingMapper.selectChatMessage", chatRoomNo);
+	public List<ChatMessage> selectChatMessage(ChatRoomJoin join){
+		return sqlSession.selectList("chattingMapper.selectChatMessage", join);
 	}
 	
 	//채팅메세지 삽입
@@ -86,6 +86,11 @@ public class ChatDAO {
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
+	}
+	
+	// 채팅방 조회
+	public int selectChatRoom(int refUno){
+		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
 	}
 
 }

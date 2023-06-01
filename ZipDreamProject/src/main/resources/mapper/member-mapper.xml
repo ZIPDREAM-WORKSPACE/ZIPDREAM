@@ -11,9 +11,12 @@
 		<result column="EMAIL" property="email" />
 		<result column="ADDRESS" property="address"/>
 		<result column="OFFICE" property="office"/>
+
 		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
 		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
 		<result column="WITHDRAW" property="withdraw" />
+
+		
 		<result column="STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
@@ -32,8 +35,14 @@
 		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
 	
+  <select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
+	</select>
+  
+
 	<!-- 일반회원 회원가입 -->
 	 <insert id="insertMember" parameterType="member" useGeneratedKeys="true" keyProperty="userNo">
+
 		INSERT INTO
 		MEMBER(
 
