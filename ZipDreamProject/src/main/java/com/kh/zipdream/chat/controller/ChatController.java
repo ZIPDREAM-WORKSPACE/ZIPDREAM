@@ -78,26 +78,27 @@ public class ChatController {
 	}
 	
 	@GetMapping("/chat/room/{chatRoomNo}")
-	public String joinChatRoom(
+	public  String selectChatMessage(
 				@ModelAttribute("loginUser") Member loginUser,
 				// sessionScope에 있는 loginUser를 넣어준다
 				// 단, SessionAttribute로 등록이 되어 있는 경우 
 				Model model,
+				ChatRoomJoin join,
 				@PathVariable("chatRoomNo") int chatRoomNo,
-				ChatRoomJoin join, 
 				RedirectAttributes ra
 			) {
 		join.setRefUno(loginUser.getUserNo());
-		List<ChatMessage> list = service.joinChatRoom(join);
+		join.setChatRoomNo(chatRoomNo);
+		model.addAttribute("chatRoomNo",chatRoomNo);
+		service.joinChatRoomUser(join);
+		List<ChatMessage> list = service.selectChatMessage(join);
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
-			model.addAttribute("chatRoomNo",chatRoomNo); // session에 올림 
-			return "chat/chatRoom";
+			return "admin/adminChatDetail";
 		}else {
 			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
-			return "redirect:../chatRoomList";
-					
+			return  "chat/chatRoomList";
 		}
 	}
 	

@@ -25,17 +25,18 @@
  	
  	if(chatMsg.value.trim().length== 0){
  		// 입력이 되지 않은 경우 
- 		alert("?");
+ 		alert("입력되지 않았습니다.");
  		
  		chatMsg.value=""; // 공백문자 삭제 
  		chatMsg.focus();
  	}else{ // 입력이 된 경우
+ 		
  		// 메세지 입력시 필요한 데이터를 js객체로 생성 
  		const chatMessage = {
  		"chatRoomNo" : chatRoomNo,
 		 			"refUno" : refUno,
 		 			"message" : chatMsg.value,
-		 			"userName" : userName
+		 			"userId" : userId
  		};
  		
  		// JSON.parse(문자열) : JSON -> JS Object
