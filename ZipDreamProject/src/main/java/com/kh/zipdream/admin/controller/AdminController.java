@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
+import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 
 @Controller
@@ -23,6 +25,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -147,6 +152,28 @@ public class AdminController {
 		
 		model.addAttribute("reportList",map);
 		return "admin/adminReport";
+	}
+	
+	@GetMapping("/report/detail")
+	public String reportDetail(Model model,
+							   @RequestParam(value="reportNo", required=false, defaultValue="0") int reportNo,
+							   @RequestParam(value="cpage", required=false, defaultValue="1") int cp) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		Report report = service.selectReport(reportNo); 
+		
+		model.addAttribute("report", report);		
+		model.addAttribute("rUser", memberService.selectMember(report.getRefRuno()));
+		model.addAttribute("tUser", memberService.selectMember(report.getRefTuno()));
+		
+		paramMap.put("userNo", report.getRefTuno());
+		paramMap.put("type", 2);
+		service.getReportArrayList(cp, paramMap, map);
+		
+		model.addAttribute("reportList", map);
+		
+		return "admin/adminReportDetail";
 	}
 	
 	@GetMapping("/chat")
