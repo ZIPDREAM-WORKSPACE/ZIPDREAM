@@ -243,6 +243,10 @@
 		ORDER BY REPORT_DATE DESC
 	</select>
 	
+	<select id="selectReport" resultMap="reportResultSet">
+		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</select>
+	
 	<update id="updateMemberStatus" parameterType="member">
 		UPDATE MEMBER SET 
 			 STATUS = #{status}		

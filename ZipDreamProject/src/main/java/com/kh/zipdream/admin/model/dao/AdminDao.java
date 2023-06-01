@@ -147,6 +147,10 @@ public class AdminDao {
 		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",paramMap,rowBounds);
 	}
 	
+	public Report selectReport(int reportNo) {
+		return sqlSession.selectOne("admin-mapper.selectReport",reportNo); 
+	}
+	
 	public int updateMemberStatus(Member m) {
 		return sqlSession.update("admin-mapper.updateMemberStatus",m);
 	}

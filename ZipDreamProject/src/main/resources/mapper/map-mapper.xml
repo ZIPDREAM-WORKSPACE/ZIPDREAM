@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapMapper">
+	<resultMap type="beopjeongdong" id="bjdNameResultSet">
+		<result column="BJD_CODE" property="bjdCode"/>
+		<result column="BJD_NAME" property="bjdName"/>
+		<result column="STATUS" property="status"/>
+		<result column="USER_NO" property="userNo"/>
+	</resultMap>
+	
 	
 	<select id="selectBjbCode" resultType="_int">
 		SELECT BJD_CODE
 		FROM USER.BEOPJEONGDONG
 		WHERE BJD_NAME = #{detailAddrClob}
+		AND STATUS like '존%'
+	</select>
+	
+	<select id="selectAddress" resultMap="bjdNameResultSet">
+		SELECT BJD_NAME
+		FROM USER.BEOPJEONGDONG
+		WHERE BJD_CODE = #{adCode}
 		AND STATUS like '존%'
 	</select>
 </mapper>

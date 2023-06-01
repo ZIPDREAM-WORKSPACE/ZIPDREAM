@@ -50,7 +50,6 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) {
 		
 		// WebSocketSession : 웹소켓에 접속/요청한 클라이언트의 세션정보 
-		System.out.println(session.getId()+"가 연결함");
 		
 		
 		sessions.add(session); // 전달받은 session을 set에 추가  
@@ -59,7 +58,6 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 	// 클라이언트와 연결이 종료되면 수행
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		
 		sessions.remove(session);
 		// 웹소켓 연결이 종료되는 경우, sessions안에 저장되어있던 클라이언트의 session정보를 삭제 
 	}
@@ -69,7 +67,6 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 		// TextMessage : 웹소켓을 이용해 전달된 텍스트가 담겨있는 객체 
 		
 		// payLoad : 전송되는 데이터(json객체)
-		System.out.println("전달된 메세지 : "+message.getPayload());
 		
 		// JackSon라이브러리 : java에서 json을 다루기 위한 라이브러리 
 		

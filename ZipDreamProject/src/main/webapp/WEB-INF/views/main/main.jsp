@@ -630,6 +630,7 @@ right:-45px;
 	margin: auto;
 	margin-top:17px;
 	border : 1px solid grey;
+	z-index: 99;
 	
 }
 #chat_msg{
@@ -640,9 +641,7 @@ right:-45px;
 
 }
 #chat_msg:focus{
-	outline: none;
-	!
-	important;
+	outline: none; !important;
 }
 #send{
 	width:30px;
@@ -721,7 +720,7 @@ box-sizing: border-box;
 	<jsp:include page="../common/header.jsp" />
 	<div class="chat" ><img src='https://ifh.cc/g/mQ6LcQ.png' ><br>채팅</div>
 	<div class="chatting">
-		<div class="chat_header"><img id="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
+		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
 		<div class="chatting_inner">
 			<c:choose>  	
 				<c:when test="${empty sessionScope.loginUser}">
@@ -1070,24 +1069,25 @@ box-sizing: border-box;
 			 	
 		$(".chat").click(function(){
 			$(".chatting").css("display","block");
+			
 			$(".chat").css("display","none");
 			
 		});
-	 	$("#x").click(function(){
+	 	$(".x").click(function(){
 	 		$(".chatting").css("display","none");
 			$(".chat").css("display","block");
 			
 		});
 		
 	 	$(".chat_open").click(function(){
-	 		
+	 		$("#chat_msg").focus();
 	 		
 		 	/* 채팅 */
 		 	$.ajax({
 		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
 		 		type : "get",
 		 		success : function(result){
-		 				
+		 			
 		 				chatRoomNo = result;
 		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
 		 				addEventChat();
@@ -1129,47 +1129,9 @@ box-sizing: border-box;
 		
 		
 		
-		window.addEventListener('beforeunload', (event) => {
-		    event.preventDefault();
-		    let userNo = '${loginUser.userNo}';
-		    // ajax 호출
 		
-		if(userNo!=''){
 		
-		 	$.ajax({
-				url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
-				type : "get",
-				success : function(result){
-					// result == 1 나가기 성공
-					if(result >= 1){
-						$.ajax({
-							url:"<%=request.getContextPath()%>/chat/exit",
-							data:{ chatRoomNo},
-							success : function(data){
-								if(data == 1){
-								}else{
-									alert("채팅방 나가기에 실패했습니다.");
-								}
-								
-							}
-						})
-						
-					}else{
-					}
-					// result == 0 실패 
-					
-				},     error: function(){
-		            console.log("에러남");
-		        }
-				
-			})
-			
-	 	} 
-	 	
 		});
-		
-		
-		})
 		
 		function exitChatRoom(){
 			if(confirm("대화를 종료하시겠습니까?")){
@@ -1179,13 +1141,18 @@ box-sizing: border-box;
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){
-							location.href="<%=request.getContextPath()%>"
+							alert("채팅방 나가기에 성공했습니다.");
 						}else{
 							alert("채팅방 나가기에 실패했습니다.");
 						}
 						// result == 0 실패 
 						
-					}
+					},
+			 		error : function(request){
+			 			console.log("에러발생");
+			 			console.log("에러코드 : "+request.status);
+			 			
+			 		}
 				})
 			}	
 			

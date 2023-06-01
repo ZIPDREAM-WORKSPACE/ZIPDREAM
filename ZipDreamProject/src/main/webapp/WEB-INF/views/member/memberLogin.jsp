@@ -37,12 +37,12 @@
 
     .login1{
         box-sizing: border-box;
-		top:100px;
+		/* top:100px; */
         position: absolute;
         width: 600px;
         height: 600px;
         right: 440px;
-        margin-top: 20px;
+        margin-top: 100px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -114,17 +114,17 @@
         	margin-top: 250px;
         }
         
-        #naverlogo{
+        /* #naverlogo{
             width: 150px;
             bottom: 100px;
             margin-left: 65px;
-        }
+        } */
         
         #kakaologo{
-        	width: 150px;
-        	height:57px;
-            bottom: 100px;
-            margin-left: 30px;
+        	width: 330px;
+		    height: 55px;
+		    bottom: 100px;
+		    margin-left: 65px;
         }
         
         
@@ -178,7 +178,7 @@
                 
                 <button type="submit" id="loginbtn">로그인</button><br><br>
                 
-                <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>
+                <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
                 <a href=""><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
 
 

@@ -20,7 +20,7 @@
 						<th>신고 일자</th>
 					</tr>
 					<c:forEach items="${reportList.list}" var="report">
-						<tr>
+						<tr onclick="location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo=${report.reportNo}'">
 							<td>${report.rname }</td>
 							<td>${report.tname }</td>
 							<td>${report.reportContent }</td>
