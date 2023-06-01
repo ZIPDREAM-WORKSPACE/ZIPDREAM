@@ -166,6 +166,7 @@
 	font-weight: bold;
 }
 
+
 </style>
 
 
@@ -418,8 +419,8 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
+    /* var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+ */
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
@@ -507,10 +508,10 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	        	   break;
            }
       
-            var content = '<div class="bAddr">' +
+            /* var content = '<div class="bAddr">' +
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
-                        '</div>';
+                        '</div>'; */
             var positions = [];
 			/* var marker;
                 */
@@ -551,8 +552,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                         let result = JSON.parse(resultData);
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
-    	                         /* console.log(result0["도로명코드"]); */
-    	                         /* console.log(result0["법정동지번코드"]); */
+    
     	                         let areaCode = result0["지역코드"];
     	                        
     	                         for(var i=0; result.length ;i++){
@@ -619,6 +619,11 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       			  min = Math.min.apply(null,tagParr);
     			    	                       			  console.log("max:"+max+", min:"+min+", min:"+tagParr);
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
+      			    	                       			  
+      			    	                       			  if(max == 0 && min == 0){
+      			    	                       				  max = "실거래 평균 시세 없음";
+      			    	                       				  min = "";
+      			    	                       			  }
       			    	                       			  
       			    	                       			  break;
       			    	                       				/* } */
