@@ -144,7 +144,7 @@
         ON R.REF_TUNO = M2.USER_NO
         ORDER BY REPORT_DATE DESC
         <if test='type == 1'>
-			 LIMIT 4
+			 LIMIT 5
 		</if>
 	</select>
 	

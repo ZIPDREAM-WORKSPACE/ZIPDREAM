@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -23,7 +24,7 @@
 						<tr onclick="location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo=${report.reportNo}'">
 							<td>${report.rname }</td>
 							<td>${report.tname }</td>
-							<td>${report.reportContent }</td>
+							<td>${fn:substring(report.reportContent,0,15) }</td>
 							<td>${report.reportType }</td>
 							<td>${report.reportStatus }</td>
 							<td>${report.reportDate }</td>

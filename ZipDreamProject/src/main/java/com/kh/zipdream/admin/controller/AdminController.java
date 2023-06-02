@@ -137,7 +137,6 @@ public class AdminController {
 		Member m = new Member();
 		m.setUserNo(userNo);
 		m.setStatus(status.equals("Y")?"N":"Y");
-		System.out.println(m.getStatus());
 		service.updateMemberStatus(m);
 		
 		return "redirect:/admin/user";
