@@ -7,11 +7,11 @@
 <section class="content">
 		<section class="wrapper">
 			<div class="item">
-				<div class="reportContent-User">
+				<div class="report-content-User">
 					<div>${rUser.userName }</div>
 					<div>${report.reportDate }</div>
 				</div>
-				<div class="reportContent">
+				<div class="report-content">
 					${report.reportContent }
 				</div>
 			</div>
@@ -69,9 +69,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="item userInfo">
+			<div class="item user-info">
 				<h3>신고자 정보</h3>
-				<table class="reportResultTable">
+				<table class="report-result-table">
 					<tbody>
 						<tr onclick="location.href='<%=request.getContextPath()%>/admin/user?type=${rUser.userLevel }&condition=id&keyword=${rUser.userId }'">
 							<th colspan=2 class="firstTh">${rUser.userName}</th>
@@ -95,9 +95,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="item userInfo">
+			<div class="item user-info">
 				<h3>대상자 정보</h3>
-				<table class="reportResultTable">
+				<table class="report-result-table">
 					<tbody>
 						<tr onclick="location.href='<%=request.getContextPath()%>/admin/user?type=${tUser.userLevel }&condition=id&keyword=${tUser.userId }'">
 							<th colspan=2 class="firstTh">${tUser.userName}</th>
@@ -121,12 +121,19 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="item">
-				<select>
-					<option>거절되었습니다. 사유 : 무분별 신고</option>
-					<option>승인되었습니다.</option>
-				</select>
-			</div>
+			<form action="" method="post">
+				<div class="item result-select">
+					<select class="result-value" name="">
+						<option>승인되었습니다.</option>
+						<option>거절되었습니다. 사유 : 불명확 신고</option>
+						<option>거절되었습니다. 사유 : 무분별 신고</option>
+						<option>거절되었습니다. 사유 : 중복 신고</option>
+						<option>거절되었습니다. 사유 : 보류</option>
+					</select>
+					<div class="select-arrow"></div>
+				</div>
+				<button type="submit" class="report-submit btn btn-success">신고 처리</button>
+			</form>
 		</section>
 <script>
 </script>
