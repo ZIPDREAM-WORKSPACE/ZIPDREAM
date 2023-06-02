@@ -91,8 +91,8 @@
 	}
 	
 #menu_wrap{
-	width: 400px;
-	height: 800px;
+	width: 500px;
+	height: 850px;
 }
 
 .scrollBar { 
@@ -164,6 +164,8 @@
 .price{
 	font-size: 15px;
 	font-weight: bold;
+	width: 200px;
+	height: 100px;s
 }
 
 
@@ -186,8 +188,8 @@
 		    <div id="menu_wrap" class="bg_white scrollBar">
 		        <div class="option">
 		            <div>
-		                <form name="sfrom" onsubmit="searchPlaces(); return false;">
-		                    <input name="s" type="text" id="keyword" placeholder="키워드를 검색하세요.">
+		                <form id="search" name="sfrom" onsubmit="searchApt(); return false;">
+		                    <input name="s" type="text" id="keyword" placeholder="키워드를 입력하세요.">
 		                    <button type="submit" class="searchBtn">
 								<svg 
 									xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -195,6 +197,7 @@
 								</svg>
 							</button> 
 		                </form>
+		                <div style="margin-bottom: 5px;">키워드를 입력하여 <br>원하는 매물을 검색해보세요.</div>
 		            </div>
 		        </div>
 		        <hr>
@@ -367,14 +370,11 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-        imgOptions =  {
-            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+    var imageSrc = 'https://ifh.cc/g/hq3jLD.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(31, 35),  // 마커 이미지의 크기
+        imgOptions = new kakao.maps.Point(13, 34), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        
+    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
             marker = new kakao.maps.Marker({
             position: position, // 마커의 위치
             image: markerImage 
@@ -508,6 +508,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             let bjdSggCode = "";
             let bjdEmdCode = "";
             let roadName = "";
+            let aptName = "";
             $(function (){
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
@@ -545,8 +546,11 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	   	                          	  
 	   	                          	  bjdSggCode = addressToXy['법정동시군구코드'];
 	                            	  bjdEmdCode = addressToXy['법정동읍면동코드'];
-
+									  
+	                            	  aptName = addressToXy['아파트'];
     	                          	 
+	                            	  
+	                            	  
     	                              var callback = function(result, status) {
  	    	                        	 
         	                              if (status === kakao.maps.services.Status.OK) {
@@ -557,10 +561,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       		  let min = "";
     			    	                       		  let max = "";
     			    	                       		  let minToMax = "";
-    			    	                       		  /* let maxArr = []; */
+    			    	                       		 
     			    	                       		  for(var j=0 ; j<30 ; j++){
-    			    	                       			/* if( document.getElementsByTagName(result[i].y+""+result[i].x).length > 0 ){ */ // result[i]와 좌표가 같은 li태그가 있다면
-      			    	                        
+    			    	                       			
       			    	                       			  // 모든 li태그를 배열에 담는다
       			    	                       			  let tagArr = document.getElementsByName(tagNameStr);
     			    	                       			  
@@ -647,7 +650,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	                                  
     	    	                              }
 	   	                          
-        	                              
+        	                              searchApt(aptName);
    	                        	 		 }
 	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
 	   	                           
@@ -715,6 +718,8 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	listEl.appendChild(listLiTag);
     					  		
     						  	
+    						  	
+    						  	
     					  }
     					  
     					  function removeAllChildNods(el) {   
@@ -773,6 +778,20 @@ function displayCenterInfo(result, status) {
     }    
 } 
 
+ 
+function searchApt(aptName){
+	let search = document.getElementById("search").value;
+	let listInner = aptName;
+	
+	// 리스트 비워주고
+	listEl = "";
+	
+	// li 태그에 아파트 정보 텍스트로 표시
+			  	
+  	listLiTag.textContent = listInner;
+  	listEl.appendChild(listLiTag);
+
+} 
  
 </script>
 
