@@ -204,7 +204,7 @@
 	 <form action="<%=request.getContextPath()%>/sell/sellInsert" enctype="multipart/form-data" method="post">
         <div class="content1 margin">
             <div class="sell_title">
-                    <span><input type="hidden" name="sellNo" vlaues="${empty b.boardNo ? 0 : b.boardNo}"></span>
+                    <span><input type="hidden" name="sellNo" value="${empty sd.sellNo ? 0 : sd.sellNo}"></span>
                 <div class="sell_name">
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
@@ -233,21 +233,21 @@
             <div id="picture">
                 <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;">
                 <div id="file-area" style="display:none;">
-                    <input type="file" id="file1" name="imges" onchange="loadImg(this, 1);" required>
-                    <input type="file" id="file2" name="imges" onchange="loadImg(this, 2);" >
-                    <input type="file" id="file3" name="imges" onchange="loadImg(this, 3);" >
-                    <input type="file" id="file4" name="imges" onchange="loadImg(this, 4);" >
-                    <input type="file" id="file5" name="imges" onchange="loadImg(this, 5);" >
-                    <input type="file" id="file6" name="imges" onchange="loadImg(this, 6);" >
-                    <input type="file" id="file7" name="imges" onchange="loadImg(this, 7);" >
-                    <input type="file" id="file8" name="imges" onchange="loadImg(this, 8);" >
-                    <input type="file" id="file9" name="imges" onchange="loadImg(this, 9);" >
-                    <input type="file" id="file10" name="imges" onchange="loadImg(this, 10);" >
-                    <input type="file" id="file11" name="imges" onchange="loadImg(this, 11);" >
-                    <input type="file" id="file12" name="imges" onchange="loadImg(this, 12);" >
-                    <input type="file" id="file13" name="imges" onchange="loadImg(this, 13);" >
-                    <input type="file" id="file14" name="imges" onchange="loadImg(this, 14);" >
-                    <input type="file" id="file15" name="imges" onchange="loadImg(this, 15);">
+                    <input type="file" id="file1" name="imges" accept="images/*" onchange="loadImg(this, 1);" >
+                    <input type="file" id="file2" name="imges" accept="images/*" onchange="loadImg(this, 2);" >
+                    <input type="file" id="file3" name="imges" accept="images/*" onchange="loadImg(this, 3);" >
+                    <input type="file" id="file4" name="imges" accept="images/*" onchange="loadImg(this, 4);" >
+                    <input type="file" id="file5" name="imges" accept="images/*" onchange="loadImg(this, 5);" >
+                    <input type="file" id="file6" name="imges" accept="images/*" onchange="loadImg(this, 6);" >
+                    <input type="file" id="file7" name="imges" accept="images/*" onchange="loadImg(this, 7);" >
+                    <input type="file" id="file8" name="imges" accept="images/*" onchange="loadImg(this, 8);" >
+                    <input type="file" id="file9" name="imges" accept="images/*" onchange="loadImg(this, 9);" >
+                    <input type="file" id="file10" name="imges" accept="images/*" onchange="loadImg(this, 10);" >
+                    <input type="file" id="file11" name="imges" accept="images/*" onchange="loadImg(this, 11);" >
+                    <input type="file" id="file12" name="imges" accept="images/*" onchange="loadImg(this, 12);" >
+                    <input type="file" id="file13" name="imges" accept="images/*" onchange="loadImg(this, 13);" >
+                    <input type="file" id="file14" name="imges" accept="images/*" onchange="loadImg(this, 14);" >
+                    <input type="file" id="file15" name="imges" accept="images/*" onchange="loadImg(this, 15);">
                 </div>
                 <div>
                     
@@ -304,15 +304,15 @@
                         </tr>
                         <tr>
                             <th>관리비</th>
-                            <td><input type="text" name="sellMaintenance" required size="100"></td>
+                            <td><input type="text" name="sellMaintenance"  size="100"></td>
                         </tr>
                         <tr>
                             <th>주차</th>
-                            <td><input type="text" name="sellParking" required size="100"></td>
+                            <td><input type="text" name="sellParking"  size="100"></td>
                         </tr>
                         <tr>
                             <th>단기임대</th>
-                            <td><input type="text" name="shortterm" required size="100"></td>
+                            <td><input type="text" name="sellShortterm"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -329,65 +329,65 @@
             <div class="info margin">
                 <table class="table">
                     <tbody>
-                        <tr>
+<!--                         <tr>
                             <th>건물이름</th>
                             <td><input type="text"  name="sellName" required size="100"></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <th>방종류</th>
-                            <td><input type="text" name="sellType" required size="100"></td>
+                            <td><input type="text" name="sellType"  size="100"></td>
                         </tr>
                         <tr>
                             <th>전용/공급면적</th>
-                            <td><input type="text" name="sellPrivateArea" required size="45">/<input type="text" name="sellProvideArea" required size="45"></td>
+                            <td><input type="text" name="sellPrivateArea"  size="45">/<input type="text" name="sellProvideArea" required size="45"></td>
                         </tr>
                         <tr>
                             <th>해당층/건물층</th>
-                            <td><input type="text" name="sellFloor" required size="45">/<input type="text" name="sellAllFloor" required size="45"></td>
+                            <td><input type="text" name="sellFloor"  size="45">/<input type="text" name="sellAllFloor" required size="45"></td>
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount" required size="45">/<input type="text" name="sellToletCount" required size="45"></td>
+                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToletCount" required size="45"></td>
                         </tr>
                         <tr>
                             <th>방향</th>
-                            <td><input type="text" name="sellWay" required size="100"></td>
+                            <td><input type="text" name="sellWay"  size="100"></td>
                         </tr>
                         <tr>
                             <th>해당 면적 세대수</th>
-                            <td><input type="text" name="sellHousehold" required size="100"></td>
+                            <td><input type="text" name="sellHousehold"  size="100"></td>
                         </tr>
                         <tr>
                             <th>현관타입</th>
-                            <td><input type="text" name="sellEntrance" required size="100"></td>
+                            <td><input type="text" name="sellEntrance"  size="100"></td>
                         </tr>
                         <tr>
                             <th>입주가능일</th>
-                            <td><input type="text" name="sellMoveDate" required size="100"></td>
+                            <td><input type="text" name="sellMoveDatetime"  size="100"></td>
                         </tr>
                         <tr>
                             <th>건축물용도</th>
-                            <td><input type="text" name="sellBuildtype" required size="100"></td>
+                            <td><input type="text" name="sellBuldtype"  size="100"></td>
                         </tr>
                         <tr>
                             <th>승강시설</th>
-                            <td><input type="text" name=sellInstallation" required size="100"></td>
+                            <td><input type="text" name="sellInstallation"  size="100"></td>
                         </tr>
                         <tr>
                             <th>냉/난방시설</th>
-                            <td><input type="text" name="sellAircondition" required size="45">/<input type="text" name="sellHeating" required size="45"></td>
+                            <td><input type="text" name="sellAircondition"  size="45">/<input type="text" name="sellHeating" required size="45"></td>
                         </tr>
                         <tr>
                             <th>세대주차대수</th>
-                            <td><input type="text" name="parkingCount"required size="100"></td>
+                            <td><input type="text" name="parkingCount" size="100"></td>
                         </tr>
                         <tr>
                             <th>사용승인일</th>
-                            <td><input type="text" name="sellApprovalDate" required size="100"></td>
+                            <td><input type="text" name="sellApprovalDatetime"  size="100"></td>
                         </tr>
                         <tr>
                             <th>최초등록일</th>
-                            <td><input type="text" name="sellEnrollDate" required size="100"></td>
+                            <td><input type="text" name="sellEnrollDatetime"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -402,15 +402,15 @@
                     <tbody>
                         <tr>
                             <th>단지사용승인일</th>
-                            <td><input type="text" name="complexApplyDate" required size="100"></td>
+                            <td><input type="text" name="complexApplyDatetime"  size="100"></td>
                         </tr>
                         <tr>
                             <th>총 동 수</th>
-                            <td><input type="text" name="wingCount" required size="100"></td>
+                            <td><input type="text" name="wingCount"  size="100"></td>
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="hoseholdCount" required size="100"></td>
+                            <td><input type="text" name="hoseholdCount"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -425,11 +425,11 @@
                     <tbody>
                         <tr>
                             <th>기본옵션</th>
-                            <td><input type="text" name="option" required size="100"></td>
+                            <td><input type="text" name="option"  size="100"></td>
                         </tr>
                         <tr>
                             <th>보안시설</th>
-                            <td><input type="text" name="security" required size="100"></td>
+                            <td><input type="text" name="security"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
