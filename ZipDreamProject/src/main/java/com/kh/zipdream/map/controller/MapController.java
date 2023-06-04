@@ -28,7 +28,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.google.gson.Gson;
 import com.kh.zipdream.map.model.service.MapService;
+import com.kh.zipdream.map.model.vo.beopjeongdong;
 @CrossOrigin(originPatterns = "http://localhost:8006")
 @Controller
 @RequestMapping("/map")
@@ -54,6 +56,18 @@ public class MapController {
       return bjdCode;
    }
    
+   @ResponseBody
+   @PostMapping("/address")
+   public String address(@RequestParam("adCode") String adCode,
+                  Model model) {
+      
+      List<beopjeongdong> address = mapService.selectAddress(adCode);
+         
+      model.addAttribute("address", address);
+      System.out.println(address);
+      return new Gson().toJson(address);
+   }
+   
    @GetMapping(value="/getXmlCode", produces = "application/text; charset=UTF-8")
    @ResponseBody
    public String getXmlCodeToAjax(int code) {
@@ -63,7 +77,7 @@ public class MapController {
 	   	   
 	   		try {
 	   	        
-                String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=100&LAWD_CD="+code+"&DEAL_YMD=201512";
+                String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=30&LAWD_CD="+code+"&DEAL_YMD=202304";
                 //OWpenAPI URL 정보 읽기
                 URL obj = new URL(openApiUrl);
                 HttpURLConnection con = (HttpURLConnection)obj.openConnection();

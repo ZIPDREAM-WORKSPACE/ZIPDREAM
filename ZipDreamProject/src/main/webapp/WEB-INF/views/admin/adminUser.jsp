@@ -29,7 +29,7 @@
 			</div>
 			<button type="submit" class="searchBtn btn btn-secondary">검색</button>
 		</form>
-		<div class="content-notice-table">
+		<div class="content-table">
 			<table class="rwd-table">
 				<tbody>
 					<tr>
@@ -229,7 +229,7 @@
 				  
 				  for(let i = 0; i < result.array.length; i++){
 					let report = result.array[i];
-				  	html += "<tr><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
+				  	html += "<tr onclick=\"location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo="+report.reportNo+"'\"><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
 				  	html += "<td>"+report.reportStatus+"</td><td>"+report.reportResult+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
 					  
 				  }

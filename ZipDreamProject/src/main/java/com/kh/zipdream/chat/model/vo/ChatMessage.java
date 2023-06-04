@@ -11,6 +11,6 @@ public class ChatMessage {
 	private Date createDate;
 	private int chatRoomNo;
 	private int refUno;
-	private String userName;
+	private String userId;
 	
 }

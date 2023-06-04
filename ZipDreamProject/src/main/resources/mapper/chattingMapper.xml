@@ -5,7 +5,8 @@
 	<resultMap type="chatRoom" id="chatRoomResultSet">
 		<result property="chatRoomNo" column="CHAT_ROOM_NO"/>
 		<result property="title" column="TITLE"/>
-		<result property="userNo" column="USER_NO"/>
+		<result property="refuno" column="REF_UNO"/>
+		<result property="userId" column="USER_ID"/>
 		<result property="status" column="STATUS"/>
 		
 	</resultMap>
@@ -15,18 +16,26 @@
 		<result column="MESSAGE" property="message" />
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="CHAT_ROOM_NO" property="chatRoomNo" />
-		<result column="USER_NO" property="userNo" />
+		<result column="REF_UNO" property="refUno" />
+		<result column="USER_ID" property="userId" />
 	</resultMap>
 	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
-		SELECT 
-			CHAT_ROOM_NO,
-			TITLE,
-			(SELECT COUNT(*) FROM CHAT_ROOM_JOIN B WHERE B.CHAT_ROOM_NO = A.CHAT_ROOM_NO) CNT
-		FROM CHAT_ROOM A
-		JOIN MEMBER M USING(USER_NO)
-		WHERE A.STATUS = 'Y'
+		  SELECT MAX(MESSAGE) AS MESSAGE, CHAT_ROOM_NO, TITLE
+		FROM CHAT_MESSAGE 
+        JOIN CHAT_ROOM  USING(CHAT_ROOM_NO)
+		GROUP BY CHAT_ROOM_NO
 		ORDER BY CHAT_ROOM_NO DESC
+	</select>
+	
+		<select id="selectChatRoom" resultType="_int" >
+		SELECT 
+			count(*)
+			
+		FROM CHAT_ROOM
+		WHERE STATUS = 'Y' AND
+		REF_UNO = #{refUno}
+		
 	</select>
 	
 	<insert id="openChatRoom" useGeneratedKeys="true" keyProperty="chatRoomNo" >
@@ -57,10 +66,11 @@
 	<select id="selectChatMessage" resultMap="chatMessageResultSet">
 		SELECT
 			MESSAGE,
-			CREATE_DATE,
-			USER_NO,
+			CREATE_DATETIME,
+			REF_UNO,
+			USER_ID
 		FROM CHAT_MESSAGE
-		JOIN MEMBER USING(USER_NO)
+		JOIN MEMBER ON(USER_NO = REF_UNO)
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
 		ORDER BY CM_NO
 	</select>
@@ -79,6 +89,11 @@
 		AND CHAT_ROOM_NO = #{chatRoomNo}  
 	</delete>
 	
+	<delete id="deleteChatMessage" parameterType="_int">
+		DELETE FROM CHAT_MESSAGE
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}  
+	</delete>
+	
 	<!--채팅방 인원 수 확인-->
 	<select id="countChatRoomMember" resultType="_int">
 		SELECT
@@ -88,9 +103,19 @@
 	</select>
 	
 	<!-- 채팅방 닫기 -->
-	<update id="closeChatRoom">
-		UPDATE CHAT_ROOM SET
-		STATUS = 'N'
+	<delete id="closeChatRoom" parameterType="_int">
+		DELETE FROM CHAT_ROOM 
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
-	</update>
+	</delete>
+	
+		<!--채팅방 수 확인-->
+	<select id="countChatRoom" resultType="_int">
+		SELECT
+			COUNT(*)
+		FROM CHAT_ROOM
+		WHERE STATUS = 'Y';
+	</select>
+	
+
+	
 </mapper>

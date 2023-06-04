@@ -28,7 +28,7 @@
 		<span>공지사항 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="report">
 		<img src="<%=request.getContextPath()%>/resources/images/Info Circle.svg" width="25px" height="25px" class="side_img"> 
 		<span>신고 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -38,7 +38,7 @@
 		<span>이벤트 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="chat">
 		<img src="<%=request.getContextPath()%>/resources/images/Frame 35287.svg" width="25px" height="25px" class="side_img"> 
 		<span>채팅 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -94,6 +94,13 @@
 	case "notice" :
 		index = 3;
         break;
+	case "report" :
+		index = 4;
+        break; 
+	case "chat" :
+		index = 6;
+        break;    
+      
     /*  case 값C :
         값이 C일 때 실행할 명령문;
         break;
