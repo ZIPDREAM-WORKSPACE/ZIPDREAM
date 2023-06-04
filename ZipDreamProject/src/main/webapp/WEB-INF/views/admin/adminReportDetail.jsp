@@ -121,9 +121,10 @@
 					</tbody>
 				</table>
 			</div>
-			<form action="" method="post">
-				<div class="item result-select">
-					<select class="result-value" name="">
+			<div class="item result-select">
+				<form id="report-result-update" action="<%= request.getContextPath() %>/admin/report/update" method="get">
+					<input type="hidden" name="reportNo" value="${report.reportNo }">
+					<select class="result-value" name="reportResult">
 						<option>승인되었습니다.</option>
 						<option>거절되었습니다. 사유 : 불명확 신고</option>
 						<option>거절되었습니다. 사유 : 무분별 신고</option>
@@ -131,9 +132,9 @@
 						<option>거절되었습니다. 사유 : 보류</option>
 					</select>
 					<div class="select-arrow"></div>
-				</div>
-				<button type="submit" class="report-submit btn btn-success">신고 처리</button>
-			</form>
+				</form>
+			</div>
+			<button type="submit" class="report-submit btn btn-success" onclick=" document.getElementById('report-result-update').submit();">처리 완료</button>
 		</section>
 <script>
 </script>

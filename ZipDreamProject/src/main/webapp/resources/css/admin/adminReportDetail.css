@@ -70,9 +70,14 @@
 	cursor: pointer;
 }
 
-.report-result-table td{
+.report-result-table th {
+	border: 1px solid #999;
+}
+
+.report-result-table td {
 	border: 1px solid #333;
 }
+
 
 .result-select {
 	display:flex;

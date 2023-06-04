@@ -151,6 +151,10 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.selectReport",reportNo); 
 	}
 	
+	public int updateReportResult(Report report) {
+		return sqlSession.update("admin-mapper.updateReportResult",report);
+	}
+	
 	public int updateMemberStatus(Member m) {
 		return sqlSession.update("admin-mapper.updateMemberStatus",m);
 	}

@@ -31,6 +31,8 @@ public class AdminController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		service.selectNoticeBoardList(1,10,map);
 		
 		Map<String, Object> countNumbers = new HashMap<String, Object>();
 		
@@ -44,6 +46,7 @@ public class AdminController {
 		model.addAttribute("countNumbers",countNumbers);
 		model.addAttribute("applyList",service.selectApplyListLimit5());
 		model.addAttribute("reportList",service.selectReportList(1));
+		model.addAttribute("noticeBoardList",map);
 		return "admin/adminMain";
 	}
 	
@@ -52,7 +55,7 @@ public class AdminController {
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
 						 ) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		service.selectNoticeBoardList(cp,map);
+		service.selectNoticeBoardList(cp,10,map);
 		model.addAttribute("noticeBoardList",map);
 		return "admin/adminNotice";
 	}
@@ -175,6 +178,15 @@ public class AdminController {
 		return "admin/adminReportDetail";
 	}
 	
+	@GetMapping("/report/update")
+	public String reportUpdate(Model model,
+								Report report) {
+		
+		int result = service.updateReportResult(report);
+		
+		return "redirect:/admin/report";
+	}
+	
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -185,6 +197,23 @@ public class AdminController {
 		return "admin/adminChat";
 	}
 	
-	
+	@GetMapping("/event")
+	public String event(Model model,
+					    @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+					    @RequestParam Map<String, Object> paramMap) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(paramMap.get("condition") == null) {
+			service.selectUserList(cp,1,map);
+		}else {
+			paramMap.put("cp", cp);
+			paramMap.put("type", 1);
+			service.selectUserSearch(paramMap,map);
+		}
+		model.addAttribute("userList",map);
+		model.addAttribute("type",1);
+		
+		
+		return "admin/adminEvent";
+	}
 	
 }
