@@ -220,10 +220,25 @@ public class AdminController {
 				@PathVariable("chatRoomNo") int chatRoomNo,
 				RedirectAttributes ra
 			) {
-		join.setRefUno(loginUser.getUserNo());
-		join.setChatRoomNo(chatRoomNo);
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("cno", join.getChatRoomNo());
+		map.put("uno", loginUser.getUserNo());
+		
+		int result = chatService.selectChatRoomjoin(map);
+		System.out.println("결과:"+result);
+		
+	if(result<1) {
+			
+			join.setRefUno(loginUser.getUserNo());
+			join.setChatRoomNo(chatRoomNo);
+			chatService.joinChatRoomUser(join);
+		}
+		
+		/*
+		 * join.setRefUno(loginUser.getUserNo()); join.setChatRoomNo(chatRoomNo);
+		 * chatService.joinChatRoomUser(join);
+		 */
 		model.addAttribute("chatRoomNo",chatRoomNo);
-		chatService.joinChatRoomUser(join);
 		List<ChatMessage> list = chatService.selectChatMessage(join);
 		
 		if(list !=null) {
@@ -233,6 +248,7 @@ public class AdminController {
 			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
 			return  "admin/chat";
 		}
+	}
 
 	@GetMapping("/event")
 	public String event(Model model,

@@ -114,6 +114,11 @@
 		WHERE STATUS = 'Y';
 	</select>
 	
-
+	<select id="selectChatRoomjoin" resultType="_int" parameterType="java.util.Map">
+		SELECT count(*)
+       FROM CHAT_ROOM_JOIN
+       WHERE CHAT_ROOM_NO = #{cno}  AND REF_UNO = #{uno}
+	</select>
+	
 	
 </mapper>

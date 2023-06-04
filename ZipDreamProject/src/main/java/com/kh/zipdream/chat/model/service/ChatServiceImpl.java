@@ -1,5 +1,6 @@
 package com.kh.zipdream.chat.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,4 +75,10 @@ public class ChatServiceImpl implements ChatService{
 		}
 		return result; 
 	}
+	
+	@Override
+	public int selectChatRoomjoin(HashMap<String, Integer> map) {
+		return dao.selectChatRoomjoin(map);
+	}
+	
 }

@@ -1,6 +1,7 @@
 package com.kh.zipdream.chat.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -94,6 +95,11 @@ public class ChatDAO {
 	// 채팅방 조회
 	public int selectChatRoom(int refUno){
 		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
+	}
+	
+	// 채팅방 조회
+	public int selectChatRoomjoin(HashMap<String, Integer> map){
+		return sqlSession.selectOne("chattingMapper.selectChatRoomjoin", map);
 	}
 
 }
