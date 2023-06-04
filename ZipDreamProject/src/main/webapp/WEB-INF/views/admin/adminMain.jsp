@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -59,10 +60,10 @@
 						<th>신고 일자</th>
 					</tr>
 					<c:forEach var="report" items="${reportList}">
-						<tr>
+						<tr onclick="location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo=${report.reportNo}'">
 							<td>${report.rname }</td>
 							<td>${report.tname }</td>
-							<td>${report.reportContent }</td>
+							<td>${fn:substring(report.reportContent,0,6)}</td>
 							<td>${report.reportType }</td>
 							<td>${report.reportStatus }</td>
 							<td>${report.reportDate }</td>
@@ -73,57 +74,21 @@
 		</article>
 
 		<article class="content-main-event">
-			<h3 style="margin: 0px 25px 15px;">현재 진행중 이벤트</h3>
+			<h3 style="margin: 0px 25px 15px;">공지사항</h3>
 			<table class="rwd-table">
 				<tbody>
 					<tr>
-						<th>이벤트 번호</th>
-						<th>카테고리</th>
-						<th>이벤트 이름</th>
-						<th>이벤트 시작일</th>
-						<th>이벤트 종료일</th>
-						<th>쿠폰 번호</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>작성일</th>
 					</tr>
-					<tr>
-						<td>UPS5005</td>
-						<td>UPS</td>
-						<td>ASDF19218</td>
-						<td>06/25/2016</td>
-						<td>12/25/2016</td>
-						<td>$8,322.12</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
-					<tr>
-						<td>UPS3449</td>
-						<td>UPS South Inc.</td>
-						<td>ASDF29301</td>
-						<td>6/24/2016</td>
-						<td>12/25/2016</td>
-						<td>$3,255.49</td>
-					</tr>
+					<c:forEach var="notice" items="${noticeBoardList.list}" end='4'>
+						<tr>
+							<td>${notice.noticeBoardTitle }</td>
+							<td>${fn:substring(notice.noticeBoardContent,0,6)}</td>
+							<td>${notice.createDateTime }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</article>

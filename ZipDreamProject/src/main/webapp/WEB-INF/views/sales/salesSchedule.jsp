@@ -307,6 +307,9 @@
     top: calc(100% + 5px);
     left: 0px;
 
+    display:none;
+
+
 }
 .stepBox>h1{
 	color: rgb(34, 34, 34);
@@ -372,7 +375,43 @@
     text-align: left;
     border: 0px;
     background-color: transparent;
+
+}
+.loader {
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+   	margin:0 auto;
+   	margin-bottom:100px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #326CF9;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 } 
+.noneList{
+	margin: 0 auto;
+	width: 100%;
+	width: 1200px;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(134, 134, 134);
+	display:none;
+}
+
 </style>
 </head>
 <body>
@@ -402,7 +441,8 @@
 				success:function(result){
 					data = JSON.parse(result).data;
 					
-					resultHtml(data);
+					resultHtml(data,month);
+					
 				},
 				error:function(){
 					console.log("에러발생");
@@ -411,44 +451,76 @@
 			
 		};
 		
+
 		
-		function resultHtml(data){
+		function resultHtml(data,month){
 			let today = new Date();
 			let year = today.getFullYear();
-			let month = (today.getMonth())+1;
-			let date = today.getDate();
+			let M = (today.getMonth())+1;
 			
-			if(today.getDate() < 10){
-				date = "0"+today.getDate();
+			if(M < 10){
+				M = "0" + M;
 			}
 			
-			let toDay = ""+year+month+date;
+			let realMonth = "" + year + M;
+			if(month < 10){
+				month = "0" + month;
+			}
+			
+			let toDay = ""+year+month;
 		
+
+			var aptList = [];
+			for(var i = 0; i<data.length; i++){
+				
+				let d = data[i].RCEPT_BGNDE.replace(/-/g, '');
+				
+				
+				if(d >= toDay){
+					aptList.push(data[i]);
+				}
+			}
+			
+			/* console.log(aptList); */
+		
+			$("#noneList").css("display", "none");
 			var html = "<tbody id='mytbody'>"
-			$.each(data, function(key, value){
+			$.each(aptList, function(key, value){
 
 				var houseCode = value.HOUSE_MANAGE_NO;
 				
-				var appDday = new Date(value.SPSPLY_RCEPT_BGNDE);
+				var appDday = new Date(value.RCEPT_BGNDE);
+
 				
 				let appyear = appDday.getFullYear();
 				let appmonth = (appDday.getMonth())+1;
 				let appdate = appDday.getDate();
-				
-				if(appDday.getDate() < 10){
-					appdate = "0" + appDday.getDate();
+
+			
+				if((appDday.getMonth())+1 < 10){
+					appmonth = "0" + appmonth;
 				}
 				
-				let appday = ""+appyear+appmonth+appdate;
+				let appday = ""+appyear+appmonth;
 				
+				
+			
+			
 				html += "<tr>";
-				if(value.SPSPLY_RCEPT_BGNDE != null){
-					if((appday-toDay) == 0){
-						html += "<td><p class='tagAccept'>접수중</p></td>";
+				if(value.RCEPT_BGNDE != null){
+					if((appday-realMonth) == 0){
+						if(appdate - (today.getDate()) == 0){
+							html += "<td><p class='tagAccept'>접수중</p></td>";							
+						} else if(appdate - (today.getDate()) > 0){
+							html += "<td><p class='tagExpected '>접수예정</p></td>";
+						}else if(appdate - (today.getDate()) < 0){
+							html += "<td><p class='tagExpected '>접수마감</p></td>";
+						}
 						
-					}else if((appday-toDay) > 0){
+					}else if((appday-realMonth) > 0){
 						html += "<td><p class='tagExpected '>접수예정</p></td>";
-					}else if((appday-toDay) < 0){
+					}else if((appday-realMonth) < 0){
+
 						html += "<td><p class='tagPublish'>접수마감</p></td>";
 					}
 				} else{
@@ -459,8 +531,10 @@
 				html += "<td><div class='appInfo'><p class='appInfoTitle'><a href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
 				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
 				
-				if(value.SPSPLY_RCEPT_BGNDE != null){
-					html += "<p class='appDday'>청약접수일 : "+ value.SPSPLY_RCEPT_BGNDE +"</p></div></td>";	
+
+				if(value.RCEPT_BGNDE != null){
+					html += "<p class='appDday'>청약접수일 : "+ value.RCEPT_BGNDE +"</p></div></td>";	
+
 				}else{
 					html += "<p class='appDday'>청약접수일 : 미정 </p></div></td>";
 				}
@@ -470,11 +544,18 @@
 				html += "<td><p>" + info[0] + "</p></td>";
 				html += "<td><p>" + info[1] + "세대</p></td>";
 				html += "<td><p>" + info[2] + "m²</p></td>";
-				html += "<td><img class='sellHousealarm' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
+
+				html += "<td id='" + houseCode+ "'><img  class='sellHousealarm' onclick='mySale("+houseCode+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
+
 			});
 			
 			html += "</tbody>"
+		
 			$(".sellHouseTable").append(html);
+			
+			
+		
+			
 		}
 		
 		/* 아파트 가격,세대수,면적 불러오는 API 데이터 받아오기  */
@@ -492,14 +573,15 @@
 				data:{houseCode},
 				contentType:"text.plain; charset:UTF-8",
 				success:function(result){
-					/* console.log(result.data[0].LTTOT_TOP_AMOUNT); */
 					aptPrice = result.data[0].LTTOT_TOP_AMOUNT;
 					aptSuply = result.data[0].SUPLY_HSHLDCO;
 					aptAr = (result.data[0].SUPLY_AR).substr(0,(result.data[0].SUPLY_AR).indexOf("."));
-					/* console.log(value.HOUSE_NM + " 가격은 : "+ aptPrice); */
+
+
 					
 					aptInfo = [aptPrice, aptSuply, aptAr];
 				},
+			
 				error:function(){
 					cosole.log("에러발생");
 				}
@@ -508,7 +590,7 @@
 			return aptInfo;
 		}
 		
-		
+
 	
 	</script>
 	
@@ -528,7 +610,8 @@
 			<div class="sellHouseCalendar">
 				<div class="calendar month">
 					<div class="calendar-header">
-						<!-- calendar-prev 클릭시 이전주로 이동 -->
+					<!-- calendar-prev 클릭시 이전달로 이동 -->
+
 						<span class="calendar-prev">
 							<img src="https://ifh.cc/g/sjwW64.png">
 						</span> 
@@ -536,7 +619,9 @@
 							<!-- 여기는 오늘이 있는 연도와 월 표시-->
 
 						</span>
-						<!-- calendar-next 클릭시 다음주로 이동 -->
+
+						<!-- calendar-next 클릭시 다음달로 이동 -->
+
 						<span class="calendar-next">
 							<img src="https://ifh.cc/g/F1V8zo.png">
 						</span>
@@ -545,37 +630,42 @@
 					<div id="calendar">
 						<!-- 카테고리 선택 버튼 -->
 						<div class="slectCover">
+
+						
 							<button class="bType" id="step"><p>분양단계</p></button>
-							<div class="stepBox">
+							<div class="stepBox" style="display:none;">
+
 								<h1>분양단계</h1>
 								<ul>
 									<li>
 										<label class="stepLabel">
-											<input type="checkbox" name="state" checked>
+											<input id="selectAll" type="checkbox"  onclick="selectAll();" >
+
 											<p>전체</p>
 										</label>
 									</li>
 									<li>
 										<label class="stepLabel">
-											<input type="checkbox" name="state">
+											<input id="stepInput" type="checkbox" name="step" value="expected">
 											<p>분양예정</p>
 										</label>
 									</li>
 									<li>
 										<label class="stepLabel">
-											<input type="checkbox" name="state">
+											<input id="stepInput" type="checkbox" name="step" value="applyWill">
 											<p>접수예정</p>
 										</label>
 									</li>
 									<li>
 										<label class="stepLabel">
-											<input type="checkbox" name="state">
+											<input id="stepInput" type="checkbox" name="step" value="apply">
 											<p>접수중</p>
 										</label>
 									</li>
 									<li>
 										<label class="stepLabel">
-											<input type="checkbox" name="state">
+											<input type="checkbox" name="step" value="end">
+
 											<p>접수마감</p>
 										</label>
 									</li>
@@ -584,9 +674,55 @@
 						</div>
 						<div class="slectCover">
 							<button class="bType" id="building"><p>건물유형</p></button>
+							<div class="stepBox" style="display:none;">
+								<h1>건물유형</h1>
+								<ul>
+									<li>
+										<label class="stepLabel">
+											<input id="sa" type="checkbox" onclick="sa();">
+											<p>전체</p>
+										</label>
+									</li>
+									<li>
+										<label class="stepLabel">
+											<input type="checkbox" name="building">
+											<p>APT</p>
+										</label>
+									</li>
+									<li>
+										<label class="stepLabel">
+											<input type="checkbox" name="building">
+											<p>신혼희망타운</p>
+										</label>
+									</li>
+								</ul>
+							</div>
 						</div>
 						<div class="slectCover">
 							<button class="bType" id="suply"><p>공급유형</p></button>
+							<div class="stepBox" style="display:none;">
+								<h1>공급유형</h1>
+								<ul>
+									<li>
+										<label class="stepLabel">
+											<input id="all" type="checkbox" onclick="all();">
+											<p>전체</p>
+										</label>
+									</li>
+									<li>
+										<label class="stepLabel">
+											<input type="checkbox" name="suply">
+											<p>민영</p>
+										</label>
+									</li>
+									<li>
+										<label class="stepLabel">
+											<input type="checkbox" name="suply">
+											<p>국민</p>
+										</label>
+									</li>
+								</ul>
+							</div>
 						</div>
 
 					</div>
@@ -607,11 +743,7 @@
 								<th>찜하기</th>
 							</tr>
 						</thead>
-						<!-- <tbody>
-							<div class="spinner-border text-primary" role="status">
-						  		<span class="visually-hidden"></span>
-							</div>
-						</tbody> -->
+
 				</table>
 				</div>
 
@@ -619,13 +751,17 @@
 			</div>
 		</div>
 		
-		<div class="d-flex justify-content-center">
-		  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-		    <span class="visually-hidden"></span>
-		  </div>
+
+		<!-- ajax 통신 중 보여질 로딩 화면 -->
+		<div>
+	 		<div class="loader"></div>
 		</div>
 		
-		
+		<!-- 조회된 리스트가 없을때 보여지게....... 하고 싶다 시파  -->
+		<div class="noneList">
+			<div>조회된 월에 등록된 청약일정이 없습니다.</div>
+		</div>
+
 	</div>
 
 
@@ -641,7 +777,7 @@
 		var yearmonth = document.getElementById("yearmonth").innerText;
 		var length = (yearmonth.length) - 1;
 		var currentMonth = yearmonth.substring(5, length);
-		console.log(currentMonth);
+
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
@@ -681,17 +817,158 @@
 	        nextButton.addEventListener("click", goToNextMonth);
 	    });
 
+		//ajax통신시작
+		$(document).ajaxStart(function(){
+			//로딩 중 화면 보이기
+			$('.loader').css("display", "block");
+		});
 		
-		function stepBox(){
-			
-			document.getQuery
-		}
+		//ajax통신종료
+		$(document).ajaxStop(function(){
+			//로딩 중 화면 숨기기
+			$('.loader').css("display", "none");
+		});
+	
+
+	    $(document).ready(function(){
+	    	
+	        $(".bType").click(function(){
+	        	$(".stepBox").css("display", "none");
+				if($(this).hasClass("active")== false){
+					$(".bType").removeClass("active");
+					$(this).addClass("active");
+					$(this).next().css("display", "block");
+				}else{
+					$(this).removeClass("active");
+					$(".stepBox").css("display", "none");
+				}
+	        });
+	      });
+	
+	    $(document).mouseup(function (e){
+    	  var LayerPopup = $(".stepBox");
+    	  if(LayerPopup.has(e.target).length === 0){
+    	    LayerPopup.css("display", "none");
+    	  }
+    	});
+	    
+	    
+	    /* 분양단계 카테고리 선택(체그박스) 함수 */
+	    let steps = document.getElementsByName("step");
+
+        for(let i = 0; i<steps.length; i++){
+        	steps[i].onclick = function () {
+                let checkedListLength = document.querySelectorAll("input[name=step]:checked").length;
+                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
+                if(checkedListLength == steps.length){
+                    // 전체선택 상태 체크
+                    document.getElementById("selectAll").checked = true;
+                } else {
+                    // 전체 선택 상태 체크 X
+                    document.getElementById("selectAll").checked = false;
+                }
+               
+            }
+        }
+
+
+        function selectAll() {
+            let checked = document.getElementById("selectAll").checked;
+            let steps = document.getElementsByName("step");
+
+            for (let i = 0; i < steps.length; i++) {
+            	steps[i].checked = checked;
+            }  
+        }
+
+	    
+        /* 건물유형 카테고리 선택(체크박스) 함수 */
+	    let buildings = document.getElementsByName("building");
+
+        for(let i = 0; i<buildings.length; i++){
+        	buildings[i].onclick = function () {
+                let checkedListLength = document.querySelectorAll("input[name=building]:checked").length;
+                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
+                if(checkedListLength == buildings.length){
+                    // 전체선택 상태 체크
+                    document.getElementById("sa").checked = true;
+                } else {
+                    // 전체 선택 상태 체크 X
+                    document.getElementById("sa").checked = false;
+                }
+               
+            }
+        }
+
+
+        function sa() {
+            let checked = document.getElementById("sa").checked;
+            let buildings = document.getElementsByName("building");
+
+            for (let i = 0; i < buildings.length; i++) {
+            	buildings[i].checked = checked;
+            }  
+        }
+	    
+        /* 공급유형 카테고리 선택(체크박스) 함수 */
+	    let suplys = document.getElementsByName("suply");
+
+        for(let i = 0; i<suplys.length; i++){
+        	suplys[i].onclick = function () {
+                let checkedListLength = document.querySelectorAll("input[name=suply]:checked").length;
+                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
+                if(checkedListLength == suplys.length){
+                    // 전체선택 상태 체크
+                    document.getElementById("all").checked = true;
+                } else {
+                    // 전체 선택 상태 체크 X
+                    document.getElementById("all").checked = false;
+                }
+               
+            }
+        }
+
+
+        function all() {
+            let checked = document.getElementById("all").checked;
+            let suplys = document.getElementsByName("suply");
+
+            for (let i = 0; i < suplys.length; i++) {
+            	suplys[i].checked = checked;
+            }  
+        }
+
+        function mySale(houseCode){
+        	var h = document.getElementById(houseCode).firstChild;
+        	
+        <%-- 	$.ajax({
+        		url: <%=request.getContextPath()%>/sales/mySaleHouse,
+        		method:"get",
+				data:{houseCode},
+				success:function(result){
+					console.log("컨트롤러 갔나염?");
+				},
+				error:function(){
+					console.log("에러발생");
+				}
 		
-		
-		
+        	}); --%>
+        	
+        	
+        	
+        	if(h.src == "https://ifh.cc/g/bNnQCj.png"){
+        		h.src = "https://ifh.cc/g/hqaYN5.png";
+        	}else{
+        		h.src = "https://ifh.cc/g/bNnQCj.png";
+        	};
+        	
+        }
+  
+   	 		
+   	 
+
 	</script>
-
-
+	
 
 	<jsp:include page="../common/footer.jsp" />
 	

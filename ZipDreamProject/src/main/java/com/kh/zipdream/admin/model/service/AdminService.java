@@ -21,7 +21,7 @@ public interface AdminService {
 	public List<Map<String,String>> selectApplyListLimit5();
 	public List<Map<String,String>> selectReportList(int type);
 	public List<Map<String,String>> selectReportList(int type,int cp, Map<String, Object> map);
-	public void selectNoticeBoardList(int cp, Map<String, Object> map);
+	public void selectNoticeBoardList(int cp,int boardLimit, Map<String, Object> map);
 	public void selectNoticeBoardList(Map<String, Object> map);
 	public int insertNoticeBoard(NoticeBoard nb);
 	public int updateNoticeBoard(NoticeBoard nb);
@@ -33,5 +33,6 @@ public interface AdminService {
 	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap, Map<String, Object> map);
 	public int updateMemberStatus(Member m);
 	public Report selectReport(int reportNo);
+	public int updateReportResult(Report report);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
 }
