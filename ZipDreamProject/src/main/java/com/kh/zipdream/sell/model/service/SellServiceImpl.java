@@ -2,6 +2,7 @@ package com.kh.zipdream.sell.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,20 @@ public class SellServiceImpl implements SellService {
 			List<Attachment> sellImgList = new ArrayList(); //db에 등록한 데이터를 모아놓음
 			List<String> renameList = new ArrayList(); 		//변경된 파일명을 저장할 리스트
 			
+			
 			//list에 담겨있는 파일정보 중 실제로 업로드된 파일만 분류하기
 			for(int i = 0; i<imgList.size(); i++) {
+				
 				if(imgList.get(i).getSize()>0) {
 					String changeName = FileUtils.saveFile(imgList.get(i), serverFolderPath);
 					renameList.add(changeName);
+					
 					Attachment at = new Attachment();
 					at.setRefSno(sellNo);
-					at.setFileLevel(i);
 					at.setOriginFile(imgList.get(i).getOriginalFilename());
 					at.setChangeName(changeName);
+					at.setFilePath(serverFolderPath);
+					at.setFileLevel(i);
 					
 					sellImgList.add(at);
 					
@@ -56,5 +61,20 @@ public class SellServiceImpl implements SellService {
 		}
 		return sellNo;
 	}
+	
+	public void selectSellList(Map<String, Object> map) {
+		
+		ArrayList<SellDetail> list = sellDao.selectSellList();
+		
+		map.put("list", list);
+		
+	}
+	
+	public SellDetail sellDetail(int sellNo) {
+		
+		return sellDao.sellDetail(sellNo);
+	}
+	
+
 
 }
