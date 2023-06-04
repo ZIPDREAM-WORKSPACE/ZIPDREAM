@@ -247,6 +247,13 @@
 		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
 	</select>
 	
+	<update id="updateReportResult" parameterType="report">
+		UPDATE REPORT SET
+			REPORT_STATUS = 'Y',
+			REPORT_RESULT = #{reportResult}
+		WHERE REPORT_NO = #{reportNo}
+	</update>
+	
 	<update id="updateMemberStatus" parameterType="member">
 		UPDATE MEMBER SET 
 			 STATUS = #{status}		
