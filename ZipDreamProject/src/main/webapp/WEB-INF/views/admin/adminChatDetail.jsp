@@ -208,6 +208,7 @@ $("#exit").click(function(){
 
 $("#back").click(function(){
 	location.href="<%=request.getContextPath()%>/admin/chat";
+	exitChatRoom();
 });
 
 function exitChatRoom(){
@@ -241,6 +242,7 @@ $("#chat_msg").keyup(function(event){
 		  $("#send").click();
 	}
 });
+
 
 </script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

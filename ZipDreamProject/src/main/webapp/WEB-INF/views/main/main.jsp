@@ -559,7 +559,7 @@ right:-45px;
 	right:3%;
 	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 10px;
 	border-radius: 50px;
-	z-index: 99;
+	z-index: 98;
 	text-align: center;
 	font-weight: 500;
 	background: white;
@@ -1202,6 +1202,10 @@ display:  block;
 			 			
 			 		}
 				})
+			}else{
+				$(".chatting").css("display","block");
+			 	$(".display-chatting").css({"display":"block","border":"none"});
+				
 			}	
 			return data;
 		};

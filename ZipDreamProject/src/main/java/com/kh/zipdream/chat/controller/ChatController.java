@@ -72,12 +72,12 @@ public class ChatController {
 		model.addAttribute("chatRoomNo",chatRoomNo);
 		System.out.println("로그인"+loginUser.getUserNo());
 		
-		if(loginUser.getUserNo()!=join.getRefUno()) {
+	
 			
 			join.setRefUno(loginUser.getUserNo());
 			join.setChatRoomNo(chatRoomNo);
 			service.joinChatRoomUser(join);
-		}
+		
 		
 		return chatRoomNo;
 	}
