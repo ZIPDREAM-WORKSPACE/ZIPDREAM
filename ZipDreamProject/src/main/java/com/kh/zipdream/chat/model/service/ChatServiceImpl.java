@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
@@ -55,6 +56,7 @@ public class ChatServiceImpl implements ChatService{
 	
 	@Transactional(rollbackFor = Exception.class)
 	@Override
+	@ResponseBody
 	public int exitChatRoom(ChatRoomJoin join) {
 		
 		// 채팅방 나가기 

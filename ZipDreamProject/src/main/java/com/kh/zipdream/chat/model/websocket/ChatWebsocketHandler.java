@@ -76,10 +76,10 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{
 		
 		ChatMessage chatMessage = objectMapper.readValue(message.getPayload(), ChatMessage.class);
 		
-		chatMessage.setCreateDate(new Date(System.currentTimeMillis()));
+		/* chatMessage.setCreateDatetime(new Date(System.currentTimeMillis())); */
 		
 		// 전달받은 채팅메세지를 db에 삽입
-		System.out.println(chatMessage);
+		System.out.println("웹소켓"+chatMessage);
 		
 		int result = chatService.insertMessage(chatMessage);
 		
