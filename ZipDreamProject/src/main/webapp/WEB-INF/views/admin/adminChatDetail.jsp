@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <style>
@@ -130,6 +131,13 @@
 #exit{
 	background: rgb(236, 236, 236);
 }
+.display-chatting::-webkit-scrollbar-thumb{
+background: grey;
+    border-radius: 10px;
+}
+.display-chatting::-webkit-scrollbar{
+width: 10px;  
+}
 </style>
 <section class="content">
    <section class="content-wrap">
@@ -150,7 +158,10 @@
 					<c:if test="${msg.refUno == loginUser.userNo }">
 						<li class="myChat">
 							<p class="chatP">${msg.message }</p><br>
-							<span class="chatDate">${msg.createDatetime }</span>
+							<span class="chatDate">
+								${fn:substring(msg.createDatetime,11,13) > 11 ? "오후 " : "오전 " }
+								${fn:substring(msg.createDatetime,11,16) }
+							</span>
 						</li>
 					</c:if>
 				
@@ -158,7 +169,10 @@
 						<li>
 							<b>${msg.userId}</b>	<br>
 							<p class="chatP">${msg.message }</p><br>
-							<span class="chatDate">${msg.createDatetime }</span>
+							<span class="chatDate">
+								${fn:substring(msg.createDatetime,11,13) > 11 ? "오후 " : "오전 " }
+								${fn:substring(msg.createDatetime,11,16) }
+							</span>
 						</li>
 					</c:if>
 				</c:forEach> 
@@ -173,10 +187,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 <script>
+$(function(){
+	
+
+	
+});
 const refUno ='${loginUser.userNo}';
 const userId ='${loginUser.userId}';
 const chatRoomNo = '${chatRoomNo}';
 const userLevel = '${loginUser.userLevel}';
+
 
 
 let chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
@@ -215,6 +235,12 @@ function exitChatRoom(){
 		})
 	}	
 };
+
+$("#chat_msg").keyup(function(event){
+	if(event.which===13){
+		  $("#send").click();
+	}
+});
 
 </script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

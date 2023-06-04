@@ -62,7 +62,7 @@ public class ChatController {
 	public int openChatRoom(
 					@ModelAttribute("loginUser") Member loginUser,
 					Model model,
-					RedirectAttributes ra
+					RedirectAttributes ra, ChatRoomJoin join
 			) {
 		ChatRoom room = new ChatRoom();
 		room.setTitle(loginUser.getUserId()+"님의 채팅");
@@ -70,38 +70,19 @@ public class ChatController {
 		room.setRefUno(loginUser.getUserNo());
 		int chatRoomNo = service.openChatRoom(room); // 생성된 채팅반 번호 
 		model.addAttribute("chatRoomNo",chatRoomNo);
-		ChatRoomJoin join = new ChatRoomJoin();
-		join.setRefUno(loginUser.getUserNo());
-		join.setChatRoomNo(chatRoomNo);
-		service.joinChatRoomUser(join);
+		System.out.println("로그인"+loginUser.getUserNo());
+		
+		if(loginUser.getUserNo()!=join.getRefUno()) {
+			
+			join.setRefUno(loginUser.getUserNo());
+			join.setChatRoomNo(chatRoomNo);
+			service.joinChatRoomUser(join);
+		}
 		
 		return chatRoomNo;
 	}
 	
-	@GetMapping("/chat/room/{chatRoomNo}")
-	public  String selectChatMessage(
-				@ModelAttribute("loginUser") Member loginUser,
-				// sessionScope에 있는 loginUser를 넣어준다
-				// 단, SessionAttribute로 등록이 되어 있는 경우 
-				Model model,
-				ChatRoomJoin join,
-				@PathVariable("chatRoomNo") int chatRoomNo,
-				RedirectAttributes ra
-			) {
-		join.setRefUno(loginUser.getUserNo());
-		join.setChatRoomNo(chatRoomNo);
-		model.addAttribute("chatRoomNo",chatRoomNo);
-		service.joinChatRoomUser(join);
-		List<ChatMessage> list = service.selectChatMessage(join);
-		
-		if(list !=null) {
-			model.addAttribute("list",list);
-			return "admin/adminChatDetail";
-		}else {
-			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
-			return  "chat/chatRoomList";
-		}
-	}
+
 	
 	//채팅방나가기
 	@GetMapping("/chat/exit")

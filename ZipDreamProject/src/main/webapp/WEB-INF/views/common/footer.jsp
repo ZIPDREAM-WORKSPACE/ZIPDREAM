@@ -84,15 +84,15 @@
 		<div class="footer_inner">
 			<ul class="footer_list">
 				<li class="f_text"><a href="#">회사소개&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-				<li class="f_text"><a href="#">이용약관&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-				<li class="f_text"><a href="#">개인정보처리방침&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-				<li class="f_text"><a href="#">매물관리규정</a></li>
+				<li class="f_text"><a href="<%=request.getContextPath() %>/main/tos">이용약관&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+				<li class="f_text"><a href="<%=request.getContextPath() %>/main/privacyPolicy">개인정보처리방침&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+				<li class="f_text"><a href="<%=request.getContextPath() %>/main/management">매물관리규정</a></li>
 			</ul>
 			<div>
 				(주)내집마련<br>주소 : 서울시 강남구 테헤란로 14길 6 남도빌딩
 			</div>
 			<div id="btn">
-				<span class="btn_inner" id="chat_btn"><a href="#" >1:1문의</a></span>&nbsp;
+				<span class="btn_inner" id="chat_btn"> <a href="javascript:void(0)" onclick="chat();">1:1문의</a></span>&nbsp;
 				<span class="btn_inner" id="q_btn"><a href="<%=request.getContextPath() %>/sales/faq" >자주묻는 질문</a></span>
 			</div>
 			<div>KH, Inc. All rights reserved.</div>

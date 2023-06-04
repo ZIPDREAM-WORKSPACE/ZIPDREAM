@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -27,9 +28,9 @@
                   </c:when>
 	           <c:otherwise>
 	               <c:forEach items="${selectChatRoomList.list}" var="chatList">
-	               <tr onclick="location.href='<%=request.getContextPath()%>/chat/room/${chatList.chatRoomNo}'">
+	               <tr onclick="location.href='<%=request.getContextPath()%>/admin/chat/room/${chatList.chatRoomNo}'">
 	               	 <th>${chatList.chatRoomNo} </th>
-	                   <th>${chatList.message}</th>
+	                  <th>${fn:substring(chatList.message,0,30)}</th>
 	                  <th>${chatList.title} </th>
 	                  <th>${chatList.createDate} </th>
 	               </tr>

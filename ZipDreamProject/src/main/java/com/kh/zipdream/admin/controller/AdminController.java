@@ -1,6 +1,7 @@
 package com.kh.zipdream.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -8,18 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.chat.model.service.ChatService;
+import com.kh.zipdream.chat.model.vo.ChatMessage;
+import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 
 @Controller
+@SessionAttributes({"loginUser", "chatRoomNo"})
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -28,6 +37,9 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ChatService chatService;
 	
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -186,6 +198,29 @@ public class AdminController {
 		return "admin/adminChat";
 	}
 	
-	
+	@GetMapping("/chat/room/{chatRoomNo}")
+	public  String selectChatMessage(
+				@ModelAttribute("loginUser") Member loginUser,
+				// sessionScope에 있는 loginUser를 넣어준다
+				// 단, SessionAttribute로 등록이 되어 있는 경우 
+				Model model,
+				ChatRoomJoin join,
+				@PathVariable("chatRoomNo") int chatRoomNo,
+				RedirectAttributes ra
+			) {
+		join.setRefUno(loginUser.getUserNo());
+		join.setChatRoomNo(chatRoomNo);
+		model.addAttribute("chatRoomNo",chatRoomNo);
+		chatService.joinChatRoomUser(join);
+		List<ChatMessage> list = chatService.selectChatMessage(join);
+		
+		if(list !=null) {
+			model.addAttribute("list",list);
+			return "admin/adminChatDetail";
+		}else {
+			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
+			return  "admin/chat";
+		}
+	}
 	
 }
