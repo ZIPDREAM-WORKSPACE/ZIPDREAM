@@ -10,7 +10,7 @@
 		<span>메뉴</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<div class="side_title" data-href="main">
+	<div class="side_title">
 		<b>Pages</b>
 	</div>
 	<aside class="side_menu" data-href="user">
@@ -33,7 +33,7 @@
 		<span>신고 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="event">
 		<img src="<%=request.getContextPath()%>/resources/images/Shield Done-2.svg" width="25px" height="25px" class="side_img"> 
 		<span>이벤트 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -97,6 +97,9 @@
 	case "report" :
 		index = 4;
         break; 
+	case "event" :
+		index = 5;
+        break;     
 	case "chat" :
 		index = 6;
         break;    
