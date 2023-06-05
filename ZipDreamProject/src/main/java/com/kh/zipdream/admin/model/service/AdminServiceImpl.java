@@ -269,7 +269,7 @@ public class AdminServiceImpl implements AdminService{
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
 		ArrayList<ChatRoom> list = chatDao.selectChatRoomList(pi);
-		
+		System.out.println(list);
 		map.put("pi", pi);
 		map.put("list", list);
 		

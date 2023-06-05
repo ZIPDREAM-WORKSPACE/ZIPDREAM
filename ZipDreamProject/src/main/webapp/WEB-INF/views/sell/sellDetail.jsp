@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,7 +148,9 @@
 	.table>tbody>tr>th{
 	    width: 15%;
 	}
-	
+	.content6, .content7, .content8{
+		margin-top:80px;
+	}
 	/*주변정보*/
 	.btn-group{
 	    display: flex;
@@ -168,6 +172,9 @@
 	    background-color: #0A2647;
 	    color: white;
 	    font-weight: 900;
+	}
+	.infogroup{
+		margin-left: 100px;
 	}
 	.info{
 	    margin-top: 20px;
@@ -313,6 +320,9 @@
 	.footer3{
 	    margin-top: 60px;
 	}
+	#secondImg{
+		border: 1px solid blue;
+	}
 	</style>
 </head>
 <body>
@@ -321,13 +331,13 @@
  <div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : 12345678910</span>
+                <span>매물번호 : ${sd.sellNo} </span>
             </div>
             <div class="sell_name">
-                <p>시그니엘</p>
+                <p>${sd.sellName }</p>
             </div>
             <div class="sell_last">
-                <div class="sell_address">매물주소 : 서울특별시 ㅇㅁㄹ니아  ㅓㄹ미ㅏ어라ㅣ멍ㄴㄹㄴ아머러
+                <div class="sell_address">매물주소 : ${sd.sellAddress}
                 </div>
                 <div class="sell_like">
                     <div class="radius" id="sellLike">
@@ -360,21 +370,21 @@
             <div>
                 <div class="picture_one margin">
                     <table>
-                        <tr>
-                            <td colspan="3" rowspan="3" align="center"> <!-- 미리보기 -->
-                            <img src="https://ifh.cc/g/mljrgR.jpg" id="titleImg" width="400" height="600">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://ifh.cc/g/JMBjyc.jpg" id="contentImg1" width="300" height="300"></td>
-                            <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
-                            <td><img src="https://ifh.cc/g/mT64PY.jpg" id="contentImg3" width="300" height="300"></td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://ifh.cc/g/g0KNkj.jpg" id="contentImg4" width="300" height="300"></td>
-                            <td><img src="https://ifh.cc/g/OQMamL.jpg" id="contentImg5" width="300" height="300"></td>
-                            <td><img src="https://ifh.cc/g/JMBjyc.jpg" id="contentImg6" width="300" height="300"></td>
-                        </tr>
+ 						<c:if test="${!empty sd.imgList}"> 
+ 							<tr>
+                            	<td colspan="3" rowspan="3" align="center">
+                            	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="400" height="600">
+                            	</td>
+                        	</tr>
+ 							<c:forEach var="i" begin="1" end="">
+			 						<tr>
+			                            <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="contentImg1" width="300" height="300"></td>
+			                            <!-- <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
+			                            <td><img src="https://ifh.cc/g/mT64PY.jpg" id="contentImg3" width="300" height="300"></td> -->
+			                        </tr>
+		                  	</c:forEach>	
+ 						</c:if>	
+                        
                     </table>
                 </div>
                 <div class="picture_two" style="display: none;">
@@ -407,19 +417,19 @@
                 <tbody>
                     <tr>
                         <th>월세</th>
-                        <td>얼마엄ㄴㅇㄹ/ㅇ럼ㅇㄹ민아ㅓㄻㄴㅇ</td>
+                        <td>${sd.sellPrice}</td>
                     </tr>
                     <tr>
                         <th>관리비</th>
-                        <td>얼마얾ㅇㄹ만얾ㅇ럼ㄴ이ㅏ럼니ㅏㅇ러미ㅏㄴ얼미ㅏㄴ어람ㄴ어리ㅏㅓ망러ㅣ망</td>
+                        <td>${sd.sellMaintenance}</td>
                     </tr>
                     <tr>
                         <th>주차</th>
-                        <td>가능해 안가능해!!</td>
+                        <td>${sd.sellParking}</td>
                     </tr>
                     <tr>
                         <th>단기임대</th>
-                        <td>가능해 안가능해!!!!!!</td>
+                        <td>${sd.sellShortterm}</td>
                     </tr>
                 </tbody>
             </table>
@@ -429,73 +439,70 @@
     <div class="content4 margin content">
         <p class="info_name">[상세정보]</p>
         <hr class="hr">
-        <div class="info_pic margin"></div>
+		        <div class="info_pic margin">
+		        </div>
         <div class="info margin">
             <table class="table">
                 <tbody>
                     <tr>
                         <th>건물이름</th>
-                        <td>무슨 아파트</td>
+                        <td>${sd.sellName}</td>
                     </tr>
                     <tr>
                         <th>방종류</th>
-                        <td>아파트야뭐야</td>
+                        <td>${sd.sellType }</td>
                     </tr>
                     <tr>
                         <th>전용/공급면적</th>
-                        <td>얼마나/해줄건데</td>
+                        <td>${sd.sellPrivateArea}/${sd.sellProvideArea }</td>
                     </tr>
                     <tr>
                         <th>해당층/건물층</th>
-                        <td>몇층짜리고 /몇층이야</td>
+                        <td>${sd.sellFloor} /${sd.sellAllFloor }</td>
                     </tr>
                     <tr>
                         <th>방수/욕실수</th>
-                        <td>방몇개 /욕실몇개</td>
+                        <td>${sd.sellRoomCount } /${sd.sellToiletCount }</td>
                     </tr>
                     <tr>
                         <th>방향</th>
-                        <td>남동</td>
+                        <td>${sd.sellWay }</td>
                     </tr>
                     <tr>
                         <th>해당 면적 세대수</th>
-                        <td>9세대</td>
+                        <td>${sd.sellHousehold }</td>
                     </tr>
                     <tr>
                         <th>현관타입</th>
-                        <td>계단식</td>
+                        <td>${sd.sellEntrance }</td>
                     </tr>
                     <tr>
                         <th>입주가능일</th>
-                        <td>즉시가능(2023.05.19)</td>
+                        <td>${sd.sellMoveDatetime }</td>
                     </tr>
                     <tr>
                         <th>건축물용도</th>
-                        <td>공동주택</td>
+                        <td>${sd.sellBuldtype }</td>
                     </tr>
                     <tr>
                         <th>승강시설</th>
-                        <td>엘리베이터</td>
+                        <td>${sd.sellInstallation }</td>
                     </tr>
                     <tr>
                         <th>냉/난방시설</th>
-                        <td>개별냉방/개별난방(도시가스)</td>
-                    </tr>
-                    <tr>
-                        <th>주차시설</th>
-                        <td>공공주차시설</td>
+                        <td>${sd.sellAircondition }/${sd.sellHeating }</td>
                     </tr>
                     <tr>
                         <th>세대주차대수</th>
-                        <td>1.16대</td>
+                        <td>${sd.parkingCount }</td>
                     </tr>
                     <tr>
                         <th>사용승인일</th>
-                        <td>20174.0529</td>
+                        <td>${sd.sellApprovalDatetime }</td>
                     </tr>
                     <tr>
                         <th>최초등록일</th>
-                        <td>2023.04.24</td>
+                        <td>${sd.sellEnrollDatetime }</td>
                     </tr>
                 </tbody>
             </table>
@@ -510,15 +517,15 @@
                 <tbody>
                     <tr>
                         <th>건물이름</th>
-                        <td>무슨 아파트</td>
+                        <td>${sd.complexApplyDatetime }</td>
                     </tr>
                     <tr>
                         <th>방종류</th>
-                        <td>아파트야뭐야</td>
+                        <td>${sd.wingCount }</td>
                     </tr>
                     <tr>
-                        <th>전용/공급면적</th>
-                        <td>얼마나/해줄건데</td>
+                        <th>총 세대 수</th>
+                        <td>${sd.householdCount }</td>
                     </tr>
                 </tbody>
             </table>
@@ -533,11 +540,11 @@
                 <tbody>
                     <tr>
                         <th>기본옵션</th>
-                        <td>에어컨, 냉장고, TV 등등...................</td>
+                        <td>${sd.option }</td>
                     </tr>
                     <tr>
                         <th>보안시설</th>
-                        <td>이것저것...모두다....</td>
+                        <td>${sd.security }</td>
                     </tr>
                 </tbody>
             </table>
@@ -553,7 +560,7 @@
         <img src="https://ifh.cc/g/RorFkp.png" width="50px">
         <span class="othier_info">[주변정보]</span>
         <hr class="hr">
-        <div class="btn-group margin">
+        <div class="btn-group">
             <button class="market button">
                 <img src="https://ifh.cc/g/XXq5Xh.png" width="34px">
                 <span>편의시설</span>
