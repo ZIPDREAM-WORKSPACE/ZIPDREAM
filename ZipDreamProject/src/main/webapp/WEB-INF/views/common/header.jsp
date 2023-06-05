@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
-	
+
 
 <!-- Jquey 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -17,7 +17,6 @@
 <!-- 부투스트랩에서 제공하고있는 스크립트   -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 
 <!-- 폰트 -->
@@ -256,6 +255,7 @@ position: absolute;
  		
  	}
  	
+	
 
 	</script>
 </body>

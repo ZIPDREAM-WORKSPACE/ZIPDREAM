@@ -1,32 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sell-mapper">
- 
-	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail">
-		<selectKey keyProperty="sellNo" resultType="_int" order="BEFORE">
-			SELECE SELL_NO FROM DUAL
-		</selectKey>
-		
+ 	
+ 	<resultMap type="sellDetail" id="sellResultSet">
+ 		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="SELL_NAME" property="sellName"/>
+ 		<result column="SELL_TYPE" property="sellType"/>
+ 		<result column="CREATE_DATE" property="createDate"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="sellDetail" id="sellDetailResultSet">
+ 		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="SELL_NAME" property="sellName"/>
+ 		<result column="SELL_ADDRESS" property="sellAddress"/>
+ 		<result column="SELL_PRICE" property="sellPrice"/>
+ 		<result column="SELL_MAINTENANCE" property="sellMaintenance"/>
+ 		<result column="SELL_PARKING" property="sellParking"/>
+ 		<result column="SELL_SHORTTERM" property="sellShortterm"/>
+ 		<result column="SELL_TYPE" property="sellType"/>
+ 		<result column="SELL_FLOOR" property="sellFloor"/>
+ 		<result column="SELL_PRIVATE_AREA" property="sellPrivateArea"/>
+ 		<result column="SELL_PROVIDE_AREA" property="sellProvideArea"/>
+ 		<result column="SELL_ALL_FLOOR" property="sellAllFloor"/>
+ 		<result column="SELL_ROOM_COUNT" property="sellRoomCount"/>
+ 		<result column="SELL_TOILET_COUNT" property="sellToiletCount"/>
+ 		<result column="SELL_WAY" property="sellWay"/>
+ 		<result column="SELL_HOUSEHOLD" property="sellHousehold"/>
+ 		<result column="SELL_ENTRANCE" property="sellEntrance"/>
+ 		<result column="SELL_MOVE_DATETIME" property="sellMoveDatetime"/>
+ 		<result column="SELL_INSTALLATION" property="sellInstallation"/>
+ 		<result column="SELL_AIRCONTITION" property="sellAircondition"/>
+ 		<result column="SELL_HEATING" property="sellHeating"/>
+ 		<result column="PARKING_COUNT" property="parkingCount"/>
+ 		<result column="SELL_APPROVAL_DATETIME" property="sellApprovalDatetime"/>
+ 		<result column="SELL_ENROLL_DATETIME" property="sellEnrollDatetime"/>
+ 		<result column="COMPLEX_APPLY_DATETIME" property="complexApplyDatetime"/>
+ 		<result column="WING_COUNT" property="wingCount"/>
+ 		<result column="HOUSEHOLD_COUNT" property="householdCount"/>
+ 		<result column="OPTION" property="option"/>
+ 		<result column="SECURITY" property="security"/>
+ 		<result column="CREADTE_DATE" property="createDate"/>
+ 		<result column="MODIRY_DATE" property="modifyDate"/>
+ 		
+ 		<collection property="imgList" javaType="java.util.ArrayList" ofType="attachment" select="selectImgList" column="SELL_NO"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="attachment" id="attachmentReustSet">
+ 		<result column="ATTACHMNET_NO" property="attachmentNo"/>
+ 		<result column="REF_SNO" property="refSno"/>
+ 		<result column="ORIGIN_FILE" property="originFile"/>
+ 		<result column="CHANGE_NAME" property="changeName"/>
+ 		<result column="FILE_PATH" property="filePath"/>
+ 		<result column="FILE_LEVEL" property="fileLevel"/>
+  	</resultMap>
+ 	
+ 	
+	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
 		INSERT INTO SELLDETAIL
-		VALUES (1, 1,#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking},#{shortterm},
-				#{sellType}, #{sellPrivateArea}, #{sellProvideArea},#{sellFloor}, #{sellAllFloor},#{sellRoomCount},#{sellToletCount}, #{sellWay}, #{sellHouseHolde},
-				#{sellEntrance}, #{sellMoveDate}, #{sellMoveDate}, #{sellBuildtype}, #{sellInstallation}, #{sellAircondition},#{sellHeating},#{parkingCount}, #{sellApprovalDate},
-				#{sellEnrollDate}, #{complexApplyDate}, #{wingCount}, #{hoseholdCount}, #{option},#{security} )
+		VALUES (#{sellNo}, 1,#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{sellShortterm},
+				#{sellType}, #{sellFloor},#{sellPrivateArea}, #{sellProvideArea}, #{sellAllFloor}, #{sellRoomCount}, #{sellToiletCount},
+				#{sellWay}, #{sellHousehold}, #{sellEntrance}, #{sellMoveDatetime}, #{sellBuldtype}, #{sellInstallation}, #{sellAircondition},
+				#{sellHeating}, #{parkingCount}, #{sellApprovalDatetime}, #{sellEnrollDatetime}, #{complexApplyDatetime}, #{wingCount}, #{householdCount},
+				#{option}, #{security}, SYSDATE, SYSDATE)
 	</insert>
 	
-	<insert id="sellInsertImg" parameterType="list">
-		INSERT INTO ATTACHMENT
-		SELECT ATTACHMENT_NO.NEXTVAL AS IMG_NO, C.*
-		FROM(
-				<foreach collection="list" item="img" separator="UNION ALL">
-					SELECT #{img.originFile} as ORIGIN_File,
-						   #{img.changeName} as CHANGE_NAME,
-						   #{img.refSno} as REF_SNO
-						   #{img.fileLevel} as FILE_LEVEL
-						   
-				    FROM DUAL
-				</foreach>
-			)C
+
+	<insert id="sellInsertImg" parameterType="list" useGeneratedKeys="true" keyProperty="attachmentNo">
+		INSERT INTO ATTACHMENT (REF_SNO, ORIGIN_FILE, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		SELECT C.*
+		FROM   (<foreach collection="list" item="at" separator="UNION ALL">
+					SELECT #{at.refSno}, #{at.originFile}, #{at.changeName}, #{at.filePath}, #{at.fileLevel}
+			   </foreach>) AS C
 	</insert>
- 
+	
+	<select id="selectSellList" resultMap="sellResultSet" >
+		SELECT SELL_NO, SELL_NAME,SELL_TYPE, CREATE_DATE
+		FROM SELLDETAIL
+	</select>
+	
+	<select id="sellDetail" resultMap="sellDetailResultSet">
+		SELECT *, USER_NAME
+		FROM SELLDETAIL
+		JOIN MEMBER ON(USER_NO = REF_UNO)
+		WHERE SELL_NO = #{sellNo}
+	</select>
+ 	
+ 	<select id="selectImgList" resultMap="attachmentReustSet">
+ 		SELECT ATTACHMENT_NO, REF_SNO, ORIGIN_FILE, CHANGE_NAME, FILE_PATH, FILE_LEVEL
+		FROM ATTACHMENT
+		WHERE REF_SNO = #{sellNo}
+		ORDER BY FILE_LEVEL
+ 	</select>
+ 	
+
+
 </mapper>

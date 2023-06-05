@@ -50,9 +50,7 @@
 		background: rgb(34, 34, 91);
 		border : 2px solid rgb(169, 169, 169);
 		width: 70px;
-		height:40px;
 		justify-content: center;
-		line-height:36px;
 		
 	}
 	.password_content{

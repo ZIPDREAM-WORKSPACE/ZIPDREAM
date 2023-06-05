@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -9,15 +10,15 @@
          <h1>채팅 문의 목록 조회</h1>
          
       </div>
-      <div class="content-table">
+      <div class="content-table" >
          <table class="rwd-table">
         
             <tbody>
                <tr>
-                  <th>번호</th>
-                  <th>내용</th>
-                  <th>제목</th>
-                 
+                  <th width="10%">번호</th>
+                  <th width="40%">내용</th>
+                  <th width="25%">회원</th>
+                  <th width="25%">생성일</th>
                </tr>
                  <c:choose>
                   <c:when test="${empty selectChatRoomList }">
@@ -27,11 +28,11 @@
                   </c:when>
 	           <c:otherwise>
 	               <c:forEach items="${selectChatRoomList.list}" var="chatList">
-	               <tr onclick="location.href='<%=request.getContextPath()%>/chat/room/${chatList.chatRoomNo}'">
+	               <tr onclick="location.href='<%=request.getContextPath()%>/admin/chat/room/${chatList.chatRoomNo}'">
 	               	 <th>${chatList.chatRoomNo} </th>
-	                   <th>${chatList.message}</th>
+	                  <th>${fn:substring(chatList.message,0,30)}</th>
 	                  <th>${chatList.title} </th>
-	                 
+	                  <th>${chatList.createDate} </th>
 	               </tr>
 	               </c:forEach>
 		        </c:otherwise>
@@ -70,6 +71,10 @@
 				</ul>
 			</div>
       </div>
+      
    </section>
 </section>
+<script>
+/* setTimeout("location.reload()", 5000); */
+</script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

@@ -12,8 +12,8 @@
 		<result column="ADDRESS" property="address"/>
 		<result column="OFFICE" property="office"/>
 
-		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
-		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
+		<result column="ENROLL_DATETIME" property="enrollDateTime" />
+		<result column="MODIFY_DATETIME" property="modifyDateTime" />
 		<result column="WITHDRAW" property="withdraw" />
 
 		
