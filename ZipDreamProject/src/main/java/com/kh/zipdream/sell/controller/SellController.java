@@ -1,5 +1,6 @@
 package com.kh.zipdream.sell.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
@@ -62,13 +64,14 @@ public class SellController {
 	}
 	
 	//sell_detail페이지 이동
-	@GetMapping("/detail/{sellNo}")
-	public String sellDetail(@PathVariable("sellNo") int sellNo, Model model,HttpServletRequest rq, HttpServletResponse reps) {
+	@PostMapping("/detail")
+	public String sellDetail(Model model, SellDetail sd) {
+		model.addAttribute("sd", sd);
 		
-		SellDetail detail = sellService.sellDetail(sellNo);
-		model.addAttribute("sd", detail);
+		System.out.println(sd);
+		
 		return "sell/sellDetail";
 	}
 	
-		
+
 }
