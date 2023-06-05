@@ -29,6 +29,7 @@ public class MemberDao {
 	}
 	//부모창 mail인증하기 버튼
 
+
 	public int completeAuth(String mail) {
 		return sqlSession.selectOne("member-mapper.completeAuth", mail);
 	}
@@ -48,15 +49,10 @@ public class MemberDao {
 	}
 	
 	
+	public Member selectMember(int userNo) {
+		return sqlSession.selectOne("member-mapper.selectMember",userNo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
 

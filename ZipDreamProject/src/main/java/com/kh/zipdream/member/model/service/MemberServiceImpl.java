@@ -21,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
+
 	@Override
 	public int insertMember(Member inputMember) {
 
@@ -81,6 +82,11 @@ public class MemberServiceImpl implements MemberService {
 	        if(mailAuth==null) return 0;
 	        return mailAuth.getIsAuth();
 	    }
+
+	public Member selectMember(int userNo) {
+		return memberDao.selectMember(userNo);
+	}
+
 }
 
 	
