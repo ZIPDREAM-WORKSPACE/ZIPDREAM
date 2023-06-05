@@ -31,7 +31,7 @@
 
 .notice_list {
 	height: 300px;
-	background: rgb(242, 242, 242);
+	background: rgb(245, 245, 234);
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
@@ -40,11 +40,7 @@
 	margin-bottom: 20px;
 	cursor: pointer;
 }
-.notice_list:hover {
-	
-	background: blue;
-	
-}
+
 .news {
 	height: 300px;
 	background: rgb(236, 236, 236);
@@ -563,7 +559,7 @@ right:-45px;
 	right:3%;
 	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 10px;
 	border-radius: 50px;
-	z-index: 99;
+	z-index: 98;
 	text-align: center;
 	font-weight: 500;
 	background: white;
@@ -630,6 +626,7 @@ right:-45px;
 	margin: auto;
 	margin-top:17px;
 	border : 1px solid grey;
+	z-index: 99;
 	
 }
 #chat_msg{
@@ -640,9 +637,7 @@ right:-45px;
 
 }
 #chat_msg:focus{
-	outline: none;
-	!
-	important;
+	outline: none; !important;
 }
 #send{
 	width:30px;
@@ -714,6 +709,32 @@ box-sizing: border-box;
         background-color :rgb(242, 249, 254);
       
    }
+   .display-chatting::-webkit-scrollbar-thumb{
+background: grey;
+    border-radius: 10px;
+}
+.display-chatting::-webkit-scrollbar{
+width: 10px;  
+}
+.logoImage{
+	height:110px;
+	width:120px;
+	opacity: 0;
+	position: absolute;
+	top:60%;
+	transition: all 0.5s;
+	
+}
+.nlist_inner:hover>.logoImage{
+display:  block;
+    opacity : 0.3;
+     
+
+}
+
+.notice_list:hover{
+	background: rgb(231, 231, 219);
+}
 </style>
 </head>
 <body>
@@ -721,7 +742,7 @@ box-sizing: border-box;
 	<jsp:include page="../common/header.jsp" />
 	<div class="chat" ><img src='https://ifh.cc/g/mQ6LcQ.png' ><br>채팅</div>
 	<div class="chatting">
-		<div class="chat_header"><img id="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
+		<div class="chat_header"><img id="x" class="x" src='https://ifh.cc/g/8wfDZb.png' ><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;운영자와의 채팅</div>
 		<div class="chatting_inner">
 			<c:choose>  	
 				<c:when test="${empty sessionScope.loginUser}">
@@ -729,7 +750,7 @@ box-sizing: border-box;
 				</c:when> 
 				<c:otherwise> 
 				
-					<div class="chat_open">운영자와 채팅하기</div>
+					<div class="chat_open" >운영자와 채팅하기</div>
 					<ul class="display-chatting" style="display:none">
 					</ul>
 				</c:otherwise> 
@@ -820,7 +841,7 @@ box-sizing: border-box;
 			<div class="main_ad_text"><div class="text_size" data-aos="fade-down-right" data-aos-duration="1500"
      				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/ct4KOO.png'><br>원하는<br>분양이 나오면<br>바로 알려드려요!</div><br>
 					<h5 class="main_h5" data-aos="flip-up" >싸고 좋은 매물,</h5><h5 class="main_h5" data-aos="flip-up">제일 먼저 확보하세요</h5><br>
-					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
+					<div class="more_btn" data-aos="zoom-in-up" id="sales">더 알아보기</div>
 				</div>
 			<div class="main_ad_image" data-aos="fade-down"
 								     data-aos-easing="linear"
@@ -904,7 +925,7 @@ box-sizing: border-box;
 	 	const refUno ='${loginUser.userNo}';
 		const userId ='${loginUser.userId}';
 		const userName = '${loginUser.userName}';
-		
+		const userLevel = '${loginUser.userLevel}';
 		
 		
 		
@@ -955,7 +976,8 @@ box-sizing: border-box;
 		 				'<div class="notice_list" onClick="noticeModal('+i+');"><img class="pin"'+
 							'src="<%=request.getContextPath()%>/resources/images/pin.png">'+
 						'<div class="nlist"><div class="nlist_inner">'+
-								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div></div></div></div>';
+								'<div class="nlist_text">'+result.list[i].noticeBoardTitle+'</div>'+
+								'<img  class="logoImage" src="https://ifh.cc/g/QymlYO.png" ></div></div></div>';
 		 			}
 		 			
 		 			$("#n_slider").html(text);
@@ -1070,10 +1092,11 @@ box-sizing: border-box;
 			 	
 		$(".chat").click(function(){
 			$(".chatting").css("display","block");
+			
 			$(".chat").css("display","none");
 			
 		});
-	 	$("#x").click(function(){
+	 	$(".x").click(function(){
 	 		$(".chatting").css("display","none");
 			$(".chat").css("display","block");
 			
@@ -1081,19 +1104,25 @@ box-sizing: border-box;
 		
 	 	$(".chat_open").click(function(){
 	 		
-	 		
-		 	/* 채팅 */
-		 	$.ajax({
+	 		$("#chat_msg").focus();
+			
+			$.ajax({
 		 		url : "<%=request.getContextPath()%>/chat/openChatRoom",
 		 		type : "get",
 		 		success : function(result){
-		 				
+		 			
 		 				chatRoomNo = result;
 		 				chattingSock = new SockJS("<%=request.getContextPath()%>/chat"); 
 		 				addEventChat();
 		 				$("#x").click(function(){
-		 					exitChatRoom();
 		 					
+		 					let result2 = exitChatRoom();
+		 					console.log(result2);
+		 					if(result2 == 1){
+		 						$(".chat_open").css("display","block");
+		 					 	$(".display-chatting").css({"display":"none","border":"none"});
+		 					 	$(".display-chatting").html('');
+		 					}
 		 				});
 		 		},
 		 		error : function(request){
@@ -1101,7 +1130,10 @@ box-sizing: border-box;
 		 			console.log("에러코드 : "+request.status);
 		 			
 		 		}
-		 	});
+			})
+		 	/* 채팅 */
+		 	
+		 	
 		 	$(".chat_open").css("display","none");
 		 	$(".display-chatting").css({"display":"block","border":"none"});
 		 	
@@ -1125,70 +1157,57 @@ box-sizing: border-box;
 		 	location.href="<%=request.getContextPath()%>/member/login";
 	 	});	
 	 	
-		
-		
-		
-		
-		window.addEventListener('beforeunload', (event) => {
-		    event.preventDefault();
-		    let userNo = '${loginUser.userNo}';
-		    // ajax 호출
-		
-		if(userNo!=''){
-		
-		 	$.ajax({
-				url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
-				type : "get",
-				success : function(result){
-					// result == 1 나가기 성공
-					if(result >= 1){
-						$.ajax({
-							url:"<%=request.getContextPath()%>/chat/exit",
-							data:{ chatRoomNo},
-							success : function(data){
-								if(data == 1){
-								}else{
-									alert("채팅방 나가기에 실패했습니다.");
-								}
-								
-							}
-						})
-						
-					}else{
-					}
-					// result == 0 실패 
-					
-				},     error: function(){
-		            console.log("에러남");
-		        }
-				
-			})
-			
-	 	} 
-	 	
+		$("#sales").click(function(){
+			location.href="<%=request.getContextPath()%>/sales/schedule";
 		});
 		
+	
+	/* 	$("#chat_btn").click(function(){
+			$(".chatting").css("display","block");
+			
+			$(".chat").css("display","none");
+		}); */
 		
-		})
+		
+		
+		});
+		function chat(){
+			$(".chatting").css("display","block");
+			
+			$(".chat").css("display","none");
+		}
+		
 		
 		function exitChatRoom(){
+			let data= 0;
 			if(confirm("대화를 종료하시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
 					data:{ chatRoomNo},
+					 async:false,
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){
-							location.href="<%=request.getContextPath()%>"
+							data = result;
+							alert("채팅방 나가기에 성공했습니다.");
 						}else{
 							alert("채팅방 나가기에 실패했습니다.");
 						}
 						// result == 0 실패 
 						
-					}
+					},
+			 		error : function(request){
+			 			console.log("에러발생");
+			 			console.log("에러코드 : "+request.status);
+			 			
+			 		}
 				})
+			}else{
+				$(".chatting").css("display","block");
+			 	$(".display-chatting").css({"display":"block","border":"none"});
+				
 			}	
-			
+			return data;
 		};
 		
 		<%-- function exitChatRoom2(){
@@ -1209,10 +1228,19 @@ box-sizing: border-box;
 			
 		}; --%>
 		
- 	
+		$("#chat_msg").keyup(function(event){
+			if(event.which===13){
+				  $("#send").click();
+			}
+		});
+		
+	
 		
 	</script>
 	
 <script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 
 	<jsp:include page="../common/footer.jsp" />
+	
+	
+	

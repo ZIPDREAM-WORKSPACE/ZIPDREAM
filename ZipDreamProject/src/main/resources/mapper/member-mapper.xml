@@ -11,15 +11,23 @@
 		<result column="EMAIL" property="email" />
 		<result column="ADDRESS" property="address"/>
 		<result column="OFFICE" property="office"/>
-		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
-		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
-		<result column="NICKNAME" property="nickname" />
+
+		<result column="ENROLL_DATETIME" property="enrollDateTime" />
+		<result column="MODIFY_DATETIME" property="modifyDateTime" />
+		<result column="WITHDRAW" property="withdraw" />
+
+		
 		<result column="STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
 	
+	<resultMap type="mailAuth" id="emailResultSet">
+		<id column="MAIL" property="mail" />
+		<result column="AUTH_KEY" property="authKey" />
+		<result column="IS_AUTH" property="isAuth" />
+	</resultMap>
 	
-
+	
 	<select id="loginMember" parameterType="member"
 		resultMap="memberResultSet">
 		SELECT *
@@ -27,21 +35,89 @@
 		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
 	</select>
 	
-<!-- 일반고객 회원가입 -->
-	<!-- <insert id="insertMember" parameterType="member">
+  <select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
+	</select>
+  
+
+	<!-- 일반회원 회원가입 -->
+	 <insert id="insertMember" parameterType="member" useGeneratedKeys="true" keyProperty="userNo">
+
 		INSERT INTO
-		MEMBER(USER_NO
-			, USER_ID
+		MEMBER(
+
+			  USER_ID
 			, USER_PWD
 			, USER_NAME
-			, EMAIL)
-		VALUES(SEQ_UNO.NEXTVAL
-			, #{userId}
+			, PHONE
+			, ADDRESS
+			, ENROLL_DATETIME
+			, MODIFY_DATETIME
+			, WITHDRAW
+			, USER_LEVEL
+			)
+		VALUES(
+			 #{userId}
 			, #{userPwd}
 			, #{userName}
-			, #{email}
+			, #{phone}
+			, #{address}
+			, SYSDATE()
+			, SYSDATE()
+			, 'Y'
 			, 1)
-	</insert>  -->
+	</insert>  
+	
+	<insert id="insertbkMember" parameterType="member"  useGeneratedKeys="true" keyProperty="userNo">
+		INSERT INTO
+		MEMBER(
+			  USER_ID
+			, USER_PWD
+			, USER_NAME
+			, PHONE
+			, ADDRESS
+			, ENROLL_DATETIME
+			, MODIFY_DATETIME
+			, WITHDRAW
+			, OFFICE
+			, USER_LEVEL
+			)
+		VALUES(
+			 #{userId}
+			, #{userPwd}
+			, #{userName}
+			, #{phone}
+			, #{address}
+			, SYSDATE()
+			, SYSDATE()
+			, 'Y'
+			, #{office}
+			, 2)
+	</insert>
+	
+	<!-- 이메일 -->
+	<insert id="insertMailAuth" parameterType="mailAuth">
+    INSERT INTO mail_auth (mail,auth_key,is_auth)
+    values (#{mail},#{authKey},0)
+	</insert>
+	
+	<select id="getMailAuth" resultMap="emailResultSet">
+	    SELECT mail, auth_key, is_auth
+	    FROM mail_auth
+	    WHERE mail=#{mail}   
+	</select>
+	
+	<update id="updateMailAuth" parameterType="mailAuth">
+	    UPDATE mail_auth 
+	    SET auth_key=#{authKey}
+	    ,is_auth=0
+	    WHERE mail=#{mail}
+	</update>
+	
+	<update id="completeAuth" parameterType="mailAuth">
+	    UPDATE mail_auth SET is_auth=1
+	    WHERE mail=#{mail}
+	</update>
 	
 	
 </mapper>

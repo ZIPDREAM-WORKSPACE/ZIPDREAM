@@ -1,5 +1,7 @@
 package com.kh.zipdream.mail.model.service;
 
+import java.util.Random;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -15,7 +17,13 @@ public class MailSendService {
 	private JavaMailSenderImpl mailSender;
 
 	private String getKey(int size) {
-		return "622354"; // 6개 숫자 랜덤 만들어보세요
+		Random random = new Random();
+	    StringBuilder keyBuilder = new StringBuilder();
+	    for (int i = 0; i < size; i++) {
+	        int digit = random.nextInt(10);
+	        keyBuilder.append(digit);
+	    }
+	    return keyBuilder.toString();
 	}
 
 	public String sendAuthMail(String mail) throws MessagingException {

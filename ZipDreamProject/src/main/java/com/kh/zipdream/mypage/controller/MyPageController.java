@@ -29,4 +29,14 @@ public class MyPageController {
 	public String moveMyInfoController(){
 		return "mypage/myInfo";
 	}
+	
+	@GetMapping("/myroomlist")
+	public String moveMyRoomList() {
+		return "mypage/myroomList";
+	}
+	
+	@GetMapping("/myroominsert")
+	public String moveMyRoomInsert() {
+		return "mypage/myroomInsert";
+	}
 }

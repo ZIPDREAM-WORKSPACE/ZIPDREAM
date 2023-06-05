@@ -1,5 +1,6 @@
 package com.kh.zipdream.chat.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.zipdream.chat.model.vo.ChatMessage;
@@ -12,7 +13,7 @@ public interface ChatService {
 	
 	int openChatRoom(ChatRoom cr);
 	
-	List<ChatMessage> joinChatRoom(ChatRoomJoin crj);
+	List<ChatMessage> selectChatMessage(ChatRoomJoin join);
 	
 	public void joinChatRoomUser(ChatRoomJoin crj);
 	
@@ -21,4 +22,6 @@ public interface ChatService {
 	int exitChatRoom(ChatRoomJoin crj);
 	
 	int selectChatRoom(int uno);
+	
+	int selectChatRoomjoin(HashMap<String, Integer> map);
 }
