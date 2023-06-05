@@ -685,6 +685,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                     function listView(addressToXy, roadName){
     						  	listEl = document.getElementById('placesList');
     						  	var listLiTag = document.createElement("li");
+    						  	listLiTag.setAttribute("class", "goDetail");
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
@@ -717,7 +718,9 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
-    						  	
+    						  	/* listLiTag.addEventListener('click', function(){
+    						        alert('Hello world, ');
+    						    });  */
     						  	
     						  	
     					  }
