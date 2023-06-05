@@ -12,6 +12,10 @@ public interface MemberService {
 
 	public abstract int insertMember(Member inputMember);
 	
+	public abstract int insertbkMember(Member inputMember);
+	
+	public abstract int insertapply(int userNo);
+	
 	public void registMailAuth(MailAuth mailAuth) throws Exception;//부모창 mail 확인하기, 확인하기버튼 누르는 순간 인증키랑 mail 저장
 	
 	public void authKeyCompare(MailAuth mailAuth) throws Exception;

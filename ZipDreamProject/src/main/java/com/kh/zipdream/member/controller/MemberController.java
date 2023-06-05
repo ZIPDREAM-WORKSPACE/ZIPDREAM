@@ -38,10 +38,16 @@ public class MemberController {
 	public String memberJoin() {
 		return "member/memberJoin";
 	}
+	
+	@GetMapping("/bkjoin")
+	public String bkmemerJoin() {
+		return "member/bkmemberJoin";
+	}
+	
 
 	// 이메일
 	@Autowired
-	MailSendService mailSendService; // @Service를 붙였었다.
+	MailSendService mailSendService; 
 
 	// 로그인 회원가입
 	@Autowired
@@ -73,6 +79,8 @@ public class MemberController {
 
 	      // 암호화 전 loginUser처리
 	      Member loginUser = memberService.loginMember(m);
+	      
+	      /*여기여기여기ㅕ깅ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ*/
 	      if (loginUser == null) { // 실패
 	         mv.addObject("errorMsg", "로그인 실패");
 	         mv.setViewName("common/errorPage");
@@ -94,11 +102,12 @@ public class MemberController {
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
-
+	
+	//일반회원가입
 	@PostMapping("/insert")
 	public String insertMember( 
 			Member m, HttpSession session, Model model) {
-			
+		
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
 		// 암호화된 pwd를 m의 userPwd다시 대입
@@ -122,23 +131,34 @@ public class MemberController {
 		return url;
 	}
 	
-	
+	//중개사회원가입
+		@PostMapping("/bkinsert")
+		public String insertbkMember( 
+				Member m, HttpSession session, Model model) {
+			
+			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+			
+			// 암호화된 pwd를 m의 userPwd다시 대입
+			
+			m.setUserPwd(encPwd);
+			
+			
+			int result = memberService.insertbkMember(m);
+			/* int result2 = memberService.insertapply(m.getUserNo()); */
+			
+			System.out.println(result);
+			
+			String url = "";
+			if (result > 0) { // 성공시 - 메인페이지로
+				session.setAttribute("alertMsg", "회원가입");
+				url = "redirect:/";
+			} else { // 실패 - 에러페이지
+				model.addAttribute("errorMsg", "회원가입 실패");
+				url = "common/errorPage";
+			}
 
-	
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			return url;
+		}
 	
 	
 	/*이메일*/
@@ -178,6 +198,7 @@ public class MemberController {
 		else return "인증안됨";
 	}
 	
+
 	@GetMapping("/logout")
 	public String logoutMember(HttpSession session,
 							SessionStatus status) {
@@ -204,6 +225,8 @@ public class MemberController {
 	 * 
 	 * return url; }
 	 */  
+
+	
   }
 	 
 
