@@ -19,15 +19,18 @@ import lombok.ToString;
 public class SellDetail {
 	
 	private int sellNo; 					// SELL_NO int 
+	private String sellSno;
 	private int refUno;						//	REF_UNO int 
 	private String sellName; 				//	SELL_NAME varchar(100) 
 	private String sellAddress;				//	SELL_ADDRESS varchar(100) 
+	private String brokerAdd;
 	private int sellPrice;					//	SELL_PRICE int 
 	private int sellMaintenance;			//	SELL_MAINTENANCE int 
 	private String sellParking;				//	SELL_PARKING varchar(30) 
 	private String sellShirtterm;			//	SELL_SHIRTTERM varchar(30) 
 	private String sellType;				//	SELL_TYPE varchar(30) 
 	private int sellFloor;					//	SELL_FLOOR int 
+	private Date ymd;
 	private String sellPrivateArea;			//	SELL_PRIVATE_AREA varchar(30) 
 	private String sellProvideArea;			//	SELL_PROVIDE_AREA varchar(30) 
 	private int sellAllFloor;				//	SELL_ALL_FLOOR int 
@@ -44,6 +47,8 @@ public class SellDetail {
 	private int parkingCount;				//	PARKING_COUNT int 
 	private Date sellApprovalDatetime; 		//	SELL_APPROVAL_DATETIME datetime 
 	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
+	private String realYn;
+	private Date realYnDate;
 	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
 	private int wingCount; 					//	WING_COUNT int 
 	private int householdCount;				//	HOUSEHOLD_COUNT int 
