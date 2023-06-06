@@ -17,8 +17,9 @@
                <tr>
                   <th width="10%">번호</th>
                   <th width="40%">내용</th>
-                  <th width="25%">회원</th>
-                  <th width="25%">생성일</th>
+                  <th width="20%">회원</th>
+                  <th width="20%">생성일</th>
+                  <th width="10%">참여수</th>
                </tr>
                  <c:choose>
                   <c:when test="${empty selectChatRoomList }">
@@ -27,12 +28,13 @@
                      </tr>
                   </c:when>
 	           <c:otherwise>
-	               <c:forEach items="${selectChatRoomList.list}" var="chatList">
+	               <c:forEach items="${selectChatRoomList.list}" var="chatList" varStatus="status">
 	               <tr onclick="location.href='<%=request.getContextPath()%>/admin/chat/room/${chatList.chatRoomNo}'">
 	               	 <th>${chatList.chatRoomNo} </th>
 	                  <th>${fn:substring(chatList.message,0,30)}</th>
 	                  <th>${chatList.title} </th>
 	                  <th>${chatList.createDate} </th>
+	                   <th>${countList[status.index].count} </th>
 	               </tr>
 	               </c:forEach>
 		        </c:otherwise>

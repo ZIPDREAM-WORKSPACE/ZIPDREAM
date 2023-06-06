@@ -85,10 +85,7 @@
 	cursor: pointer;
 	font-weight: 500;
 }
-.login>a{
-	color:white;
-	text-decoration-line: none;
-}
+
 
 .header_list {
 	width: 60%;
@@ -194,7 +191,7 @@ position: absolute;
 				<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 			</ul>
 			<c:if test="${ empty sessionScope.loginUser}"> 
-            		<div class="login"><a href="<%=request.getContextPath()%>/member/login">로그인</a></div>
+            		<div class="login">로그인</div>
 
             </c:if>
             <c:if test="${!empty sessionScope.loginUser}"> 
@@ -255,6 +252,9 @@ position: absolute;
  		
  	}
  	
+	$(".login").click(function(){
+		location.href="<%=request.getContextPath()%>/member/login";
+	});
 	
 
 	</script>
