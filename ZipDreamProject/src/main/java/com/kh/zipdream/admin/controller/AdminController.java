@@ -202,10 +202,14 @@ public class AdminController {
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						
 						 ) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		service.selectChatRoomList(cp,map);
+		List<Integer> countList = chatService.countChatRoomMemberList();
+		System.out.println(countList);
 		model.addAttribute("selectChatRoomList",map);
+		model.addAttribute("countList",countList);
 		return "admin/adminChat";
 	}
 	

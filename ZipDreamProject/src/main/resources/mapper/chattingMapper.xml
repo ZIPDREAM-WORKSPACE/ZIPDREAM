@@ -18,6 +18,11 @@
 		<result column="USER_ID" property="userId" />
 	</resultMap>
 	
+	<resultMap type="chatRoomJoin" id="chatRoomJoinCount">
+		<result column="COUNT" property="count" />
+		
+	</resultMap>
+	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
 		  SELECT MESSAGE, CHAT_ROOM_NO, TITLE, DATE_FORMAT(CREATE_DATETIME, '%Y-%m-%d %H:%i:%s') AS CREATE_DATE
         FROM CHAT_ROOM
@@ -115,9 +120,16 @@
 	</select>
 	
 	<select id="selectChatRoomjoin" resultType="_int" parameterType="java.util.Map">
-		SELECT count(*)
+		SELECT COUNT(*)
        FROM CHAT_ROOM_JOIN
        WHERE CHAT_ROOM_NO = #{cno}  AND REF_UNO = #{uno}
+	</select>
+	
+	<select id="countChatRoomMemberList" resultMap="chatRoomJoinCount" >
+		   	SELECT COUNT(*) AS COUNT
+         FROM CHAT_ROOM_JOIN
+          GROUP BY CHAT_ROOM_NO
+        ORDER BY CHAT_ROOM_NO DESC;
 	</select>
 	
 	

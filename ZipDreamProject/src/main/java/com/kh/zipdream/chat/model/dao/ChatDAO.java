@@ -97,9 +97,13 @@ public class ChatDAO {
 		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
 	}
 	
-	// 채팅방 조회
+	// 채팅조인 조회 
 	public int selectChatRoomjoin(HashMap<String, Integer> map){
 		return sqlSession.selectOne("chattingMapper.selectChatRoomjoin", map);
+	}
+	
+	public List<Integer> countChatRoomMemberList(){
+		return sqlSession.selectList("chattingMapper.countChatRoomMemberList");
 	}
 
 }
