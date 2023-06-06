@@ -65,10 +65,12 @@ public class SellController {
 	
 	//sell_detail페이지 이동
 	@PostMapping("/detail")
-	public String sellDetail(Model model, SellDetail sd) {
-		model.addAttribute("sd", sd);
-		
-		System.out.println(sd);
+	public String sellDetail(/*Model model, SellDetail sd*/) {
+		/*
+		 * model.addAttribute("sd", sd);
+		 * 
+		 * System.out.println(sd);
+		 */
 		
 		return "sell/sellDetail";
 	}

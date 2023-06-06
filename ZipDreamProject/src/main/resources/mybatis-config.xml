@@ -27,6 +27,7 @@
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatMessage" alias="chatMessage"/>
 		
 		<typeAlias type="com.kh.zipdream.map.model.vo.beopjeongdong" alias="beopjeongdong"/>
+		
 	</typeAliases>
 	
 	<mappers>
