@@ -97,12 +97,12 @@
 	</select>
 	
 	<select id="countEvent" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION
+		SELECT COUNT(*) FROM NOTICE_BOARD
 	</select>
 	
 	<select id="countEventYesterday" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION 
-		<![CDATA[WHERE PROMOTION_START_DATETIME < CURDATE()]]>
+		SELECT COUNT(*) FROM NOTICE_BOARD 
+		<![CDATA[WHERE CREATE_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">

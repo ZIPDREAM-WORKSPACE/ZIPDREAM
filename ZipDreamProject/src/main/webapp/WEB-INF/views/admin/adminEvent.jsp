@@ -8,7 +8,7 @@
 	<section class="content-wrap">
 		<div class="content-title">
 			<h1>이벤트 관리</h1>
-			<div class="content-view-item add-coupon" style="margin-right:200px;box-shadow: 0px 10px 30px rgba(17, 38, 146, 0.3);">
+			<div class="content-view-item add-coupon" style="margin-right:140px;box-shadow: 0px 10px 30px rgba(17, 38, 146, 0.3);cursor:pointer;">
 				<div class="coupon-menu">
 					<p class="text-gray">쿠폰 등록</p>
 					<h5 style="margin-top:10px;">현재 : 2</h5>
@@ -92,6 +92,28 @@
 				</ul>
 			</div>
 		</div>
+		<div class="modal fade" id="couponModal" tabindex="-1" aria-labelledby="couponModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">쿠폰 현황</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close"
+							style="border: none; background: white; font-size: 20px;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						asd
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success">쿠폰 등록</button>
+						<button type="button" id="btn_register" class="btn btn-primary"
+	                        data-dismiss="modal">닫기</button>
+      				</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </section>
 <script>
@@ -139,5 +161,8 @@ for (let i = 0; i < userLabel.length; i++) {
 	});
 }
 
+$(".add-coupon").click(function(){
+	$('#couponModal').modal("show");
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />
