@@ -35,8 +35,8 @@ public class SellDetail {
 	private String sellShortterm;			//	SELL_SHIRTTERM varchar(30) 
 	private String sellType;				//	SELL_TYPE varchar(30) 
 
-	private int sellFloor;					//	SELL_FLOOR int 
-	private Date ymd;
+	private String sellFloor;					//	SELL_FLOOR int 
+	private String ymd;
 
 	private String sellPrivateArea;			//	SELL_PRIVATE_AREA varchar(30) 
 	private String sellProvideArea;			//	SELL_PROVIDE_AREA varchar(30) 
@@ -56,7 +56,7 @@ public class SellDetail {
 	private Date sellApprovalDatetime; 		//	SELL_APPROVAL_DATETIME datetime 
 	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
 	private String realYn;
-	private Date realYnDate;
+	private String realYnDate;
 	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
 	private int wingCount; 					//	WING_COUNT int 
 	private int householdCount;				//	HOUSEHOLD_COUNT int 
