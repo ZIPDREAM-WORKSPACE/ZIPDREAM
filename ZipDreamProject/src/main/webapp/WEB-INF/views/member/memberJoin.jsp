@@ -72,17 +72,18 @@
 	    background: #FFFFFF;
 	    border: 0.5px solid #000000;
 	    text-align: center;
-}
-    }
+	}
+    
 
     #emailcheck{
-		position: absolute; 
+		position: absolute;
 	    width: 114px;
-	    height: 45px;
-	   left: 800px;
-	    top: 190px; 
+	    height: 44px;
+	    left: 440px;
+	    top: 135px;
 	    background-color: #4C69A2;
 	    color: white;
+	    font-size: 10px;
     }
 
     #ok{
@@ -174,7 +175,7 @@
 	    border: 0.5px solid #000000;
     }
 
-    #address{
+    #addr1{
        position: absolute; 
 	    width: 360px;
 	    height: 45px;
@@ -183,15 +184,37 @@
 	    background: #FFFFFF;
 	    border: 0.5px solid #000000;
     }
+    
+    #addr2{
+    	position: absolute; 
+	    width: 360px;
+	    height: 45px;
+	    bottom: 340px;
+	    top: 810px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
+    }
+    
+    #addr3{
+    	position: absolute; 
+	    width: 360px;
+	    height: 45px;
+	    bottom: 340px;
+	    top: 865px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
+    }
+    
 
     #adsearch{
              position: absolute; 
 		    width: 114px;
 		    height: 45px;
-		     left: 450px; 
+		     left: 315px; 
 		     top: 755px; 
 		    background: #4C69A2;
 		    color: white;
+		    font-size: 15px;
     }
 
     #detailaddress{
@@ -213,7 +236,7 @@
 		    border-radius: 8px;
 		    align-items: center;
 		    margin-left: 65px;
-		    margin-top: 160px;  
+		    margin-top: 240px;  
     }
 
     h4{
@@ -261,8 +284,8 @@
                 <h4>비밀번호</h4>
                 <input type="password" id="password" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
                 <label style="font-size: 13px; color: gray;">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
-                <span id="passwordError" style="color: red; font-size: 13px;" ></span><br>
-                <span id="passwordMessage" style="color: green; font-size: 13px;"></span>
+                <span id="passwordError" style="color: red; font-size: 13px;" ></span>
+                <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
                 
 
                 <h4>비밀번호 확인</h4>
@@ -274,12 +297,19 @@
 
                 <h4>전화번호</h4>
                 <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
-
+		
                 <h4>주소</h4>
-                <input type="text" id="address" name="address" placeholder="우편번호"><br><br>
-                <button type="button" id="adsearch" name="adsearch">검색</button>
-            <!--     <input type="text" id="detailaddress" placeholder="상세주소를 입력해주세요."> -->
-                
+				<div class="form-group">                   
+				<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
+				    <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+				</div>
+				<div class="form-group">
+				    <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
+				</div>
+				<div class="form-group">
+				    <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
+				</div>
+
                 <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
 				
 				</form>
@@ -292,6 +322,7 @@
     
     
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 function ok(){
@@ -352,7 +383,7 @@ function ok(){
 	 		,dataType : "TEXT"    
 	 		,async:false
             ,success: function(data){
-               alert(data);
+               alert("인증번호를 전송완료.");
                verificationNumber = data;
             },error : function(req,status,err){
                 console.log(req);
@@ -391,7 +422,51 @@ function ok(){
     } 
       
   }); 
-     
+    
+  
+  //주소 가져오기
+  function execPostCode() {
+         new daum.Postcode({
+             oncomplete: function(data) {	
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+ 
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+ 
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+ 
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                console.log(data.zonecode);
+                console.log(fullRoadAddr);
+                
+                
+                $("[id=addr1]").val(data.zonecode);
+                $("[name=addr2]").val(fullRoadAddr);
+                
+                document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('addr2').value = fullAddr;
+            }
+         }).open();
+     }
+  
   
 
     
