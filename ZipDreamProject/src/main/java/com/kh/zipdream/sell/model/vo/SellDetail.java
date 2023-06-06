@@ -26,9 +26,10 @@ public class SellDetail {
 	private int refUno;						//	REF_UNO int 
 	private String sellName; 				//	SELL_NAME varchar(100) 
 	private String sellAddress;				//	SELL_ADDRESS varchar(100) 
-
+	
+	private String sellPrice;
 	private String brokerAdd;
-	private int sellPrice;					//	SELL_PRICE int 
+						
 	private int sellMaintenance;			//	SELL_MAINTENANCE int 
 
 	private String sellParking;				//	SELL_PARKING varchar(30) 
@@ -55,6 +56,7 @@ public class SellDetail {
 	private int parkingCount;				//	PARKING_COUNT int 
 	private Date sellApprovalDatetime; 		//	SELL_APPROVAL_DATETIME datetime 
 	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
+	private Date sellConstructionDate;
 	private String realYn;
 	private String realYnDate;
 	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
