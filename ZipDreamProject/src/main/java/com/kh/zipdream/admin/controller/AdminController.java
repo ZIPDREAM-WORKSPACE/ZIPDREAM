@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.admin.model.service.AdminService;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.chat.model.service.ChatService;
@@ -274,4 +278,25 @@ public class AdminController {
 
 	}
 	
+	@PostMapping("/event/insert")
+	public String eventInsert(Model model,
+							  @RequestParam(value="images", required=false) MultipartFile img,
+							  Coupon coupon, HttpSession session) {
+		
+		String webPath = "/resources/images/coupons/";
+		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		coupon.setCouponPath(webPath);
+		int result = 0;
+		
+		try {
+			result = service.insertCoupon(coupon, img, webPath, serverFolderPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+		}else {
+		}
+		return "redirect:/admin/event";
+	}
 }

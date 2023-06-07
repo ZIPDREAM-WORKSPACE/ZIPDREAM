@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.zipdream.admin.model.vo.MemberApply" alias="memberApply"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.NoticeBoard" alias="noticeBoard"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Report" alias="report"/>
+		<typeAlias type="com.kh.zipdream.admin.model.vo.Coupon" alias="coupon"/>
 		<typeAlias type="com.kh.zipdream.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.zipdream.mail.model.vo.MailAuth" alias="mailAuth"/>
 

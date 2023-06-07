@@ -259,4 +259,9 @@
 			 STATUS = #{status}		
 		WHERE USER_NO = #{userNo}
 	</update>
+	
+	<insert id="insertCoupon" parameterType="coupon">
+		INSERT INTO COUPON (COUPON_TITLE,COUPON_CONTENT,COUPON_DATE,COUPON_PATH)
+		VALUES(#{couponTitle},#{couponContent},#{couponDate},#{couponPath})
+	</insert>
 </mapper>

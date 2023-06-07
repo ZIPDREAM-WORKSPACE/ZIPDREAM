@@ -104,7 +104,34 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						asd
+						<form id="enrollForm" action="<%= request.getContextPath() %>/admin/event/insert" enctype="multipart/form-data" method="post">
+							<table align="center">
+								<tr>
+									<th><label for="title">제목</label></th>
+									<td><input type="text" id="title" class="form-control" name="couponTitle" required></td>
+								</tr>
+								<tr>
+									<th><label for="content">내용</label></th>
+									<td><input type="text" id="content" class="form-control" name="couponContent"></td>
+								</tr>
+								<tr>
+									<th><label for="date">유효기간</label></th>
+									<td><input type="date" id="date" class="form-control" name="couponDate"></td>
+								</tr>
+								<tr>
+									<th><label  for="image">업로드 이미지</label></th>
+									<td>
+									<img class="preview" src="">
+									<input type="file" name="images" class="form-control" accept="images/*" id="img" required>
+									</td>
+								</tr>
+							</table>
+							
+							<div align="center">
+								<button type="submit" class="btn btn-primary">등록하기</button>
+								<button type="reset"  class="btn btn-danger">취소하기</button>
+							</div>				
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-success">쿠폰 등록</button>
@@ -164,5 +191,29 @@ for (let i = 0; i < userLabel.length; i++) {
 $(".add-coupon").click(function(){
 	$('#couponModal').modal("show");
 });
+
+function readImage(input) {
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+        // 이미지 파일인지 검사 (생략)
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementsByClassName("preview")[0];
+            previewImage.src = e.target.result
+        }
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+    }
+}
+
+const inputImage = document.getElementById("img")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+});
+
 </script>
+		
+	
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />
