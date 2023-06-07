@@ -81,4 +81,16 @@ public class ChatServiceImpl implements ChatService{
 		return dao.selectChatRoomjoin(map);
 	}
 	
+	@Override
+	public List<Integer> countChatRoomMemberList() {
+		return dao.countChatRoomMemberList();
+	}
+
+	@Override
+	public int closeChatRoom(int chatRoomNo) {
+		dao.deleteChatMessage(chatRoomNo);
+		dao.joinUserDelete(chatRoomNo);
+		return dao.closeChatRoom(chatRoomNo);
+	}
+	
 }

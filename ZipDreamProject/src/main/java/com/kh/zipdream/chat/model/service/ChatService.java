@@ -24,4 +24,8 @@ public interface ChatService {
 	int selectChatRoom(int uno);
 	
 	int selectChatRoomjoin(HashMap<String, Integer> map);
+	
+	List<Integer> countChatRoomMemberList();
+	
+	int closeChatRoom(int chatRoomNo);
 }

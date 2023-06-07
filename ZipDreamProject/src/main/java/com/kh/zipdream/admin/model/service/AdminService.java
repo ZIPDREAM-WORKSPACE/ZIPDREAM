@@ -35,4 +35,5 @@ public interface AdminService {
 	public Report selectReport(int reportNo);
 	public int updateReportResult(Report report);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
+	public List<Integer> countChatRoomMemberList();
 }

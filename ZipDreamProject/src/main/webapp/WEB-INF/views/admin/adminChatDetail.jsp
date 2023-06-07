@@ -117,20 +117,10 @@
 }
 .chat_btn>*{
 	margin:10px;
-	width:100px;
-	height:30px;
-	cursor:pointer;
-	text-align: center;
-	line-height:30px;
 	border-radius: 5px;
 	box-shadow:rgba(0, 0, 0, 0.6) 0px 3px 5px;
 }
-#back{
-	background: rgb(236, 236, 236);
-}
-#exit{
-	background: rgb(236, 236, 236);
-}
+
 .display-chatting::-webkit-scrollbar-thumb{
 background: grey;
     border-radius: 10px;
@@ -146,8 +136,8 @@ width: 10px;
       </div>
 
 	<div class="chat_btn">
-		<div id="back">뒤로 가기</div>
-		<div id="exit">방 나가기</div>
+		<button type="button" class="btn btn-secondary" id="back">뒤로 가기</button>
+		<button type="button" class="btn btn-warning" id="exit">방 나가기</button>
 	</div>
 	<div class="chatting">
 		<div class="chat_header"><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
@@ -208,7 +198,6 @@ $("#exit").click(function(){
 
 $("#back").click(function(){
 	location.href="<%=request.getContextPath()%>/admin/chat";
-	exitChatRoom();
 });
 
 function exitChatRoom(){
