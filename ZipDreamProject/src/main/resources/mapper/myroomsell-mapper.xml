@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myroomsell-mapper">
+
+	<resultMap type="member" id="memberResultSet">
+		<id column="USER_NO" property="userNo" />
+		<result column="USER_ID" property="userId" />
+		<result column="USER_PWD" property="userPwd" />
+		<result column="USER_NAME" property="userName" />
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email" />
+		<result column="ADDRESS" property="address"/>
+		<result column="OFFICE" property="office"/>
+
+		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
+		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
+		<result column="WITHDRAW" property="withdraw" />
+
+		
+		<result column="STATUS" property="status" />
+		<result column="USER_LEVEL" property="userLevel" />
+	</resultMap>
+
+
+	<select id="selectAgent" parameterType="hashmap"
+		resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE USER_LEVEL = '2' AND STATUS = '1'
+		AND
+		<foreach collection="address" item="arr" open="" close="" separator="">
+			ADDRESS LIKE CONCAT('%', #{arr}, '%')
+		</foreach>
+	</select>
+	
+	
+	
+	
+</mapper>

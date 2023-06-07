@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- alert창 꾸미기  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>ZIPDREAM</title>
 <style>
 * {
@@ -418,13 +420,42 @@
 <jsp:include page="../common/header.jsp" />
 	
 	<script>
+		mysaleList = [];
+		myhouseList = [];
 		$(function(){
+			
 			
 			var yearmonth = document.getElementById("yearmonth").innerText;
 			var length = (yearmonth.length) - 1;
 			var month = yearmonth.substring(5, length);
 			
 			applyschedule(month);
+			
+			
+			 if('${loginUser}' != ''){
+				 
+				 $.ajax({
+					url:"<%=request.getContextPath()%>/sales/selectMySale",
+					method:"get",
+					data:{userNo : '${loginUser.userNo}'},
+					dataType:"text",
+					async: false,
+					success:function(result){
+						
+						
+						mysaleList = result;
+						
+						/* console.log(mysaleList); */
+						
+					},
+					error:function(){
+						console.log("에러발생");
+					}
+					
+				 })
+				 
+			 };
+			
 			
 		});
 		
@@ -481,16 +512,14 @@
 				}
 			}
 			
-			/* console.log(aptList); */
-		
-			$("#noneList").css("display", "none");
 			var html = "<tbody id='mytbody'>"
 			$.each(aptList, function(key, value){
 
 				var houseCode = value.HOUSE_MANAGE_NO;
-				
+				myhouseList.push(houseCode);
+				var startDateTime = value.RCEPT_BGNDE;
 				var appDday = new Date(value.RCEPT_BGNDE);
-
+				startDateTime = startDateTime.replace(/-/g, '');
 				
 				let appyear = appDday.getFullYear();
 				let appmonth = (appDday.getMonth())+1;
@@ -544,8 +573,8 @@
 				html += "<td><p>" + info[0] + "</p></td>";
 				html += "<td><p>" + info[1] + "세대</p></td>";
 				html += "<td><p>" + info[2] + "m²</p></td>";
-
-				html += "<td id='" + houseCode+ "'><img  class='sellHousealarm' onclick='mySale("+houseCode+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
+				
+				html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
 
 			});
 			
@@ -640,7 +669,6 @@
 									<li>
 										<label class="stepLabel">
 											<input id="selectAll" type="checkbox"  onclick="selectAll();" >
-
 											<p>전체</p>
 										</label>
 									</li>
@@ -778,6 +806,7 @@
 		var length = (yearmonth.length) - 1;
 		var currentMonth = yearmonth.substring(5, length);
 
+
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
@@ -790,10 +819,12 @@
 			tbody.remove();
         	
         	applyschedule(currentMonth);
+		
         }
 
         // 다음 달로 이동하는 함수
         function goToNextMonth() {
+        	
         	
         	currentMonth += 1;
         	
@@ -807,15 +838,28 @@
 	
 		// 페이지 로드 시 
 	    window.addEventListener("load", function () {
-	
-	        // calendar-prev 클릭 시 이전 주로 이동
 	        var prevButton = document.querySelector(".calendar-prev");
-	        prevButton.addEventListener("click", goToPreviousMonth);
-	
-	        // calendar-next 클릭 시 다음 주로 이동
 	        var nextButton = document.querySelector(".calendar-next");
-	        nextButton.addEventListener("click", goToNextMonth);
+	
+	      
+	    	if (yearmonth === "2023년1월"){
+	    		prevButton.disabled = true;
+	    	}else{
+		        // calendar-prev 클릭 시 이전 주로 이동
+		        prevButton.addEventListener("click", goToPreviousMonth);
+	    		
+	    	}
+			
+	        if(yearmonth === "2023년12월"){
+	        	nextButton.disabled = true;
+	        }else{
+		        // calendar-next 클릭 시 다음 주로 이동
+		        nextButton.addEventListener("click", goToNextMonth);
+	        	
+	        }
+	        
 	    });
+		
 
 		//ajax통신시작
 		$(document).ajaxStart(function(){
@@ -938,35 +982,57 @@
             }  
         }
 
-        function mySale(houseCode){
-        	var h = document.getElementById(houseCode).firstChild;
-        	
-        <%-- 	$.ajax({
-        		url: <%=request.getContextPath()%>/sales/mySaleHouse,
-        		method:"get",
-				data:{houseCode},
-				success:function(result){
-					console.log("컨트롤러 갔나염?");
-				},
-				error:function(){
-					console.log("에러발생");
-				}
-		
-        	}); --%>
-        	
-        	
-        	
-        	if(h.src == "https://ifh.cc/g/bNnQCj.png"){
-        		h.src = "https://ifh.cc/g/hqaYN5.png";
-        	}else{
-        		h.src = "https://ifh.cc/g/bNnQCj.png";
-        	};
-        	
-        }
+        function mySale(houseCode, startDateTime){
+            var h = document.getElementById(houseCode).firstChild;
+            
+            var userNo = '${loginUser.userNo}';
+            
+            console.log("보낸거" + houseCode + "" + startDateTime);
+            
+            if('${loginUser}' != ''){
+                if(h.src == "https://ifh.cc/g/bNnQCj.png"){
+                    h.src = "https://ifh.cc/g/hqaYN5.png";
+                    /* 찜하기 취소하기 */
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/sales/deletemySaleHouse",
+                        method:"get",
+                        data:{houseCode,startDateTime,userNo},
+                        success:function(result){
+                            console.log(result);
+                            
+                        },
+                        error:function(){
+                            console.log("에러발생");
+                        }
+                    
+                    });
+                    
+                    swal("", "분양일정 알림을 취소했습니다.", "warning");
+                }else{
+                    h.src = "https://ifh.cc/g/bNnQCj.png";
+                    /* 찜하기 등록하기 */
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
+                        method:"post",
+                        data:{houseCode,startDateTime,userNo},
+                        success:function(result){
+                            console.log(result);
+                            
+                        },
+                        error:function(){
+                            console.log("에러발생");
+                        }
+                
+                    });
+                    swal("", "관심 분양단지로 등록되었습니다.", "success");
+                };
+                
+            }else{
+                swal("", "로그인 후 이용하실 수 있습니다.", "error");
+            } 
+        };
   
    	 		
-   	 
-
 	</script>
 	
 
