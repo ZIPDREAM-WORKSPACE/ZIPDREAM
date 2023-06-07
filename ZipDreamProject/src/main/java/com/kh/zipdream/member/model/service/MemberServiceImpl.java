@@ -30,6 +30,25 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	@Override
+	public int insertbkMember(Member inputMember) {
+
+		int result = memberDao.insertbkMember(inputMember);
+		System.out.println(inputMember);
+		return result;
+	}
+	
+	@Override
+	public int insertapply(int userNo) {
+
+		int result = memberDao.insertapply(userNo);
+
+		return result;
+	}
+	
+	
+	
+	
 	
 	 @Override
 	 public void registMailAuth(MailAuth mailAuth) throws Exception {
