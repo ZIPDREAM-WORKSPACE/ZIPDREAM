@@ -1,11 +1,12 @@
 package com.kh.zipdream.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.member.model.vo.Member;
@@ -35,5 +36,6 @@ public interface AdminService {
 	public Report selectReport(int reportNo);
 	public int updateReportResult(Report report);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
-	public List<Integer> countChatRoomMemberList();
+	/* public List<Integer> countChatRoomMemberList(); */
+	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception;
 }

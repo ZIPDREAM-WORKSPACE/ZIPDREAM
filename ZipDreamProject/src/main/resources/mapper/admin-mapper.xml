@@ -97,12 +97,12 @@
 	</select>
 	
 	<select id="countEvent" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION
+		SELECT COUNT(*) FROM NOTICE_BOARD
 	</select>
 	
 	<select id="countEventYesterday" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION 
-		<![CDATA[WHERE PROMOTION_START_DATETIME < CURDATE()]]>
+		SELECT COUNT(*) FROM NOTICE_BOARD 
+		<![CDATA[WHERE CREATE_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">
@@ -259,4 +259,9 @@
 			 STATUS = #{status}		
 		WHERE USER_NO = #{userNo}
 	</update>
+	
+	<insert id="insertCoupon" parameterType="coupon">
+		INSERT INTO COUPON (COUPON_TITLE,COUPON_CONTENT,COUPON_DATE,COUPON_PATH)
+		VALUES(#{couponTitle},#{couponContent},#{couponDate},#{couponPath})
+	</insert>
 </mapper>
