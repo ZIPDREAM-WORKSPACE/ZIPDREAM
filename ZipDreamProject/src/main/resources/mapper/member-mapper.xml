@@ -12,8 +12,8 @@
 		<result column="ADDRESS" property="address"/>
 		<result column="OFFICE" property="office"/>
 
-		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
-		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
+		<result column="ENROLL_DATETIME" property="enrollDateTime" />
+		<result column="MODIFY_DATETIME" property="modifyDateTime" />
 		<result column="WITHDRAW" property="withdraw" />
 
 		
@@ -67,6 +67,33 @@
 			, 'Y'
 			, 1)
 	</insert>  
+	
+	<insert id="insertbkMember" parameterType="member"  useGeneratedKeys="true" keyProperty="userNo">
+		INSERT INTO
+		MEMBER(
+			  USER_ID
+			, USER_PWD
+			, USER_NAME
+			, PHONE
+			, ADDRESS
+			, ENROLL_DATETIME
+			, MODIFY_DATETIME
+			, WITHDRAW
+			, OFFICE
+			, USER_LEVEL
+			)
+		VALUES(
+			 #{userId}
+			, #{userPwd}
+			, #{userName}
+			, #{phone}
+			, #{address}
+			, SYSDATE()
+			, SYSDATE()
+			, 'Y'
+			, #{office}
+			, 2)
+	</insert>
 	
 	<!-- 이메일 -->
 	<insert id="insertMailAuth" parameterType="mailAuth">

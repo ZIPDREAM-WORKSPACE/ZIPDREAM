@@ -11,6 +11,7 @@
 .item {
 	border-radius: 10px;
 	background-color: #FFFFFF;
+	box-shadow: 0px 10px 13px rgba(17, 38, 146, 0.05);
 }
 
 .item:nth-child(5) {
@@ -18,22 +19,106 @@
 	grid-row: 3/ 4;
 }
 
-.reportContent-User{
+.report-content-User{
 	display:flex;
 	justify-content: space-between;
 	align-items: center;
 	height: 100px;
 	padding: 25px;
+	margin-top: 25px;
 	font-size: 20px;
 	font-weight: 700;
 }
 
-.reportContent{
-	height:250px;
+.report-content{
+	height:275px;
 	padding: 25px;
 	overflow: auto;
+	border-radius: 10px;
+	background-clip: content-box;
+	background-color: #F9F9F9;
 }
 
 .tTable{
 	overflow : auto;
+}
+
+.user-info{
+	padding: 25px;
+}
+
+.report-result-table{
+	width: 100%;
+	height: 300px;
+	text-align : center;
+	border : 1px solid black;
+}
+
+.report-result-table th:first-child{
+	background: #0048B3;
+	color : #ffffff;
+}
+
+
+.reportResultTable .firstTh {
+	font-size : 20px;
+}
+
+.reportResultTable .firstTh:hover {
+	background: #3B8AFF;
+	font-size : 20px;
+	cursor: pointer;
+}
+
+.report-result-table th {
+	border: 1px solid #999;
+}
+
+.report-result-table td {
+	border: 1px solid #333;
+}
+
+
+.result-select {
+	display:flex;
+	position: relative;
+	text-align:center;
+	margin:auto;
+}
+
+.result-value::-ms-expand {
+  display : none ;
+}
+
+.result-value {
+	width: 500px;
+	height: 100px;
+	padding: 25px 80px 25px 25px;
+	appearance : none ;
+	-webkit-appearance : none ;
+	-moz-appearance:none;
+	font-size: 20px;
+	border-radius: 8px;
+	border: 0px;
+	box-shadow: 0px 10px 13px rgba(17, 38, 146, 0.05);
+}
+
+.select-arrow {
+	position: absolute;
+	right:40px;
+	top: 45px;
+	width: 0;
+    height: 0;
+	pointer-events : none ;
+    border-width : 16px 10px 0 10px ;
+    border-style : solid ;
+    border-color: #999 transparent transparent transparent;
+}
+
+.report-submit {
+	position: absolute;
+	right: 140px;
+	bottom: 45px;
+	width: 200px;
+	height: 50px;
 }

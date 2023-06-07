@@ -38,7 +38,16 @@ public class MemberDao {
 		System.out.println("ss"+inputMember);
 		return sqlSession.insert("member-mapper.insertMember", inputMember);
 	}
-
+	
+	public int insertbkMember(Member inputMember) {
+		return sqlSession.insert("member-mapper.insertbkMember", inputMember);
+	}
+	
+	public int insertapply(int userNo) {
+		System.out.println("ss"+userNo);
+		return sqlSession.insert("member-mapper.insertapply", userNo);
+	}
+	
 	
 	public Member selectMember(int userNo) {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);

@@ -111,10 +111,10 @@
 	
 	<select id="countChattingRoom" resultType="_int">
 		SELECT COUNT(*) FROM (
-			SELECT CHAT_ROOM_NO , COUNT(*) as 'COUNT' , 'STATUS' 
+			SELECT CHAT_ROOM_NO , COUNT(*) as 'COUNT' , R.STATUS
 			FROM CHAT_ROOM_JOIN 
-			JOIN CHAT_ROOM USING(CHAT_ROOM_NO) 
-			GROUP BY CHAT_ROOM_NO HAVING STATUS = 'Y'
+			JOIN CHAT_ROOM R USING(CHAT_ROOM_NO) 
+			GROUP BY CHAT_ROOM_NO HAVING R.STATUS = 'Y'
 		) C 
 		WHERE COUNT > 1
 	</select>
@@ -144,7 +144,7 @@
         ON R.REF_TUNO = M2.USER_NO
         ORDER BY REPORT_DATE DESC
         <if test='type == 1'>
-			 LIMIT 4
+			 LIMIT 5
 		</if>
 	</select>
 	
@@ -246,6 +246,13 @@
 	<select id="selectReport" resultMap="reportResultSet">
 		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
 	</select>
+	
+	<update id="updateReportResult" parameterType="report">
+		UPDATE REPORT SET
+			REPORT_STATUS = 'Y',
+			REPORT_RESULT = #{reportResult}
+		WHERE REPORT_NO = #{reportNo}
+	</update>
 	
 	<update id="updateMemberStatus" parameterType="member">
 		UPDATE MEMBER SET 
