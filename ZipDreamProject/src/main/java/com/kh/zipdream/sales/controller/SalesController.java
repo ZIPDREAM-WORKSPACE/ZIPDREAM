@@ -170,6 +170,8 @@ public class SalesController {
 		
 		List<Integer> mysaleList = mysaleService.selectMySale(userNo);
 		model.addAttribute("mysaleList", mysaleList);
+		
+		System.out.println(mysaleList);
 		return mysaleList;
 	}
 	

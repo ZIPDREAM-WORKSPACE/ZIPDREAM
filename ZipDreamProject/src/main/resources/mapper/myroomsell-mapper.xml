@@ -26,9 +26,9 @@
 		resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE USER_LEVEL = '2' AND STATUS = '1'
-		AND
+		
 		<foreach collection="address" item="arr" open="" close="" separator="">
-			ADDRESS LIKE CONCAT('%', #{arr}, '%')
+			AND ADDRESS LIKE CONCAT('%', #{arr}, '%')
 		</foreach>
 	</select>
 	
