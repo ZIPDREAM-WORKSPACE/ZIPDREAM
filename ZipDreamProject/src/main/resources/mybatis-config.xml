@@ -28,6 +28,9 @@
 		
 		<typeAlias type="com.kh.zipdream.map.model.vo.beopjeongdong" alias="beopjeongdong"/>
 		
+
+		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
+
 	</typeAliases>
 	
 	<mappers>
@@ -38,6 +41,10 @@
 		<mapper resource="/mapper/sell-mapper.xml"/>
 
 		<mapper resource="/mapper/chattingMapper.xml" />
+		
+		<mapper resource="/mapper/sale-mapper.xml" />
+		
+		<mapper resource="/mapper/myroomsell-mapper.xml" />
 
 	</mappers>
 
