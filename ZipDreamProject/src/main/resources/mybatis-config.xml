@@ -28,9 +28,7 @@
 		
 		<typeAlias type="com.kh.zipdream.map.model.vo.beopjeongdong" alias="beopjeongdong"/>
 		
-
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
-
 	</typeAliases>
 	
 	<mappers>
