@@ -59,6 +59,13 @@
 		AND REF_UNO = #{refUno}
 	</select>
 	
+	<delete id="joinUserDelete" parameterType="_int" >
+		DELETE 
+		FROM CHAT_ROOM_JOIN
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+		
+	</delete>
+	
 	<!-- 채팅방 참여하기 -->
 	<insert id="joinChatRoom" parameterType="chatRoomJoin">
 		INSERT INTO CHAT_ROOM_JOIN

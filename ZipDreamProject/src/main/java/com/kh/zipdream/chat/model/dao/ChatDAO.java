@@ -76,6 +76,11 @@ public class ChatDAO {
 		return sqlSession.delete("chattingMapper.closeChatRoom",chatRoomNo);
 	}
 	
+	// 채팅방 조인 없애기
+	public int joinUserDelete(int chatRoomNo) {
+		return sqlSession.delete("chattingMapper.joinUserDelete",chatRoomNo);
+	}
+	
 	// 채팅방 인원수
 	public int countChatRoom() {
 		return sqlSession.selectOne("chattingMapper.countChatRoom");

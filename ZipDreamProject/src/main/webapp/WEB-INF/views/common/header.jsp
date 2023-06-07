@@ -210,12 +210,10 @@ position: absolute;
 	
 		
 	if('${loginUser.userNo}'!='' && currentURL != URL){
-	console.log("ing");
 	 	$.ajax({
 			url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
 			type : "get",
 			success : function(result){
-				console.log("ing2");
 				// result == 1 나가기 성공
 				if(result >= 1){
 					$.ajax({
@@ -223,7 +221,7 @@ position: absolute;
 						data:{ chatRoomNo : '${chatRoomNo}'},
 						success : function(data){
 							if(data == 1){
-								console.log("ing3");
+								console.log("채팅방에서 나갔습니다");
 							}else{
 								alert("채팅방 나가기에 실패했습니다.");
 							}
@@ -237,7 +235,7 @@ position: absolute;
 					})
 					
 				}else{
-					console.log("ing3");
+					console.log("else");
 				}
 				// result == 0 실패 
 				

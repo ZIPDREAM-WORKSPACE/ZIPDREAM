@@ -97,6 +97,17 @@ public class ChatController {
 	}
 	
 	
+	//채팅방삭제
+		@GetMapping("/chat/closeChatRoom/{chatRoomNo}")
+		@ResponseBody
+		public int closeChatRoom(@PathVariable("chatRoomNo") int chatRoomNo,
+								 HttpSession session) {
+			int result  = service.closeChatRoom(chatRoomNo);
+			return result;
+		
+		}
+	
+	
 
 	
 	
