@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .footer {
 	width: calc(100% - 250px);
+	min-width: 1553px;
 	height:80px;
 	padding:25px;
 	display: flex;

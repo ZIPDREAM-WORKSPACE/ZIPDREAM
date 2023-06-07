@@ -1,5 +1,6 @@
 package com.kh.zipdream.sell.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;   
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,10 +23,21 @@ public class SellDao {
 		if(result > 0) {
 			result = sd.getSellNo();
 		}
+		
 		return result;
 	}
 	
 	public int sellInsertImg(List<Attachment> sellImgList) {
 		return sqlSession.insert("sell-mapper.sellInsertImg", sellImgList);
 	}
+	
+	public ArrayList<SellDetail> selectSellList() {
+		return (ArrayList)sqlSession.selectList("sell-mapper.selectSellList");
+	}
+	
+	public SellDetail sellDetail(int sellNo) {
+		return sqlSession.selectOne("sell-mapper.sellDetail", sellNo);
+	}
+	
+
 }

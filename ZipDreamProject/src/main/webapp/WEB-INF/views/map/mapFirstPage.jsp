@@ -91,8 +91,8 @@
 	}
 	
 #menu_wrap{
-	width: 400px;
-	height: 800px;
+	width: 500px;
+	height: 850px;
 }
 
 .scrollBar { 
@@ -164,6 +164,8 @@
 .price{
 	font-size: 15px;
 	font-weight: bold;
+	width: 200px;
+	height: 100px;s
 }
 
 
@@ -186,8 +188,8 @@
 		    <div id="menu_wrap" class="bg_white scrollBar">
 		        <div class="option">
 		            <div>
-		                <form name="sfrom" onsubmit="searchPlaces(); return false;">
-		                    <input name="s" type="text" id="keyword" placeholder="키워드를 검색하세요.">
+		                <form id="search" name="sfrom" onsubmit="searchApt(); return false;">
+		                    <input name="s" type="text" id="keyword" placeholder="키워드를 입력하세요.">
 		                    <button type="submit" class="searchBtn">
 								<svg 
 									xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -195,6 +197,7 @@
 								</svg>
 							</button> 
 		                </form>
+		                <div style="margin-bottom: 5px;">키워드를 입력하여 <br>원하는 매물을 검색해보세요.</div>
 		            </div>
 		        </div>
 		        <hr>
@@ -204,7 +207,19 @@
 		    </div>
 	   </div>
 	</div>
-	
+	<form id="gtSellDetail" action="<%= request.getContextPath() %>/sell/detail" method="post">
+		<input id="sellSno" name="sellSno" type="hidden">
+		<input id="sellName" name="sellName" type="hidden">
+		<input id="sellAddress" name="sellAddress" type="hidden">
+		<input id="sellPrice" name="sellPrice" type="hidden">
+		<input id="brokerAdd" name="brokerAdd" type="hidden">
+		<input id="sellPrivateArea" name="sellPrivateArea" type="hidden">
+		<input id="sellFloor" name="sellFloor" type="hidden">
+		<input id="ymd" name="ymd" type="hidden">
+		<input id="sellConstructionDate" name="sellConstructionDate" type="hidden">
+		<input id="realYn" name="realYn" type="hidden">
+		<input id="realYnDate" name="realYnDate" type="hidden">
+ 	</form>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7"></script> -->
@@ -227,10 +242,10 @@ var Latitude = center.getLat(); // 위도
 var longitude = center.getLng(); // 경도
 
 // 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places();  
+const ps = new kakao.maps.services.Places();  
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+const infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
 searchPlaces();
@@ -272,6 +287,12 @@ function placesSearchCB(data, status, pagination) {
 
     }
 }
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
@@ -287,6 +308,10 @@ function displayPlaces(places) {
 
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
+    
+ // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+	 
+	  
     
     for ( var i=0; i<places.length; i++ ) {
 
@@ -357,26 +382,16 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-   /*  var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-        imgOptions =  {
-            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        }; */
+    var imageSrc = 'https://ifh.cc/g/hq3jLD.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(31, 35),  // 마커 이미지의 크기
+        imgOptions = new kakao.maps.Point(13, 34), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         
-	/* var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
             marker = new kakao.maps.Marker({
             position: position, // 마커의 위치
             image: markerImage 
-        }); */
-        
-    var markerImage = new kakao.maps.MarkerImage(
-    	    '<%= request.getContextPath()%>/resources/images/marker.png',
-    	    new kakao.maps.Size(31, 35), new kakao.maps.Point(13, 34));
- 
-    marker.setImage(markerImage);
-        
+        });
+
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
@@ -419,8 +434,8 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    /* var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
- */
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+ 
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
@@ -434,15 +449,6 @@ function removeAllChildNods(el) {
  
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
-
-/* var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-    infowindow = new kakao.maps.InfoWindow({zindex:1});  */// 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-    /* var callback = function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-        }
-    }; */
-
     
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -459,7 +465,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
            
            let adressNameArray = result[0].address.address_name.split(' ');
            var detailAddrClob = adressNameArray[0] + ' ' + adressNameArray[1] + ' ' + adressNameArray[2];
-           /* detailAddrClob = detailAddrClob.replace("서울","서울특별시"); */
+           
            switch(detailAddrClob.split(" ")[0]){
 	           case "서울":
 	        	   detailAddrClob = detailAddrClob.replace("서울","서울특별시");
@@ -507,25 +513,14 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	        	   detailAddrClob = detailAddrClob.replace("경남","경상남도");
 	        	   break;
            }
-      
-            /* var content = '<div class="bAddr">' +
-                            '<span class="title">법정동 주소정보</span>' + 
-                            detailAddr + 
-                        '</div>'; */
-            var positions = [];
-			/* var marker;
-                */
-            /* // 마커를 클릭한 위치에 표시합니다 
-            marker.setPosition(mouseEvent.latLng);
-            marker.setMap(map);
 
-            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-            infowindow.setContent(content);
-            infowindow.open(map, marker); */
+            var positions = [];
+			
             
             let bjdSggCode = "";
             let bjdEmdCode = "";
             let roadName = "";
+            let aptName = "";
             $(function (){
             	// 현재 주소를 법정동 테이블에서 찾아서 해당하는 지역코드를 반환받는다.
             	// result 에 그 지역코드가 저장될 것이고
@@ -546,7 +541,6 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                      data: {'code' : bjdCodeFirst},
     	                      dataType: "text",
     	                      contentType : "text/plain; charset:UTF-8",
-    	                      /* crossDomain :true, */
     	                      success: function(resultData){
     	                    	  
     	                         let result = JSON.parse(resultData);
@@ -564,24 +558,11 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
 	   	                          	  
 	   	                          	  bjdSggCode = addressToXy['법정동시군구코드'];
 	                            	  bjdEmdCode = addressToXy['법정동읍면동코드'];
-    	                              <%-- $.ajax({
-	                        				url: "<%= request.getContextPath() %>/map/address",
-	                   				  		method: "post",
-		                   				  	data: {'adCode' : bjdSggCode.concat(bjdEmdCode) },
-		                   				    dataType : 'json',	                        				
-		                   				    success: function(result){
-		                   				    	
-	                        					console.log(result[0].bjdName);
-	                        					
-	                        					geocoder.addressSearch(result[0].bjdName+" "+roadName, callback);
-	                        					
-	                        					
-	                        				},
-	                        				error: function(){
-	                        					console.log("에러");
-	                        				}
-	                        			}); --%>
+									  
+	                            	  aptName = addressToXy['아파트'];
     	                          	 
+	                            	  
+	                            	  
     	                              var callback = function(result, status) {
  	    	                        	 
         	                              if (status === kakao.maps.services.Status.OK) {
@@ -591,10 +572,10 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       		  let tagNameStr = result[i].y+""+result[i].x;
     			    	                       		  let min = "";
     			    	                       		  let max = "";
-    			    	                       		  /* let maxArr = []; */
+    			    	                       		  let minToMax = "";
+    			    	                       		 
     			    	                       		  for(var j=0 ; j<30 ; j++){
-    			    	                       			/* if( document.getElementsByTagName(result[i].y+""+result[i].x).length > 0 ){ */ // result[i]와 좌표가 같은 li태그가 있다면
-      			    	                        
+    			    	                       			
       			    	                       			  // 모든 li태그를 배열에 담는다
       			    	                       			  let tagArr = document.getElementsByName(tagNameStr);
     			    	                       			  
@@ -620,22 +601,19 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       			  console.log("max:"+max+", min:"+min+", min:"+tagParr);
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
       			    	                       			  
+      			    	                       			  minToMax = min+" ~ "+max+"(단위 : 만)";
+      			    	                       			  
       			    	                       			  if(max == 0 && min == 0){
-      			    	                       				  max = "실거래 평균 시세 없음";
-      			    	                       				  min = "";
+      			    	                       				 minToMax = "실거래 평균 시세 없음";
       			    	                       			  }
       			    	                       			  
       			    	                       			  break;
       			    	                       				/* } */
     			    	                       		  }  
-    			    	                       		    /* maxArr = [...max];
-    			    	                       		    let maxArrLeng = maxArr.length-5;
-    			    	                       		 	maxArr.splice(maxArrLeng, 0,"억"); */
-    			    	                       		 	
     			    	                       			positions.push({
     			    	                       				// content안에 주소정보랑 최소금액~최대금액 표시하기
     			    	                       				// content div안에 min과 max를 넣어준다.
-    			    	                       				content: '<div class="price">'+min+" ~ "+max+"</div>"
+    			    	                       				content: '<div class="price">'+minToMax+"</div>"
     			    	                       						+"<div>"+result[i].address_name+'</div>',
     			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
     			    	                       			})
@@ -684,7 +662,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	                                  
     	    	                              }
 	   	                          
-        	                              
+        	                              searchApt(aptName);
    	                        	 		 }
 	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
 	   	                           
@@ -719,6 +697,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                     function listView(addressToXy, roadName){
     						  	listEl = document.getElementById('placesList');
     						  	var listLiTag = document.createElement("li");
+    						  	listLiTag.setAttribute("class", "goDetail");
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
@@ -740,24 +719,36 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	});
     						  	
     						  	var str = addressToXy["거래금액"].trim();
-    						  /* 	var arr  = Array.from(str); */
     						  
     						    var arr = [...str];
     						    var arrLeng = arr.length-5;  
-    						  
-    						  	/* console.log(Array.isArray(arr));
-    						  	console.log(arrLeng); */
+
     						  	arr.splice(arrLeng, 0, "억");
-    						  	/* console.log(arr); */
     						  	
     						  	var resultStr = arr.join('');
-    						  	/* console.log(resultStr); */
-
-    						  	
-    						  	
-    						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 ";
+    						  				  	
+    						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
+    						  	listLiTag.addEventListener('click', function(){
+    						  		let add = addressToXy["지역코드"];
+    						  		let str = add.substring(0,2);
+    						        
+    						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
+    						  		document.getElementById("sellName").value = addressToXy["아파트"];
+    						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
+    						  		document.getElementById("sellPrice").value = resultStr;
+    						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
+    						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"];
+    						  		document.getElementById("sellFloor").value = addressToXy["층"];
+    						  		document.getElementById("ymd").value = addressToXy["년"]+addressToXy["월"]+addressToXy["일"];
+    						  		document.getElementById("sellConstructionDate").value = addressToXy["건축년도"];
+    						  		document.getElementById("realYn").value = addressToXy["해제여부"];
+    						  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];
+    						  	
+    						  		document.getElementById("gtSellDetail").submit();
+    						  	});
+    						  	
     						  	
     					  }
     					  
@@ -817,6 +808,20 @@ function displayCenterInfo(result, status) {
     }    
 } 
 
+ 
+function searchApt(aptName){
+	let search = document.getElementById("search").value;
+	let listInner = aptName;
+	
+	// 리스트 비워주고
+	listEl = "";
+	
+	// li 태그에 아파트 정보 텍스트로 표시
+			  	
+  	listLiTag.textContent = listInner;
+  	listEl.appendChild(listLiTag);
+
+} 
  
 </script>
 
