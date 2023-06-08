@@ -48,14 +48,16 @@ public class MyPageController {
 	@GetMapping("/myroomlist")
 	public String moveMyRoomList(@ModelAttribute("loginUser") Member loginUser, Model model) {
 		
+
 		int userNo = loginUser.getUserNo();
 		
 		ArrayList<MyRoomSell> list = myroomSellService.selectMyRoomList(userNo);
+
 	
 		model.addAttribute("myroomsellList", list);
 		
 		return "mypage/myroomList";
-	
+
 	}
 	
 	@GetMapping("/myroominsert")
