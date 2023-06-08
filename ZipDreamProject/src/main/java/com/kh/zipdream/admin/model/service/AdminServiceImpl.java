@@ -237,6 +237,35 @@ public class AdminServiceImpl implements AdminService{
 	
 	}
 	
+	public JSONObject getCouponList(int cp,int userNo) {
+		int listCount = dao.countUserCoupon(userNo);				
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Coupon> list = dao.getCouponList(pi, userNo);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jArray = new JSONArray();	
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			
+			for(int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(new MapController().getJsonStringFromMap(map));
+				
+				jArray.add(jsonObj);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();	
+		};
+		
+		obj.put("pi", pi);
+		obj.put("array", jArray);
+		return obj;
+	
+	}
+	
 	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap , Map<String, Object> map) {
 		
 		int listCount = dao.countUserReport(paramMap);				
@@ -309,5 +338,14 @@ public class AdminServiceImpl implements AdminService{
 		result = dao.insertCoupon(coupon);
 		
 		return result;
+	}
+	
+	public List<Coupon> selectCouponList(){
+		
+		return dao.selectCouponList();
+	}
+	
+	public int insertCouponToUser(Map<String,Integer> map) {
+		return dao.insertCouponToUser(map);
 	}
 }

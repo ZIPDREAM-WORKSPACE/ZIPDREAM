@@ -59,6 +59,10 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countUserReport",paramMap);
 	}
 	
+	public int countUserCoupon(int userNo) {
+		return sqlSession.selectOne("admin-mapper.countUserCoupon",userNo);
+	}
+	
 	public int countEvent() {
 		return sqlSession.selectOne("admin-mapper.countEvent");
 	}
@@ -148,6 +152,13 @@ public class AdminDao {
 		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",paramMap,rowBounds);
 	}
 	
+	public ArrayList<Coupon> getCouponList(PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.getCouponList",userNo,rowBounds);
+	}
+	
 	public Report selectReport(int reportNo) {
 		return sqlSession.selectOne("admin-mapper.selectReport",reportNo); 
 	}
@@ -162,5 +173,13 @@ public class AdminDao {
 	
 	public int insertCoupon(Coupon coupon) {
 		return sqlSession.insert("admin-mapper.insertCoupon",coupon);
+	}
+	
+	public ArrayList<Coupon> selectCouponList(){
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectCouponList");
+	}
+	
+	public int insertCouponToUser(Map<String,Integer> map) {
+		return sqlSession.insert("admin-mapper.insertCouponToUser",map);
 	}
 }
