@@ -8,9 +8,10 @@ import lombok.Data;
 public class ChatMessage {
 	private int cmNo;
 	private String message;
-	private Date createDate;
+	private String createDatetime;
 	private int chatRoomNo;
 	private int refUno;
 	private String userId;
+	private int userLevel;
 	
 }

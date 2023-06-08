@@ -41,7 +41,7 @@
 		<div class="content-view-item">
 			<div class="donut" data-percent="${countNumbers.eventCount.percent}"></div>
 			<div>
-				<p class="text-gray">이벤트</p>
+				<p class="text-gray">공지사항</p>
 				<h4>${countNumbers.eventCount.num}</h4>
 			</div>
 		</div>

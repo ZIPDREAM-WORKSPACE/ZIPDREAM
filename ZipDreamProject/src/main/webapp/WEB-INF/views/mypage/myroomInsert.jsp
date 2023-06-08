@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -265,6 +265,7 @@
 }
 
 .inputHo {
+	width: 100%;
 	padding: 0px 16px;
 	color: rgb(76, 76, 76);
 	font-size: 14px;
@@ -433,13 +434,19 @@
 	height: 52px;
 }
 
-#map{
-    width: 100%;
-    height: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
+#map {
+	width: 100%;
+	height: 100%;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
-
+.agentList{
+    width: 100%;
+    text-align: center;
+}
+.nonAgent{
+	text-align:center;
+}
 </style>
 
 </head>
@@ -496,7 +503,6 @@
 											<p>아파트</p>
 										</label>
 									</li>
-
 								</ul>
 							</td>
 						</tr>
@@ -504,7 +510,6 @@
 							<th>건물 유형</th>
 							<td>
 								<ul class="roomTypeList">
-
 									<li>
 										<label class="roomTypeCover"> 
 											<input type="radio" name="buildingType">
@@ -529,10 +534,9 @@
 											<p>상가</p>
 										</label>
 									</li>
-
 								</ul>
 							</td>
-            </tr>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -549,29 +553,29 @@
 							<td>
 								<div class="addressSearch">
 									<div class="addressInfo">
-
-										<input type="text" id="sample5_address" placeholder="주소를 검색하세요."> 
-										<input type="button" onclick="sample5_execDaumPostcode()" value="검색">
+										<input type="text" id="sample5_address" placeholder="주소를 검색하세요." name="address1"> 
+										<input type="button" onclick="sample5_execDaumPostcode()" value="검색"> 
 										<br>
-
-										<input class="addressDetail" placeholder="상세주소를 입력하세요.">
+										<input class="addressDetail" placeholder="상세주소를 입력하세요." name="address2">
 										<div class="appInfo">
 											<div class="dong">
-												<input class="inputDong" placeholder="예)101동">
+												<input class="inputDong" placeholder="예)101동" name="address3">
 											</div>
 											<div class="ho">
-												<input class="inputHo" placeholder="예)201호">
+												<input class="inputHo" placeholder="예)201호" name="address4">
 											</div>
 										</div>
 									</div>
-									<div class="addressMap" >
-
-										<div id="map" style="display:none; border-radius:0px;"></div>
+									<div class="addressMap">
+										<div id="map" style="display: none; border-radius: 0px;"></div>
 										<div id="mapImg">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-
+											<svg xmlns="http://www.w3.org/2000/svg" width="16"
+												height="16" fill="currentColor" class="bi bi-geo-alt"
+												viewBox="0 0 16 16">
+                                                <path
+													d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                                <path
+													d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                             </svg>
 										</div>
 										<p>
@@ -597,7 +601,6 @@
 							<td>
 								<div class="dealType">
 									<ul class="roomTypeList">
-
 										<li>
 											<label class="roomTypeCover"> 
 												<input type="radio" name="dealType" checked>
@@ -616,7 +619,6 @@
 												<p>매매</p>
 											</label>
 										</li>
-
 									</ul>
 								</div>
 							</td>
@@ -625,82 +627,179 @@
 				</table>
 			</div>
 			<p class="warning">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					fill="currentColor" class="bi bi-exclamation-octagon-fill"
-					viewBox="0 0 16 16">
-                    <path
-						d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                    <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
-
 				<span>허위 매물을 등록할 경우 집드림에서 임의로 계정 및 매물 전체 삭제 처리됩니다.</span> 
 				<a href="">허위매물 제재 정책 확인하기</a>
 			</p>
 			<div class="agreeWrap">
-				<label for="agreeCheck"> 
-					<input id="agreeCheck" type="checkbox">
-
+				<label for="agreeCheck"> <input id="agreeCheck" type="checkbox">
 					<p>매물관리규정을 확인하였으며, 입력한 정보는 실제 매물과 다름이 없습니다.</p>
 				</label>
 				<div class="btn-wrap">
-					<button typte="reset" class="cancel">취소</button>
-					<button type="submit" class="add" disabled>매물등록</button>
+					<button type="reset" class="cancel">취소</button>
+					<button class="add" disabled type="button" data-toggle="modal" data-target="#exampleModal">매물등록</button>
 				</div>
 			</div>
 		</form>
 	</div>
+	
+	<!-- 매물 등록시 공인중개사 리스트 가져오기 -->
+	<script>
+	
+		$(".add").click(function(){
+			
+			var userNo = '${loginUser.userNo}';
+			var address = $('input[name=address1]').val();
+			
+			console.log(address);
+			
+			$.ajax({
+				url: "<%=request.getContextPath()%>/myroomsell/insert" ,
+				method:"get",
+				data:{address},
+				contentType :"text.plain; charset:UTF-8",
+				success:function(result){
+					console.log(resuslt);
+					
+				},
+				error:function(){
+					console.log("에러발생");
+				}
+			})
+		});
+	
+	
+	
+	</script>
+
+	<!-- 공인중개사 선택 팝업 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">공인중개사 리스트</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	       <!--  <table class="agentList">
+	        	<thead>
+	        		<tr>
+	        			<th>선택</th>
+	        			<th>이름</th>
+	        			<th>소재지</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr>
+	        			<td><input type="radio" name="agent" value="agent"></td>
+	        			<td>장용동</td>
+	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
+	        		</tr>
+	        		<tr>
+	        			<td><input type="radio" name="agent" value="agent"></td>
+	        			<td>장용동</td>
+	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
+	        		</tr>
+	        		<tr>
+	        			<td><input type="radio" name="agent" value="agent"></td>
+	        			<td>장용동</td>
+	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
+	        		</tr>
+	        	</tbody>
+	        </table> -->
+	        
+	        <div class="nonAgent">입력하신 주소지에 등록된 공인중개사가 없습니다.</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">신청하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+	
 
 
+	<!-- 다음 우편번호 script  -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+		mapOption = {
+			center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+			level : 5
+		// 지도의 확대 레벨
+		};
+
+		//지도를 미리 생성
+		var map = new daum.maps.Map(mapContainer, mapOption);
+		//주소-좌표 변환 객체를 생성
+		var geocoder = new daum.maps.services.Geocoder();
+		//마커를 미리 생성
+		var marker = new daum.maps.Marker({
+			position : new daum.maps.LatLng(37.537187, 127.005476),
+			map : map
+		});
+
+		function sample5_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var addr = data.address; // 최종 주소 변수
+
+					// 주소 정보를 해당 필드에 넣는다.
+					document.getElementById("sample5_address").value = addr;
+					// 주소로 상세 정보를 검색
+					geocoder.addressSearch(data.address, function(results,
+							status) {
+						// 정상적으로 검색이 완료됐으면
+						if (status === daum.maps.services.Status.OK) {
+
+							var result = results[0]; //첫번째 결과의 값을 활용
+
+							// 해당 주소에 대한 좌표를 받아서
+							var coords = new daum.maps.LatLng(result.y,
+									result.x);
+							// 지도를 보여준다.
+							mapContainer.style.display = "block";
+							map.relayout();
+							// 지도 중심을 변경한다.
+							map.setCenter(coords);
+							// 마커를 결과값으로 받은 위치로 옮긴다.
+							marker.setPosition(coords)
+						}
+					});
+				}
+			}).open();
+		}
+	</script>
+
 
 	<script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-                level: 5 // 지도의 확대 레벨
-            };
+	
+		// 체크박스 상태 변경 시 이벤트 핸들러
+		function handleCheckboxChange() {
+			var checkbox = document.getElementById("agreeCheck");
+			var button = document.querySelector("button.add");
 
-        //지도를 미리 생성
-        var map = new daum.maps.Map(mapContainer, mapOption);
-        //주소-좌표 변환 객체를 생성
-        var geocoder = new daum.maps.services.Geocoder();
-        //마커를 미리 생성
-        var marker = new daum.maps.Marker({
-            position: new daum.maps.LatLng(37.537187, 127.005476),
-            map: map
-        });
+			if (checkbox.checked) {
+				button.disabled = false; // 버튼 활성화
+			} else {
+				button.disabled = true; // 버튼 비활성화
+			}
+		}
 
-
-        function sample5_execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    var addr = data.address; // 최종 주소 변수
-
-                    // 주소 정보를 해당 필드에 넣는다.
-                    document.getElementById("sample5_address").value = addr;
-                    // 주소로 상세 정보를 검색
-                    geocoder.addressSearch(data.address, function(results, status) {
-                        // 정상적으로 검색이 완료됐으면
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var result = results[0]; //첫번째 결과의 값을 활용
-
-                            // 해당 주소에 대한 좌표를 받아서
-                            var coords = new daum.maps.LatLng(result.y, result.x);
-                            // 지도를 보여준다.
-                            mapContainer.style.display = "block";
-                            map.relayout();
-                            // 지도 중심을 변경한다.
-                            map.setCenter(coords);
-                            // 마커를 결과값으로 받은 위치로 옮긴다.
-                            marker.setPosition(coords)
-                        }
-                    });
-                }
-            }).open();
-        }
-    </script>
+		// 문서 로드 시 이벤트 핸들러 등록
+		document.addEventListener("DOMContentLoaded", function() {
+			var checkbox = document.getElementById("agreeCheck");
+			checkbox.addEventListener("change", handleCheckboxChange);
+		});
+	</script>
 
 	<jsp:include page="../common/footer.jsp" />
 
