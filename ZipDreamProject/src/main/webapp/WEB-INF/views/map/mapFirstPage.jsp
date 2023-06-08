@@ -194,7 +194,8 @@
 		    </div>
 	   </div>
 	</div>
-	<form id="gtSellDetail" action="<%= request.getContextPath() %>/sell/detail" method="post">
+	<form id="gtSellDetail" action="<%= request.getContextPath() %>/sell/detailapi" method="post">
+		<input id="sidoCode" name="sidoCode" type="hidden">
 		<input id="sellSno" name="sellSno" type="hidden">
 		<input id="sellName" name="sellName" type="hidden">
 		<input id="sellAddress" name="sellAddress" type="hidden">
@@ -719,16 +720,17 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     					  		
     						  	listLiTag.addEventListener('click', function(){
     						  		let add = addressToXy["지역코드"];
-    						  		let str = add.substring(0,2);
+    						  		let sidoCode = add.substring(0,2);
     						        
+    						  		document.getElementById("sidoCode").value = sidocode;
     						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
     						  		document.getElementById("sellName").value = addressToXy["아파트"];
     						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
     						  		document.getElementById("sellPrice").value = resultStr;
     						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
-    						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"];
+    						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
     						  		document.getElementById("sellFloor").value = addressToXy["층"];
-    						  		document.getElementById("ymd").value = addressToXy["년"]+addressToXy["월"]+addressToXy["일"];
+    						  		document.getElementById("ymd").value = addressToXy["년"]+" / "+addressToXy["월"]+" / "+addressToXy["일"];
     						  		document.getElementById("sellApprovalDatetime").value = addressToXy["건축년도"];
     						  		document.getElementById("realYn").value = addressToXy["해제여부"];
     						  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];

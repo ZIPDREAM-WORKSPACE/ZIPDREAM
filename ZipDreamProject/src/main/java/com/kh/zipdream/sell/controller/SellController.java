@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
 @Controller
 @RequestMapping("/sell")
@@ -39,7 +40,7 @@ public class SellController {
 	@PostMapping("/sellInsert")
 	@ResponseBody
 	public String sellInsert(SellDetail sd, HttpServletRequest request, HttpSession session,
-							 @RequestParam(value="imges", required=false) List<MultipartFile> imgList) {
+							 @RequestParam(value="imges", required=false ) List<MultipartFile> imgList) {
 		
 		String webPath = "resources/sellupfiles/";
 		String serverFolderPath = session.getServletContext().getRealPath(webPath);
@@ -64,15 +65,13 @@ public class SellController {
 	}
 	
 	//sell_detail페이지 이동
-	@PostMapping("/detail")
-	public String sellDetail(/*Model model, SellDetail sd*/) {
-		/*
-		 * model.addAttribute("sd", sd);
-		 * 
-		 * System.out.println(sd);
-		 */
+	@PostMapping("/detailapi")	
+	public String sellDetailApi(Model model, SellDetailApi sda){
+
+		model.addAttribute("sda", sda);
+		System.out.println("sd:");
 		
-		return "sell/sellDetail";
+		return "sell/sellDetailApi";
 	}
 	
 
