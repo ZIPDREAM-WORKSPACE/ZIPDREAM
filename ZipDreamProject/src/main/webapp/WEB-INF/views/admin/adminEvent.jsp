@@ -8,7 +8,7 @@
 	<section class="content-wrap">
 		<div class="content-title">
 			<h1>이벤트 관리</h1>
-			<div class="content-view-item add-coupon" style="margin-right:200px;box-shadow: 0px 10px 30px rgba(17, 38, 146, 0.3);">
+			<div class="content-view-item add-coupon" style="margin-right:140px;box-shadow: 0px 10px 30px rgba(17, 38, 146, 0.3);cursor:pointer;">
 				<div class="coupon-menu">
 					<p class="text-gray">쿠폰 등록</p>
 					<h5 style="margin-top:10px;">현재 : 2</h5>
@@ -92,6 +92,55 @@
 				</ul>
 			</div>
 		</div>
+		<div class="modal fade" id="couponModal" tabindex="-1" aria-labelledby="couponModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">쿠폰 현황</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close"
+							style="border: none; background: white; font-size: 20px;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="enrollForm" action="<%= request.getContextPath() %>/admin/event/insert" enctype="multipart/form-data" method="post">
+							<table align="center">
+								<tr>
+									<th><label for="title">제목</label></th>
+									<td><input type="text" id="title" class="form-control" name="couponTitle" required></td>
+								</tr>
+								<tr>
+									<th><label for="content">내용</label></th>
+									<td><input type="text" id="content" class="form-control" name="couponContent"></td>
+								</tr>
+								<tr>
+									<th><label for="date">유효기간</label></th>
+									<td><input type="date" id="date" class="form-control" name="couponDate"></td>
+								</tr>
+								<tr>
+									<th><label  for="image">업로드 이미지</label></th>
+									<td>
+									<img class="preview" src="">
+									<input type="file" name="images" class="form-control" accept="images/*" id="img" required>
+									</td>
+								</tr>
+							</table>
+							
+							<div align="center">
+								<button type="submit" class="btn btn-primary">등록하기</button>
+								<button type="reset"  class="btn btn-danger">취소하기</button>
+							</div>				
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success">쿠폰 등록</button>
+						<button type="button" id="btn_register" class="btn btn-primary"
+	                        data-dismiss="modal">닫기</button>
+      				</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </section>
 <script>
@@ -139,5 +188,32 @@ for (let i = 0; i < userLabel.length; i++) {
 	});
 }
 
+$(".add-coupon").click(function(){
+	$('#couponModal').modal("show");
+});
+
+function readImage(input) {
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+        // 이미지 파일인지 검사 (생략)
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementsByClassName("preview")[0];
+            previewImage.src = e.target.result
+        }
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+    }
+}
+
+const inputImage = document.getElementById("img")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+});
+
 </script>
+		
+	
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

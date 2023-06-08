@@ -11,9 +11,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
@@ -23,6 +26,7 @@ import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.utils.FileUtils;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -295,4 +299,15 @@ public class AdminServiceImpl implements AdminService{
 		return listResult;
 	}
 
+	@Transactional(rollbackFor = {Exception.class})
+	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception{
+		int result = 0;
+		String changeName = FileUtils.saveFile(img, serverFolderPath);
+		
+		coupon.setCouponPath(coupon.getCouponPath() + changeName);
+		
+		result = dao.insertCoupon(coupon);
+		
+		return result;
+	}
 }
