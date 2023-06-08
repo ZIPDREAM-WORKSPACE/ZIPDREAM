@@ -11,7 +11,7 @@ public interface SellService {
 	
 	int sellInsert(SellDetail sd, String webPath, String serverFolderPath, List<MultipartFile> imgList) throws Exception;
 	
-	void selectSellList(Map<String, Object> map);
+	void selectSellList(Map<String, Object> map, int refUno);
 	
 	SellDetail sellDetail(int sellNo);
 	

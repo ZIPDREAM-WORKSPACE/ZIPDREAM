@@ -69,23 +69,33 @@
 
     #brokeraddress{
         position: absolute;
-        width: 360px;
+        width: 480px;
         height: 45px;
         top: 140px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
-
-    #brokeraddress2{
+    
+    #addr1{
         position: absolute;
-        width: 360px;
-        height: 45px;
-        top: 245px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+	    width: 360px;
+	    height: 45px;
+	    top: 245px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
     }
 
-    #brokeraddress2-1{
+    #addr2{
+        position: absolute;
+	    width: 300px;
+	    height: 45px;
+	    top: 245px;
+	    left: 250px;
+	    background: #FFFFFF;
+	    border: 0.5px solid #000000;
+    }
+
+    #addr3{
         position: absolute;
         width: 360px;
         height: 45px;
@@ -94,14 +104,15 @@
         border: 0.5px solid #000000;
     }
 
-    #broker-adsearch{
+    #adsearch{
         position: absolute;
-        width: 100px;
-        height: 47px;
-        left: 450px;
-        top: 300px;
-        background: #4C69A2;
-        color: white;
+	    width: 110px;
+	    height: 47px;
+	    left: 440px;
+	    top: 300px;
+	    background: #4C69A2;
+	    color: white;
+	    font-size: 14px;
     }
 
     .licensebox{
@@ -184,7 +195,7 @@
         width: 100px;
         height: 45px;
         left: 450px;
-        top: 735px;
+        top: 720px;
         background-color: #4C69A2;
         color: white;
         font-size: 12px;
@@ -196,11 +207,11 @@
 
     #emailchecknumber{
         position: absolute;
-	    width: 352px;
-	    height: 45px;
-	    top: 800px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 333px;
+       height: 45px;
+       top: 780px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
 
     #ok{
@@ -208,7 +219,7 @@
         width: 100px;
         height: 47px;
         left: 450px;
-        top: 800px;
+        top: 775px;
         background-color: #4C69A2;
         color: white;
     }
@@ -217,7 +228,7 @@
         position: absolute;
         width: 360px;
         height: 45px;
-        top: 890px;
+        top: 870px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
@@ -226,7 +237,7 @@
         position: absolute;
         width: 360px;
         height: 45px;
-        top: 1030px;
+        top: 1020px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
@@ -237,7 +248,7 @@
         position: absolute;
         width: 360px;
         height: 45px;
-        bottom: 265px;
+        bottom: 275px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
@@ -246,7 +257,7 @@
         position: absolute;
         width: 360px;
         height: 45px;
-        bottom: 155px;
+        bottom: 165px;
         background: #FFFFFF;
         border: 0.5px solid #000000;
     }
@@ -274,10 +285,10 @@
 <body>
 <jsp:include page="../common/header.jsp" />
 
-	<div class="wrap">
+   <div class="wrap">
         <div class="content" id="content">
             <div class="login1">
-                <form id="signApplyform" action="bkinsert" method="post" name="signApplyform" >
+                <form id="signApplyform" action="bkinsert" enctype="multipart/form-data" method="post" name="signApplyform" >
                 <h2 id="brokerlogin-text">중개사회원정보입력</h2> 
                 <p>서비스 이용을 위해 아래내용을 입력해주세요.</p>
 
@@ -286,26 +297,33 @@
                 
 
                 <h4>소재지</h4>
-                <input type="text" id="brokeraddress2"  name="address" placeholder="우편번호"><br>
-                <button type="button" id="broker-adsearch" onclick="" >검색</button>
-                <input type="text" id="brokeraddress2-1" placeholder="상세주소를 입력해주세요."><br><br><br><br><br>
+                <div class="form-group">                   
+				<input class="form-control" style="width: 26%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
+				    <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+				</div>
+				<div class="form-group">
+				    <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
+				</div>
+				<div class="form-group">
+				    <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
+				</div><br><br><br><br><br>
 
-                <!-- <h5 id="license">사업자 등록증 등록</h5>
-                <input type="file" class="real-upload" accept="image/*" required multiple style="display: none;">
+                <h5 id="license">사업자 등록증 등록</h5>
+                <input type="file" class="real-upload" accept="images/*"   style="display: none;" name="imges">
                 <div class="licensebox" ></div>
                     
          
 
-                  <div class="a"></div>
+                  
                 <h5 id="license1-1">중개등록증 등록</h5>
-                <input type="file" class="real-upload1" accept="image/*" required multiple style="display: none;">
-                    <div class="licensebox1-1"></div>
+                <input type="file" class="real-upload1" accept="images/*"   style="display: none;" name="imges">
+                <div class="licensebox1-1"></div>
                 
 
 
                 <h5 id="license1-2">증명사진 등록</h5>
-                <input type="file" class="real-upload3" accept="image/*" required multiple style="display: none;">
-                <div class="licensebox1-2" ></div> -->
+                <input type="file" class="real-upload3" accept="images/*"   style="display: none;" name="imges">
+                <div class="licensebox1-2" ></div> 
                     
                 
             
@@ -320,7 +338,7 @@
                     
                     <input type="hidden" id="userEmail" name="userId">
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                	<button  type="button" id="ok" >확인</button><br><br>
+                   <button  type="button" id="ok" >확인</button><br><br>
                     
                 <h4>비밀번호</h4>
                 <input type="password" id="password"  name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
@@ -389,8 +407,8 @@
       }
     }
 
-   /*  //중개사 회원가입 첫번쨰 사진
-    function getImageFiles(e) {
+    //중개사 회원가입 첫번쨰 사진
+     function getImageFiles1(e) {
         const uploadFiles = [];
         const files = e.currentTarget.files;
             const licensebox = document.querySelector('.licensebox');
@@ -436,10 +454,11 @@
 
             upload.addEventListener('click', () => realUpload.click());
 
-            realUpload.addEventListener('change', getImageFiles);
+            realUpload.addEventListener('change', getImageFiles1);
+
               
-        // 중개사회원가입 두번째 사진
-        function getImageFiles(e) {
+         // 중개사회원가입 두번째 사진
+          function getImageFiles2(e) {
             const uploadFiles = [];
             const files = e.currentTarget.files;
                 const licensebox1 = document.querySelector('.licensebox1-1');
@@ -462,8 +481,8 @@
                     uploadFiles.push(file);
                     const reader = new FileReader();
                     reader.onload = (e) => {
-                        const preview = createElement(e, file);
-                        licensebox1.appendChild(preview);
+                        const preview2 = createElement(e, file);
+                        licensebox1.appendChild(preview2);
                     };
                     reader.readAsDataURL(file);
                     }
@@ -485,10 +504,10 @@
 
                 upload1.addEventListener('click', () => realUpload1.click());
 
-                realUpload1.addEventListener('change', getImageFiles);
+                realUpload1.addEventListener('change', getImageFiles2);  
                     
             //중개사 회원가입 세번째사진
-            function getImageFiles(e) {
+             function getImageFiles3(e) {
                 const uploadFiles = [];
                 const files = e.currentTarget.files;
                     const licensebox2 = document.querySelector('.licensebox1-2');
@@ -534,8 +553,11 @@
 
                     upload3.addEventListener('click', () => realUpload3.click());
 
-                    realUpload3.addEventListener('change', getImageFiles); */
+                    realUpload3.addEventListener('change', getImageFiles3);  
               
+                    
+                    
+                    
                     var verificationNumber = ""; // 인증번호를 저장하는 변수
                     //mail인증하기 버튼 클릭 
                        $("#emailcheck").on("click",function(){
@@ -546,11 +568,11 @@
                           $("#emailcheck").text("인증번호 재전송");
 
                           $.ajax({
-                          	url : "<%= request.getContextPath()%>/member/mailAuth"
+                             url : "<%= request.getContextPath()%>/member/mailAuth"
                               ,data : {mail : Mail}
-                          	,method : "get"
-                  	 		,dataType : "TEXT"    
-                  	 		,async:false
+                             ,method : "get"
+                            ,dataType : "TEXT"    
+                            ,async:false
                               ,success: function(data){
                                  alert("인증번호를 전송완료.");
                                  verificationNumber = data;
@@ -563,7 +585,7 @@
                       
                       //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
                       
-                    	/* document.getElementById("emailcheck").addEventListener("click", function() {
+                       /* document.getElementById("emailcheck").addEventListener("click", function() {
                       document.getElementById("emailchecknumber").style.display = "block";
                       document.getElementById("ok").style.display = "block";
                     });  */
@@ -572,7 +594,7 @@
                       document.getElementById("ok").addEventListener("click", function() {
                       var inputNumber = document.getElementById("emailchecknumber").value;
                       
-                  	
+                     
                       
                       
                       // 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
@@ -591,6 +613,49 @@
                       } 
                         
                     }); 
+                    
+                  //주소 가져오기
+                    function execPostCode() {
+                           new daum.Postcode({
+                               oncomplete: function(data) {	
+                                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                   
+                                  // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                  var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                                  var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+                   
+                                  // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                  // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                  if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                      extraRoadAddr += data.bname;
+                                  }
+                                  // 건물명이 있고, 공동주택일 경우 추가한다.
+                                  if(data.buildingName !== '' && data.apartment === 'Y'){
+                                     extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                  }
+                                  // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                  if(extraRoadAddr !== ''){
+                                      extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                  }
+                                  // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                                  if(fullRoadAddr !== ''){
+                                      fullRoadAddr += extraRoadAddr;
+                                  }
+                   
+                                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                  console.log(data.zonecode);
+                                  console.log(fullRoadAddr);
+                                  
+                                  
+                                  $("[id=addr1]").val(data.zonecode);
+                                  $("[name=addr2]").val(fullRoadAddr);
+                                  
+                                  document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
+                                  document.getElementById('addr2').value = fullAddr;
+                              }
+                           }).open();
+                  };
     
       </script>
 </html>

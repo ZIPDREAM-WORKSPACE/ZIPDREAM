@@ -18,7 +18,7 @@ import lombok.ToString;
 public class Attachment {
 	
 	private int attachmentNo;	//	ATTACHMENT_NO int AI PK 
-	private int refAno;			//	REF_ANO int 
+	private int refUno;			//	REF_ANO int 
 	private int refSno; 		//	REF_SNO int 
 	private String originFile;	//	ORIGIN_FILE varchar(100) 
 	private String changeName;	//	CHANGE_NAME varchar(100) 

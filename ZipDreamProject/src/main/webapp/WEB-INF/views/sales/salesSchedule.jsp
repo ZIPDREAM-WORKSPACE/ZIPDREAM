@@ -404,14 +404,23 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 } 
-.noneList{
+#noneList{
 	margin: 0 auto;
 	width: 100%;
 	width: 1200px;
 	text-align: center;
 	font-size: 24px;
-	color: rgb(134, 134, 134);
+    color: rgb(174, 174, 174);
 	display:none;
+   	padding-bottom: 80px;
+   	margin-top: 30px;
+    margin-bottom: 30px;
+	border-bottom: 1px solid rgb(174, 174, 174);
+}
+
+}
+#noneList svg{
+    margin-bottom: 20px;
 }
 
 </style>
@@ -424,13 +433,11 @@
 		myhouseList = [];
 		$(function(){
 			
-			
 			var yearmonth = document.getElementById("yearmonth").innerText;
 			var length = (yearmonth.length) - 1;
 			var month = yearmonth.substring(5, length);
 			
 			applyschedule(month);
-			
 			
 			 if('${loginUser}' != ''){
 				 
@@ -441,12 +448,9 @@
 					dataType:"text",
 					async: false,
 					success:function(result){
+					    mysaleList = result.replace("[","").replace("]","").split(",");
 						
-						
-						mysaleList = result;
-						
-						/* console.log(mysaleList); */
-						
+						console.log(mysaleList);
 					},
 					error:function(){
 						console.log("에러발생");
@@ -471,7 +475,6 @@
 				contentTYpe :"text.plain; charset:UTF-8",
 				success:function(result){
 					data = JSON.parse(result).data;
-					
 					resultHtml(data,month);
 					
 				},
@@ -512,6 +515,14 @@
 				}
 			}
 			
+			if(aptList.length == 0){
+				console.log("분양정보 없음");
+				$("#noneList").css("display", "block");
+			}else{
+				$("#noneList").css("display", "none");
+			}
+			
+			
 			var html = "<tbody id='mytbody'>"
 			$.each(aptList, function(key, value){
 
@@ -541,9 +552,9 @@
 						if(appdate - (today.getDate()) == 0){
 							html += "<td><p class='tagAccept'>접수중</p></td>";							
 						} else if(appdate - (today.getDate()) > 0){
-							html += "<td><p class='tagExpected '>접수예정</p></td>";
+							html += "<td><p class='tagExpected'>접수예정</p></td>";
 						}else if(appdate - (today.getDate()) < 0){
-							html += "<td><p class='tagExpected '>접수마감</p></td>";
+							html += "<td><p class='tagPublish'>접수마감</p></td>";
 						}
 						
 					}else if((appday-realMonth) > 0){
@@ -557,7 +568,7 @@
 				}
 				html += "<td><p>" + value.HOUSE_SECD_NM + "</p></td>";
 				html += "<td><p>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
-				html += "<td><div class='appInfo'><p class='appInfoTitle'><a href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
+				html += "<td><div class='appInfo'><p class='appInfoTitle'><a target='_blank' href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
 				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
 				
 
@@ -574,16 +585,20 @@
 				html += "<td><p>" + info[1] + "세대</p></td>";
 				html += "<td><p>" + info[2] + "m²</p></td>";
 				
-				html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
-
+				let src = "https://ifh.cc/g/hqaYN5.png";
+	            
+				for(let i = 0; i < mysaleList.length; i++){
+	               if(houseCode == Number(mysaleList[i])){
+	                  src = "https://ifh.cc/g/bNnQCj.png";
+	               }
+	            }
+	            
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
 		
 			$(".sellHouseTable").append(html);
-			
-			
-		
 			
 		}
 		
@@ -606,7 +621,6 @@
 					aptSuply = result.data[0].SUPLY_HSHLDCO;
 					aptAr = (result.data[0].SUPLY_AR).substr(0,(result.data[0].SUPLY_AR).indexOf("."));
 
-
 					
 					aptInfo = [aptPrice, aptSuply, aptAr];
 				},
@@ -619,6 +633,67 @@
 			return aptInfo;
 		}
 		
+		$(function(){
+			
+			for(var i = 0; i<$(".houseCode").length; i++){
+				console.log($(".houseCode")[i]);
+			}
+			
+			
+		});
+		
+		/* 분양정보 찜하기 */
+		function mySale(houseCode, startDateTime){
+	            var h = document.getElementById(houseCode).firstChild;
+	            
+	           /*  console.log("클릭"+mysaleList); */
+	            var userNo = '${loginUser.userNo}';
+	            
+	           /*  console.log("보낸거" + houseCode + "" + startDateTime); */
+	            
+	            if('${loginUser}' != ''){
+	                if(h.src == "https://ifh.cc/g/bNnQCj.png"){
+	                    h.src = "https://ifh.cc/g/hqaYN5.png";
+	                    /* 찜하기 취소하기 */
+	                    $.ajax({
+	                        url: "<%=request.getContextPath()%>/sales/deletemySaleHouse",
+	                        method:"get",
+	                        data:{houseCode,startDateTime,userNo},
+	                        success:function(result){
+	                            console.log(result);
+	                            
+	                        },
+	                        error:function(){
+	                            console.log("에러발생");
+	                        }
+	                    
+	                    });
+	                    
+	                    swal("", "분양일정 알림을 취소했습니다.", "warning");
+	                }else{
+	                    h.src = "https://ifh.cc/g/bNnQCj.png";
+	                    /* 찜하기 등록하기 */
+	                    $.ajax({
+	                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
+	                        method:"post",
+	                        data:{houseCode,startDateTime,userNo},
+	                        success:function(result){
+	                            console.log(result);
+	                            
+	                        },
+	                        error:function(){
+	                            console.log("에러발생");
+	                        }
+	                
+	                    });
+	                    swal("", "관심 분양단지로 등록되었습니다.", "success");
+	                };
+	                
+	            }else{
+	                swal("", "로그인 후 이용하실 수 있습니다.", "error");
+	            } 
+	        };
+	  
 
 	
 	</script>
@@ -656,8 +731,8 @@
 						</span>
 							
 					</div>
-					<div id="calendar">
-						<!-- 카테고리 선택 버튼 -->
+					<!-- <div id="calendar">
+						카테고리 선택 버튼
 						<div class="slectCover">
 
 						
@@ -753,7 +828,7 @@
 							</div>
 						</div>
 
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="sellHouseListWrap">
@@ -785,9 +860,13 @@
 	 		<div class="loader"></div>
 		</div>
 		
-		<!-- 조회된 리스트가 없을때 보여지게....... 하고 싶다 시파  -->
-		<div class="noneList">
-			<div>조회된 월에 등록된 청약일정이 없습니다.</div>
+		<!-- 조회된 리스트가 없을때 보여지게-->
+		<div id="noneList">
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  				<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  				<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+			</svg>
+			<div>분양정보가 없습니다.</div>
 		</div>
 
 	</div>
@@ -804,14 +883,18 @@
 		
 		var yearmonth = document.getElementById("yearmonth").innerText;
 		var length = (yearmonth.length) - 1;
-		var currentMonth = yearmonth.substring(5, length);
+		var currentMonth = Number(yearmonth.substring(5, length));
 
 
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
+	       	if(currentMonth == 1) {
+	                return;
+         	} 
 			 
-        	currentMonth -= 1;
+  			currentMonth -= 1;
+        	
 			 
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");    
 			
@@ -825,8 +908,12 @@
         // 다음 달로 이동하는 함수
         function goToNextMonth() {
         	
+        	if(currentMonth == 12) {
+                return;
+            }
         	
         	currentMonth += 1;
+        	
         	
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");
         	
@@ -874,164 +961,7 @@
 		});
 	
 
-	    $(document).ready(function(){
-	    	
-	        $(".bType").click(function(){
-	        	$(".stepBox").css("display", "none");
-				if($(this).hasClass("active")== false){
-					$(".bType").removeClass("active");
-					$(this).addClass("active");
-					$(this).next().css("display", "block");
-				}else{
-					$(this).removeClass("active");
-					$(".stepBox").css("display", "none");
-				}
-	        });
-	      });
-	
-	    $(document).mouseup(function (e){
-    	  var LayerPopup = $(".stepBox");
-    	  if(LayerPopup.has(e.target).length === 0){
-    	    LayerPopup.css("display", "none");
-    	  }
-    	});
-	    
-	    
-	    /* 분양단계 카테고리 선택(체그박스) 함수 */
-	    let steps = document.getElementsByName("step");
-
-        for(let i = 0; i<steps.length; i++){
-        	steps[i].onclick = function () {
-                let checkedListLength = document.querySelectorAll("input[name=step]:checked").length;
-                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
-                if(checkedListLength == steps.length){
-                    // 전체선택 상태 체크
-                    document.getElementById("selectAll").checked = true;
-                } else {
-                    // 전체 선택 상태 체크 X
-                    document.getElementById("selectAll").checked = false;
-                }
-               
-            }
-        }
-
-
-        function selectAll() {
-            let checked = document.getElementById("selectAll").checked;
-            let steps = document.getElementsByName("step");
-
-            for (let i = 0; i < steps.length; i++) {
-            	steps[i].checked = checked;
-            }  
-        }
-
-	    
-        /* 건물유형 카테고리 선택(체크박스) 함수 */
-	    let buildings = document.getElementsByName("building");
-
-        for(let i = 0; i<buildings.length; i++){
-        	buildings[i].onclick = function () {
-                let checkedListLength = document.querySelectorAll("input[name=building]:checked").length;
-                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
-                if(checkedListLength == buildings.length){
-                    // 전체선택 상태 체크
-                    document.getElementById("sa").checked = true;
-                } else {
-                    // 전체 선택 상태 체크 X
-                    document.getElementById("sa").checked = false;
-                }
-               
-            }
-        }
-
-
-        function sa() {
-            let checked = document.getElementById("sa").checked;
-            let buildings = document.getElementsByName("building");
-
-            for (let i = 0; i < buildings.length; i++) {
-            	buildings[i].checked = checked;
-            }  
-        }
-	    
-        /* 공급유형 카테고리 선택(체크박스) 함수 */
-	    let suplys = document.getElementsByName("suply");
-
-        for(let i = 0; i<suplys.length; i++){
-        	suplys[i].onclick = function () {
-                let checkedListLength = document.querySelectorAll("input[name=suply]:checked").length;
-                // 선택된 체크 박스 길이 == 전체 체크박스 길이를 비교해서 일치한다면 
-                if(checkedListLength == suplys.length){
-                    // 전체선택 상태 체크
-                    document.getElementById("all").checked = true;
-                } else {
-                    // 전체 선택 상태 체크 X
-                    document.getElementById("all").checked = false;
-                }
-               
-            }
-        }
-
-
-        function all() {
-            let checked = document.getElementById("all").checked;
-            let suplys = document.getElementsByName("suply");
-
-            for (let i = 0; i < suplys.length; i++) {
-            	suplys[i].checked = checked;
-            }  
-        }
-
-        function mySale(houseCode, startDateTime){
-            var h = document.getElementById(houseCode).firstChild;
-            
-            var userNo = '${loginUser.userNo}';
-            
-            console.log("보낸거" + houseCode + "" + startDateTime);
-            
-            if('${loginUser}' != ''){
-                if(h.src == "https://ifh.cc/g/bNnQCj.png"){
-                    h.src = "https://ifh.cc/g/hqaYN5.png";
-                    /* 찜하기 취소하기 */
-                    $.ajax({
-                        url: "<%=request.getContextPath()%>/sales/deletemySaleHouse",
-                        method:"get",
-                        data:{houseCode,startDateTime,userNo},
-                        success:function(result){
-                            console.log(result);
-                            
-                        },
-                        error:function(){
-                            console.log("에러발생");
-                        }
-                    
-                    });
-                    
-                    swal("", "분양일정 알림을 취소했습니다.", "warning");
-                }else{
-                    h.src = "https://ifh.cc/g/bNnQCj.png";
-                    /* 찜하기 등록하기 */
-                    $.ajax({
-                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
-                        method:"post",
-                        data:{houseCode,startDateTime,userNo},
-                        success:function(result){
-                            console.log(result);
-                            
-                        },
-                        error:function(){
-                            console.log("에러발생");
-                        }
-                
-                    });
-                    swal("", "관심 분양단지로 등록되었습니다.", "success");
-                };
-                
-            }else{
-                swal("", "로그인 후 이용하실 수 있습니다.", "error");
-            } 
-        };
-  
+       
    	 		
 	</script>
 	

@@ -56,6 +56,11 @@ public class SalesController {
 		return "sales/salesFaq";
 	}
 	
+	@GetMapping("/rule")
+	public String moveSaleRule() {
+		return "sales/saleRule";
+	}
+	
 	@ResponseBody
 	@GetMapping("/apiData")
 	@PostMapping("/apiData")
@@ -170,6 +175,8 @@ public class SalesController {
 		
 		List<Integer> mysaleList = mysaleService.selectMySale(userNo);
 		model.addAttribute("mysaleList", mysaleList);
+		
+		/* System.out.println(mysaleList); */
 		return mysaleList;
 	}
 	

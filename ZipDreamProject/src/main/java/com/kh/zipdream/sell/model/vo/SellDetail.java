@@ -22,7 +22,8 @@ import lombok.ToString;
 public class SellDetail {
 	
 	private int sellNo; 					// SELL_NO int 
-	private String sellSno;
+	private String sellSno; // 매물번호
+	private String sidoCode; // 시도코드 ex) 11110(지역) -> 11(시도)
 	private int refUno;						//	REF_UNO int 
 	private String sellName; 				//	SELL_NAME varchar(100) 
 	private String sellAddress;				//	SELL_ADDRESS varchar(100) 
@@ -54,9 +55,9 @@ public class SellDetail {
 	private String sellHeating;				//	SELL_HEATING varchar(100) 
 
 	private int parkingCount;				//	PARKING_COUNT int 
-	private Date sellApprovalDatetime; 		//	SELL_APPROVAL_DATETIME datetime 
+	private String sellApprovalDatetime; 		// 건축년도 //	SELL_APPROVAL_DATETIME datetime 
 	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
-	private Date sellConstructionDate;
+	
 	private String realYn;
 	private String realYnDate;
 	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 

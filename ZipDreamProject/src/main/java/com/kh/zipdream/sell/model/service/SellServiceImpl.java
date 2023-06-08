@@ -62,9 +62,9 @@ public class SellServiceImpl implements SellService {
 		return sellNo;
 	}
 	
-	public void selectSellList(Map<String, Object> map) {
+	public void selectSellList(Map<String, Object> map, int refUno) {
 		
-		ArrayList<SellDetail> list = sellDao.selectSellList();
+		ArrayList<SellDetail> list = sellDao.selectSellList(refUno);
 		
 		map.put("list", list);
 		
