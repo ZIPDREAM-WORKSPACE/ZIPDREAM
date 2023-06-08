@@ -77,7 +77,7 @@ public class MapController {
 	   	   
 	   		try {
 	   	        
-                String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=30&LAWD_CD="+code+"&DEAL_YMD=202304";
+                String openApiUrl = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=waPCFjtcKyjDOnXs6Bn4GUGOASC7K5kMpKiyIeuSvEx6xq9M6UV3cGxdX5NBKna%2Fe5nKMWQARaIrhPKkt%2BiGKw%3D%3D&pageNo=1&numOfRows=30&LAWD_CD="+code+"&DEAL_YMD=202305";
                 //OWpenAPI URL 정보 읽기
                 URL obj = new URL(openApiUrl);
                 HttpURLConnection con = (HttpURLConnection)obj.openConnection();
