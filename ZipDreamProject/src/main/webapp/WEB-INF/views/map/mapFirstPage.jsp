@@ -722,7 +722,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  		let add = addressToXy["지역코드"];
     						  		let sidoCode = add.substring(0,2);
     						        
-    						  		document.getElementById("sidoCode").value = sidocode;
+    						  		document.getElementById("sidoCode").value = sidoCode;
     						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
     						  		document.getElementById("sellName").value = addressToXy["아파트"];
     						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
