@@ -56,11 +56,6 @@ public class SalesController {
 		return "sales/salesFaq";
 	}
 	
-	@GetMapping("/rule")
-	public String moveSaleRule() {
-		return "sales/saleRule";
-	}
-	
 	@ResponseBody
 	@GetMapping("/apiData")
 	@PostMapping("/apiData")

@@ -37,7 +37,7 @@
 		SELECT * FROM MEMBER
 		WHERE USER_LEVEL = '2' AND STATUS = 'Y'
 		AND
-		<foreach collection="address" item="arr" open="" close="" separator="or">
+		<foreach collection="address" item="arr" open="(" close=")" separator="or">
 			ADDRESS LIKE CONCAT('%', #{arr}, '%') 
 		</foreach>
 	</select>

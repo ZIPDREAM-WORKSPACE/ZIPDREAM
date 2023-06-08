@@ -78,10 +78,47 @@
 .myroomsellList>tbody{
     border-bottom: 1px solid rgb(21 27 55 / 13%);
 }
+.myroomsellList>tbody tr{
+    border-bottom: 1px solid rgb(21 27 55 / 13%);
+}
 .myroomsellList>tbody td{
  	padding: 17px 0;
     line-height: 2.0rem;
     letter-spacing: -0.0em;
+}
+.approve{
+	color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 400;
+    width: 62px;
+    height: 28px;
+    margin: 0px auto;
+    line-height: 28px;
+    border-radius: 2px;
+    background-color: rgb(22, 107, 229);
+}
+.refuse{
+    font-size: 15px;
+    font-weight: 400;
+    width: 62px;
+    height: 28px;
+    margin: 0px auto;
+    line-height: 28px;
+    border-radius: 2px;
+    color: #E45A64;
+	border: 1px solid #E45A64;
+}
+.wating{
+	font-size: 15px;
+    font-weight: 400;
+    width: 62px;
+    height: 28px;
+    margin: 0px auto;
+    line-height: 28px;
+    border-radius: 2px;
+    color: #326CF9;
+	border: 1px solid #326CF9;
+
 }
 </style>
 </head>
@@ -91,9 +128,9 @@
 	<div class="myRoomListWrap">
 		<div>
 			<ul>
-				<li>· 승인중 : 내가 등록한 매물이 공인중개사에게 신청되어 승인을 기다리고 있는 상태</li>
+				<li>· 대기 : 내가 등록한 매물이 공인중개사에게 신청되어 승인을 기다리고 있는 상태</li>
 				<li>· 승인 : 내가 등록한 매물이 공인중개사에게 승인된 상태</li>
-				<li>· 승인거절 : 신청한 공인중개사가 해당 매물에 대한 승인을 거절한 상태</li>
+				<li>· 거절 : 공인중개사가 해당 매물에 대한 승인을 거절한 상태</li>
 			</ul>
 			<div class="myRoomInsert">
 				<button class="btn btn-outline-dark" type="button" onclick="location.href='<%=request.getContextPath()%>/mypage/myroominsert'">방 내놓기</button>
@@ -105,7 +142,7 @@
 						<th>건물종류</th>
 						<th>주소</th>
 						<th>거래종류</th>
-						<th>승인여부</th>
+						<th>진행사항</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -116,13 +153,13 @@
 							<td>${myroom.address }</td>
 							<td>${myroom.dealType}</td>
 							<c:if test="${myroom.status == 1}">
-								<td>승인 중</td>
+								<td><p class="wating">대기</p></td>
 							</c:if>
 							<c:if test="${myroom.status == 2}">
-								<td>승인</td>
+								<td><p class="approve">승인</p></td>
 							</c:if>
 							<c:if test="${myroom.status == 3}">
-								<td>승인거절</td>
+								<td class="refuse">거절</td>
 							</c:if>
 						</tr>
 					</c:forEach>
