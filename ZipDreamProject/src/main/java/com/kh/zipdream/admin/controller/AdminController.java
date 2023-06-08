@@ -151,6 +151,15 @@ public class AdminController {
 		return result;
 	}
 	
+	@GetMapping("/getCouponList")
+	@ResponseBody
+	public JSONObject getCouponList(int userNo, int cPage) {
+		
+		JSONObject result = service.getCouponList(cPage, userNo);
+		
+		return result;
+	}
+	
 	@GetMapping("/changeMemberStatus")
 	public String changeMemberStatus(int userNo,String status) {
 		Member m = new Member();
@@ -270,9 +279,11 @@ public class AdminController {
 			paramMap.put("type", 1);
 			service.selectUserSearch(paramMap,map);
 		}
+		List<Coupon> list = service.selectCouponList();
+		
 		model.addAttribute("userList",map);
 		model.addAttribute("type",1);
-		
+		model.addAttribute("couponList",list);
 		
 		return "admin/adminEvent";
 
@@ -296,6 +307,20 @@ public class AdminController {
 		
 		if(result > 0) {
 		}else {
+		}
+		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/event/couponToUser")
+	public String couponToUser(@RequestParam(value="couponNo", required=false) int couponNo,
+							   @RequestParam(value="userNo", required=false) int[] userNo) {
+
+		for(int i = 0; i < userNo.length; i++) {
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("couponNo", couponNo);
+			map.put("userNo", userNo[i]);
+			
+			service.insertCouponToUser(map);
 		}
 		return "redirect:/admin/event";
 	}

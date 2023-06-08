@@ -136,6 +136,7 @@
 							<div class="user-content-nav" style="display:flex;">
 								<button type="button" id="reportHistory" class="btn btn-primary" style="border-radius:8px 8px 0px 0px;">신고 기록</button>
 								<button type="button" id="reportedHistory" class="btn" style="border-radius:8px 8px 0px 0px;">피신고 기록</button>
+								<button type="button" id="userCouponList" class="btn" style="border-radius:8px 8px 0px 0px;">쿠폰</button>
 							</div>
 							<div class="user-content" style="padding:12px;border:5px solid #007bff;">
 								<table class="rwd-table" style="margin-bottom:30px;">
@@ -193,6 +194,7 @@
 			$("#reportHistory").on('click',function(){
 				$(this).addClass("btn-primary");
 				$("#reportedHistory").removeClass("btn-primary");
+				$("#userCouponList").removeClass("btn-primary");
 				$(".user-content").css({'border-top-left-radius':"0px"});
 				getReportList(userNo,uPage,1);
 			});
@@ -200,9 +202,18 @@
 			$("#reportedHistory").on('click',function(){
 				$(this).addClass("btn-primary");
 				$("#reportHistory").removeClass("btn-primary");
+				$("#userCouponList").removeClass("btn-primary");
 				$(".user-content").css({'border-radius':"8px"});
 				getReportList(userNo,uPage,2);
 			});
+			
+			$("#userCouponList").on('click',function(){
+				$(this).addClass("btn-primary");
+				$("#reportHistory").removeClass("btn-primary");
+				$("#reportedHistory").removeClass("btn-primary");
+				$(".user-content").css({'border-radius':"8px"});
+				getCouponList(userNo,uPage);
+			})
 			
 			$('#userModal').modal("show");
 		});
@@ -252,6 +263,58 @@
 					  userPage += '<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>';
 				  }else {
 					  userPage += "<li class='page-item'><a class='page-link' onclick='getReportList(" +uno +","+ (uPage+1) +","+ type + "); uPage++;'" +
+						">다음</a></li>";
+				  }
+				  $(".user-pagination").html(userPage);
+				  
+			  },
+              error: function(){
+                  console.log("error");
+               }
+                  
+        });
+	}
+	
+	function getCouponList(userNo,cPage){
+		$.ajax({
+			  url : "<%= request.getContextPath() %>/admin/getCouponList",
+			  method: "get",
+			  data: {userNo, cPage},
+			  contentType:'application/json;charset=utf-8',
+	    	  dataType:'json',
+			  success : function(result){
+				  $(".user-tbody").html("");
+				  $(".user-pagination").html("");
+				  
+				  
+				  let html = "<tr><td>번호</td><td>제목</td><td>내용</td><td>유효기간</td></tr>";					  
+				  
+				  
+				  for(let i = 0; i < result.array.length; i++){
+					let coupon = result.array[i];
+				  	html += "<tr><td>"+ coupon.couponNo +"</td><td>"+ coupon.couponTitle+"</td>";
+				  	html += "<td>"+coupon.couponContent+"</td><td>"+ new Date(coupon.couponDate).toISOString().slice(0, 10); +"</td></tr>";
+					  
+				  }
+				  $(".user-tbody").html(html);
+				  
+				  let userPage = "";
+				  uPage = uPage-1 < 1 ? 1 : uPage;
+				  
+				  if(result.pi.currentPage == 1){
+					  userPage += "<li class='page-item disabled'><a class='page-link' href='#'>이전</a></li>";
+				  }else {
+					  userPage += "<li class='page-item'><a class='page-link' onclick='getCouponList(" +uno +","+ (uPage-1)+"); uPage--;'" +
+							">이전</a></li>";
+				  }
+				  for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
+					  userPage += '<li class="page-item"><a class="page-link" '+
+							'onclick="getReportList(' +uno +','+ i + ')">${item }'+i+'</a></li>';
+				  }
+				  if(result.pi.currentPage == result.pi.maxPage){
+					  userPage += '<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>';
+				  }else {
+					  userPage += "<li class='page-item'><a class='page-link' onclick='getCouponList(" +uno +","+ (uPage+1)+"); uPage++;'" +
 						">다음</a></li>";
 				  }
 				  $(".user-pagination").html(userPage);
