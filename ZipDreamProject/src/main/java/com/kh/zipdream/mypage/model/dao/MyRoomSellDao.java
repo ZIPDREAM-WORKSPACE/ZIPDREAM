@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.mypage.model.vo.MyRoomSell;
 
 @Repository
 public class MyRoomSellDao {
@@ -22,6 +23,16 @@ public class MyRoomSellDao {
 		
 		return (ArrayList) sqlSession.selectList("myroomsell-mapper.selectAgent", map);
 		
+	}
+	
+	public int myroomSellInsert(MyRoomSell mrs) {
+		
+		return sqlSession.insert("myroomsell-mapper.myroomSellInsert", mrs);
+	}
+	
+	public ArrayList<MyRoomSell> selectMyRoomList(int userNo){
+		
+		return (ArrayList)sqlSession.selectList("myroomsell-mapper.selectMyRoomList", userNo);
 	}
 	
 }
