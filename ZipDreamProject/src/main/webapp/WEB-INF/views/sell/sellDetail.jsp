@@ -125,7 +125,7 @@
 	    width: 70%;
 	    height: 20rem;
 	}
-	.price_name, .info_name, .arround_name, .option_name, .othier_info{
+	.price_name, .info_name, .arround_name, .option_name, .othier_info, .talk, .talkWriter{
 	    font-size: 1.5rem;
 	    font-weight: 600;
 	}
@@ -148,7 +148,7 @@
 	.table>tbody>tr>th{
 	    width: 15%;
 	}
-	.content6, .content7, .content8{
+	.content6, .content7, .content8,.content10{
 		margin-top:80px;
 	}
 	/*주변정보*/
@@ -189,7 +189,69 @@
 		margin-top: 50px;
 		text-align: center;
 	}
-	
+	.content10_name{
+		margin-top : 80px;
+	}
+	.content10{
+		border: 1px solid black;
+		height : 40rem;
+		overflow: auto;
+		margin-top : -5px;
+	}
+	.box{
+		margin-top : 20px;
+	}
+	.lastBox{
+		border : 1px solid gray;
+		width : 90%;
+		height : 15rem;
+		display: flex;
+	}
+	.boardBox{
+		border-right : 1px solid gray;
+		width : 55%;
+		height: 15rem;
+	}
+	.writer{
+		margin : 20px 0px 10px 30px;
+		font-size : 1.5rem;
+	}
+	.reply{
+		margin : 10px 0px 0px 30px;
+		font-size : 1.3rem;
+	}
+	.hr2{
+		border:0.5px solid  #6E7C7C;
+	}
+	#boardContent{
+		border :1px solid gray;
+		margin-left : 15px;
+		width : 95%;
+		height : 60%;
+	}
+	.replyBox{
+	/* 	border: 1px solid blue; */
+		height: 100%;
+		width : 45%;
+	}
+	.replyName{
+		height: 20%;
+	}
+	.replyContent{
+		overflow : auto;
+		height: 55%;
+	}
+	#reply{
+		border-bottom: 0.3px solid gray;
+		margin-top : 10px;
+	}
+	.inputReply{
+		height : 20%;
+		display: flex;
+	}
+	#inputReply{
+		height : 35px;
+	}
 	/*모달창*/
 	#modal.modal-overlay {
 	    width: 100%;
@@ -209,7 +271,8 @@
 	    border: 1px solid rgba(255, 255, 255, 0.18);
 	}
 	#modal .modal-window {
-	    /* background: rgba( 69, 139, 197, 0.70 ); */            backdrop-filter: blur( 13.5px );
+	    /* background: rgba( 69, 139, 197, 0.70 ); */            
+	    backdrop-filter: blur( 13.5px );
 	    -webkit-backdrop-filter: blur( 13.5px );
 	    border-radius: 10px;
 	    width: 700px;
@@ -376,7 +439,7 @@
                             	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="400" height="600">
                             	</td>
                         	</tr>
- 							<c:forEach var="i" begin="1" end="">
+ 							<c:forEach var="i" begin="1" end="${fn:length(sd.imgList)-2}">
 			 						<tr>
 			                            <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="contentImg1" width="300" height="300"></td>
 			                            <!-- <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
@@ -440,6 +503,9 @@
         <p class="info_name">[상세정보]</p>
         <hr class="hr">
 		        <div class="info_pic margin">
+		        <c:forEach var="a" begin="" end="">
+		        
+		        </c:forEach>
 		        </div>
         <div class="info margin">
             <table class="table">
@@ -693,7 +759,52 @@
         <input type="button"  class="contect radius " value="공인중개사 연락하기">
         <input type="button" class="notify radius last_btn" value="허위매물 신고하기">
     </div>
-    
+	
+	<div class="content10_name content margin">
+		<img src="https://ifh.cc/g/KN4Qnw.png" width="50px"> <span class="talk">[담소나누기]</span>
+		<hr class="hr">
+	</div>
+	<div class="content10 content board margin">
+		<!-- <div class="lastBox margin">
+			<div class="boardBox">
+				<p class="writer">임*훈님</p>
+				<div id="boardContent">
+					<span>안녕하세요 여기집 좋아요 많이많이 사세요</span>
+				</div>
+			</div>
+			<div class="replyBox">
+				<div class="replyName">
+					<p class="reply">한줄댓글</p>
+					<hr class="hr2">
+				</div>
+				<div class="replyContent">
+					<p id="reply">김*진 : 굉굉광광이쥠봐보바뫄뫔</p>
+					<p id="reply">장*은 : 우르로캌이ㅏ러니ㅏㅇ린ㅇㄹ</p>
+					<p id="reply">김*진 : 굉굉광광이쥠봐보바뫄뫔</p>
+					<p id="reply">장*은 : 우르로캌이ㅏ러니ㅏㅇ린ㅇㄹ</p>
+				</div>
+				<div class="inputReply">
+	        		<textarea rows="1" cols="53" id="inputReply" style="resize: none;"></textarea>
+	        		<button type="submit">작성</button>
+	        	</div> 
+			</div>
+
+		</div> -->
+		<hr>
+	</div>
+	
+	<div class="content content11 margin" id="writer">
+			<img src="https://ifh.cc/g/HHdrA0.png" width="40px"> <span
+				class="talkWriter">[게시글 작성하기]</span>
+			<div class="boardWriter ">
+				<textarea rows="3" cols="150" style="resize: none;"
+					id="board_Content"></textarea>
+				<button onclick="insertboard();">작성</button>
+			</div>
+	</div>
+        
+      
+  
     <!-- 모달창 -->
     <div id="modal" class="modal-overlay" style="display: none;">
         <div class="modal-window">
@@ -715,7 +826,7 @@
                     <p id="seller_phone">연락처 : 010-1234-5678</p>
                 </div>
                 <div class="modal_footer">
-                    <input type="button" class="close_apply" value="닫기">
+                    <input type="button" class="close_apply" value="닫기" >
                     <input type="button" class="apply" value="신청하기">
                 </div>
             </div>
@@ -731,11 +842,11 @@
                 </div>
                 <hr>
                 <div class="modal_body2">
-                    <textarea rows="10" cols="60" style="resize: none;" placeholder="상담을 희망하는 날짜와 시간대를 입력해주세요. 공인중개사가 확인 후 일정 조율을 진행합니다."></textarea>
+                    <textarea rows="10" cols="60" style="resize: none;" placeholder="상담을 희망하는 날짜와 시간대를 입력해주세요. 공인중개사가 확인 후 일정 조율을 진행합니다." name="applyContent"></textarea>
                 </div>
                 <div class="modal_footer">
-                    <input type="button" class="meet apply" value="대면상담">
-                    <input type="button" class="untact apply" value="비대면상담">
+                    <input type="button" class="meet apply" value="대면상담" onclick="apply();">
+                    <input type="button" class="untact apply" value="비대면상담" onclick="apply();">
                 </div>
             </div>
         
@@ -759,4 +870,113 @@
     </div>
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
 </body>
+<script>
+	$(function(){
+		function apply(){
+			var meet = $(".meet").val();
+			var untact = $(".untact").val();
+			console.log(meet);
+			console.log(untact);
+		}
+	})
+	
+	$(function(){
+		boardList();
+	})
+	
+ 	function insertboard(){
+		$.ajax({
+			url : "<%=request.getContextPath()%>/board/insert",
+			data : {
+				refSno : '${sd.sellNo}',
+				content : $("#board_Content").val(),
+				refUno : '${loginUser.userNo}'
+			},
+			type : "POST",
+			success : function(result){
+				if(result == "1"){
+					console.log("게시판 작성 성공");
+					
+				}else{
+					console.log("게시판 작성 실패");
+				}
+				boardList();
+			},
+			complete : function(){
+				$("#board_Content").val("");
+			} 
+		})
+	}
+	
+	function boardList(){
+		$.ajax({
+			url : "<%=request.getContextPath()%>/board/list",
+			data : {refSno : '${sd.sellNo}'},
+			dataType : 'json',
+			success : function(result){
+				console.log(result);
+				let html = "";
+				for(let board of result){
+					html += "<div class='box'>"+"<div class='lastBox margin'>"+
+								"<input type='hidden' value='board.detailBoardNo'>"+
+								"<div class='boardBox'>"+
+									"<p class='writer'>"+board.userName+"</p>"+
+									"<div id='boardContent'>"+
+									"<span>"+board.content+"</span>"+
+								"</div>"+"</div>"+
+								"<div class='replyBox'>"+
+									"<div class='replyName'>"+
+										"<p class='reply'>"+"한줄댓글"+"</p>"+
+										"<hr class='hr2'>"+
+									"</div>"+
+									"<div class='replyContent'>"+
+									"</div>"+
+									"<div class='inputReply'>"+
+		        					"<textarea rows='1' cols='53' id='inputReply' style='resize: none;''>"+"</textarea>"+
+		        					"<button type='submit' onclick='insertReply();'>"+"작성"+"</button>"+
+		        				"</div>"+"</div>"+"</div>"
+				}
+				$(".content10").html(html);
+			},
+			error : function(result){
+				console.log("리스트조회 실패");
+			}
+		})
+	}
+	
+	function insertReply(){
+		$.ajax({
+			url : "<%=request.getContextPath()%>/reply/insert",
+			data : {
+				refDno : '${board.detailBoardNo}',
+				refUno : '${loginUser.userNo}',
+				replyContent : $("#inputReply").val();
+			}
+		})
+	}
+		
+	<%-- 
+	$(function(){
+		function apply(){
+			var meet = $(".meet").val();
+			var untact = $(".untact").val();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/sell/sellApply",
+				type:"post",
+				data:{
+					sno : ${sd.sellNo},
+					meet : "meet",
+					untact : "untact"
+				},
+				success : function(result){
+					$(".finish_apply").show();
+				},
+				errpr : function(){
+					alert("신청이 완료되지 않았습니다. 다시 신청해주세요");
+				}
+				
+			})
+		}
+	}) --%>
+</script>
 </html>

@@ -216,16 +216,16 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                	<p>내돈내산공인중개소</p>
-                    <!-- <input type="text" size="15" name="sellAgent" value="내돈내산공인중개소"> -->
+                	<!-- <p>내돈내산공인중개소</p> -->
+                    <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }">
                 </div>
                 <div class="seller_name">
-                	<p>김예진</p>
-                    <!-- <input type="text" size="10" name="sellerName" value="김예진"> -->
+                	<!-- <p>김예진</p> -->
+                    <input type="text" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
                 </div>
                 <div class="seller_address">
-                	<p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p>
-                    <!-- <input type="text" size="50" name="sellerAddress" value="서울특별시 강남구 테헤란로 14길 6 남도빌딩"> -->
+                	<!-- <p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p> -->
+                    <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }">
                 </div>
             </div>
         </div>
@@ -339,15 +339,15 @@
                         </tr>
                         <tr>
                             <th>전용/공급면적</th>
-                            <td><input type="text" name="sellPrivateArea"  size="45">/<input type="text" name="sellProvideArea" required size="45"></td>
+                            <td><input type="text" name="sellPrivateArea"  size="45">/<input type="text" name="sellProvideArea"  size="45"></td>
                         </tr>
                         <tr>
                             <th>해당층/건물층</th>
-                            <td><input type="text" name="sellFloor"  size="45">/<input type="text" name="sellAllFloor" required size="45"></td>
+                            <td><input type="text" name="sellFloor"  size="45">/<input type="text" name="sellAllFloor"  size="45"></td>
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToletCount" required size="45"></td>
+                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToletCount"  size="45"></td>
                         </tr>
                         <tr>
                             <th>방향</th>
@@ -375,7 +375,7 @@
                         </tr>
                         <tr>
                             <th>냉/난방시설</th>
-                            <td><input type="text" name="sellAircondition"  size="45">/<input type="text" name="sellHeating" required size="45"></td>
+                            <td><input type="text" name="sellAircondition"  size="45">/<input type="text" name="sellHeating" size="45"></td>
                         </tr>
                         <tr>
                             <th>세대주차대수</th>

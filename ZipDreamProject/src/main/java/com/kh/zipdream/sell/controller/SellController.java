@@ -54,7 +54,7 @@ public class SellController {
 		
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "main";
+			return "redirect:../agent/list";
 		}else {
 			System.out.println("업로드 실패");
 			return "main";
@@ -70,5 +70,11 @@ public class SellController {
 		return "sell/sellDetail";
 	}
 	
+	//상담신청
+	@PostMapping("/sellApply")
+	@ResponseBody
+	public int sellApply() {
+		return result;
+	}
 		
 }
