@@ -465,9 +465,11 @@
 .agentList>tbody tr{
 	border-bottom: 1px solid rgb(231, 231, 231);
 }
+
 .agentList>tbody label, .agentList>tbody input{
 	cursor:pointer;
 }
+
 .agentList>tbody td{
 	font-size: 14px;
 	font-weight: 400;
@@ -695,8 +697,10 @@
 						html = "<table class='agentList'><thead><tr><th>선택</th><th>이름</th><th>소재지</th></thead><tbody>";
 						for(var i = 0; i<result.length;i++){
 							/* console.log(result[i]) */
+
 							html += "<tr><td><input type='radio' name='agent' id='"+ result[i].userNo +"' value='"+ result[i].userNo +"'></td><td><label for='"+ result[i].userNo +"'>"+ result[i].userName+"</label></td>";
 							html += "<td><label for='"+ result[i].userNo +"'>"+result[i].address+"</label></td></tr>"
+
 						}
 						
 						html += "</tbody>"
@@ -752,6 +756,7 @@
 			let roomType = $('input[name=roomType]:checked').val();
 			let buildingType = $('input[name=buildingType]:checked').val();
 			let dealType = $('input[name=dealType]:checked').val();
+
 			let address = $('input[name=address1]').val() + " " +$('input[name=address2]').val() + " ";
 			if($('input[name=address3]').val() != ""){
 				address += $('input[name=address3]').val()+ "동 ";
@@ -760,6 +765,7 @@
 				address += $('input[name=address4]').val()+"호";
 			}
 			 
+
 			
 			console.log("보낼정보는 = 공인중개사 : "+refRuno+", 회원정보 :"+refUno+", 룸타입" + roomType + buildingType + dealType + address);
 			
@@ -772,11 +778,13 @@
 					
 					swal({
 						  title: "신청 완료",
+
 						  text: "공인중개사가 확인 후 직접 연락드립니다.\n진행사항은 마이페이지 내 매물에서 확인하실 수 있습니다.",
 						  button: "확인",
 						  closeOnClickOutside : false
 					}).then(function(){
 						location.href = "<%=request.getContextPath()%>/mypage/myroomlist";
+
 					});
 					
 					listReset();

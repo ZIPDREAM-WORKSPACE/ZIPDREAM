@@ -78,13 +78,16 @@
 .myroomsellList>tbody{
     border-bottom: 1px solid rgb(21 27 55 / 13%);
 }
+
 .myroomsellList>tbody tr{
     border-bottom: 1px solid rgb(21 27 55 / 13%);
 }
+
 .myroomsellList>tbody td{
  	padding: 17px 0;
     line-height: 2.0rem;
     letter-spacing: -0.0em;
+
 }
 .approve{
 	color: rgb(255, 255, 255);
@@ -128,9 +131,11 @@
 	<div class="myRoomListWrap">
 		<div>
 			<ul>
+
 				<li>· 대기 : 내가 등록한 매물이 공인중개사에게 신청되어 승인을 기다리고 있는 상태</li>
 				<li>· 승인 : 내가 등록한 매물이 공인중개사에게 승인된 상태</li>
 				<li>· 거절 : 공인중개사가 해당 매물에 대한 승인을 거절한 상태</li>
+
 			</ul>
 			<div class="myRoomInsert">
 				<button class="btn btn-outline-dark" type="button" onclick="location.href='<%=request.getContextPath()%>/mypage/myroominsert'">방 내놓기</button>
@@ -153,6 +158,7 @@
 							<td>${myroom.address }</td>
 							<td>${myroom.dealType}</td>
 							<c:if test="${myroom.status == 1}">
+
 								<td><p class="wating">대기</p></td>
 							</c:if>
 							<c:if test="${myroom.status == 2}">
@@ -160,6 +166,7 @@
 							</c:if>
 							<c:if test="${myroom.status == 3}">
 								<td class="refuse">거절</td>
+
 							</c:if>
 						</tr>
 					</c:forEach>
