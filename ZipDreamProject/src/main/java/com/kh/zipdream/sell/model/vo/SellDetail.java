@@ -54,9 +54,9 @@ public class SellDetail {
 	private String sellHeating;				//	SELL_HEATING varchar(100) 
 
 	private int parkingCount;				//	PARKING_COUNT int 
-	private Date sellApprovalDatetime; 		//	SELL_APPROVAL_DATETIME datetime 
+	private Date sellApprovalDatetime; 		// 건축년도 //	SELL_APPROVAL_DATETIME datetime 
 	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
-	private Date sellConstructionDate;
+	
 	private String realYn;
 	private String realYnDate;
 	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
