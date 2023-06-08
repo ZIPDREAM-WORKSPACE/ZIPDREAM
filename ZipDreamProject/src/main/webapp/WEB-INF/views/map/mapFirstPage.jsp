@@ -831,7 +831,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	                                  
     	    	                              }
 	   	                          
-        	                              searchApt(aptName);
+        	                              
    	                        	 		 }
 	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
 	   	                           
@@ -979,7 +979,7 @@ function displayCenterInfo(result, status) {
 } 
 
  
-/* function searchApt(aptName){
+function searchApt(){
 	let search = document.getElementById("search").value;
 	let listInner = aptName;
 	
@@ -991,7 +991,7 @@ function displayCenterInfo(result, status) {
   	listLiTag.textContent = listInner;
   	listEl.appendChild(listLiTag);
 
-}  */
+}
  
 </script>
 
