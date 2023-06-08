@@ -69,7 +69,7 @@ public class SellController {
 	public String sellDetailApi(Model model, SellDetailApi sda){
 
 		model.addAttribute("sda", sda);
-		System.out.println("sd:");
+		System.out.println("sd:"+ sda);
 		
 		return "sell/sellDetailApi";
 	}
