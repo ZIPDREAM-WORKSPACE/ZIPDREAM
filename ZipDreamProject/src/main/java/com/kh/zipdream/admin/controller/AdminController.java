@@ -1,25 +1,38 @@
 package com.kh.zipdream.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.admin.model.service.AdminService;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.chat.model.service.ChatService;
+import com.kh.zipdream.chat.model.vo.ChatMessage;
+import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 
 @Controller
+@SessionAttributes({"loginUser", "chatRoomNo"})
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -28,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ChatService chatService;
 	
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -190,13 +206,58 @@ public class AdminController {
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						
 						 ) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		service.selectChatRoomList(cp,map);
+		List<Integer> countList = chatService.countChatRoomMemberList();
+		System.out.println(countList);
 		model.addAttribute("selectChatRoomList",map);
+		model.addAttribute("countList",countList);
 		return "admin/adminChat";
 	}
 	
+
+	@GetMapping("/chat/room/{chatRoomNo}")
+	public  String selectChatMessage(
+				@ModelAttribute("loginUser") Member loginUser,
+				// sessionScope에 있는 loginUser를 넣어준다
+				// 단, SessionAttribute로 등록이 되어 있는 경우 
+				Model model,
+				ChatRoomJoin join,
+				@PathVariable("chatRoomNo") int chatRoomNo,
+				RedirectAttributes ra
+			) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("cno", join.getChatRoomNo());
+		map.put("uno", loginUser.getUserNo());
+		
+		int result = chatService.selectChatRoomjoin(map);
+		System.out.println("결과:"+result);
+		
+	if(result<1) {
+			
+			join.setRefUno(loginUser.getUserNo());
+			join.setChatRoomNo(chatRoomNo);
+			chatService.joinChatRoomUser(join);
+		}
+		
+		/*
+		 * join.setRefUno(loginUser.getUserNo()); join.setChatRoomNo(chatRoomNo);
+		 * chatService.joinChatRoomUser(join);
+		 */
+		model.addAttribute("chatRoomNo",chatRoomNo);
+		List<ChatMessage> list = chatService.selectChatMessage(join);
+		
+		if(list !=null) {
+			model.addAttribute("list",list);
+			return "admin/adminChatDetail";
+		}else {
+			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
+			return  "admin/chat";
+		}
+	}
+
 	@GetMapping("/event")
 	public String event(Model model,
 					    @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
@@ -214,6 +275,28 @@ public class AdminController {
 		
 		
 		return "admin/adminEvent";
+
 	}
 	
+	@PostMapping("/event/insert")
+	public String eventInsert(Model model,
+							  @RequestParam(value="images", required=false) MultipartFile img,
+							  Coupon coupon, HttpSession session) {
+		
+		String webPath = "/resources/images/coupons/";
+		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		coupon.setCouponPath(webPath);
+		int result = 0;
+		
+		try {
+			result = service.insertCoupon(coupon, img, webPath, serverFolderPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+		}else {
+		}
+		return "redirect:/admin/event";
+	}
 }

@@ -394,7 +394,7 @@
  <div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellNo} </span>
+                <span>매물번호 : ${sd.sellSno} </span>
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>

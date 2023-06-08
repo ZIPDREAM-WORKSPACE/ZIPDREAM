@@ -10,16 +10,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.sales.model.service.MySaleService;
+import com.kh.zipdream.sales.model.vo.MySale;
 
 @Controller 
 @RequestMapping("/sales")
+@SessionAttributes({"loginUser"})
 public class SalesController {
+	
+	
+	@Autowired
+	private MySaleService mysaleService;
 	
 	@GetMapping("/schedule")
 	public String moveSalesSchedule() {
@@ -53,7 +68,7 @@ public class SalesController {
 
 			month = "0" + (Integer.parseInt(month)-1);
 
-		
+		}
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();
 		
@@ -88,8 +103,8 @@ public class SalesController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return result.toString();
+
 	}
 	
 	
@@ -132,9 +147,47 @@ public class SalesController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/mySaleHouse")
-	public void mySaleHouse(String houseCode) {
-		System.out.println("컨트롤러");
+	@PostMapping("/mySaleHouse")
+	public String mySaleHouse(int houseCode, int userNo, String startDateTime) {
+		
+		MySale ms = new MySale(houseCode,startDateTime, userNo);
+		
+		int result = mysaleService.insertMysaleHouse(ms);
+		
+		if(result>0) {
+			return "성공";
+			
+		}else{
+			return "실패";
+		}
+		
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("/selectMySale")
+	public List<Integer> selectMySale(int userNo, Model model) {
+		
+		List<Integer> mysaleList = mysaleService.selectMySale(userNo);
+		model.addAttribute("mysaleList", mysaleList);
+		
+		System.out.println(mysaleList);
+		return mysaleList;
+	}
+	
+	@ResponseBody
+	@GetMapping("/deletemySaleHouse")
+	public String deletemySaleHouse(MySale ms) {
+		
+		int result = mysaleService.deleteMysaleHouse(ms);
+		
+		if(result>0) {
+			return "성공";
+			
+		}else{
+			return "실패";
+		}
+		
 	}
 
 }

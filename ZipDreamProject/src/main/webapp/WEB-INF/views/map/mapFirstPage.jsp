@@ -27,20 +27,7 @@
 		height: 60px;
 		
 	}
-/* 	.keyword_wrap{
-		width: 100%;
-		height: 2083px;
-		border-bottom: 1px solid lightgray; 
-		overflow: auto;
-	} */
-	/* .map_wrap::-webkit-scrollbar {
-	    width: 10px;
-	    background-color: gray;
-	  }
-	.map_wrap::-webkit-scrollbar-track{
-		background:none;
-	} */
-	
+
 			
 	.bi-search{
 		float: left;
@@ -207,7 +194,20 @@
 		    </div>
 	   </div>
 	</div>
-	
+	<form id="gtSellDetail" action="<%= request.getContextPath() %>/sell/detailapi" method="post">
+		<input id="sidoCode" name="sidoCode" type="hidden">
+		<input id="sellSno" name="sellSno" type="hidden">
+		<input id="sellName" name="sellName" type="hidden">
+		<input id="sellAddress" name="sellAddress" type="hidden">
+		<input id="sellPrice" name="sellPrice" type="hidden">
+		<input id="brokerAdd" name="brokerAdd" type="hidden">
+		<input id="sellPrivateArea" name="sellPrivateArea" type="hidden">
+		<input id="sellFloor" name="sellFloor" type="hidden">
+		<input id="ymd" name="ymd" type="hidden">
+		<input id="sellApprovalDatetime" name="sellApprovalDatetime" type="hidden">
+		<input id="realYn" name="realYn" type="hidden">
+		<input id="realYnDate" name="realYnDate" type="hidden">
+ 	</form>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7"></script> -->
@@ -685,6 +685,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	                     function listView(addressToXy, roadName){
     						  	listEl = document.getElementById('placesList');
     						  	var listLiTag = document.createElement("li");
+    						  	listLiTag.setAttribute("class", "goDetail");
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
@@ -717,7 +718,25 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
+    						  	listLiTag.addEventListener('click', function(){
+    						  		let add = addressToXy["지역코드"];
+    						  		let sidoCode = add.substring(0,2);
+    						        
+    						  		document.getElementById("sidoCode").value = sidocode;
+    						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
+    						  		document.getElementById("sellName").value = addressToXy["아파트"];
+    						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
+    						  		document.getElementById("sellPrice").value = resultStr;
+    						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
+    						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
+    						  		document.getElementById("sellFloor").value = addressToXy["층"];
+    						  		document.getElementById("ymd").value = addressToXy["년"]+" / "+addressToXy["월"]+" / "+addressToXy["일"];
+    						  		document.getElementById("sellApprovalDatetime").value = addressToXy["건축년도"];
+    						  		document.getElementById("realYn").value = addressToXy["해제여부"];
+    						  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];
     						  	
+    						  		document.getElementById("gtSellDetail").submit();
+    						  	});
     						  	
     						  	
     					  }

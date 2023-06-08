@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
@@ -157,5 +158,9 @@ public class AdminDao {
 	
 	public int updateMemberStatus(Member m) {
 		return sqlSession.update("admin-mapper.updateMemberStatus",m);
+	}
+	
+	public int insertCoupon(Coupon coupon) {
+		return sqlSession.insert("admin-mapper.insertCoupon",coupon);
 	}
 }

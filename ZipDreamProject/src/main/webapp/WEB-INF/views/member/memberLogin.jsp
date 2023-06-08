@@ -147,7 +147,7 @@
         <div class="modal-body">
             <a href="<%=request.getContextPath()%>/member/join" role="button" class="sign-up" >일반 회원가입</a>
             <hr>
-            <a href="<%=request.getContextPath()%>/member/brokerjoin" role="button" class="sign-up2" >공인중개사 회원가입</a>
+            <a href="<%=request.getContextPath()%>/member/bkjoin" role="button" class="sign-up2" >공인중개사 회원가입</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

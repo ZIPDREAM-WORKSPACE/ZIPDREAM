@@ -5,27 +5,30 @@
 	<resultMap type="chatRoom" id="chatRoomResultSet">
 		<result property="chatRoomNo" column="CHAT_ROOM_NO"/>
 		<result property="title" column="TITLE"/>
-		<result property="refuno" column="REF_UNO"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
 		
 	</resultMap>
 	
 	<resultMap type="chatMessage" id="chatMessageResultSet">
 		<result column="CM_NO" property="cmNo" />
 		<result column="MESSAGE" property="message" />
-		<result column="CREATE_DATE" property="createDate" />
+		<result column="CREATE_DATETIME" property="createDatetime" />
 		<result column="CHAT_ROOM_NO" property="chatRoomNo" />
 		<result column="REF_UNO" property="refUno" />
 		<result column="USER_ID" property="userId" />
 	</resultMap>
 	
+	<resultMap type="chatRoomJoin" id="chatRoomJoinCount">
+		<result column="COUNT" property="count" />
+		
+	</resultMap>
+	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
-		  SELECT MAX(MESSAGE) AS MESSAGE, CHAT_ROOM_NO, TITLE
-		FROM CHAT_MESSAGE 
-        JOIN CHAT_ROOM  USING(CHAT_ROOM_NO)
-		GROUP BY CHAT_ROOM_NO
-		ORDER BY CHAT_ROOM_NO DESC
+		  SELECT MESSAGE, CHAT_ROOM_NO, TITLE, DATE_FORMAT(CREATE_DATETIME, '%Y-%m-%d %H:%i:%s') AS CREATE_DATE
+        FROM CHAT_ROOM
+       JOIN CHAT_MESSAGE USING(CHAT_ROOM_NO)
+        WHERE CM_NO IN ( SELECT MAX(CM_NO) FROM CHAT_MESSAGE GROUP BY CHAT_ROOM_NO )
+         ORDER BY CHAT_ROOM_NO DESC
 	</select>
 	
 		<select id="selectChatRoom" resultType="_int" >
@@ -55,6 +58,13 @@
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
 		AND REF_UNO = #{refUno}
 	</select>
+	
+	<delete id="joinUserDelete" parameterType="_int" >
+		DELETE 
+		FROM CHAT_ROOM_JOIN
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+		
+	</delete>
 	
 	<!-- 채팅방 참여하기 -->
 	<insert id="joinChatRoom" parameterType="chatRoomJoin">
@@ -116,6 +126,18 @@
 		WHERE STATUS = 'Y';
 	</select>
 	
-
+	<select id="selectChatRoomjoin" resultType="_int" parameterType="java.util.Map">
+		SELECT COUNT(*)
+       FROM CHAT_ROOM_JOIN
+       WHERE CHAT_ROOM_NO = #{cno}  AND REF_UNO = #{uno}
+	</select>
+	
+	<select id="countChatRoomMemberList" resultMap="chatRoomJoinCount" >
+		   	SELECT COUNT(*) AS COUNT
+         FROM CHAT_ROOM_JOIN
+          GROUP BY CHAT_ROOM_NO
+        ORDER BY CHAT_ROOM_NO DESC;
+	</select>
+	
 	
 </mapper>
