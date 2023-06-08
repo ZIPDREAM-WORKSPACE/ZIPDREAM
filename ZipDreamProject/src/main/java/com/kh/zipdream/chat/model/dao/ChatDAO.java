@@ -14,6 +14,7 @@ import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.common.model.vo.PageInfo;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Repository
 public class ChatDAO {
@@ -92,7 +93,6 @@ public class ChatDAO {
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		ArrayList<ChatRoom> r =  (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
-		System.out.println(r);
 		
 		return r;
 	}
@@ -109,6 +109,10 @@ public class ChatDAO {
 	
 	public List<Integer> countChatRoomMemberList(){
 		return sqlSession.selectList("chattingMapper.countChatRoomMemberList");
+	}
+	
+	public List<Member> selectChatMember(int chatRoomNo){
+		return sqlSession.selectList("chattingMapper.selectChatMember",chatRoomNo);
 	}
 
 }
