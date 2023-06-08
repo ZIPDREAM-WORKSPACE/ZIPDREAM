@@ -445,12 +445,12 @@
 					url:"<%=request.getContextPath()%>/sales/selectMySale",
 					method:"get",
 					data:{userNo : '${loginUser.userNo}'},
-					dataType:"json",
+					dataType:"text",
 					async: false,
 					success:function(result){
+					    mysaleList = result.replace("[","").replace("]","").split(",");
 						
-						mysaleList = result;
-						
+						console.log(mysaleList);
 					},
 					error:function(){
 						console.log("에러발생");
@@ -568,7 +568,7 @@
 				}
 				html += "<td><p>" + value.HOUSE_SECD_NM + "</p></td>";
 				html += "<td><p>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
-				html += "<td><div class='appInfo'><p class='appInfoTitle'><a href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
+				html += "<td><div class='appInfo'><p class='appInfoTitle'><a target='_blank' href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
 				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
 				
 
@@ -584,17 +584,16 @@
 				html += "<td><p>" + info[0] + "</p></td>";
 				html += "<td><p>" + info[1] + "세대</p></td>";
 				html += "<td><p>" + info[2] + "m²</p></td>";
-				html += "<td class='houseCode' id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
-				for(var i = 0; i<mysaleList.length; i++){
-					if(houseCode == mysaleList[i]){
-						console.log("같음");
-						/* html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/bNnQCj.png'></td></tr>"; */
-					} else{
-						console.log("다름");
-					}
-				}
 				
-
+				let src = "https://ifh.cc/g/hqaYN5.png";
+	            
+				for(let i = 0; i < mysaleList.length; i++){
+	               if(houseCode == Number(mysaleList[i])){
+	                  src = "https://ifh.cc/g/bNnQCj.png";
+	               }
+	            }
+	            
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
@@ -622,7 +621,6 @@
 					aptSuply = result.data[0].SUPLY_HSHLDCO;
 					aptAr = (result.data[0].SUPLY_AR).substr(0,(result.data[0].SUPLY_AR).indexOf("."));
 
-
 					
 					aptInfo = [aptPrice, aptSuply, aptAr];
 				},
@@ -648,10 +646,10 @@
 		function mySale(houseCode, startDateTime){
 	            var h = document.getElementById(houseCode).firstChild;
 	            
-	            console.log("클릭"+mysaleList);
+	           /*  console.log("클릭"+mysaleList); */
 	            var userNo = '${loginUser.userNo}';
 	            
-	            console.log("보낸거" + houseCode + "" + startDateTime);
+	           /*  console.log("보낸거" + houseCode + "" + startDateTime); */
 	            
 	            if('${loginUser}' != ''){
 	                if(h.src == "https://ifh.cc/g/bNnQCj.png"){
@@ -885,14 +883,18 @@
 		
 		var yearmonth = document.getElementById("yearmonth").innerText;
 		var length = (yearmonth.length) - 1;
-		var currentMonth = yearmonth.substring(5, length);
+		var currentMonth = Number(yearmonth.substring(5, length));
 
 
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
+	       	if(currentMonth == 1) {
+	                return;
+         	} 
 			 
-        	currentMonth -= 1;
+  			currentMonth -= 1;
+        	
 			 
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");    
 			
@@ -906,8 +908,12 @@
         // 다음 달로 이동하는 함수
         function goToNextMonth() {
         	
+        	if(currentMonth == 12) {
+                return;
+            }
         	
         	currentMonth += 1;
+        	
         	
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");
         	
