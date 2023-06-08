@@ -43,6 +43,14 @@
 		<result column="REPORT_DATE" property="reportDate"/>
 	</resultMap>	
 	
+	<resultMap type="coupon" id="couponResultSet">
+		<result column="COUPON_NO" property="couponNo"/>
+		<result column="COUPON_TITLE" property="couponTitle"/>
+		<result column="COUPON_CONTENT" property="couponContent"/>
+		<result column="COUPON_DATE" property="couponDate"/>
+		<result column="COUPON_PATH" property="couponPath"/>
+	</resultMap>
+	
 	<select id="countUser" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 
 		<if test='type == 1'>
@@ -91,18 +99,22 @@
     	</choose>
 	</select>
 	
+	<select id="countUserCoupon" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM USER_COUPON WHERE USER_NO = #{userNo}
+	</select>
+	
 	<select id="countReportYesterday" resultType="_int">
 		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
 		<![CDATA[AND REPORT_DATE < CURDATE()]]>
 	</select>
 	
 	<select id="countEvent" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION
+		SELECT COUNT(*) FROM NOTICE_BOARD
 	</select>
 	
 	<select id="countEventYesterday" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION 
-		<![CDATA[WHERE PROMOTION_START_DATETIME < CURDATE()]]>
+		SELECT COUNT(*) FROM NOTICE_BOARD 
+		<![CDATA[WHERE CREATE_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">
@@ -243,6 +255,11 @@
 		ORDER BY REPORT_DATE DESC
 	</select>
 	
+	<select id="getCouponList" parameterType="_int" resultMap="couponResultSet">
+		SELECT * FROM USER_COUPON U LEFT JOIN COUPON C ON U.COUPON_NO = C.COUPON_NO
+		WHERE U.USER_NO = #{userNo}
+	</select>
+	
 	<select id="selectReport" resultMap="reportResultSet">
 		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
 	</select>
@@ -259,4 +276,18 @@
 			 STATUS = #{status}		
 		WHERE USER_NO = #{userNo}
 	</update>
+	
+	<insert id="insertCoupon" parameterType="coupon">
+		INSERT INTO COUPON (COUPON_TITLE,COUPON_CONTENT,COUPON_DATE,COUPON_PATH)
+		VALUES(#{couponTitle},#{couponContent},#{couponDate},#{couponPath})
+	</insert>
+	
+	<select id="selectCouponList" resultMap="couponResultSet">
+		SELECT * FROM COUPON
+	</select>
+	
+	<insert id="insertCouponToUser" parameterType="hashMap">
+		INSERT INTO USER_COUPON
+		VALUES(#{userNo},#{couponNo})
+	</insert>
 </mapper>

@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
@@ -56,6 +57,10 @@ public class AdminDao {
 	
 	public int countUserReport(Map<String, Object> paramMap) {
 		return sqlSession.selectOne("admin-mapper.countUserReport",paramMap);
+	}
+	
+	public int countUserCoupon(int userNo) {
+		return sqlSession.selectOne("admin-mapper.countUserCoupon",userNo);
 	}
 	
 	public int countEvent() {
@@ -147,6 +152,13 @@ public class AdminDao {
 		return (ArrayList) sqlSession.selectList("admin-mapper.getReportList",paramMap,rowBounds);
 	}
 	
+	public ArrayList<Coupon> getCouponList(PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.getCouponList",userNo,rowBounds);
+	}
+	
 	public Report selectReport(int reportNo) {
 		return sqlSession.selectOne("admin-mapper.selectReport",reportNo); 
 	}
@@ -157,5 +169,17 @@ public class AdminDao {
 	
 	public int updateMemberStatus(Member m) {
 		return sqlSession.update("admin-mapper.updateMemberStatus",m);
+	}
+	
+	public int insertCoupon(Coupon coupon) {
+		return sqlSession.insert("admin-mapper.insertCoupon",coupon);
+	}
+	
+	public ArrayList<Coupon> selectCouponList(){
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectCouponList");
+	}
+	
+	public int insertCouponToUser(Map<String,Integer> map) {
+		return sqlSession.insert("admin-mapper.insertCouponToUser",map);
 	}
 }

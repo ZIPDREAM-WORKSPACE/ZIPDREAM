@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="list" value="${map.list}" />
 <!DOCTYPE html>
 <html>
@@ -64,17 +65,23 @@
 				</tr>
 			</thead>
 			<tbody class="tbody">
-				<c:forEach items="${list}" var="sell">
-					<tr onclick="movePage(${sell.sellNo})">
-						<td class="sno">${sell.sellNo}</td>
-						<td>${sell.sellType}</td>
-						<td>${sell.sellName}</td>
-						<td>${sell.createDate} </td>
-						<td>22</td>
+				<c:if test="${empty list}">
+					<tr>
+						<td colspan="5">등록된 게시글이 없습니다.</td>
 					</tr>
-					
-				</c:forEach>
-				
+				</c:if>	
+				<c:if test="${!empty list }">
+					<c:forEach items="${list}" var="sell">
+						
+								<tr onclick="movePage(${sell.sellNo})">
+									<td class="sno">${sell.sellNo}</td>
+									<td>${sell.sellType}</td>
+									<td>${sell.sellName}</td>
+									<td>${sell.createDate} </td>
+									<td>22</td>
+								</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	</div>

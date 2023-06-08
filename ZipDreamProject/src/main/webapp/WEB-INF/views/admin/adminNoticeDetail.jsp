@@ -13,7 +13,7 @@
 					<button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/notice/delete?boardNo=${noticeBoard.noticeBoardNo}'" style="background-color:red;">삭제</button>
 				</div>
 			</div>
-			<input type="text" class="content-noticeBoardNo" name="noticeBoardNo" value="${noticeBoard.noticeBoardNo}" readonly/>
+			번호 : <input type="text" class="content-noticeBoardNo" name="noticeBoardNo" value="${noticeBoard.noticeBoardNo}" readonly/>
 			<input type="text" class="content-noticeBoardTitle" name="noticeBoardTitle" placeholder="제목을 입력하세요." value="${noticeBoard.noticeBoardTitle}">
 			<textarea id="summernote" name="noticeBoardContent">		
 				${noticeBoard.noticeBoardContent}

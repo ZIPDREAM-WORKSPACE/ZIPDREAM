@@ -1,6 +1,10 @@
 package com.kh.zipdream.member.model.service;
 
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
 
@@ -12,7 +16,7 @@ public interface MemberService {
 
 	public abstract int insertMember(Member inputMember);
 	
-	public abstract int insertbkMember(Member inputMember);
+	public abstract int insertbkMember(Member m, String webPath, String serverFolderPath,List<MultipartFile> imgList) throws Exception;
 	
 	public abstract int insertapply(int userNo);
 	

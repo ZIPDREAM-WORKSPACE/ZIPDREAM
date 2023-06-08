@@ -1,6 +1,8 @@
 package com.kh.zipdream.member.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -79,20 +82,19 @@ public class MemberController {
 
 	      // 암호화 전 loginUser처리
 	      Member loginUser = memberService.loginMember(m);
-	      
-	      /*여기여기여기ㅕ깅ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ*/
-	      if (loginUser == null) { // 실패
-	         mv.addObject("errorMsg", "로그인 실패");
-	         mv.setViewName("common/errorPage");
-	      } else { // 성공
-	         session.setAttribute("loginUser", loginUser);
-	         if(loginUser.getUserLevel() == 3) {
-	            mv.setViewName("redirect:/admin/main");
-	         }else {            
-	            mv.setViewName("redirect:/");
-	         }
-	         System.out.println(session.getAttribute("loginUser"));
 
+	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+	    	  	session.setAttribute("loginUser", loginUser);
+		         if(loginUser.getUserLevel() == 3) {
+		            mv.setViewName("redirect:/admin/main");
+		         }else {            
+		            mv.setViewName("redirect:/");
+		         }
+		         System.out.println(session.getAttribute("loginUser"));
+	      } else { // 성공
+	    	  mv.addObject("errorMsg", "로그인 실패");
+		      mv.setViewName("common/errorPage");
+	         
 	      }
 	      return mv;  
 	   }
@@ -107,7 +109,9 @@ public class MemberController {
 	@PostMapping("/insert")
 	public String insertMember( 
 			Member m, HttpSession session, Model model) {
-		
+		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
+		System.out.println(address);
+		m.setAddress(address);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
 		// 암호화된 pwd를 m의 userPwd다시 대입
@@ -134,32 +138,47 @@ public class MemberController {
 	//중개사회원가입
 		@PostMapping("/bkinsert")
 		public String insertbkMember( 
-				Member m, HttpSession session, Model model) {
+				Member m, HttpSession session, Model model,
+				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList){
+			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
+			System.out.println(address);
+			m.setAddress(address);
 			
+			System.out.println(imgList);
 			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+			String webPath = "resources/bkupfiles/";
+			String serverFolderPath = session.getServletContext().getRealPath(webPath);
 			
 			// 암호화된 pwd를 m의 userPwd다시 대입
 			
 			m.setUserPwd(encPwd);
 			
+			int result =0;
 			
-			int result = memberService.insertbkMember(m);
-			/* int result2 = memberService.insertapply(m.getUserNo()); */
-			
-			System.out.println(result);
-			
-			String url = "";
-			if (result > 0) { // 성공시 - 메인페이지로
-				session.setAttribute("alertMsg", "회원가입");
-				url = "redirect:/";
-			} else { // 실패 - 에러페이지
-				model.addAttribute("errorMsg", "회원가입 실패");
-				url = "common/errorPage";
+			try {
+				result = memberService.insertbkMember(m, webPath, serverFolderPath,imgList);
+				System.out.println(result);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("업로드 에러");
 			}
-
-			return url;
-		}
 	
+			String url = "";
+		if(result >0) {
+			System.out.println("업로드 성공");
+			session.setAttribute("alertMsg", "회원가입");
+			url = "redirect:/";
+			
+		}else {
+			System.out.println("업로드 실패");
+			model.addAttribute("errorMsg", "회원가입 실패");
+			url = "common/errorPage";
+			
+		}
+
+		return url;
+		}
+
 	
 	/*이메일*/
 	@RequestMapping("/mailAuth")
@@ -208,23 +227,7 @@ public class MemberController {
 	}
 	
 	
-	/*
-	 * @GetMapping("/insert") public String enrollForm() { return
-	 * "member/memberLogin";
-	 * 
-	 * }
-	 * 
-	 * @PostMapping("/insert") public String insertMember(Member m, HttpSession
-	 * session, Model model) {
-	 * 
-	 * int result = memberService.insertMember(m);
-	 * 
-	 * String url = ""; if (result > 0) { session.setAttribute("alertMsg", "회원가입");
-	 * url = "redirect:/"; } else { model.addAttribute("errorMsg", "회원가입 실패"); url =
-	 * "common/errorPage"; }
-	 * 
-	 * return url; }
-	 */  
+	 
 
 	
   }
