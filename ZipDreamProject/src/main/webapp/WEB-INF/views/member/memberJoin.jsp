@@ -403,8 +403,6 @@ function ok(){
     document.getElementById("ok").addEventListener("click", function() {
     var inputNumber = document.getElementById("emailchecknumber").value;
     
-	
-    
     
     // 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
 
