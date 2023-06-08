@@ -27,20 +27,7 @@
 		height: 60px;
 		
 	}
-/* 	.keyword_wrap{
-		width: 100%;
-		height: 2083px;
-		border-bottom: 1px solid lightgray; 
-		overflow: auto;
-	} */
-	/* .map_wrap::-webkit-scrollbar {
-	    width: 10px;
-	    background-color: gray;
-	  }
-	.map_wrap::-webkit-scrollbar-track{
-		background:none;
-	} */
-	
+
 			
 	.bi-search{
 		float: left;
@@ -216,7 +203,7 @@
 		<input id="sellPrivateArea" name="sellPrivateArea" type="hidden">
 		<input id="sellFloor" name="sellFloor" type="hidden">
 		<input id="ymd" name="ymd" type="hidden">
-		<input id="sellConstructionDate" name="sellConstructionDate" type="hidden">
+		<input id="sellApprovalDatetime" name="sellApprovalDatetime" type="hidden">
 		<input id="realYn" name="realYn" type="hidden">
 		<input id="realYnDate" name="realYnDate" type="hidden">
  	</form>
@@ -742,7 +729,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"];
     						  		document.getElementById("sellFloor").value = addressToXy["층"];
     						  		document.getElementById("ymd").value = addressToXy["년"]+addressToXy["월"]+addressToXy["일"];
-    						  		document.getElementById("sellConstructionDate").value = addressToXy["건축년도"];
+    						  		document.getElementById("sellApprovalDatetime").value = addressToXy["건축년도"];
     						  		document.getElementById("realYn").value = addressToXy["해제여부"];
     						  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];
     						  	
