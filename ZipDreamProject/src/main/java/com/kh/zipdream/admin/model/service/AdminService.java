@@ -30,6 +30,8 @@ public interface AdminService {
 	public int deleteNoticeBoard(int boardNo);
 	public void selectUserList(int cp, int type, Map<String, Object> map);
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
+	public void selectBkList(int cp, Map<String, Object> map);
+	public void selectBkSearch(Map<String, Object> paramMap, Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public JSONObject getCouponList(int cp,int userNo);
 	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap, Map<String, Object> map);
@@ -37,7 +39,9 @@ public interface AdminService {
 	public Report selectReport(int reportNo);
 	public int updateReportResult(Report report);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
+
 	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception;
 	public List<Coupon> selectCouponList();
 	public int insertCouponToUser(Map<String,Integer> map);
+
 }

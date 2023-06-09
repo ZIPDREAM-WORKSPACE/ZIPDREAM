@@ -220,7 +220,6 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		service.selectChatRoomList(cp,map);
 		List<Integer> countList = chatService.countChatRoomMemberList();
-		System.out.println(countList);
 		model.addAttribute("selectChatRoomList",map);
 		model.addAttribute("countList",countList);
 		return "admin/adminChat";
@@ -242,7 +241,6 @@ public class AdminController {
 		map.put("uno", loginUser.getUserNo());
 		
 		int result = chatService.selectChatRoomjoin(map);
-		System.out.println("결과:"+result);
 		
 	if(result<1) {
 			
@@ -257,9 +255,10 @@ public class AdminController {
 		 */
 		model.addAttribute("chatRoomNo",chatRoomNo);
 		List<ChatMessage> list = chatService.selectChatMessage(join);
-		
+		List<Member> mlist = chatService.selectChatMember(chatRoomNo);
 		if(list !=null) {
 			model.addAttribute("list",list);
+			model.addAttribute("mlist",mlist);
 			return "admin/adminChatDetail";
 		}else {
 			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
@@ -323,5 +322,31 @@ public class AdminController {
 			service.insertCouponToUser(map);
 		}
 		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/bkmember")
+	public String bkMember(Model model,
+						   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+						   @RequestParam Map<String, Object> paramMap) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(paramMap.get("condition") == null) {
+				service.selectBkList(cp,map);
+			}else {
+				paramMap.put("cp", cp);
+				service.selectBkSearch(paramMap,map);
+			}
+			model.addAttribute("userList",map);
+			
+		return "admin/adminBkMember";
+	}
+	
+	@GetMapping("/bkmember/detail")
+	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
+		
+		Member m = memberService.selectMember(userNo);
+		
+		model.addAttribute("member", m);
+		
+		return "admin/adminBkMemberDetail";
 	}
 }

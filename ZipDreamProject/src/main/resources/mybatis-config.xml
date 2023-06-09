@@ -13,7 +13,6 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.zipdream.admin.model.vo.MemberApply" alias="memberApply"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.NoticeBoard" alias="noticeBoard"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Report" alias="report"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Coupon" alias="coupon"/>
@@ -24,6 +23,7 @@
 		<typeAlias type="com.kh.zipdream.sell.model.vo.SellDetailApi" alias="sellDetailApi"/>
 		<typeAlias type="com.kh.zipdream.attachment.model.vo.Attachment" alias="attachment"/>
 		<typeAlias type="com.kh.zipdream.sell.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.zipdream.sell.model.vo.Reply" alias="reply"/>
 
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/>
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoom" alias="chatRoom"/>
@@ -42,6 +42,7 @@
 		
 		<mapper resource="/mapper/sell-mapper.xml"/>
 		<mapper resource="/mapper/board-mapper.xml"/>
+		<mapper resource="/mapper/reply-mapper.xml"/>
 
 		<mapper resource="/mapper/chattingMapper.xml" />
 		

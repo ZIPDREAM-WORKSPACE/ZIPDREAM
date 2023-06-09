@@ -48,7 +48,7 @@
 	z-index: 99;
 	border-radius: 10px;
 	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 20px;
-	margin:auto;
+	margin-left:20px;
 	
 }
 .chatting_inner{
@@ -113,7 +113,7 @@
 .chat_btn{
 	display: flex;
 	padding:5px;
-	justify-content: center;
+	margin-left:37%;
 }
 .chat_btn>*{
 	margin:10px;
@@ -138,6 +138,15 @@ width: 10px;
 	<div class="chat_btn">
 		<button type="button" class="btn btn-secondary" id="back">뒤로 가기</button>
 		<button type="button" class="btn btn-warning" id="exit">방 나가기</button>
+	</div>
+	<div style="display:flex; margin-left:200px;">
+	<div style="width:200px; height:200px; box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 20px; padding:10px;">
+		<h4>참여자 : </h4>
+		<ul>
+			<c:forEach items="${mlist}" var="mlist">
+				<li >${mlist.userId } ${mlist.userLevel== 1 ? " 회원님" : mlist.userLevel  ==2 ? " 공인중개사" : " 관리자"}</li>
+			</c:forEach>
+		</ul>
 	</div>
 	<div class="chatting">
 		<div class="chat_header"><img src='https://ifh.cc/g/YX6YxA.png'>&nbsp;&nbsp;문의 채팅</div>
@@ -171,6 +180,7 @@ width: 10px;
 		<div class="chat_bottom">
 				<textarea id="chat_msg" style="width:350px; height:30px; resize:none;"></textarea>
 		<img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
+	</div>
 	</div>
    </section>
 </section>
