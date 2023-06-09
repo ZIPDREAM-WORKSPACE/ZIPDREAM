@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- alert창 꾸미기  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -443,6 +445,38 @@
 .agentList{
     width: 100%;
     text-align: center;
+    border-top: 1px solid rgb(34, 34, 34);
+	border-bottom: 1px solid rgb(231, 231, 231);
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+.agentList>thead{
+	margin: 0px;
+}
+.agentList>thead th{
+	color: rgb(101, 101, 101);
+	font-size: 14px;
+	font-weight: 400;
+	height: 52px;
+	line-height: 52px;
+	text-align: center;
+	background-color: rgb(248, 248, 248);
+}
+.agentList>tbody tr{
+	border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.agentList>tbody label, .agentList>tbody input{
+	cursor:pointer;
+}
+
+.agentList>tbody td{
+	font-size: 14px;
+	font-weight: 400;
+	height: 80px;
+	vertical-align: middle;
+	text-align: center;
+	color: rgb(101, 101, 101);
 }
 .nonAgent{
 	text-align:center;
@@ -475,31 +509,31 @@
 								<ul class="roomTypeList">
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="roomType" checked>
+											<input type="radio" name="roomType" value="원룸" checked>
 											<p>원룸</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="roomType">
+											<input type="radio" name="roomType" value="투룸">
 											<p>투룸</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="roomType">
+											<input type="radio" name="roomType" value="쓰리룸">
 											<p>쓰리룸</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="roomType">
+											<input type="radio" name="roomType" value="오피스텔">
 											<p>오피스텔</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="roomType">
+											<input type="radio" name="roomType" value="아파트">
 											<p>아파트</p>
 										</label>
 									</li>
@@ -512,25 +546,25 @@
 								<ul class="roomTypeList">
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="buildingType">
+											<input type="radio" name="buildingType" value="단독주택" checked>
 											<p>단독주택</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="buildingType">
+											<input type="radio" name="buildingType" value="다가구주택">
 											<p>다가구주택</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="buildingType">
+											<input type="radio" name="buildingType" value="빌라">
 											<p>빌라</p>
 										</label>
 									</li>
 									<li>
 										<label class="roomTypeCover"> 
-											<input type="radio" name="buildingType">
+											<input type="radio" name="buildingType" value="상가">
 											<p>상가</p>
 										</label>
 									</li>
@@ -603,19 +637,19 @@
 									<ul class="roomTypeList">
 										<li>
 											<label class="roomTypeCover"> 
-												<input type="radio" name="dealType" checked>
+												<input type="radio" name="dealType" value="월세" checked>
 												<p>월세</p>
 											</label>
 										</li>
 										<li>
 											<label class="roomTypeCover"> 
-												<input type="radio" name="dealType">
+												<input type="radio" name="dealType" value="전세">
 												<p>전세</p>
 											</label>
 										</li>
 										<li>
 											<label class="roomTypeCover"> 
-												<input type="radio" name="dealType">
+												<input type="radio" name="dealType" value="매매">
 												<p>매매</p>
 											</label>
 										</li>
@@ -631,7 +665,7 @@
                     <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
 				<span>허위 매물을 등록할 경우 집드림에서 임의로 계정 및 매물 전체 삭제 처리됩니다.</span> 
-				<a href="">허위매물 제재 정책 확인하기</a>
+				<a href="<%=request.getContextPath() %>/main/management">매물관리규정 확인하기</a>
 			</p>
 			<div class="agreeWrap">
 				<label for="agreeCheck"> <input id="agreeCheck" type="checkbox">
@@ -647,83 +681,127 @@
 	
 	<!-- 매물 등록시 공인중개사 리스트 가져오기 -->
 	<script>
-	
 		$(".add").click(function(){
 			
 			var userNo = '${loginUser.userNo}';
 			var address = $('input[name=address1]').val();
 			
-			console.log(address);
-			
 			$.ajax({
-				url: "<%=request.getContextPath()%>/myroomsell/insert" ,
+				url: "<%=request.getContextPath()%>/myroomsell/select" ,
 				method:"get",
 				data:{address},
 				contentType :"text.plain; charset:UTF-8",
 				success:function(result){
-					console.log(resuslt);
+					var html = "";
+					if(result.length != 0){
+						html = "<table class='agentList'><thead><tr><th>선택</th><th>이름</th><th>소재지</th></thead><tbody>";
+						for(var i = 0; i<result.length;i++){
+							/* console.log(result[i]) */
+
+							html += "<tr><td><input type='radio' name='agent' id='"+ result[i].userNo +"' value='"+ result[i].userNo +"'></td><td><label for='"+ result[i].userNo +"'>"+ result[i].userName+"</label></td>";
+							html += "<td><label for='"+ result[i].userNo +"'>"+result[i].address+"</label></td></tr>"
+
+						}
+						
+						html += "</tbody>"
+					}else{
+						
+						html = "<div class='nonAgent'>조회된 공인중개사가 없습니다.</div>"
+					}
+					
+					$(".modal-body").append(html);
 					
 				},
 				error:function(){
 					console.log("에러발생");
 				}
 			})
+			
+			
 		});
-	
-	
 	
 	</script>
 
 	<!-- 공인중개사 선택 팝업 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">공인중개사 리스트</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	       <!--  <table class="agentList">
-	        	<thead>
-	        		<tr>
-	        			<th>선택</th>
-	        			<th>이름</th>
-	        			<th>소재지</th>
-	        		</tr>
-	        	</thead>
-	        	<tbody>
-	        		<tr>
-	        			<td><input type="radio" name="agent" value="agent"></td>
-	        			<td>장용동</td>
-	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
-	        		</tr>
-	        		<tr>
-	        			<td><input type="radio" name="agent" value="agent"></td>
-	        			<td>장용동</td>
-	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
-	        		</tr>
-	        		<tr>
-	        			<td><input type="radio" name="agent" value="agent"></td>
-	        			<td>장용동</td>
-	        			<td>서울특별시 강남구 어쩌구 저쩌구</td>
-	        		</tr>
-	        	</tbody>
-	        </table> -->
-	        
-	        <div class="nonAgent">입력하신 주소지에 등록된 공인중개사가 없습니다.</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">신청하기</button>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">공인중개사 리스트</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="listReset();">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="listReset();">닫기</button>
+					<button type="button" class="btn btn-primary" onclick="myroomInsert();" data-dismiss="modal">신청하기</button>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
+	<!-- 공인중개사에게 매물 신청하기  -->
+	<script>
+		function listReset(){
+			$(".agentList").remove();
+			
+		}
 	
+		function myroomInsert(){
+			let refRuno = $('input[name=agent]:checked').val();
+			let refUno = '${loginUser.userNo}';
+			let roomType = $('input[name=roomType]:checked').val();
+			let buildingType = $('input[name=buildingType]:checked').val();
+			let dealType = $('input[name=dealType]:checked').val();
+
+			let address = $('input[name=address1]').val() + " " +$('input[name=address2]').val() + " ";
+			if($('input[name=address3]').val() != ""){
+				address += $('input[name=address3]').val()+ "동 ";
+			}
+			if($('input[name=address4]').val()!= ""){
+				address += $('input[name=address4]').val()+"호";
+			}
+			 
+
+			
+			console.log("보낼정보는 = 공인중개사 : "+refRuno+", 회원정보 :"+refUno+", 룸타입" + roomType + buildingType + dealType + address);
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/myroomsell/insert",
+				method:"get",
+				data:{refRuno, refUno, roomType, buildingType, dealType, address},
+				success:function(result){
+					console.log(result);
+					
+					swal({
+						  title: "신청 완료",
+
+						  text: "공인중개사가 확인 후 직접 연락드립니다.\n진행사항은 마이페이지 내 매물에서 확인하실 수 있습니다.",
+						  button: "확인",
+						  closeOnClickOutside : false
+					}).then(function(){
+						location.href = "<%=request.getContextPath()%>/mypage/myroomlist";
+
+					});
+					
+					listReset();
+					
+					
+				},
+				error:function(){
+					console.log("에러발생");
+				}
+			
+			});
+			
+		};
 	
-	
+	</script>
+
+
 
 
 	<!-- 다음 우편번호 script  -->
@@ -786,9 +864,17 @@
 		function handleCheckboxChange() {
 			var checkbox = document.getElementById("agreeCheck");
 			var button = document.querySelector("button.add");
-
+			var address = document.getElementById("sample5_address").value;
+			
 			if (checkbox.checked) {
-				button.disabled = false; // 버튼 활성화
+				if(address == ''){
+					swal("", "주소를 입력해주시기 바랍니다.", "warning");
+					button.disabled = true; // 버튼 비활성화
+					checkbox.checked = false;
+				}else{
+					button.disabled = false; // 버튼 활성화
+					
+				}
 			} else {
 				button.disabled = true; // 버튼 비활성화
 			}

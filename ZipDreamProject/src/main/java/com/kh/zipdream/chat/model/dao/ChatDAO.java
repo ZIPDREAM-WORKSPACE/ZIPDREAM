@@ -3,6 +3,7 @@ package com.kh.zipdream.chat.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,6 +15,7 @@ import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.common.model.vo.PageInfo;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Repository
 public class ChatDAO {
@@ -92,14 +94,13 @@ public class ChatDAO {
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		ArrayList<ChatRoom> r =  (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
-		System.out.println(r);
 		
 		return r;
 	}
 	
 	// 채팅방 조회
-	public int selectChatRoom(int refUno){
-		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
+	public int selectChatRoom(Map<String, Integer> map){
+		return sqlSession.selectOne("chattingMapper.selectChatRoom", map);
 	}
 	
 	// 채팅조인 조회 
@@ -109,6 +110,10 @@ public class ChatDAO {
 	
 	public List<Integer> countChatRoomMemberList(){
 		return sqlSession.selectList("chattingMapper.countChatRoomMemberList");
+	}
+	
+	public List<Member> selectChatMember(int chatRoomNo){
+		return sqlSession.selectList("chattingMapper.selectChatMember",chatRoomNo);
 	}
 
 }

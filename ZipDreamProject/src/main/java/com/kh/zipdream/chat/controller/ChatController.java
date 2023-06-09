@@ -1,7 +1,7 @@
 package com.kh.zipdream.chat.controller;
 
-import java.net.http.HttpRequest;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,15 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.chat.model.service.ChatService;
-import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.member.model.vo.Member;
@@ -31,26 +27,15 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService service;
-	
-	/*
-	 * // 채팅방 목록 조회
-	 * 
-	 * @GetMapping("/chat/chatRoomList") public String selectChatRoomList(Model
-	 * model) {
-	 * 
-	 * List<ChatRoom> crList = service.selectChatRoomList();
-	 * 
-	 * model.addAttribute("chatRoomList", crList); System.out.println(crList);
-	 * return "chat/chatRoomList";
-	 * 
-	 * }
-	 */
+
 	
 	@ResponseBody
 	@GetMapping("/chat/chatRoomSelect")
-	public int selectChatRoom(@ModelAttribute("loginUser") Member loginUser, Model model) {
-		
-		int result = service.selectChatRoom(loginUser.getUserNo());
+	public int selectChatRoom(@ModelAttribute("loginUser") Member loginUser,@ModelAttribute("chatRoomNo") int chatRoomNo, Model model) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("refUno", loginUser.getUserNo());
+		map.put("chatRoomNo", chatRoomNo);
+		int result = service.selectChatRoom(map);
 		
 		return result;
 				
@@ -65,12 +50,11 @@ public class ChatController {
 					RedirectAttributes ra, ChatRoomJoin join
 			) {
 		ChatRoom room = new ChatRoom();
-		room.setTitle(loginUser.getUserId()+"님의 채팅");
+		room.setTitle(loginUser.getUserId());
 		room.setStatus("Y");
 		room.setRefUno(loginUser.getUserNo());
 		int chatRoomNo = service.openChatRoom(room); // 생성된 채팅반 번호 
 		model.addAttribute("chatRoomNo",chatRoomNo);
-		System.out.println("로그인"+loginUser.getUserNo());
 		
 	
 			

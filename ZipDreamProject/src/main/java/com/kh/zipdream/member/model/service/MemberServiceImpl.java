@@ -1,11 +1,21 @@
 package com.kh.zipdream.member.model.service;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.dao.MemberDao;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.utils.FileUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -30,13 +40,59 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
-	@Override
-	public int insertbkMember(Member inputMember) {
-
-		int result = memberDao.insertbkMember(inputMember);
-		System.out.println(inputMember);
-		return result;
+	/*
+	 * @Override public int insertMember(Member inputMember) {
+	 * 
+	 * int result = memberDao.insertbkMember(inputMember);
+	 * System.out.println(inputMember); return result; }
+	 */
+	
+	@Transactional(rollbackFor = {Exception.class})
+	public int insertbkMember(Member m , String webPath, String serverFolderPath, List<MultipartFile> imgList) throws Exception {
+	
+		int userNo = memberDao.insertbkMember(m);
+		
+		if(userNo > 0 && imgList != null) {
+			List<Attachment> bkImgList = new ArrayList(); //db에 등록한 데이터를 모아놓음
+			List<String> renameList = new ArrayList(); 		//변경된 파일명을 저장할 리스트
+			
+			
+			//list에 담겨있는 파일정보 중 실제로 업로드된 파일만 분류하기
+			for(int i = 0; i<imgList.size(); i++) {
+				
+				if(imgList.get(i).getSize()>0) {
+					String changeName = FileUtils.saveFile(imgList.get(i), serverFolderPath);
+					renameList.add(changeName);
+					
+					Attachment at = new Attachment();
+					at.setRefUno(userNo);
+					at.setOriginFile(imgList.get(i).getOriginalFilename());
+					at.setChangeName(changeName);
+					at.setFilePath(webPath);
+					at.setFileLevel(i);
+					
+					bkImgList.add(at);
+					System.out.println(at);
+				}
+			}
+			
+			if(!bkImgList.isEmpty()) {//등록한 이미지가 있음
+				int result = memberDao.bkInsertImg(bkImgList);
+				
+				if(result == bkImgList.size()) {
+					System.out.println("사진저장 완료");
+				}else{
+					System.out.println("사진저장실패");
+				}
+			}
+		}
+		return userNo;
 	}
+	
+	
+	
+	
+	
 	
 	@Override
 	public int insertapply(int userNo) {
@@ -45,6 +101,8 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
+	
+	
 	
 	
 	
@@ -86,6 +144,22 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMember(int userNo) {
 		return memberDao.selectMember(userNo);
 	}
+	
+
+	
+	@Override
+    public Member searchId(Map<String, String> map) {
+		Member result=memberDao.searchId(map);
+        return result;
+    }
+
+	
+	 @Override
+	    public int emailCheck(String id) {
+	        int result=memberDao.emailCheck(id);
+	        
+	        return result;
+	    }
 
 }
 

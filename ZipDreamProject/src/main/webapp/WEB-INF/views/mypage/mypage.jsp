@@ -9,6 +9,22 @@
 	div{
 		/* border: 1px solid red; */
 	}
+	.mypageHeader{
+		width:100%;
+		flex: 0 0 auto;
+	}
+	.mypageHeader>div{
+		/* display: flex;
+	    align-items: center;
+	    justify-content: center; */
+	    margin: 0px auto;
+    	padding: 0px 10px;
+	}
+	.mypageTitle{
+		margin: 80px 0px 64px;
+		text-align:center;
+		font-weight:700;	
+	}
 	.listWrap>div{
 		font-size: 25px;
 		width: 200px;
@@ -44,13 +60,17 @@
 
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<div style="text-align: center; font-size: 40px; margin-top: 20px;">MY DREAM</div>	
-	<div class="listWrap">
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage">최근 본 방</a></div>
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/myroomlist">내 매물</a></div>
-		<div class="list"><a href="#">찜하기</a></div>
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></div>
-		<div class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></div>
+	<div class="mypageHeader">
+		<div class="mypageTitle">
+			<h1>MY DREAM</h1>
+		</div>	
+		<div class="listWrap">
+			<div class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage">최근 본 방</a></div>
+			<div class="list"><a href="<%=request.getContextPath()%>/mypage/myroomlist">내 매물</a></div>
+			<div class="list"><a href="#">찜하기</a></div>
+			<div class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></div>
+			<div class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></div>
+		</div>
 	</div>
 	
 </body>

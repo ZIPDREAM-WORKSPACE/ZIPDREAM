@@ -445,12 +445,12 @@
 					url:"<%=request.getContextPath()%>/sales/selectMySale",
 					method:"get",
 					data:{userNo : '${loginUser.userNo}'},
-					dataType:"json",
+					dataType:"text",
 					async: false,
 					success:function(result){
+					    mysaleList = result.replace("[","").replace("]","").split(",");
 						
-						mysaleList = result;
-						
+						console.log(mysaleList);
 					},
 					error:function(){
 						console.log("에러발생");
@@ -531,6 +531,7 @@
 				var startDateTime = value.RCEPT_BGNDE;
 				var appDday = new Date(value.RCEPT_BGNDE);
 				startDateTime = startDateTime.replace(/-/g, '');
+				var hsUrl = value.PBLANC_URL;
 				
 				let appyear = appDday.getFullYear();
 				let appmonth = (appDday.getMonth())+1;
@@ -568,7 +569,7 @@
 				}
 				html += "<td><p>" + value.HOUSE_SECD_NM + "</p></td>";
 				html += "<td><p>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
-				html += "<td><div class='appInfo'><p class='appInfoTitle'><a href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
+				html += "<td><div class='appInfo'><p class='appInfoTitle'><a target='_blank' href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
 				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
 				
 
@@ -584,17 +585,16 @@
 				html += "<td><p>" + info[0] + "</p></td>";
 				html += "<td><p>" + info[1] + "세대</p></td>";
 				html += "<td><p>" + info[2] + "m²</p></td>";
-				html += "<td class='houseCode' id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/hqaYN5.png'></td></tr>";
-				for(var i = 0; i<mysaleList.length; i++){
-					if(houseCode == mysaleList[i]){
-						console.log("같음");
-						/* html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='https://ifh.cc/g/bNnQCj.png'></td></tr>"; */
-					} else{
-						console.log("다름");
-					}
-				}
 				
-
+				let src = "https://ifh.cc/g/hqaYN5.png";
+	            
+				for(let i = 0; i < mysaleList.length; i++){
+	               if(houseCode == Number(mysaleList[i])){
+	                  src = "https://ifh.cc/g/bNnQCj.png";
+	               }
+	            }
+	            
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
@@ -622,7 +622,6 @@
 					aptSuply = result.data[0].SUPLY_HSHLDCO;
 					aptAr = (result.data[0].SUPLY_AR).substr(0,(result.data[0].SUPLY_AR).indexOf("."));
 
-
 					
 					aptInfo = [aptPrice, aptSuply, aptAr];
 				},
@@ -645,13 +644,13 @@
 		});
 		
 		/* 분양정보 찜하기 */
-		function mySale(houseCode, startDateTime){
+		function mySale(houseCode, startDateTime, hsUrl){
 	            var h = document.getElementById(houseCode).firstChild;
 	            
-	            console.log("클릭"+mysaleList);
+	           /*  console.log("클릭"+mysaleList); */
 	            var userNo = '${loginUser.userNo}';
 	            
-	            console.log("보낸거" + houseCode + "" + startDateTime);
+	           /*  console.log("보낸거" + houseCode + "" + startDateTime); */
 	            
 	            if('${loginUser}' != ''){
 	                if(h.src == "https://ifh.cc/g/bNnQCj.png"){
@@ -660,7 +659,7 @@
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/deletemySaleHouse",
 	                        method:"get",
-	                        data:{houseCode,startDateTime,userNo},
+	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
 	                            
@@ -678,7 +677,7 @@
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
 	                        method:"post",
-	                        data:{houseCode,startDateTime,userNo},
+	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
 	                            
@@ -733,104 +732,6 @@
 						</span>
 							
 					</div>
-					<!-- <div id="calendar">
-						카테고리 선택 버튼
-						<div class="slectCover">
-
-						
-							<button class="bType" id="step"><p>분양단계</p></button>
-							<div class="stepBox" style="display:none;">
-
-								<h1>분양단계</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="selectAll" type="checkbox"  onclick="selectAll();" >
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="expected">
-											<p>분양예정</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="applyWill">
-											<p>접수예정</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="apply">
-											<p>접수중</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="step" value="end">
-
-											<p>접수마감</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="slectCover">
-							<button class="bType" id="building"><p>건물유형</p></button>
-							<div class="stepBox" style="display:none;">
-								<h1>건물유형</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="sa" type="checkbox" onclick="sa();">
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="building">
-											<p>APT</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="building">
-											<p>신혼희망타운</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="slectCover">
-							<button class="bType" id="suply"><p>공급유형</p></button>
-							<div class="stepBox" style="display:none;">
-								<h1>공급유형</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="all" type="checkbox" onclick="all();">
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="suply">
-											<p>민영</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="suply">
-											<p>국민</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-					</div> -->
 				</div>
 			</div>
 			<div class="sellHouseListWrap">
@@ -851,7 +752,6 @@
 
 				</table>
 				</div>
-
 
 			</div>
 		</div>
@@ -885,14 +785,18 @@
 		
 		var yearmonth = document.getElementById("yearmonth").innerText;
 		var length = (yearmonth.length) - 1;
-		var currentMonth = yearmonth.substring(5, length);
+		var currentMonth = Number(yearmonth.substring(5, length));
 
 
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
+	       	if(currentMonth == 1) {
+	                return;
+         	} 
 			 
-        	currentMonth -= 1;
+  			currentMonth -= 1;
+        	
 			 
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");    
 			
@@ -906,8 +810,12 @@
         // 다음 달로 이동하는 함수
         function goToNextMonth() {
         	
+        	if(currentMonth == 12) {
+                return;
+            }
         	
         	currentMonth += 1;
+        	
         	
         	$(".calendar-yearmonth").html(year + "년" + currentMonth + "월");
         	

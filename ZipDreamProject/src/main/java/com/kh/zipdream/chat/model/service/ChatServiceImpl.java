@@ -2,6 +2,7 @@ package com.kh.zipdream.chat.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -25,8 +27,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
-	public int selectChatRoom(int uno){
-		return dao.selectChatRoom(uno);
+	public int selectChatRoom(Map<String, Integer> map){
+		return dao.selectChatRoom(map);
 	}
 	
 	@Override
@@ -93,4 +95,8 @@ public class ChatServiceImpl implements ChatService{
 		return dao.closeChatRoom(chatRoomNo);
 	}
 	
+	@Override
+	public List<Member> selectChatMember(int chatRoomNo) {
+		return dao.selectChatMember(chatRoomNo);
+	}
 }

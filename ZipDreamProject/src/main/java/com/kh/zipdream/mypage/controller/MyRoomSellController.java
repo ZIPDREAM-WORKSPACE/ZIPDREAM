@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.service.MyRoomSellService;
+import com.kh.zipdream.mypage.model.vo.MyRoomSell;
 
 @Controller
 @RequestMapping("/myroomsell")
@@ -19,21 +20,38 @@ public class MyRoomSellController {
 	private MyRoomSellService myroomsellService;
 	
 	@ResponseBody
-	@GetMapping("/insert")
-	public ArrayList<Member> myroomSellInsert(String address) {
+	@GetMapping("/select")
+	public ArrayList<Member> selectAgent(String address) {
 		
 		// 입력한 주소값을 " " 으로 잘라서 배열에 담기.
-		String[] addressList = address.split(" ");
+		String[] str = address.split(" ");
+		String[] addressList = {str[1], str[2]}; 
 		
-		
-		for(int i = 0; i<addressList.length;i++) {
-			System.out.println(addressList[i]);;
+		for(int i = 0; i<addressList.length; i++) {
+			System.out.println("보낸주소값"+addressList[i]);
+			
 		}
-		
 		ArrayList<Member> list = myroomsellService.selectAgent(addressList);
 		
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@GetMapping("/insert")
+	public String myroomSellInsert(MyRoomSell mrs) {
+		
+		
+		int result = myroomsellService.myroomSellInsert(mrs);
+		
+		if(result>0) {
+			return "성공";
+			
+		}else {
+			return "실패";
+		}
+		
+		
 	}
 
 }

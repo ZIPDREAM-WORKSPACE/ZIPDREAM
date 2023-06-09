@@ -11,12 +11,9 @@
 		<result column="EMAIL" property="email" />
 		<result column="ADDRESS" property="address"/>
 		<result column="OFFICE" property="office"/>
-
 		<result column="ENROLL_DATETIME" property="enrollDateTime" />
 		<result column="MODIFY_DATETIME" property="modifyDateTime" />
 		<result column="WITHDRAW" property="withdraw" />
-
-		
 		<result column="STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
@@ -32,17 +29,11 @@
 		resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER
-		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
+		WHERE USER_ID = #{userId} AND STATUS = 'Y'
 	</select>
 	
-  <select id="selectMember" parameterType="_int" resultMap="memberResultSet">
-		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
-	</select>
-  
-
 	<!-- 일반회원 회원가입 -->
 	 <insert id="insertMember" parameterType="member" useGeneratedKeys="true" keyProperty="userNo">
-
 		INSERT INTO
 		MEMBER(
 
@@ -68,6 +59,7 @@
 			, 1)
 	</insert>  
 	
+	<!-- 중개사 회원가입 -->
 	<insert id="insertbkMember" parameterType="member"  useGeneratedKeys="true" keyProperty="userNo">
 		INSERT INTO
 		MEMBER(
@@ -90,10 +82,29 @@
 			, #{address}
 			, SYSDATE()
 			, SYSDATE()
-			, 'Y'
+			, 'N'
 			, #{office}
 			, 2)
 	</insert>
+	
+	<!-- 이미지 파일 -->
+	<insert id="bkInsertImg" parameterType="list" useGeneratedKeys="true" keyProperty="attachmentNo">
+		INSERT INTO ATTACHMENT (REF_UNO, ORIGIN_FILE, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		SELECT C.*
+		FROM   (<foreach collection="list" item="at" separator="UNION ALL">
+					SELECT #{at.refUno}, #{at.originFile}, #{at.changeName}, #{at.filePath}, #{at.fileLevel}
+			   </foreach>) AS C
+	</insert>
+	
+	<select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
+	</select>
+	
+	<select id="emailCheck" resultType="int">
+      SELECT count(USER_ID)
+      FROM MEMBER
+      WHERE USER_ID=#{id}
+   </select>
 	
 	<!-- 이메일 -->
 	<insert id="insertMailAuth" parameterType="mailAuth">
@@ -118,6 +129,13 @@
 	    UPDATE mail_auth SET is_auth=1
 	    WHERE mail=#{mail}
 	</update>
+	
+	
+	<select id="searchId" resultMap="memberResultSet">
+	   SELECT USER_ID
+		FROM MEMBER
+		WHERE USER_NAME  = #{name} AND PHONE = #{phone}
+	</select>
 	
 	
 </mapper>

@@ -18,7 +18,7 @@
 		<span>회원조회</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="bkmember">
 		<img src="<%=request.getContextPath()%>/resources/images/Shield Done.svg" width="25px" height="25px" class="side_img"> 
 		<span>공인중개사 승인</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -90,6 +90,9 @@
         break;
     case "user" :
         index = 1;
+        break;
+    case "bkmember" :
+		index = 2;
         break;
 	case "notice" :
 		index = 3;

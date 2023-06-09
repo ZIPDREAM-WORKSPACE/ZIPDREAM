@@ -22,12 +22,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 rel="stylesheet">	
 
+<!-- 슬릭 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"> 
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminSideBar.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminFooter.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminMain.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminNotice.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminReportDetail.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminBkMemberDetail.css">
 <script src="<%=request.getContextPath()%>/resources/js/admin/donut.js"></script>
 <style>
 * {
@@ -123,6 +128,13 @@ div {
     border-radius: 50%;
     background: #FFFFFF;
     color: #000000;
+}
+
+#searchForm {
+	display:flex;
+	justify-content:flex-start;
+	margin-bottom:25px;
+	gap:10px;
 }
 </style>
 </head>

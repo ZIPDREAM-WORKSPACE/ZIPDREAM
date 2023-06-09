@@ -1,9 +1,13 @@
 package com.kh.zipdream.member.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
 
@@ -16,6 +20,10 @@ public class MemberDao {
 	public Member loginMember(Member inputMember) {
 
 		return sqlSession.selectOne("member-mapper.loginMember", inputMember);
+	}
+	
+	public int bkInsertImg(List<Attachment> bkImgList) {
+		return sqlSession.insert("member-mapper.bkInsertImg", bkImgList);
 	}
 	
 	public int insertMailAuth(MailAuth mailAuth) {
@@ -40,12 +48,19 @@ public class MemberDao {
 	}
 	
 	public int insertbkMember(Member inputMember) {
-		return sqlSession.insert("member-mapper.insertbkMember", inputMember);
+		int result =  sqlSession.insert("member-mapper.insertbkMember", inputMember);
+		
+		return inputMember.getUserNo();
 	}
+
+	
+	   public int emailCheck(String id) {
+		      return sqlSession.selectOne("member-mapper.emailCheck",id);
+		   }
 	
 	public int insertapply(int userNo) {
 		System.out.println("ss"+userNo);
-		return sqlSession.insert("member-mapper.insertapply", userNo);
+		return sqlSession.insert("member-mapper.insertbkMember", userNo);
 	}
 	
 	
@@ -54,5 +69,9 @@ public class MemberDao {
 	}
 	
 
+	
+	public Member searchId(Map<String, String> map) {
+		return sqlSession.selectOne("member-mapper.searchId",map);
+	}
 }
 

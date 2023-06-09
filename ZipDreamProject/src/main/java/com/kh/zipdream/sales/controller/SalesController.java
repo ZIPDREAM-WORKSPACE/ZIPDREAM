@@ -56,6 +56,11 @@ public class SalesController {
 		return "sales/salesFaq";
 	}
 	
+	@GetMapping("/rule")
+	public String moveSaleRule() {
+		return "sales/saleRule";
+	}
+	
 	@ResponseBody
 	@GetMapping("/apiData")
 	@PostMapping("/apiData")
@@ -148,10 +153,7 @@ public class SalesController {
 	
 	@ResponseBody
 	@PostMapping("/mySaleHouse")
-	public String mySaleHouse(int houseCode, int userNo, String startDateTime) {
-		
-		MySale ms = new MySale(houseCode,startDateTime, userNo);
-		
+	public String mySaleHouse(MySale ms) {
 		int result = mysaleService.insertMysaleHouse(ms);
 		
 		if(result>0) {
@@ -171,7 +173,7 @@ public class SalesController {
 		List<Integer> mysaleList = mysaleService.selectMySale(userNo);
 		model.addAttribute("mysaleList", mysaleList);
 		
-		System.out.println(mysaleList);
+		/* System.out.println(mysaleList); */
 		return mysaleList;
 	}
 	

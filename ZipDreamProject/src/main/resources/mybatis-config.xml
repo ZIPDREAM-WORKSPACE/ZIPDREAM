@@ -13,7 +13,6 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.zipdream.admin.model.vo.MemberApply" alias="memberApply"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.NoticeBoard" alias="noticeBoard"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Report" alias="report"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Coupon" alias="coupon"/>
@@ -33,6 +32,7 @@
 		<typeAlias type="com.kh.zipdream.map.model.vo.beopjeongdong" alias="beopjeongdong"/>
 		
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
+		<typeAlias type="com.kh.zipdream.mypage.model.vo.MyRoomSell" alias="myroomsell"/>
 	</typeAliases>
 	
 	<mappers>
