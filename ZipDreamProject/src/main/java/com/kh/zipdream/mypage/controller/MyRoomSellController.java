@@ -24,8 +24,13 @@ public class MyRoomSellController {
 	public ArrayList<Member> selectAgent(String address) {
 		
 		// 입력한 주소값을 " " 으로 잘라서 배열에 담기.
-		String[] addressList = address.split(" ");
+		String[] str = address.split(" ");
+		String[] addressList = {str[1], str[2]}; 
 		
+		for(int i = 0; i<addressList.length; i++) {
+			System.out.println("보낸주소값"+addressList[i]);
+			
+		}
 		ArrayList<Member> list = myroomsellService.selectAgent(addressList);
 		
 		

@@ -3,16 +3,18 @@
 <mapper namespace="sale-mapper">
 	
 	<resultMap type="mysale" id="mysaleResultSet">
-		<result column="HN_NO" property="houseCode" />
-		<result column="START_DATETIME" property="startDateTime" />
+		<id column="HS_SEQ" property="hsSeq" />
+		<result column="START_DATE" property="startDateTime" />
 		<result column="REF_UNO" property="userNo" />
+		<result column="HN_NO" property="houseCode" />
+		<result column="HS_URL" property="hsUrl" />
 	</resultMap>
 
 
 
 	<insert id="insertMysaleHouse" parameterType="mysale">
-		INSERT INTO HOUSESELL_SELECT(HN_NO, START_DATETIME, REF_UNO)
-		VALUES(#{houseCode}, #{startDateTime}, #{userNo})
+		INSERT INTO HOUSESELL_SELECT(START_DATE, REF_UNO, HN_NO, HS_URL)
+		VALUES(#{startDateTime}, #{userNo}, #{houseCode}, #{hsUrl})
 	</insert>
 	
 	<select id="selectMySale" resultType="int">
