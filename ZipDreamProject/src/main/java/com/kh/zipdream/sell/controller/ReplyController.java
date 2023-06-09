@@ -24,11 +24,7 @@ public class ReplyController {
 		return replyService.insertReply(reply);
 	}
 	
-	@GetMapping("/selectList")
-	public String selectList(int detailBoardNo) {
-		List<Reply> rList = replyService.selectList(detailBoardNo);
-		return new Gson().toJson(rList);
-	}
+	
 	
 	
 	
