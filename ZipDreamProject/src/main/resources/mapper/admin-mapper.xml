@@ -46,6 +46,16 @@
 		<result column="COUPON_PATH" property="couponPath"/>
 	</resultMap>
 	
+	<resultMap type="attachment" id="attachmentResultSet">
+		<result column="ATTACHMENT_NO" property="attachmentNo"/>
+		<result column="REF_UNO" property="refUno"/>
+		<result column="REF_SNO" property="refSno"/>
+		<result column="ORIGIN_FILE" property="originFile"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+	</resultMap>
+	
 	<select id="countUser" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 
 		<if test='type == 1'>
@@ -145,11 +155,14 @@
 		WHERE COUNT > 1
 	</select>
 	
-	<select id="selectApplyListLimit5" resultMap="memberResultSet">
-		SELECT USER_NAME, ENROLL_DATETIME 
+	<select id="selectApplyListLimit5" parameterType="_int" resultMap="memberResultSet">
+		SELECT USER_NO, USER_NAME, ENROLL_DATETIME 
 		FROM MEMBER
 		WHERE WITHDRAW='N'
-		ORDER BY ENROLL_DATETIME DESC LIMIT 5
+		ORDER BY ENROLL_DATETIME DESC
+		<if test='type == 1'>
+		LIMIT 5
+		</if>
 	</select>
 	
 	<select id="selectReportList" resultMap="reportResultSet">
@@ -322,4 +335,8 @@
 		INSERT INTO USER_COUPON
 		VALUES(#{userNo},#{couponNo})
 	</insert>
+	
+	<select id="selectAttachmentList" parameterType="_int" resultMap="attachmentResultSet">
+		SELECT * FROM ATTACHMENT WHERE REF_UNO = #{userNo}
+	</select>
 </mapper>
