@@ -216,15 +216,15 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                	<p>내돈내산공인중개소</p>
+                	 <p>내돈내산공인중개소</p> 
                    <%--  <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }"> --%>
                 </div>
                 <div class="seller_name">
-                	 <p>김예진</p>
-                    <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
+                	<p>김예진</p> 
+                   <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
                 </div>
                 <div class="seller_address">
-                	<p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p>
+                	 <p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p> 
                    <%--  <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }"> --%>
                 </div>
             </div>
