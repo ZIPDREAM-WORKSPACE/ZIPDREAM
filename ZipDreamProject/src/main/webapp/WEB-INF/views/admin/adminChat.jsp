@@ -80,7 +80,7 @@
    </section>
 </section>
 <script>
-/* setTimeout("location.reload()", 5000); */
+setTimeout("location.reload()", 5000); 
 
 let chatCheck = document.getElementsByName("chatCheck");
 

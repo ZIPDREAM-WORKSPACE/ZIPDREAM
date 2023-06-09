@@ -17,13 +17,12 @@ import lombok.ToString;
 @Builder
 public class Reply {
 	
-	
-	
 	private int replyNo;
-	private int refDno;
 	private String replyContent;
 	private Date createDate;
 	private String status;
+	private int detailBoardNo;
+	private int replyRefUno;
 	
 	private String userName;
 }

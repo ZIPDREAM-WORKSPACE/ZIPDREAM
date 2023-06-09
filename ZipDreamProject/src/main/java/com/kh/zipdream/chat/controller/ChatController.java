@@ -31,20 +31,7 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService service;
-	
-	/*
-	 * // 채팅방 목록 조회
-	 * 
-	 * @GetMapping("/chat/chatRoomList") public String selectChatRoomList(Model
-	 * model) {
-	 * 
-	 * List<ChatRoom> crList = service.selectChatRoomList();
-	 * 
-	 * model.addAttribute("chatRoomList", crList); System.out.println(crList);
-	 * return "chat/chatRoomList";
-	 * 
-	 * }
-	 */
+
 	
 	@ResponseBody
 	@GetMapping("/chat/chatRoomSelect")
@@ -70,7 +57,6 @@ public class ChatController {
 		room.setRefUno(loginUser.getUserNo());
 		int chatRoomNo = service.openChatRoom(room); // 생성된 채팅반 번호 
 		model.addAttribute("chatRoomNo",chatRoomNo);
-		System.out.println("로그인"+loginUser.getUserNo());
 		
 	
 			
