@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
 					at.setRefUno(userNo);
 					at.setOriginFile(imgList.get(i).getOriginalFilename());
 					at.setChangeName(changeName);
-					at.setFilePath(serverFolderPath);
+					at.setFilePath(webPath);
 					at.setFileLevel(i);
 					
 					bkImgList.add(at);
