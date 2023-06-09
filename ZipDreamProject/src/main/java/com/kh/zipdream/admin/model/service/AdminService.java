@@ -30,6 +30,8 @@ public interface AdminService {
 	public int deleteNoticeBoard(int boardNo);
 	public void selectUserList(int cp, int type, Map<String, Object> map);
 	public void selectUserSearch(Map<String, Object> paramMap,Map<String, Object> map);
+	public void selectBkList(int cp, Map<String, Object> map);
+	public void selectBkSearch(Map<String, Object> paramMap, Map<String, Object> map);
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap);
 	public JSONObject getCouponList(int cp,int userNo);
 	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap, Map<String, Object> map);
