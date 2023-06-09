@@ -1,6 +1,8 @@
 package com.kh.zipdream.mypage.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,15 +49,16 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/myroomlist")
-	public String moveMyRoomList(@ModelAttribute("loginUser") Member loginUser, Model model) {
+	public String moveMyRoomList(@ModelAttribute("loginUser") Member loginUser, 
+								 Model model,
+								 @RequestParam(value="cpage", defaultValue="1") int currentPage) {
 		
-
+		Map<String, Object> map = new HashMap();
 		int userNo = loginUser.getUserNo();
 		
-		ArrayList<MyRoomSell> list = myroomSellService.selectMyRoomList(userNo);
+		myroomSellService.selectMyRoomList(currentPage, userNo, map);
 
-	
-		model.addAttribute("myroomsellList", list);
+		model.addAttribute("map", map);
 		
 		return "mypage/myroomList";
 

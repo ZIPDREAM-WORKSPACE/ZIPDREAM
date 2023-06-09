@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
-
+<!-- alert창 꾸미기  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- Jquey 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -253,6 +254,8 @@ position: absolute;
 	$(".login").click(function(){
 		location.href="<%=request.getContextPath()%>/member/login";
 	});
+	
+	
 	
 
 	</script>

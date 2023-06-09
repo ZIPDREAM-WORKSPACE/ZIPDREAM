@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pi" value="${map.pi }" />
+<c:set var="myroomsellList" value="${map.myroomsellList }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,6 +125,10 @@
 	border: 1px solid #326CF9;
 
 }
+.pagination{
+	justify-content: center;
+ 	margin-top: 30px;
+}
 </style>
 </head>
 <body>
@@ -158,7 +164,6 @@
 							<td>${myroom.address }</td>
 							<td>${myroom.dealType}</td>
 							<c:if test="${myroom.status == 1}">
-
 								<td><p class="wating">대기</p></td>
 							</c:if>
 							<c:if test="${myroom.status == 2}">
@@ -180,6 +185,34 @@
 					<span>등록된 매물이 없습니다.</span>
 				</div>
 			</c:if>
+			
+			<!-- 페이지네이션 구현 -->
+			<c:set var="url" value="/zipdream/mypage/myroomlist?cpage="/>
+			<div id="pagingArea">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${ pi.currentPage eq 1 }">
+							<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage -1 }">Previous</a></li>
+						</c:otherwise>
+					</c:choose>
+
+					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+						<li class="page-item"><a class="page-link" href="${url}${item }">${item }</a></li>
+					</c:forEach>
+
+					<c:choose>
+						<c:when test="${ pi.currentPage eq pi.maxPage }">
+							<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage + 1 }">Next</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
 			
 		</div>
 	</div>
