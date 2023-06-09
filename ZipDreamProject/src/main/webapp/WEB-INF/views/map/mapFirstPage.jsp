@@ -341,10 +341,19 @@
 #comOkOj{
 	width: 100px;
 }
-/* #allOj{
+.selectBtn {
+        border: 1px solid;
+        width: 100px;
+        height: 50px;
+        
+        align-items: center;
+        }
+
+.clicked {
 	background-color: #1F4B6B;
-	color:white;
-} */
+	color: white;
+	}
+      
 </style>
 
 
@@ -386,8 +395,8 @@
 								</svg>
 							</button>
 							<div class="btnSt">
-								<button id="allOj" type="button">전체</button>
-								<button id="comOkOj">상담 가능 매물</button>
+								<button id="allOj" class="selectBtn" type="button" >전체</button>
+								<button id="comOkOj" class="selectBtn" type="button" >상담 가능 매물</button>
 							</div>
 						</form>
 						<!-- <div style="margin-bottom: 5px;">
@@ -899,7 +908,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	var listLiTag = document.createElement("li");
     						  	listLiTag.setAttribute("class", "goDetail");
     						  	
-    						  	$("#allOj").css({
+						  	$("#allOj").css({
     						  		"background-color": "#1F4B6B",
     								"color":"white"
     						  		
@@ -1015,7 +1024,22 @@ function displayCenterInfo(result, status) {
         }
     }    
 } 
-
+/* $(function(){
+	
+	$("#comOkOj").click(function(){
+		var className = $("#comOkOj").attr("class");
+		console.log(className);
+		if(className == "noneClick"){
+			$("#comOkOj").css("background-color", "noneClick");
+			$("#comOkOj").css("color", "white");
+		}else{
+			$("#comOkOj").css("background-color", "lightgray");
+			$("#comOkOj").css("color", "black");
+			$("#comOkOj").attr("class", "click");
+		}
+	});
+	
+}); */
  
 function searchApt(){
 	let search = document.getElementById("search").value;
@@ -1034,7 +1058,35 @@ function searchApt(){
 }
  
 </script>
+<script>
+var selectBtn = document.getElementsByClassName("selectBtn");
 
+function handleClick(event) {
+  console.log(event.target);
+  // console.log(this);
+  // 콘솔창을 보면 둘다 동일한 값이 나온다
+
+  console.log(event.target.classList);
+
+  if (event.target.classList[1] === "clicked") {
+    event.target.classList.remove("clicked");
+  } else {
+    for (var i = 0; i < selectBtn.length; i++) {
+    	selectBtn[i].classList.remove("clicked");
+    }
+
+    event.target.classList.add("clicked");
+  }
+}
+
+function init() {
+  for (var i = 0; i < selectBtn.length; i++) {
+	  selectBtn[i].addEventListener("click", handleClick);
+  }
+}
+
+init();
+</script>
 
 </body>
 

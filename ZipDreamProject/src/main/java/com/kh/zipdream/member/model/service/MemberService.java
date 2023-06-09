@@ -29,9 +29,9 @@ public interface MemberService {
 	
 	public Member selectMember(int userNo);
 	
-	public int emailCheck(String id);
-	
 	public Member searchId(Map<String, String> map);
-	
+
+	public int emailCheck(String id);
+
 }
 

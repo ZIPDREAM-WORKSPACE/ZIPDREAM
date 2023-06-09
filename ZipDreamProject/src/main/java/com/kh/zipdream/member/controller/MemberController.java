@@ -229,15 +229,16 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/emailCheck")
-	public int emailCheck(HttpSession session,
-							
-							 @RequestParam(value = "id", required = false) String id) {
-		int result = memberService.emailCheck(id);
-		
-		return result;
-	}
-	 
+	   @GetMapping("/emailCheck")
+	   public int emailCheck(HttpSession session,
+	                     
+	                      @RequestParam(value = "id", required = false) String id) {
+	       System.out.println(id);
+	      int result = memberService.emailCheck(id);
+	      
+	      return result;
+	   }
+
 	
 	@ResponseBody
 	@GetMapping("/searchId")

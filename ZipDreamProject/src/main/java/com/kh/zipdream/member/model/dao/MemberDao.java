@@ -52,13 +52,11 @@ public class MemberDao {
 		
 		return inputMember.getUserNo();
 	}
+
 	
-	/*
-	 * public int bkInsertImg(int userNo) { System.out.println("ss"+userNo); return
-	 * sqlSession.insert("member-mapper.insertapply", userNo); }
-	 */
-	
-	
+	   public int emailCheck(String id) {
+		      return sqlSession.selectOne("member-mapper.emailCheck",id);
+		   }
 	
 	public int insertapply(int userNo) {
 		System.out.println("ss"+userNo);

@@ -58,12 +58,17 @@
  	
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
-		INSERT INTO SELLDETAIL
+		INSERT INTO SELLDETAIL(SELL_NO, REF_UNO, SELL_NAME, SELL_ADDRESS, SELL_PRICE , SELL_MAINTENANCE, SELL_PARKING ,  SELL_SHORTTERM ,SELL_TYPE ,
+		SELL_FLOOR ,  SELL_PRIVATE_AREA , SELL_PROVIDE_AREA , SELL_ALL_FLOOR , SELL_ROOM_COUNT , SELL_TOILET_COUNT ,
+		SELL_WAY , SELL_HOUSEHOLD , SELL_ENTRANCE , SELL_MOVE_DATETIME , SELL_BULDTYPE , SELL_INSTALLATION ,SELL_AIRCONDITION,
+		SELL_HEATING,PARKING_COUNT , SELL_APPROVAL_DATETIME , SELL_ENROLL_DATETIME , COMPLEX_APPLY_DATETIME ,
+		WING_COUNT , HOUSEHOLD_COUNT , OPTION ,SECURITY, CREATE_DATE , MODIFY_DATE , STATUS)
+
 		VALUES (SELL_NO, #{refUno},#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{sellShortterm},
 				#{sellType}, #{sellFloor},#{sellPrivateArea}, #{sellProvideArea}, #{sellAllFloor}, #{sellRoomCount}, #{sellToiletCount},
 				#{sellWay}, #{sellHousehold}, #{sellEntrance}, #{sellMoveDatetime}, #{sellBuldtype}, #{sellInstallation}, #{sellAircondition},
 				#{sellHeating}, #{parkingCount}, #{sellApprovalDatetime}, #{sellEnrollDatetime}, #{complexApplyDatetime}, #{wingCount}, #{householdCount},
-				#{option}, #{security}, SYSDATE(), SYSDATE())
+				#{option}, #{security}, SYSDATE(), SYSDATE(),'N')
 	</insert>
 	
 

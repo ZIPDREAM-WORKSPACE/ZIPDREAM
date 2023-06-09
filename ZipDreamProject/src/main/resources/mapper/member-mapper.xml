@@ -100,16 +100,11 @@
 		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="emailCheck" resultType="int">
+      SELECT count(USER_ID)
+      FROM MEMBER
+      WHERE USER_ID=#{id}
+   </select>
 	
 	<!-- 이메일 -->
 	<insert id="insertMailAuth" parameterType="mailAuth">

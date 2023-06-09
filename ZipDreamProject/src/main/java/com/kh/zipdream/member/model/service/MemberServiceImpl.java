@@ -68,7 +68,7 @@ public class MemberServiceImpl implements MemberService {
 					at.setRefUno(userNo);
 					at.setOriginFile(imgList.get(i).getOriginalFilename());
 					at.setChangeName(changeName);
-					at.setFilePath(serverFolderPath);
+					at.setFilePath(webPath);
 					at.setFileLevel(i);
 					
 					bkImgList.add(at);
@@ -145,18 +145,21 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMember(userNo);
 	}
 	
-	@Override
-    public int emailCheck(String id) {
-        int result=memberDao.emailCheck(id);
-        
-        return result;
-    }
+
 	
 	@Override
     public Member searchId(Map<String, String> map) {
 		Member result=memberDao.searchId(map);
         return result;
     }
+
+	
+	 @Override
+	    public int emailCheck(String id) {
+	        int result=memberDao.emailCheck(id);
+	        
+	        return result;
+	    }
 
 }
 

@@ -531,6 +531,7 @@
 				var startDateTime = value.RCEPT_BGNDE;
 				var appDday = new Date(value.RCEPT_BGNDE);
 				startDateTime = startDateTime.replace(/-/g, '');
+				var hsUrl = value.PBLANC_URL;
 				
 				let appyear = appDday.getFullYear();
 				let appmonth = (appDday.getMonth())+1;
@@ -593,7 +594,7 @@
 	               }
 	            }
 	            
-	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+");' src='" + src + "'></td></tr>";
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
@@ -643,7 +644,7 @@
 		});
 		
 		/* 분양정보 찜하기 */
-		function mySale(houseCode, startDateTime){
+		function mySale(houseCode, startDateTime, hsUrl){
 	            var h = document.getElementById(houseCode).firstChild;
 	            
 	           /*  console.log("클릭"+mysaleList); */
@@ -658,7 +659,7 @@
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/deletemySaleHouse",
 	                        method:"get",
-	                        data:{houseCode,startDateTime,userNo},
+	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
 	                            
@@ -676,7 +677,7 @@
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
 	                        method:"post",
-	                        data:{houseCode,startDateTime,userNo},
+	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
 	                            
@@ -731,104 +732,6 @@
 						</span>
 							
 					</div>
-					<!-- <div id="calendar">
-						카테고리 선택 버튼
-						<div class="slectCover">
-
-						
-							<button class="bType" id="step"><p>분양단계</p></button>
-							<div class="stepBox" style="display:none;">
-
-								<h1>분양단계</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="selectAll" type="checkbox"  onclick="selectAll();" >
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="expected">
-											<p>분양예정</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="applyWill">
-											<p>접수예정</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input id="stepInput" type="checkbox" name="step" value="apply">
-											<p>접수중</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="step" value="end">
-
-											<p>접수마감</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="slectCover">
-							<button class="bType" id="building"><p>건물유형</p></button>
-							<div class="stepBox" style="display:none;">
-								<h1>건물유형</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="sa" type="checkbox" onclick="sa();">
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="building">
-											<p>APT</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="building">
-											<p>신혼희망타운</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="slectCover">
-							<button class="bType" id="suply"><p>공급유형</p></button>
-							<div class="stepBox" style="display:none;">
-								<h1>공급유형</h1>
-								<ul>
-									<li>
-										<label class="stepLabel">
-											<input id="all" type="checkbox" onclick="all();">
-											<p>전체</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="suply">
-											<p>민영</p>
-										</label>
-									</li>
-									<li>
-										<label class="stepLabel">
-											<input type="checkbox" name="suply">
-											<p>국민</p>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-					</div> -->
 				</div>
 			</div>
 			<div class="sellHouseListWrap">
@@ -849,7 +752,6 @@
 
 				</table>
 				</div>
-
 
 			</div>
 		</div>

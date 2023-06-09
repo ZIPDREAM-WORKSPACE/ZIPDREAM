@@ -61,6 +61,12 @@
 		
 	</insert>
 	
+	<select id="selectMyRoomListCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM USER_ROOM_SELL
+		WHERE REF_UNO = #{userNo}
+	</select>
+	
 	<select id="selectMyRoomList" resultMap="myroomsellResultSet">
 		SELECT * 
 		FROM USER_ROOM_SELL

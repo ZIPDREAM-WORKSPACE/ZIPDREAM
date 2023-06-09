@@ -18,7 +18,4 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyDao.insertReply(reply);
 	}
 	
-	public List<Reply> selectList(int detailBoardNo){
-		return replyDao.selectList(detailBoardNo);
-	}
 }
