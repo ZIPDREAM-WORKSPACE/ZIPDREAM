@@ -3,6 +3,7 @@ package com.kh.zipdream.chat.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -98,8 +99,8 @@ public class ChatDAO {
 	}
 	
 	// 채팅방 조회
-	public int selectChatRoom(int refUno){
-		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
+	public int selectChatRoom(Map<String, Integer> map){
+		return sqlSession.selectOne("chattingMapper.selectChatRoom", map);
 	}
 	
 	// 채팅조인 조회 

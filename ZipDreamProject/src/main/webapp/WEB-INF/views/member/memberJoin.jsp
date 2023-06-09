@@ -85,6 +85,16 @@
        color: white;
        font-size: 10px;
     }
+        #emailCheck{
+      position: absolute;
+       width: 114px;
+       height: 44px;
+       left: 440px;
+       top: 135px;
+       background-color: #4C69A2;
+       color: white;
+       font-size: 10px;
+    }
 
     #ok{
          position: absolute; 
