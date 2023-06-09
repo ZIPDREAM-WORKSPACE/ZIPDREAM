@@ -19,6 +19,7 @@ import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.common.model.vo.PageInfo;
@@ -95,13 +96,14 @@ public class AdminServiceImpl implements AdminService{
 		return map;
 	}
 	
-	public List<Map<String,String>> selectApplyListLimit5(){
+	public List<Map<String,String>> selectApplyListLimit5(int type){
 		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
-		List<Member>list = dao.selectApplyListLimit5();
+		List<Member>list = dao.selectApplyListLimit5(type);
 		
 		for(int i = 0; i < list.size(); i++) {
 			Map<String,String> map = new HashMap<String,String>();
+			map.put("userNo", list.get(i).getUserNo()+"");
 			map.put("userName", list.get(i).getUserName());
 			map.put("applyDateTime", list.get(i).getEnrollDateTime()+"");
 			listResult.add(map);
@@ -368,5 +370,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	public int insertCouponToUser(Map<String,Integer> map) {
 		return dao.insertCouponToUser(map);
+	}
+	
+	public List<Attachment> selectAttachmentList(int userNo){
+		return dao.selectAttachmentList(userNo);
 	}
 }
