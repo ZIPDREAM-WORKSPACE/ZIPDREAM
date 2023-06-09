@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board-mapper">
+
+	<resultMap type="board" id="boardResultSet">
+		<result column="DETAIL_BOARD_NO" property="detailBoardNo"/>
+		<result column="REF_UNO" property="refUno"/>
+		<result column="CONTENT" property="content"/>
+		<result column="STATUS" property="status"/>
+		<result column="DEL_STATUS" property="delStatus"/>
+		<result column="REF_SNO" property="refSno"/>
+		<result column="USER_NAME" property="userName"/>
+	</resultMap>
+
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO DETAIL_BOARD(DETAIL_BOARD_NO,REF_UNO, CONTENT, STATUS, DEL_STATUS, SELL_NO)
+		VALUES(DETAIL_BOARD_NO, #{refUno}, #{content}, 'Y', 'N', #{refSno})
+	</insert>
+	
+	<select id="boardList" resultMap="boardResultSet">
+		SELECT B.*, M.USER_NAME
+		FROM DETAIL_BOARD B
+		JOIN MEMBER M ON(USER_NO = REF_UNO)
+		WHERE SELL_NO = #{refSno} AND B.STATUS='Y'
+	</select>
+	
+</mapper>

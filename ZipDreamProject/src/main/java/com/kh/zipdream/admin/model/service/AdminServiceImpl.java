@@ -11,9 +11,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
@@ -23,6 +26,7 @@ import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.utils.FileUtils;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -233,6 +237,35 @@ public class AdminServiceImpl implements AdminService{
 	
 	}
 	
+	public JSONObject getCouponList(int cp,int userNo) {
+		int listCount = dao.countUserCoupon(userNo);				
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Coupon> list = dao.getCouponList(pi, userNo);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jArray = new JSONArray();	
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			
+			for(int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(new MapController().getJsonStringFromMap(map));
+				
+				jArray.add(jsonObj);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();	
+		};
+		
+		obj.put("pi", pi);
+		obj.put("array", jArray);
+		return obj;
+	
+	}
+	
 	public List<Map<String,String>> getReportArrayList(int cp, Map<String, Object> paramMap , Map<String, Object> map) {
 		
 		int listCount = dao.countUserReport(paramMap);				
@@ -295,4 +328,24 @@ public class AdminServiceImpl implements AdminService{
 		return listResult;
 	}
 
+	@Transactional(rollbackFor = {Exception.class})
+	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception{
+		int result = 0;
+		String changeName = FileUtils.saveFile(img, serverFolderPath);
+		
+		coupon.setCouponPath(coupon.getCouponPath() + changeName);
+		
+		result = dao.insertCoupon(coupon);
+		
+		return result;
+	}
+	
+	public List<Coupon> selectCouponList(){
+		
+		return dao.selectCouponList();
+	}
+	
+	public int insertCouponToUser(Map<String,Integer> map) {
+		return dao.insertCouponToUser(map);
+	}
 }

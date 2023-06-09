@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.admin.model.service.AdminService;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.chat.model.service.ChatService;
@@ -147,6 +151,15 @@ public class AdminController {
 		return result;
 	}
 	
+	@GetMapping("/getCouponList")
+	@ResponseBody
+	public JSONObject getCouponList(int userNo, int cPage) {
+		
+		JSONObject result = service.getCouponList(cPage, userNo);
+		
+		return result;
+	}
+	
 	@GetMapping("/changeMemberStatus")
 	public String changeMemberStatus(int userNo,String status) {
 		Member m = new Member();
@@ -265,12 +278,49 @@ public class AdminController {
 			paramMap.put("type", 1);
 			service.selectUserSearch(paramMap,map);
 		}
+		List<Coupon> list = service.selectCouponList();
+		
 		model.addAttribute("userList",map);
 		model.addAttribute("type",1);
-		
+		model.addAttribute("couponList",list);
 		
 		return "admin/adminEvent";
 
 	}
 	
+	@PostMapping("/event/insert")
+	public String eventInsert(Model model,
+							  @RequestParam(value="images", required=false) MultipartFile img,
+							  Coupon coupon, HttpSession session) {
+		
+		String webPath = "/resources/images/coupons/";
+		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		coupon.setCouponPath(webPath);
+		int result = 0;
+		
+		try {
+			result = service.insertCoupon(coupon, img, webPath, serverFolderPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+		}else {
+		}
+		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/event/couponToUser")
+	public String couponToUser(@RequestParam(value="couponNo", required=false) int couponNo,
+							   @RequestParam(value="userNo", required=false) int[] userNo) {
+
+		for(int i = 0; i < userNo.length; i++) {
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("couponNo", couponNo);
+			map.put("userNo", userNo[i]);
+			
+			service.insertCouponToUser(map);
+		}
+		return "redirect:/admin/event";
+	}
 }

@@ -1,6 +1,9 @@
 package com.kh.zipdream.member.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import com.kh.zipdream.attachment.model.vo.Attachment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +25,8 @@ public class Member {
 	private String userName;
 	private String phone;
 	private String address;
+	private String addr2;
+	private String addr3;
 	private String email;
 	private Date enrollDateTime;
 	private Date modifyDateTime;
@@ -29,7 +34,7 @@ public class Member {
 	private String withdraw;
 	private String office;
 	private int userLevel;
-
+	private ArrayList<Attachment> imgList;
 	
 
 }

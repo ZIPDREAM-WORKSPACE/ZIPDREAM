@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sale-mapper">
+	
+	<resultMap type="mysale" id="mysaleResultSet">
+		<result column="HN_NO" property="houseCode" />
+		<result column="START_DATETIME" property="startDateTime" />
+		<result column="REF_UNO" property="userNo" />
+	</resultMap>
+
+
+
+	<insert id="insertMysaleHouse" parameterType="mysale">
+		INSERT INTO HOUSESELL_SELECT(HN_NO, START_DATETIME, REF_UNO)
+		VALUES(#{houseCode}, #{startDateTime}, #{userNo})
+	</insert>
+	
+	<select id="selectMySale" resultType="int">
+		SELECT HN_NO FROM HOUSESELL_SELECT WHERE REF_UNO = #{userNo}
+	</select>
+	
+	<delete id="deleteMysaleHouse">
+		DELETE FROM HOUSESELL_SELECT WHERE REF_UNO = #{userNo} AND HN_NO = #{houseCode}
+	</delete>
+
+
+</mapper>
