@@ -16,7 +16,7 @@
 				<button type="button" onclick="location.href='<%= request.getContextPath()%>/admin/user?type=2&cpage=1'">공인중개사</button>
 			</div>
 		</div>
-		<form id="searchForm" action="<%= request.getContextPath() %>/admin/user" method="get" align="center" style="display:flex;justify-content:flex-start;margin-bottom:25px;gap:10px;">
+		<form id="searchForm" action="<%= request.getContextPath() %>/admin/user" method="get" align="center">
 			<input type="hidden" name="type" value="${type }">
 			<div class="select">
 				<select class="custom-select" name="condition">
@@ -38,6 +38,7 @@
 						<th>아이디</th>
 						<th>전화번호</th>
 						<th>가입일</th>
+						<th>상태</th>
 					</tr>
 					<c:choose>
 						<c:when test="${fn: length(userList.list) == 0} ">
@@ -53,6 +54,7 @@
 									<td>${user.userId }</td>
 									<td>${user.phone }</td>
 									<td>${user.enrollDateTime }</td>
+									<td>${user.status }</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

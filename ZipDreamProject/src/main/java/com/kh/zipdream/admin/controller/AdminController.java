@@ -323,4 +323,30 @@ public class AdminController {
 		}
 		return "redirect:/admin/event";
 	}
+	
+	@GetMapping("/bkmember")
+	public String bkMember(Model model,
+						   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+						   @RequestParam Map<String, Object> paramMap) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(paramMap.get("condition") == null) {
+				service.selectBkList(cp,map);
+			}else {
+				paramMap.put("cp", cp);
+				service.selectBkSearch(paramMap,map);
+			}
+			model.addAttribute("userList",map);
+			
+		return "admin/adminBkMember";
+	}
+	
+	@GetMapping("/bkmember/detail")
+	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
+		
+		Member m = memberService.selectMember(userNo);
+		
+		model.addAttribute("member", m);
+		
+		return "admin/adminBkMemberDetail";
+	}
 }
