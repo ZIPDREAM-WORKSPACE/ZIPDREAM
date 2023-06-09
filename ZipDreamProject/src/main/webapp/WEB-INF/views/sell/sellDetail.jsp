@@ -873,7 +873,7 @@
 <script>
 	$(function(){
 		boardList();
-		selectReply();
+		
 	})
 	
  	function insertboard(){
@@ -961,24 +961,7 @@
 		})
 	}  
 	
-	function selectReply(refBno){
-		console.log(refBno)
-		$.ajax({
-			url : "<%=request.getContextPath()%>/reply/selectList",
-			data : {${refBno}},
-			dataType : 'json',
-			seccess : function(result){
-				let reply = "";
-				for(let reply of result){
-					reply += "<p id='reply'>"+reply.userName+":"+reply.replyContent+"</p>"
-				}
-				$(".replyContent").html(reply);
-			},
-			error : function(){
-				console.log("리스트 불러오기 실패");
-			}
-		})
-	}
+
 
 </script>
 </html>

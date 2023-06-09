@@ -8,5 +8,4 @@ public interface ReplyService {
 	
 	int insertReply(Reply reply);
 	
-	List<Reply> selectList(int detailBoardNo);
 }

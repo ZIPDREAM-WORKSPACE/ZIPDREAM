@@ -1,7 +1,9 @@
 package com.kh.zipdream.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -143,6 +145,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMember(userNo);
 	}
 	
+
+	
+	@Override
+    public Member searchId(Map<String, String> map) {
+		Member result=memberDao.searchId(map);
+        return result;
+    }
+
 	
 	 @Override
 	    public int emailCheck(String id) {
