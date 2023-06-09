@@ -1,10 +1,9 @@
 package com.kh.zipdream.sell.controller;
 
-import java.util.Date; 
+import java.util.Date;  
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
@@ -53,11 +51,10 @@ public class SellController {
 				e.printStackTrace();
 				System.out.println("업로드 에러");
 			}
-	
 		
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "redirect:../agent/list";
+			return "main";
 		}else {
 			System.out.println("업로드 실패");
 			return "main";

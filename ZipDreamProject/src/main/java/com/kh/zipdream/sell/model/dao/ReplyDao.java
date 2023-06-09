@@ -18,7 +18,5 @@ public class ReplyDao {
 		return sqlSession.insert("reply-mapper.insertReply", reply);
 	}
 	
-	public List<Reply> selectList(int detailBoardNo){
-		return sqlSession.selectList("reply-mapper.selectList", detailBoardNo);
-	}
+	
 }

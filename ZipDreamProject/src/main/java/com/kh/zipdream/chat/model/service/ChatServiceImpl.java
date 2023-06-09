@@ -2,6 +2,7 @@ package com.kh.zipdream.chat.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
-	public int selectChatRoom(int uno){
-		return dao.selectChatRoom(uno);
+	public int selectChatRoom(Map<String, Integer> map){
+		return dao.selectChatRoom(map);
 	}
 	
 	@Override

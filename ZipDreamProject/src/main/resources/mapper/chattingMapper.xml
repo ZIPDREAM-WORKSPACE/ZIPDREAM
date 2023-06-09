@@ -16,6 +16,7 @@
 		<result column="CHAT_ROOM_NO" property="chatRoomNo" />
 		<result column="REF_UNO" property="refUno" />
 		<result column="USER_ID" property="userId" />
+		<result column="USER_NAME" property="userName" />
 	</resultMap>
 	
 	<resultMap type="chatRoomJoin" id="chatRoomJoinCount">
@@ -25,6 +26,7 @@
 	
 	<resultMap type="Member" id="selectChatMember">
 		<result column="USER_ID" property="userId" />
+		<result column="USER_NAME" property="userName" />
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
 	
@@ -42,7 +44,8 @@
 			
 		FROM CHAT_ROOM
 		WHERE STATUS = 'Y' AND
-		REF_UNO = #{refUno}
+		REF_UNO = #{refUno} AND
+		CHAT_ROOM_NO = #{chatRoomNo}
 		
 	</select>
 	
@@ -83,7 +86,8 @@
 			MESSAGE,
 			CREATE_DATETIME,
 			REF_UNO,
-			USER_ID
+			USER_ID,
+			USER_NAME
 		FROM CHAT_MESSAGE
 		JOIN MEMBER ON(USER_NO = REF_UNO)
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
@@ -145,7 +149,7 @@
 	</select>
 	
 	<select id="selectChatMember" resultMap="selectChatMember" >
-		SELECT USER_ID, USER_LEVEL
+		SELECT USER_NAME, USER_ID, USER_LEVEL
 		FROM MEMBER
 		JOIN CHAT_ROOM_JOIN ON (REF_UNO = USER_NO)
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}

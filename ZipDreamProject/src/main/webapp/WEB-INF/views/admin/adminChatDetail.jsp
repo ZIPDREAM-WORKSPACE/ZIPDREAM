@@ -144,7 +144,19 @@ width: 10px;
 		<h4>참여자 : </h4>
 		<ul>
 			<c:forEach items="${mlist}" var="mlist">
-				<li >${mlist.userId } ${mlist.userLevel== 1 ? " 회원님" : mlist.userLevel  ==2 ? " 공인중개사" : " 관리자"}</li>
+				<li >
+					<c:choose>
+					<c:when test="${mlist.userLevel == 1 }">
+						${mlist.userName } 님
+					</c:when>
+					<c:when test="${mlist.userLevel == 2 }">
+						${mlist.userName } 님
+					</c:when>
+					<c:otherwise>
+						${mlist.userId } 관리자
+					</c:otherwise>
+				</c:choose>
+				</li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -166,7 +178,7 @@ width: 10px;
 				
 					<c:if test="${msg.refUno != loginUser.userNo }">
 						<li>
-							<b>${msg.userId}</b>	<br>
+							<b>${msg.userName} 님</b>	<br>
 							<p class="chatP">${msg.message }</p><br>
 							<span class="chatDate">
 								${fn:substring(msg.createDatetime,11,13) > 11 ? "오후 " : "오전 " }
@@ -187,13 +199,10 @@ width: 10px;
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
 <script>
-$(function(){
-	
 
-	
-});
 const refUno ='${loginUser.userNo}';
 const userId ='${loginUser.userId}';
+const userName ='${loginUser.userName}';
 const chatRoomNo = '${chatRoomNo}';
 const userLevel = '${loginUser.userLevel}';
 
