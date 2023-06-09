@@ -191,7 +191,7 @@ position: absolute;
 				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
 					<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 				</c:if>
-				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
+				<c:if test="${sessionScope.loginUser.userLevel ==2 }">
 					<li class="h_text"><a href="<%=request.getContextPath()%>/agent/list">마이페이지</a></li>
 				</c:if>
 			</ul>
