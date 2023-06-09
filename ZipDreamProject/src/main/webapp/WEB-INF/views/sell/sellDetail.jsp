@@ -911,7 +911,8 @@
 				for(let board of result){
 					html += "<div class='box'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
-									"<p class='writer'>"+board.userName+"</p>"+
+									"<span class='writer'>"+board.userName+"</span>"+
+									"<button onclick='deleteBoard("+board.detailBoardNo+");'>"+"삭제"+"</button>"+
 									"<div id='boardContent'>"+
 									"<span>"+board.content+"</span>"+
 								"</div>"+"</div>"+
@@ -960,7 +961,11 @@
 			}
 		})
 	}  
-	
+
+	function deleteBoard(refBno){
+		console.log(refBno);
+		location.href="<%=request.getContextPath()%>/board/deleteBoard"+refBno;
+	}
 
 
 </script>

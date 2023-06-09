@@ -347,7 +347,7 @@
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToletCount"  size="45"></td>
+                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToiletCount"  size="45"></td>
                         </tr>
                         <tr>
                             <th>방향</th>
@@ -410,7 +410,7 @@
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="hoseholdCount"  size="100"></td>
+                            <td><input type="text" name="householdCount"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
