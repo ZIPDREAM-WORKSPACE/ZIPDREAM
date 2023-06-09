@@ -142,6 +142,14 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMember(int userNo) {
 		return memberDao.selectMember(userNo);
 	}
+	
+	
+	 @Override
+	    public int emailCheck(String id) {
+	        int result=memberDao.emailCheck(id);
+	        
+	        return result;
+	    }
 
 }
 

@@ -27,6 +27,7 @@ public interface MemberService {
 	public int isMailAuthed(String mail) ; // 부모창 다음버튼, is_auth=1이면 1리턴해서 인증되었다는걸 알림
 	
 	public Member selectMember(int userNo);
-	
+
+	public int emailCheck(String id);
 }
 

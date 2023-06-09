@@ -67,33 +67,33 @@
 
     #emailct{
         width: 186px;
-	    height: 45px;
-	    left: 5px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
-	    text-align: center;
-	}
+       height: 45px;
+       left: 5px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
+       text-align: center;
+   }
     
 
     #emailcheck{
-		position: absolute;
-	    width: 114px;
-	    height: 44px;
-	    left: 440px;
-	    top: 135px;
-	    background-color: #4C69A2;
-	    color: white;
-	    font-size: 10px;
+      position: absolute;
+       width: 114px;
+       height: 44px;
+       left: 440px;
+       top: 135px;
+       background-color: #4C69A2;
+       color: white;
+       font-size: 10px;
     }
 
     #ok{
          position: absolute; 
-	    width: 114px;
-	    height: 45px;
-	   left: 440px;
-	    top: 190px; 
-	    background-color: #4C69A2;
-	    color: white;
+       width: 114px;
+       height: 45px;
+      left: 440px;
+       top: 190px; 
+       background-color: #4C69A2;
+       color: white;
     }
 
     #pwd-text{
@@ -130,113 +130,113 @@
     
     #emailchecknumber{
            position: absolute; 
-		    width: 360px;
-		    height: 45px;
-		    top: 190px;
-		    background: #FFFFFF;
-		    border: 0.5px solid #000000;
+          width: 360px;
+          height: 45px;
+          top: 190px;
+          background: #FFFFFF;
+          border: 0.5px solid #000000;
     }
 
     #password{
         position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	   top: 290px; 
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 360px;
+       height: 45px;
+      top: 290px; 
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
 
     #confirmPassword{
         position: absolute;
-	    width: 360px;
-	    height: 45px;
-	    top: 430px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 360px;
+       height: 45px;
+       top: 430px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
 
     #name{
         position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	    bottom: 480px;
-	 	top: 540px; 
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 360px;
+       height: 45px;
+       bottom: 480px;
+       top: 540px; 
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
 
     #phone{
         position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	    top: 650px;
-	    bottom: 510px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 360px;
+       height: 45px;
+       top: 650px;
+       bottom: 510px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
 
     #addr1{
        position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	    bottom: 340px;
-	    top: 755px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       width: 360px;
+       height: 45px;
+       bottom: 340px;
+       top: 755px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
     
     #addr2{
-    	position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	    bottom: 340px;
-	    top: 810px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       position: absolute; 
+       width: 360px;
+       height: 45px;
+       bottom: 340px;
+       top: 810px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
     
     #addr3{
-    	position: absolute; 
-	    width: 360px;
-	    height: 45px;
-	    bottom: 340px;
-	    top: 865px;
-	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+       position: absolute; 
+       width: 360px;
+       height: 45px;
+       bottom: 340px;
+       top: 865px;
+       background: #FFFFFF;
+       border: 0.5px solid #000000;
     }
     
 
     #adsearch{
              position: absolute; 
-		    width: 114px;
-		    height: 45px;
-		     left: 315px; 
-		     top: 755px; 
-		    background: #4C69A2;
-		    color: white;
-		    font-size: 15px;
+          width: 114px;
+          height: 45px;
+           left: 315px; 
+           top: 755px; 
+          background: #4C69A2;
+          color: white;
+          font-size: 15px;
     }
 
     #detailaddress{
             position: absolute; 
-		    width: 360px;
-		    height: 45px;
-		    top: 810px; 
-		    background: #FFFFFF;
-		    border: 0.5px solid #000000;
+          width: 360px;
+          height: 45px;
+          top: 810px; 
+          background: #FFFFFF;
+          border: 0.5px solid #000000;
 
     }
 
     #signupbtn{
             width: 330px;
-		    height: 48px;
-		    right: 520px;
-		    bottom: 100px;
-		    background: #B9B9B9;
-		    border-radius: 8px;
-		    align-items: center;
-		    margin-left: 65px;
-		    margin-top: 240px;  
+          height: 48px;
+          right: 520px;
+          bottom: 100px;
+          background: #B9B9B9;
+          border-radius: 8px;
+          align-items: center;
+          margin-left: 65px;
+          margin-top: 240px;  
     }
 
     h4{
@@ -244,7 +244,7 @@
     }
     
   /*  .login2{
-   	 position: absolute; 
+       position: absolute; 
     right: 5%;
     top: 15%;
     width: 9%;
@@ -274,13 +274,14 @@
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option></select>
-                    <button type="button" id="emailcheck" name="emailcheck" >인증번호 전송</button><br><br>
+                     <button type="button" id="emailCheck" name="emailCheck" >중복확인</button><br><br>
+                    <button type="button" id="emailcheck" name="emailcheck" style="display:none;">인증번호 전송</button><br><br>
                     
                     <input type="hidden" id="userEmail" name="userId">
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                	<button  type="button" id="ok" >확인</button><br><br>
+                   <button  type="button" id="ok" >확인</button><br><br>
                     
-			<!-- <div class="login2"></div> -->
+         <!-- <div class="login2"></div> -->
                 <h4>비밀번호</h4>
                 <input type="password" id="password" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
                 <label style="font-size: 13px; color: gray;">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
@@ -297,23 +298,23 @@
 
                 <h4>전화번호</h4>
                 <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
-		
+      
                 <h4>주소</h4>
-				<div class="form-group">                   
-				<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
-				    <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
-				</div>
-				<div class="form-group">
-				    <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
-				</div>
-				<div class="form-group">
-				    <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
-				</div>
+            <div class="form-group">                   
+            <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
+                <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+            </div>
+            <div class="form-group">
+                <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
+            </div>
 
                 <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
-				
-				</form>
-            	</div>
+            
+            </form>
+               </div>
         
         </div>
     </div>
@@ -326,9 +327,9 @@
 <script>
 
 function ok(){
-	
-	var text = document.getElementById("emailchecknumber").value;
-	console.log(text);
+   
+   var text = document.getElementById("emailchecknumber").value;
+   console.log(text);
 };
       function checkPasswordValidity() {
       var password = document.getElementById("password").value;
@@ -377,11 +378,11 @@ function ok(){
         $("#emailcheck").text("인증번호 재전송");
 
         $.ajax({
-        	url : "<%= request.getContextPath()%>/member/mailAuth"
+           url : "<%= request.getContextPath()%>/member/mailAuth"
             ,data : {mail : Mail}
-        	,method : "get"
-	 		,dataType : "TEXT"    
-	 		,async:false
+           ,method : "get"
+          ,dataType : "TEXT"    
+          ,async:false
             ,success: function(data){
                alert("인증번호를 전송완료.");
                verificationNumber = data;
@@ -394,7 +395,7 @@ function ok(){
     
     //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
     
-  	/* document.getElementById("emailcheck").addEventListener("click", function() {
+     /* document.getElementById("emailcheck").addEventListener("click", function() {
     document.getElementById("emailchecknumber").style.display = "block";
     document.getElementById("ok").style.display = "block";
   });  */
@@ -425,7 +426,7 @@ function ok(){
   //주소 가져오기
   function execPostCode() {
          new daum.Postcode({
-             oncomplete: function(data) {	
+             oncomplete: function(data) {   
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
  
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -465,10 +466,29 @@ function ok(){
          }).open();
      }
   
-  
-
+  $("#emailCheck").on("click",function(){
+     let email = document.getElementById("emailct");
+     let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
+     $.ajax({
+         url : "<%= request.getContextPath()%>/member/emailCheck"
+          ,data : {id : value}
+         ,method : "get"
+          
+          ,success: function(data){
+            if(data==1){
+               alert("이미 가입된 아이디 입니다.");
+               $("#id-text").val("");
+            }else{
+               alert("사용가능한 아이디입니다");
+               $("#emailCheck").css("display","none");
+               $("#emailcheck").css("display","block");
+            }
+          },error : function(req,status,err){
+              console.log(req);
+          }
+      });//ajax
     
-    
+  });
    
    </script>
 </html>
