@@ -11,10 +11,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
-import com.kh.zipdream.admin.model.vo.MemberApply;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.chat.model.dao.ChatDAO;
@@ -23,6 +25,7 @@ import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.utils.FileUtils;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -95,12 +98,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<Map<String,String>> selectApplyListLimit5(){
 		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
-		List<MemberApply>list = dao.selectApplyListLimit5();
+		List<Member>list = dao.selectApplyListLimit5();
 		
 		for(int i = 0; i < list.size(); i++) {
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("userName", list.get(i).getUserName());
-			map.put("applyDateTime", list.get(i).getApplyDateTime());
+			map.put("applyDateTime", list.get(i).getEnrollDateTime()+"");
 			listResult.add(map);
 		}
 		
@@ -204,6 +207,29 @@ public class AdminServiceImpl implements AdminService{
 		map.put("list", list);
 	}
 	
+	public void selectBkList(int cp, Map<String, Object> map) {
+		int listCount = dao.countBkUser();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Member> list = dao.selectBkList(pi);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public void selectBkSearch(Map<String, Object> paramMap,Map<String, Object> map) {
+		int listCount = dao.selectBkSearchCount(paramMap);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
+		ArrayList<Member> list = dao.selectBkSearch(pi, paramMap);
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap) {
 		int listCount = dao.countUserReport(paramMap);				
 		int pageLimit = 10;
@@ -211,6 +237,35 @@ public class AdminServiceImpl implements AdminService{
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
 		ArrayList<Report> list = dao.getReportList(pi, paramMap);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jArray = new JSONArray();	
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			
+			for(int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(new MapController().getJsonStringFromMap(map));
+				
+				jArray.add(jsonObj);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();	
+		};
+		
+		obj.put("pi", pi);
+		obj.put("array", jArray);
+		return obj;
+	
+	}
+	
+	public JSONObject getCouponList(int cp,int userNo) {
+		int listCount = dao.countUserCoupon(userNo);				
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Coupon> list = dao.getCouponList(pi, userNo);
 		
 		JSONObject obj = new JSONObject();
 		JSONArray jArray = new JSONArray();	
@@ -295,4 +350,24 @@ public class AdminServiceImpl implements AdminService{
 		return listResult;
 	}
 
+	@Transactional(rollbackFor = {Exception.class})
+	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception{
+		int result = 0;
+		String changeName = FileUtils.saveFile(img, serverFolderPath);
+		
+		coupon.setCouponPath(coupon.getCouponPath() + changeName);
+		
+		result = dao.insertCoupon(coupon);
+		
+		return result;
+	}
+	
+	public List<Coupon> selectCouponList(){
+		
+		return dao.selectCouponList();
+	}
+	
+	public int insertCouponToUser(Map<String,Integer> map) {
+		return dao.insertCouponToUser(map);
+	}
 }

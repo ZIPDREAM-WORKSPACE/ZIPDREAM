@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
+import com.kh.zipdream.member.model.vo.Member;
 
 public interface ChatService {
 	
@@ -24,4 +25,10 @@ public interface ChatService {
 	int selectChatRoom(int uno);
 	
 	int selectChatRoomjoin(HashMap<String, Integer> map);
+	
+	List<Integer> countChatRoomMemberList();
+	
+	int closeChatRoom(int chatRoomNo);
+	
+	List<Member> selectChatMember(int chatRoomNo);
 }

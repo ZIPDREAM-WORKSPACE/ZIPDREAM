@@ -124,6 +124,13 @@ div {
     background: #FFFFFF;
     color: #000000;
 }
+
+#searchForm {
+	display:flex;
+	justify-content:flex-start;
+	margin-bottom:25px;
+	gap:10px;
+}
 </style>
 </head>
 <body>

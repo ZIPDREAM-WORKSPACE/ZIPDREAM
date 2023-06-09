@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.zipdream.admin.model.service.AdminService;
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.chat.model.service.ChatService;
@@ -147,6 +151,15 @@ public class AdminController {
 		return result;
 	}
 	
+	@GetMapping("/getCouponList")
+	@ResponseBody
+	public JSONObject getCouponList(int userNo, int cPage) {
+		
+		JSONObject result = service.getCouponList(cPage, userNo);
+		
+		return result;
+	}
+	
 	@GetMapping("/changeMemberStatus")
 	public String changeMemberStatus(int userNo,String status) {
 		Member m = new Member();
@@ -202,10 +215,13 @@ public class AdminController {
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
+						
 						 ) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		service.selectChatRoomList(cp,map);
+		List<Integer> countList = chatService.countChatRoomMemberList();
 		model.addAttribute("selectChatRoomList",map);
+		model.addAttribute("countList",countList);
 		return "admin/adminChat";
 	}
 	
@@ -225,7 +241,6 @@ public class AdminController {
 		map.put("uno", loginUser.getUserNo());
 		
 		int result = chatService.selectChatRoomjoin(map);
-		System.out.println("결과:"+result);
 		
 	if(result<1) {
 			
@@ -240,9 +255,10 @@ public class AdminController {
 		 */
 		model.addAttribute("chatRoomNo",chatRoomNo);
 		List<ChatMessage> list = chatService.selectChatMessage(join);
-		
+		List<Member> mlist = chatService.selectChatMember(chatRoomNo);
 		if(list !=null) {
 			model.addAttribute("list",list);
+			model.addAttribute("mlist",mlist);
 			return "admin/adminChatDetail";
 		}else {
 			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
@@ -262,12 +278,75 @@ public class AdminController {
 			paramMap.put("type", 1);
 			service.selectUserSearch(paramMap,map);
 		}
+		List<Coupon> list = service.selectCouponList();
+		
 		model.addAttribute("userList",map);
 		model.addAttribute("type",1);
-		
+		model.addAttribute("couponList",list);
 		
 		return "admin/adminEvent";
 
 	}
 	
+	@PostMapping("/event/insert")
+	public String eventInsert(Model model,
+							  @RequestParam(value="images", required=false) MultipartFile img,
+							  Coupon coupon, HttpSession session) {
+		
+		String webPath = "/resources/images/coupons/";
+		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		coupon.setCouponPath(webPath);
+		int result = 0;
+		
+		try {
+			result = service.insertCoupon(coupon, img, webPath, serverFolderPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+		}else {
+		}
+		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/event/couponToUser")
+	public String couponToUser(@RequestParam(value="couponNo", required=false) int couponNo,
+							   @RequestParam(value="userNo", required=false) int[] userNo) {
+
+		for(int i = 0; i < userNo.length; i++) {
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("couponNo", couponNo);
+			map.put("userNo", userNo[i]);
+			
+			service.insertCouponToUser(map);
+		}
+		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/bkmember")
+	public String bkMember(Model model,
+						   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+						   @RequestParam Map<String, Object> paramMap) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(paramMap.get("condition") == null) {
+				service.selectBkList(cp,map);
+			}else {
+				paramMap.put("cp", cp);
+				service.selectBkSearch(paramMap,map);
+			}
+			model.addAttribute("userList",map);
+			
+		return "admin/adminBkMember";
+	}
+	
+	@GetMapping("/bkmember/detail")
+	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
+		
+		Member m = memberService.selectMember(userNo);
+		
+		model.addAttribute("member", m);
+		
+		return "admin/adminBkMemberDetail";
+	}
 }

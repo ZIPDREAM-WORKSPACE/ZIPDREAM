@@ -12,6 +12,7 @@ import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -81,4 +82,20 @@ public class ChatServiceImpl implements ChatService{
 		return dao.selectChatRoomjoin(map);
 	}
 	
+	@Override
+	public List<Integer> countChatRoomMemberList() {
+		return dao.countChatRoomMemberList();
+	}
+
+	@Override
+	public int closeChatRoom(int chatRoomNo) {
+		dao.deleteChatMessage(chatRoomNo);
+		dao.joinUserDelete(chatRoomNo);
+		return dao.closeChatRoom(chatRoomNo);
+	}
+	
+	@Override
+	public List<Member> selectChatMember(int chatRoomNo) {
+		return dao.selectChatMember(chatRoomNo);
+	}
 }

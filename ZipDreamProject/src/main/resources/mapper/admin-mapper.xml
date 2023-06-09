@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="admin-mapper">
-	
-	<resultMap type="memberApply" id="memberApplyResultSet">
-		<result column="USER_NAME" property="userName"/>
-		<result column="APPLY_DATETIME" property="applyDateTime"/>
-	</resultMap>	
+<mapper namespace="admin-mapper">	
 	
 	<resultMap type="member" id="memberResultSet">
 		<id column="USER_NO" property="userNo" />
@@ -43,6 +38,14 @@
 		<result column="REPORT_DATE" property="reportDate"/>
 	</resultMap>	
 	
+	<resultMap type="coupon" id="couponResultSet">
+		<result column="COUPON_NO" property="couponNo"/>
+		<result column="COUPON_TITLE" property="couponTitle"/>
+		<result column="COUPON_CONTENT" property="couponContent"/>
+		<result column="COUPON_DATE" property="couponDate"/>
+		<result column="COUPON_PATH" property="couponPath"/>
+	</resultMap>
+	
 	<select id="countUser" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 
 		<if test='type == 1'>
@@ -55,16 +58,35 @@
 		<![CDATA[WHERE USER_LEVEL = 1 AND STATUS = 'Y' AND ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
+	<select id="selectBkSearchCount" parameterType="HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_LEVEL = 2 AND WITHDRAW = 'N'
+		 	<if test='keyword != null and keyword != ""'>
+			  	AND
+				  <choose>
+					<when test='condition.equals("name")'> USER_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("id")'> USER_ID LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
+	</select>
+	
+	<select id="countBkUser" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE USER_LEVEL = 2
+				AND WITHDRAW = 'N'
+	</select>
+	
 	<select id="countLicenseUser" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 2
 		<if test='type == 1'>
-			AND STATUS = 'Y'
+			AND WITHDRAW = 'Y' AND STATUS = 'Y'
 		</if>
 	</select>
 	
 	<select id="countLicenseUserYesterday" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER 
-		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND ENROLL_DATETIME < CURDATE()]]>
+		<![CDATA[WHERE USER_LEVEL = 2 AND STATUS = 'Y' AND WITHDRAW = 'Y' AND ENROLL_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countObject" resultType="_int">
@@ -91,18 +113,22 @@
     	</choose>
 	</select>
 	
+	<select id="countUserCoupon" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM USER_COUPON WHERE USER_NO = #{userNo}
+	</select>
+	
 	<select id="countReportYesterday" resultType="_int">
 		SELECT COUNT(*) FROM REPORT WHERE REPORT_STATUS = 'N'
 		<![CDATA[AND REPORT_DATE < CURDATE()]]>
 	</select>
 	
 	<select id="countEvent" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION
+		SELECT COUNT(*) FROM NOTICE_BOARD
 	</select>
 	
 	<select id="countEventYesterday" resultType="_int">
-		SELECT COUNT(*) FROM PROMOTION 
-		<![CDATA[WHERE PROMOTION_START_DATETIME < CURDATE()]]>
+		SELECT COUNT(*) FROM NOTICE_BOARD 
+		<![CDATA[WHERE CREATE_DATETIME < CURDATE()]]>
 	</select>
 	
 	<select id="countChatRoom" resultType="_int">
@@ -119,12 +145,11 @@
 		WHERE COUNT > 1
 	</select>
 	
-	<select id="selectApplyListLimit5" resultMap="memberApplyResultSet">
-		SELECT USER_NAME, APPLY_DATETIME 
-		FROM MEMBER_APPLY 
-		JOIN MEMBER ON(USER_NO = REF_UNO) 
-		WHERE STATUS='N'
-		ORDER BY APPLY_DATETIME DESC LIMIT 5
+	<select id="selectApplyListLimit5" resultMap="memberResultSet">
+		SELECT USER_NAME, ENROLL_DATETIME 
+		FROM MEMBER
+		WHERE WITHDRAW='N'
+		ORDER BY ENROLL_DATETIME DESC LIMIT 5
 	</select>
 	
 	<select id="selectReportList" resultMap="reportResultSet">
@@ -220,6 +245,25 @@
 		ORDER BY ENROLL_DATETIME DESC
 	</select>
 	
+	<select id="selectBkList" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_LEVEL = 2 AND WITHDRAW = 'N'
+		ORDER BY ENROLL_DATETIME DESC
+	</select>
+	
+	<select id="selectBkSearch" parameterType="HashMap" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_LEVEL = 2 AND WITHDRAW = 'N'
+		 	<if test='keyword != null and keyword != ""'>
+			  	AND
+				  <choose>
+					<when test='condition.equals("name")'> USER_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("id")'> USER_ID LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
+		ORDER BY ENROLL_DATETIME DESC
+	</select>
+	
 	<select id="getReportList" parameterType="hashMap" resultMap="reportResultSet">
 		SELECT REPORT_NO,
 			   REF_RUNO,
@@ -243,6 +287,11 @@
 		ORDER BY REPORT_DATE DESC
 	</select>
 	
+	<select id="getCouponList" parameterType="_int" resultMap="couponResultSet">
+		SELECT * FROM USER_COUPON U LEFT JOIN COUPON C ON U.COUPON_NO = C.COUPON_NO
+		WHERE U.USER_NO = #{userNo}
+	</select>
+	
 	<select id="selectReport" resultMap="reportResultSet">
 		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
 	</select>
@@ -259,4 +308,18 @@
 			 STATUS = #{status}		
 		WHERE USER_NO = #{userNo}
 	</update>
+	
+	<insert id="insertCoupon" parameterType="coupon">
+		INSERT INTO COUPON (COUPON_TITLE,COUPON_CONTENT,COUPON_DATE,COUPON_PATH)
+		VALUES(#{couponTitle},#{couponContent},#{couponDate},#{couponPath})
+	</insert>
+	
+	<select id="selectCouponList" resultMap="couponResultSet">
+		SELECT * FROM COUPON
+	</select>
+	
+	<insert id="insertCouponToUser" parameterType="hashMap">
+		INSERT INTO USER_COUPON
+		VALUES(#{userNo},#{couponNo})
+	</insert>
 </mapper>

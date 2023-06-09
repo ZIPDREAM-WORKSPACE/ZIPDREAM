@@ -14,6 +14,7 @@ import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
 import com.kh.zipdream.common.model.vo.PageInfo;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Repository
 public class ChatDAO {
@@ -76,6 +77,11 @@ public class ChatDAO {
 		return sqlSession.delete("chattingMapper.closeChatRoom",chatRoomNo);
 	}
 	
+	// 채팅방 조인 없애기
+	public int joinUserDelete(int chatRoomNo) {
+		return sqlSession.delete("chattingMapper.joinUserDelete",chatRoomNo);
+	}
+	
 	// 채팅방 인원수
 	public int countChatRoom() {
 		return sqlSession.selectOne("chattingMapper.countChatRoom");
@@ -87,7 +93,6 @@ public class ChatDAO {
 		int limit = pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		ArrayList<ChatRoom> r =  (ArrayList) sqlSession.selectList("chattingMapper.selectChatRoomList","",rowBounds);
-		System.out.println(r);
 		
 		return r;
 	}
@@ -97,9 +102,17 @@ public class ChatDAO {
 		return sqlSession.selectOne("chattingMapper.selectChatRoom", refUno);
 	}
 	
-	// 채팅방 조회
+	// 채팅조인 조회 
 	public int selectChatRoomjoin(HashMap<String, Integer> map){
 		return sqlSession.selectOne("chattingMapper.selectChatRoomjoin", map);
+	}
+	
+	public List<Integer> countChatRoomMemberList(){
+		return sqlSession.selectList("chattingMapper.countChatRoomMemberList");
+	}
+	
+	public List<Member> selectChatMember(int chatRoomNo){
+		return sqlSession.selectList("chattingMapper.selectChatMember",chatRoomNo);
 	}
 
 }

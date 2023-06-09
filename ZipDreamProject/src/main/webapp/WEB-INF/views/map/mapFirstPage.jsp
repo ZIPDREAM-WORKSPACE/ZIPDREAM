@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,212 +7,425 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
-	div{
-		   /* border : 1px solid red; */
-	}
-	.wrap{
-		width: 100%;
-		height: 100vw;
-		display: inline-flex;
-		border-top: 1px solid lightgray;
-	}
-	#con1{
-		float: left;
-		width: 20%;
-		height: 100%;
-	}
-	#con1>#search{
-		position: top;
-		width: 100%;
-		height: 60px;
-		
-	}
-/* 	.keyword_wrap{
-		width: 100%;
-		height: 2083px;
-		border-bottom: 1px solid lightgray; 
-		overflow: auto;
-	} */
-	/* .map_wrap::-webkit-scrollbar {
-	    width: 10px;
-	    background-color: gray;
-	  }
-	.map_wrap::-webkit-scrollbar-track{
-		background:none;
-	} */
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.wrap {
+	width: 100%;
+	height: 100vw;
+	display: inline-flex;
+	border-top: 1px solid lightgray;
+}
+
+#con1 {
+	float: left;
+	width: 20%;
+	height: 100%;
+}
+
+#con1>#search {
+	position: top;
+	width: 100%;
+	height: 60px;
+}
+
+.bi-search {
+	float: left;
+}
+
+/* #search {
+	border-bottom: 1px solid lightgray;
+} */
+
+#imgArea {
+	margin: 10px;
+	float: left;
+	width: 130px;
+	height: 130px;
+	background-color: red;
+}
+
+.infoArea {
+	float: right;
+	width: 230px;
+	height: 130px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+#ia1 {
+	width: 100%;
+	height: 50px;
+}
+
+#ia2 {
+	width: 100%;
+	height: 80px;
+}
+
+.searchBtn {
+	border: none;
+	background-color: transparent;
+}
+
+.searchBtn>svg {
+	position: absolute;
+	top: 16px;
+	right: 10px;
+}
+
+#keyword {
+	padding: 10px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	height: 30px;
+	width: 180px;
+	margin: 10px 0;
+	margin-right: 10px;
 	
-			
-	.bi-search{
-		float: left;
-	}
-	
-	#search{
-		border-bottom: 1px solid lightgray;
-	}
-	#imgArea{
-		margin: 10px;
-		float: left;
-		width: 130px;
-		height: 130px;
-		background-color: red;
-	}
-	.infoArea{
-		float:right;
-		width: 230px;
-		height: 130px;
-		margin-top: 10px;
-		margin-right: 10px;
-	}
-	#ia1{
-		width: 100%;
-		height: 50px;
-	}
-	#ia2{
-		width: 100%;
-		height: 80px;
-	}
-	.searchBtn{
-		border: none;
-		background-color: transparent;
-	}
-	.searchBtn>svg{
-		position:absolute;
-		top: 16px;
-		right:10px;
-	}
-	
-	#keyword{
-		border: 1px solid lightgray;
-		border-radius: 5px;
-		height:30px;
-		width: 180px;
-		margin: 10px 0;
-		margin-right: 10px;
-	}
-	
-#menu_wrap{
-	width: 500px;
+}
+
+#menu_wrap {
+	width: 700px;
 	height: 850px;
 }
 
-.scrollBar { 
-  width: 200px;
-  height: 50px;
-  overflow-y: scroll;
+.scrollBar {
+	width: 200px;
+	height: 50px;
+	overflow-y: scroll;
 }
 
 /* 아래의 모든 코드는 영역::코드로 사용 */
 .scrollBar::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+	width: 10px; /* 스크롤바의 너비 */
 }
 
 .scrollBar::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: #989FA7; /* 스크롤바의 색상 */
-    
-    border-radius: 10px;
+	height: 10%; /* 스크롤바의 길이 */
+	background: #989FA7; /* 스크롤바의 색상 */
+	border-radius: 10px;
 }
 
 .scrollBar::-webkit-scrollbar-track {
-    background: rgba(211, 211, 211, 0.5);  /*스크롤바 뒷 배경 색상*/
+	background: rgba(211, 211, 211, 0.5); /*스크롤바 뒷 배경 색상*/
 }
 
-	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px; font-size: 15px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
-#placesList>li{
-	font-size: 15px;
-	font-weight: bold;
-	margin: 20px;
-	background-color: white;
-	border-radius: 5px;
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	/* background: rgba(255, 255, 255, 0.7); */
+	background: white;
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
 	cursor: pointer;
+	min-height: 65px;
 }
-.price{
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
 	font-size: 15px;
-	font-weight: bold;
-	width: 200px;
-	height: 100px;s
 }
 
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
 
+#placesList>li {
+	/* width: 600px;
+	font-size: 15px; */
+	font-weight: 600;
+	margin: 20px;
+	background-color: #f0f3f5;
+	border-radius: 3px;
+	border: 1px solid lightgray;
+	border-bottom: 2px solid #1A1A3A; 
+	cursor: pointer;
+	padding: 10px;
+}
+#placesList>li:hover{
+	background-color: #e3f4ffa1;
+}
+.price {
+	font-size: 15px;
+	font-weight: 600;
+	width: 200px;
+	height: 80px;
+}
+
+.infoAdd {
+	font-size: 13px;
+	font-weight: normal;
+}
+.wrap button{
+	height: 30px;
+	width: 50px;
+	border: none;
+	border-radius: 2px;
+}
+.btnSt{
+	position: absolute;
+	top: 50px;
+	left: 75px;
+	
+}
+#comOkOj{
+	width: 100px;
+}
+/* #allOj{
+	background-color: #1F4B6B;
+	color:white;
+} */
 </style>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 </head>
 
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div class="wrap">
-	<div class="map_wrap">
-		    <div id="map" style="width:100%;height:100vh;position:relative;overflow:hidden;"></div>
-		
-		    <div id="menu_wrap" class="bg_white scrollBar">
-		        <div class="option">
-		            <div>
-		                <form id="search" name="sfrom" onsubmit="searchApt(); return false;">
-		                    <input name="s" type="text" id="keyword" placeholder="키워드를 입력하세요.">
-		                    <button type="submit" class="searchBtn">
-								<svg 
-									xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-								  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		<div class="map_wrap">
+			<div id="map"
+				style="width: 100%; height: 100vh; position: relative; overflow: hidden;"></div>
+
+			<div id="menu_wrap" class="bg_white scrollBar">
+				<div class="option">
+					<div>
+						<form id="search" name="sfrom"
+							onsubmit="searchApt(); return false;">
+							<input name="s" type="text" id="keyword"
+								placeholder="키워드를 입력하세요.">
+							<button type="submit" class="searchBtn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+									fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								  <path
+										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
 								</svg>
-							</button> 
-		                </form>
-		                <div style="margin-bottom: 5px;">키워드를 입력하여 <br>원하는 매물을 검색해보세요.</div>
-		            </div>
-		        </div>
-		        <hr>
-		        <ul id="placesList"></ul>
-		        <div id="pagination"></div>
-		        <div class="keywordPlaceList"></div>
-		    </div>
-	   </div>
+							</button>
+							<div class="btnSt">
+								<button id="allOj" type="button">전체</button>
+								<button id="comOkOj">상담 가능 매물</button>
+							</div>
+						</form>
+						<!-- <div style="margin-bottom: 5px;">
+							키워드를 입력하여 <br>원하는 매물을 검색해보세요.
+						</div> -->
+					</div>
+				</div>
+				<hr>
+				<ul id="placesList"></ul>
+				<div id="pagination"></div>
+				<!-- <div class="keywordPlaceList"></div> -->
+				
+			</div>
+			
+		</div>
+		
 	</div>
-	
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+	<form id="gtSellDetail"
+		action="<%=request.getContextPath()%>/sell/detailapi" method="post">
+		<input id="sidoCode" name="sidoCode" type="hidden"> <input
+			id="sellSno" name="sellSno" type="hidden"> <input
+			id="sellName" name="sellName" type="hidden"> <input
+			id="sellAddress" name="sellAddress" type="hidden"> <input
+			id="sellPrice" name="sellPrice" type="hidden"> <input
+			id="brokerAdd" name="brokerAdd" type="hidden"> <input
+			id="sellPrivateArea" name="sellPrivateArea" type="hidden"> <input
+			id="sellFloor" name="sellFloor" type="hidden"> <input
+			id="ymd" name="ymd" type="hidden"> <input
+			id="sellApprovalDatetime" name="sellApprovalDatetime" type="hidden">
+		<input id="realYn" name="realYn" type="hidden"> <input
+			id="realYnDate" name="realYnDate" type="hidden">
+	</form>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7&libraries=services"></script>
+	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7"></script> -->
 
-<script>
+	<script>
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -370,7 +583,7 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://ifh.cc/g/hq3jLD.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    var imageSrc = 'https://ifh.cc/g/phtlAJ.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(31, 35),  // 마커 이미지의 크기
         imgOptions = new kakao.maps.Point(13, 34), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         
@@ -515,7 +728,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
             	// result를 콘솔에 찍은후 result값을 활용해준다.
             	
             	$.ajax({
-    				  url : "<%= request.getContextPath() %>/map/bjdCode",
+    				  url : "<%=request.getContextPath()%>/map/bjdCode",
     				  method: "post",
     				  data: {detailAddrClob : detailAddrClob},
     				  dataType: "text",
@@ -524,7 +737,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     					  
     					  
     					  $.ajax({
-    	                      url: "<%= request.getContextPath() %>/map/getXmlCode",
+    	                      url: "<%=request.getContextPath()%>/map/getXmlCode",
     	                      method: "get",
     	                      data: {'code' : bjdCodeFirst},
     	                      dataType: "text",
@@ -571,25 +784,24 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
     			    	                       			 for(var k=0; k<tagArr.length; k++){
     			    	                       				 if(k==tagArr.length-1){
-    			    	                       					 tagMoney += tagArr[k].innerText.split(" ")[0].replace("억","").replace(",","");
+    			    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
     			    	                       				 }else{
-	    			    	                       				 tagMoney += tagArr[k].innerText.split(" ")[0].replace("억","").replace(",","")+" ";
+	    			    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
     			    	                       				 }
     			    	                       				 
     			    	                       			 }
     			    	                       			 
     			    	                       			 let tagMarr = tagMoney.split(" ");
     			    	                       			 let tagParr =  tagMarr.map(Number);
-    			    	                       			 
+    			    	                       			 console.log("?"+tagMarr+"ㅐㅔㅐㅔ" );
     			    	                       			 
     			    	                       			  max = Math.max.apply(null,tagParr);
     			    	                       			  
-    			    	                       			  
     			    	                       			  min = Math.min.apply(null,tagParr);
-    			    	                       			  console.log("max:"+max+", min:"+min+", min:"+tagParr);
+    			    	                       			
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
       			    	                       			  
-      			    	                       			  minToMax = min+" ~ "+max+"(단위 : 만)";
+      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
       			    	                       			  
       			    	                       			  if(max == 0 && min == 0){
       			    	                       				 minToMax = "실거래 평균 시세 없음";
@@ -601,8 +813,8 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       			positions.push({
     			    	                       				// content안에 주소정보랑 최소금액~최대금액 표시하기
     			    	                       				// content div안에 min과 max를 넣어준다.
-    			    	                       				content: '<div class="price">'+minToMax+"</div>"
-    			    	                       						+"<div>"+result[i].address_name+'</div>',
+    			    	                       				content: "<div class='infoAdd'>"+"주소 : "+result[i].address_name+'</div>'
+    			    	                       						+ '<div class="price">'+minToMax+"</div>",
     			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
     			    	                       			})
     			    	                       	  		
@@ -625,18 +837,18 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
     	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-    	    	    	                        	        $(backgroundTag).siblings().css("background-color","white");
+    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
     	    	    	                        	        
     	    	    	                        	        
-    	    	    	                        	        if($(backgroundTag).css("background-color") != "#1F4B6B"){
-    	    	    	                        	        	$(backgroundTag).css("background-color", "#1F4B6B");
+    	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
+    	    	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
     	    	    	                        	        	$(backgroundTag).css("color", "white");
     	    	    	                        	        }
     	    	    	                        	    });
     	    	    	                        	    
     	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-	    	    	                        	        	    'https://ifh.cc/g/xSQS2h.png',
-	    	    	                        	        	    new kakao.maps.Size(31, 35), new kakao.maps.Point(13, 34));
+	    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+	    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 	    	    	                        	     
 	    	    	                        	        marker.setImage(markerImage);
     	    	    	                        	    
@@ -650,7 +862,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	                                  
     	    	                              }
 	   	                          
-        	                              searchApt(aptName);
+        	                              
    	                        	 		 }
 	   	                           // 리스트 비워놓고 추가하고 비워놓고 추가하고...
 	   	                           
@@ -686,6 +898,13 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	listEl = document.getElementById('placesList');
     						  	var listLiTag = document.createElement("li");
     						  	listLiTag.setAttribute("class", "goDetail");
+    						  	
+    						  	$("#allOj").css({
+    						  		"background-color": "#1F4B6B",
+    								"color":"white"
+    						  		
+    						  	});
+    						  	
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
@@ -715,12 +934,28 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	
     						  	var resultStr = arr.join('');
     						  				  	
-    						  	listLiTag.textContent = resultStr+" "+addressToXy["아파트"]+" "+addressToXy["전용면적"]+"㎡ "+addressToXy["층"]+"층 중개사소재지 : "+addressToXy["중개사소재지"];
+    						  	listLiTag.innerHTML = resultStr+"<br> "+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
-    						  	/* listLiTag.addEventListener('click', function(){
-    						        alert('Hello world, ');
-    						    });  */
+    						  	listLiTag.addEventListener('click', function(){
+    						  		let add = addressToXy["지역코드"];
+    						  		let sidoCode = add.substring(0,2);
+    						        
+    						  		document.getElementById("sidoCode").value = sidoCode;
+    						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
+    						  		document.getElementById("sellName").value = addressToXy["아파트"];
+    						  		document.getElementById("sellAddress").value = detailAddrClob+" "+addressToXy["도로명"];
+    						  		document.getElementById("sellPrice").value = resultStr;
+    						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
+    						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
+    						  		document.getElementById("sellFloor").value = addressToXy["층"];
+    						  		document.getElementById("ymd").value = addressToXy["년"]+" / "+addressToXy["월"]+" / "+addressToXy["일"];
+    						  		document.getElementById("sellApprovalDatetime").value = addressToXy["건축년도"];
+    						  		document.getElementById("realYn").value = addressToXy["해제여부"];
+    						  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];
+    						  	
+    						  		document.getElementById("gtSellDetail").submit();
+    						  	});
     						  	
     						  	
     					  }
@@ -782,23 +1017,25 @@ function displayCenterInfo(result, status) {
 } 
 
  
-function searchApt(aptName){
+function searchApt(){
 	let search = document.getElementById("search").value;
-	let listInner = aptName;
+	
 	
 	// 리스트 비워주고
 	listEl = "";
 	
 	// li 태그에 아파트 정보 텍스트로 표시
-			  	
+	
+	let listInner = 아파트정보;
+	
   	listLiTag.textContent = listInner;
   	listEl.appendChild(listLiTag);
 
-} 
+}
  
 </script>
 
-	
+
 </body>
 
 </html>

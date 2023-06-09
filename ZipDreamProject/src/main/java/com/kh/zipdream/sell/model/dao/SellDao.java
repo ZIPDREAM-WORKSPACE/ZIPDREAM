@@ -31,8 +31,8 @@ public class SellDao {
 		return sqlSession.insert("sell-mapper.sellInsertImg", sellImgList);
 	}
 	
-	public ArrayList<SellDetail> selectSellList() {
-		return (ArrayList)sqlSession.selectList("sell-mapper.selectSellList");
+	public ArrayList<SellDetail> selectSellList(int refUno) {
+		return (ArrayList)sqlSession.selectList("sell-mapper.selectSellList", refUno);
 	}
 	
 	public SellDetail sellDetail(int sellNo) {

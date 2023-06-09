@@ -1,5 +1,6 @@
 package com.kh.zipdream.sell.controller;
 
+import java.util.Date; 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
 @Controller
 @RequestMapping("/sell")
@@ -37,7 +40,7 @@ public class SellController {
 	@PostMapping("/sellInsert")
 	@ResponseBody
 	public String sellInsert(SellDetail sd, HttpServletRequest request, HttpSession session,
-							 @RequestParam(value="imges", required=false) List<MultipartFile> imgList) {
+							 @RequestParam(value="imges", required=false ) List<MultipartFile> imgList) {
 		
 		String webPath = "resources/sellupfiles/";
 		String serverFolderPath = session.getServletContext().getRealPath(webPath);
@@ -54,7 +57,7 @@ public class SellController {
 		
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "main";
+			return "redirect:../agent/list";
 		}else {
 			System.out.println("업로드 실패");
 			return "main";
@@ -62,13 +65,28 @@ public class SellController {
 	}
 	
 	//sell_detail페이지 이동
-	@GetMapping("/detail/{sellNo}")
-	public String sellDetail(@PathVariable("sellNo") int sellNo, Model model,HttpServletRequest rq, HttpServletResponse reps) {
+	@PostMapping("/detailapi")	
+	public String sellDetailApi(Model model, SellDetailApi sda){
+
+		model.addAttribute("sda", sda);
+		System.out.println("sd:"+ sda);
 		
+		return "sell/sellDetailApi";
+	}
+	
+	@GetMapping("/detail/{sellNo}")	
+	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo){
+
 		SellDetail detail = sellService.sellDetail(sellNo);
 		model.addAttribute("sd", detail);
 		return "sell/sellDetail";
 	}
 	
+	//상담신청
+	/*
+	 * @PostMapping("/sellApply")
+	 * 
+	 * @ResponseBody public int sellApply() { return result; }
+	 */
 		
 }

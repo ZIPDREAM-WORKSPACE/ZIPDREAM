@@ -96,7 +96,9 @@
 			   </foreach>) AS C
 	</insert>
 	
-	
+	<select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
+	</select>
 	
 	
 	

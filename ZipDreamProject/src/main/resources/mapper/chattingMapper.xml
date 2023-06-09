@@ -18,6 +18,16 @@
 		<result column="USER_ID" property="userId" />
 	</resultMap>
 	
+	<resultMap type="chatRoomJoin" id="chatRoomJoinCount">
+		<result column="COUNT" property="count" />
+		
+	</resultMap>
+	
+	<resultMap type="Member" id="selectChatMember">
+		<result column="USER_ID" property="userId" />
+		<result column="USER_LEVEL" property="userLevel" />
+	</resultMap>
+	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
 		  SELECT MESSAGE, CHAT_ROOM_NO, TITLE, DATE_FORMAT(CREATE_DATETIME, '%Y-%m-%d %H:%i:%s') AS CREATE_DATE
         FROM CHAT_ROOM
@@ -53,6 +63,13 @@
 		WHERE CHAT_ROOM_NO = #{chatRoomNo}
 		AND REF_UNO = #{refUno}
 	</select>
+	
+	<delete id="joinUserDelete" parameterType="_int" >
+		DELETE 
+		FROM CHAT_ROOM_JOIN
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+		
+	</delete>
 	
 	<!-- 채팅방 참여하기 -->
 	<insert id="joinChatRoom" parameterType="chatRoomJoin">
@@ -111,13 +128,28 @@
 		SELECT
 			COUNT(*)
 		FROM CHAT_ROOM
-		WHERE STATUS = 'Y';
+		WHERE STATUS = 'Y'
 	</select>
 	
 	<select id="selectChatRoomjoin" resultType="_int" parameterType="java.util.Map">
-		SELECT count(*)
+		SELECT COUNT(*)
        FROM CHAT_ROOM_JOIN
        WHERE CHAT_ROOM_NO = #{cno}  AND REF_UNO = #{uno}
+	</select>
+	
+	<select id="countChatRoomMemberList" resultMap="chatRoomJoinCount" >
+		   	SELECT COUNT(*) AS COUNT
+         FROM CHAT_ROOM_JOIN
+          GROUP BY CHAT_ROOM_NO
+        ORDER BY CHAT_ROOM_NO DESC
+	</select>
+	
+	<select id="selectChatMember" resultMap="selectChatMember" >
+		SELECT USER_ID, USER_LEVEL
+		FROM MEMBER
+		JOIN CHAT_ROOM_JOIN ON (REF_UNO = USER_NO)
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+
 	</select>
 	
 	

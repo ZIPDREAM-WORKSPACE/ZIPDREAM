@@ -4,6 +4,7 @@
  	
  	<resultMap type="sellDetail" id="sellResultSet">
  		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="REF_UNO" property="refUno"/>
  		<result column="SELL_NAME" property="sellName"/>
  		<result column="SELL_TYPE" property="sellType"/>
  		<result column="CREATE_DATE" property="createDate"/>
@@ -11,6 +12,7 @@
  	
  	<resultMap type="sellDetail" id="sellDetailResultSet">
  		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="REF_UNO" property="refUno"/>
  		<result column="SELL_NAME" property="sellName"/>
  		<result column="SELL_ADDRESS" property="sellAddress"/>
  		<result column="SELL_PRICE" property="sellPrice"/>
@@ -57,11 +59,11 @@
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
 		INSERT INTO SELLDETAIL
-		VALUES (#{sellNo}, 1,#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{sellShortterm},
+		VALUES (SELL_NO, #{refUno},#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{sellShortterm},
 				#{sellType}, #{sellFloor},#{sellPrivateArea}, #{sellProvideArea}, #{sellAllFloor}, #{sellRoomCount}, #{sellToiletCount},
 				#{sellWay}, #{sellHousehold}, #{sellEntrance}, #{sellMoveDatetime}, #{sellBuldtype}, #{sellInstallation}, #{sellAircondition},
 				#{sellHeating}, #{parkingCount}, #{sellApprovalDatetime}, #{sellEnrollDatetime}, #{complexApplyDatetime}, #{wingCount}, #{householdCount},
-				#{option}, #{security}, SYSDATE, SYSDATE)
+				#{option}, #{security}, SYSDATE(), SYSDATE())
 	</insert>
 	
 
@@ -74,8 +76,11 @@
 	</insert>
 	
 	<select id="selectSellList" resultMap="sellResultSet" >
-		SELECT SELL_NO, SELL_NAME,SELL_TYPE, CREATE_DATE
+		SELECT SELL_NO, REF_UNO,SELL_NAME,SELL_TYPE, CREATE_DATE
 		FROM SELLDETAIL
+		JOIN MEMBER ON(USER_NO = REF_UNO)
+		WHERE USER_NO = #{refUno}
+		
 	</select>
 	
 	<select id="sellDetail" resultMap="sellDetailResultSet">
