@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.Coupon;
-import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.chat.model.dao.ChatDAO;
@@ -99,12 +98,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<Map<String,String>> selectApplyListLimit5(){
 		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
-		List<MemberApply>list = dao.selectApplyListLimit5();
+		List<Member>list = dao.selectApplyListLimit5();
 		
 		for(int i = 0; i < list.size(); i++) {
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("userName", list.get(i).getUserName());
-			map.put("applyDateTime", list.get(i).getApplyDateTime());
+			map.put("applyDateTime", list.get(i).getEnrollDateTime()+"");
 			listResult.add(map);
 		}
 		
@@ -204,6 +203,29 @@ public class AdminServiceImpl implements AdminService{
 		int boardLimit = 10;
 		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
 		ArrayList<Member> list = dao.selectUserSearch(pi, paramMap);
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public void selectBkList(int cp, Map<String, Object> map) {
+		int listCount = dao.countBkUser();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Member> list = dao.selectBkList(pi);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public void selectBkSearch(Map<String, Object> paramMap,Map<String, Object> map) {
+		int listCount = dao.selectBkSearchCount(paramMap);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
+		ArrayList<Member> list = dao.selectBkSearch(pi, paramMap);
 		map.put("pi", pi);
 		map.put("list", list);
 	}

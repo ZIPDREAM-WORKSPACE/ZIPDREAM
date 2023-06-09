@@ -1,6 +1,6 @@
 package com.kh.zipdream.sell.controller;
 
-import java.util.Date;
+import java.util.Date; 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,13 +74,19 @@ public class SellController {
 		return "sell/sellDetailApi";
 	}
 	
+	@GetMapping("/detail/{sellNo}")	
+	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo){
 
-	//상담신청
-	@PostMapping("/sellApply")
-	@ResponseBody
-	public int sellApply() {
-		return result;
+		SellDetail detail = sellService.sellDetail(sellNo);
+		model.addAttribute("sd", detail);
+		return "sell/sellDetail";
 	}
+	
+	//상담신청
+	/*
+	 * @PostMapping("/sellApply")
+	 * 
+	 * @ResponseBody public int sellApply() { return result; }
+	 */
 		
-
 }

@@ -16,7 +16,7 @@
 				<img src="<%=request.getContextPath()%>/resources/images/Group.svg">
 			</div>
 		</div>
-		<form id="searchForm" action="<%= request.getContextPath() %>/admin/event" method="get" align="center" style="display:flex;justify-content:flex-start;margin-bottom:25px;gap:10px;">
+		<form id="searchForm" action="<%= request.getContextPath() %>/admin/event" method="get" align="center">
 			<div class="select">
 				<select class="custom-select" name="condition">
 					<option value="name" ${param.condition == 'name' ? 'selected':'' }>이름</option>
