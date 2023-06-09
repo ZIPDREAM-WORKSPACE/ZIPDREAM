@@ -15,10 +15,12 @@
 }
 
 .myRoomListWrap>div {
-	width: 1000px;
+	width: 1200px;
 	height: 100%;
 	margin: 0px auto;
 	padding: 0px 10px;
+    padding-left: 45px;
+    padding-right: 45px;
 }
 
 .myRoomListWrap>div>ul {
@@ -133,6 +135,7 @@
 </head>
 <body>
 	<jsp:include page="mypage.jsp" />
+	
 
 	<div class="myRoomListWrap">
 		<div>
@@ -192,10 +195,10 @@
 				<ul class="pagination">
 					<c:choose>
 						<c:when test="${ pi.currentPage eq 1 }">
-							<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage -1 }">Previous</a></li>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage -1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -205,10 +208,10 @@
 
 					<c:choose>
 						<c:when test="${ pi.currentPage eq pi.maxPage }">
-							<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage + 1 }">Next</a></li>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage + 1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
