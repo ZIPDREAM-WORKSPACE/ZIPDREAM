@@ -482,6 +482,7 @@ function ok(){
                alert("사용가능한 아이디입니다");
                $("#emailCheck").css("display","none");
                $("#emailcheck").css("display","block");
+
             }
           },error : function(req,status,err){
               console.log(req);
