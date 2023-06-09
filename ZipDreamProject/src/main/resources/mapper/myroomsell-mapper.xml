@@ -20,18 +20,52 @@
 		<result column="STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
 	</resultMap>
+	
+	<resultMap type="myroomsell" id="myroomsellResultSet">
+		<id column="USER_SR_NO" property="userSrNo" />
+		<result column="REF_UNO" property="refUno" />
+		<result column="REF_RUNO" property="refRuno" />
+		<result column="ROOM_TYPE" property="roomType" />
+		<result column="BUILDING_TYPE" property="buildingType" />
+		<result column="ADDRESS" property="address" />
+		<result column="DEAL_TYPE" property="dealType" />
+		<result column="STATUS" property="status" />
+	</resultMap>
 
 
-	<select id="selectAgent" parameterType="hashmap"
-		resultMap="memberResultSet">
+	<select id="selectAgent" parameterType="hashmap" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
-		WHERE USER_LEVEL = '2' AND STATUS = '1'
-		
-		<foreach collection="address" item="arr" open="" close="" separator="">
-			AND ADDRESS LIKE CONCAT('%', #{arr}, '%')
+		WHERE USER_LEVEL = '2' AND STATUS = 'Y'
+		AND
+		<foreach collection="address" item="arr" open="(" close=")" separator="or">
+			ADDRESS LIKE CONCAT('%', #{arr}, '%') 
 		</foreach>
 	</select>
 	
+	<insert id="myroomSellInsert" parameterType="myroomsell" useGeneratedKeys="true" keyProperty="userSrNo">
+		INSERT INTO USER_ROOM_SELL(
+			REF_UNO,
+			REF_RUNO,
+			ROOM_TYPE,
+			BUILDING_TYPE,
+			ADDRESS,
+			DEAL_TYPE
+		) VALUES(
+			#{refUno},
+			#{refRuno},
+			#{roomType},
+			#{buildingType},
+			#{address},
+			#{dealType}
+		)
+		
+	</insert>
+	
+	<select id="selectMyRoomList" resultMap="myroomsellResultSet">
+		SELECT * 
+		FROM USER_ROOM_SELL
+		WHERE REF_UNO = #{userNo}
+	</select>
 	
 	
 	

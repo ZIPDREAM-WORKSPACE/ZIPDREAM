@@ -12,6 +12,7 @@ import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
+import com.kh.zipdream.member.model.vo.Member;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -93,4 +94,8 @@ public class ChatServiceImpl implements ChatService{
 		return dao.closeChatRoom(chatRoomNo);
 	}
 	
+	@Override
+	public List<Member> selectChatMember(int chatRoomNo) {
+		return dao.selectChatMember(chatRoomNo);
+	}
 }
