@@ -68,9 +68,7 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);
 	}
 	
-	public int emailCheck(String id) {
-		return sqlSession.selectOne("member-mapper.emailCheck",id);
-	}
+
 	
 	public Member searchId(Map<String, String> map) {
 		return sqlSession.selectOne("member-mapper.searchId",map);

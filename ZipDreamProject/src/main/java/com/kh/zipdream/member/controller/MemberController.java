@@ -233,7 +233,6 @@ public class MemberController {
 	   public int emailCheck(HttpSession session,
 	                     
 	                      @RequestParam(value = "id", required = false) String id) {
-	       System.out.println(id);
 	      int result = memberService.emailCheck(id);
 	      
 	      return result;
