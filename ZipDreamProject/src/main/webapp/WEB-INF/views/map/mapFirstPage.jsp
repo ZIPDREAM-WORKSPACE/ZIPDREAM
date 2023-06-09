@@ -34,9 +34,9 @@
 	float: left;
 }
 
-#search {
+/* #search {
 	border-bottom: 1px solid lightgray;
-}
+} */
 
 #imgArea {
 	margin: 10px;
@@ -83,6 +83,7 @@
 	width: 180px;
 	margin: 10px 0;
 	margin-right: 10px;
+	
 }
 
 #menu_wrap {
@@ -300,16 +301,20 @@
 }
 
 #placesList>li {
-	width: 600px
-	font-size: 15px;
+	/* width: 600px;
+	font-size: 15px; */
 	font-weight: 600;
 	margin: 20px;
 	background-color: #f0f3f5;
-	border-radius: 5px;
+	border-radius: 3px;
+	border: 1px solid lightgray;
+	border-bottom: 2px solid #1A1A3A; 
 	cursor: pointer;
 	padding: 10px;
 }
-
+#placesList>li:hover{
+	background-color: #e3f4ffa1;
+}
 .price {
 	font-size: 15px;
 	font-weight: 600;
@@ -321,6 +326,25 @@
 	font-size: 13px;
 	font-weight: normal;
 }
+.wrap button{
+	height: 30px;
+	width: 50px;
+	border: none;
+	border-radius: 2px;
+}
+.btnSt{
+	position: absolute;
+	top: 50px;
+	left: 75px;
+	
+}
+#comOkOj{
+	width: 100px;
+}
+/* #allOj{
+	background-color: #1F4B6B;
+	color:white;
+} */
 </style>
 
 
@@ -361,18 +385,25 @@
 										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
 								</svg>
 							</button>
+							<div class="btnSt">
+								<button id="allOj" type="button">전체</button>
+								<button id="comOkOj">상담 가능 매물</button>
+							</div>
 						</form>
-						<div style="margin-bottom: 5px;">
+						<!-- <div style="margin-bottom: 5px;">
 							키워드를 입력하여 <br>원하는 매물을 검색해보세요.
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<hr>
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
-				<div class="keywordPlaceList"></div>
+				<!-- <div class="keywordPlaceList"></div> -->
+				
 			</div>
+			
 		</div>
+		
 	</div>
 	<form id="gtSellDetail"
 		action="<%=request.getContextPath()%>/sell/detailapi" method="post">
@@ -552,7 +583,7 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://ifh.cc/g/hq3jLD.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    var imageSrc = 'https://ifh.cc/g/phtlAJ.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(31, 35),  // 마커 이미지의 크기
         imgOptions = new kakao.maps.Point(13, 34), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         
@@ -816,8 +847,8 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     	    	    	                        	    });
     	    	    	                        	    
     	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-	    	    	                        	        	    'https://ifh.cc/g/xSQS2h.png',
-	    	    	                        	        	    new kakao.maps.Size(31, 35), new kakao.maps.Point(13, 34));
+	    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+	    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 	    	    	                        	     
 	    	    	                        	        marker.setImage(markerImage);
     	    	    	                        	    
@@ -867,6 +898,13 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	listEl = document.getElementById('placesList');
     						  	var listLiTag = document.createElement("li");
     						  	listLiTag.setAttribute("class", "goDetail");
+    						  	
+    						  	$("#allOj").css({
+    						  		"background-color": "#1F4B6B",
+    								"color":"white"
+    						  		
+    						  	});
+    						  	
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
     						  	// marker.click() => location.href="#134.25252,145.12321321"
@@ -981,13 +1019,15 @@ function displayCenterInfo(result, status) {
  
 function searchApt(){
 	let search = document.getElementById("search").value;
-	let listInner = aptName;
+	
 	
 	// 리스트 비워주고
 	listEl = "";
 	
 	// li 태그에 아파트 정보 텍스트로 표시
-			  	
+	
+	let listInner = 아파트정보;
+	
   	listLiTag.textContent = listInner;
   	listEl.appendChild(listLiTag);
 
