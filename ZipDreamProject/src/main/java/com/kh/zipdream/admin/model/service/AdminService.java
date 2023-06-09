@@ -37,7 +37,9 @@ public interface AdminService {
 	public Report selectReport(int reportNo);
 	public int updateReportResult(Report report);
 	public void selectChatRoomList(int cp, Map<String, Object> map);
+
 	public int insertCoupon(Coupon coupon, MultipartFile img, String webPath, String serverFolderPath) throws Exception;
 	public List<Coupon> selectCouponList();
 	public int insertCouponToUser(Map<String,Integer> map);
+
 }
