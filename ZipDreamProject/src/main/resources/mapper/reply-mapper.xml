@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reply-mapper">
+ 	
+ 	<resultMap type="reply" id="replyResultSet">
+ 		<result column="REPLY_NO" property="replyNo"/>
+ 		<result column="REPLY_CONTENT" property="replyContent"/>
+ 		<result column="CREATE_DATE" property="createDate"/>
+ 		<result column="STATUS" property="status"/>
+ 		<result column="DETAIL_BOARD_NO" property="detailBoardNo"/>
+ 		<result column="REPLY_REF_UNO" property="replyRefUno"/>
+  		<result column="USER_NAME" property="userName"/>
+  	</resultMap>
+ 	
+ 	
+ 	<insert id="insertReply" parameterType="reply">
+ 		INSERT INTO REPLY
+		VALUES(REPLY_NO, #{replyContent}, SYSDATE(), 'Y', #{detailBoardNo}, #{replyRefUno});
+ 	</insert>
+ 	
+ 	<select id="selectList" resultMap="replyResultSet">
+ 		SELECT R.*, M.USER_NAME
+ 		FROM REPLY R
+ 		JOIN MEMBER M ON(USER_NO = REPLY_REF_UNO)
+ 		WHERE DETAIL_BOARD_NO = #{detailBoardNo} AND R.STATUS='Y'
+ 	</select>
+ 
+</mapper>

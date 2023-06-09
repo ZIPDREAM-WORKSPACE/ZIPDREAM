@@ -872,16 +872,8 @@
 </body>
 <script>
 	$(function(){
-		function apply(){
-			var meet = $(".meet").val();
-			var untact = $(".untact").val();
-			console.log(meet);
-			console.log(untact);
-		}
-	})
-	
-	$(function(){
 		boardList();
+		selectReply();
 	})
 	
  	function insertboard(){
@@ -918,7 +910,6 @@
 				let html = "";
 				for(let board of result){
 					html += "<div class='box'>"+"<div class='lastBox margin'>"+
-								"<input type='hidden' value='board.detailBoardNo'>"+
 								"<div class='boardBox'>"+
 									"<p class='writer'>"+board.userName+"</p>"+
 									"<div id='boardContent'>"+
@@ -933,7 +924,8 @@
 									"</div>"+
 									"<div class='inputReply'>"+
 		        					"<textarea rows='1' cols='53' id='inputReply' style='resize: none;''>"+"</textarea>"+
-		        					"<button type='submit' onclick='insertReply();'>"+"작성"+"</button>"+
+		        					"<input type='hidden' id='refBno' name='refBno' value='"+board.detailBoardNo+"'>"+
+		        					"<button onclick='insertReply("+board.detailBoardNo+");'>"+"작성"+"</button>"+
 		        				"</div>"+"</div>"+"</div>"
 				}
 				$(".content10").html(html);
@@ -944,39 +936,49 @@
 		})
 	}
 	
-	function insertReply(){
+	let detailBoardNo ="";
+	function insertReply(refBno){
+		console.log(refBno);
+		detailBoardNo  = refBno;
 		$.ajax({
-			url : "<%=request.getContextPath()%>/reply/insert",
+			url : "<%=request.getContextPath()%>/reply/replyInsert",
 			data : {
-				refDno : '${board.detailBoardNo}',
-				refUno : '${loginUser.userNo}',
-				replyContent : $("#inputReply").val();
+				detailBoardNo,
+				replyRefUno : '${loginUser.userNo}',
+				replyContent : $("#inputReply").val()
+			},
+			type : "POST",
+			success : function(result){
+				if(result ==1){
+					console.log("댓글작성 성공");
+				}else{
+					console.log("댓글작성 실패");
+				}
+			},
+			complete : function(){
+				$("#inputReply").val("");
+			}
+		})
+	}  
+	
+	function selectReply(refBno){
+		console.log(refBno)
+		$.ajax({
+			url : "<%=request.getContextPath()%>/reply/selectList",
+			data : {${refBno}},
+			dataType : 'json',
+			seccess : function(result){
+				let reply = "";
+				for(let reply of result){
+					reply += "<p id='reply'>"+reply.userName+":"+reply.replyContent+"</p>"
+				}
+				$(".replyContent").html(reply);
+			},
+			error : function(){
+				console.log("리스트 불러오기 실패");
 			}
 		})
 	}
-		
-	<%-- 
-	$(function(){
-		function apply(){
-			var meet = $(".meet").val();
-			var untact = $(".untact").val();
-			$.ajax({
-				url:"<%=request.getContextPath()%>/sell/sellApply",
-				type:"post",
-				data:{
-					sno : ${sd.sellNo},
-					meet : "meet",
-					untact : "untact"
-				},
-				success : function(result){
-					$(".finish_apply").show();
-				},
-				errpr : function(){
-					alert("신청이 완료되지 않았습니다. 다시 신청해주세요");
-				}
-				
-			})
-		}
-	}) --%>
+
 </script>
 </html>
