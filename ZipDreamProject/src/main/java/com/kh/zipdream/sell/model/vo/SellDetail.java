@@ -1,13 +1,11 @@
 package com.kh.zipdream.sell.model.vo;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import com.kh.zipdream.attachment.model.vo.Attachment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,19 +53,20 @@ public class SellDetail {
 	private String sellHeating;				//	SELL_HEATING varchar(100) 
 
 	private String parkingCount;				//	PARKING_COUNT int 
-	private Date sellApprovalDatetime; 		// 건축년도 //	SELL_APPROVAL_DATETIME datetime 
-	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
+	private String sellApprovalDatetime; 		// 건축년도 //	SELL_APPROVAL_DATETIME datetime 
+	private String sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
 	
 	private String realYn;
 	private String realYnDate;
-	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
+	private String complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
 	private String wingCount; 					//	WING_COUNT int 
 	private String householdCount;				//	HOUSEHOLD_COUNT int 
 
 	private String option;					//	OPTION varchar(100) 
 	private String security;				//	SECURITY varchar(100) 
-	private Date createDate;
-	private Date modifyDate;
+	private String createDate;
+	private String modifyDate;
+	private String status;
 	
 	private ArrayList<Attachment> imgList;
 	
