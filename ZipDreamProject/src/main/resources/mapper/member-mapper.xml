@@ -135,5 +135,17 @@
 	    WHERE mail=#{mail}
 	</update>
 	
+	<select id="emailCheck" resultType="int">
+	   SELECT count(USER_ID)
+		FROM MEMBER
+		WHERE USER_ID=#{id}
+	</select>
+	
+	<select id="searchId" resultMap="memberResultSet">
+	   SELECT USER_ID
+		FROM MEMBER
+		WHERE USER_NAME  = #{name} AND PHONE = #{phone}
+	</select>
+	
 	
 </mapper>

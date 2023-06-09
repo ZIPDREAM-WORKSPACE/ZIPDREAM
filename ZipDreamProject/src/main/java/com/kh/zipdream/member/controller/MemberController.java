@@ -1,7 +1,9 @@
 package com.kh.zipdream.member.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -226,7 +228,29 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@GetMapping("/emailCheck")
+	public int emailCheck(HttpSession session,
+							
+							 @RequestParam(value = "id", required = false) String id) {
+		int result = memberService.emailCheck(id);
+		
+		return result;
+	}
+	 
 	
+	@ResponseBody
+	@GetMapping("/searchId")
+	public Member searchId(HttpSession session,
+							
+							 @RequestParam(value = "name", required = false) String name,
+							 @RequestParam(value = "phoneNumber", required = false) String phone) {
+		Map<String, String> map = new HashMap();
+		map.put("name", name);
+		map.put("phone", phone);
+		 Member result = memberService.searchId(map);
+		return result;
+	}
 	 
 
 	

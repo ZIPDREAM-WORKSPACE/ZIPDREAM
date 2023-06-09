@@ -37,7 +37,7 @@
 
     .login1{
         box-sizing: border-box;
-		/* top:100px; */
+      /* top:100px; */
         position: absolute;
         width: 600px;
         height: 600px;
@@ -95,7 +95,7 @@
             color: white;
         }
 
-        #btn1, #btn2{
+        #btn1, #btn2, #btn3{
             border: none;
             background-color: white;
             /* margin-left: -7px; */
@@ -111,7 +111,7 @@
         }
         
         #exampleModal{
-        	margin-top: 250px;
+           margin-top: 250px;
         }
         
         /* #naverlogo{
@@ -121,14 +121,24 @@
         } */
         
         #kakaologo{
-        	width: 330px;
-		    height: 55px;
-		    bottom: 100px;
-		    margin-left: 65px;
+           width: 330px;
+          height: 55px;
+          bottom: 100px;
+          margin-left: 65px;
         }
-        
-        
-
+        #findPasswordInner{
+           text-align: left;
+           margin-left:30px;
+           
+        }
+        #findPasswordInner>*{
+           margin:10px;
+           padding:5px;
+        }
+        #findPasswordInner>.bt{
+           margin-bottom:13px;
+           
+        }
    
 </style>
 </head>
@@ -156,6 +166,54 @@
       </div>
     </div>
   </div>
+  
+    <div class="modal fade" id="findPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">비밀번호 찾기 </h5>
+       
+        </div>
+        <div class="modal-body" id="findPasswordInner" >
+           전화번호 : <input  class="signin_pass" class="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
+            <br>
+        
+            
+            아이디 &nbsp;&nbsp;&nbsp;:  <input  class="signin_pass" id="idText" type="text" name="idText"  placeholder="아이디를 입력해주세요">
+           
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" >확인</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   <div class="modal fade" id="searchId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">아이디 찾기 </h5>
+       
+        </div>
+        <div class="modal-body" id="findPasswordInner" >
+           전화번호 : <input  class="signin_pass" id="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
+           <br>
+        
+            
+            이름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <input  class="signin_pass" id="name" type="text" name="name"  placeholder="이름을 입력해주세요">
+           
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="findId">확인</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
     
     <form action="<%=request.getContextPath()%>/member/memberLogin" method="post">
         <div class="content" id="content">
@@ -173,7 +231,8 @@
 
                 <div id="login_search">
                     <button type="button" id="btn1" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
-                    <button type="button" id="btn2" onclick="">아이디, 비밀번호 찾기</button>
+                    <button type="button" id="btn2" onclick="" data-toggle="modal" data-target="#searchId">아이디 찾기</button>
+                     <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>
                 
                 <button type="submit" id="loginbtn">로그인</button><br><br>
@@ -185,9 +244,37 @@
             </div>
             
         </div>
-	</form>
+   </form>
        
     </div>
+<script>
+$(function(){
 
+    
+    
+
+     $("#findId").click(function(){
+    	 let phoneNumber = $("#phoneNumber").val();
+    	 let name = $("#name").val();
+ 		$.ajax({
+             url:"<%=request.getContextPath()%>/member/searchId", 
+             data: {name,phoneNumber }, // 전송할 ㅔ이터값
+             success:function(data){
+                 if(data.userId == null){ 
+                     alert("가입된 아이디가 없습니다.");
+                 }else{                  
+                     alert("아이디는 "+data.userId+"입니다.");
+                 }
+             }
+             
+         });
+        
+     });
+   
+    
+     
+   
+});
+</script>
 </body>
 </html>
