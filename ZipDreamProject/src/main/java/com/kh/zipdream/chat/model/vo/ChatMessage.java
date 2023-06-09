@@ -13,5 +13,6 @@ public class ChatMessage {
 	private int refUno;
 	private String userId;
 	private int userLevel;
+	private String userName;
 	
 }

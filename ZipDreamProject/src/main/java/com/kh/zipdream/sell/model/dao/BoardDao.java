@@ -21,5 +21,6 @@ public class BoardDao {
 	public List<Board> boardList(int refSno){
 		return sqlSession.selectList("board-mapper.boardList", refSno);
 	}
+	
 
 }

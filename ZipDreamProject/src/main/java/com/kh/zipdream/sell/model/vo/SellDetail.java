@@ -1,13 +1,11 @@
 package com.kh.zipdream.sell.model.vo;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import com.kh.zipdream.attachment.model.vo.Attachment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +29,7 @@ public class SellDetail {
 	private String sellPrice;
 	private String brokerAdd;
 						
-	private int sellMaintenance;			//	SELL_MAINTENANCE int 
+	private String sellMaintenance;			//	SELL_MAINTENANCE int 
 
 	private String sellParking;				//	SELL_PARKING varchar(30) 
 	private String sellShortterm;			//	SELL_SHIRTTERM varchar(30) 
@@ -54,20 +52,21 @@ public class SellDetail {
 	private String sellAircondition;		//	SELL_AIRCONDITION varchar(100) 
 	private String sellHeating;				//	SELL_HEATING varchar(100) 
 
-	private int parkingCount;				//	PARKING_COUNT int 
+	private String parkingCount;				//	PARKING_COUNT int 
 	private String sellApprovalDatetime; 		// 건축년도 //	SELL_APPROVAL_DATETIME datetime 
-	private Date sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
+	private String sellEnrollDatetime;		//	SELL_ENROLL_DATETIME datetime 
 	
 	private String realYn;
 	private String realYnDate;
-	private Date complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
-	private int wingCount; 					//	WING_COUNT int 
-	private int householdCount;				//	HOUSEHOLD_COUNT int 
+	private String complexApplyDatetime;		//	COMPLEX_APPLY_DATETIME datetime 
+	private String wingCount; 					//	WING_COUNT int 
+	private String householdCount;				//	HOUSEHOLD_COUNT int 
 
 	private String option;					//	OPTION varchar(100) 
 	private String security;				//	SECURITY varchar(100) 
-	private Date createDate;
-	private Date modifyDate;
+	private String createDate;
+	private String modifyDate;
+	private String status;
 	
 	private ArrayList<Attachment> imgList;
 	

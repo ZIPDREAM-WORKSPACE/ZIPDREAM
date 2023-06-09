@@ -30,6 +30,6 @@ public class BoardController {
 		return new Gson().toJson(bList);
 	}
 	
-	
+
 	
 }

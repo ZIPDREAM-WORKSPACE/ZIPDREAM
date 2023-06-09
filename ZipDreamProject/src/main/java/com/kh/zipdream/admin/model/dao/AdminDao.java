@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
 
@@ -86,8 +87,8 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countChattingRoom");
 	}
 	
-	public List<Member> selectApplyListLimit5() {
-		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
+	public List<Member> selectApplyListLimit5(int type) {
+		return sqlSession.selectList("admin-mapper.selectApplyListLimit5",type);
 	}
 	
 	public List<Report> selectReportList(int type) {
@@ -201,5 +202,9 @@ public class AdminDao {
 	
 	public int insertCouponToUser(Map<String,Integer> map) {
 		return sqlSession.insert("admin-mapper.insertCouponToUser",map);
+	}
+	
+	public List<Attachment> selectAttachmentList(int userNo){
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectAttachmentList",userNo);
 	}
 }

@@ -195,10 +195,12 @@
 				<ul class="pagination">
 					<c:choose>
 						<c:when test="${ pi.currentPage eq 1 }">
+
 							<li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage -1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
 						</c:otherwise>
 					</c:choose>
 
@@ -212,6 +214,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage + 1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+
 						</c:otherwise>
 					</c:choose>
 				</ul>
