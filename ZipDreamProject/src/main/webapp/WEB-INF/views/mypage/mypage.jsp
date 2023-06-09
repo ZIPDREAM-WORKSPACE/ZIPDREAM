@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
+
 * {
 	box-sizing: border-box;
 }
@@ -86,11 +87,13 @@
 .list:hover {
 	background-color: #171F45;
 }
+
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/header.jsp" />
+
 	
 	<div class="mypageHeader">
 		<div style="height: 250px;">
@@ -103,6 +106,7 @@
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></li>
             </ul>
 		</div>	
+
 	</div>
 	
 </body>
