@@ -292,8 +292,29 @@
     		
     	});
     
-    
+   
+    	
+   	$(function({
+    		let sidoCode = '${sda.sidoCode}';
+    		$.ajax({
+    			url : "<%=request.getContextPath()%>/sell/addApi/"+sidoCode,
+    			data : {sidoCode : '${sda.sidoCode}'},
+    			type : "POST",
+    			dataType : "json",
+    			success : function(result){
+    				console.log(result);
+    				console.log("api가져왔음");
+    				
+    				}
+    			},
+    			error : function(){
+    				console.log("예진api못가져옴");
+    			}
+    		})
+    	}))
+    	
     </script>
+    
     
     
     
