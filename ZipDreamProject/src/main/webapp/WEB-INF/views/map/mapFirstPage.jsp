@@ -1042,14 +1042,16 @@ function displayCenterInfo(result, status) {
 }); */
  
 function searchApt(){
+	// 검색어를 넣어준다.
 	let search = document.getElementById("search").value;
-	
 	
 	// 리스트 비워주고
 	listEl = "";
 	
-	// li 태그에 아파트 정보 텍스트로 표시
+	// 아파트나 도로명 주소에 키워드가 있는지 검사
 	
+	
+	// li 태그에 해당하는 아파트 정보 텍스트로 표시
 	let listInner = 아파트정보;
 	
   	listLiTag.textContent = listInner;
