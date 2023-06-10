@@ -38,7 +38,7 @@
 		<div id="bk-list-slick">
 			<c:forEach items="${list}" var="user">
 				<div>
-					<div class="content-main-apply-item bk-user-list" data-uno="${user.userNo}">
+					<div class="content-main-apply-item bk-user-list" onclick="viewBk(${user.userNo});">
 						<div class="apply-item-wrap" style="margin:0px;">
 							<div class="apply-item-circle"></div>
 							<div class="apply-item-line" style="height:50px;"></div>
@@ -88,6 +88,15 @@ $(function() {
 		verticalSwiping: true,
 		draggable : true //드래그 가능 여부 
 	});
+	
 });
+	function viewBk(userNo) {
+		console.log(userNo);
+	}
+	
+	$("#bk-userNo").on('change',function(){
+		console.log(1);
+	});
+	$("#bk-userNo").val("1");
 </script>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

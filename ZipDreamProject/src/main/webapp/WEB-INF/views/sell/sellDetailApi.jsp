@@ -449,5 +449,37 @@
     </div>
     
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+    
+    <script>
+    	/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
+    	$(function(){
+    		
+    		var userNo = '${loginUser.userNo}';
+    		var sellPrice = '${sda.sellPrice}';
+    		var sellAddress = '${sda.sellAddress}';
+    		var detail = '${sda.sellName}' +", " + '${sda.sellFloor}' +"층";
+    		console.log(userNo);
+    		
+    		const obj = {
+    				userNo : userNo,
+    				sellPrice : sellPrice,
+    				sellAddress : sellAddress,
+    				detail : detail
+			}
+    	
+    		const objString = JSON.stringify(obj);
+    		
+    		if(userNo != ''){
+    			window.localStorage.setItem('recentRoom', objString);
+    		}
+    		
+    		
+    	});
+    
+    
+    </script>
+    
+    
+    
 </body>
 </html>
