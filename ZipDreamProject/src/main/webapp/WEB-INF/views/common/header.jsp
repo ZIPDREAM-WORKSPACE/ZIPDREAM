@@ -214,7 +214,7 @@ position: absolute;
 	
 	
 		
-	if('${loginUser.userNo}'!='' && currentURL != URL){
+	if('${loginUser.userNo}'!='' && currentURL != URL && '${chatRoomNo}'!=''){
 	 	$.ajax({
 			url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
 			type : "get",

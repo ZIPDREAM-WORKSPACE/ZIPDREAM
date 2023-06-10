@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.kh.zipdream.agent.model.service.AgentService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.sell.model.service.SellService;
 
 @Controller
 @RequestMapping("/agent")
-@SessionAttributes({"loginUser"})
+@SessionAttributes({"loginUser", "requestList"})
 public class agentController {
 		
 	@Autowired
 	private SellService sellService;
+	
+	@Autowired 
+	private AgentService agentService;
 	
 	@GetMapping("/page")
 	public String main() {
@@ -47,7 +51,18 @@ public class agentController {
 	
 	
 	@GetMapping("/apply")
-	public String applyList() {
+	public String applyList(@ModelAttribute("loginUser") Member loginUSer,
+					        Model model,
+					        @RequestParam(value="cpage", defaultValue="1") int currentPage) {
+		
+		Map<String, Object> map = new HashMap();
+		int userNo = loginUSer.getUserNo();
+		
+		agentService.selectRequestList(currentPage, userNo, map);
+		
+		model.addAttribute("map", map);
+		
+		
 		return "agent/agentRequestList";
 	}
 	

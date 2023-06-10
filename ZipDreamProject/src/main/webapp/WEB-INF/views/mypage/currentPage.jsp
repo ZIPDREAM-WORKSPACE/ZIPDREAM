@@ -21,6 +21,7 @@
 	margin: 0px auto;
 	padding-left: 50px;
 	padding-right: 50px;
+    padding-top: 20px;
 }
 
 .emptyContent {
@@ -83,9 +84,22 @@
 			
 			console.log(recentRoom);
 			
+
+			var html ="";
 			
+			if(recentRoom == null){
+				html = "<div class='emptyContent'><p>최근 본 방이 존재하지 않습니다.</p></div>";
+			}else{
+				html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 20개까지 저장됩니다.</p></div>";
+				html += "<div class='row row-cols-1 row-cols-md-4 g-4'><div class='col'><div class='card h-100'>";
+				html += "<img src='https://ifh.cc/g/aoGQoK.jpg' class='card-img-top'><div class='card-body'>";
+				html += "<h5 clas='card-title'>" + recentRoom.sellPrice + "</h5>";
+				html += "<p class='card-text'>" + recentRoom.detail + "</p>";
+				html += "<p clas='card-text'>" + recentRoom.sellAddress + "</p></div></div></div>";
+			}
 			
-			
+			$('.rc').append(html);
+
 			
 		});
 	</script>
@@ -97,7 +111,7 @@
                 <p>최근 본 방이 존재하지 않습니다.</p>
             </div> -->
             <!-- 최근본방이 존재할 경우 -->
-            <div class="recentRoomList">
+            <!-- <div class="recentRoomList">
                 <div class="sliderinfor">
                     <p>최근 본 방은 최대 20개까지 저장됩니다.</p>
                 </div>
@@ -144,7 +158,7 @@
                       </div>
                   </div>
                
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="paging">

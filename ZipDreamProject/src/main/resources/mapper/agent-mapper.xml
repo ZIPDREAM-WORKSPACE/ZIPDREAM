@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="agent-mapper">
+
+	<resultMap type="myroomsell" id="myroomsellResultSet">
+		<id column="USER_SR_NO" property="userSrNo" />
+		<result column="REF_UNO" property="refUno" />
+		<result column="REF_RUNO" property="refRuno" />
+		<result column="ROOM_TYPE" property="roomType" />
+		<result column="BUILDING_TYPE" property="buildingType" />
+		<result column="ADDRESS" property="address" />
+		<result column="DEAL_TYPE" property="dealType" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<select id="selectRequestListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM USER_ROOM_SELL
+		WHERE REF_RUNO = #{userNo}
+	</select>
+	
+	<select id="selectRequestList" resultMap="myroomsellResultSet">
+		SELECT *
+		FROM USER_ROOM_SELL
+		WHERE REF_RUNO = #{userNo} AND STATUS = '1'
+	</select>
+	
+	
+</mapper>
