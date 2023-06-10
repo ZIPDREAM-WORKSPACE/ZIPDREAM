@@ -216,16 +216,16 @@
             <div class="line"></div>
             <div class="seller">
                 <div class="seller_title">
-                	<!-- <p>내돈내산공인중개소</p> -->
-                    <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }">
+                	 <p>내돈내산공인중개소</p> 
+                   <%--  <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }"> --%>
                 </div>
                 <div class="seller_name">
-                	<!-- <p>김예진</p> -->
-                    <input type="text" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
+                	<p>김예진</p> 
+                   <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
                 </div>
                 <div class="seller_address">
-                	<!-- <p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p> -->
-                    <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }">
+                	 <p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p> 
+                   <%--  <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }"> --%>
                 </div>
             </div>
         </div>
@@ -347,7 +347,7 @@
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToletCount"  size="45"></td>
+                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToiletCount"  size="45"></td>
                         </tr>
                         <tr>
                             <th>방향</th>
@@ -410,7 +410,7 @@
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="hoseholdCount"  size="100"></td>
+                            <td><input type="text" name="householdCount"  size="100"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -604,7 +604,6 @@
                 </div>
             </div>
         </div>
-		<input type="hidden" name="mode" value="${param.mode}">
         <div class="content9 content margin">
             <button type="submit" class="submit last_btn">등록하기</button>
             <input type="button" class="cansle last_btn" value="뒤로가기">

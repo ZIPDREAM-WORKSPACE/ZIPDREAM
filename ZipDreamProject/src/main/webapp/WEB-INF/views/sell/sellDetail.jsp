@@ -873,7 +873,7 @@
 <script>
 	$(function(){
 		boardList();
-		selectReply();
+		
 	})
 	
  	function insertboard(){
@@ -911,7 +911,8 @@
 				for(let board of result){
 					html += "<div class='box'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
-									"<p class='writer'>"+board.userName+"</p>"+
+									"<span class='writer'>"+board.userName+"</span>"+
+									"<button onclick='deleteBoard("+board.detailBoardNo+");'>"+"삭제"+"</button>"+
 									"<div id='boardContent'>"+
 									"<span>"+board.content+"</span>"+
 								"</div>"+"</div>"+
@@ -960,25 +961,12 @@
 			}
 		})
 	}  
-	
-	function selectReply(refBno){
-		console.log(refBno)
-		$.ajax({
-			url : "<%=request.getContextPath()%>/reply/selectList",
-			data : {${refBno}},
-			dataType : 'json',
-			seccess : function(result){
-				let reply = "";
-				for(let reply of result){
-					reply += "<p id='reply'>"+reply.userName+":"+reply.replyContent+"</p>"
-				}
-				$(".replyContent").html(reply);
-			},
-			error : function(){
-				console.log("리스트 불러오기 실패");
-			}
-		})
+
+	function deleteBoard(refBno){
+		console.log(refBno);
+		location.href="<%=request.getContextPath()%>/board/deleteBoard"+refBno;
 	}
+
 
 </script>
 </html>

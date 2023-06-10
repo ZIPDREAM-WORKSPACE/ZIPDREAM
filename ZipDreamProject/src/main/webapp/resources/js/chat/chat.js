@@ -35,8 +35,9 @@
  		const chatMessage = {
  		"chatRoomNo" : chatRoomNo,
 		 			"refUno" : refUno,
-		 			"message" : chatMsg.value,
 		 			"userId" : userId,
+		 			"message" : chatMsg.value,
+		 			"userName" : userName,
 		 			"userLevel" : userLevel
  		};
  		
@@ -90,7 +91,8 @@ function addEventChat(){
  		li.innerHTML = "<b>"+"운영자"+"</b><br>";
  		li.append(p, span);
  		}else{
- 		li.innerHTML = "<b>"+chatMessage.userId+"</b><br>";
+ 		li.innerHTML = "<b>"+chatMessage.userName+" 님</b><br>";
+ 		console.log(chatMessage.userName);
  		li.append(p, span);
  		}
  	}

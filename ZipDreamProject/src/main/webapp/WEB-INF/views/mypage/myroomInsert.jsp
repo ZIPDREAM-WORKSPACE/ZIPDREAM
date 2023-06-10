@@ -747,7 +747,7 @@
 	<script>
 		function listReset(){
 			$(".agentList").remove();
-			
+			location.reload();
 		}
 	
 		function myroomInsert(){

@@ -100,16 +100,11 @@
 		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="emailCheck" resultType="int">
+      SELECT count(USER_ID)
+      FROM MEMBER
+      WHERE USER_ID=#{id}
+   </select>
 	
 	<!-- 이메일 -->
 	<insert id="insertMailAuth" parameterType="mailAuth">
@@ -134,6 +129,13 @@
 	    UPDATE mail_auth SET is_auth=1
 	    WHERE mail=#{mail}
 	</update>
+	
+	
+	<select id="searchId" resultMap="memberResultSet">
+	   SELECT USER_ID
+		FROM MEMBER
+		WHERE USER_NAME  = #{name} AND PHONE = #{phone}
+	</select>
 	
 	
 </mapper>

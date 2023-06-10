@@ -1,6 +1,7 @@
 package com.kh.zipdream.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +52,11 @@ public class MemberDao {
 		
 		return inputMember.getUserNo();
 	}
+
 	
-	/*
-	 * public int bkInsertImg(int userNo) { System.out.println("ss"+userNo); return
-	 * sqlSession.insert("member-mapper.insertapply", userNo); }
-	 */
-	
-	
+	   public int emailCheck(String id) {
+		      return sqlSession.selectOne("member-mapper.emailCheck",id);
+		   }
 	
 	public int insertapply(int userNo) {
 		System.out.println("ss"+userNo);
@@ -70,5 +69,9 @@ public class MemberDao {
 	}
 	
 
+	
+	public Member searchId(Map<String, String> map) {
+		return sqlSession.selectOne("member-mapper.searchId",map);
+	}
 }
 

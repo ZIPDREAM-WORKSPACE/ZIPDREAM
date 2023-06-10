@@ -15,9 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class MySale {
-	private int houseCode;
+	private int hsSeq;
 	private String startDateTime;
 	private int userNo;
-	
+	private int houseCode;
+	private String hsUrl;
 	
 }
