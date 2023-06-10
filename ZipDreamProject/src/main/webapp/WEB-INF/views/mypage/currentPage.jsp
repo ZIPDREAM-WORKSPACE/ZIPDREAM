@@ -82,6 +82,11 @@
 			var recentRoom = JSON.parse(localStorage.getItem("recentRoom"));
 			
 			console.log(recentRoom);
+			
+			
+			
+			
+			
 		});
 	</script>
 	
