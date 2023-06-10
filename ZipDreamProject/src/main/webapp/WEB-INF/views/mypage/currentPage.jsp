@@ -84,6 +84,7 @@
 			
 			console.log(recentRoom);
 			
+
 			var html ="";
 			
 			if(recentRoom == null){
@@ -98,6 +99,7 @@
 			}
 			
 			$('.rc').append(html);
+
 			
 		});
 	</script>

@@ -25,6 +25,7 @@ import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
+import com.kh.zipdream.member.model.dao.MemberDao;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.utils.FileUtils;
 
@@ -36,6 +37,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private ChatDAO chatDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	@Autowired
 	private Pagination pagination;
@@ -374,5 +378,34 @@ public class AdminServiceImpl implements AdminService{
 	
 	public List<Attachment> selectAttachmentList(int userNo){
 		return dao.selectAttachmentList(userNo);
+	}
+	
+	public JSONObject getBkUserInfo(int userNo) {
+		Member m = memberDao.selectMember(userNo);
+		
+		List<Attachment> list = dao.selectAttachmentList(userNo);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray jArray = new JSONArray();	
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			
+			for(int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = objectMapper.convertValue(list.get(i), Map.class);
+				JSONObject jsonObj = (JSONObject) new JSONParser().parse(new MapController().getJsonStringFromMap(map));
+				
+				jArray.add(jsonObj);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();	
+		};
+		
+		obj.put("member", m);
+		obj.put("array", jArray);
+		return obj;
+	}
+	
+	public int acceptBkMember(int userNo) {
+		return dao.acceptBkMember(userNo);
 	}
 }

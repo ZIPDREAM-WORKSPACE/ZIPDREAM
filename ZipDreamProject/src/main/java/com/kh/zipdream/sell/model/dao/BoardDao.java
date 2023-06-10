@@ -22,5 +22,8 @@ public class BoardDao {
 		return sqlSession.selectList("board-mapper.boardList", refSno);
 	}
 	
-
+	public int deleteBoard(int detailBoardNo) {
+		return sqlSession.update("board-mapper.deleteBoard", detailBoardNo);
+	}
+	
 }

@@ -161,6 +161,9 @@ public class MemberServiceImpl implements MemberService {
 	        return result;
 	    }
 
+	 public int deleteMember(int userNo) {
+		 return memberDao.deleteMember(userNo);
+	 }
 }
 
 	
