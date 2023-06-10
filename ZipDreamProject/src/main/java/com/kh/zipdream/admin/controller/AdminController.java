@@ -4,10 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +50,9 @@ public class AdminController {
 	
 	@Autowired
 	private ChatService chatService;
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -353,5 +361,44 @@ public class AdminController {
 		model.addAttribute("attachment", at);
 		model.addAttribute("list", list);
 		return "admin/adminBkMemberDetail";
+	}
+	
+	@GetMapping("/getBkUserInfo")
+	@ResponseBody
+	public JSONObject getBkUserInfo(int userNo) {
+		
+		JSONObject result = service.getBkUserInfo(userNo);
+		
+		return result;
+	}
+	
+	@GetMapping("/bkAccept")
+	@ResponseBody
+	public int bkAccept(int userNo, String answer, String userId)throws MessagingException {
+		String subjectText = "";
+		String contentText = "";
+		int result = 0;
+		
+		if(answer.equals("Y")) {
+			subjectText = "귀하의 " + userId + " 회원가입 요청이 승인되었습니다.";
+			contentText = "ZIPDREAM에 오신 것을 환영합니다!!";
+			result = service.acceptBkMember(userNo);
+		}else {
+			subjectText = "귀하의 " + userId + " 회원가입 요청이 거절되었습니다.";
+			contentText = "아쉽지만, 회원가입이 거절되었습니다.";
+			result = memberService.deleteMember(userNo);
+		}
+		
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		String mailContent = contentText;
+		mailMessage.setFrom(new InternetAddress("minifkaus@naver.com"));
+		mailMessage.setSubject(subjectText, "utf-8");
+		mailMessage.setText(mailContent, "utf-8", "html");
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(userId));
+		mailSender.send(mailMessage);
+		
+		
+		
+		return result;
 	}
 }
