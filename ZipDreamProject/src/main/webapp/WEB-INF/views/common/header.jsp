@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
-
+<!-- alert창 꾸미기  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- Jquey 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -15,8 +16,7 @@
  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
 <!-- 부투스트랩에서 제공하고있는 스크립트   -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <!-- 폰트 -->
@@ -26,7 +26,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<!-- 	
+ 	
 <!-- 슬릭 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
@@ -191,7 +191,7 @@ position: absolute;
 				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
 					<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
 				</c:if>
-				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
+				<c:if test="${sessionScope.loginUser.userLevel ==2 }">
 					<li class="h_text"><a href="<%=request.getContextPath()%>/agent/list">마이페이지</a></li>
 				</c:if>
 			</ul>
@@ -258,6 +258,8 @@ position: absolute;
 	$(".login").click(function(){
 		location.href="<%=request.getContextPath()%>/member/login";
 	});
+	
+	
 	
 
 	</script>

@@ -25,6 +25,7 @@ import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.chat.model.service.ChatService;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
@@ -60,7 +61,7 @@ public class AdminController {
 		countNumbers.put("chattingCount", service.countChattingRoom());
 		
 		model.addAttribute("countNumbers",countNumbers);
-		model.addAttribute("applyList",service.selectApplyListLimit5());
+		model.addAttribute("applyList",service.selectApplyListLimit5(1));
 		model.addAttribute("reportList",service.selectReportList(1));
 		model.addAttribute("noticeBoardList",map);
 		return "admin/adminMain";
@@ -322,5 +323,35 @@ public class AdminController {
 			service.insertCouponToUser(map);
 		}
 		return "redirect:/admin/event";
+	}
+	
+	@GetMapping("/bkmember")
+	public String bkMember(Model model,
+						   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+						   @RequestParam Map<String, Object> paramMap) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(paramMap.get("condition") == null) {
+				service.selectBkList(cp,map);
+			}else {
+				paramMap.put("cp", cp);
+				service.selectBkSearch(paramMap,map);
+			}
+			model.addAttribute("userList",map);
+			
+		return "admin/adminBkMember";
+	}
+	
+	@GetMapping("/bkmember/detail")
+	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
+		
+		Member m = memberService.selectMember(userNo);
+		List<Attachment> at = service.selectAttachmentList(userNo);
+		
+		List<Map<String,String>> list = service.selectApplyListLimit5(1);
+		
+		model.addAttribute("member", m);
+		model.addAttribute("attachment", at);
+		model.addAttribute("list", list);
+		return "admin/adminBkMemberDetail";
 	}
 }

@@ -64,6 +64,7 @@
 </style>
 <body>
 <jsp:include page="mypage.jsp"/>
+	
 	<div class="myInfo_wrap">
 		<label class="myInfo_title">아이디</label><br>
 	    <input class="myInfo_content read_only" type="text"  value="dhguswl00" size="55" readonly><br><br>

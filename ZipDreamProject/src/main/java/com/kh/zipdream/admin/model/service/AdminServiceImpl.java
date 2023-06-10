@@ -17,9 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.zipdream.admin.model.dao.AdminDao;
 import com.kh.zipdream.admin.model.vo.Coupon;
-import com.kh.zipdream.admin.model.vo.MemberApply;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.chat.model.dao.ChatDAO;
 import com.kh.zipdream.chat.model.vo.ChatRoom;
 import com.kh.zipdream.common.model.vo.PageInfo;
@@ -96,15 +96,16 @@ public class AdminServiceImpl implements AdminService{
 		return map;
 	}
 	
-	public List<Map<String,String>> selectApplyListLimit5(){
+	public List<Map<String,String>> selectApplyListLimit5(int type){
 		List<Map<String,String>> listResult = new ArrayList<Map<String,String>>();
 		
-		List<MemberApply>list = dao.selectApplyListLimit5();
+		List<Member>list = dao.selectApplyListLimit5(type);
 		
 		for(int i = 0; i < list.size(); i++) {
 			Map<String,String> map = new HashMap<String,String>();
+			map.put("userNo", list.get(i).getUserNo()+"");
 			map.put("userName", list.get(i).getUserName());
-			map.put("applyDateTime", list.get(i).getApplyDateTime());
+			map.put("applyDateTime", list.get(i).getEnrollDateTime()+"");
 			listResult.add(map);
 		}
 		
@@ -208,6 +209,29 @@ public class AdminServiceImpl implements AdminService{
 		map.put("list", list);
 	}
 	
+	public void selectBkList(int cp, Map<String, Object> map) {
+		int listCount = dao.countBkUser();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<Member> list = dao.selectBkList(pi);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public void selectBkSearch(Map<String, Object> paramMap,Map<String, Object> map) {
+		int listCount = dao.selectBkSearchCount(paramMap);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
+		ArrayList<Member> list = dao.selectBkSearch(pi, paramMap);
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
 	public JSONObject getReportList(int cp, Map<String, Object> paramMap) {
 		int listCount = dao.countUserReport(paramMap);				
 		int pageLimit = 10;
@@ -302,7 +326,6 @@ public class AdminServiceImpl implements AdminService{
 		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
 		
 		ArrayList<ChatRoom> list = chatDao.selectChatRoomList(pi);
-		System.out.println(list);
 		map.put("pi", pi);
 		map.put("list", list);
 		
@@ -347,5 +370,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	public int insertCouponToUser(Map<String,Integer> map) {
 		return dao.insertCouponToUser(map);
+	}
+	
+	public List<Attachment> selectAttachmentList(int userNo){
+		return dao.selectAttachmentList(userNo);
 	}
 }

@@ -153,10 +153,7 @@ public class SalesController {
 	
 	@ResponseBody
 	@PostMapping("/mySaleHouse")
-	public String mySaleHouse(int houseCode, int userNo, String startDateTime) {
-		
-		MySale ms = new MySale(houseCode,startDateTime, userNo);
-		
+	public String mySaleHouse(MySale ms) {
 		int result = mysaleService.insertMysaleHouse(ms);
 		
 		if(result>0) {
