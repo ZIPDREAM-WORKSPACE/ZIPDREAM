@@ -11,9 +11,10 @@
 		/* border: 1px solid red; */
 	}
 	.contentWrap{
-		padding-top: 30px;
 		width: 100%;
 		height: 509px;
+		display: inline-flex;
+		justify-content: center;
 	}
 	.coupon{
 		display: inline-flex;
@@ -29,8 +30,7 @@
 		cursor: pointer;
 	}
 	.couponWrap{
-		position: absolute;
-		left: 460px;
+		
 	}
 	.coupon_img{
 		margin: 15px 0px 10px 0px;
@@ -152,6 +152,7 @@
 </head>
 <body>
 	<jsp:include page="mypage.jsp"/>
+	
 	<div class="contentWrap">
 		<div class="couponWrap">
 			<div class="coupon">
