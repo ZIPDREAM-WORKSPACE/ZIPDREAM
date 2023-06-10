@@ -961,12 +961,19 @@
 			}
 		})
 	}  
-
+	
 	function deleteBoard(refBno){
-		console.log(refBno);
-		location.href="<%=request.getContextPath()%>/board/deleteBoard"+refBno;
+		detailBoardNo  = refBno;
+		$.ajax({
+			url : "<%=request.getContextPath()%>/board/deleteBoard/"+detailBoardNo,
+			data : {detailBoardNo},
+			type: "post",
+			success : function(result){
+				alert("게시글이 삭제되었습니다.");
+			}
+		})
 	}
-
+	
 
 </script>
 </html>
