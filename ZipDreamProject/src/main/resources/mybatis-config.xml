@@ -49,6 +49,7 @@
 		<mapper resource="/mapper/sale-mapper.xml" />
 		
 		<mapper resource="/mapper/myroomsell-mapper.xml" />
+		<mapper resource="/mapper/agent-mapper.xml"/>
 
 	</mappers>
 
