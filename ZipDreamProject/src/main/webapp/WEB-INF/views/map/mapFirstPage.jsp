@@ -666,8 +666,9 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
     
 var listEl ="";    
 // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
+kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     searchDetailAddrFromCoords(map.getCenter(), function(result, status) {
+    	console.log("resta"+JSON.stringify(result)+status);
         if (status === kakao.maps.services.Status.OK) {
            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>'; 
@@ -802,7 +803,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     			    	                       			 
     			    	                       			 let tagMarr = tagMoney.split(" ");
     			    	                       			 let tagParr =  tagMarr.map(Number);
-    			    	                       			 console.log("?"+tagMarr+"ㅐㅔㅐㅔ" );
+    			    	                       			 console.log("?"+tagMarr);
     			    	                       			 
     			    	                       			  max = Math.max.apply(null,tagParr);
     			    	                       			  
@@ -908,11 +909,7 @@ kakao.maps.event.addListener(map, 'dragend', function(mouseEvent) {
     						  	var listLiTag = document.createElement("li");
     						  	listLiTag.setAttribute("class", "goDetail");
     						  	
-						  	$("#allOj").css({
-    						  		"background-color": "#1F4B6B",
-    								"color":"white"
-    						  		
-    						  	});
+						  	
     						  	
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
@@ -1040,7 +1037,41 @@ function displayCenterInfo(result, status) {
 	});
 	
 }); */
- 
+
+
+$("#comOkOj").click(function(){
+	$.ajax({
+		type: "get",
+		url: "<%= request.getContextPath() %>/sell/sellList",
+		dataType: "json",
+		success: function(result){
+			console.log(result);
+			console.log(result.length);
+			var listEl = document.getElementById('placesList');
+			listEl.innerHTML = "";
+		  	
+			for(let i=0; i<result.length; i++){
+				var listLiTag = document.createElement("li");
+			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
+					result[i].sellName+"<br>"+
+					result[i].sellPrivateArea+" | "+ result[i].sellFloor+"층";
+		  		listEl.appendChild(listLiTag);
+			}
+		  	
+		},
+		error: function(result){
+			console.log("에러");
+		}
+		
+	});
+});
+
+$("#allOj").click(function(){
+    
+});
+
+
+
 function searchApt(){
 	let search = document.getElementById("search").value;
 	

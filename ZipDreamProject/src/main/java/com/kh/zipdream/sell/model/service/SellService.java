@@ -15,5 +15,6 @@ public interface SellService {
 	
 	SellDetail sellDetail(int sellNo);
 	
+	List<SellDetail> selectSellAllList();
 
 }

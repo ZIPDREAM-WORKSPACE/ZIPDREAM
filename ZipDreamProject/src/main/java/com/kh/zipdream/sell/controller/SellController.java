@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
@@ -54,10 +55,10 @@ public class SellController {
 		
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "main";
+			return "redirect:../agent/agentRegistrationList";
 		}else {
 			System.out.println("업로드 실패");
-			return "main";
+			return "main/main";
 		}
 	}
 	
@@ -77,6 +78,17 @@ public class SellController {
 		SellDetail detail = sellService.sellDetail(sellNo);
 		model.addAttribute("sd", detail);
 		return "sell/sellDetail";
+	}
+	
+	@GetMapping("/sellList")
+	@ResponseBody
+	public String sellList(Model model) {
+		
+		List<SellDetail> sdList = sellService.selectSellAllList();
+		
+		model.addAttribute("sdList", sdList);
+		System.out.println("sdL:"+sdList);
+		return new Gson().toJson(sdList);
 	}
 	
 	//상담신청
