@@ -75,6 +75,8 @@ public class SellServiceImpl implements SellService {
 		return sellDao.sellDetail(sellNo);
 	}
 	
-
+	public List<SellDetail> selectSellAllList(){
+		return sellDao.selectSellAllList();
+	}
 
 }

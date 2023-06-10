@@ -102,6 +102,10 @@
 		ORDER BY FILE_LEVEL
  	</select>
  	
+ 	<select id="selectSellAllList" resultMap="sellDetailResultSet">
+ 		SELECT *
+ 		FROM SELLDETAIL
+ 	</select>
 
 
 </mapper>

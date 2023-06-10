@@ -62,10 +62,10 @@ public class SellController {
 		
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "main";
+			return "redirect:../agent/agentRegistrationList";
 		}else {
 			System.out.println("업로드 실패");
-			return "main";
+			return "main/main";
 		}
 	}
 	
@@ -87,6 +87,23 @@ public class SellController {
 		return "sell/sellDetail";
 	}
 	
+	@GetMapping("/sellList")
+	@ResponseBody
+	public String sellList(Model model) {
+		
+		List<SellDetail> sdList = sellService.selectSellAllList();
+		
+		model.addAttribute("sdList", sdList);
+		System.out.println("sdL:"+sdList);
+		return new Gson().toJson(sdList);
+	}
+	
+	//상담신청
+	/*
+	 * @PostMapping("/sellApply")
+	 * 
+	 * @ResponseBody public int sellApply() { return result; }
+	 */
 	@PostMapping("/addApi/{sellSno}")
 	@ResponseBody
 	public void sellAddApi(int sidoCode, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {

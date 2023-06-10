@@ -39,5 +39,7 @@ public class SellDao {
 		return sqlSession.selectOne("sell-mapper.sellDetail", sellNo);
 	}
 	
-
+	public List<SellDetail> selectSellAllList(){
+		return sqlSession.selectList("sell-mapper.selectSellAllList");
+	}
 }
