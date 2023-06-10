@@ -45,4 +45,6 @@ public interface AdminService {
 	public List<Coupon> selectCouponList();
 	public int insertCouponToUser(Map<String,Integer> map);
 	public List<Attachment> selectAttachmentList(int userNo);
+	public JSONObject getBkUserInfo(int userNo);
+	public int acceptBkMember(int userNo);
 }

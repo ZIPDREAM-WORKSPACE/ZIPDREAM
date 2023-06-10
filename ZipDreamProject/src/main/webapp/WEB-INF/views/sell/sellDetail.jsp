@@ -447,6 +447,9 @@
 			                        </tr>
 		                  	</c:forEach>	
  						</c:if>	
+ 						<c:if test="${empty sd.imgList}" >
+ 							<tr><td>등록된 이미지가 없습니다.</td></tr>
+ 						</c:if>
                         
                     </table>
                 </div>
@@ -503,9 +506,11 @@
         <p class="info_name">[상세정보]</p>
         <hr class="hr">
 		        <div class="info_pic margin">
-		        <c:forEach var="a" begin="" end="">
-		        
-		        </c:forEach>
+		        <c:if test="${!empty sd.imgList }">
+		        	<c:forEach begin="${fn:length(sd.imgList)-2}" var="i" end="${fn:length(sd.imgList)-1}">
+		        		<img src="<%=request.getContextPath()%>/reources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        	</c:forEach>
+		        </c:if>
 		        </div>
         <div class="info margin">
             <table class="table">
@@ -961,12 +966,19 @@
 			}
 		})
 	}  
-
+	
 	function deleteBoard(refBno){
-		console.log(refBno);
-		location.href="<%=request.getContextPath()%>/board/deleteBoard"+refBno;
+		detailBoardNo  = refBno;
+		$.ajax({
+			url : "<%=request.getContextPath()%>/board/deleteBoard/"+detailBoardNo,
+			data : {detailBoardNo},
+			type: "post",
+			success : function(result){
+				alert("게시글이 삭제되었습니다.");
+			}
+		})
 	}
-
+	
 
 </script>
 </html>

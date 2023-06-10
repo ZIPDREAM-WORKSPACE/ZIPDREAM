@@ -137,5 +137,7 @@
 		WHERE USER_NAME  = #{name} AND PHONE = #{phone}
 	</select>
 	
-	
+	<delete id="deleteMember" parameterType="_int">
+		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
+	</delete>
 </mapper>

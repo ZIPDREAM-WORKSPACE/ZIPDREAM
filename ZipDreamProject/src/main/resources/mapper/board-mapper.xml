@@ -24,4 +24,9 @@
 		WHERE SELL_NO = #{refSno} AND B.STATUS='Y'
 	</select>
 	
+	<update id="deleteBoard" parameterType="board">
+		UPDATE DETAIL_BOARD
+		SET STATUS='N'
+		WHERE DETAIL_BOARD_NO = #{detailBoardNo}
+	</update>
 </mapper>
