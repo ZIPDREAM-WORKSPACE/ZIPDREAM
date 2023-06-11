@@ -747,7 +747,7 @@
 	<script>
 		function listReset(){
 			$(".agentList").remove();
-			location.reload();
+			/* location.reload(); */
 		}
 	
 		function myroomInsert(){
@@ -774,11 +774,9 @@
 				method:"get",
 				data:{refRuno, refUno, roomType, buildingType, dealType, address},
 				success:function(result){
-					console.log(result);
 					
 					swal({
 						  title: "신청 완료",
-
 						  text: "공인중개사가 확인 후 직접 연락드립니다.\n진행사항은 마이페이지 내 매물에서 확인하실 수 있습니다.",
 						  button: "확인",
 						  closeOnClickOutside : false
