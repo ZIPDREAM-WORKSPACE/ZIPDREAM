@@ -36,14 +36,14 @@
 	    height: 90%;
 	    display: flex;
 	    flex-direction: column;
-	    justify-content: space-around;
+	    justify-content: flex-end;
+	    border : 1px solid red;
 	}
 	
 	.sell_no{
 	    border: 1px solid lightgray;
 	    width: 20%;
 	    height: 10%;
-	    margin-top: 20px;
 	}
 	.sell_no>span{
 	    font-size: 0.5rem;
@@ -54,19 +54,18 @@
 	    font-size: 4rem;
 	    font-weight: 700;
 	    color: #0A2647;
-	    margin: 0px;
 	}
 	.sell_last{
+		border : 1px solid blue;
 	    display: flex;
-	    justify-content: flex-start;
+	    flex-direction: column;
 	}
 	.sell_address, .seller_address{
-	    width: 70%;
 	    font-size: 1rem;
 	    color: #6E7C7C;
 	}
 	.sell_like{
-	    width: 12%;
+	    width: 30%;
 	}
 	#sellLike {
 	    border: 1px solid black;
@@ -83,47 +82,12 @@
 	    border: 1px solid #6E7C7C;
 	    height: 80%;
 	}
-	/*공인중개사 연락하기*/
-	.seller{
-	    width: 30%;
-	    height: 70%;
-	    margin-left: 60px;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-evenly;
-	}
-	.seller_title{
-	    font-size: 2rem;
-	    font-weight: 500;
-	}
-	.contect{
-		width:160px;
-		margin-right:50px;
-	    background-color: #0A2647;
-	    color: white;
-	}
-	/*허위매물신고*/
-	.notify{
- 	    width: 150px;
-	    background-color: #2C74B3;
-	    color: white;
-	}
-	
-	/*사진*/
-	.content2{
-		margin-top:50px;
-	    height: 40rem;
-	}
-    #picture{
-          display: flex;
-          align-items: center;
-    }
 	.content{
 	    width: 70%;
 	}
 	.content3{
-	    width: 70%;
-	    height: 20rem;
+	    margin-top : 80px;
+	    height: 15rem;
 	}
 	.price_name, .info_name, .arround_name, .option_name, .othier_info{
 	    font-size: 1.5rem;
@@ -132,14 +96,8 @@
 	.price, .info, .arround, .option{
 	    width: 90%;
 	}
-	
 	.content4{
-	    height: 80rem;
-	}
-	.info_pic{
-	    border: 1px solid red;
 	    height: 30rem;
-	    width: 70%;
 	}
 	.content5{
 		margin-top: 120px;	
@@ -190,171 +148,34 @@
 		text-align: center;
 	}
 	
-	/*모달창*/
-	#modal.modal-overlay {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: center;
-	    background: rgba(255, 255, 255, 0.25);
-	    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	    backdrop-filter: blur(1.5px);
-	    -webkit-backdrop-filter: blur(1.5px);
-	    border-radius: 10px;
-	    border: 1px solid rgba(255, 255, 255, 0.18);
-	}
-	#modal .modal-window {
-	    /* background: rgba( 69, 139, 197, 0.70 ); */            backdrop-filter: blur( 13.5px );
-	    -webkit-backdrop-filter: blur( 13.5px );
-	    border-radius: 10px;
-	    width: 700px;
-	    position: relative;
-	    top: -100px;
-	    padding: 10px;
-	}
-	#modal .title {
-	    padding-left: 10px;
-	    display: inline;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	    
-	}
-	#modal .title h2 {
-	    display: inline;
-	}
-	#modal .close-area {
-	    display: inline;
-	    float: right;
-	    padding-right: 10px;
-	    cursor: pointer;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	}
 	
-	#modal .content {
-	    margin-top: 20px;
-	    padding: 0px 10px;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	}
-	/*모달 css*/
-	.seller_contect_modal, .seller_contect_modal2, .finish_apply{
-	    border: 1px solid  black;
-	    width: 80%;
-	    margin: 0 auto;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: center;
-	    align-items: center;
-	    background-color: #abafc5;
-	}
-	.seller_contect_modal{
-	    height: 40rem;
-	}
-	.radius{
-	    border-radius: 30px;
-	}
-	.modal_header1{
-	    height: 8%;
-	}
-	.modal_header1>span{
-	    font-size: 2rem;
-	    font-weight: 900;
-	}
-	.modal_header2{
-	    margin-top: 20px;
-	    font-size: 0.8rem;
-	    line-height: 10px;
-	    height: 10%;
-	    text-align: center;
-	    border-bottom: 2px solid gray;
-	}
-	.modal_body{
-	    height: 50%;
-	    text-align: center;
-	    font-weight: 900;
-	}
-	#seller_name{
-	    font-size: 1.7rem;
-	
-	}
-	.modal_footer{
-	    margin-top: 50px;
-	    height: 5%;
-	}
-	
-	/*두번째 모달창*/
-	.seller_contect_modal2{
-	    height: 35rem;
-	}
-	.modal_body2{
-	    height: 40%;
-	}
-	.apply{
-	    border: 1px solid black ;
-	    background-color: white;
-	    height: 2rem;
-	}
-	.meet, .close{
-	    margin-right: 50px;
-	}
-	textarea{
-	    padding: 10px 10px;
-	}
-	
-	/*신청완료*/
-	.finish_apply{
-	    height: 25rem;
-	}
-	.body3{
-	    height: 8%;
-	}
-	.head3{
-	    margin-top: 20px;
-	}
-	.footer3{
-	    margin-top: 60px;
-	}
-	#secondImg{
-		border: 1px solid blue;
-	}
 	</style>
 </head>
 <body>
 	<jsp:include page="../../views/common/header.jsp" />
 
- <div class="content1 margin">
+ <div class="content1 margin content">
         <div class="sell_title">
-            <div class="sell_no radius">
-                <span>매물번호 : ${sda.sellSno} </span>
+	            <div class="sell_no radius">
+	                <span>매물번호 : ${sda.sellSno} </span>
+	            </div>
+	            <div class="sell_name">
+	                <p>${sda.sellName }</p>
+	            </div>
+	    </div>
+        <div class="sell_last">
+        	<div class="address">
+            	<div class="sell_address">매물주소 : ${sda.sellAddress}</div>
+            	<div class="seller_address">중개사소재지 : ${sda.brokerAdd }</div>
             </div>
-            <div class="sell_name">
-                <p>${sda.sellName }</p>
-            </div>
-            <div class="sell_last">
-                <div class="sell_address">매물주소 : ${sda.sellAddress}
-                </div>
-                <div class="sell_like">
-                    <div class="radius" id="sellLike">
-                        <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
-                        <span>찜하기</span>
-                    </div>
-                </div>
-            </div>
+            <div class="sell_like">
+             <div class="radius" id="sellLike">
+                 <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
+                 <span>찜하기</span>
+             </div>
+          </div>  
         </div>
-        <div class="line"></div>
-        <div class="seller">
-            
-            <div class="seller_address">
-                중개사소재지 : ${sda.brokerAdd }
-            </div>
-            
-        </div>
+ 	 	  
     </div>
 
     <div class="content3 margin content">
@@ -442,15 +263,11 @@
         </div>
      
     </div>
-
-    <div class="content9 content margin">
-       <!--  <input type="button"  class="contect radius " value="공인중개사 연락하기">
-        <input type="button" class="notify radius last_btn" value="허위매물 신고하기"> -->
-    </div>
     
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
     
     <script>
+    	/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
     	$(function(){
     		
     		var userNo = '${loginUser.userNo}';
@@ -475,8 +292,29 @@
     		
     	});
     
-    
+   
+    	
+   	$(function({
+    		let sidoCode = '${sda.sidoCode}';
+    		$.ajax({
+    			url : "<%=request.getContextPath()%>/sell/addApi/"+sidoCode,
+    			data : {sidoCode : '${sda.sidoCode}'},
+    			type : "POST",
+    			dataType : "json",
+    			success : function(result){
+    				console.log(result);
+    				console.log("api가져왔음");
+    				
+    				}
+    			},
+    			error : function(){
+    				console.log("예진api못가져옴");
+    			}
+    		})
+    	}))
+    	
     </script>
+    
     
     
     

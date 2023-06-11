@@ -105,7 +105,7 @@
 	
 	<select id="countObjectYesterday" resultType="_int">
 		SELECT COUNT(*) FROM SELLDETAIL
-		<![CDATA[WHERE SELL_ENROLL_DATETIME < CURDATE()]]>
+		<![CDATA[WHERE SELL_ENROLL_DATE < CURDATE()]]>
 	</select>
 	
 	<select id="countReport" parameterType="_int" resultType="_int">
@@ -227,7 +227,11 @@
 	</delete>
 	
 	<select id="selectUserList" parameterType="_int" resultMap="memberResultSet">
-		SELECT * FROM MEMBER WHERE USER_LEVEL = #{type}
+		SELECT * FROM MEMBER 
+		WHERE USER_LEVEL = #{type}
+		<if test='type == 2'>
+			AND WITHDRAW = 'Y'
+		</if>
 		ORDER BY ENROLL_DATETIME DESC
 	</select>
 	
@@ -248,6 +252,9 @@
 		SELECT *
 		FROM MEMBER
 		WHERE USER_LEVEL = #{type}
+			<if test='type == 2'>
+				AND WITHDRAW = 'Y'
+			</if>
 		 	<if test='keyword != null and keyword != ""'>
 			  	AND
 				  <choose>
@@ -339,4 +346,12 @@
 	<select id="selectAttachmentList" parameterType="_int" resultMap="attachmentResultSet">
 		SELECT * FROM ATTACHMENT WHERE REF_UNO = #{userNo}
 	</select>
+	
+	<update id="acceptBkMember" parameterType="_int">
+		UPDATE MEMBER SET 
+			 WITHDRAW = 'Y',
+			 MODIFY_DATETIME = SYSDATE()
+		WHERE USER_NO = #{userNo}
+	</update>
+	
 </mapper>

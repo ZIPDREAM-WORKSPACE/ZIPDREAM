@@ -73,5 +73,9 @@ public class MemberDao {
 	public Member searchId(Map<String, String> map) {
 		return sqlSession.selectOne("member-mapper.searchId",map);
 	}
+	
+	public int deleteMember(int userNo) {
+		return sqlSession.delete("member-mapper.deleteMember",userNo);
+	}
 }
 

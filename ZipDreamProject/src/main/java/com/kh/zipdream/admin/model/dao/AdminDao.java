@@ -207,4 +207,8 @@ public class AdminDao {
 	public List<Attachment> selectAttachmentList(int userNo){
 		return (ArrayList) sqlSession.selectList("admin-mapper.selectAttachmentList",userNo);
 	}
+	
+	public int acceptBkMember(int userNo) {
+		return sqlSession.update("admin-mapper.acceptBkMember",userNo);
+	}
 }
