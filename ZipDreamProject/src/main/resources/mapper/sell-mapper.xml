@@ -56,6 +56,18 @@
  		<result column="FILE_LEVEL" property="fileLevel"/>
   	</resultMap>
  	
+ 	<resultMap type="report" id="reportResultSet">
+		<id column="REPORT_NO" property="reportNo"/>
+		<result column="REF_RUNO" property="refRuno"/>
+		<result column="REF_TUNO" property="refTuno"/>
+		<result column="R_NAME" property="rName"/>
+		<result column="T_NAME" property="tName"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+		<result column="REPORT_RESULT" property="reportResult"/>
+		<result column="REPORT_TYPE" property="reportType"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+	</resultMap>
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
 		INSERT INTO SELLDETAIL
@@ -107,5 +119,9 @@
  		FROM SELLDETAIL
  	</select>
 
+	<insert id="insertReport" parameterType="report">
+		INSERT INTO REPORT (REF_RUNO, REF_TUNO, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE, REPORT_DATE)
+		VALUES(#{refRuno}, #{refTuno}, #{reportContent}, 'N', #{reportType}, SYSDATE())
+	</insert>
 
 </mapper>
