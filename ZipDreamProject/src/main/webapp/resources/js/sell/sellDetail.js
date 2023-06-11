@@ -33,24 +33,9 @@
 
 $(function(){
     $(".contect").on("click",function(){
-        $(".modal-overlay").show();
-        $(".seller_contect_modal").show();
+        console.log("클릭");
     })
-    $(".apply").on("click",function(){
-        $(".seller_contect_modal").hide();
-        $(".seller_contect_modal2").show();
-    })
-    $(".meet, .untact").on("click",function(){
-        $(".seller_contect_modal").hide();
-        $(".seller_contect_modal2").hide();
-        $(".finish_apply").show();
-    })
-    $(".close_apply").on("click",function(){
-        $(".seller_contect_modal").hide();
-        $(".seller_contect_modal2").hide();
-        $(".finish_apply").hide();
-        $(".modal-overlay").hide();
-    })
+
 })
 
 $(function() {

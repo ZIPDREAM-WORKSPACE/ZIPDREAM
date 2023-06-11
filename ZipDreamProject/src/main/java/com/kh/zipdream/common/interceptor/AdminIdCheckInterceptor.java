@@ -1,5 +1,7 @@
 package com.kh.zipdream.common.interceptor;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +31,15 @@ public class AdminIdCheckInterceptor extends HandlerInterceptorAdapter {
 				result = true;
 			}	
 		}
+		
+		if(!result) {
+			try {
+				response.sendRedirect(request.getContextPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return result;
 	}
 	@Override // 후처리할 메서드 작성

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.dao.SellDao;
 import com.kh.zipdream.sell.model.vo.SellDetail;
@@ -75,6 +76,11 @@ public class SellServiceImpl implements SellService {
 		return sellDao.sellDetail(sellNo);
 	}
 	
+	public List<SellDetail> selectSellAllList(){
+		return sellDao.selectSellAllList();
+	}
 
-
+	public int insertReport(Report report) {
+		return sellDao.insertReport(report);
+	}
 }
