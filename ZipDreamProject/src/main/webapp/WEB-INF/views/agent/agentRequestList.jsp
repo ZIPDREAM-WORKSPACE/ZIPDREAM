@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pi" value="${map.pi }" />
+<c:set var="requestList" value="${map.requestList }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +147,16 @@
 				</tr>
 			</thead>
 			<tbody class="tbody">
-				<tr>
+				<c:forEach items="${requestList }" var="request">
+					<tr>
+						<td>${request.roomType }</td>
+						<td>${request.buildingType }</td>
+						<td>${request.address }</td>
+						<td>${request.dealType }</td>
+						<td>${request.status }</td>
+					</tr>
+				</c:forEach>
+				<!-- <tr>
 					<td>아파트</td>
 					<td>다가구</td>
 					<td>트리마제</td>
@@ -157,9 +169,55 @@
 					<td>시그니엘</td>
 					<td>매매</td>
 					<td>장하은</td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
+		<c:if test="${ empty requestList}">
+				<div class="myRoomList">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+					  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+					</svg>
+					<span>등록된 매물이 없습니다.</span>
+				</div>
+		</c:if>
+		
+		<!-- 페이지네이션 구현 -->
+		<c:set var="url" value="/zipdream/agent/apply?cpage=" />
+		<div id="pagingArea">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${ pi.currentPage eq 1 }">
+
+						<li class="page-item disabled"><a class="page-link" href="#"
+							aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="${url}${pi.currentPage -1 }" aria-label="Previous"><span
+								aria-hidden="true">&laquo;</span></a></li>
+
+					</c:otherwise>
+				</c:choose>
+
+				<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+					<li class="page-item"><a class="page-link"
+						href="${url}${item }">${item }</a></li>
+				</c:forEach>
+
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+						<li class="page-item disabled"><a class="page-link" href="#"
+							aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="" aria-label="Next"><span
+								aria-hidden="true">&raquo;</span></a></li>
+
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 	</div>
 	
 	

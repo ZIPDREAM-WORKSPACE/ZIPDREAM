@@ -4,4 +4,8 @@
 *.class
 .classPath
 target/
+<<<<<<< Updated upstream
 bin/
+=======
+bin/
+>>>>>>> Stashed changes
