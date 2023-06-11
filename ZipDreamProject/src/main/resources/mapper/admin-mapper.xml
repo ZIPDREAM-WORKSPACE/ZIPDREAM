@@ -349,7 +349,8 @@
 	
 	<update id="acceptBkMember" parameterType="_int">
 		UPDATE MEMBER SET 
-			 WITHDRAW = 'Y'
+			 WITHDRAW = 'Y',
+			 MODIFY_DATETIME = SYSDATE()
 		WHERE USER_NO = #{userNo}
 	</update>
 	
