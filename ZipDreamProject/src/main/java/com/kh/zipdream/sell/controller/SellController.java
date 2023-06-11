@@ -1,10 +1,9 @@
 package com.kh.zipdream.sell.controller;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream; 
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.Date;  
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.member.model.service.MemberService;
+import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
@@ -35,6 +37,9 @@ public class SellController {
 	
 	@Autowired
 	private SellService sellService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//sell입력 페이지이동
 	@GetMapping("/insert")
@@ -83,7 +88,9 @@ public class SellController {
 	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo){
 
 		SellDetail detail = sellService.sellDetail(sellNo);
+		Member seller = memberService.selectMember(detail.getRefUno());
 		model.addAttribute("sd", detail);
+		model.addAttribute("seller", seller);
 		return "sell/sellDetail";
 	}
 	
@@ -142,6 +149,14 @@ public class SellController {
 		
 	}
 	
-
+	@PostMapping("/report")
+	@ResponseBody
+	public int insertReport(Report report) {
+		int result = 0;
+		
+		result = sellService.insertReport(report);
+		
+		return result;
+	}
 		
 }

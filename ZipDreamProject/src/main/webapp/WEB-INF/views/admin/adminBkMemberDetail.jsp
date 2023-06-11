@@ -17,9 +17,9 @@
 		</div>
 		<div style="object-fit:contain;">
 			<div id="bk-img-slick">
-				<div id="bk-img0" class="bk-images" style="background-image: url('<%=request.getContextPath() %>${attachment[0].filePath.replace('\\','/')}${attachment[0].changeName}')"></div>
-				<div id="bk-img1" class="bk-images" style="background-image: url('<%=request.getContextPath() %>${attachment[1].filePath.replace('\\','/')}${attachment[1].changeName}')"></div>
-				<div id="bk-img2" class="bk-images" style="background-image: url('<%=request.getContextPath() %>${attachment[2].filePath.replace('\\','/')}${attachment[2].changeName}')"></div>
+				<div id="bk-img0" class="bk-images" style="background-image: url('<%=request.getContextPath()+"/" %>${attachment[0].filePath.replace('\\','/')}${attachment[0].changeName}')"></div>
+				<div id="bk-img1" class="bk-images" style="background-image: url('<%=request.getContextPath()+"/" %>${attachment[1].filePath.replace('\\','/')}${attachment[1].changeName}')"></div>
+				<div id="bk-img2" class="bk-images" style="background-image: url('<%=request.getContextPath()+"/" %>${attachment[2].filePath.replace('\\','/')}${attachment[2].changeName}')"></div>
 			</div>
 		</div>
 		<div class="bk-info-1">
@@ -151,13 +151,13 @@ $(function() {
 				  $(".bk-address").val(result.member.address);
 				  $(".bk-phone").val(result.member.phone);
 				  if(result.array[0] != null){
-					  document.getElementById("bk-img0").style.backgroundImage = "url('<%= request.getContextPath()%>"+result.array[0].filePath.replace(/\\/g, '/')+result.array[0].changeName+"')";
+					  document.getElementById("bk-img0").style.backgroundImage = "url('<%= request.getContextPath()%>/"+result.array[0].filePath.replace(/\\/g, '/')+result.array[0].changeName+"')";
 				  }
 				  if(result.array[1] != null){
-					  document.getElementById("bk-img1").style.backgroundImage = "url('<%= request.getContextPath()%>"+result.array[1].filePath.replace(/\\/g, '/')+result.array[1].changeName+"')";					  
+					  document.getElementById("bk-img1").style.backgroundImage = "url('<%= request.getContextPath()%>/"+result.array[1].filePath.replace(/\\/g, '/')+result.array[1].changeName+"')";					  
 				  }
 				  if(result.array[2] != null){
-					  document.getElementById("bk-img2").style.backgroundImage = "url('<%= request.getContextPath()%>"+result.array[2].filePath.replace(/\\/g, '/')+result.array[2].changeName+"')";  
+					  document.getElementById("bk-img2").style.backgroundImage = "url('<%= request.getContextPath()%>/"+result.array[2].filePath.replace(/\\/g, '/')+result.array[2].changeName+"')";  
 				  }
 			  },
               error: function(){
