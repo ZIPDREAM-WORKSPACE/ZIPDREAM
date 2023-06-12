@@ -39,8 +39,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 
 
-<!--sockjs 라이브러리 -->
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
 
 
 <style>
@@ -214,7 +213,7 @@ position: absolute;
 	
 	
 		
-	if('${loginUser.userNo}'!='' && currentURL != URL){
+	if('${loginUser.userNo}'!='' && currentURL != URL && '${chatRoomNo}'!=''){
 	 	$.ajax({
 			url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
 			type : "get",

@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- alert창 꾸미기  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>ZIPDREAM</title>
@@ -429,6 +430,7 @@
 <jsp:include page="../common/header.jsp" />
 	
 	<script>
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 		mysaleList = [];
 		myhouseList = [];
 		$(function(){
@@ -645,6 +647,11 @@
 		
 		/* 분양정보 찜하기 */
 		function mySale(houseCode, startDateTime, hsUrl){
+				var hu = hsUrl;
+				var hc = houseCode;
+				var time = startDateTime;
+				var uno = '${loginUser.userNo}';
+				
 	            var h = document.getElementById(houseCode).firstChild;
 	            
 	           /*  console.log("클릭"+mysaleList); */
@@ -673,13 +680,18 @@
 	                    swal("", "분양일정 알림을 취소했습니다.", "warning");
 	                }else{
 	                    h.src = "https://ifh.cc/g/bNnQCj.png";
-	                    /* 찜하기 등록하기 */
+	                   /* 찜하기 등록하기 */
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
 	                        method:"post",
 	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
-	                            console.log(result);
+	                        
+	                        
+	                        	console.log(houseSock);
+	                        	sendMessage1(hu, hc, uno, time);
+	                            /* console.log(result); */
+	                          
 	                            
 	                        },
 	                        error:function(){
@@ -698,7 +710,7 @@
 
 	
 	</script>
-	
+
 
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
@@ -868,8 +880,8 @@
 	</script>
 	
 
+		<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 	<jsp:include page="../common/footer.jsp" />
-	
 	
 </body>
 </html>

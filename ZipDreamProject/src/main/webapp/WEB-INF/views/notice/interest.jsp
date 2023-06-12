@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -61,21 +62,31 @@ tbody::-webkit-scrollbar {
 	.content{
 		width:600px;
 	}
+	.notice1{
+		width:200px;
+		height:100px;
+		background: grey;
+		position: absolute;
+		top:100px;
+		right:30px;
+		display:none;
+		
+	}
 	
 </style>
 <body>
 <jsp:include page="notice_header.jsp"/>
 	<div class="notice_table">
 		<table>
-			<thead>
+			<thead >
 				<tr>
 					<th class="num">번호</th>
 					<th class="title">제목</th>
 					<th class="content">내용</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
+			<tbody class="noticeThead">
+				<!-- <tr>
 					<td class="num">1</td>
 					<td class="title">역삼 디오빌 분양 정보</td>
 					<td class="content">찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
@@ -94,11 +105,21 @@ tbody::-webkit-scrollbar {
 					<td>2</td>
 					<td>역삼 디오빌 분양 정보</td>
 					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
+				</tr> -->
 		
 			</tbody>
 		</table>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
+
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<script>
+
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	notice();
+	addEventMessage();
+
+
+</script>
 </body>
 
