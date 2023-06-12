@@ -47,4 +47,7 @@ public interface AdminService {
 	public List<Attachment> selectAttachmentList(int userNo);
 	public JSONObject getBkUserInfo(int userNo);
 	public int acceptBkMember(int userNo);
+	public void selectSellDetailList(int cp, Map<String, Object> map);
+	public void selectSellDetailSearch(Map<String, Object> paramMap,Map<String, Object> map);
+	public int deleteSellDetail(int sellNo);
 }

@@ -164,4 +164,16 @@ public class MapController {
 
 	        return jsonArray.toJSONString();
 	    }
+	   
+	   @GetMapping("/searchKeyword")
+	   @ResponseBody
+	   public String searchKeyword(@RequestParam("keyword") String keyword, Model model) {
+		   
+		   List<beopjeongdong> address = mapService.searchKeyword(keyword);
+	         
+		   model.addAttribute("address", address);
+		   System.out.println(address);
+		   return new Gson().toJson(address);
+		   
+	   }
 }
