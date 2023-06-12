@@ -401,4 +401,29 @@ public class AdminController {
 		
 		return result;
 	}
+	
+	@GetMapping("/selldetail")
+	public String sellDetail(Model model,
+			   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+			   @RequestParam Map<String, Object> paramMap) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(paramMap.get("condition") == null) {
+			service.selectSellDetailList(cp,map);
+		}else {
+			paramMap.put("cp", cp);
+			service.selectSellDetailSearch(paramMap,map);
+		}
+		model.addAttribute("sellDetailList",map);
+		
+		return "admin/adminSellDetail";
+	}
+	
+	@GetMapping("/selldetail/del")
+	public String deleteSellDetail(@RequestParam(value="sellNo") int sellNo) {
+		
+		int result = service.deleteSellDetail(sellNo);
+		
+		return "redirect:/admin/selldetail";
+	}
 }
