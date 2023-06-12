@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.dao.SellDao;
+import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.utils.FileUtils;
 
@@ -82,5 +83,17 @@ public class SellServiceImpl implements SellService {
 
 	public int insertReport(Report report) {
 		return sellDao.insertReport(report);
+	}
+	
+	public int insertCounsle(Counsle counsle) {
+		return sellDao.insertCounsle(counsle);
+	}
+
+	public int insertUserSelect(Map<String, Integer> map) {
+		return sellDao.insertUserSelect(map);
+	}
+
+	public int deleteUserSelect(Map<String, Integer> map) {
+		return sellDao.deleteUserSelect(map);
 	}
 }

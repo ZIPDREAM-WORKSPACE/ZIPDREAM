@@ -4,7 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +30,7 @@ import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.sell.model.service.SellService;
+import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
  
@@ -159,4 +162,35 @@ public class SellController {
 		return result;
 	}
 		
+	@PostMapping("/counsle")
+	@ResponseBody
+	public int insertCounsle(Counsle counsle) {
+		int result = 0;
+		
+		result = sellService.insertCounsle(counsle);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/userselect")
+	public int insertUserselect(@RequestParam(value="userNo") int userNo,
+			@RequestParam(value="sellNo") int sellNo,
+			@RequestParam(value="type") int type) {
+		Map<String,Integer> map = new HashMap();
+		
+		map.put("userNo", userNo);
+		map.put("sellNo", sellNo);
+		
+		int result = 0;
+		
+		if(type == 2) {
+			result = sellService.insertUserSelect(map);
+		}else {
+			result = sellService.deleteUserSelect(map);
+		}
+		
+		return result;
+		
+	}
 }
