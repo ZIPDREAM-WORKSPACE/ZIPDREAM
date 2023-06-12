@@ -173,7 +173,7 @@
 								<td><p class="approve">승인</p></td>
 							</c:if>
 							<c:if test="${myroom.status == 3}">
-								<td class="refuse">거절</td>
+								<td><p class="refuse">거절</p></td>
 
 							</c:if>
 						</tr>

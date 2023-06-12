@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import="com.kh.zipdream.member.model.vo.Member" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -13,380 +13,456 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-	.content1{
-		margin-top : 500px;
-	    border-bottom: 4px solid #6E7C7C;
-	    width: 80%;
-	    height: 15rem;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	}
-	.hr{
-		border:2px solid  #6E7C7C;
-	}
-	.margin{
-	    margin: 0 auto;
-	}
-	.radius{
-	    border-radius: 30px;
-	}
-	.sell_title{
-	    width: 50%;
-	    height: 90%;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-around;
-	}
-	
-	.sell_no{
-	    border: 1px solid lightgray;
-	    width: 20%;
-	    height: 10%;
-	    margin-top: 20px;
-	}
-	.sell_no>span{
-	    font-size: 0.5rem;
-	    margin-left: 5px;
-	    vertical-align: text-top;
-	}
-	.sell_name>p{
-	    font-size: 4rem;
-	    font-weight: 700;
-	    color: #0A2647;
-	    margin: 0px;
-	}
-	.sell_last{
-	    display: flex;
-	    justify-content: flex-start;
-	}
-	.sell_address, .seller_address{
-	    width: 70%;
-	    font-size: 1rem;
-	    color: #6E7C7C;
-	}
-	.sell_like{
-	    width: 12%;
-	}
-	#sellLike {
-	    border: 1px solid black;
-	    height: 2.3rem;
-	}
-	#sellLike>span{
-	    font-size: 0.8rem;
-	}
-	#like_img{
-	    vertical-align: bottom;
-	    margin: 5px 0px 0px 14px;
-	}
-	.line{
-	    border: 1px solid #6E7C7C;
-	    height: 80%;
-	}
-	/*공인중개사 연락하기*/
-	.seller{
-	    width: 30%;
-	    height: 70%;
-	    margin-left: 60px;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-evenly;
-	}
-	.seller_title{
-	    font-size: 2rem;
-	    font-weight: 500;
-	}
-	.contect{
-		width:160px;
-		margin-right:50px;
-	    background-color: #0A2647;
-	    color: white;
-	}
-	/*허위매물신고*/
-	.notify{
- 	    width: 150px;
-	    background-color: #2C74B3;
-	    color: white;
-	}
-	
-	/*사진*/
-	.content2{
-		margin-top:50px;
-	    height: 40rem;
-	}
-    #picture{
-          display: flex;
-          align-items: center;
-    }
-	.content{
-	    width: 70%;
-	}
-	.content3{
-	    width: 70%;
-	    height: 20rem;
-	}
-	.price_name, .info_name, .arround_name, .option_name, .othier_info, .talk, .talkWriter{
-	    font-size: 1.5rem;
-	    font-weight: 600;
-	}
-	.price, .info, .arround, .option{
-	    width: 90%;
-	}
-	
-	.content4{
-	    height: 80rem;
-	}
-	.info_pic{
-	    border: 1px solid red;
-	    height: 30rem;
-	    width: 70%;
-	}
-	.content5{
-		margin-top: 120px;	
-	    height: 15rem;
-	}
-	.table>tbody>tr>th{
-	    width: 15%;
-	}
-	.content6, .content7, .content8,.content10{
-		margin-top:80px;
-	}
-	/*주변정보*/
-	.btn-group{
-	    display: flex;
-	    justify-content: center;
-	}
-	.button{
-	    width: 200px;
-	    height: 3rem;
-	    border: 1px solid gray;
-	    border-radius: 20px;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: row;
-	    justify-content: center;
-	    align-items: center;
-	}
-	
-	.button:hover{
-	    background-color: #0A2647;
-	    color: white;
-	    font-weight: 900;
-	}
-	.infogroup{
-		margin-left: 100px;
-	}
-	.info{
-	    margin-top: 20px;
-	}
-	.info_table>tbody>tr>th{
-	    width: 10%;
-	}
-	.hospital_info, .school_info, .subway_info{
-	    display: none;
-	}
-	.content9{
-		margin-top: 50px;
-		text-align: center;
-	}
-	.content10_name{
-		margin-top : 80px;
-	}
-	.content10{
-		border: 1px solid black;
-		height : 40rem;
-		overflow: auto;
-		margin-top : -5px;
-	}
-	.box{
-		margin-top : 20px;
-	}
-	.lastBox{
-		border : 1px solid gray;
-		width : 90%;
-		height : 15rem;
-		display: flex;
-	}
-	.boardBox{
-		border-right : 1px solid gray;
-		width : 55%;
-		height: 15rem;
-	}
-	.writer{
-		margin : 20px 0px 10px 30px;
-		font-size : 1.5rem;
-	}
-	.reply{
-		margin : 10px 0px 0px 30px;
-		font-size : 1.3rem;
-	}
-	.hr2{
-		border:0.5px solid  #6E7C7C;
-	}
-	#boardContent{
-		border :1px solid gray;
-		margin-left : 15px;
-		width : 95%;
-		height : 60%;
-	}
-	.replyBox{
+.content1 {
+	margin-top: 500px;
+	border-bottom: 4px solid #6E7C7C;
+	width: 80%;
+	height: 15rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hr {
+	border: 2px solid #6E7C7C;
+}
+
+.margin {
+	margin: 0 auto;
+}
+
+.radius {
+	border-radius: 30px;
+}
+
+.sell_title {
+	width: 50%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.sell_no {
+	border: 1px solid lightgray;
+	width: 20%;
+	height: 10%;
+	margin-top: 20px;
+}
+
+.sell_no>span {
+	font-size: 0.5rem;
+	margin-left: 5px;
+	vertical-align: text-top;
+}
+
+.sell_name>p {
+	font-size: 4rem;
+	font-weight: 700;
+	color: #0A2647;
+	margin: 0px;
+}
+
+.sell_last {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.sell_address, .seller_address {
+	width: 70%;
+	font-size: 1rem;
+	color: #6E7C7C;
+}
+
+.sell_like {
+	width: 12%;
+}
+
+#sellLike {
+	border: 1px solid black;
+	height: 2.3rem;
+}
+
+#sellLike>span {
+	font-size: 0.8rem;
+}
+
+#like_img {
+	vertical-align: bottom;
+	margin: 5px 0px 0px 14px;
+}
+
+.line {
+	border: 1px solid #6E7C7C;
+	height: 80%;
+}
+/*공인중개사 연락하기*/
+.seller {
+	width: 30%;
+	height: 70%;
+	margin-left: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.seller_title {
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.contect {
+	width: 160px;
+	margin-right: 50px;
+	background-color: #0A2647;
+	color: white;
+}
+/*허위매물신고*/
+.notify {
+	width: 150px;
+	background-color: #2C74B3;
+	color: white;
+}
+
+/*사진*/
+.content2 {
+	margin-top: 50px;
+	height: 40rem;
+}
+
+#picture {
+	display: flex;
+	align-items: center;
+}
+
+.content {
+	width: 70%;
+}
+
+.content3 {
+	width: 70%;
+	height: 20rem;
+}
+
+.price_name, .info_name, .arround_name, .option_name, .othier_info,
+	.talk, .talkWriter {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.price, .info, .arround, .option {
+	width: 90%;
+}
+
+.content4 {
+	height: 80rem;
+}
+
+.info_pic {
+	height: 30rem;
+	width: 70%;
+}
+
+.content5 {
+	margin-top: 120px;
+	height: 15rem;
+}
+
+.table>tbody>tr>th {
+	width: 15%;
+}
+
+.content6, .content7, .content8, .content10 {
+	margin-top: 80px;
+}
+/*주변정보*/
+.btn-group {
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	width: 200px;
+	height: 3rem;
+	border: 1px solid gray;
+	border-radius: 20px;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.button:hover {
+	background-color: #0A2647;
+	color: white;
+	font-weight: 900;
+}
+
+.infogroup {
+	margin-left: 100px;
+}
+
+.info {
+	margin-top: 20px;
+}
+
+.info_table>tbody>tr>th {
+	width: 10%;
+}
+
+.hospital_info, .school_info, .subway_info {
+	display: none;
+}
+
+.content9 {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.content10_name {
+	margin-top: 80px;
+}
+
+.content10 {
+	border: 1px solid black;
+	height: 40rem;
+	overflow: auto;
+	margin-top: -5px;
+}
+
+
+.box {
+	margin-top: 20px;
+}
+
+.lastBox {
+	border: 1px solid gray;
+	width: 90%;
+	height: 15rem;
+	display: flex;
+}
+
+.boardBox {
+	margin-top: 10px;
+	border-right: 1px solid gray;
+	width: 55%;
+	height: 15rem;
+}
+
+.writer {
+	margin: 20px 0px 10px 30px;
+	font-size: 1.5rem;
+}
+
+.reply {
+	margin: 10px 0px 0px 30px;
+	font-size: 1.3rem;
+}
+
+.hr2 {
+	border: 0.5px solid #6E7C7C;
+}
+
+#boardContent {
+	border: 1px solid gray;
+	margin-left: 15px;
+	width: 95%;
+	height: 60%;
+}
+
+.replyBox {
 	/* 	border: 1px solid blue; */
-		height: 100%;
-		width : 45%;
-	}
-	.replyName{
-		height: 20%;
-	}
-	.replyContent{
-		overflow : auto;
-		height: 55%;
-	}
-	#reply{
-		border-bottom: 0.3px solid gray;
-		margin-top : 10px;
-	}
-	.inputReply{
-		height : 20%;
-		display: flex;
-	}
-	#inputReply{
-		height : 35px;
-	}
-	/*모달창*/
-	#modal.modal-overlay {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: center;
-	    background: rgba(255, 255, 255, 0.25);
-	    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	    backdrop-filter: blur(1.5px);
-	    -webkit-backdrop-filter: blur(1.5px);
-	    border-radius: 10px;
-	    border: 1px solid rgba(255, 255, 255, 0.18);
-	}
-	#modal .modal-window {
-	    /* background: rgba( 69, 139, 197, 0.70 ); */            
-	    backdrop-filter: blur( 13.5px );
-	    -webkit-backdrop-filter: blur( 13.5px );
-	    border-radius: 10px;
-	    width: 700px;
-	    position: relative;
-	    top: -100px;
-	    padding: 10px;
-	}
-	#modal .title {
-	    padding-left: 10px;
-	    display: inline;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	    
-	}
-	#modal .title h2 {
-	    display: inline;
-	}
-	#modal .close-area {
-	    display: inline;
-	    float: right;
-	    padding-right: 10px;
-	    cursor: pointer;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	}
+	height: 100%;
+	width: 45%;
+}
+
+.replyName {
+	height: 20%;
+}
+
+.replyContent {
+	overflow: auto;
+	height: 55%;
+}
+
+#reply {
+	border-bottom: 0.3px solid gray;
+	margin-top: 10px;
+}
+
+.inputReply {
+	height: 20%;
+	display: flex;
+}
+
+#inputReply {
+	height: 35px;
+}
+/*모달창 css*/
+
+#modal.modal-overlay {	
+ 	margin-top :80px;
+	width: 100%;
+	height: 5000px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(1.5px);
+	-webkit-backdrop-filter: blur(1.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#modal .modal-window {
+	/* background: rgba( 69, 139, 197, 0.70 ); */
+	backdrop-filter: blur(13.5px);
+	-webkit-backdrop-filter: blur(13.5px);
+	border-radius: 10px;
+	width: 700px;
+	position: relative;
+	top: -100px;
+	padding: 10px;
+	position:relative;
+	top : -300px;
+}
+.modalbox {
+	border : 1.5px solid lightgray;
+	width: 100%;
+	padding: 20px 20px;
+	background-color: #f8f9fa;
+	box-shadow: 0 10px 30px 0 rgba(27, 88, 117, 0.2);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	
-	#modal .content {
-	    margin-top: 20px;
-	    padding: 0px 10px;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	}
-	/*모달 css*/
-	.seller_contect_modal, .seller_contect_modal2, .finish_apply{
-	    border: 1px solid  black;
-	    width: 80%;
-	    margin: 0 auto;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: center;
-	    align-items: center;
-	    background-color: #abafc5;
-	}
-	.seller_contect_modal{
-	    height: 40rem;
-	}
-	.radius{
-	    border-radius: 30px;
-	}
-	.modal_header1{
-	    height: 8%;
-	}
-	.modal_header1>span{
-	    font-size: 2rem;
-	    font-weight: 900;
-	}
-	.modal_header2{
-	    margin-top: 20px;
-	    font-size: 0.8rem;
-	    line-height: 10px;
-	    height: 10%;
-	    text-align: center;
-	    border-bottom: 2px solid gray;
-	}
-	.modal_body{
-	    height: 50%;
-	    text-align: center;
-	    font-weight: 900;
-	}
-	#seller_name{
-	    font-size: 1.7rem;
-	
-	}
-	.modal_footer{
-	    margin-top: 50px;
-	    height: 5%;
-	}
-	
-	/*두번째 모달창*/
-	.seller_contect_modal2{
-	    height: 35rem;
-	}
-	.modal_body2{
-	    height: 40%;
-	}
-	.apply{
-	    border: 1px solid black ;
-	    background-color: white;
-	    height: 2rem;
-	}
-	.meet, .close{
-	    margin-right: 50px;
-	}
-	textarea{
-	    padding: 10px 10px;
-	}
-	
-	/*신청완료*/
-	.finish_apply{
-	    height: 25rem;
-	}
-	.body3{
-	    height: 8%;
-	}
-	.head3{
-	    margin-top: 20px;
-	}
-	.footer3{
-	    margin-top: 60px;
-	}
-	#secondImg{
-		border: 1px solid blue;
-	}
-	</style>
+}
+
+#btn {
+	font-size: 1em;
+	text-decoration: none;
+	width: 140px;
+	height: 45px;
+	color: #fff;
+	transition: background-color 0.5s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2196f3;
+	box-shadow: 0 10px 30px 0 rgba(33, 150, 243, 0.7);
+	&:
+	hover
+	{
+	background-color
+	:
+	#4cb0f9;
+}
+
+}
+.alert-box {
+	opacity: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	transition: opacity 0.5s;
+	display: flex;
+	flex-wrap: wrap;
+	pointer-events: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.8);
+	text-decoration: none;
+	color: #000000; &: target { outline : none;
+	opacity: 1;
+	pointer-events: none;
+}
+
+&
+.alert-column {
+	background: #ffffff;
+	position: relative;
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+	cursor: default;
+	width: 500px;
+	height: 100px;
+	align-items: center;
+	justify-content: center; &: before { content : "✕";
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 10px;
+	right: 10px;
+	line-height: 1;
+	color: #000;
+	font-size: 20px;
+	font-family: Arial, sans-serif;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+}
+}
+.dis {
+	display: flex;
+	margin-top: 30px;
+}
+
+.rig {
+	margin-right: 50px;
+}
+
+.modalContent {
+	border: 1px solid lightgray;
+	border-radius: 30px;;
+	padding: 15px 15px;
+}
+
+#modalname {
+	font-size: 2rem;
+	font-weight: 900;
+	margin-left: 10px;
+	vertical-align: super;
+}
+
+.modalBody , .lastContent{
+    margin-top: 16px;
+	line-height: 1;
+}
+
+.applyContent {
+	padding: 10px 10px;
+}
+
+#seller_name {
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.x {
+	margin-left: auto;
+}
+.modalLast{
+	text-align : center;
+	font-size : 1.2rem;
+	font-weight600;
+	higth : 40rem;
+	width : 100%;
+	border : 1.5px solid lightgray;
+	background-color: #f8f9fa;
+	box-shadow: 0 10px 30px 0 rgba(27, 88, 117, 0.2);
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../../views/common/header.jsp" />
@@ -413,13 +489,13 @@
         <div class="line"></div>
         <div class="seller">
             <div class="seller_title">
-                내돈내산공인중개사
+                ${seller.office }
             </div>
             <div class="seller_name">
-                대표  : 김예진
+                대표  : ${seller.userName }
             </div>
             <div class="seller_address">
-                소재지 : 서울특별시 어쩔저쩔 ㅇ
+                소재지 : ${seller.address }
             </div>
             <div class="seller_contect">
                 <input type="button"  class="contect radius" value="공인중개사 연락하기">
@@ -447,6 +523,9 @@
 			                        </tr>
 		                  	</c:forEach>	
  						</c:if>	
+ 						<c:if test="${empty sd.imgList}" >
+ 							<tr><td>등록된 이미지가 없습니다.</td></tr>
+ 						</c:if>
                         
                     </table>
                 </div>
@@ -503,9 +582,11 @@
         <p class="info_name">[상세정보]</p>
         <hr class="hr">
 		        <div class="info_pic margin">
-		        <c:forEach var="a" begin="" end="">
-		        
-		        </c:forEach>
+		        <c:if test="${!empty sd.imgList }">
+		        	<c:forEach begin="${fn:length(sd.imgList)-1}" var="i" end="${fn:length(sd.imgList)-1}">
+		        		<img src="<%=request.getContextPath()%>/reources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        	</c:forEach>
+		        </c:if>
 		        </div>
         <div class="info margin">
             <table class="table">
@@ -802,75 +883,110 @@
 				<button onclick="insertboard();">작성</button>
 			</div>
 	</div>
-        
-      
-  
+    
     <!-- 모달창 -->
     <div id="modal" class="modal-overlay" style="display: none;">
-        <div class="modal-window">
-            <div class="seller_contect_modal radius" style="display: none;">
-                <div class="modal_header1">
-                    <img src="https://ifh.cc/g/Hyz5zg.png" width="40px" style="vertical-align: bottom;">
-                    <span>공인중개사에게 연락하기</span>
-                </div>
-                <div class="modal_header2">
-                    <p>이 매물은 공인중개사가 등록한 중개매물입니다.</p>
-                    <p>공인중개사와 만남을 통해 안전하게 계약을 진행할 수 있으며, 법정중개보수가 발생합니다.</p>
-                </div>
-                <hr>
-                <div class="modal_body">
-                    <img src="https://ifh.cc/g/rK1zPs.jpg" width="200px" style="border-radius: 50%;">
-                    <p id="seller_name">내돈내산공인중개사</p>
-                    <p id="seller_address">소재지 : 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층</p>
-                    <p id="seller_number">중개등록번호 : 12345-677-123123</p>
-                    <p id="seller_phone">연락처 : 010-1234-5678</p>
-                </div>
-                <div class="modal_footer">
-                    <input type="button" class="close_apply" value="닫기" >
-                    <input type="button" class="apply" value="신청하기">
-                </div>
-            </div>
-            
-            <div class="seller_contect_modal2 radius" style="display: none;">
-                <div class="modal_header1">
-                    <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
-                    <span>공인중개사 상담 신청하기</span>
-                </div>
-                <div class="modal_header2">
-                    <p>공인중개사와 대면&비대면으로 상담을 신청할 수 있습니다.</p>
-                    <p>희망시간을 작성해주시면 공인중개사가 확인 후 상담일정을 조율해드릴 예정입니다.</p>
-                </div>
-                <hr>
-                <div class="modal_body2">
-                    <textarea rows="10" cols="60" style="resize: none;" placeholder="상담을 희망하는 날짜와 시간대를 입력해주세요. 공인중개사가 확인 후 일정 조율을 진행합니다." name="applyContent"></textarea>
-                </div>
-                <div class="modal_footer">
-                    <input type="button" class="meet apply" value="대면상담" onclick="apply();">
-                    <input type="button" class="untact apply" value="비대면상담" onclick="apply();">
-                </div>
-            </div>
-        
-            <div class="finish_apply radius" style="display: none;">
-                <div class="modal_header1">
-                    <span>신청이 완료되었습니다.</span>
-                </div>
-                <div class="modal_header2 head3">
-                    <p>공인중개사가 직접 연락드릴예정이오니 연락들 기다려 주세요 *^^*</p>
-                </div>
-                <hr>
-                <div class="modal_body body3">
-                    <p> 공인중개사 : 내집마련공인중개사</p>
-                    <p> 연락처 : 010-1234-5678</p>
-                </div>
-                <div class="modal_footer footer3">
-                    <input type="button" class="close_apply" value="닫기">
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="modal-window">
+	    <div class="modalbox" style="display: none;">
+	        <div class="x">
+	          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
+	        </div>
+	        <div class="modalHead">
+	            <div class="head1">
+	                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
+	                <span id="modalname">공인중개사에게 연락하기</span>
+	            </div>
+	            <span>공인중개사와 만남을 통해 안전하게 계약을 진행할 수 있습니다.</span>
+	        </div>
+	        <hr>
+	        <div class="modalContent dis ">
+	            <img class="rig" src="https://ifh.cc/g/6BoQCw.jpg" width="150px" style="border-radius: 50%;">
+	            <div class="modalBody">
+	                <p id="seller_name">${seller.office }</p>
+	                <p id="seller_address">소재지 : ${seller.address }</p>
+	                <p id="seller_number">중개등록번호 : 12345-677-123123</p>
+	                <p id="seller_phone">연락처 : ${seller.phone }</p>
+	            </div>
+	        </div>
+	        <hr>
+	        <div class="modalApply">
+	          <textarea class="applyContent" cols="70" rows="5" style="resize: none;" placeholder="상담을 희망하는 시간과 날짜를 적어주세요"></textarea>
+	
+	        </div>
+	            <div class="modalFooter dis ">
+	            <a class="btn rig untact" id="btn" >비대면 신청</a>
+	            <a class="btn meet" id="btn">대면 신청</a>
+	        </div>
+	       
+	      </div>
+	      
+	      <div class="modalLast" style="display: none;">
+	      	<div class="x">
+	          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
+	        </div>
+	        <div class="modalHead">
+	            <div class="head1">
+	                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
+	                <span id="modalname">신청완료</span>
+	            </div>
+	            <span>공인중개사의 연락을 기다려주세요*^^*</span>
+	        </div>
+	      </div>
+	     </div>
+	     
+	   </div>
+ 
+		<!-- 신고 모달 창 -->
+	   <div class="modal fade" id="reportInsertModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">허위매물 신고</h5>
+						<button type="button" class="btn-close" onclick="$('#reportInsertModal').modal('hide');"
+							aria-label="Close"
+							style="border: none; background: white; font-size: 20px;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" align="center">
+						<h3>신고 내용 작성</h3>
+						<textarea rows="3" cols="80" class="reportContent" placeholder="내용을 작성해주세요."></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" onclick="insertReport(2)" class="btn btn-success">등록하기</button>
+						<button type="button" class="btn btn-primary"
+	                        onclick="$('#reportInsertModal').modal('hide');">닫기</button>
+      				</div>
+				</div>
+			</div>
+		</div>   
+
+   
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
 </body>
 <script>
+	const loremIpsum = document.getElementById("lorem-ipsum")
+	fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+	    .then(response => response.text())
+	    .then(result => loremIpsum.innerHTML = result)
+	
+	$(function(){
+	    $(".contect").click(function(){
+	        $(".modal-overlay").show();
+	        $(".modalbox").show();
+	    })
+	    $(".modalX").click(function(){
+    	  $(".modal-overlay").hide();
+	      $(".modalbox").hide();
+	    })
+	    $(".untact").click(function(){
+	    	$(".modalbox").hide();
+	    	$(".modalLast").show();
+	    })
+	    $(".notify").click(function(){
+	    	$("#reportInsertModal").modal("show");
+	    })
+	})
 	$(function(){
 		boardList();
 		
@@ -909,7 +1025,7 @@
 				console.log(result);
 				let html = "";
 				for(let board of result){
-					html += "<div class='box'>"+"<div class='lastBox margin'>"+
+					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
 									"<span class='writer'>"+board.userName+"</span>"+
 									"<button onclick='deleteBoard("+board.detailBoardNo+");'>"+"삭제"+"</button>"+
@@ -961,12 +1077,40 @@
 			}
 		})
 	}  
-
+	
 	function deleteBoard(refBno){
-		console.log(refBno);
-		location.href="<%=request.getContextPath()%>/board/deleteBoard"+refBno;
+		detailBoardNo  = refBno;
+		$.ajax({
+			url : "<%=request.getContextPath()%>/board/deleteBoard/"+detailBoardNo,
+			data : {detailBoardNo},
+			type: "post",
+			success : function(result){
+				alert("게시글이 삭제되었습니다.");
+			}
+		})
 	}
-
+	
+	/* 신고 등록 함수 */
+	function insertReport(type) {
+		let reportContent = $(".reportContent").val();
+		$.ajax({
+			url : "<%=request.getContextPath()%>/sell/report",
+			data : {
+					refTuno : ${seller.userNo}, 
+					refRuno : <%= ((Member)request.getSession().getAttribute("loginUser")).getUserNo()%>,
+					reportContent : reportContent,
+					reportType: type
+					},
+			type: "post",
+			success : function(result){
+				if(result >= 1){
+					swal("", "신고가 등록되었습니다.", "success");					
+				}else {
+					swal("", "신고 등록 실패.", "error");
+				}
+			}
+		});
+	}
 
 </script>
 </html>
