@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import="com.kh.zipdream.member.model.vo.Member" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -489,13 +489,13 @@
         <div class="line"></div>
         <div class="seller">
             <div class="seller_title">
-                내돈내산공인중개사
+                ${seller.office }
             </div>
             <div class="seller_name">
-                대표  : 김예진
+                대표  : ${seller.userName }
             </div>
             <div class="seller_address">
-                소재지 : 서울특별시 어쩔저쩔 ㅇ
+                소재지 : ${seller.address }
             </div>
             <div class="seller_contect">
                 <input type="button"  class="contect radius" value="공인중개사 연락하기">
@@ -902,10 +902,10 @@
 	        <div class="modalContent dis ">
 	            <img class="rig" src="https://ifh.cc/g/6BoQCw.jpg" width="150px" style="border-radius: 50%;">
 	            <div class="modalBody">
-	                <p id="seller_name">내돈내산공인중개사</p>
-	                <p id="seller_address">소재지 : 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층</p>
+	                <p id="seller_name">${seller.office }</p>
+	                <p id="seller_address">소재지 : ${seller.address }</p>
 	                <p id="seller_number">중개등록번호 : 12345-677-123123</p>
-	                <p id="seller_phone">연락처 : 010-1234-5678</p>
+	                <p id="seller_phone">연락처 : ${seller.phone }</p>
 	            </div>
 	        </div>
 	        <hr>
@@ -936,8 +936,31 @@
 	     
 	   </div>
  
-	      
-  
+		<!-- 신고 모달 창 -->
+	   <div class="modal fade" id="reportInsertModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">허위매물 신고</h5>
+						<button type="button" class="btn-close" onclick="$('#reportInsertModal').modal('hide');"
+							aria-label="Close"
+							style="border: none; background: white; font-size: 20px;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" align="center">
+						<h3>신고 내용 작성</h3>
+						<textarea rows="3" cols="80" class="reportContent" placeholder="내용을 작성해주세요."></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" onclick="insertReport(2)" class="btn btn-success">등록하기</button>
+						<button type="button" class="btn btn-primary"
+	                        onclick="$('#reportInsertModal').modal('hide');">닫기</button>
+      				</div>
+				</div>
+			</div>
+		</div>   
+
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
 </body>
@@ -960,7 +983,9 @@
 	    	$(".modalbox").hide();
 	    	$(".modalLast").show();
 	    })
-	    
+	    $(".notify").click(function(){
+	    	$("#reportInsertModal").modal("show");
+	    })
 	})
 	$(function(){
 		boardList();
@@ -1065,6 +1090,27 @@
 		})
 	}
 	
+	/* 신고 등록 함수 */
+	function insertReport(type) {
+		let reportContent = $(".reportContent").val();
+		$.ajax({
+			url : "<%=request.getContextPath()%>/sell/report",
+			data : {
+					refTuno : ${seller.userNo}, 
+					refRuno : <%= ((Member)request.getSession().getAttribute("loginUser")).getUserNo()%>,
+					reportContent : reportContent,
+					reportType: type
+					},
+			type: "post",
+			success : function(result){
+				if(result >= 1){
+					swal("", "신고가 등록되었습니다.", "success");					
+				}else {
+					swal("", "신고 등록 실패.", "error");
+				}
+			}
+		});
+	}
 
 </script>
 </html>

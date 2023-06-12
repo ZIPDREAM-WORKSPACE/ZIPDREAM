@@ -31,5 +31,14 @@ public class AgentDao {
 		return (ArrayList)sqlSession.selectList("agent-mapper.selectRequestList", userNo, rowBounds);
 		
 	}
+	public MyRoomSell selectRequestUser(int userSrNo) {
+		
+		return sqlSession.selectOne("agent-mapper.selectRequestUser", userSrNo);
+	}
+	
+	public int updateMyRoomSell(MyRoomSell ms) {
+		
+		return sqlSession.update("agent-mapper.updateMyRoomSell", ms);
+	}
 	
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
@@ -46,5 +47,8 @@ public class SellDao {
 	
 	public List<SellDetailApi> selectApiList(String kaptAddress){
 		return sqlSession.selectList("sell-mapper.selectApiList", kaptAddress);
+	}
+	public int insertReport(Report report) {
+		return sqlSession.insert("sell-mapper.insertReport",report);
 	}
 }

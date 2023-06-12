@@ -105,7 +105,7 @@
 	
 	<select id="countObjectYesterday" resultType="_int">
 		SELECT COUNT(*) FROM SELLDETAIL
-		<![CDATA[WHERE SELL_ENROLL_DATETIME < CURDATE()]]>
+		<![CDATA[WHERE SELL_ENROLL_DATE < CURDATE()]]>
 	</select>
 	
 	<select id="countReport" parameterType="_int" resultType="_int">
@@ -349,7 +349,8 @@
 	
 	<update id="acceptBkMember" parameterType="_int">
 		UPDATE MEMBER SET 
-			 WITHDRAW = 'Y'
+			 WITHDRAW = 'Y',
+			 MODIFY_DATETIME = SYSDATE()
 		WHERE USER_NO = #{userNo}
 	</update>
 	

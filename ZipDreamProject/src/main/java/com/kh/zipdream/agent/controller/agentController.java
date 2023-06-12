@@ -11,12 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.zipdream.agent.model.service.AgentService;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.mypage.model.vo.MyRoomSell;
 import com.kh.zipdream.sell.model.service.SellService;
 
 @Controller
@@ -71,8 +74,35 @@ public class agentController {
 		return "agent/agentCounselList";
 	}
 	
-	@GetMapping("mypage")
+	@GetMapping("/mypage")
 	public String agentPage() {
 		return "agent/agentMypage";
 	}
+	
+	@ResponseBody
+	@GetMapping("/userInfo")
+	public MyRoomSell selectRequestUser(int userSrNo) {
+		
+		MyRoomSell ms = agentService.selectRequestUser(userSrNo);
+		
+		return ms;
+		
+	}
+	
+	@PostMapping("/updateMs")
+	public String updateMyRoomSell(MyRoomSell ms) {
+		
+		System.out.println(ms);
+		
+		int result = agentService.updateMyRoomSell(ms);
+	
+		if(result>0) {
+			return "redirect:/";
+		} else {
+			return "";
+		}
+		
+	}
+	
+	
 }
