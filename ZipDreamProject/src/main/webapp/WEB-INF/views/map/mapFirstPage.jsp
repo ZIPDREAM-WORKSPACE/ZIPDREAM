@@ -910,6 +910,9 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  	listLiTag.setAttribute("class", "goDetail");
     						  	
 						  	
+    						  	$("#allOj").css("background-color", "#1F4B6B").css("color", "white");
+    						  	$("#comOkOj").css("background-color", "#F0F0F0").css("color", "black");
+    						  	
     						  	
     						  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
     						  	// x y를 넣어서 <li name="134.25252, 145.12321321">
@@ -1040,6 +1043,9 @@ function displayCenterInfo(result, status) {
 
 
 $("#comOkOj").click(function(){
+  	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
+  	$("#comOkOj").css("background-color", "#1F4B6B").css("color", "white");
+	
 	$.ajax({
 		type: "get",
 		url: "<%= request.getContextPath() %>/sell/sellList",
@@ -1054,7 +1060,7 @@ $("#comOkOj").click(function(){
 				var listLiTag = document.createElement("li");
 			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
-					result[i].sellPrivateArea+" | "+ result[i].sellFloor+"층";
+					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층";
 		  		listEl.appendChild(listLiTag);
 			}
 		  	
@@ -1064,10 +1070,6 @@ $("#comOkOj").click(function(){
 		}
 		
 	});
-});
-
-$("#allOj").click(function(){
-    
 });
 
 
