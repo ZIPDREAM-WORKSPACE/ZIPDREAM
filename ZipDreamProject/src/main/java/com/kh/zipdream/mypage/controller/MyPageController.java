@@ -39,12 +39,14 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/couponlist")
-	public String moveCouponListController(@ModelAttribute("loginUser") Member loginUser, Model model){
+	public String moveCouponListController(@ModelAttribute("loginUser") Member loginUser, 
+											Model model,
+											@RequestParam(value="cpage", defaultValue="1") int currentPage){
 		
 		Map<String, Object> map = new HashMap();
 		int userNo = loginUser.getUserNo();
 		
-		myroomSellService.selectCouponList(userNo, map);
+		myroomSellService.selectCouponList(currentPage,userNo, map);
 		
 		model.addAttribute("map", map);
 		

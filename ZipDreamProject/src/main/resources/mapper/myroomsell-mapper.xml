@@ -95,5 +95,16 @@
 		WHERE USER_NO = #{userNo}
 	</select>
 	
+	<select id="selectCouponListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM USER_COUPON
+		WHERE USER_NO = #{userNo}
+		
+	</select>
+	
+	<delete id="deleteUserCoupon">
+		DELETE FROM USER_COUPON
+		WHERE USER_NO = #{userNo} AND COUPON_NO = #{couponNo}
+	</delete>
 	
 </mapper>
