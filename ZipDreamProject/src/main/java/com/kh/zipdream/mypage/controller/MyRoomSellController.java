@@ -49,5 +49,13 @@ public class MyRoomSellController {
 		
 		
 	}
+	
+	@ResponseBody
+	@GetMapping("/deletemyroom")
+	public void myroomSellDelete(int userSrNo) {
+		
+		myroomsellService.myroomSellDelete(userSrNo);
+		
+	}
 
 }

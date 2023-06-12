@@ -39,7 +39,15 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/couponlist")
-	public String moveCouponListController(){
+	public String moveCouponListController(@ModelAttribute("loginUser") Member loginUser, Model model){
+		
+		Map<String, Object> map = new HashMap();
+		int userNo = loginUser.getUserNo();
+		
+		myroomSellService.selectCouponList(userNo, map);
+		
+		model.addAttribute("map", map);
+		
 		return "mypage/couponList";
 	}
 	

@@ -93,40 +93,6 @@
     letter-spacing: -0.0em;
 
 }
-.approve{
-	color: rgb(255, 255, 255);
-    font-size: 15px;
-    font-weight: 400;
-    width: 62px;
-    height: 28px;
-    margin: 0px auto;
-    line-height: 28px;
-    border-radius: 2px;
-    background-color: rgb(22, 107, 229);
-}
-.refuse{
-    font-size: 15px;
-    font-weight: 400;
-    width: 62px;
-    height: 28px;
-    margin: 0px auto;
-    line-height: 28px;
-    border-radius: 2px;
-    color: #E45A64;
-	border: 1px solid #E45A64;
-}
-.wating{
-	font-size: 15px;
-    font-weight: 400;
-    width: 62px;
-    height: 28px;
-    margin: 0px auto;
-    line-height: 28px;
-    border-radius: 2px;
-    color: #326CF9;
-	border: 1px solid #326CF9;
-
-}
 .pagination{
 	justify-content: center;
  	margin-top: 30px;
@@ -167,13 +133,13 @@
 							<td>${myroom.address }</td>
 							<td>${myroom.dealType}</td>
 							<c:if test="${myroom.status == 1}">
-								<td><p class="wating">대기</p></td>
+								<td><button type="button" class="btn btn-outline-primary" id="wating">대기</button></td>
 							</c:if>
 							<c:if test="${myroom.status == 2}">
-								<td><p class="approve">승인</p></td>
+								<td><button type="button" class="btn btn-secondary" id="approve">승인</button></td>
 							</c:if>
 							<c:if test="${myroom.status == 3}">
-								<td><p class="refuse">거절</p></td>
+								<td><button type="button" class="btn btn-danger" id="refuse"  value="${myroom.userSrNo }">거절</button></td>
 
 							</c:if>
 						</tr>
@@ -222,6 +188,58 @@
 			
 		</div>
 	</div>
+	
+	<script>
+		$(function(){
+			$(".btn").on("click", function(e){
+				console.log(e.target.id);
+				if(e.target.id == "wating"){
+					swal({
+						  text: "승인대기 중입니다.",
+						  icon: "info",
+						  button: "확인",
+						});
+				}else if(e.target.id == "approve"){
+					swal({
+						text:"승인완료된 매물입니다.",
+						icon:"success",
+						button:"확인"
+					});
+				}else if(e.target.id == "refuse"){
+					let userSrNo = e.target.value;
+					swal({
+						  title: "삭제하시겠습니까?",
+						  text: "공인중개사로부터 승인거절당한 매물입니다. 해당 매물 정보를 삭제하시겠습니까?",
+						  icon: "warning",
+						  buttons: ["취소", "삭제"],
+						  buttons: true,
+						  dangerMode: true,
+						})
+						.then((willDelete) => {
+						  if (willDelete) {
+						    $.ajax({
+						    	url:"<%=request.getContextPath()%>/myroomsell/deletemyroom",
+						    	method:"get",
+						    	data:{userSrNo},
+						    	success:function(){
+						    		swal({
+										text:"삭제완료되었습니다",
+										icon:"success",
+										button:"확인"
+									}).then(function(){
+										location.href = "<%=request.getContextPath()%>/mypage/myroomlist";
+									});
+						    	},
+						    	error:function(){
+						    		console.log("에러발생");
+						    	}
+						    });
+						};
+					})
+				}	
+			})
+		});
+	</script>
 
 
 
