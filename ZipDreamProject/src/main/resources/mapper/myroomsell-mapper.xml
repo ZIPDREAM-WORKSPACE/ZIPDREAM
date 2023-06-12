@@ -94,6 +94,7 @@
 		JOIN COUPON USING(COUPON_NO)
 		WHERE USER_NO = #{userNo}
 	</select>
+
 	
 	<select id="selectCouponListCount" resultType="int">
 		SELECT COUNT(*)
@@ -101,6 +102,7 @@
 		WHERE USER_NO = #{userNo}
 		
 	</select>
+
 	
 	<delete id="deleteUserCoupon">
 		DELETE FROM USER_COUPON

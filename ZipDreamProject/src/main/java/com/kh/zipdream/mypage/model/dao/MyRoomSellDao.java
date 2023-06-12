@@ -54,6 +54,7 @@ public class MyRoomSellDao {
 		sqlSession.delete("myroomsell-mapper.myroomSellDelete", userSrNo);
 	}
 	
+
 	public ArrayList<Coupon> selectCouponList(PageInfo pi, int userNo){
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
@@ -71,6 +72,7 @@ public class MyRoomSellDao {
 	
 	public void deleteUserCoupon(Coupon coupon) {
 		sqlSession.delete("myroomsell-mapper.deleteUserCoupon", coupon);
+
 	}
 	
 }

@@ -61,6 +61,7 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 	}
 
 	@Override
+
 	public void selectCouponList(int currentPage, int userNo, Map<String, Object> map) {
 		
 		int listCount = myroomSellDao.selectCouponListCount(userNo);
@@ -71,9 +72,11 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 		ArrayList<Coupon> couponList = myroomSellDao.selectCouponList(pi,userNo);
 		
 		map.put("pi", pi);
+
 		map.put("couponList", couponList);
 		
 	}
+
 
 	@Override
 	public void deleteUserCoupon(Coupon coupon) {
