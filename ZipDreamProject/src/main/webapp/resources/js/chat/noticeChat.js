@@ -111,7 +111,7 @@ function addEventMessage(){
  
  };
 function clickLink(url){
-	location.href = url;
+	window.open('about:blank').location.href = url;
 };
  
  

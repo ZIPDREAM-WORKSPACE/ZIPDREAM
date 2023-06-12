@@ -4,7 +4,7 @@
 
 	.listWrap>div{
 		font-size: 25px;
-		width: 400px;
+		width: 500px;
 		height: 70px;
 		text-align:center;
 		line-height:70px;
