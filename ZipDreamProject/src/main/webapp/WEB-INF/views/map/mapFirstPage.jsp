@@ -1054,12 +1054,14 @@ $("#comOkOj").click(function(){
 		  	
 			for(let i=0; i<result.length; i++){
 				var listLiTag = document.createElement("li");
+				listLiTag.setAttribute("id", result[i].sellNo);
 			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
 					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
 					"중개사 소재지 : "+result[i].brokerAdd;
 		  		listEl.appendChild(listLiTag);
 			}
+			
 		  	
 		},
 		error: function(result){
@@ -1068,6 +1070,11 @@ $("#comOkOj").click(function(){
 		
 	});
 });
+
+$("#placesList>li").click(function(){
+	
+});
+
 
 let plusLi = "";
 let resultBjdCode = "";
