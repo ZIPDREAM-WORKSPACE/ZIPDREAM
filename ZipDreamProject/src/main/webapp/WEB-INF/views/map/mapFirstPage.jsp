@@ -1072,7 +1072,9 @@ $("#comOkOj").click(function(){
 });
 
 $("#placesList>li").click(function(){
-	
+	$.ajax({
+		url: <%= request.%>
+	});
 });
 
 
