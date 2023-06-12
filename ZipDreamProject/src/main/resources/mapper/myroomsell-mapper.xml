@@ -31,6 +31,15 @@
 		<result column="DEAL_TYPE" property="dealType" />
 		<result column="STATUS" property="status" />
 	</resultMap>
+	
+	<resultMap type="coupon" id="couponResultSet">
+		<result column="COUPON_NO" property="couponNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="COUPON_TITLE" property="couponTitle"/>
+		<result column="COUPON_CONTENT" property="couponContent"/>
+		<result column="COUPON_DATE" property="couponDate"/>
+		<result column="COUPON_PATH" property="couponPath"/>
+	</resultMap>
 
 
 	<select id="selectAgent" parameterType="hashmap" resultMap="memberResultSet">
@@ -65,6 +74,7 @@
 		SELECT COUNT(*) 
 		FROM USER_ROOM_SELL
 		WHERE REF_UNO = #{userNo}
+		
 	</select>
 	
 	<select id="selectMyRoomList" resultMap="myroomsellResultSet">
@@ -73,6 +83,17 @@
 		WHERE REF_UNO = #{userNo}
 	</select>
 	
+	<delete id="myroomSellDelete">
+		DELETE FROM USER_ROOM_SELL
+		WHERE USER_SR_NO=#{userSrNo}
+	</delete> 
+	
+	<select id="selectCouponList" resultMap="couponResultSet">
+		SELECT *
+		FROM USER_COUPON
+		JOIN COUPON USING(COUPON_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
 	
 	
 </mapper>
