@@ -353,7 +353,15 @@
 	background-color: #1F4B6B;
 	color: white;
 	}
-      
+.kwBoxLi{
+	 list-style-type: none;
+	 font-size: 15px;
+	 padding: 5px;
+}
+.kwBoxLi:hover{
+	background-color: #F0F0F0;
+	cursor: pointer;
+}
 </style>
 
 
@@ -383,17 +391,22 @@
 			<div id="menu_wrap" class="bg_white scrollBar">
 				<div class="option">
 					<div>
-						<form id="search" name="sfrom"
-							onsubmit="searchApt(); return false;">
-							<input name="s" type="text" id="keyword"
+						<form id="search" name="sfrom">
+							<div style="height: 45px;">
+								<input name="s" type="text" id="keyword"
 								placeholder="키워드를 입력하세요.">
-							<button type="submit" class="searchBtn">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-									fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-								  <path
-										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-								</svg>
-							</button>
+								<button type="submit" class="searchBtn">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									  <path
+											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+									</svg>
+								</button>
+								<div id="keywordListBox" class="scrollBar" style="display:none; border: 1px solid lightgray; border-top: none; box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 18px -10px; width: 220px; height: 200px; position: absolute; background-color: white; top: 45px; left: 30px; z-index: 1;" >
+									<ul id="keywordListBoxUl">
+									</ul>
+								</div>
+							</div>
 							<div class="btnSt">
 								<button id="allOj" class="selectBtn" type="button" >전체</button>
 								<button id="comOkOj" class="selectBtn" type="button" >상담 가능 매물</button>
@@ -404,7 +417,7 @@
 						</div> -->
 					</div>
 				</div>
-				<hr>
+				<br><br><hr>
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
 				<!-- <div class="keywordPlaceList"></div> -->
@@ -753,7 +766,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	                      dataType: "text",
     	                      contentType : "text/plain; charset:UTF-8",
     	                      success: function(resultData){
-    	                    	  
+    	                    	 
     	                         let result = JSON.parse(resultData);
     	                         let result0 = JSON.parse(result[0]);
     	                         let keys = Object.keys(result0);
@@ -1024,23 +1037,6 @@ function displayCenterInfo(result, status) {
         }
     }    
 } 
-/* $(function(){
-	
-	$("#comOkOj").click(function(){
-		var className = $("#comOkOj").attr("class");
-		console.log(className);
-		if(className == "noneClick"){
-			$("#comOkOj").css("background-color", "noneClick");
-			$("#comOkOj").css("color", "white");
-		}else{
-			$("#comOkOj").css("background-color", "lightgray");
-			$("#comOkOj").css("color", "black");
-			$("#comOkOj").attr("class", "click");
-		}
-	});
-	
-}); */
-
 
 $("#comOkOj").click(function(){
   	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
@@ -1060,7 +1056,8 @@ $("#comOkOj").click(function(){
 				var listLiTag = document.createElement("li");
 			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
-					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층";
+					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
+					"중개사 소재지 : "+result[i].brokerAdd;
 		  		listEl.appendChild(listLiTag);
 			}
 		  	
@@ -1072,23 +1069,78 @@ $("#comOkOj").click(function(){
 	});
 });
 
-
-
-function searchApt(){
-	let search = document.getElementById("search").value;
+let plusLi = "";
+let resultBjdCode = "";
+$("#keyword").keyup(function(){
+	$("#keywordListBox").css("display", "block");
 	
+	$(document).on('click', function(e) {
+	    var container = $("#keywordListBox");
+	    if (!$(e.target).closest(container).length) {
+	        container.hide();
+	    }
+	});
 	
-	// 리스트 비워주고
 	listEl = "";
+	let keyword = document.getElementById("keyword").value;
+	// 유효성검사 
 	
-	// li 태그에 아파트 정보 텍스트로 표시
 	
-	let listInner = 아파트정보;
+		$.ajax({
+			  url : "<%=request.getContextPath()%>/map/searchKeyword",
+			  method: "get",
+			  data: {'keyword' : keyword},
+			  dataType: "json",
+			  success : function(result){
+				  console.log(result);
+				  // li 태그에 정보 넣어서 추가
+				  document.getElementById("keywordListBoxUl").innerHTML = "";
+				  for(let i=0; i<result.length; i++){
+					  plusLi = document.createElement("li");
+					  resultBjdCode = result[i].bjdCode;
+					  plusLi.setAttribute("class", "kwBoxLi");
+					  plusLi.setAttribute("id", resultBjdCode);
+					  plusLi.innerHTML = result[i].bjdName;
+					  
+					  document.getElementById("keywordListBoxUl").appendChild(plusLi);
+					  
+					  let buttonLi = document.getElementById(resultBjdCode);
+					  let btnLiVal = document.getElementById(resultBjdCode).id;
+					  console.log("btnLiVal "+btnLiVal );
+					  let resultBLV = btnLiVal.substring(0, 5);
+					  console.log("resultBLV "+resultBLV);
+					  
+					  buttonLi.onclick = function () {
+						  
+						  $.ajax({
+							  url:"<%= request.getContextPath()%>/map/getXmlCode",
+							  method: "get",
+							  data :{'code' : resultBLV },
+							  dataType: "text",
+    	                      contentType : "text/plain; charset:UTF-8",
+							  success: function(result){
+								  console.log(result);
+								  
+							  },
+							  error: function(result){
+								  console.log("에러");
+							  }
+							  
+						  });
+					  }
+					  
+				  }
+				  
+			  },
+			  error : function(result){
+				  /* alert("결과가 존재하지 않습니다. 다시 입력해주세요."); */
+			  }
+		})
 	
-  	listLiTag.textContent = listInner;
-  	listEl.appendChild(listLiTag);
+});
 
-}
+
+
  
 </script>
 <script>
