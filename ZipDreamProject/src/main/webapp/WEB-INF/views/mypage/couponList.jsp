@@ -59,6 +59,7 @@
 	border: 1px solid #ededed;
 	box-shadow: 0 2px 12px 0 #ededed;
 	border-radius: 10px;
+
 }
 
 .card-body {
@@ -194,11 +195,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+
 }
 </style>
 </head>
 <body>
+
 	<jsp:include page="mypage.jsp" />
+
 	<script>
 		$(function() {
 			console.log('${couponList}');
@@ -347,6 +351,7 @@
 			})
 		});
 	</script>
+
 	
 
 	

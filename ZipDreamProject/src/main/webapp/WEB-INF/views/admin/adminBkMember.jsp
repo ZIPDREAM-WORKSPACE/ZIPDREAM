@@ -37,7 +37,7 @@
 					<c:choose>
 						<c:when test="${fn: length(userList.list) == 0}">
 							<tr>
-								<td colspan="4" style="text-align:center;">회원이 없습니다.</td>
+								<td colspan="5" style="text-align:center;">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
