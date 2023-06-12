@@ -20,9 +20,9 @@
 						<th>작성일</th>
 					</tr>
 					<c:choose>
-						<c:when test="${fn: length(noticeBoardList.list) == 0} ">
+						<c:when test="${fn: length(noticeBoardList.list) == 0}">
 							<tr>
-								<td colspan="4">게시글이 없습니다.</td>
+								<td colspan="4" style="text-align:center;">게시글이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
