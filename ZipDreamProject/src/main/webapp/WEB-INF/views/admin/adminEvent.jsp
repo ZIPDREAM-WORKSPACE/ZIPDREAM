@@ -257,7 +257,7 @@ function openInsertModal(td){
 	document.getElementById("coupon-userNo").value = userInfo[1].innerText;
 	document.getElementById("coupon-userId").value = userInfo[2].innerText;
 	document.getElementById("coupon-userPhone").value = userInfo[3].innerText;
-	document.getElementById("coupon-createDate").value = userInfo[4].innerText;
+	document.getElementById("coupon-createDate").value = userInfo[5].innerText;
 	
 	$('#couponInsertModal').modal("show");
 }
@@ -276,12 +276,12 @@ function ArrayInsertModal(){
 			document.getElementById("coupon-userNo").value += userCheck[i].value;
 			document.getElementById("coupon-userId").value += userInfo[2].innerText;
 			document.getElementById("coupon-userPhone").value += userInfo[3].innerText;
-			document.getElementById("coupon-createDate").value += userInfo[4].innerText;
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText;
 		}else {
 			document.getElementById("coupon-userNo").value += userCheck[i].value + ",";			
 			document.getElementById("coupon-userId").value += userInfo[2].innerText + ",";
 			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ",";
-			document.getElementById("coupon-createDate").value += userInfo[4].innerText + ",";
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ",";
 		}
 	}
 	$('#couponInsertModal').modal("show");
