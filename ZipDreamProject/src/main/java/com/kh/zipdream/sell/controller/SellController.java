@@ -1,9 +1,14 @@
 package com.kh.zipdream.sell.controller;
 
+import java.io.BufferedReader; 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream; 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;  
 import java.util.List;
 
@@ -28,7 +33,7 @@ import com.google.gson.Gson;
 import com.kh.zipdream.sell.model.service.SellService;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
- 
+  
 @Controller
 @RequestMapping("/sell")
 public class SellController {
@@ -72,12 +77,26 @@ public class SellController {
 	//sell_detail페이지 이동
 	@PostMapping("/detailapi")	
 	public String sellDetailApi(Model model, SellDetailApi sda){
-
+		
+		
 		model.addAttribute("sda", sda);
+		String address =sda.getSellAddress();
+		System.out.println(address);
+		String kaptAddress = sda.getSellAddress().substring(0,9)+sda.getSellAddress().substring(13);
+		String kaptName = sda.getSellName().substring(0,4);
+		System.out.println(kaptName);
+		
+		System.out.println("주소 : " + kaptAddress);
+		
+		if(kaptAddress != null) {
+			List<SellDetailApi> list = sellService.selectApiList(kaptAddress);
+		}
+		
 		System.out.println("sd:"+ sda);
 		
 		return "sell/sellDetailApi";
 	}
+	
 	
 	@GetMapping("/detail/{sellNo}")	
 	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo){
@@ -98,50 +117,7 @@ public class SellController {
 		return new Gson().toJson(sdList);
 	}
 	
-	//상담신청
-	/*
-	 * @PostMapping("/sellApply")
-	 * 
-	 * @ResponseBody public int sellApply() { return result; }
-	 */
-	@PostMapping("/addApi/{sellSno}")
-	@ResponseBody
-	public void sellAddApi(int sidoCode, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=UTF-8");
-		
-		String apiHtml = "http://apis.data.go.kr/1613000/AptListService2/getSidoAptList";
-		String serviceKey = "JUcWmPoEmZ5fqRuSCJQMJZVyqQnw6TosEAsAGq9QBxgACfB0IclbACz1nqClqgNZ8GynTRYruU9UCWuTD4YA2A%3D%3D";
-		String parameter = "";
-		
-		PrintWriter out = response.getWriter();
-		
-		parameter = parameter + "&" + "sidoCode="+sidoCode;
-		
-		apiHtml = apiHtml + serviceKey + parameter;
-		URL url = new URL(apiHtml);
-		
-		System.out.println(apiHtml); 
-		
-		InputStream in = url.openStream();
-		
-		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-		IOUtils.copy(in, bos1);
-		in.close();
-		bos1.close();
-		
-		String mbos = bos1.toString("UTF-8");
-		
-		byte[] b = mbos.getBytes("UTF-8");
-		String s = new String(b, "UTF-8");
-		out.print(s);
-		
-		JSONObject json = new JSONObject();
-		json.put("api", s);
-		
-	}
-	
+
 
 		
 }

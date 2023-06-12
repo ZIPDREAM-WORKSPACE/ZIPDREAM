@@ -56,6 +56,29 @@
  		<result column="FILE_LEVEL" property="fileLevel"/>
   	</resultMap>
  	
+ 	<resultMap type="sellDetailApi" id="apiResultSet">
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 		<result column="" property=""/>
+ 	</resultMap>
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
 		INSERT INTO SELLDETAIL

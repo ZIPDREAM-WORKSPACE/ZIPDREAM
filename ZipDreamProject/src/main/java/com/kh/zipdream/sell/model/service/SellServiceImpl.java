@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.dao.SellDao;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 import com.kh.zipdream.utils.FileUtils;
 
 @Service
@@ -77,6 +78,10 @@ public class SellServiceImpl implements SellService {
 	
 	public List<SellDetail> selectSellAllList(){
 		return sellDao.selectSellAllList();
+	}
+	
+	public List<SellDetailApi> selectApiList(String kaptAddress){
+		return sellDao.selectApiList(kaptAddress);
 	}
 
 }

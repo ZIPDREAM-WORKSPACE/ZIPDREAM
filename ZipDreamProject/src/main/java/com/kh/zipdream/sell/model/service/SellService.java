@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
 public interface SellService {
 	
@@ -16,5 +17,7 @@ public interface SellService {
 	SellDetail sellDetail(int sellNo);
 	
 	List<SellDetail> selectSellAllList();
+	
+	List<SellDetailApi> selectApiList(String kaptAddress);
 
 }
