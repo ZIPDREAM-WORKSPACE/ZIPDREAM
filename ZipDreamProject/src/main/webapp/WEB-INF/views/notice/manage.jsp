@@ -53,16 +53,15 @@ tbody::-webkit-scrollbar {
 		
 		text-align: center;
 	}
-	.num{
-		width:100px;
-	}
 	.title{
-		width:300px;
+		width:200px;
 	}
 	.content{
 		width:600px;
 	}
-	
+	.time{
+		width:200px;
+	}
 </style>
 <body>
 <jsp:include page="notice_header.jsp"/>
@@ -70,9 +69,9 @@ tbody::-webkit-scrollbar {
 		<table>
 			<thead>
 				<tr>
-					<th class="num">번호</th>
 					<th class="title">제목</th>
 					<th class="content">내용</th>
+					<th class="time">날짜</th>
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
@@ -81,46 +80,7 @@ tbody::-webkit-scrollbar {
 					<td class="title">첫 가입 이벤트 혜택</td>
 					<td class="content">복비 10% 할인 쿠폰 지급되었습니다.</td>
 				</tr> -->
-			<!-- 	<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-					<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr> -->
+			
 			</tbody>
 		</table>
 	</div>

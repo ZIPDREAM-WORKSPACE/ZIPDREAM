@@ -61,14 +61,14 @@ function addEventMessage(){
  	tr1.setAttribute("onClick", "clickLink('"+houseMessage.hsUrl+"')");
  	tr1.classList.add("link");
  	const td1 = document.createElement("td");
- 	td1.classList.add("num");
+ 	td1.classList.add("title");
  	const td2 = document.createElement("td");
- 	td2.classList.add("title");
+ 	td2.classList.add("content");
  	const td3 = document.createElement("td");
- 	td3.classList.add("content");
+ 	td3.classList.add("time");
  	
- 	td1.innerHTML = houseMessage.title;
- 	td2.innerHTML = houseMessage.hsUrl;
+ 	td1.innerHTML = houseMessage.title +" 분양 정보";
+ 	td2.innerHTML = "관심 분양에 등록했습니다."
  	td3.innerHTML = houseMessage.startDateTime;
  	
  	// 내용
@@ -101,12 +101,13 @@ function addEventMessage(){
  	
  }
  function createNotice(){
+ 
  const div1 = document.createElement("div");
  		div1.classList.add("notice1");
  		div1.innerHTML= "새로운 알림이 도착했습니다.";
  		const header1 = document.getElementsByClassName("header")[0];
  		header1.append(div1);
- 		   $( '.notice1' ).fadeOut( 5000, 'swing' );
+ 		   $( '.notice1' ).fadeOut( 3000, 'swing' );
  
  };
 function clickLink(url){
@@ -131,11 +132,11 @@ function clickLink(url){
  	
  	const tr1 = document.createElement("tr");
  	const td1 = document.createElement("td");
- 	td1.classList.add("num");
+ 	td1.classList.add("title");
  	const td2 = document.createElement("td");
- 	td2.classList.add("title");
+ 	td2.classList.add("content");
  	const td3 = document.createElement("td");
- 	td3.classList.add("content");
+ 	td3.classList.add("time");
  	
   	console.log(reportMessage.refRuno);
   	console.log(refUno);

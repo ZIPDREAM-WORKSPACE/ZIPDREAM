@@ -170,13 +170,19 @@ position: absolute;
 	margin-right:5px;
 }
 	.notice1{
-		width:200px;
-		height:100px;
-		background: grey;
+		width:250px;
+		height:60px;
+		line-height:60px;
 		position: absolute;
-		top:10%;
+		background:white;
+		top:150%;
 		right:10%;
-		border-radius: 10px;
+		border-radius: 30px;
+		border : 3px solid black;
+		z-index : 99;
+		 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+		 text-align: center;
+		 padding:0px;
 		
 	}
 </style>
@@ -274,6 +280,10 @@ position: absolute;
 	});
 	
 	
+	let houseSock1 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	houseSock1.onmessage = function(e){
+		createNotice();
+	}
 	
 
 	</script>
