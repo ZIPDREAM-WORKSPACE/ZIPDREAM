@@ -56,6 +56,42 @@
 		<result column="FILE_LEVEL" property="fileLevel"/>
 	</resultMap>
 	
+	<resultMap type="sellDetail" id="sellDetailResultSet">
+ 		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="REF_UNO" property="refUno"/>
+ 		<result column="SELL_NAME" property="sellName"/>
+ 		<result column="SELL_ADDRESS" property="sellAddress"/>
+ 		<result column="SELL_PRICE" property="sellPrice"/>
+ 		<result column="SELL_MAINTENANCE" property="sellMaintenance"/>
+ 		<result column="SELL_PARKING" property="sellParking"/>
+ 		<result column="SELL_SHORTTERM" property="sellShortterm"/>
+ 		<result column="SELL_TYPE" property="sellType"/>
+ 		<result column="SELL_FLOOR" property="sellFloor"/>
+ 		<result column="SELL_PRIVATE_AREA" property="sellPrivateArea"/>
+ 		<result column="SELL_PROVIDE_AREA" property="sellProvideArea"/>
+ 		<result column="SELL_ALL_FLOOR" property="sellAllFloor"/>
+ 		<result column="SELL_ROOM_COUNT" property="sellRoomCount"/>
+ 		<result column="SELL_TOILET_COUNT" property="sellToiletCount"/>
+ 		<result column="SELL_WAY" property="sellWay"/>
+ 		<result column="SELL_HOUSEHOLD" property="sellHousehold"/>
+ 		<result column="SELL_ENTRANCE" property="sellEntrance"/>
+ 		<result column="SELL_MOVE_DATE" property="sellMoveDatetime"/>
+ 		<result column="SELL_INSTALLATION" property="sellInstallation"/>
+ 		<result column="SELL_AIRCONTITION" property="sellAircondition"/>
+ 		<result column="SELL_HEATING" property="sellHeating"/>
+ 		<result column="PARKING_COUNT" property="parkingCount"/>
+ 		<result column="SELL_APPROVAL_DATE" property="sellApprovalDatetime"/>
+ 		<result column="SELL_ENROLL_DATE" property="sellEnrollDatetime"/>
+ 		<result column="COMPLEX_APPLY_DATE" property="complexApplyDatetime"/>
+ 		<result column="WING_COUNT" property="wingCount"/>
+ 		<result column="HOUSEHOLD_COUNT" property="householdCount"/>
+ 		<result column="OPTION" property="option"/>
+ 		<result column="SECURITY" property="security"/>
+ 		<result column="CREATE_DATE" property="createDate"/>
+ 		<result column="MODIRY_DATE" property="modifyDate"/>
+ 		
+ 	</resultMap>
+	
 	<select id="countUser" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_LEVEL = 1 
 		<if test='type == 1'>
@@ -106,6 +142,19 @@
 	<select id="countObjectYesterday" resultType="_int">
 		SELECT COUNT(*) FROM SELLDETAIL
 		<![CDATA[WHERE SELL_ENROLL_DATE < CURDATE()]]>
+	</select>
+	
+	<select id="countObjectSearch" parameterType="HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM SELLDETAIL
+		 	<if test='keyword != null and keyword != ""'>
+			  	WHERE
+				  <choose>
+					<when test='condition.equals("name")'> SELL_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("address")'> SELL_ADDRESS LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("price")'> SELL_PRICE >= LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
 	</select>
 	
 	<select id="countReport" parameterType="_int" resultType="_int">
@@ -354,4 +403,25 @@
 		WHERE USER_NO = #{userNo}
 	</update>
 	
+	<select id="selectSellDetailList" parameterType="_int" resultMap="sellDetailResultSet">
+		SELECT * FROM SELLDETAIL ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="selectSellDetailSearch" parameterType="HashMap" resultMap="sellDetailResultSet">
+		SELECT *
+		FROM SELLDETAIL
+		 	<if test='keyword != null and keyword != ""'>
+			  	WHERE
+				  <choose>
+					<when test='condition.equals("name")'> SELL_NAME LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("address")'> SELL_ADDRESS LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+			    	<when test='condition.equals("price")'> SELL_PRICE LIKE  CONCAT(CONCAT('%',#{keyword}),'%')  </when>
+				  </choose>
+			 </if>
+		ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<delete id="deleteSellDetail" parameterType="_int">
+		DELETE FROM SELLDETAIL WHERE SELL_NO = #{sellNo}
+	</delete>
 </mapper>

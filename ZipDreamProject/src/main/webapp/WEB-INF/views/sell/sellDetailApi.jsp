@@ -280,7 +280,8 @@
     				userNo : userNo,
     				sellPrice : sellPrice,
     				sellAddress : sellAddress,
-    				detail : detail
+    				detail : detail,
+    				expire: Date.now() + (1000 * 60 * 60 * 24)
 			}
     	
     		const objString = JSON.stringify(obj);
@@ -289,12 +290,11 @@
     			window.localStorage.setItem('recentRoom', objString);
     		}
     		
-    		
     	});
     
    
     	
-   	$(function({
+   	<%-- $(function({
     		let sidoCode = '${sda.sidoCode}';
     		$.ajax({
     			url : "<%=request.getContextPath()%>/sell/addApi/"+sidoCode,
@@ -311,7 +311,7 @@
     				console.log("예진api못가져옴");
     			}
     		})
-    	}))
+    	})) --%>
     	
     </script>
     

@@ -11,5 +11,8 @@ public interface MyRoomSellService {
 	public ArrayList<Member> selectAgent(String[] address);
 	public int myroomSellInsert(MyRoomSell mrs);
 	public void selectMyRoomList(int currentPage, int userNo, Map<String, Object> map);
+	public void myroomSellDelete(int userSrNo);
+	public void selectCouponList(int userNo, Map<String, Object> map);
+	
 
 }

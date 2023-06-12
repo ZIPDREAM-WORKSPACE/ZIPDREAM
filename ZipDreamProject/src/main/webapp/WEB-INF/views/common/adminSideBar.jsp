@@ -43,7 +43,7 @@
 		<span>채팅 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
 	</aside>
-	<aside class="side_menu" data-href="main">
+	<aside class="side_menu" data-href="selldetail">
 		<img src="<%=request.getContextPath()%>/resources/images/Wallet.svg" width="25px" height="25px" class="side_img"> 
 		<span>매물 관리</span> 
 		<img src="<%=request.getContextPath()%>/resources/images/Dropdown.svg" width="25px" height="25px" class="side_arrow">
@@ -106,16 +106,9 @@
 	case "chat" :
 		index = 6;
         break;    
-      
-    /*  case 값C :
-        값이 C일 때 실행할 명령문;
-        break;
-    case 값D :
-        값이 D일 때 실행할 명령문;
-        break;
-    case 값E :
-        값이 E일 때 실행할 명령문;
-        break; */
+	case "selldetail" :
+		index = 7;
+        break; 
 	}
 	
 	let menu = $('.side_menu').eq(index);

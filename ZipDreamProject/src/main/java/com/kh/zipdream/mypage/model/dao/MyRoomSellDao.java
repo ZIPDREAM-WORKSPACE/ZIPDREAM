@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
@@ -46,6 +47,16 @@ public class MyRoomSellDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("myroomsell-mapper.selectMyRoomList", userNo, rowBounds);
+	}
+	
+	public void myroomSellDelete(int userSrNo) {
+		
+		sqlSession.delete("myroomsell-mapper.myroomSellDelete", userSrNo);
+	}
+	
+	public ArrayList<Coupon> selectCouponList(int userNo){
+		
+		return (ArrayList)sqlSession.selectList("myroomsell-mapper.selectCouponList", userNo);
 	}
 	
 }
