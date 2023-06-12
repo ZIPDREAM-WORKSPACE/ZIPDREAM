@@ -27,6 +27,7 @@ import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.map.controller.MapController;
 import com.kh.zipdream.member.model.dao.MemberDao;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.utils.FileUtils;
 
 @Service
@@ -407,5 +408,31 @@ public class AdminServiceImpl implements AdminService{
 	
 	public int acceptBkMember(int userNo) {
 		return dao.acceptBkMember(userNo);
+	}
+	
+	public void selectSellDetailList(int cp, Map<String, Object> map) {
+		int listCount = dao.countObject();
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, cp, pageLimit, boardLimit);
+		
+		ArrayList<SellDetail> list = dao.selectSellDetailList(pi);
+		
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public void selectSellDetailSearch(Map<String, Object> paramMap,Map<String, Object> map) {
+		int listCount = dao.countObjectSearch(paramMap);
+		int pageLimit = 10;
+		int boardLimit = 10;
+		PageInfo pi = pagination.getPageInfo(listCount, (int)paramMap.get("cp"), pageLimit, boardLimit);
+		ArrayList<SellDetail> list = dao.selectSellDetailSearch(pi, paramMap);
+		map.put("pi", pi);
+		map.put("list", list);
+	}
+	
+	public int deleteSellDetail(int sellNo) {
+		return dao.deleteSellDetail(sellNo);
 	}
 }

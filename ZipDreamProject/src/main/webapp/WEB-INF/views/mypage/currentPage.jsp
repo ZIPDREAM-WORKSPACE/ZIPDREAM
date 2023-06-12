@@ -8,7 +8,7 @@
 <style>
 .recentContent {
 	width: 100%;
-	height: 450px;
+	/* height: 300px; */
 }
 
 .recentContent>div {
@@ -17,7 +17,7 @@
 	min-height: 400px;
 	padding: 50px 10px 150px;
 	width: 1200px;
-	height: 100%;
+	/* height: 100%; */
 	margin: 0px auto;
 	padding-left: 50px;
 	padding-right: 50px;
@@ -25,8 +25,15 @@
 }
 
 .emptyContent {
+	display:flex;
 	flex: 0 0 auto;
 	padding: 100px 0px 50px;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(174, 174, 174);
+}
+.emptyContent>svg{
+	margin-bottom:20px;
 }
 
 .emptyContent>p {
@@ -81,22 +88,25 @@
 	<script>
 		$(function(){
 			var recentRoom = JSON.parse(localStorage.getItem("recentRoom"));
-			
-			console.log(recentRoom);
-			
-
+			const now = new Date();
 			var html ="";
 			
-			if(recentRoom == null){
-				html = "<div class='emptyContent'><p>최근 본 방이 존재하지 않습니다.</p></div>";
+			if(recentRoom != null){
+				if(now.getTime() > recentRoom.expire){
+					window.localStorage.clear();
+					location.reload();
+				}else{
+					html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 20개까지 저장됩니다.</p></div>";
+					html += "<div class='row row-cols-1 row-cols-md-4 g-4'><div class='col'><div class='card h-100'>";
+					html += "<img src='https://ifh.cc/g/aoGQoK.jpg' class='card-img-top'><div class='card-body'>";
+					html += "<h5 clas='card-title'>" + recentRoom.sellPrice + "</h5>";
+					html += "<p class='card-text'>" + recentRoom.detail + "</p>";
+					html += "<p clas='card-text'>" + recentRoom.sellAddress + "</p></div></div></div>";
+				}
 			}else{
-				html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 20개까지 저장됩니다.</p></div>";
-				html += "<div class='row row-cols-1 row-cols-md-4 g-4'><div class='col'><div class='card h-100'>";
-				html += "<img src='https://ifh.cc/g/aoGQoK.jpg' class='card-img-top'><div class='card-body'>";
-				html += "<h5 clas='card-title'>" + recentRoom.sellPrice + "</h5>";
-				html += "<p class='card-text'>" + recentRoom.detail + "</p>";
-				html += "<p clas='card-text'>" + recentRoom.sellAddress + "</p></div></div></div>";
+				html = "<div class='emptyContent'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-x-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg><p>최근 본 방이 존재하지 않습니다.</p></div>";
 			}
+			
 			
 			$('.rc').append(html);
 
@@ -106,62 +116,9 @@
 	
 	 <div class="recentContent">
         <div class="rc">
-   			<!-- 최근본방이 존재하지 않을때  -->
-            <!-- <div class="emptyContent">
-                <p>최근 본 방이 존재하지 않습니다.</p>
-            </div> -->
-            <!-- 최근본방이 존재할 경우 -->
-            <!-- <div class="recentRoomList">
-                <div class="sliderinfor">
-                    <p>최근 본 방은 최대 20개까지 저장됩니다.</p>
-                </div>
-                <div class="row row-cols-1 row-cols-md-4 g-4">
-                    <div class="col">
-                      <div class="card h-100">
-                        <img src="https://ifh.cc/g/aoGQoK.jpg" class="card-img-top">
-                        <div class="card-body">
-                          <h5 class="card-title">전세 1억4천</h5>
-                          <p class="card-text">7층, 14.02m², 관리비 8만</p>
-                          <p class="card-text">서울특별시 성북구 동선동4가 140</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card h-100">
-                        <img src="https://ifh.cc/g/DpfhcO.jpg" class="card-img-top">
-                        <div class="card-body">
-                          <h5 class="card-title">월세 200/125</h5>
-                          <p class="card-text">7층, 14.02m², 관리비 8만</p>
-                          <p class="card-text">서울특별시 성북구 동선동4가 140</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card h-100">
-                        <img src="https://ifh.cc/g/9GmptT.jpg" class="card-img-top">
-                        <div class="card-body">
-                          <h5 class="card-title">전세 4억5천</h5>
-                          <p class="card-text">7층, 14.02m², 관리비 8만</p>
-                          <p class="card-text">서울특별시 성북구 동선동4가 140</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                          <img src="https://ifh.cc/g/DpfhcO.jpg" class="card-img-top">
-                          <div class="card-body">
-                            <h5 class="card-title">월세 200/125</h5>
-                            <p class="card-text">7층, 14.02m², 관리비 8만</p>
-                            <p class="card-text">서울특별시 성북구 동선동4가 140</p>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-               
-            </div> -->
         </div>
     </div>
-    <div class="paging">
+    <!-- <div class="paging">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
@@ -179,25 +136,9 @@
               </li>
             </ul>
         </nav>
-    </div>
+    </div> -->
 	
 	<jsp:include page="../common/footer.jsp" />
 
-	<!-- <script>
-	$('.post-wrapper').slick({
-		  infinite: true,
-		  slidesToShow: 3,
-		  slidesToScroll: 1,
-		  autoplay: false,
-		  arrows : true,
-		  dots : true,
-		  prevArrow: $('#prevArrow'), // 좌 (이전) 화살표만 변경 (선택자 혹은 $(element))
-		  nextArrow: $('#nextArrow')
-		  /* autoplaySpeed: 2000, */
-		});
-	
-	$(".slick-dots").css("bottom", "-70px");
-	
-	</script> -->
 </body>
 </html>
