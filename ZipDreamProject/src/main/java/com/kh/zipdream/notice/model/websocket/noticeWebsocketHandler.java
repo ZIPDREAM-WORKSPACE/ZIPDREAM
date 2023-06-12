@@ -12,6 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.sales.model.service.MySaleService;
 import com.kh.zipdream.sales.model.vo.MySale;
 
@@ -54,13 +55,10 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 		// Jackson-databind -> ObjectMapper를 이용해서 JSON형태로 넘어온 데이터를 특정 VO필드에 맞게 자동 매핑 
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		System.out.println(message.getPayload());
 		if(message.getPayload().charAt(2)=='h') {
 			
 			MySale mySale = objectMapper.readValue(message.getPayload(), MySale.class);
-			int result = mySaleService.insertMysaleHouse(mySale);
-			System.out.println(result);
-			if(result > 0) {
+			
 				// 같은방에 접속중인 클라이언트에게 전달받은 메세지 뿌리기 
 				for( WebSocketSession s: sessions) {
 					// 반복을 진행중인 WebSocketSession안에 담겨있는 방번호 == 메세지 안에 담겨있는 방번호가 일치하는 경우 메세지 뿌리기
@@ -73,7 +71,7 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 					s.sendMessage(new TextMessage(new Gson().toJson(mySale) ));
 					//}
 					System.out.println("dd4");
-		}
+		
 		
 		
 		/* chatMessage.setCreateDatetime(new Date(System.currentTimeMillis())); */
@@ -81,6 +79,13 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 		// 전달받은 채팅메세지를 db에 삽입
 		//System.out.println("웹소켓"+chatMessage); 
 		
+			}
+		}else if(message.getPayload().charAt(2)=='r') {
+			
+			Report report = objectMapper.readValue(message.getPayload(), Report.class);
+			for( WebSocketSession s: sessions) {
+				s.sendMessage(new TextMessage(new Gson().toJson(report) ));
+				System.out.println("dd4");
 			}
 		}
 	}

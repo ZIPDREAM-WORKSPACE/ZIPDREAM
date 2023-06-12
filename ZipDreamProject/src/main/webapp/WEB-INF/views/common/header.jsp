@@ -169,7 +169,16 @@ position: absolute;
 	padding-bottom:5px;
 	margin-right:5px;
 }
-
+	.notice1{
+		width:200px;
+		height:100px;
+		background: grey;
+		position: absolute;
+		top:10%;
+		right:10%;
+		border-radius: 10px;
+		
+	}
 </style>
 </head>
 <body>

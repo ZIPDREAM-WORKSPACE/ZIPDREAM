@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -74,13 +75,13 @@ tbody::-webkit-scrollbar {
 					<th class="content">내용</th>
 				</tr>
 			</thead>
-			<tbody >
-				<tr>
+			<tbody class="noticeThead">
+				<!-- <tr>
 					<td class="num">1</td>
 					<td class="title">첫 가입 이벤트 혜택</td>
 					<td class="content">복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
+				</tr> -->
+			<!-- 	<tr>
 					<td>2</td>
 					<td>첫 가입 이벤트 혜택</td>
 					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
@@ -119,10 +120,18 @@ tbody::-webkit-scrollbar {
 					<td>2</td>
 					<td>첫 가입 이벤트 혜택</td>
 					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
+	<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<script>
+var refUno ='${loginUser.userNo}';
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	addEventMessage2(refUno);
+
+
+</script>
 </body>
 

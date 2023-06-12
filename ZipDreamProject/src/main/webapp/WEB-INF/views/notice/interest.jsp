@@ -62,16 +62,8 @@ tbody::-webkit-scrollbar {
 	.content{
 		width:600px;
 	}
-	.notice1{
-		width:200px;
-		height:100px;
-		background: grey;
-		position: absolute;
-		top:100px;
-		right:30px;
-		display:none;
-		
-	}
+
+
 	
 </style>
 <body>
@@ -116,8 +108,8 @@ tbody::-webkit-scrollbar {
 <script>
 
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
-	notice();
 	addEventMessage();
+	
 
 
 </script>

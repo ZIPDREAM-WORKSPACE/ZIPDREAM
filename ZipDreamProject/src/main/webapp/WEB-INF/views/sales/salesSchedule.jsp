@@ -596,7 +596,7 @@
 	               }
 	            }
 	            
-	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\");' src='" + src + "'></td></tr>";
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\",\""+value.HOUSE_NM+"\");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
@@ -646,7 +646,8 @@
 		});
 		
 		/* 분양정보 찜하기 */
-		function mySale(houseCode, startDateTime, hsUrl){
+		function mySale(houseCode, startDateTime, hsUrl,title){
+			
 				var hu = hsUrl;
 				var hc = houseCode;
 				var time = startDateTime;
@@ -689,7 +690,7 @@
 	                        
 	                        
 	                        	console.log(houseSock);
-	                        	sendMessage1(hu, hc, uno, time);
+	                        	sendMessage1(hu, hc, uno, time, title);
 	                            /* console.log(result); */
 	                          
 	                            

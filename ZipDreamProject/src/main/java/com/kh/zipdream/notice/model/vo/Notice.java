@@ -1,4 +1,5 @@
-package com.kh.zipdream.sales.model.vo;
+package com.kh.zipdream.notice.model.vo;
+
 
 
 import lombok.AllArgsConstructor;
@@ -14,11 +15,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MySale {
-	private int hsSeq;
-	private String startDateTime;
-	private int userNo;
-	private int houseCode;
-	private String hsUrl;
-	private String title;
+public class Notice {
+	private int noticeNo;
+	private int noticeType;
+	private String noticeContent;
+	private String noticeTitle;
+	private int refUno;
+	private String createDateTime;
 }
