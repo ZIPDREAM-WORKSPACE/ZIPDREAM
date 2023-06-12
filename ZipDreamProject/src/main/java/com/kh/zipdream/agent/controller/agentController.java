@@ -97,7 +97,7 @@ public class agentController {
 		int result = agentService.updateMyRoomSell(ms);
 	
 		if(result>0) {
-			return "redirect:/";
+			return "redirect:/agent/apply";
 		} else {
 			return "";
 		}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pi" value="${map.pi }"/>
 <c:set var="couponList" value="${map.couponList }"/>
 <!DOCTYPE html>
 <html>
@@ -11,14 +12,14 @@
 <style>
 .recentContent {
 	width: 100%;
-	height: 450px;
+	height: 100%;
 }
 
 .recentContent>div {
 	display: flex;
 	flex-direction: column;
 	min-height: 400px;
-	padding: 50px 10px 150px;
+	/* 	padding: 50px 10px 150px; */
 	width: 1200px;
 	height: 100%;
 	margin: 0px auto;
@@ -55,9 +56,10 @@
 
 .card {
 	background-color: #fff;
-    border: 1px solid #ededed;
-    box-shadow: 0 2px 12px 0 #ededed;
-    border-radius: 10px;
+	border: 1px solid #ededed;
+	box-shadow: 0 2px 12px 0 #ededed;
+	border-radius: 10px;
+
 }
 
 .card-body {
@@ -89,214 +91,271 @@
 	text-align: center;
 }
 
-.usebtn {
-	margin: 0 auto;
+#useBtn {
+	border-color: #09addb;
+	background-color: #09addb;
+	padding: 10px 20px;
+	line-height: 10px;
+	font-size: 17px;
+	min-height: 40px;
+	margin-top: 20px;
+	width: 100%;
 }
 
-/*모달창*/
-#modal.modal-overlay {
-	width: 100%;
-	height: 100%;
-	position: absolute;
+.pagination {
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.card-img-top {
+	height: 200px;
+}
+
+#modalWrap {
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
 	left: 0;
 	top: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: none;
 }
 
-#modal .modal-window {
-	/* background: rgba( 69, 139, 197, 0.70 ); */
-	backdrop-filter: blur(13.5px);
-	-webkit-backdrop-filter: blur(13.5px);
-	border-radius: 10px;
-	width: 700px;
-	position: relative;
-	top: -100px;
-	padding: 10px;
+#modalWrap {
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	/* display: none; */
 }
 
-#modal .title {
-	padding-left: 10px;
-	display: inline;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-
-#modal .title h2 {
-	display: inline;
-}
-
-#modal .close-area {
-	display: inline;
-	float: right;
-	padding-right: 10px;
-	cursor: pointer;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-
-#modal .content {
-	margin-top: 20px;
-	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-}
-/*모달 css*/
-.seller_contect_modal, .seller_contect_modal2, .finish_apply {
-	border: 1px solid black;
-	width: 70%;
+#modal-dialog {
+	width: 400px;
+	height: 450px;
+	padding: 30px 30px;
 	margin: 0 auto;
+	border: 1px solid #777;
+	background-color: #fff;
+	border-radius: 20px;
+}
+
+.modalContent {
+	width: 100%;
+}
+
+.modalHeader {
+	text-align: center;
+	border-bottom: 1px solid #777;;
+}
+
+.modalHeader>h4 {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.modalHeader>div {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.modalBody {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	background-color: #EEF1FF;
+	height: 100%;
+	overflow: auto;
 }
 
-.seller_contect_modal {
-	height: 26rem;
-}
-
-.radius {
-	border-radius: 30px;
-}
-
-.modal_header1 {
-	height: 20%;
+.modalBody>div {
+	margin-top: 10px;
 	text-align: center;
+	font-weight: 500;
 }
 
-.modal_header1>p {
-	font-size: 2rem;
-	font-weight: 900;
+.modalBody>input {
+	width: 90%;
+	margin-top: 20px;
 }
 
-.modal_header2 {
-	margin-top: 35px;
-	font-size: 0.8rem;
-	line-height: 5px;
-	height: 15%;
-	text-align: center;
+.modalHeader>img {
+	width: 200px;
 }
 
-.modal_body {
-	margin-top: 25px;
-	height: 25%;
-	text-align: center;
-	font-weight: 600;
-	line-height: 10px;
-}
+.btnArea {
+	margin: 30px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 
-.modal_footer {
-	height: 5%;
-	margin-top: 25px;
-}
-
-.hr {
-	width: 350px;
-	border: 1px solid gray;
-}
-
-.no {
-	margin-right: 30px;
-}
-#useBtn{
-    border-color: #09addb;
-    background-color: #09addb;
-    padding: 10px 20px;
-    line-height: 10px;
-    font-size: 17px;
-    min-height: 40px;
-   	margin-top: 20px;
-   	width: 100%;
 }
 </style>
 </head>
 <body>
-	<jsp:include page="mypage.jsp"/>
+
+	<jsp:include page="mypage.jsp" />
+
 	<script>
 		$(function() {
 			console.log('${couponList}');
 		});
 	</script>
-	
-	
-	  <div class="recentContent">
-        <div>
-        	<!-- 쿠폰이 없을 경우 -->
-        	<c:if test="${empty couponList}">
-	       		<div class="emptyContent">
-	                <p>발급된 쿠폰이 없습니다.</p>
-	            </div>
-        	</c:if>
-        	<c:if test="${!empty couponList }">
-	       		<div class="recentRoomList">
-	                <div class="row row-cols-1 row-cols-md-4 g-4">
-	                	<c:forEach items="${couponList }" var="coupon">
-		                    <div class="col">
-		                      <div class="card h-100">
-		                        <img src="<%=request.getContextPath() %>${coupon.couponPath }" class="card-img-top">
-		                        <div class="card-body">
-		                          	<h5 class="card-title">${coupon.couponTitle }</h5>
-		                          	<p class="card-text">${coupon.couponContent }</p>
-		                          	<div class="d-grid gap-2">
-									  <button class="btn btn-primary" id="useBtn" type="button">사용하기</button>
+
+
+	<div class="recentContent">
+		<div>
+			<!-- 쿠폰이 없을 경우 -->
+			<c:if test="${empty couponList}">
+				<div class="emptyContent">
+					<p>발급된 쿠폰이 없습니다.</p>
+				</div>
+			</c:if>
+			<c:if test="${!empty couponList }">
+				<div class="recentRoomList">
+					<div class="row row-cols-1 row-cols-md-4 g-4">
+						<c:forEach items="${couponList }" var="coupon">
+							<div class="col">
+								<div class="card h-100" data-couponno="${coupon.couponNo }">
+									<img src="<%=request.getContextPath() %>${coupon.couponPath }" class="card-img-top">
+									<div class="card-body">
+										<h5 class="card-title">${coupon.couponTitle }</h5>
+										<p class="card-text">${coupon.couponContent }</p>
+										<div class="d-grid gap-2">
+											<button class="btn btn-primary" id="useBtn" type="button" onclick="showModal('${coupon.couponNo }','${coupon.couponPath }','${coupon.couponTitle }','${coupon.couponContent }');">사용하기</button>
+										</div>
 									</div>
-		                        </div>
-		                      </div>
-		                    </div>
-	                	</c:forEach>
-	                  </div>
-	            </div>
-        	</c:if>  
-            
-        </div>
-    </div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</c:if>
+
+			<!-- 페이지네이션 구현 -->
+			<c:set var="url" value="/zipdream/mypage/couponlist?cpage=" />
+			<div id="pagingArea">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${ pi.currentPage eq 1 }">
+							<li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage -1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+						<li class="page-item"><a class="page-link"
+							href="${url}${item }">${item }</a></li>
+					</c:forEach>
+
+					<c:choose>
+						<c:when test="${ pi.currentPage eq pi.maxPage }">
+							<li class="page-item disabled"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url}${pi.currentPage + 1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 모달 창  -->
+	<div id="modalWrap" tabindex="-1">
+		<div id="modal-dialog">
+			<div class="modalContent">
+				<div class="modalHeader">
+					<!-- <img src="resource/img/20off.png" />
+					<h4>쿠폰제목</h4>
+					<div>쿠폰내용</div> -->
+				</div>
+				<div class="modalBody">
+					<div>
+						쿠폰을 사용하실 경우<br>담당 공인중개사의 코드를 입력해주세요.
+					</div>
+					<input type="text">
+				</div>
+				<div class="btnArea">
+					<button class="btn btn-secondary bb" type="button" id="cancel">취소</button>
+					<button class="btn btn-outline-primary bb" type="button" id="use">사용하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		const modal = document.getElementById('modalWrap');
+		var html = "";
+		function showModal(no, path, title, content) {
+			/* console.log(no + path + title + content); */
+			modal.style.display = 'block';
+			
+			html = "<img src='path'/><h4>" + title + "</h4><div>" + content + "</div>";
+			
+			$(".modalHeader").html(html);
+			$(".btn").attr("value", no);
+		}
+		
+		$(document).mouseup(function (e){
+			if($("#modalWrap").has(e.target).length === 0){
+				$("#modalWrap").hide();
+			}
+		});
+		
+		$(function(){
+			$(".bb").on("click", function(e){
+				console.log(e.target.id);
+				$("#modalWrap").hide();
+				if(e.target.id == "use"){
+					let couponNo = e.target.value;
+					let userNo = "${loginUser.userNo}";
+					swal({
+						title:"사용하시겠습니까?",
+					 	buttons: ["취소", "삭제"],
+					  	buttons: true,
+					  	dangerMode: true,
+					})
+					.then((willDelete) => {
+						if(willDelete){
+							$.ajax({
+								url:"<%=request.getContextPath()%>/myroomsell/deleteuUserCoupon",
+								method:"get",
+								data:{couponNo, userNo},
+								success:function(){
+									swal({
+										text:"사용완료되었습니다.",
+										icon:"success",
+										button:"확인"
+									}).then(function(){
+										location.href = "<%=request.getContextPath()%>/mypage/couponlist";
+									})
+								},
+								error:function(){
+									console.log("에러발생");
+								}
+							})
+						}
+					})
+				}
+			})
+		});
+	</script>
+
 	
-	   <div id="modal" class="modal-overlay" style="display:none;">
-        <div class="modal-window">
-            <div class="seller_contect_modal radius" > 
-                <div class="modal_header1">
-                    <img src="https://ifh.cc/g/XDbNvq.png" width="80px" height="50px" style="vertical-align: bottom;">
-                    <p class="coupon_name">첫 가입 10%할인 쿠폰</p>
-                </div>
-                <div class="modal_header2">
-                    <p>해당 쿠폰을 사용하실 경우,</p>
-                    <p>중개보수비용의 10%를 할인받을 수 있습니다.</p>
-                <hr class="hr">
-                </div>
-                <div class="modal_body">
-                    <p id="copon_advice">쿠폰 사용을 원하실 경우</p>
-                    <p id="copon_advice"">담당 공인중개사의 코드를 입력하고 사용하기를 눌러주세요</p>
-                    <input type="text" placeholder="공인중개사 코드 입력" size="20">
-                </div>
-                <div class="modal_footer">
-                    <input type="button" class="no" value="사용안함">
-                    <input type="button" class="okay" value="사용하기">
-                </div>
-            </div>
-        </div>
-    </div>
+
 	
+
 	<jsp:include page="../common/footer.jsp" />
 </body>
-<script type="text/javascript">
-$(function(){
-	$(".coupon").on("click",function(){
-		$(".modal-overlay").show();
-	})
-	
-	$(".no, .okay").on("click", function(){
-		$(".modal-overlay").hide();
-	})
-})
-</script>
 </html>

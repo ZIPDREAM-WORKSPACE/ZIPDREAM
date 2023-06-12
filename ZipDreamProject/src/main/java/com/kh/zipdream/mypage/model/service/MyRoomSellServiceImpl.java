@@ -61,11 +61,26 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 	}
 
 	@Override
-	public void selectCouponList(int userNo, Map<String, Object> map) {
+
+	public void selectCouponList(int currentPage, int userNo, Map<String, Object> map) {
 		
-		ArrayList<Coupon> couponList = myroomSellDao.selectCouponList(userNo);
+		int listCount = myroomSellDao.selectCouponListCount(userNo);
+		int pageLimit = 10;
+		int boardLimit = 4;
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
+		ArrayList<Coupon> couponList = myroomSellDao.selectCouponList(pi,userNo);
+		
+		map.put("pi", pi);
+
 		map.put("couponList", couponList);
+		
+	}
+
+
+	@Override
+	public void deleteUserCoupon(Coupon coupon) {
+		myroomSellDao.deleteUserCoupon(coupon);
 		
 	}
 
