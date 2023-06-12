@@ -38,4 +38,24 @@ public class AgentServiceImpl implements AgentService {
 		
 	}
 
+
+
+	@Override
+	public MyRoomSell selectRequestUser(int userSrNo) {
+		
+		MyRoomSell ms = agentDao.selectRequestUser(userSrNo);
+		
+		return ms;
+	}
+
+
+
+	@Override
+	public int updateMyRoomSell(MyRoomSell ms) {
+		
+		int result = agentDao.updateMyRoomSell(ms);
+		
+		return result;
+	}
+
 }

@@ -27,10 +27,6 @@ public class MyRoomSellController {
 		String[] str = address.split(" ");
 		String[] addressList = {str[1], str[2]}; 
 		
-		for(int i = 0; i<addressList.length; i++) {
-			System.out.println("보낸주소값"+addressList[i]);
-			
-		}
 		ArrayList<Member> list = myroomsellService.selectAgent(addressList);
 		
 		
