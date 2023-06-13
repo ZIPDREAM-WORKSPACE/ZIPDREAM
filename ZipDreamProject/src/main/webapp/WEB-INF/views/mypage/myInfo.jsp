@@ -103,7 +103,7 @@
 		    <label class="myInfo_title ">주소</label><br>
 		    <input class="myInfo_content" type="text"  value="${m.address }" size="46" id="addr" name="address">
 		    <input class="myInfo_content myInfo_button" type="button" value="변경" data-toggle="modal" data-target="#address_modal"><br><br>
-			<a href="" ><button type="submit" id="signchangebtn">변경하기</button></a>   
+			<button type="button" id="signchangebtn">변경하기</button>  
 		    <a href="" ><button type="button" id="signdeletebtn">회원탈퇴</button></a>
 	    </form>
 	</div>
@@ -271,7 +271,10 @@ function checkPasswordValidity() {
    $("#signchangebtn").click(function(){
    	 let phone = $("#phone").val();
    	 let userNo = ${loginUser.userNo};
-   	 let address = add1 + add2 + add3;
+   	let add1 = document.getElementById('addr1').value;
+	let add2 = document.getElementById('addr2').value;
+	let add3 = document.getElementById('addr3').value;
+	let address = add1 + add2 + add3;
    	 let userName = $("#userName").val();
 		$.ajax({
             url:"<%=request.getContextPath()%>/member/updateMember", 
