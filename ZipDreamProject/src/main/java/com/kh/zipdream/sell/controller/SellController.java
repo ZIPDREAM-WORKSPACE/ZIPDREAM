@@ -68,7 +68,6 @@ public class SellController {
 	
 	//sell입력
 	@PostMapping("/sellInsert")
-	@ResponseBody
 	public String sellInsert(SellDetail sd, HttpServletRequest request, HttpSession session,
 							 @RequestParam(value="imges", required=false ) List<MultipartFile> imgList) {
 		
@@ -83,11 +82,10 @@ public class SellController {
 				e.printStackTrace();
 				System.out.println("업로드 에러");
 			}
-		String url ="";
 		if(result >0) {
 			System.out.println("업로드 성공");
-			url="redirect:/../agent/RegistrationList";
-			return url;
+			
+			return "redirect:/agent/list";
 		}else {
 			System.out.println("업로드 실패");
 			return "main/main";

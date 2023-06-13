@@ -39,6 +39,10 @@ public class SellDao {
 		return (ArrayList)sqlSession.selectList("sell-mapper.selectSellList", refUno);
 	}
 	
+	public List<Counsle> selectCounsel(int refTno){
+		return sqlSession.selectList("sell-mapper.selectCounsel", refTno);
+	}
+	
 	public SellDetail sellDetail(int sellNo) {
 		return sqlSession.selectOne("sell-mapper.sellDetail", sellNo);
 	}
@@ -46,6 +50,8 @@ public class SellDao {
 	public List<SellDetail> selectSellAllList(){
 		return sqlSession.selectList("sell-mapper.selectSellAllList");
 	}
+	
+	
 	
 	public SellDetailApi detailApiSecond(Map<String, String> map){
 		return sqlSession.selectOne("sell-mapper.selectApiList", map);

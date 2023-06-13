@@ -73,6 +73,11 @@ public class SellServiceImpl implements SellService {
 		
 	}
 	
+	public void selectCounsel(Map<String, Object> map, int refTno) {
+		List<Counsle> clist = sellDao.selectCounsel(refTno);
+		map.put("clist", clist);
+	}
+	
 	public SellDetail sellDetail(int sellNo) {
 		
 		return sellDao.sellDetail(sellNo);
@@ -101,4 +106,5 @@ public class SellServiceImpl implements SellService {
 	public int deleteUserSelect(Map<String, Integer> map) {
 		return sellDao.deleteUserSelect(map);
 	}
+	
 }

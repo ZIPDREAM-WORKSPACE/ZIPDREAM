@@ -100,6 +100,8 @@
  		<result column="REF_TUNO" property="refTuno"/>
  		<result column="REF_UNO" property="refUno"/>
  		<result column="SELL_NO" property="sellNo"/>
+ 		<result column="USER_NAME" property="userName"/>
+ 		<result column="SELL_NAME" property="sellName"/>
   	</resultMap>
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
@@ -130,7 +132,6 @@
 		FROM SELLDETAIL
 		JOIN MEMBER ON(USER_NO = REF_UNO)
 		WHERE USER_NO = #{refUno}
-		
 	</select>
 	
 	<select id="sellDetail" resultMap="sellDetailResultSet">
@@ -178,6 +179,14 @@
 	<delete id="deleteUserSelect" parameterType="HashMap">
 		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
 	</delete>
+	
+	<select id="selectCounsel" resultMap="counsleReustSet">
+		SELECT C.*, S.SELL_NAME, M.USER_NAME
+		FROM COUNSLE C
+		JOIN MEMBER M ON (M.USER_NO = C.REF_UNO) 
+		JOIN SELLDETAIL S ON(S.SELL_NO = C.SELL_NO)
+		WHERE REF_TNO =#{refTno}
+	</select>
 	
 
 </mapper>
