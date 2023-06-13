@@ -37,6 +37,12 @@
 	<select id="selectCalender" resultMap="calenderResultSet">
 		SELECT * FROM SALEHOUSE_CALENDER
 	</select>
+	
+	<select id="selectinfoList" resultMap="calenderResultSet">
+		SELECT * 
+		FROM SALEHOUSE_CALENDER
+		WHERE CALENDER_START = #{calenderStart}
+	</select>
 
 
 </mapper>
