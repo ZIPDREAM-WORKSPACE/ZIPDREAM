@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
+import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
@@ -52,4 +53,17 @@ public class SellDao {
 	public int insertReport(Report report) {
 		return sqlSession.insert("sell-mapper.insertReport",report);
 	}
+	
+	public int insertCounsle(Counsle counsle) {
+		return sqlSession.insert("sell-mapper.insertCounsle",counsle);
+	}
+
+	public int insertUserSelect(Map<String, Integer> map) {
+		return sqlSession.insert("sell-mapper.insertUserSelect",map);
+	}
+	
+	public int deleteUserSelect(Map<String, Integer> map) {
+		return sqlSession.delete("sell-mapper.deleteUserSelect",map);
+	}
+
 }

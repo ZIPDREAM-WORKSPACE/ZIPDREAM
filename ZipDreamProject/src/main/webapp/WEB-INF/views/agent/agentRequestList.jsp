@@ -282,7 +282,7 @@ table.type05 td {
 
 	$(function(){
 		$(".btn").on("click", function(e){
-			console.log(e.target.value);
+			/* console.log(e.target.value); */
 			if(e.target.value == "대기"){
 				modal.style.display = 'block';
 				

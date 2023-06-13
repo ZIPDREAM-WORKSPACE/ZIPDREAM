@@ -92,6 +92,16 @@
 		<result column="REPORT_DATE" property="reportDate"/>
 	</resultMap>
  	
+ 	<resultMap type="counsle" id="counsleReustSet">
+ 		<result column="COUNSLE_METHOD" property="counsleMethod"/>
+ 		<result column="COUNSLE_CONTENT" property="counsleContent"/>
+ 		<result column="APPLY_DATE" property="applyDate"/>
+ 		<result column="ACCEPT" property="accept"/>
+ 		<result column="REF_TUNO" property="refTuno"/>
+ 		<result column="REF_UNO" property="refUno"/>
+ 		<result column="SELL_NO" property="sellNo"/>
+  	</resultMap>
+ 	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
 		INSERT INTO SELLDETAIL
 		(SELL_NO, REF_UNO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_MAINTENANCE, SELL_PARKING, SELL_SHORTTERM,SELL_TYPE, SELL_FLOOR,
@@ -153,4 +163,18 @@
 		WHERE KAPT_ADDRESS LIKE CONCAT(CONCAT('%',#{kaptAddress}),'%') AND KAPT_NAME LIKE CONCAT(CONCAT('%',#{kaptName}),'%')
 	</select>
 
+	<insert id="insertCounsle" parameterType="counsle">
+		INSERT INTO COUNSLE
+		VALUES(#{counsleMethod}, #{counsleContent}, SYSDATE(), 'N', #{refTuno}, #{refUno}, #{sellNo})
+	</insert>
+	
+	<insert id="insertUserSelect" parameterType="HashMap">
+		INSERT INTO USERSELECT_LIST 
+		VALUES (#{userNo}, #{sellNo})
+	</insert>
+	
+	<delete id="deleteUserSelect" parameterType="HashMap">
+		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
+	</delete>
+	
 </mapper>

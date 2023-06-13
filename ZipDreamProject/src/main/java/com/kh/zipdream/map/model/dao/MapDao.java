@@ -21,4 +21,8 @@ public class MapDao {
 	public List<beopjeongdong> selectAddress(String adCode) {
 		return sqlSession.selectList("mapMapper.selectAddress", adCode);
 	}
+	
+	public List<beopjeongdong> searchKeyword(String search) {
+		return sqlSession.selectList("mapMapper.searchKeyword", search);
+	}
 }

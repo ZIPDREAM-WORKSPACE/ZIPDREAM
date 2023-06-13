@@ -9,4 +9,6 @@ public interface MapService {
 	public int selectBjbCode(String detailAddrClob);
 	
 	public List<beopjeongdong> selectAddress(String adCode);
+	
+	public List<beopjeongdong> searchKeyword(String search);
 }

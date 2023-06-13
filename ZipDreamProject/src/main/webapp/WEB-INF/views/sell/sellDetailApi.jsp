@@ -464,7 +464,8 @@
     				userNo : userNo,
     				sellPrice : sellPrice,
     				sellAddress : sellAddress,
-    				detail : detail
+    				detail : detail,
+    				expire: Date.now() + (1000 * 60 * 60 * 24)
 			}
     	
     		const objString = JSON.stringify(obj);
@@ -473,7 +474,6 @@
     			window.localStorage.setItem('recentRoom', objString);
     		}
     		
-    		
     	});
     	
     	$(function(){
@@ -481,6 +481,8 @@
     		addApiList();
     	})
     	function addApiList(){
+   		$(function({
+    		let sidoCode = '${sda.sidoCode}';
     		$.ajax({
     			url : "<%=request.getContextPath()%>/sell/addApi",
     			method : "get",
@@ -561,6 +563,8 @@
     	        $(".hospital_info").hide();
     	    })
     	})
+    	
+    	
     </script>
     
     
