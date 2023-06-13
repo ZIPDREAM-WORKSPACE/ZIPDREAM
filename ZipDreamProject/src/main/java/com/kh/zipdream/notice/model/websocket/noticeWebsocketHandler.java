@@ -20,6 +20,7 @@ import com.kh.zipdream.notice.model.service.NoticeService;
 import com.kh.zipdream.notice.model.vo.Notice;
 import com.kh.zipdream.sales.model.service.MySaleService;
 import com.kh.zipdream.sales.model.vo.MySale;
+import com.kh.zipdream.sell.model.vo.Counsle;
 
 public class noticeWebsocketHandler extends TextWebSocketHandler{
 	
@@ -34,9 +35,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
-		System.out.println("dd1");
-		
-		
 		sessions.add(session); // 전달받은 session을 set에 추가  
 	}
 	
@@ -44,13 +42,10 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		sessions.remove(session);
-		System.out.println("dd2");
 	}
 	
 	@Override // 클라이언트로부터 텍스트 메세지를 전달받았을때 수행
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
-		System.out.println("dd3");
-		
 		ObjectMapper objectMapper = new ObjectMapper();
 		Notice n = new Notice();
 		if(message.getPayload().charAt(2)=='h') {
@@ -65,7 +60,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(mySale) ));
-				System.out.println("dd4");
 			}
 		}else if(message.getPayload().charAt(2)=='r') {
 			
@@ -86,7 +80,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(report) ));
-				System.out.println("dd4");
 			}
 		}else if(message.getPayload().charAt(2)=='c') {
 			
@@ -101,7 +94,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(coupon) ));
-				System.out.println("dd4");
 			}
 			
 			
@@ -109,7 +101,7 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 			MyRoomSell myRoomSell = objectMapper.readValue(message.getPayload(), MyRoomSell.class);
 			n.setNoticeContent(myRoomSell.getDealType()+" 타입의 매물이 공인중개사와 매칭되었습니다.");
-			n.setNoticeTitle("매물 매칭");
+			n.setNoticeTitle("매물");
 			n.setRefUno(myRoomSell.getRefUno());
 			n.setCreateDateTime(new Date().toString());
 			n.setNoticeType(1);
@@ -118,13 +110,30 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(myRoomSell) ));
-				System.out.println("dd4");
 			}
 			
 			
+		}else if(message.getPayload().charAt(2)=='m') {
+			Counsle counsle = objectMapper.readValue(message.getPayload(), Counsle.class);
+			int method = counsle.getCounsleMethod();
+			if(method == 1) {
+				n.setNoticeContent("신청하신 대면 상담이 공인중개사와 매칭되었습니다.");
+			}else {
+				n.setNoticeContent("신청하신 비대면 상담이 공인중개사와 매칭되었습니다.");
+			}
+			n.setNoticeTitle("상담");
+			n.setRefUno(counsle.getRefUno());
+			n.setCreateDateTime(new Date().toString());
+			n.setNoticeType(1);
+			
+			
+			
+			for( WebSocketSession s: sessions) {
+				s.sendMessage(new TextMessage(new Gson().toJson(counsle) ));
+			}
+			
 		}
 		noticeService.insertNotice(n);
-		
 	}
 
 }

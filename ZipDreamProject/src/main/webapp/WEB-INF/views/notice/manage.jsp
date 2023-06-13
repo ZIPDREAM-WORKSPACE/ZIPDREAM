@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -74,11 +75,14 @@ tbody::-webkit-scrollbar {
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
-				<!-- <tr>
-					<td class="num">1</td>
-					<td class="title">첫 가입 이벤트 혜택</td>
-					<td class="content">복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr> -->
+			  <c:forEach items="${list}" var="manageList" >
+	               <tr >
+	               	 <td  class="title">${manageList.noticeTitle} </td>
+	               	 <td class="content">${manageList.noticeContent} </td>
+	               	 <td class="time">${manageList.createDateTime} </td>
+	               </tr>
+	           </c:forEach>
+				
 			
 			</tbody>
 		</table>

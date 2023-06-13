@@ -70,17 +70,16 @@
  }
 
    // 공인중개사 상담 매칭 알림 함수
- function sendMessage5(refUno,refRuno,dealType){
+ function sendMessage5(refUno,method){
 		console.log("이벤트메세지6");
  		
- 		 const counsleMessage = {
-		 			"dealType" : dealType,
- 					"refUno" : refUno,
-		 			"refRuno" : refRuno
+ 		 const counselMessage = {
+		 			"method" : method,
+ 					"refUno" : refUno
  		};
  		
  		
- 		houseSock.send( JSON.stringify(requestMessage));
+ 		houseSock.send( JSON.stringify(counselMessage));
  	
  }
 		
@@ -130,13 +129,11 @@ function clickLink(url){
  
  
     function addEventMessage2(refUno) {
-        console.log("이벤트메세지");
 
         houseSock.onmessage = function (e) {
 
             const reportMessage = JSON.parse(e.data); // JSON-> JS Object
 
-            console.log(reportMessage);
 
 
 
@@ -184,14 +181,12 @@ function clickLink(url){
     }
  
  function addEventMessage3(refUno){
-	console.log("어드민이벤트");
 	
  houseSock2.onmessage = function(e){
  	
  	const eventMessage = JSON.parse(e.data); // JSON-> JS Object
 	if(refUno == eventMessage.userNo && eventMessage.title == null){
  
- 	console.log(eventMessage);
  	
  	const tr1 = document.createElement("tr");
  	 tr1.classList.add("manage");
@@ -224,7 +219,6 @@ function clickLink(url){
  }
  
  function addEventMessage4(refUno){
-	console.log("이벤트메세지");
 
  houseSock3.onmessage = function(e){
 
@@ -280,8 +274,8 @@ function clickLink(url){
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
  		td1.innerHTML = "상담 매칭";
- 		td2.innerHTML = "신청하신 상담이 공인중개사와 매칭되었습니다.";
- 		td3.innerHTML = currentTime();
+ 		td2.innerHTML = "신청하신 "+ (counselMessage.method ? 1 == "대면" : "비대면") +"상담이 공인중개사와 매칭되었습니다.";
+ 		td3.innerHTML = counselMessage.applyDate;
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
@@ -301,32 +295,9 @@ function clickLink(url){
  
  
  
- function insertSaleNotice(contextPath,hu, uno, time, title){
- 	console.log("dd");
- 			$.ajax({
-					url:contextPath+"/notice/insertSaleNotice",
-					data:{noticeUrl : hu, refUno : uno,createDateTime : time, title},
-					
-					success : function(result){
-						
-						if(result >= 1){
-							console.log("성공");
-						}else{
-							console.log("실패");
-						}
-						
-					},
-			 		error : function(request){
-			 			console.log("에러발생");
-			 			console.log("에러코드 : "+request.status);
-			 			
-			 		}
-				})
- 	
- };
+
  
   function deleteSaleNotice(contextPath,hu, uno){
- 	console.log("dd");
  			$.ajax({
 					url:contextPath+"/notice/deleteSaleNotice",
 					data:{hu, uno},
@@ -365,31 +336,7 @@ function clickLink(url){
 		 		   $( '.notice1' ).fadeOut( 3000, 'swing' );
 		 			 
 		 };
- 
-  function insertReportNotice(contextPath,reportContent,reportDate,refRuno, reportResult,reportType ){
- 	console.log("dd");
- 			$.ajax({
-					url:contextPath+"/notice/insertReportNotice",
-					data:{noticeContent : reportContent, createDateTime:reportDate,refUno:refRuno, result : reportResult, type :reportType },
-					
-					success : function(result){
-						
-						if(result >= 1){
-							console.log("성공");
-						}else{
-							console.log("실패");
-						}
-						
-					},
-			 		error : function(request){
-			 			console.log("에러발생");
-			 			console.log("에러코드 : "+request.status);
-			 			
-			 		}
-				})
- 	
- };
- 
+
  function currentTime() {
  	
  	const now = new Date();

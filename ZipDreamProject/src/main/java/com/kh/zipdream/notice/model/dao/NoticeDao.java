@@ -6,8 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.zipdream.admin.model.vo.Report;
-import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.notice.model.vo.Notice;
 
 @Repository
@@ -24,5 +22,11 @@ public class NoticeDao {
 		return sqlSession.delete("notice-mapper.deleteSaleNotice", notice);
 	}
 
-
+	public List<Notice> selectManageList() {
+		return sqlSession.selectList("notice-mapper.selectManageList");
+	}
+	
+	public List<Notice> selectInterestList() {
+		return sqlSession.selectList("notice-mapper.selectInterestList");
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -79,11 +80,13 @@ tbody::-webkit-scrollbar {
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
-				<!-- <tr>
-					<td class="num">1</td>
-					<td class="title">역삼 디오빌 분양 정보</td>
-					<td class="content">찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr> -->
+				  <c:forEach items="${list}" var="interestList" >
+	               <tr onClick="clickLink('${interestList.noticeUrl}')" class="link">
+	               	 <td  class="title">${interestList.noticeTitle} </td>
+	               	 <td class="content">${interestList.noticeContent} </td>
+	               	 <td class="time">${interestList.createDateTime} </td>
+	               </tr>
+	           </c:forEach>
 		
 			</tbody>
 		</table>
@@ -96,7 +99,10 @@ var refUno ='${loginUser.userNo}';
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	addEventMessage(refUno);
 	
-
+function clickLink(url){
+	window.open('about:blank').location.href =url;
+	
+}
 
 </script>
 </body>

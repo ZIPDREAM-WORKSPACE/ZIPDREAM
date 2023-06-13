@@ -236,7 +236,7 @@
 					<c:if test="${!empty clist}">
 						<c:forEach items="${clist}" var="c">
 							
-							<tr class="cList" onclick="acceptModal(${c.sellNo});" data-sellNo="${c.sellNo}" data-refUno="${c.refUno}" data-content="${c.counsleContent }">
+							<tr class="cList" onclick="acceptModal(${c.sellNo});" data-sellNo="${c.sellNo}" data-refUno="${c.refUno}" data-content="${c.counsleContent }" data-method="${c.counsleMethod}">
 								<td>${c.sellNo}</td>
 								<td>${c.sellName}</td>
 								<td>${c.userName}</td>
@@ -304,14 +304,15 @@
 <script>
 	refUno = 0; 
 	sellNo = 0;
-	
+	method = 0;
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	function acceptModal(sno){
 		$("#reportInsertModal").modal("show");
 		let currentList = $(".cList[data-sellNo="+ sno +"]")[0];
 		$(".reportContent").val(currentList.dataset.content);
 		sellNo = currentList.dataset.sellno;
 		refUno = currentList.dataset.refuno;
-		
+		method = currentList.dataset.counsleMethod;
 	};
 
 	
@@ -327,6 +328,7 @@
 					console.log("신청상태 수락 완료");
 					alert("수락이 완료되었습니다");
 					$("#reportInsertModal").modal("hide");
+					sendMessage5(refUno,method);
 				}else{
 					console.log("불가");
 				}
