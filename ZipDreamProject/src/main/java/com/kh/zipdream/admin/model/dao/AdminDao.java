@@ -15,6 +15,7 @@ import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 
 @Repository
@@ -53,6 +54,10 @@ public class AdminDao {
 	
 	public int countObjectYesterday() {
 		return sqlSession.selectOne("admin-mapper.countObjectYesterday");
+	}
+	
+	public int countObjectSearch(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("admin-mapper.countObjectSearch",paramMap);
 	}
 	
 	public int countReport(int type) {
@@ -206,5 +211,28 @@ public class AdminDao {
 	
 	public List<Attachment> selectAttachmentList(int userNo){
 		return (ArrayList) sqlSession.selectList("admin-mapper.selectAttachmentList",userNo);
+	}
+	
+	public int acceptBkMember(int userNo) {
+		return sqlSession.update("admin-mapper.acceptBkMember",userNo);
+	}
+	
+	public ArrayList<SellDetail> selectSellDetailList(PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectSellDetailList","",rowBounds);
+	}
+	
+	public ArrayList<SellDetail> selectSellDetailSearch(PageInfo pi, Map<String, Object> paramMap) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectSellDetailSearch", paramMap, rowBounds);
+	}
+	
+	public int deleteSellDetail(int sellNo) {
+		return sqlSession.delete("admin-mapper.deleteSellDetail",sellNo);
 	}
 }

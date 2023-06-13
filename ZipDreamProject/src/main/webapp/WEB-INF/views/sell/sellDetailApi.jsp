@@ -36,14 +36,14 @@
 	    height: 90%;
 	    display: flex;
 	    flex-direction: column;
-	    justify-content: space-around;
+	    justify-content: flex-end;
+	    border : 1px solid red;
 	}
 	
 	.sell_no{
 	    border: 1px solid lightgray;
 	    width: 20%;
 	    height: 10%;
-	    margin-top: 20px;
 	}
 	.sell_no>span{
 	    font-size: 0.5rem;
@@ -54,76 +54,35 @@
 	    font-size: 4rem;
 	    font-weight: 700;
 	    color: #0A2647;
-	    margin: 0px;
 	}
 	.sell_last{
+		border : 1px solid blue;
 	    display: flex;
-	    justify-content: flex-start;
+	    flex-direction: column;
 	}
 	.sell_address, .seller_address{
-	    width: 70%;
 	    font-size: 1rem;
 	    color: #6E7C7C;
-	}
-	.sell_like{
-	    width: 12%;
-	}
-	#sellLike {
-	    border: 1px solid black;
-	    height: 2.3rem;
-	}
-	#sellLike>span{
-	    font-size: 0.8rem;
-	}
-	#like_img{
-	    vertical-align: bottom;
-	    margin: 5px 0px 0px 14px;
 	}
 	.line{
 	    border: 1px solid #6E7C7C;
 	    height: 80%;
 	}
-	/*공인중개사 연락하기*/
-	.seller{
-	    width: 30%;
-	    height: 70%;
-	    margin-left: 60px;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-evenly;
-	}
-	.seller_title{
-	    font-size: 2rem;
-	    font-weight: 500;
-	}
-	.contect{
-		width:160px;
-		margin-right:50px;
-	    background-color: #0A2647;
-	    color: white;
-	}
-	/*허위매물신고*/
-	.notify{
- 	    width: 150px;
-	    background-color: #2C74B3;
-	    color: white;
-	}
-	
-	/*사진*/
-	.content2{
-		margin-top:50px;
-	    height: 40rem;
-	}
-    #picture{
-          display: flex;
-          align-items: center;
-    }
 	.content{
 	    width: 70%;
 	}
+	.content2{
+		margin-top:50px;
+		text-align:center;
+		display: -webkit-box;
+	}
+	#p{
+		font-size: 1rem;
+		font-weight: 600;
+	}
 	.content3{
-	    width: 70%;
-	    height: 20rem;
+	    margin-top : 30px;
+	    height: 15rem;
 	}
 	.price_name, .info_name, .arround_name, .option_name, .othier_info{
 	    font-size: 1.5rem;
@@ -132,42 +91,26 @@
 	.price, .info, .arround, .option{
 	    width: 90%;
 	}
-	
 	.content4{
-	    height: 80rem;
-	}
-	.info_pic{
-	    border: 1px solid red;
+		margin-top : 60px;
 	    height: 30rem;
-	    width: 70%;
 	}
 	.content5{
-		margin-top: 120px;	
+		margin-top: 380px;	
 	    height: 15rem;
 	}
-	.table>tbody>tr>th{
-	    width: 15%;
+	.table>tbody>tr>th {
+		width: 15%;
 	}
-	.content6, .content7, .content8{
+	.content6, .content8{
 		margin-top:80px;
 	}
 	/*주변정보*/
-	.btn-group{
+	.btn-group, .con2Text1, .con2Text2{
 	    display: flex;
 	    justify-content: center;
 	}
-	.button{
-	    width: 200px;
-	    height: 3rem;
-	    border: 1px solid gray;
-	    border-radius: 20px;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: row;
-	    justify-content: center;
-	    align-items: center;
-	}
-	
+
 	.button:hover{
 	    background-color: #0A2647;
 	    color: white;
@@ -185,178 +128,77 @@
 	.hospital_info, .school_info, .subway_info{
 	    display: none;
 	}
-	.content9{
-		margin-top: 50px;
-		text-align: center;
+	
+	
+	.button {
+		width: 200px;
+		height: 3rem;
+		border: 1px solid gray;
+		border-radius: 20px;
+		background-color: white;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 	}
 	
-	/*모달창*/
-	#modal.modal-overlay {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: center;
-	    background: rgba(255, 255, 255, 0.25);
-	    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	    backdrop-filter: blur(1.5px);
-	    -webkit-backdrop-filter: blur(1.5px);
-	    border-radius: 10px;
-	    border: 1px solid rgba(255, 255, 255, 0.18);
-	}
-	#modal .modal-window {
-	    /* background: rgba( 69, 139, 197, 0.70 ); */            backdrop-filter: blur( 13.5px );
-	    -webkit-backdrop-filter: blur( 13.5px );
-	    border-radius: 10px;
-	    width: 700px;
-	    position: relative;
-	    top: -100px;
-	    padding: 10px;
-	}
-	#modal .title {
-	    padding-left: 10px;
-	    display: inline;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	    
-	}
-	#modal .title h2 {
-	    display: inline;
-	}
-	#modal .close-area {
-	    display: inline;
-	    float: right;
-	    padding-right: 10px;
-	    cursor: pointer;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
+	.button:hover {
+		background-color: #0A2647;
+		color: white;
+		font-weight: 900;
 	}
 	
-	#modal .content {
-	    margin-top: 20px;
-	    padding: 0px 10px;
-	    text-shadow: 1px 1px 2px gray;
-	    color: white;
-	}
-	/*모달 css*/
-	.seller_contect_modal, .seller_contect_modal2, .finish_apply{
-	    border: 1px solid  black;
-	    width: 80%;
-	    margin: 0 auto;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: center;
-	    align-items: center;
-	    background-color: #abafc5;
-	}
-	.seller_contect_modal{
-	    height: 40rem;
-	}
-	.radius{
-	    border-radius: 30px;
-	}
-	.modal_header1{
-	    height: 8%;
-	}
-	.modal_header1>span{
-	    font-size: 2rem;
-	    font-weight: 900;
-	}
-	.modal_header2{
-	    margin-top: 20px;
-	    font-size: 0.8rem;
-	    line-height: 10px;
-	    height: 10%;
-	    text-align: center;
-	    border-bottom: 2px solid gray;
-	}
-	.modal_body{
-	    height: 50%;
-	    text-align: center;
-	    font-weight: 900;
-	}
-	#seller_name{
-	    font-size: 1.7rem;
-	
-	}
-	.modal_footer{
-	    margin-top: 50px;
-	    height: 5%;
+	.infogroup {
+		margin-left: 100px;
 	}
 	
-	/*두번째 모달창*/
-	.seller_contect_modal2{
-	    height: 35rem;
-	}
-	.modal_body2{
-	    height: 40%;
-	}
-	.apply{
-	    border: 1px solid black ;
-	    background-color: white;
-	    height: 2rem;
-	}
-	.meet, .close{
-	    margin-right: 50px;
-	}
-	textarea{
-	    padding: 10px 10px;
+	.info {
+		margin-top: 20px;
 	}
 	
-	/*신청완료*/
-	.finish_apply{
-	    height: 25rem;
+	.info_table>tbody>tr>th {
+		width: 10%;
 	}
-	.body3{
-	    height: 8%;
+	
+	.hospital_info, .school_info, .subway_info {
+		display: none;
 	}
-	.head3{
-	    margin-top: 20px;
-	}
-	.footer3{
-	    margin-top: 60px;
-	}
-	#secondImg{
-		border: 1px solid blue;
-	}
+	
 	</style>
 </head>
 <body>
 	<jsp:include page="../../views/common/header.jsp" />
 
- <div class="content1 margin">
+ <div class="content1 margin content">
         <div class="sell_title">
-            <div class="sell_no radius">
-                <span>매물번호 : ${sda.sellSno} </span>
+	            <div class="sell_no radius">
+	                <span>매물번호 : ${sda.sellSno} </span>
+	            </div>
+	            <div class="sell_name">
+	                <p>${sda.sellName }</p>
+	            </div>
+	    </div>
+        <div class="sell_last">
+        	<div class="address">
+            	<div class="sell_address">매물주소 : ${sda.sellAddress}</div>
+            	<div class="seller_address">중개사소재지 : ${sda.brokerAdd }</div>
             </div>
-            <div class="sell_name">
-                <p>${sda.sellName }</p>
-            </div>
-            <div class="sell_last">
-                <div class="sell_address">매물주소 : ${sda.sellAddress}
-                </div>
-                <div class="sell_like">
-                    <div class="radius" id="sellLike">
-                        <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
-                        <span>찜하기</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="line"></div>
-        <div class="seller">
-            
-            <div class="seller_address">
-                중개사소재지 : ${sda.brokerAdd }
-            </div>
-            
         </div>
     </div>
-
+	
+	<div class="content2 margin content">
+		<div class="margin">
+			<div class="con2Text1 ">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당자료는 국토교통부에서 제공하는 아파트매매 실거래 자료를 기반으로 한 매물의 정보입니다.</p>
+			</div>
+			<div class="con2Text2">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">본 서비스에서 제공하는 정보는 법적인 효력이 없으므로 참고용으로만 활용해주시길 바랍니다.</p>
+			</div>
+		</div>
+	</div>
+	
     <div class="content3 margin content">
         <p class="price_name">[가격정보]</p>
         <hr class="hr">
@@ -366,6 +208,18 @@
                     <tr>
                         <th>매매가</th>
                         <td>${sda.sellPrice}</td>
+                    </tr>
+                    <tr>
+                    	<th>관리비</th>
+                    	<th></th>
+                    </tr>
+                    <tr>
+                    	<td>주차</td>
+                    	<td>가능</td>
+                    </tr>
+                    <tr>
+                    	<td>단기임대</td>
+                    	<td>불가능</td>
                     </tr>
                 </tbody>
             </table>
@@ -384,21 +238,49 @@
                         <td>${sda.sellName}</td>
                     </tr>
                     <tr>
+                    	<th>건물종류</th>
+                    	<td>${sda2.kaptType }</td>
+                    </tr>
+                    <tr>
                         <th>전용 면적</th>
                         <td>${sda.sellPrivateArea}</td>
                     </tr>
                     <tr>
-                        <th>해당 층</th>
-                        <td>${sda.sellFloor}</td>
+                        <th>해당 층/전체 층</th>
+                        <td>${sda.sellFloor}/ ${sda2.kaptAllFloor}</td>
                     </tr>
+                    <tr>
+                    	<th>방 수 / 욕실 수</th>
+                    	<td></td>
+                    </tr>
+                    <tr>
+                    	<th>현관타입</th>
+                    	<td>${sda2.kaptEntrance }</td>
+                   	</tr>
                     <tr>
                         <th>계약년/월/일</th>
                         <td>${sda.ymd}</td>
                     </tr>
                     <tr>
                         <th>건축년도</th>
-                        <td>${sda.sellApprovalDatetime}</td>
+                        <td>${sda.sellApprovalDatetime}년</td>
                     </tr>
+                    <tr>
+                    	<th>입주가능일</th>
+                    	<td></td>
+                    </tr>
+                    <tr>
+                    	<th>건축 시공사</th>
+                    	<td>${sda2.buildStructure }</td>
+                    </tr>
+                    <tr>
+                    	<th>승강시설</th>
+                    	<th></th>
+                    </tr>
+                    <tr>
+                    	<th>냉/난방시설</th>
+                    	<td>${sda2.kaptHeating}</td>
+                    </tr>	
                     <tr>
                         <th>해제여부</th>
                         <td>${sda.realYn}</td>
@@ -411,11 +293,46 @@
             </table>
         </div>
     </div>
-
-
-    <div class="content7 margin content">
-        <p class="option_name">[실매매가]</p>
+	 <div class="content5 margin content">
+        <p class="arround_name">[단지정보]</p>
         <hr class="hr">
+        <div class="arround margin">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>단지사용 승인일</th>
+                        <td>${sda2.kaptApprovalDate}</td>
+                    </tr>
+                    <tr>
+                        <th>총 동수</th>
+                        <td>${sda2.kaptWingCount}개 동</td>
+                    </tr>
+                    <tr>
+                        <th>총 세대 수</th>
+                        <td>${sda2.kaptHousehold }세대</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="content6 margin content">
+        <p class="option_name">[옵션정보]</p>
+        <hr class="hr">
+        <div class="option margin">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>기본옵션</th>
+                        <td>${sd.option }</td>
+                    </tr>
+                    <tr>
+                        <th>보안시설</th>
+                        <td>cctv(${sda2.cctvCount })</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="content8 margin content">
@@ -432,25 +349,48 @@
                 <span>대중교통</span>
             </button>
             <button class="hospital button">
-                <img src="https://ifh.cc/g/r0Ta4O.png" width="40px">
-                <span>병원시설</span>
+                <img src="https://ifh.cc/g/wssk5H.png" width="40px">
+                <span>부대시설</span>
             </button>
             <button class="school button">
                 <img src="https://ifh.cc/g/27sfFC.png" width="40px" height="35px">
                 <span>학교정보</span>
             </button>
         </div>
-     
+        <div class="infogroup">
+            <div class="market_info info margin">
+                <table class="table con info_table">
+                    <tbody class="market_tbody">
+                    </tbody> 
+                </table>
+            </div>
+        
+            <div class="hospital_info info margin">
+                <table class="table info_table">
+                    <tbody class="other_tbody">
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="subway_info info margin">
+                <table class="table info_table">
+                    <tbody class="subway_tbody">
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="school_info info margin">
+                <table class="table info_table">
+                    <tbody class="school_tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="content9 content margin">
-       <!--  <input type="button"  class="contect radius " value="공인중개사 연락하기">
-        <input type="button" class="notify radius last_btn" value="허위매물 신고하기"> -->
-    </div>
-    
-    <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+   
     
     <script>
+    	/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
     	$(function(){
     		
     		var userNo = '${loginUser.userNo}';
@@ -463,7 +403,8 @@
     				userNo : userNo,
     				sellPrice : sellPrice,
     				sellAddress : sellAddress,
-    				detail : detail
+    				detail : detail,
+    				expire: Date.now() + (1000 * 60 * 60 * 24)
 			}
     	
     		const objString = JSON.stringify(obj);
@@ -472,11 +413,111 @@
     			window.localStorage.setItem('recentRoom', objString);
     		}
     		
-    		
     	});
+    	
+    	$(function(){
+    	
+    		addApiList();
+    	})
+    	
+    	function addApiList(){
+    		$.ajax({
+    			url : "<%=request.getContextPath()%>/sell/addApi",
+    			method : "get",
+    			data : {kaptCode : '${sda2.kaptCode}'},
+    			dataType : "json",
+    			success : function(result){
+    				console.log("api접근성공");
+    				
+    				let result0 = JSON.parse(result[0]);
+    				console.log(result0);
+    				console.log(result0.kaptdWtimebus);
+    				console.log(result0.subwayLine);
+    				console.log(result0.subwayStation);
+    				console.log(result0.kaptdWtimesub);
+    				
+    				/* 편의시설 */
+    				let convenientFacility = result0.convenientFacility;
+    				let conarr = convenientFacility.split(" ");
+    				let con = "";
+    				for(let i=0; i<conarr.length; i++){
+    					con += "<tr>"+"<th>"+(i+1)+"</th>"+
+    							"<td>"+conarr[i]+"</td>"+"</tr>"
+    				}
+    				$(".market_tbody").html(con);
+    				/* 교육시설 */
+    				let educationFacility = result0.educationFacility;
+    				let eduArr = educationFacility.split(" ");
+    				let edu = "";
+    				for(let i=0; i<eduArr.length; i++){
+    					edu +=  "<tr>"+"<th>"+(i+1)+"</th>"+
+								"<td>"+eduArr[i]+"</td>"+"</tr>"
+    				}
+    				$(".school_tbody").html(edu);
+    				
+    				/* 교통시설 */
+    				let subwayStation = result0.subwayStation;
+    				let subwayTime = result0.kaptdWtimesub;
+    				let subArr = subwayStation.split(",");
+    				let sub = "";
+    				for(let i=0; i<subArr.length; i++){
+    					sub += "<tr>"+"<th>"+(i+1)+"<th>"+"<td>"+subArr[i]+" -> "+subwayTime+"</td>"+"</tr>"
+    				}
+    				$(".subway_tbody").html(sub);
+    				
+    				/* 부대시설 */
+    				let welfareFacility = result0.welfareFacility;
+    				let welArr = welfareFacility.split(" ");
+    				let wel = "";
+    				for(let i=0; i<welArr.length; i++){
+    					wel +=  "<tr>"+"<th>"+(i+1)+"</th>"+
+						"<td>"+welArr[i].replace(",","")+"</td>"+"</tr>"
+    				}
+    				$(".other_tbody").html(wel);
+    				
+    			}, error : function(){
+    				console.log("api접근 실패")
+    			}
+    		})
+
+    	}
+  
+    	$(function(){
+    	    $(".market").on("click", function(){
+    	    	$(".market").css({"background-color":"#0A2647", "color":"white", "font-weight":"900"});
+    	    	$(".market>img").attr("src","https://ifh.cc/g/zF1Glv.png");
+    	        $(".market_info").show();
+    	        $(".subway_info").hide();
+    	        $(".school_info").hide();
+    	        $(".hospital_info").hide();
+    	    })
+    	    $(".subway").on("click", function(){
+    	    	
+    	        $(".market_info").hide();
+    	        $(".subway_info").show();
+    	        $(".school_info").hide();
+    	        $(".hospital_info").hide();
+    	    })
+    	    $(".hospital").on("click", function(){
+    	        $(".market_info").hide();
+    	        $(".subway_info").hide();
+    	        $(".school_info").hide();
+    	        $(".hospital_info").show();
+    	    })
+    	    $(".school").on("click", function(){
+    	        $(".market_info").hide();
+    	        $(".subway_info").hide();
+    	        $(".school_info").show();
+    	        $(".hospital_info").hide();
+    	    })
+    	})
+    	
+    	
+
     
-    
+
     </script>
+    
     
     
     

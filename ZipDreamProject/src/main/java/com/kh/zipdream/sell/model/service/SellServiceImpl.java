@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.dao.SellDao;
+import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 import com.kh.zipdream.utils.FileUtils;
 
 @Service
@@ -75,6 +78,32 @@ public class SellServiceImpl implements SellService {
 		return sellDao.sellDetail(sellNo);
 	}
 	
+	public List<SellDetail> selectSellAllList(){
+		return sellDao.selectSellAllList();
+	}
+	
+	public SellDetailApi detailApiSecond(Map<String, String> map){
+		return sellDao.detailApiSecond(map);
+	}
 
+	public int insertReport(Report report) {
+		return sellDao.insertReport(report);
+	}
+	
+	public int insertCounsle(Counsle counsle) {
+		return sellDao.insertCounsle(counsle);
+	}
 
+	public int insertUserSelect(Map<String, Integer> map) {
+		return sellDao.insertUserSelect(map);
+	}
+
+	public int deleteUserSelect(Map<String, Integer> map) {
+		return sellDao.deleteUserSelect(map);
+	}
+	
+	public List<SellDetail> selectSellList2(int sellNo){
+		return sellDao.selectSellList2(sellNo);
+	}
+	
 }

@@ -4,12 +4,18 @@ package com.kh.zipdream.member.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.kh.zipdream.mail.model.service.MailSendService;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 
 @SessionAttributes({ "loginUser" })
 @Controller
@@ -49,11 +57,19 @@ public class MemberController {
 		return "member/bkmemberJoin";
 	}
 	
+	@GetMapping("/updatemember")
+	public String updatemember() {
+		return "mypage/myInfo";
+	}
+	
 
 	// 이메일
 	@Autowired
 	MailSendService mailSendService; 
-
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
 	// 로그인 회원가입
 	@Autowired
 	private MemberService memberService;
@@ -84,7 +100,8 @@ public class MemberController {
 
 	      // 암호화 전 loginUser처리
 	      Member loginUser = memberService.loginMember(m);
-
+	    
+	      System.out.println(m.getUserPwd());
 	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
 	    	  	session.setAttribute("loginUser", loginUser);
 		         if(loginUser.getUserLevel() == 3) {
@@ -112,7 +129,7 @@ public class MemberController {
 	public String insertMember( 
 			Member m, HttpSession session, Model model) {
 		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
-		System.out.println(address);
+		
 		m.setAddress(address);
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
@@ -143,10 +160,9 @@ public class MemberController {
 				Member m, HttpSession session, Model model,
 				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList){
 			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
-			System.out.println(address);
+		
 			m.setAddress(address);
 			
-			System.out.println(imgList);
 			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 			String webPath = "resources/bkupfiles/";
 			String serverFolderPath = session.getServletContext().getRealPath(webPath);
@@ -228,6 +244,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 아이디 중복체크
 	@ResponseBody
 	   @GetMapping("/emailCheck")
 	   public int emailCheck(HttpSession session,
@@ -238,23 +255,157 @@ public class MemberController {
 	      return result;
 	   }
 
-	
+	//아이디 찾기
 	@ResponseBody
 	@GetMapping("/searchId")
 	public Member searchId(HttpSession session,
 							
 							 @RequestParam(value = "name", required = false) String name,
-							 @RequestParam(value = "phoneNumber", required = false) String phone) {
+							 @RequestParam(value = "phone", required = false) String phone) {
 		Map<String, String> map = new HashMap();
 		map.put("name", name);
 		map.put("phone", phone);
 		 Member result = memberService.searchId(map);
 		return result;
 	}
+	
+	//비밀번호찾기
+	@ResponseBody
+	@GetMapping("/searchPwd")
+	public int searchPwd(HttpSession session,
+							
+					@RequestParam(value = "phone", required = false) String phoneNumber,
+					@RequestParam(value = "idText", required = false) String idText)throws MessagingException {
+		Member m = new Member();
+		m.setPhone(phoneNumber);
+		m.setUserId(idText);
+		
+		int leftLimit = 97; // letter 'a'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = 10;
+		
+		Random random = new Random();
+		StringBuilder buffer = new StringBuilder(targetStringLength);
+		for (int i = 0; i < targetStringLength; i++) {
+		    int randomLimitedInt = leftLimit + (int)
+		            (random.nextFloat() * (rightLimit - leftLimit + 1));
+		    buffer.append((char) randomLimitedInt);
+		}
+		String generatedString = buffer.toString();
+		
+		m.setUserPwd(bcryptPasswordEncoder.encode(generatedString));
+		
+		int result = memberService.searchPwd(m);
+		
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		mailMessage.setFrom(new InternetAddress("minifkaus@naver.com"));
+		mailMessage.setSubject("귀하의 " + m.getUserId() + " 비밀번호입니다.", "utf-8");
+		mailMessage.setText("귀하의 ZIPDREAM 비밀번호는 " + generatedString + "입니다.", "utf-8", "html");
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(m.getUserId()));
+		mailSender.send(mailMessage);
+		
+		return result;
+	}
+	
+	//일반회원 정보수정
+	@PostMapping("/updateMember")
+	@ResponseBody
+	public int updateMember(
+			@RequestParam(value = "phone") String phone,
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "address") String address,
+			@RequestParam(value = "userNo") int userNo,
+			
+			  HttpSession session, Model model 
+			) {
+		
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setPhone(phone);
+		m.setAddress(address);
+		m.setUserNo(userNo);
+		
+		int result = memberService.updateMember(m);
+		
+		String url = "";
+		if (result > 0) { // 성공시 - 메인페이지로
+			session.setAttribute("alertMsg", "수정성공");
+			url = "redirect:/";
+		} else { // 실패 - 에러페이지
+			model.addAttribute("errorMsg", "수정실패");
+			url = "common/errorPage";
+		}
+		System.out.println(m);
+		
+		
+		return result;
+	}
+
+	@GetMapping("/mybookmarklist")
+	@ResponseBody
+	public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
+		List<userSelectList> uslist = memberService.myBookmarkList(uno);
+
+		return uslist;
+	}
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 
 
 	
-  }
+  
 	 
 
 

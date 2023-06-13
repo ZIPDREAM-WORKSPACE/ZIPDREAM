@@ -14,6 +14,7 @@ import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.dao.MemberDao;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.utils.FileUtils;
 
@@ -89,11 +90,6 @@ public class MemberServiceImpl implements MemberService {
 		return userNo;
 	}
 	
-	
-	
-	
-	
-	
 	@Override
 	public int insertapply(int userNo) {
 
@@ -101,11 +97,6 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
-	
-	
-	
-	
-	
 	
 	
 	 @Override
@@ -152,8 +143,22 @@ public class MemberServiceImpl implements MemberService {
 		Member result=memberDao.searchId(map);
         return result;
     }
-
 	
+	@Override
+    public int searchPwd(Member m) {
+		int result = memberDao.searchPwd(m);
+		
+        return result;
+    }
+	
+	@Override
+    public int updateMember(Member m) {
+		
+		
+        return memberDao.updateMember(m);
+    }
+	
+
 	 @Override
 	    public int emailCheck(String id) {
 	        int result=memberDao.emailCheck(id);
@@ -161,6 +166,13 @@ public class MemberServiceImpl implements MemberService {
 	        return result;
 	    }
 
+	 public int deleteMember(int userNo) {
+		 return memberDao.deleteMember(userNo);
+	 }
+	 
+	 public  List<userSelectList> myBookmarkList(int uno) {
+		 return memberDao.myBookmarkList(uno);
+	 }
 }
 
 	

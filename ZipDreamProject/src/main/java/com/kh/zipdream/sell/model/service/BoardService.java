@@ -8,4 +8,5 @@ public interface BoardService {
 
 	int insertBoard(Board board);
 	List<Board> boardList(int refSno);
+	int deleteBoard(int detailBoardNo);
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="agent-mapper">
+
+	<resultMap type="myroomsell" id="myroomsellResultSet">
+		<id column="USER_SR_NO" property="userSrNo" />
+		<result column="REF_UNO" property="refUno" />
+		<result column="REF_RUNO" property="refRuno" />
+		<result column="ROOM_TYPE" property="roomType" />
+		<result column="BUILDING_TYPE" property="buildingType" />
+		<result column="ADDRESS" property="address" />
+		<result column="DEAL_TYPE" property="dealType" />
+		<result column="STATUS" property="status" />
+		<result column="USER_NAME" property="userName" />
+		<result column="PHONE" property="phone" />
+	</resultMap>
+	
+	<select id="selectRequestListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM USER_ROOM_SELL
+		WHERE STATUS IN (1,2) AND REF_RUNO = #{userNo}
+	</select>
+	
+	<select id="selectRequestList" resultMap="myroomsellResultSet">
+		SELECT USER_SR_NO, REF_UNO, REF_RUNO, ROOM_TYPE, BUILDING_TYPE, U.ADDRESS, DEAL_TYPE, U.STATUS,  M.USER_NAME
+		FROM USER_ROOM_SELL U
+		JOIN MEMBER M ON (M.USER_NO = REF_UNO)
+		WHERE U.STATUS IN (1,2) AND REF_RUNO = #{userNo} 
+	</select>
+	
+	<select id="selectRequestUser" resultMap="myroomsellResultSet">
+		SELECT USER_SR_NO, ROOM_TYPE, BUILDING_TYPE, U.ADDRESS, DEAL_TYPE, M.USER_NAME, M.PHONE
+		FROM USER_ROOM_SELL U
+		JOIN MEMBER M ON (M.USER_NO = REF_UNO)
+		WHERE USER_SR_NO = #{userSrNo}
+	</select>
+	
+	<update id="updateMyRoomSell">
+		UPDATE USER_ROOM_SELL 
+		SET STATUS = #{status}
+		WHERE USER_SR_NO = #{userSrNo}
+	</update>
+	
+	
+</mapper>

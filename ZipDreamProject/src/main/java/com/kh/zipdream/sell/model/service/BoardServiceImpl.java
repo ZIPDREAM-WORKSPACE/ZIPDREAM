@@ -21,4 +21,8 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> boardList(int refSno){
 		return boardDao.boardList(refSno);
 	}
+	
+	public int deleteBoard(int detailBoardNo) {
+		return boardDao.deleteBoard(detailBoardNo);
+	}
 }
