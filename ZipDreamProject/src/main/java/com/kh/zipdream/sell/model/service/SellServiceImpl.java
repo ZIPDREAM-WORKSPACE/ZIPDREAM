@@ -81,8 +81,8 @@ public class SellServiceImpl implements SellService {
 		return sellDao.selectSellAllList();
 	}
 	
-	public List<SellDetailApi> selectApiList(String kaptAddress){
-		return sellDao.selectApiList(kaptAddress);
+	public SellDetailApi detailApiSecond(Map<String, String> map){
+		return sellDao.detailApiSecond(map);
 	}
 
 	public int insertReport(Report report) {

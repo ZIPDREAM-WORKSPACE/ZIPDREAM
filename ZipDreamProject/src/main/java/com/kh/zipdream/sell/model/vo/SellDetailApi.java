@@ -37,12 +37,13 @@ public class SellDetailApi {
 	private String dongri;
 	private String kaptCode;
 	private String kaptName;
+	private String kaptAddress;
 	private String kaptApprovalDate;
 	private String kaptEnrollDate;
 	private String kaptWingCount;
 	private String kaptHousehold;
 	private String maintenanace;
-	private String heating;
+	private String kaptHeating;
 	private String kaptEntrance;
 	private String kaptBuildCompany;
 	private String securityCompany;

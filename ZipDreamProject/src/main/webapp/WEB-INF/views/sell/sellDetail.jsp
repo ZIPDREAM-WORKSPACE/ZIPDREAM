@@ -515,7 +515,7 @@
                             	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="400" height="600">
                             	</td>
                         	</tr>
- 							<c:forEach var="i" begin="1" end="${fn:length(sd.imgList)-2}">
+ 							<c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}">
 			 						<tr>
 			                            <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="contentImg1" width="300" height="300"></td>
 			                            <!-- <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
@@ -558,7 +558,7 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>월세</th>
+                        <th>매매가</th>
                         <td>${sd.sellPrice}</td>
                     </tr>
                     <tr>
@@ -584,7 +584,7 @@
 		        <div class="info_pic margin">
 		        <c:if test="${!empty sd.imgList }">
 		        	<c:forEach begin="${fn:length(sd.imgList)-1}" var="i" end="${fn:length(sd.imgList)-1}">
-		        		<img src="<%=request.getContextPath()%>/reources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
 		        	</c:forEach>
 		        </c:if>
 		        </div>
@@ -1092,7 +1092,7 @@
 	
 	/* 신고 등록 함수 */
 	function insertReport(type) {
-		let reportContent = $(".reportContent").val();
+		<%-- let reportContent = $(".reportContent").val();
 		$.ajax({
 			url : "<%=request.getContextPath()%>/sell/report",
 			data : {
@@ -1109,7 +1109,7 @@
 					swal("", "신고 등록 실패.", "error");
 				}
 			}
-		});
+		}); --%>
 	}
 
 </script>

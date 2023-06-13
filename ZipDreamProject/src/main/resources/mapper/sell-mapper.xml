@@ -57,28 +57,28 @@
   	</resultMap>
  	
  	<resultMap type="sellDetailApi" id="apiResultSet">
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
- 		<result column="" property=""/>
+ 		<result column="SIDO" property="sido"/>
+ 		<result column="SIGUNGU" property="sigungu"/>
+ 		<result column="EUPMYEON" property="eupmyeon"/>
+ 		<result column="KAPT_CODE" property="kaptCode"/>
+ 		<result column="KAPT_NAME" property="kaptName"/>
+ 		<result column="KAPT_APPROVAL_DATE" property="kaptApprovalDate"/>
+ 		<result column="KAPT_ENROLL_DATE" property="kaptEnrollDate"/>
+ 		<result column="KAPT_WING_COUNT" property="kaptWingCount"/>
+ 		<result column="KAPT_HOUSEHOLD" property="kaptHousehold"/>
+ 		<result column="MAINTENANACE" property="maintenanace"/>
+ 		<result column="KAPT_HEATING" property="kaptHeating"/>
+ 		<result column="KAPT_ENTRANCE" property="kaptEntrance"/>
+ 		<result column="KAPT_BUILD_COMPANY" property="kaptBuildCompany"/>
+ 		<result column="SECURITY_COMPANY" property="securityCompany"/>
+ 		<result column="CLEAN_COMPANY" property="cleanCompany"/>
+ 		<result column="BUILD_STRUCTURE" property="buildStructure"/>
+ 		<result column="LIFT_COUNT" property="liftCount"/>
+ 		<result column="KAPT_PARKING_COUNT" property="kaptParkingCount"/>
+ 		<result column="CCTV_COUNT" property="cctvCount"/>
+ 		<result column="KAPT_ALL_FLOOR" property="kaptAllFloor"/>
  	</resultMap>
+ 	
  	<resultMap type="report" id="reportResultSet">
 		<id column="REPORT_NO" property="reportNo"/>
 		<result column="REF_RUNO" property="refRuno"/>
@@ -146,5 +146,11 @@
 		INSERT INTO REPORT (REF_RUNO, REF_TUNO, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE, REPORT_DATE)
 		VALUES(#{refRuno}, #{refTuno}, #{reportContent}, 'N', #{reportType}, SYSDATE())
 	</insert>
+	
+	<select id="selectApiList" resultMap="apiResultSet" parameterType="sellDetailApi">
+		SELECT *
+		FROM API2
+		WHERE KAPT_ADDRESS LIKE CONCAT(CONCAT('%',#{kaptAddress}),'%') AND KAPT_NAME LIKE CONCAT(CONCAT('%',#{kaptName}),'%')
+	</select>
 
 </mapper>

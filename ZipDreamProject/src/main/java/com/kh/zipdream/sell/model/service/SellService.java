@@ -19,7 +19,7 @@ public interface SellService {
 	
 	List<SellDetail> selectSellAllList();
 	
-	List<SellDetailApi> selectApiList(String kaptAddress);
+	SellDetailApi detailApiSecond(Map<String, String> map);
 
 	public int insertReport(Report report);
 }

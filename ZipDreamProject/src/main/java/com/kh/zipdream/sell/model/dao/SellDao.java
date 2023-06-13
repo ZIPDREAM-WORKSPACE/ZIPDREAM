@@ -2,6 +2,7 @@ package com.kh.zipdream.sell.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,8 @@ public class SellDao {
 		return sqlSession.selectList("sell-mapper.selectSellAllList");
 	}
 	
-	public List<SellDetailApi> selectApiList(String kaptAddress){
-		return sqlSession.selectList("sell-mapper.selectApiList", kaptAddress);
+	public SellDetailApi detailApiSecond(Map<String, String> map){
+		return sqlSession.selectOne("sell-mapper.selectApiList", map);
 	}
 	public int insertReport(Report report) {
 		return sqlSession.insert("sell-mapper.insertReport",report);
