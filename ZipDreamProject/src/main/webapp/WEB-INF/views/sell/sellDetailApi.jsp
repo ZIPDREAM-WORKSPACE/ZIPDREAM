@@ -64,20 +64,6 @@
 	    font-size: 1rem;
 	    color: #6E7C7C;
 	}
-	.sell_like{
-	    width: 30%;
-	}
-	#sellLike {
-	    border: 1px solid black;
-	    height: 2.3rem;
-	}
-	#sellLike>span{
-	    font-size: 0.8rem;
-	}
-	#like_img{
-	    vertical-align: bottom;
-	    margin: 5px 0px 0px 14px;
-	}
 	.line{
 	    border: 1px solid #6E7C7C;
 	    height: 80%;
@@ -95,7 +81,7 @@
 		font-weight: 600;
 	}
 	.content3{
-	    margin-top : 80px;
+	    margin-top : 30px;
 	    height: 15rem;
 	}
 	.price_name, .info_name, .arround_name, .option_name, .othier_info{
@@ -106,16 +92,17 @@
 	    width: 90%;
 	}
 	.content4{
+		margin-top : 60px;
 	    height: 30rem;
 	}
 	.content5{
-		margin-top: 360px;	
+		margin-top: 380px;	
 	    height: 15rem;
 	}
-	.table>tbody>tr>th{
-	    width: 15%;
+	.table>tbody>tr>th {
+		width: 15%;
 	}
-	.content6, .content7, .content8{
+	.content6, .content8{
 		margin-top:80px;
 	}
 	/*주변정보*/
@@ -123,18 +110,7 @@
 	    display: flex;
 	    justify-content: center;
 	}
-	.button{
-	    width: 200px;
-	    height: 3rem;
-	    border: 1px solid gray;
-	    border-radius: 20px;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: row;
-	    justify-content: center;
-	    align-items: center;
-	}
-	
+
 	.button:hover{
 	    background-color: #0A2647;
 	    color: white;
@@ -152,15 +128,7 @@
 	.hospital_info, .school_info, .subway_info{
 	    display: none;
 	}
-	.content9{
-		margin-top: 50px;
-		text-align: center;
-	}
-	/*주변정보*/
-	.btn-group {
-		display: flex;
-		justify-content: center;
-	}
+	
 	
 	.button {
 		width: 200px;
@@ -270,8 +238,8 @@
                         <td>${sda.sellName}</td>
                     </tr>
                     <tr>
-                    	<th>방종류</th>
-                    	<td></td>
+                    	<th>건물종류</th>
+                    	<td>${sda2.kaptType }</td>
                     </tr>
                     <tr>
                         <th>전용 면적</th>
@@ -283,10 +251,6 @@
                     </tr>
                     <tr>
                     	<th>방 수 / 욕실 수</th>
-                    	<td></td>
-                    </tr>
-                    <tr>
-                    	<th>방향</th>
                     	<td></td>
                     </tr>
                     <tr>
@@ -370,11 +334,6 @@
             </table>
         </div>
     </div>
-	
-	  <div class="content7 margin content">
-        <p class="option_name">[실매매가]</p>
-        <hr class="hr">
-    </div>
 
     <div class="content8 margin content">
         <img src="https://ifh.cc/g/RorFkp.png" width="50px">
@@ -416,26 +375,6 @@
             <div class="subway_info info margin">
                 <table class="table info_table">
                     <tbody class="subway_tbody">
-                        <tr>
-                            <th>역삼역</th>
-                            <td>서울특별시 여기저기저기정로이괴외괴왹</td>
-                        </tr>
-                        <tr>
-                            <th>강남역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>선릉역</th>
-                            <td>에어컨, 냉장고, TV 등등...................</td>
-                        </tr>
-                        <tr>
-                            <th>잠실역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>신논현역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -476,16 +415,12 @@
     		
     	});
     	
-
     	$(function(){
     	
     		addApiList();
     	})
+    	
     	function addApiList(){
-
-    $(function({
-    		let sidoCode = '${sda.sidoCode}';
-
     		$.ajax({
     			url : "<%=request.getContextPath()%>/sell/addApi",
     			method : "get",
@@ -496,6 +431,10 @@
     				
     				let result0 = JSON.parse(result[0]);
     				console.log(result0);
+    				console.log(result0.kaptdWtimebus);
+    				console.log(result0.subwayLine);
+    				console.log(result0.subwayStation);
+    				console.log(result0.kaptdWtimesub);
     				
     				/* 편의시설 */
     				let convenientFacility = result0.convenientFacility;
@@ -516,20 +455,25 @@
     				}
     				$(".school_tbody").html(edu);
     				
+    				/* 교통시설 */
+    				let subwayStation = result0.subwayStation;
+    				let subwayTime = result0.kaptdWtimesub;
+    				let subArr = subwayStation.split(",");
+    				let sub = "";
+    				for(let i=0; i<subArr.length; i++){
+    					sub += "<tr>"+"<th>"+(i+1)+"<th>"+"<td>"+subArr[i]+" -> "+subwayTime+"</td>"+"</tr>"
+    				}
+    				$(".subway_tbody").html(sub);
+    				
     				/* 부대시설 */
     				let welfareFacility = result0.welfareFacility;
     				let welArr = welfareFacility.split(" ");
-    				
     				let wel = "";
     				for(let i=0; i<welArr.length; i++){
     					wel +=  "<tr>"+"<th>"+(i+1)+"</th>"+
 						"<td>"+welArr[i].replace(",","")+"</td>"+"</tr>"
     				}
     				$(".other_tbody").html(wel);
-    				
-    				
-    				
-    				
     				
     			}, error : function(){
     				console.log("api접근 실패")
@@ -567,9 +511,10 @@
     	        $(".hospital_info").hide();
     	    })
     	})
-
-    	})) 
     	
+    	
+
+    
 
     </script>
     

@@ -395,7 +395,7 @@
 							<div style="height: 45px;">
 								<input name="s" type="text" id="keyword"
 								placeholder="키워드를 입력하세요.">
-								<button type="submit" class="searchBtn">
+								<button type="button" class="searchBtn">
 									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 									  <path
@@ -1055,10 +1055,14 @@ $("#comOkOj").click(function(){
 			for(let i=0; i<result.length; i++){
 				var listLiTag = document.createElement("li");
 				listLiTag.setAttribute("id", result[i].sellNo);
-			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
+				listLiTag.setAttribute("class", "goDetail2");
+				
+				
+				
+				listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
 					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
-					"중개사 소재지 : "+result[i].brokerAdd;
+					"중개사 소재지 : "+result[i].address.substring(5);
 		  		listEl.appendChild(listLiTag);
 			}
 			
@@ -1071,6 +1075,17 @@ $("#comOkOj").click(function(){
 		
 		
 	});
+});
+
+$(document).on('click', '.goDetail2',
+function(e){
+	e.preventDefault();
+	
+	let sellNo = $(".goDetail2").attr("id");
+	
+	location.href="<%= request.getContextPath() %>/sell/detail/"+sellNo;
+	
+	
 });
 
 let plusLi = "";
@@ -1359,21 +1374,51 @@ $("#keyword").keyup(function(){
 	
 });
 
-<%-- let liId = "";
+let liId = "";
 
 $(document).on('click', '.kwBoxLi',
 function(e){
 	e.preventDefault();
 	liId = $('.kwBoxLi').attr('id');
 	console.log("liId "+liId);
-	
+
 	$.ajax({
-		url: "<%= request.getContextPath%>/map/",
+		url: "<%= request.getContextPath() %>/map/getaddress",
+		method: "post",
+		data: {'liId':liId },
+		dataType: "text",
 		
+		success: function(result){
+			console.log(result);
+			
+			let roadName = result;
+			
+			geocoder.addressSearch(roadName, function(result, status){
+			  		
+			  		if (status === kakao.maps.services.Status.OK) {
+
+			  			let y = result[0].y;
+			  			let x = result[0].x;
+						
+						var moveLatLon = new kakao.maps.LatLng(y,x);
+
+						map.panTo(moveLatLon, {
+						    animate: {
+						        duration: 550
+						    }
+						});
+						
+			  		}
+		   });
+			
+		},
+		error: function(result){
+			console.log("주소가져오기 에러");
+		}
 		
 	});
 
-}) --%>
+})
 
  
 </script>
