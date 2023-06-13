@@ -101,4 +101,9 @@ public class SellServiceImpl implements SellService {
 	public int deleteUserSelect(Map<String, Integer> map) {
 		return sellDao.deleteUserSelect(map);
 	}
+	
+	public List<SellDetail> selectSellList2(int sellNo){
+		return sellDao.selectSellList2(sellNo);
+	}
+	
 }

@@ -29,4 +29,6 @@ public interface SellService {
 	public int insertUserSelect(Map<String,Integer> map);
 	
 	public int deleteUserSelect(Map<String,Integer> map);
+	
+	public List<SellDetail> selectSellList2(int sellNo);
 }

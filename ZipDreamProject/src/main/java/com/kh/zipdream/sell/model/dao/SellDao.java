@@ -65,5 +65,8 @@ public class SellDao {
 	public int deleteUserSelect(Map<String, Integer> map) {
 		return sqlSession.delete("sell-mapper.deleteUserSelect",map);
 	}
-
+	
+	public List<SellDetail> selectSellList2(int sellNo){
+		return sqlSession.selectList("sell-mapper.selectSellList2", sellNo);
+	}
 }
