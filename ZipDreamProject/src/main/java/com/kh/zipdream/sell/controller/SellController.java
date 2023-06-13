@@ -124,6 +124,7 @@ public class SellController {
 		Member seller = memberService.selectMember(detail.getRefUno());
 		model.addAttribute("sd", detail);
 		model.addAttribute("seller", seller);
+		
 		return "sell/sellDetail";
 	}
 	
