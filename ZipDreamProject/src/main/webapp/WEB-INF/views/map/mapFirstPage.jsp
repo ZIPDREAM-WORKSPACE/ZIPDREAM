@@ -1089,7 +1089,7 @@ $("#keyword").keyup(function(){
 	let keyword = document.getElementById("keyword").value;
 	// 유효성검사 
 	
-	
+		var positions = [];
 		$.ajax({
 			  url : "<%=request.getContextPath()%>/map/searchKeyword",
 			  method: "get",
@@ -1316,7 +1316,7 @@ $("#keyword").keyup(function(){
   						  		document.getElementById("sidoCode").value = sidoCode;
   						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
   						  		document.getElementById("sellName").value = addressToXy["아파트"];
-  						  		document.getElementById("sellAddress").value = detailAddrClob+" "+addressToXy["도로명"];
+  						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
   						  		document.getElementById("sellPrice").value = resultStr;
   						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
   						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
