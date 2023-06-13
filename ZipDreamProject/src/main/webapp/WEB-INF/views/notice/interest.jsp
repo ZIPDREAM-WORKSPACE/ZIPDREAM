@@ -52,53 +52,52 @@ tbody::-webkit-scrollbar {
 		
 		text-align: center;
 	}
-	.num{
-		width:100px;
-	}
 	.title{
-		width:300px;
+		width:400px;
 	}
 	.content{
-		width:600px;
+		width:400px;
 	}
+	.time{
+		width:200px;
+	}
+	.link{
+		cursor:pointer;
+	}
+
 	
 </style>
 <body>
 <jsp:include page="notice_header.jsp"/>
 	<div class="notice_table">
 		<table>
-			<thead>
+			<thead >
 				<tr>
-					<th class="num">번호</th>
 					<th class="title">제목</th>
 					<th class="content">내용</th>
+					<th class="time">청약 접수일</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
+			<tbody class="noticeThead">
+				<!-- <tr>
 					<td class="num">1</td>
 					<td class="title">역삼 디오빌 분양 정보</td>
 					<td class="content">찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
+				</tr> -->
 		
 			</tbody>
 		</table>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
+
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<script>
+var refUno ='${loginUser.userNo}';
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	addEventMessage(refUno);
+	
+
+
+</script>
 </body>
 

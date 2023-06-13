@@ -20,5 +20,5 @@ public class MySale {
 	private int userNo;
 	private int houseCode;
 	private String hsUrl;
-	
+	private String title;
 }
