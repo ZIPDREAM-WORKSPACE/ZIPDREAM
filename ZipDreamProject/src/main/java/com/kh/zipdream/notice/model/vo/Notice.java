@@ -20,6 +20,9 @@ public class Notice {
 	private int noticeType;
 	private String noticeContent;
 	private String noticeTitle;
+	private String noticeUrl;
 	private int refUno;
 	private String createDateTime;
+	private String result;
+	private int type;
 }

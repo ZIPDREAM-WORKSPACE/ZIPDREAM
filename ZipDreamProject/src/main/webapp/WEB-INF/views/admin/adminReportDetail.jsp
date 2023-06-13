@@ -151,6 +151,7 @@ function reportSubmit(){
 	var reportType = '${report.reportType }';
 	console.log(reportResult);
 	sendMessage2(reportContent,reportDate,refRuno, reportStatus,reportResult,reportType );
+	insertReportNotice("<%=request.getContextPath()%>",reportContent,reportDate,refRuno, reportResult,reportType );
 }
 </script>
 </section>

@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- alert창 꾸미기  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <title>ZIPDREAM</title>
@@ -670,7 +669,7 @@
 	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
-	                            
+	                            deleteSaleNotice("<%=request.getContextPath()%>",hu, uno);
 	                        },
 	                        error:function(){
 	                            console.log("에러발생");

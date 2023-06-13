@@ -11,7 +11,7 @@
 <style>
 .recentContent {
 	width: 100%;
-	height: 450px;
+	min-height: 450px;
 }
 
 .recentContent>div {

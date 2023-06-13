@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
+<!-- 소켓 -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- alert창 꾸미기  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -185,6 +187,10 @@ position: absolute;
 		 padding:0px;
 		
 	}
+	.alarmImg{
+		width:30px;
+		height:30px;
+	}
 </style>
 </head>
 <body>
@@ -279,13 +285,19 @@ position: absolute;
 		location.href="<%=request.getContextPath()%>/member/login";
 	});
 	
+	var currentUserNo ='${loginUser.userNo}';
 	
 	let houseSock1 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	houseSock1.onmessage = function(e){
-		createNotice();
+		let message = JSON.parse(e.data);
+		if(message.userNo==currentUserNo || message.refRuno==currentUserNo || (message.refUno==currentUserNo&&message.dealType!=null)){
+			
+			createNotice();
+		}
 	}
 	
 
 	</script>
+	<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -76,7 +75,7 @@ tbody::-webkit-scrollbar {
 				<tr>
 					<th class="title">제목</th>
 					<th class="content">내용</th>
-					<th class="time">날짜</th>
+					<th class="time">청약 접수일</th>
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
@@ -93,9 +92,9 @@ tbody::-webkit-scrollbar {
 
 <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 <script>
-
+var refUno ='${loginUser.userNo}';
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
-	addEventMessage();
+	addEventMessage(refUno);
 	
 
 

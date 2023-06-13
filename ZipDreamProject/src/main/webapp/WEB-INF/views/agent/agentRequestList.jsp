@@ -183,7 +183,7 @@ table.type05 td {
 				</thead>
 				<tbody>
 					<c:forEach items="${requestList }" var="request">
-						<tr>
+						<tr >
 							<td style="display:none;">${request.userSrNo }</td>
 							<td>${request.roomType }</td>
 							<td>${request.buildingType }</td>
@@ -262,7 +262,7 @@ table.type05 td {
                     	<table class="type05"></table>
 		                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 		                    <button class="btn btn-outline-secondary" type="submit" name ="status" value="3" style="margin-right: 30px; margin-left: 30px;">거절하기</button>
-		                    <button class="btn btn-outline-primary" type="submit" name ="status" value="2">수락하기</button>
+		                    <button id="requestSubmit" class="btn btn-outline-primary" type="submit" name ="status" value="2"  >수락하기</button>
 		                </div> 
                 	</form>
                 </div>
@@ -276,7 +276,7 @@ table.type05 td {
 </body>
 
 <script>
-
+let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	const modal = document.getElementById('modalWrap');
 
 
@@ -311,6 +311,10 @@ table.type05 td {
 						}
 						
 						$(".type05").html(html);
+							
+						$("#requestSubmit").click(function(){
+							sendMessage4(result.refUno, result.refRuno, result.dealType);
+						});
 					},
 					error:function(){
 						consoel.log("에러 발생");
@@ -332,5 +336,6 @@ table.type05 td {
 		
 		
 	});
+	
 </script>
 </html>

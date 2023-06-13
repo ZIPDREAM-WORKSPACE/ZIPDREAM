@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -89,8 +88,13 @@ tbody::-webkit-scrollbar {
 <script>
 var refUno ='${loginUser.userNo}';
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock2 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock3 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock4 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	addEventMessage2(refUno);
-
+	addEventMessage3(refUno);
+	addEventMessage4(refUno);
+	addEventMessage5(refUno);
 
 </script>
 </body>
