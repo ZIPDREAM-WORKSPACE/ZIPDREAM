@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.service.MyRoomSellService;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
@@ -49,5 +50,22 @@ public class MyRoomSellController {
 		
 		
 	}
+	
+	@ResponseBody
+	@GetMapping("/deletemyroom")
+	public void myroomSellDelete(int userSrNo) {
+		
+		myroomsellService.myroomSellDelete(userSrNo);
+		
+	}
+
+	
+	@ResponseBody
+	@GetMapping("/deleteuUserCoupon")
+	public void deleteUserCoupon(Coupon coupon) {
+		
+		myroomsellService.deleteUserCoupon(coupon);
+	}
+
 
 }
