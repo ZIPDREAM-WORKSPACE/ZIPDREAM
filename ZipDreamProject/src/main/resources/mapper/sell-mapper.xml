@@ -43,7 +43,7 @@
  		<result column="SECURITY" property="security"/>
  		<result column="CREADTE_DATE" property="createDate"/>
  		<result column="MODIRY_DATE" property="modifyDate"/>
- 		
+ 		<result column="ADDRESS" property="address"/>
  		<collection property="imgList" javaType="java.util.ArrayList" ofType="attachment" select="selectImgList" column="SELL_NO"/>
  	</resultMap>
  	
@@ -148,8 +148,9 @@
  	</select>
  	
  	<select id="selectSellAllList" resultMap="sellDetailResultSet">
- 		SELECT *
- 		FROM SELLDETAIL
+ 		SELECT S.*, M.ADDRESS
+ 		FROM SELLDETAIL S
+ 		JOIN MEMBER M ON(REF_UNO = USER_NO)
  	</select>
 
 	<insert id="insertReport" parameterType="report">
