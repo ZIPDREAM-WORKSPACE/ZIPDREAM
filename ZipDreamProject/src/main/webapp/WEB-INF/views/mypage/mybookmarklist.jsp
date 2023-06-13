@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
+div{
+	/* border: 1px solid red; */
+}
 .recentContent {
 	width: 100%;
 	/* height: 300px; */
@@ -23,14 +26,28 @@
 	padding-right: 50px;
     padding-top: 20px;
 }
-	
+.imgStyle{
+	width: 300px;
+	height: 200px;
+	border-radius: 5px 5px 0px 0px;
+}
+.divStyle{
+	width: 300px;
+	padding: 10px;
+}
+.divStWrap{
+	width: 300px;
+	height: 200px;
+	border: 1px solid lightgray;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="mypage.jsp"/>
 	
 	<div class="recentContent">
-        <div class="rc">
+        <div id="listWrap" class="rc">
+        	
         </div>
     </div>
 	
@@ -55,9 +72,24 @@
 					$.ajax({
 						url: "<%= request.getContextPath() %>/sell/sellList2",
 						method: "get",
-						data: {"sellNo", sellNo},
+						data: {sellNo},
 						success: function(result){
 							console.log(result);
+							
+							let sellAddress = result[0].sellAddress;
+							let sellFloor = result[0].sellFloor;
+							let sellName = result[0].sellName;
+							let sellPrice = result[0].sellPrice;
+							let filePath = result[0].filePath;
+							console.log(result[0]);
+							
+								const element = document.getElementById("listWrap");
+								element.innerHTML += '<img class="imgStyle" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'">'
+												  + '<div class="divStWrap"><div class="divStyle" style="font-size:20px; font-weight: 500;">'+sellPrice+'억</div>'
+												  + '<div class="divStyle">'+sellName+', '+sellFloor+'</div>'
+												  + '<div class="divStyle">'+sellAddress+'</div>'+'</div>';
+						
+							
 						},
 						error: function(result){
 							console.log("에러");
