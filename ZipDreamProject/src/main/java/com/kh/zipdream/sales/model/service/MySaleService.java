@@ -13,6 +13,8 @@ public interface MySaleService {
 	public List<Integer> selectMySale(int userNo);
 	public int deleteMysaleHouse(MySale ms);
 	public ArrayList<Calender> selectCalender();
+
 	public ArrayList<Calender> selectinfoList(String calenderStart);
+
 	
 }

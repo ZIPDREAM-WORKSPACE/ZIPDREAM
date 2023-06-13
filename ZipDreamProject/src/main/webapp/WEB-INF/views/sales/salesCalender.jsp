@@ -191,7 +191,9 @@ a{
                         
                         <!-- 캘린더 날짜 선택시 상세 일정 넣기  -->
                         <div class="schedule">
+
                             <!-- <ul>
+
                                 <li>
                                     <p class="scheduleName">접수</p>
                                     <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
@@ -212,7 +214,9 @@ a{
                                     <p class="scheduleName">접수</p>
                                     <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
                                 </li>
+
                             </ul> -->
+
                         </div>
                     </div>
                 </div>
@@ -223,7 +227,9 @@ a{
     </div>
 
 
+
     <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -240,6 +246,7 @@ a{
                 selectable: true, 
                 nowIndicator: true, // 현재 시간 마크
                 locale: 'ko', // 한국어 설정
+
                 select: function(info) {
                     console.log(info.startStr);
                     var calenderStart = info.startStr;
@@ -271,6 +278,7 @@ a{
                     });
                     
                   },
+
                	events:[
                		<%List<Calender> calenderList = (List<Calender>) request.getAttribute("calenderList");%>
                		<%if(calenderList != null) {%>
@@ -285,10 +293,12 @@ a{
            		}%>
                	] 
             });
+
             
             calendar.render();
         });
         
+
     </script>
 	
 	
