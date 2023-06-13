@@ -179,5 +179,8 @@
 		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
 	</delete>
 	
+	<select id="selectSellList2" resultMap="">
+		
+	</select>
 
 </mapper>
