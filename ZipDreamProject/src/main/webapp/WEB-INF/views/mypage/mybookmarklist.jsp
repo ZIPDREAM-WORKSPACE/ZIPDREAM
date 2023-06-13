@@ -52,6 +52,17 @@
 				for(let i=0; i<result.length; i++){
 					let sellNo = result[i].sellNo;
 					// ajax로 sellDetail에서 정보 가져오기
+					$.ajax({
+						url: "<%= request.getContextPath() %>/sell/sellList2",
+						method: "get",
+						data: {"sellNo", sellNo},
+						success: function(result){
+							console.log(result);
+						},
+						error: function(result){
+							console.log("에러");
+						}
+					})
 				}
 				
 			},

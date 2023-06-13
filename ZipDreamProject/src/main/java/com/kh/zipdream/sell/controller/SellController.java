@@ -138,6 +138,17 @@ public class SellController {
 		return new Gson().toJson(sdList);
 	}
 	
+	@GetMapping("/sellList2")
+	@ResponseBody
+	public String sellList2(@RequestParam("sellNo") int sellNo, Model model) {
+		
+		List<SellDetail> sdList = sellService.selectSellList2(sellNo);
+		
+		model.addAttribute("sdList", sdList);
+		System.out.println("sdL:"+sdList);
+		return new Gson().toJson(sdList);
+	}
+	
 	//상담신청
 	/*
 	 * @PostMapping("/sellApply")
