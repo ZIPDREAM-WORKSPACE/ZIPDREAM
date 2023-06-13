@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
 public interface SellService {
 	
@@ -18,6 +19,8 @@ public interface SellService {
 	SellDetail sellDetail(int sellNo);
 	
 	List<SellDetail> selectSellAllList();
+	
+	SellDetailApi detailApiSecond(Map<String, String> map);
 
 	public int insertReport(Report report);
 	
