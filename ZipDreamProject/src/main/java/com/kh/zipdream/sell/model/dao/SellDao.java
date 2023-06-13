@@ -12,6 +12,7 @@ import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 
 
 @Repository
@@ -46,6 +47,9 @@ public class SellDao {
 		return sqlSession.selectList("sell-mapper.selectSellAllList");
 	}
 	
+	public SellDetailApi detailApiSecond(Map<String, String> map){
+		return sqlSession.selectOne("sell-mapper.selectApiList", map);
+	}
 	public int insertReport(Report report) {
 		return sqlSession.insert("sell-mapper.insertReport",report);
 	}

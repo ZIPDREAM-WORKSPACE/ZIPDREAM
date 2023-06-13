@@ -14,6 +14,7 @@ import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.sell.model.dao.SellDao;
 import com.kh.zipdream.sell.model.vo.Counsle;
 import com.kh.zipdream.sell.model.vo.SellDetail;
+import com.kh.zipdream.sell.model.vo.SellDetailApi;
 import com.kh.zipdream.utils.FileUtils;
 
 @Service
@@ -79,6 +80,10 @@ public class SellServiceImpl implements SellService {
 	
 	public List<SellDetail> selectSellAllList(){
 		return sellDao.selectSellAllList();
+	}
+	
+	public SellDetailApi detailApiSecond(Map<String, String> map){
+		return sellDao.detailApiSecond(map);
 	}
 
 	public int insertReport(Report report) {

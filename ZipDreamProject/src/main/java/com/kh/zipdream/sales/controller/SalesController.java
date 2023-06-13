@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.sales.model.service.MySaleService;
+import com.kh.zipdream.sales.model.vo.Calender;
 import com.kh.zipdream.sales.model.vo.MySale;
 
 @Controller 
@@ -45,6 +47,8 @@ public class SalesController {
 	public String moveSalesGuide() {
 		return "sales/salesGuide";
 	}
+	
+	
 	
 	@GetMapping("/term")
 	public String moveSalesTerm() {
@@ -190,6 +194,17 @@ public class SalesController {
 			return "실패";
 		}
 		
+	}
+	
+	@GetMapping("/calender")
+	public String moveSalesCalender(Model model) {
+		
+		ArrayList<Calender> calenderList = mysaleService.selectCalender();
+		model.addAttribute("calenderList", calenderList);
+		
+		/* System.out.println(calenderList); */
+		
+		return "sales/salesCalender";
 	}
 
 }
