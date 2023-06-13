@@ -83,10 +83,11 @@ public class SellController {
 				e.printStackTrace();
 				System.out.println("업로드 에러");
 			}
-		
+		String url ="";
 		if(result >0) {
 			System.out.println("업로드 성공");
-			return "redirect:../agent/agentRegistrationList";
+			url="redirect:/../agent/RegistrationList";
+			return url;
 		}else {
 			System.out.println("업로드 실패");
 			return "main/main";

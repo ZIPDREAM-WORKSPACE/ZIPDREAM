@@ -140,12 +140,12 @@
 
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="searchPwd" resultMap="memberResultSet">
-      SELECT PWD
-      FROM MEMBER
-      WHERE USER_ID = #{idText} AND PHONE = #{phoneNumber} 
-   </select> 
-   
+	<update id="searchPwd" parameterType="member">
+      UPDATE MEMBER SET 
+			USER_PWD = #{userPwd}
+      WHERE USER_ID = #{userId} AND PHONE = #{phone} 
+   </update> 
+
    <!-- 일반회원 수정 -->
    <update id="updateMember" parameterType="HashMap">
 	    UPDATE MEMBER SET 
