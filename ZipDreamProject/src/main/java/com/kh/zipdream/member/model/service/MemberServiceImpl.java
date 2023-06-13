@@ -14,6 +14,7 @@ import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.dao.MemberDao;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 import com.kh.zipdream.sell.model.vo.SellDetail;
 import com.kh.zipdream.utils.FileUtils;
 
@@ -167,6 +168,10 @@ public class MemberServiceImpl implements MemberService {
 
 	 public int deleteMember(int userNo) {
 		 return memberDao.deleteMember(userNo);
+	 }
+	 
+	 public  List<userSelectList> myBookmarkList(int uno) {
+		 return memberDao.myBookmarkList(uno);
 	 }
 }
 

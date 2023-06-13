@@ -8,7 +8,6 @@
 		<result column="USER_PWD" property="userPwd" />
 		<result column="USER_NAME" property="userName" />
 		<result column="PHONE" property="phone"/>
-		<result column="PWD" property="pwd" />
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDR2" property="addr2"/>
 		<result column="ADDR3" property="addr3"/>
@@ -24,6 +23,11 @@
 		<id column="MAIL" property="mail" />
 		<result column="AUTH_KEY" property="authKey" />
 		<result column="IS_AUTH" property="isAuth" />
+	</resultMap>
+	
+	<resultMap type="userselectlist" id="bookmarkResultSet">
+		<result column="USER_NO" property="userNo" />
+		<result column="SELL_NO" property="sellNo" />
 	</resultMap>
 	
 	
@@ -173,5 +177,11 @@
 	<delete id="deleteMember" parameterType="_int">
 		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
 	</delete>
+
+	<select id="myBookmarkList" resultMap="bookmarkResultSet">
+		SELECT SELL_NO
+		FROM USERSELECT_LIST
+		WHERE USER_NO = #{uno}
+	</select>
 
 </mapper>

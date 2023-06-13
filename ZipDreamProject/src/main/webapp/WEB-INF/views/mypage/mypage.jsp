@@ -101,7 +101,7 @@
             <ul class="listWrap">
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage"">최근 본 방</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/myroomlist">내 매물</a></li>
-                <li class="list"><a href="#">찜하기</a></li>
+                <li class="list"><a href="<%=request.getContextPath()%>/mypage/mybookmarklist">찜하기</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/couponlist">쿠폰함</a></li>
             </ul>
@@ -123,6 +123,9 @@
         break;
 	case "myroomlist" :
 		index = 1;
+		break;
+	case "mybookmarklist":
+		index = 2;
 		break;
 	case "myInfo" :
 		index = 3;

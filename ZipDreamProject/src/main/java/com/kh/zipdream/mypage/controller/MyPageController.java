@@ -42,6 +42,12 @@ public class MyPageController {
 	
 	}
 	
+	@GetMapping("/mybookmarklist") 
+	public String moveMyBookmarkListController() {
+		return "mypage/mybookmarklist"; 
+	
+	}
+	
 	@GetMapping("/couponlist")
 
 	public String moveCouponListController(@ModelAttribute("loginUser") Member loginUser, 
