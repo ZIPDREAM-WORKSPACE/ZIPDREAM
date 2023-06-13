@@ -90,7 +90,7 @@
 <jsp:include page="mypage.jsp"/>
 	
 	<div class="myInfo_wrap">
-		<form id="signUpdateform" action="<%=request.getContextPath()%>/member/updateMember" method="post"  >
+		
 			<label class="myInfo_title">아이디</label><br>
 		    <input class="myInfo_content read_only" type="text" name="userId" value="${m.userId}" size="55" readonly><br><br>
 		    <label class="myInfo_title" >비밀번호</label><br>
@@ -104,8 +104,8 @@
 		    <input class="myInfo_content" type="text"  value="${m.address }" size="46" id="addr" name="address">
 		    <input class="myInfo_content myInfo_button" type="button" value="변경" data-toggle="modal" data-target="#address_modal"><br><br>
 			<button type="button" id="signchangebtn">변경하기</button>  
-		    <a href="" ><button type="button" id="signdeletebtn">회원탈퇴</button></a>
-	    </form>
+		    <button type="button" id="signdeletebtn">회원탈퇴</button>
+	    
 	</div>
 	
 
@@ -113,6 +113,7 @@
 <!-- 비밀번호 모달 -->
 <div class="modal fade" id="password_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <form action="changePw" method="post"></form>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
@@ -122,15 +123,15 @@
       </div>
       <div class="modal-body">
        	<label class="myInfo_title">기존 비밀번호</label><br>
-	    <input class="password_content" type="text"  ><br><br>
+	    <input class="password_content" type="password" name="currentPw" id="currentPw"><br><br>
 	    
 	    <label class="myInfo_title">비밀번호 재설정</label><br>
-	    <input class="password_content" type="password"  id="password" onkeyup="checkPasswordValidity()"><br>
+	    <input class="password_content" type="password"  name="newPw" id="password" onkeyup="checkPasswordValidity()"><br>
 	    <span id="passwordError" style="color: red; font-size: 13px;" ></span>
         <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
         
 	    <label class="myInfo_title">비밀번호 확인</label><br>
-	    <input class="password_content" type="password" id="confirmPassword" onkeyup="checkPasswordMatch()" ><br>
+	    <input class="password_content" type="password" name="newPwdConfirm" id="confirmPassword" onkeyup="checkPasswordMatch()" ><br>
 	    <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
       </div>
       
@@ -267,14 +268,15 @@ function checkPasswordValidity() {
     	$('#addr').attr("value",address);
     	console.log($('#addr').val());
     });
-    
+$(function(){
+	
    $("#signchangebtn").click(function(){
    	 let phone = $("#phone").val();
    	 let userNo = ${loginUser.userNo};
-   	let add1 = document.getElementById('addr1').value;
-	let add2 = document.getElementById('addr2').value;
-	let add3 = document.getElementById('addr3').value;
-	let address = add1 + add2 + add3;
+	   	let add1 = document.getElementById('addr1').value;
+		let add2 = document.getElementById('addr2').value;
+		let add3 = document.getElementById('addr3').value;
+		let address = add1 + add2 + add3;
    	 let userName = $("#userName").val();
 		$.ajax({
             url:"<%=request.getContextPath()%>/member/updateMember", 
@@ -288,10 +290,13 @@ function checkPasswordValidity() {
                 }else{                  
                     alert("정보수정 성공");
                 }
+            },error : function(err){
+            	console.log(err)
             }
             
         });
        
     });  
+});
 
 </script>

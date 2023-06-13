@@ -33,10 +33,9 @@ public interface MemberService {
 	
 	public Member searchPwd(Map<String, String> map);
 	
-	public int updateMember(Member m);
+	public int updateMember(Map<String, String> map);
 
 	public int emailCheck(String id);
 
-	public int deleteMember(int userNo);
 }
 

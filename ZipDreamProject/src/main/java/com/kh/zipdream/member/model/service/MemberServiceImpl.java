@@ -151,10 +151,10 @@ public class MemberServiceImpl implements MemberService {
     }
 	
 	@Override
-    public int updateMember(Member m) {
+	public int updateMember(Map<String, String> map) {
 		
 		
-        return memberDao.updateMember(m);
+        return memberDao.updateMember(map);
     }
 	
 
@@ -168,6 +168,9 @@ public class MemberServiceImpl implements MemberService {
 	 public int deleteMember(int userNo) {
 		 return memberDao.deleteMember(userNo);
 	 }
+	 
+	 //비밀번호 변경
+	 
 }
 
 	

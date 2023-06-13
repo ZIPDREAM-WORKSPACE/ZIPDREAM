@@ -67,8 +67,8 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);
 	}
 	
-	public int updateMember(Member m) {
-		return sqlSession.update("member-mapper.updateMember", m);
+	public int updateMember(Map<String, String> map) {
+		return sqlSession.update("member-mapper.updateMember", map);
 	}
 	
 	
