@@ -7,7 +7,7 @@
 <title>ZIPDREAM</title>
 <style>
 div{
-	border: 1px solid red; 
+	/* border: 1px solid red;  */
 }
 .recentContent {
 	width: 100%;
@@ -31,6 +31,11 @@ div{
 	height: 200px;
 	border-radius: 5px 5px 0px 0px;
 }
+.imgStyle:hover{
+	
+	transform: scale(1.4);
+	transition: all 0.5s linear;
+}
 .divStyle{
 	width: 300px;
 	padding: 10px;
@@ -44,7 +49,11 @@ div{
 .imgStyle, .divStWrap:hover{
 	cursor: pointer;
 }
-
+.infoWrap{
+	width: 300px;
+	height: 400px;
+	
+}
 </style>
 </head>
 <body>
@@ -90,8 +99,8 @@ div{
 							console.log(result[0]);
 							
 								const element = document.getElementById("listWrap");
-								element.innerHTML += '<div id="'+sellNo+'" class="infoWrap">'
-												  + '<img class="imgStyle goDet" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'">'
+								element.innerHTML += '<div id="'+sellNo+'" class="infoWrap" style="display: inline-block;">'
+												  + '<div style="overflow: hidden;"><img class="imgStyle goDet" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'"></div>'
 												  + '<div class="divStWrap goDet"><div class="divStyle" style="font-size:20px; font-weight: 500; margin-top: 10px;">'+sellPrice+'억</div>'
 												  + '<div class="divStyle" style="font-size:14px;">'+sellName+', '+sellFloor+'</div>'
 												  + '<div class="divStyle">'+sellAddress+'</div>'+'</div></div>';
