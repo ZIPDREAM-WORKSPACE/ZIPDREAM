@@ -27,7 +27,6 @@ public class Member {
 	private String address;
 	private String addr2;
 	private String addr3;
-	private String pwd;
 	private Date enrollDateTime;
 	private Date modifyDateTime;
 	private String status;

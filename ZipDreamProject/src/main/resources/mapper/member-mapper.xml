@@ -8,7 +8,6 @@
 		<result column="USER_PWD" property="userPwd" />
 		<result column="USER_NAME" property="userName" />
 		<result column="PHONE" property="phone"/>
-		<result column="PWD" property="pwd" />
 		<result column="ADDRESS" property="address"/>
 		<result column="ADDR2" property="addr2"/>
 		<result column="ADDR3" property="addr3"/>
@@ -143,11 +142,11 @@
 
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="searchPwd" resultMap="memberResultSet">
-      SELECT PWD
-      FROM MEMBER
-      WHERE USER_ID = #{idText} AND PHONE = #{phoneNumber} 
-   </select> 
+	<update id="searchPwd" parameterType="member">
+      UPDATE MEMBER SET 
+			USER_PWD = #{userPwd}
+      WHERE USER_ID = #{userId} AND PHONE = #{phone} 
+   </update> 
    <!-- 일반회원 수정 -->
    <update id="updateMember" parameterType="member">
 	    UPDATE MEMBER SET 
