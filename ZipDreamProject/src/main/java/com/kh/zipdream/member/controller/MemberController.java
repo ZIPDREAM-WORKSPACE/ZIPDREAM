@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,11 @@ public class MemberController {
 	@GetMapping("/bkjoin")
 	public String bkmemerJoin() {
 		return "member/bkmemberJoin";
+	}
+	
+	@GetMapping("/updatemember")
+	public String updatemember() {
+		return "mypage/myInfo";
 	}
 	
 
@@ -84,7 +90,8 @@ public class MemberController {
 
 	      // 암호화 전 loginUser처리
 	      Member loginUser = memberService.loginMember(m);
-
+	    
+	      System.out.println(m.getUserPwd());
 	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
 	    	  	session.setAttribute("loginUser", loginUser);
 		         if(loginUser.getUserLevel() == 3) {
@@ -112,8 +119,9 @@ public class MemberController {
 	public String insertMember( 
 			Member m, HttpSession session, Model model) {
 		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
-		System.out.println(address);
+		
 		m.setAddress(address);
+		m.setPwd(m.getUserPwd());
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
 		// 암호화된 pwd를 m의 userPwd다시 대입
@@ -143,10 +151,9 @@ public class MemberController {
 				Member m, HttpSession session, Model model,
 				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList){
 			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
-			System.out.println(address);
+		
 			m.setAddress(address);
 			
-			System.out.println(imgList);
 			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 			String webPath = "resources/bkupfiles/";
 			String serverFolderPath = session.getServletContext().getRealPath(webPath);
@@ -228,6 +235,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 아이디 중복체크
 	@ResponseBody
 	   @GetMapping("/emailCheck")
 	   public int emailCheck(HttpSession session,
@@ -238,7 +246,7 @@ public class MemberController {
 	      return result;
 	   }
 
-	
+	//아이디 찾기
 	@ResponseBody
 	@GetMapping("/searchId")
 	public Member searchId(HttpSession session,
@@ -251,10 +259,109 @@ public class MemberController {
 		 Member result = memberService.searchId(map);
 		return result;
 	}
+	
+	//비밀번호찾기
+	@ResponseBody
+	@GetMapping("/searchPwd")
+	public Member searchPwd(HttpSession session,
+							
+					@RequestParam(value = "phone", required = false) String phoneNumber,
+					@RequestParam(value = "idText", required = false) String idText) {
+		Map<String, String> map = new HashMap();
+		map.put("idText",idText );
+		map.put("phoneNumber", phoneNumber);
+		
+		Member result = memberService.searchPwd(map);
+		 
+		return result;
+	}
+	
+	//일반회원 정보수정
+	@PostMapping("/updateMember")
+	@ResponseBody
+	public int updateMember(
+			HttpSession session, Model model,
+			@RequestParam(value = "phone" ) String phone,
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "address") String address,
+			@RequestParam(value = "userNo" ) int userNo ) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userName", userName);
+		map.put("phone", phone);
+		map.put("address", address);
+		map.put("userNo", userNo+"");
+		System.out.println(map);
+		/* int result = memberService.updateMember(m); */
+		
+
+		
+		/* session.setAttribute("loginUser", loginUser); */
+		
+			
+		
+		
+		return 1;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 
 
 	
-  }
+  
 	 
 
 

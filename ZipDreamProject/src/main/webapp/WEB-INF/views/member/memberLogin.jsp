@@ -132,7 +132,7 @@
            
         }
         #findPasswordInner>*{
-           margin:10px;
+           margin:2px;
            padding:5px;
         }
         #findPasswordInner>.bt{
@@ -171,19 +171,25 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">비밀번호 찾기 </h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align:center;">비밀번호 찾기 </h5>
        
         </div>
         <div class="modal-body" id="findPasswordInner" >
-           전화번호 : <input  class="signin_pass" class="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
+           전화번호 : <input  class="signin_pass" id="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
             <br>
         
             
             아이디 &nbsp;&nbsp;&nbsp;:  <input  class="signin_pass" id="idText" type="text" name="idText"  placeholder="아이디를 입력해주세요">
+            <button type="button" class="btn btn-primary" id="emailCheck" >인증번호 전송</button>
+            <br>
+            
+            인증번호 :  <input  class="emailchecknumber" id="emailchecknumber" type="text" name="emailchecknumber"  placeholder="인증번호를 입력해주세요">
+            <button type="button" class="btn btn-primary" id="emailsamecheck" >중복확인</button>
+            <br>
            
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" >확인</button>
+        <button type="button" class="btn btn-primary" id="findPwd">확인</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           
         </div>
@@ -248,11 +254,9 @@
        
     </div>
 <script>
+//아이디 찾기
 $(function(){
-
-    
-    
-
+	//아이디 찾기
      $("#findId").click(function(){
     	 let phoneNumber = $("#phoneNumber").val();
     	 let name = $("#name").val();
@@ -270,11 +274,69 @@ $(function(){
          });
         
      });
-   
-    
      
-   
-});
+     //비밀번호 찾기
+         $("#findPwd").click(function(){
+        	 let phone = $("#phoneNumber").val();
+        	 let idText = $("#idText").val();
+     		$.ajax({
+                 url:"<%=request.getContextPath()%>/member/searchPwd", 
+                 data: {idText, phone }, 
+                 success:function(data){
+                     if(data.pwd == null){ 
+                         alert("확인되는 비밀번호가 없습니다.");
+                     }else{                  
+                         alert("비밀번호는 "+data.pwd+"입니다.");
+                     }
+                 }
+                 
+             });
+            
+         });
+     
+     
+     
+     var verificationNumber = ""; // 인증번호를 저장하는 변수
+     //mail인증하기 버튼 클릭 
+        $("#emailCheck").on("click",function(){
+           isMailAuthed=true;
+           let memMail = $("#idText").val();
+         	console.log(memMail);
+           $("#emailCheck").text("인증번호 재전송");
+
+           $.ajax({
+              url : "<%= request.getContextPath()%>/member/mailAuth"
+               ,data : {mail : memMail}
+              ,method : "get"
+             ,dataType : "TEXT"    
+             ,async:false
+               ,success: function(data){
+                  alert("인증번호를 전송완료.");
+                  verificationNumber = data;
+               },error : function(req,status,err){
+                   console.log(req);
+               }
+           });//ajax
+       });//mailCheck 
+     
+     
+     //인증번호 유효성 검사
+     document.getElementById("emailsamecheck").addEventListener("click", function() {
+    	 let inputNumber = $("#emailchecknumber").val();
+     
+     // 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
+
+     if (inputNumber === verificationNumber && verificationNumber != "") {
+       
+       $("#emailsamecheck").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
+       /* $("#emailct").attr('disabled',true); */ 
+       alert("인증번호가 일치합니다.");
+     } else {
+       alert("인증번호가 일치하지 않습니다.");
+     } 
+       
+   }); 
+}); 
 </script>
 </body>
 </html>

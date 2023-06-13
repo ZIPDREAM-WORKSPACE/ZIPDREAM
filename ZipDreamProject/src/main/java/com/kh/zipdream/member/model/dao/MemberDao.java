@@ -43,7 +43,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member inputMember) {
-		System.out.println("ss"+inputMember);
+		
 		return sqlSession.insert("member-mapper.insertMember", inputMember);
 	}
 	
@@ -54,12 +54,11 @@ public class MemberDao {
 	}
 
 	
-	   public int emailCheck(String id) {
+	public int emailCheck(String id) {
 		      return sqlSession.selectOne("member-mapper.emailCheck",id);
 		   }
 	
 	public int insertapply(int userNo) {
-		System.out.println("ss"+userNo);
 		return sqlSession.insert("member-mapper.insertbkMember", userNo);
 	}
 	
@@ -68,14 +67,22 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);
 	}
 	
-
+	public int updateMember(Member m) {
+		return sqlSession.update("member-mapper.updateMember", m);
+	}
+	
 	
 	public Member searchId(Map<String, String> map) {
 		return sqlSession.selectOne("member-mapper.searchId",map);
 	}
 	
+
+	public Member searchPwd(Map<String, String> map) {
+		return sqlSession.selectOne("member-mapper.searchPwd",map);
+  }
 	public int deleteMember(int userNo) {
 		return sqlSession.delete("member-mapper.deleteMember",userNo);
+
 	}
 }
 
