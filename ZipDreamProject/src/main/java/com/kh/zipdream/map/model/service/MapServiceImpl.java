@@ -22,4 +22,13 @@ public class MapServiceImpl implements MapService{
 	public List<beopjeongdong> selectAddress(String adCode) {
 		return mapdao.selectAddress(adCode);
 	}
+	
+	public List<beopjeongdong> searchKeyword(String search) {
+		return mapdao.searchKeyword(search);
+	}
+	
+	public String selectPullAddress(int liId) {
+		return mapdao.selectPullAddress(liId);
+	}
+	
 }

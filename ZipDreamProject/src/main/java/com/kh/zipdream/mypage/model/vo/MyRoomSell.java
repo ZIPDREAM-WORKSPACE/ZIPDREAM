@@ -24,4 +24,7 @@ public class MyRoomSell {
 	private String dealType;
 	private int status;
 
+	// 공인중개사 페이지에서 회원정보 받아오기 위한 필드	
+	private String userName;
+	private String phone;
 }

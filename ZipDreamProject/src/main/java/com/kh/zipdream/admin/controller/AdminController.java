@@ -4,10 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +30,7 @@ import com.kh.zipdream.admin.model.service.AdminService;
 import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.chat.model.service.ChatService;
 import com.kh.zipdream.chat.model.vo.ChatMessage;
 import com.kh.zipdream.chat.model.vo.ChatRoomJoin;
@@ -45,6 +51,9 @@ public class AdminController {
 	@Autowired
 	private ChatService chatService;
 	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
 	@GetMapping("/main")
 	public String main(Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -60,7 +69,7 @@ public class AdminController {
 		countNumbers.put("chattingCount", service.countChattingRoom());
 		
 		model.addAttribute("countNumbers",countNumbers);
-		model.addAttribute("applyList",service.selectApplyListLimit5());
+		model.addAttribute("applyList",service.selectApplyListLimit5(1));
 		model.addAttribute("reportList",service.selectReportList(1));
 		model.addAttribute("noticeBoardList",map);
 		return "admin/adminMain";
@@ -344,9 +353,77 @@ public class AdminController {
 	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
 		
 		Member m = memberService.selectMember(userNo);
+		List<Attachment> at = service.selectAttachmentList(userNo);
+		
+		List<Map<String,String>> list = service.selectApplyListLimit5(1);
 		
 		model.addAttribute("member", m);
-		
+		model.addAttribute("attachment", at);
+		model.addAttribute("list", list);
 		return "admin/adminBkMemberDetail";
+	}
+	
+	@GetMapping("/getBkUserInfo")
+	@ResponseBody
+	public JSONObject getBkUserInfo(int userNo) {
+		
+		JSONObject result = service.getBkUserInfo(userNo);
+		
+		return result;
+	}
+	
+	@GetMapping("/bkAccept")
+	@ResponseBody
+	public int bkAccept(int userNo, String answer, String userId)throws MessagingException {
+		String subjectText = "";
+		String contentText = "";
+		int result = 0;
+		
+		if(answer.equals("Y")) {
+			subjectText = "귀하의 " + userId + " 회원가입 요청이 승인되었습니다.";
+			contentText = "ZIPDREAM에 오신 것을 환영합니다!!";
+			result = service.acceptBkMember(userNo);
+		}else {
+			subjectText = "귀하의 " + userId + " 회원가입 요청이 거절되었습니다.";
+			contentText = "아쉽지만, 회원가입이 거절되었습니다.";
+			result = memberService.deleteMember(userNo);
+		}
+		
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		String mailContent = contentText;
+		mailMessage.setFrom(new InternetAddress("minifkaus@naver.com"));
+		mailMessage.setSubject(subjectText, "utf-8");
+		mailMessage.setText(mailContent, "utf-8", "html");
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(userId));
+		mailSender.send(mailMessage);
+		
+		
+		
+		return result;
+	}
+	
+	@GetMapping("/selldetail")
+	public String sellDetail(Model model,
+			   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
+			   @RequestParam Map<String, Object> paramMap) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(paramMap.get("condition") == null) {
+			service.selectSellDetailList(cp,map);
+		}else {
+			paramMap.put("cp", cp);
+			service.selectSellDetailSearch(paramMap,map);
+		}
+		model.addAttribute("sellDetailList",map);
+		
+		return "admin/adminSellDetail";
+	}
+	
+	@GetMapping("/selldetail/del")
+	public String deleteSellDetail(@RequestParam(value="sellNo") int sellNo) {
+		
+		int result = service.deleteSellDetail(sellNo);
+		
+		return "redirect:/admin/selldetail";
 	}
 }

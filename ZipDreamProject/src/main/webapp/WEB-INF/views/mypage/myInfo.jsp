@@ -88,6 +88,7 @@
 </style>
 <body>
 <jsp:include page="mypage.jsp"/>
+	
 	<div class="myInfo_wrap">
 		<form id="signUpdateform" action="<%=request.getContextPath()%>/member/updateMember" method="post"  >
 			<label class="myInfo_title">아이디</label><br>

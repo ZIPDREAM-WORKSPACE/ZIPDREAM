@@ -21,5 +21,9 @@ public class BoardDao {
 	public List<Board> boardList(int refSno){
 		return sqlSession.selectList("board-mapper.boardList", refSno);
 	}
-
+	
+	public int deleteBoard(int detailBoardNo) {
+		return sqlSession.update("board-mapper.deleteBoard", detailBoardNo);
+	}
+	
 }

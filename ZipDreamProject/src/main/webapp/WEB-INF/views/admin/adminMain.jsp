@@ -83,7 +83,7 @@
 						<th>작성일</th>
 					</tr>
 					<c:forEach var="notice" items="${noticeBoardList.list}" end='4'>
-						<tr>
+						<tr onclick="location.href='<%= request.getContextPath()%>/admin/notice'">
 							<td>${notice.noticeBoardTitle }</td>
 							<td>${fn:substring(notice.noticeBoardContent,0,6)}</td>
 							<td>${notice.createDateTime }</td>

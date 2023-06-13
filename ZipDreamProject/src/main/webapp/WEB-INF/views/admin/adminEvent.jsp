@@ -41,9 +41,9 @@
 						<th><button type="button" class="btn btn-success" onclick="ArrayInsertModal();">일괄 보내기</button></th>
 					</tr>
 					<c:choose>
-						<c:when test="${fn: length(userList.list) == 0} ">
+						<c:when test="${fn: length(userList.list) == 0}">
 							<tr>
-								<td colspan="4">회원이 없습니다.</td>
+								<td colspan="4" style="text-align:center;">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -127,7 +127,7 @@
 								</tr>
 							</table>
 							
-							<div align="center">
+							<div align="center" style="margin-top:20px;">
 								<button type="submit" class="btn btn-primary">등록하기</button>
 								<button type="reset"  class="btn btn-danger">취소하기</button>
 							</div>				
@@ -257,7 +257,7 @@ function openInsertModal(td){
 	document.getElementById("coupon-userNo").value = userInfo[1].innerText;
 	document.getElementById("coupon-userId").value = userInfo[2].innerText;
 	document.getElementById("coupon-userPhone").value = userInfo[3].innerText;
-	document.getElementById("coupon-createDate").value = userInfo[4].innerText;
+	document.getElementById("coupon-createDate").value = userInfo[5].innerText;
 	
 	$('#couponInsertModal').modal("show");
 }
@@ -276,12 +276,12 @@ function ArrayInsertModal(){
 			document.getElementById("coupon-userNo").value += userCheck[i].value;
 			document.getElementById("coupon-userId").value += userInfo[2].innerText;
 			document.getElementById("coupon-userPhone").value += userInfo[3].innerText;
-			document.getElementById("coupon-createDate").value += userInfo[4].innerText;
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText;
 		}else {
 			document.getElementById("coupon-userNo").value += userCheck[i].value + ",";			
 			document.getElementById("coupon-userId").value += userInfo[2].innerText + ",";
 			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ",";
-			document.getElementById("coupon-createDate").value += userInfo[4].innerText + ",";
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ",";
 		}
 	}
 	$('#couponInsertModal').modal("show");

@@ -37,5 +37,6 @@ public interface MemberService {
 
 	public int emailCheck(String id);
 
+	public int deleteMember(int userNo);
 }
 

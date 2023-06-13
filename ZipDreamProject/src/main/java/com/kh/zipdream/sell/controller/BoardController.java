@@ -30,6 +30,12 @@ public class BoardController {
 		return new Gson().toJson(bList);
 	}
 	
+	@PostMapping("/deleteBoard")
+	public int deleteBoard(int detailBoardNo) {
+		return boardService.deleteBoard(detailBoardNo);
+	}
+
 	
+
 	
 }

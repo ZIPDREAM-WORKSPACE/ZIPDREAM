@@ -30,4 +30,30 @@ public class SellDetailApi {
 	private String realYn;
 	private String realYnDate;
 	
+	//api2
+	private String sido;
+	private String sigungu;
+	private String eupmyeon;
+	private String dongri;
+	private String kaptCode;
+	private String kaptName;
+	private String kaptAddress;
+	private String kaptApprovalDate;
+	private String kaptEnrollDate;
+	private String kaptWingCount;
+	private String kaptHousehold;
+	private String management;
+	private String kaptHeating;
+	private String kaptEntrance;
+	private String kaptBuildCompany;
+	private String securityCount;
+	private String securityCompany;
+	private String buildStructure;
+	private String liftCount;
+	private String kaptParkingCount;
+	private String cctvCount;
+	private String kaptSecurityAddress;
+	private String kaptAllFloor;
+	
+	
 }

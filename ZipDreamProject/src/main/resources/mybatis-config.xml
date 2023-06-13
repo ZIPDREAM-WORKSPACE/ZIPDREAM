@@ -24,6 +24,7 @@
 		<typeAlias type="com.kh.zipdream.attachment.model.vo.Attachment" alias="attachment"/>
 		<typeAlias type="com.kh.zipdream.sell.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.zipdream.sell.model.vo.Reply" alias="reply"/>
+		<typeAlias type="com.kh.zipdream.sell.model.vo.Counsle" alias="counsle"/>
 
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/>
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoom" alias="chatRoom"/>
@@ -33,6 +34,7 @@
 		
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
 		<typeAlias type="com.kh.zipdream.mypage.model.vo.MyRoomSell" alias="myroomsell"/>
+		<typeAlias type="com.kh.zipdream.sales.model.vo.Calender" alias="calender"/>
 	</typeAliases>
 	
 	<mappers>
@@ -49,6 +51,7 @@
 		<mapper resource="/mapper/sale-mapper.xml" />
 		
 		<mapper resource="/mapper/myroomsell-mapper.xml" />
+		<mapper resource="/mapper/agent-mapper.xml"/>
 
 	</mappers>
 

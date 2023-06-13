@@ -16,8 +16,7 @@
  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
 <!-- 부투스트랩에서 제공하고있는 스크립트   -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <!-- 폰트 -->
@@ -27,7 +26,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<!-- 	
+ 	
 <!-- 슬릭 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
@@ -189,12 +188,18 @@ position: absolute;
 				<li class="h_text"><a href="<%=request.getContextPath()%>/sales/schedule">분양</a></li>
 				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
-				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
-					<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
+				<c:if test="${sessionScope.loginUser != null }">
+					<c:if test="${sessionScope.loginUser.userLevel == 1 }">
+						<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
+					</c:if>
+					<c:if test="${sessionScope.loginUser.userLevel == 2 }">
+						<li class="h_text"><a href="<%=request.getContextPath()%>/agent/list">마이페이지</a></li>
+					</c:if>
 				</c:if>
-				<c:if test="${sessionScope.loginUser.userLevel ==1 }">
-					<li class="h_text"><a href="<%=request.getContextPath()%>/agent/list">마이페이지</a></li>
+				<c:if test="${sessionScope.loginUser == null }">
+					<li class="h_text"><a href="" onclick="swal('로그인 후 이용하실 수 있습니다.'); return false;">마이페이지</a></li>
 				</c:if>
+				
 			</ul>
 			<c:if test="${ empty sessionScope.loginUser}"> 
             		<div class="login">로그인</div>
@@ -215,7 +220,7 @@ position: absolute;
 	
 	
 		
-	if('${loginUser.userNo}'!='' && currentURL != URL){
+	if('${loginUser.userNo}'!='' && currentURL != URL && '${chatRoomNo}'!=''){
 	 	$.ajax({
 			url:"<%=request.getContextPath()%>/chat/chatRoomSelect",
 			type : "get",

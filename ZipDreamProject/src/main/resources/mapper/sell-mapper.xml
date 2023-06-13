@@ -29,14 +29,14 @@
  		<result column="SELL_WAY" property="sellWay"/>
  		<result column="SELL_HOUSEHOLD" property="sellHousehold"/>
  		<result column="SELL_ENTRANCE" property="sellEntrance"/>
- 		<result column="SELL_MOVE_DATETIME" property="sellMoveDatetime"/>
+ 		<result column="SELL_MOVE_DATE" property="sellMoveDatetime"/>
  		<result column="SELL_INSTALLATION" property="sellInstallation"/>
  		<result column="SELL_AIRCONTITION" property="sellAircondition"/>
  		<result column="SELL_HEATING" property="sellHeating"/>
  		<result column="PARKING_COUNT" property="parkingCount"/>
- 		<result column="SELL_APPROVAL_DATETIME" property="sellApprovalDatetime"/>
- 		<result column="SELL_ENROLL_DATETIME" property="sellEnrollDatetime"/>
- 		<result column="COMPLEX_APPLY_DATETIME" property="complexApplyDatetime"/>
+ 		<result column="SELL_APPROVAL_DATE" property="sellApprovalDatetime"/>
+ 		<result column="SELL_ENROLL_DATE" property="sellEnrollDatetime"/>
+ 		<result column="COMPLEX_APPLY_DATE" property="complexApplyDatetime"/>
  		<result column="WING_COUNT" property="wingCount"/>
  		<result column="HOUSEHOLD_COUNT" property="householdCount"/>
  		<result column="OPTION" property="option"/>
@@ -56,19 +56,64 @@
  		<result column="FILE_LEVEL" property="fileLevel"/>
   	</resultMap>
  	
+ 	<resultMap type="sellDetailApi" id="apiResultSet">
+ 		<result column="SIDO" property="sido"/>
+ 		<result column="SIGUNGU" property="sigungu"/>
+ 		<result column="EUPMYEON" property="eupmyeon"/>
+ 		<result column="KAPT_CODE" property="kaptCode"/>
+ 		<result column="KAPT_NAME" property="kaptName"/>
+ 		<result column="KAPT_APPROVAL_DATE" property="kaptApprovalDate"/>
+ 		<result column="KAPT_ENROLL_DATE" property="kaptEnrollDate"/>
+ 		<result column="KAPT_WING_COUNT" property="kaptWingCount"/>
+ 		<result column="KAPT_HOUSEHOLD" property="kaptHousehold"/>
+ 		<result column="MAINTENANACE" property="maintenanace"/>
+ 		<result column="KAPT_HEATING" property="kaptHeating"/>
+ 		<result column="KAPT_ENTRANCE" property="kaptEntrance"/>
+ 		<result column="KAPT_BUILD_COMPANY" property="kaptBuildCompany"/>
+ 		<result column="SECURITY_COMPANY" property="securityCompany"/>
+ 		<result column="CLEAN_COMPANY" property="cleanCompany"/>
+ 		<result column="BUILD_STRUCTURE" property="buildStructure"/>
+ 		<result column="LIFT_COUNT" property="liftCount"/>
+ 		<result column="KAPT_PARKING_COUNT" property="kaptParkingCount"/>
+ 		<result column="CCTV_COUNT" property="cctvCount"/>
+ 		<result column="KAPT_ALL_FLOOR" property="kaptAllFloor"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="report" id="reportResultSet">
+		<id column="REPORT_NO" property="reportNo"/>
+		<result column="REF_RUNO" property="refRuno"/>
+		<result column="REF_TUNO" property="refTuno"/>
+		<result column="R_NAME" property="rName"/>
+		<result column="T_NAME" property="tName"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+		<result column="REPORT_RESULT" property="reportResult"/>
+		<result column="REPORT_TYPE" property="reportType"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+	</resultMap>
+ 	
+ 	<resultMap type="counsle" id="counsleReustSet">
+ 		<result column="COUNSLE_METHOD" property="counsleMethod"/>
+ 		<result column="COUNSLE_CONTENT" property="counsleContent"/>
+ 		<result column="APPLY_DATE" property="applyDate"/>
+ 		<result column="ACCEPT" property="accept"/>
+ 		<result column="REF_TUNO" property="refTuno"/>
+ 		<result column="REF_UNO" property="refUno"/>
+ 		<result column="SELL_NO" property="sellNo"/>
+  	</resultMap>
  	
 	<insert id="sellInsert" useGeneratedKeys="true" parameterType="sellDetail" keyProperty="sellNo">
-		INSERT INTO SELLDETAIL(SELL_NO, REF_UNO, SELL_NAME, SELL_ADDRESS, SELL_PRICE , SELL_MAINTENANCE, SELL_PARKING ,  SELL_SHORTTERM ,SELL_TYPE ,
-		SELL_FLOOR ,  SELL_PRIVATE_AREA , SELL_PROVIDE_AREA , SELL_ALL_FLOOR , SELL_ROOM_COUNT , SELL_TOILET_COUNT ,
-		SELL_WAY , SELL_HOUSEHOLD , SELL_ENTRANCE , SELL_MOVE_DATETIME , SELL_BULDTYPE , SELL_INSTALLATION ,SELL_AIRCONDITION,
-		SELL_HEATING,PARKING_COUNT , SELL_APPROVAL_DATETIME , SELL_ENROLL_DATETIME , COMPLEX_APPLY_DATETIME ,
-		WING_COUNT , HOUSEHOLD_COUNT , OPTION ,SECURITY, CREATE_DATE , MODIFY_DATE , STATUS)
-
+		INSERT INTO SELLDETAIL
+		(SELL_NO, REF_UNO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_MAINTENANCE, SELL_PARKING, SELL_SHORTTERM,SELL_TYPE, SELL_FLOOR,
+		 SELL_PRIVATE_AREA, SELL_PROVIDE_AREA, SELL_ALL_FLOOR, SELL_ROOM_COUNT,SELL_TOILET_COUNT, SELL_WAY, SELL_HOUSEHOLD,SELL_ENTRANCE, SELL_MOVE_DATE, SELL_BULDTYPE,
+		SELL_INSTALLATION, SELL_AIRCONDITION, SELL_HEATING, PARKING_COUNT, SELL_APPROVAL_DATE,
+		SELL_ENROLL_DATE, COMPLEX_APPLY_DATE, WING_COUNT, HOUSEHOLD_COUNT, `OPTION`, SECURITY,
+		CREATE_DATE, MODIFY_DATE, STATUS)
 		VALUES (SELL_NO, #{refUno},#{sellName}, #{sellAddress}, #{sellPrice}, #{sellMaintenance}, #{sellParking}, #{sellShortterm},
 				#{sellType}, #{sellFloor},#{sellPrivateArea}, #{sellProvideArea}, #{sellAllFloor}, #{sellRoomCount}, #{sellToiletCount},
 				#{sellWay}, #{sellHousehold}, #{sellEntrance}, #{sellMoveDatetime}, #{sellBuldtype}, #{sellInstallation}, #{sellAircondition},
 				#{sellHeating}, #{parkingCount}, #{sellApprovalDatetime}, #{sellEnrollDatetime}, #{complexApplyDatetime}, #{wingCount}, #{householdCount},
-				#{option}, #{security}, SYSDATE(), SYSDATE(),'N')
+				#{option}, #{security}, SYSDATE(), SYSDATE(), 'Y')
 	</insert>
 	
 
@@ -102,6 +147,36 @@
 		ORDER BY FILE_LEVEL
  	</select>
  	
+ 	<select id="selectSellAllList" resultMap="sellDetailResultSet">
+ 		SELECT *
+ 		FROM SELLDETAIL
+ 	</select>
 
+	<insert id="insertReport" parameterType="report">
+		INSERT INTO REPORT (REF_RUNO, REF_TUNO, REPORT_CONTENT, REPORT_STATUS, REPORT_TYPE, REPORT_DATE)
+		VALUES(#{refRuno}, #{refTuno}, #{reportContent}, 'N', #{reportType}, SYSDATE())
+	</insert>
+	
+	<select id="selectApiList" resultMap="apiResultSet" parameterType="sellDetailApi">
+		SELECT *
+		FROM API2
+		WHERE KAPT_ADDRESS LIKE CONCAT(CONCAT('%',#{kaptAddress}),'%') AND KAPT_NAME LIKE CONCAT(CONCAT('%',#{kaptName}),'%')
+	</select>
+
+
+	<insert id="insertCounsle" parameterType="counsle">
+		INSERT INTO COUNSLE
+		VALUES(#{counsleMethod}, #{counsleContent}, SYSDATE(), 'N', #{refTuno}, #{refUno}, #{sellNo})
+	</insert>
+	
+	<insert id="insertUserSelect" parameterType="HashMap">
+		INSERT INTO USERSELECT_LIST 
+		VALUES (#{userNo}, #{sellNo})
+	</insert>
+	
+	<delete id="deleteUserSelect" parameterType="HashMap">
+		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
+	</delete>
+	
 
 </mapper>

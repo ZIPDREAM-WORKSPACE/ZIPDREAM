@@ -76,8 +76,13 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.searchId",map);
 	}
 	
+
 	public Member searchPwd(Map<String, String> map) {
 		return sqlSession.selectOne("member-mapper.searchPwd",map);
+  }
+	public int deleteMember(int userNo) {
+		return sqlSession.delete("member-mapper.deleteMember",userNo);
+
 	}
 }
 

@@ -9,6 +9,15 @@
 		<result column="HN_NO" property="houseCode" />
 		<result column="HS_URL" property="hsUrl" />
 	</resultMap>
+	
+	<resultMap type="calender" id="calenderResultSet">
+		<result column="CALENDER_NO" property="calenderNo"/>
+		<result column="CALENDER_TITLE" property="calenderTitle"/>
+		<result column="CALENDER_MEMO" property="calenderMemo"/>
+		<result column="URL" property="url"/>
+		<result column="CALENDER_START" property="calenderStart"/>
+		<result column="CALENDER_END" property="calenderEnd"/>
+	</resultMap>
 
 
 
@@ -24,6 +33,10 @@
 	<delete id="deleteMysaleHouse">
 		DELETE FROM HOUSESELL_SELECT WHERE REF_UNO = #{userNo} AND HN_NO = #{houseCode}
 	</delete>
+	
+	<select id="selectCalender" resultMap="calenderResultSet">
+		SELECT * FROM SALEHOUSE_CALENDER
+	</select>
 
 
 </mapper>

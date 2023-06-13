@@ -13,8 +13,8 @@
 		<result column="ADDR2" property="addr2"/>
 		<result column="ADDR3" property="addr3"/>
 		<result column="OFFICE" property="office"/>
-		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
-		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
+		<result column="ENROLL_DATETIME" property="enrollDateTime" />
+		<result column="MODIFY_DATETIME" property="modifyDateTime" />
 		<result column="WITHDRAW" property="withdraw" />
 		<result column="STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
@@ -140,7 +140,7 @@
 	    FROM MEMBER
 	    WHERE USER_NAME = #{name} AND PHONE = #{phone}   
 	</select>
-	
+
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="searchPwd" resultMap="memberResultSet">
@@ -169,4 +169,9 @@
 	
 	
 	
+
+	<delete id="deleteMember" parameterType="_int">
+		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
+	</delete>
+
 </mapper>

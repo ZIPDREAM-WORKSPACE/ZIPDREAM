@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.admin.model.vo.NoticeBoard;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 
 @Repository
@@ -54,6 +56,10 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countObjectYesterday");
 	}
 	
+	public int countObjectSearch(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("admin-mapper.countObjectSearch",paramMap);
+	}
+	
 	public int countReport(int type) {
 		return sqlSession.selectOne("admin-mapper.countReport",type);
 	}
@@ -86,8 +92,8 @@ public class AdminDao {
 		return sqlSession.selectOne("admin-mapper.countChattingRoom");
 	}
 	
-	public List<Member> selectApplyListLimit5() {
-		return sqlSession.selectList("admin-mapper.selectApplyListLimit5");
+	public List<Member> selectApplyListLimit5(int type) {
+		return sqlSession.selectList("admin-mapper.selectApplyListLimit5",type);
 	}
 	
 	public List<Report> selectReportList(int type) {
@@ -201,5 +207,32 @@ public class AdminDao {
 	
 	public int insertCouponToUser(Map<String,Integer> map) {
 		return sqlSession.insert("admin-mapper.insertCouponToUser",map);
+	}
+	
+	public List<Attachment> selectAttachmentList(int userNo){
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectAttachmentList",userNo);
+	}
+	
+	public int acceptBkMember(int userNo) {
+		return sqlSession.update("admin-mapper.acceptBkMember",userNo);
+	}
+	
+	public ArrayList<SellDetail> selectSellDetailList(PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectSellDetailList","",rowBounds);
+	}
+	
+	public ArrayList<SellDetail> selectSellDetailSearch(PageInfo pi, Map<String, Object> paramMap) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList) sqlSession.selectList("admin-mapper.selectSellDetailSearch", paramMap, rowBounds);
+	}
+	
+	public int deleteSellDetail(int sellNo) {
+		return sqlSession.delete("admin-mapper.deleteSellDetail",sellNo);
 	}
 }

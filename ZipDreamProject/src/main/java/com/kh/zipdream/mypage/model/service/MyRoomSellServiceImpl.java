@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.member.model.vo.Member;
@@ -49,6 +50,37 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 		
 		map.put("pi", pi);
 		map.put("myroomsellList", myroomsellList);
+		
+	}
+
+	@Override
+	public void myroomSellDelete(int userSrNo) {
+		
+		myroomSellDao.myroomSellDelete(userSrNo);
+		
+	}
+
+	@Override
+
+	public void selectCouponList(int currentPage, int userNo, Map<String, Object> map) {
+		
+		int listCount = myroomSellDao.selectCouponListCount(userNo);
+		int pageLimit = 10;
+		int boardLimit = 4;
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<Coupon> couponList = myroomSellDao.selectCouponList(pi,userNo);
+		
+		map.put("pi", pi);
+
+		map.put("couponList", couponList);
+		
+	}
+
+
+	@Override
+	public void deleteUserCoupon(Coupon coupon) {
+		myroomSellDao.deleteUserCoupon(coupon);
 		
 	}
 
