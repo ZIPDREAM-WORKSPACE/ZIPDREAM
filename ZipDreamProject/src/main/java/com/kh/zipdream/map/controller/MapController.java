@@ -68,6 +68,18 @@ public class MapController {
       return new Gson().toJson(address);
    }
    
+   @ResponseBody
+   @PostMapping(value="/getaddress", produces = "application/text; charset=utf8")
+   public String getaddress(@RequestParam("liId") int liId,
+                  Model model) {
+      
+      String address = mapService.selectPullAddress(liId);
+         
+      model.addAttribute("address", address);
+      System.out.println(address);
+      return new Gson().toJson(address);
+   }
+   
    @GetMapping(value="/getXmlCode", produces = "application/text; charset=UTF-8")
    @ResponseBody
    public String getXmlCodeToAjax(int code) {

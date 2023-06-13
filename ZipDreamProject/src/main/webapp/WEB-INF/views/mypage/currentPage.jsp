@@ -87,26 +87,34 @@
 	
 	<script>
 		$(function(){
-			var recentRoom = JSON.parse(localStorage.getItem("recentRoom"));
+			var userNo = "${loginUser.userNo}"
+			var recentRoom = JSON.parse(localStorage.getItem(userNo));
+			var sellNo = recentRoom.sellNo;
 			const now = new Date();
 			var html ="";
+			console.log(recentRoom);
 			
 			if(recentRoom != null){
 				if(now.getTime() > recentRoom.expire){
 					window.localStorage.clear();
 					location.reload();
 				}else{
-					html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 20개까지 저장됩니다.</p></div>";
-					html += "<div class='row row-cols-1 row-cols-md-4 g-4'><div class='col'><div class='card h-100'>";
-					html += "<img src='https://ifh.cc/g/aoGQoK.jpg' class='card-img-top'><div class='card-body'>";
-					html += "<h5 clas='card-title'>" + recentRoom.sellPrice + "</h5>";
-					html += "<p class='card-text'>" + recentRoom.detail + "</p>";
-					html += "<p clas='card-text'>" + recentRoom.sellAddress + "</p></div></div></div>";
+					$.ajax({
+						url:"<%=request.getContextPath()%>/mypage/recentRoomList",
+						method:"get",
+						data:{sellNo},
+						success:function(result){
+							console.log(result);
+						},
+						error:function(result){
+							console.log("에러발생");
+						}
+					});
+						
 				}
 			}else{
 				html = "<div class='emptyContent'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-x-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg><p>최근 본 방이 존재하지 않습니다.</p></div>";
 			}
-			
 			
 			$('.rc').append(html);
 

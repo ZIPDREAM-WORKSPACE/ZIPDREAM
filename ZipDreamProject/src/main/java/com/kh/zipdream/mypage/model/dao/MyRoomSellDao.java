@@ -12,6 +12,7 @@ import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 @Repository
 public class MyRoomSellDao {
@@ -54,9 +55,29 @@ public class MyRoomSellDao {
 		sqlSession.delete("myroomsell-mapper.myroomSellDelete", userSrNo);
 	}
 	
-	public ArrayList<Coupon> selectCouponList(int userNo){
+
+	public ArrayList<Coupon> selectCouponList(PageInfo pi, int userNo){
 		
-		return (ArrayList)sqlSession.selectList("myroomsell-mapper.selectCouponList", userNo);
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("myroomsell-mapper.selectCouponList", userNo, rowBounds);
 	}
 	
+	public int selectCouponListCount (int userNo) {
+		
+		return sqlSession.selectOne("myroomsell-mapper.selectCouponListCount", userNo);
+	}
+	
+	public void deleteUserCoupon(Coupon coupon) {
+		sqlSession.delete("myroomsell-mapper.deleteUserCoupon", coupon);
+
+	}
+	
+	public ArrayList<SellDetail> recentRoomList(int sellNo){
+		
+		return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList", sellNo);
+	}
 }

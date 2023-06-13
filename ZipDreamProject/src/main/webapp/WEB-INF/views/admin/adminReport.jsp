@@ -21,17 +21,26 @@
 						<th>처리 결과</th>
 						<th>신고 일자</th>
 					</tr>
-					<c:forEach items="${reportList.list}" var="report">
-						<tr onclick="location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo=${report.reportNo}'">
-							<td>${report.rname }</td>
-							<td>${report.tname }</td>
-							<td>${fn:substring(report.reportContent,0,15) }</td>
-							<td>${report.reportType }</td>
-							<td>${report.reportStatus }</td>
-							<td>${report.reportResult }</td>
-							<td>${report.reportDate }</td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${fn: length(reportList.list) == 0}">
+							<tr>
+								<td colspan="6" style="text-align:center;">게시글이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${reportList.list}" var="report">
+								<tr onclick="location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo=${report.reportNo}'">
+									<td>${report.rname }</td>
+									<td>${report.tname }</td>
+									<td>${fn:substring(report.reportContent,0,15) }</td>
+									<td>${report.reportType }</td>
+									<td>${report.reportStatus }</td>
+									<td>${report.reportResult }</td>
+									<td>${report.reportDate }</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 			<c:set var="url" value="report?cpage="/>

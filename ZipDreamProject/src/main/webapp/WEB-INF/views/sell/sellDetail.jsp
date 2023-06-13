@@ -80,6 +80,7 @@
 
 #sellLike {
 	border: 1px solid black;
+	width:6rem;
 	height: 2.3rem;
 }
 
@@ -231,7 +232,6 @@
 	margin-top: -5px;
 }
 
-
 .box {
 	margin-top: 20px;
 }
@@ -299,178 +299,81 @@
 #inputReply {
 	height: 35px;
 }
-/*모달창 css*/
 
-#modal.modal-overlay {	
- 	margin-top :80px;
-	width: 100%;
-	height: 5000px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+/* modal css */
+
+.modalContent {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	gap:30px;
 }
 
-#modal .modal-window {
-	/* background: rgba( 69, 139, 197, 0.70 ); */
-	backdrop-filter: blur(13.5px);
-	-webkit-backdrop-filter: blur(13.5px);
-	border-radius: 10px;
-	width: 700px;
-	position: relative;
-	top: -100px;
-	padding: 10px;
-	position:relative;
-	top : -300px;
-}
-.modalbox {
-	border : 1.5px solid lightgray;
-	width: 100%;
-	padding: 20px 20px;
-	background-color: #f8f9fa;
-	box-shadow: 0 10px 30px 0 rgba(27, 88, 117, 0.2);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	
+.modalBody {
+	max-width: 600px;
 }
 
-#btn {
-	font-size: 1em;
-	text-decoration: none;
-	width: 140px;
-	height: 45px;
-	color: #fff;
-	transition: background-color 0.5s ease;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #2196f3;
-	box-shadow: 0 10px 30px 0 rgba(33, 150, 243, 0.7);
-	&:
-	hover
-	{
-	background-color
-	:
-	#4cb0f9;
-}
-
-}
-.alert-box {
-	opacity: 0;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	transition: opacity 0.5s;
-	display: flex;
-	flex-wrap: wrap;
-	pointer-events: none;
-	align-items: center;
-	justify-content: center;
-	background: rgba(0, 0, 0, 0.8);
-	text-decoration: none;
-	color: #000000; &: target { outline : none;
-	opacity: 1;
-	pointer-events: none;
-}
-
-&
-.alert-column {
-	background: #ffffff;
-	position: relative;
-	display: flex;
-	text-align: center;
-	flex-wrap: wrap;
-	cursor: default;
-	width: 500px;
-	height: 100px;
-	align-items: center;
-	justify-content: center; &: before { content : "✕";
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 10px;
-	right: 10px;
-	line-height: 1;
-	color: #000;
-	font-size: 20px;
-	font-family: Arial, sans-serif;
-	pointer-events: auto;
-	cursor: pointer;
-}
-
-}
-}
-.dis {
-	display: flex;
+.modalFooter {
 	margin-top: 30px;
 }
 
-.rig {
-	margin-right: 50px;
+.modalFooter>.btn {
+	width:150px;
 }
 
-.modalContent {
-	border: 1px solid lightgray;
-	border-radius: 30px;;
-	padding: 15px 15px;
-}
-
-#modalname {
-	font-size: 2rem;
-	font-weight: 900;
-	margin-left: 10px;
-	vertical-align: super;
-}
-
-.modalBody , .lastContent{
-    margin-top: 16px;
-	line-height: 1;
-}
-
-.applyContent {
-	padding: 10px 10px;
-}
-
-#seller_name {
-	font-size: 1.2rem;
-	font-weight: 600;
-}
-
-.x {
-	margin-left: auto;
-}
-.modalLast{
-	text-align : center;
-	font-size : 1.2rem;
-	font-weight600;
-	higth : 40rem;
-	width : 100%;
-	border : 1.5px solid lightgray;
-	background-color: #f8f9fa;
-	box-shadow: 0 10px 30px 0 rgba(27, 88, 117, 0.2);
+.modalFooter>.btn-success {
+	margin-left: 30px;
 }
 </style>
 </head>
 <body>
+
 	<jsp:include page="../../views/common/header.jsp" />
 
- <div class="content1 margin">
+	<script>
+		/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
+		$(function(){
+			/* 로그인한 유저 정보 가져오기  */
+			var userNo = '${loginUser.userNo}';
+			/* 로그인한 유저의 회원번호로 저장된 localstorage 배열 가져오기  */
+			var recentRoom = JSON.parse(localStorage.getItem(userNo));
+			/* 현재 조회한 매물번호 */
+			var sellNo = '${sd.sellNo}';
+			const arr = [];
+			
+			console.log(recentRoom);
+			
+			/* console.log(userNo + "의 최근본 : " + sellNo); */
+			
+			/* 객체로 매물번호와 만료기한 저장 */
+			/* const obj = {
+					sellNo : sellNo,
+					expire: Date.now() + (1000 * 60 * 60 * 24)
+			}
+			
+			const objString = "";
+			if(recentRoom != null){
+				recentRoom.push(obj);
+				objString = JSON.stringify(recentRoom);
+			}else{
+				arr.push(obj);
+				objString = JSON.stringify(arr);
+			}
+			
+			
+			if(userNo != ''){
+				window.localStorage.setItem(userNo, objString);
+			}  */
+			
+		});
+	
+	</script>
+
+
+	<div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellSno} </span>
+                <span>매물번호 : ${sd.sellNo} </span>
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>
@@ -479,7 +382,7 @@
                 <div class="sell_address">매물주소 : ${sd.sellAddress}
                 </div>
                 <div class="sell_like">
-                    <div class="radius" id="sellLike">
+                    <div class="radius" id="sellLike" onclick="insertUserSelect();">
                         <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
                         <span>찜하기</span>
                     </div>
@@ -515,7 +418,7 @@
                             	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="400" height="600">
                             	</td>
                         	</tr>
- 							<c:forEach var="i" begin="1" end="${fn:length(sd.imgList)-2}">
+ 							<c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}">
 			 						<tr>
 			                            <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="contentImg1" width="300" height="300"></td>
 			                            <!-- <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
@@ -558,7 +461,7 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>월세</th>
+                        <th>매매가</th>
                         <td>${sd.sellPrice}</td>
                     </tr>
                     <tr>
@@ -584,7 +487,7 @@
 		        <div class="info_pic margin">
 		        <c:if test="${!empty sd.imgList }">
 		        	<c:forEach begin="${fn:length(sd.imgList)-1}" var="i" end="${fn:length(sd.imgList)-1}">
-		        		<img src="<%=request.getContextPath()%>/reources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
 		        	</c:forEach>
 		        </c:if>
 		        </div>
@@ -885,57 +788,67 @@
 	</div>
     
     <!-- 모달창 -->
-    <div id="modal" class="modal-overlay" style="display: none;">
-      <div class="modal-window">
-	    <div class="modalbox" style="display: none;">
-	        <div class="x">
-	          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
-	        </div>
-	        <div class="modalHead">
-	            <div class="head1">
-	                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
-	                <span id="modalname">공인중개사에게 연락하기</span>
-	            </div>
-	            <span>공인중개사와 만남을 통해 안전하게 계약을 진행할 수 있습니다.</span>
-	        </div>
-	        <hr>
-	        <div class="modalContent dis ">
-	            <img class="rig" src="https://ifh.cc/g/6BoQCw.jpg" width="150px" style="border-radius: 50%;">
-	            <div class="modalBody">
-	                <p id="seller_name">${seller.office }</p>
-	                <p id="seller_address">소재지 : ${seller.address }</p>
-	                <p id="seller_number">중개등록번호 : 12345-677-123123</p>
-	                <p id="seller_phone">연락처 : ${seller.phone }</p>
-	            </div>
-	        </div>
-	        <hr>
-	        <div class="modalApply">
-	          <textarea class="applyContent" cols="70" rows="5" style="resize: none;" placeholder="상담을 희망하는 시간과 날짜를 적어주세요"></textarea>
-	
-	        </div>
-	            <div class="modalFooter dis ">
-	            <a class="btn rig untact" id="btn" >비대면 신청</a>
-	            <a class="btn meet" id="btn">대면 신청</a>
-	        </div>
-	       
-	      </div>
-	      
-	      <div class="modalLast" style="display: none;">
-	      	<div class="x">
-	          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
-	        </div>
-	        <div class="modalHead">
-	            <div class="head1">
-	                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
-	                <span id="modalname">신청완료</span>
-	            </div>
-	            <span>공인중개사의 연락을 기다려주세요*^^*</span>
-	        </div>
-	      </div>
-	     </div>
-	     
-	   </div>
- 
+	<div class="modal fade" id="modal" tabindex="-1"
+		aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">공인중개사에게 연락하기</h5>
+					<button type="button" class="btn-close"
+						onclick="$('#modal').modal('hide');" aria-label="Close"
+						style="border: none; background: white; font-size: 20px;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" align="center">
+					<div class="modal-window">
+						<div class="modalbox">
+							<div class="modalHead">
+								<div class="head1">
+									<img src="https://ifh.cc/g/Hyz5zg.png" width="40px"> 
+									<span id="modalname">공인중개사에게 연락하기</span>
+								</div>
+								<span>공인중개사와 만남을 통해 안전하게 계약을 진행할 수 있습니다.</span>
+							</div>
+							<hr>
+							<div class="modalContent">
+								<img class="rig" src="https://ifh.cc/g/6BoQCw.jpg" width="150px"
+									style="border-radius: 50%;">
+								<div class="modalBody" align="left" style="border:1px solid black;">
+									<p id="seller_name">${seller.office }</p>
+									<p id="seller_address">소재지 : ${seller.address }</p>
+									<p id="seller_number">이름 : ${seller.userName }</p>
+									<p id="seller_phone">연락처 : ${seller.phone }</p>
+								</div>
+							</div>
+							<hr>
+							<div class="modalApply">
+								<textarea class="applyContent" cols="70" rows="5"
+									style="resize: none;" placeholder="상담을 희망하는 시간과 날짜를 적어주세요"></textarea>
+							</div>
+							<div class="modalFooter">
+								<a class="btn btn-lg btn-primary" onclick="insertCounsle(2)">비대면 신청</a> 
+								<a class="btn btn-lg btn-success" onclick="insertCounsle(1)">대면 신청</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 
+ 		 <div class="modalLast" style="display: none;">
+						      	<div class="x">
+						          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
+						        </div>
+						        <div class="modalHead">
+						            <div class="head1">
+						                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
+						                <span id="modalname">신청완료</span>
+						            </div>
+						            <span>공인중개사의 연락을 기다려주세요*^^*</span>
+						        </div>
+						      </div> -->
 		<!-- 신고 모달 창 -->
 	   <div class="modal fade" id="reportInsertModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-xl">
@@ -972,8 +885,9 @@
 	
 	$(function(){
 	    $(".contect").click(function(){
-	        $(".modal-overlay").show();
-	        $(".modalbox").show();
+	        /* $(".modal-overlay").show();
+	        $(".modalbox").show(); */
+	    	$("#modal").modal("show");
 	    })
 	    $(".modalX").click(function(){
     	  $(".modal-overlay").hide();
@@ -1090,14 +1004,16 @@
 		})
 	}
 	
+
+	
 	/* 신고 등록 함수 */
 	function insertReport(type) {
-		let reportContent = $(".reportContent").val();
+		<%-- let reportContent = $(".reportContent").val();
 		$.ajax({
 			url : "<%=request.getContextPath()%>/sell/report",
 			data : {
 					refTuno : ${seller.userNo}, 
-					refRuno : <%= ((Member)request.getSession().getAttribute("loginUser")).getUserNo()%>,
+					refRuno : ${loginUser.userNo},
 					reportContent : reportContent,
 					reportType: type
 					},
@@ -1109,8 +1025,84 @@
 					swal("", "신고 등록 실패.", "error");
 				}
 			}
-		});
+		}); --%>
 	}
 
+	function insertCounsle(counsleMethod) {
+		$.ajax({
+			url : "<%=request.getContextPath()%>/sell/counsle",
+			data : {
+					counsleMethod : counsleMethod,
+					counsleContent :  $(".applyContent").val(),
+					refTuno : ${loginUser.userNo},
+					refUno : ${seller.userNo}, 
+					sellNo: ${sd.sellNo}
+					},
+			type: "post",
+			success : function(result){
+				if(result >= 1){
+					swal("", "상담신청이 완료되었습니다.", "success");					
+				}else {
+					swal("", "상담신청 등록 실패.", "error");
+				}
+				$("#modal").modal("hide");
+			}
+		});
+	}
+	
+	function insertUserSelect(){
+		let h = $("#like_img");
+		console.log(h.attr("src"));
+		if('${loginUser}' != ''){
+            if(h.attr("src") == "https://ifh.cc/g/Wa4bRl.png"){
+                h.attr("src","https://ifh.cc/g/8v70Mm.png");
+                /* 찜하기 취소하기 */
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/sell/userselect",
+                    data : {
+        				userNo : ${loginUser.userNo},
+        				sellNo : ${sd.sellNo},
+        				type : 1
+        			},
+        			type : "GET",
+        			success : function(result){
+        				if(result >= 1){
+        					swal("", "찜하기 취소 성공", "success");					
+        				}else {
+        					swal("", "찜하기 실패.", "error");
+        				}
+        			}
+                
+                });
+                
+                swal("", "분양일정 알림을 취소했습니다.", "warning");
+            }else{
+            	h.attr("src","https://ifh.cc/g/Wa4bRl.png");
+                /* 찜하기 등록하기 */
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/sell/userselect",
+                    data : {
+        				userNo : ${loginUser.userNo},
+        				sellNo : ${sd.sellNo},
+        				type: 2
+        			},
+        			type : "GET",
+        			success : function(result){
+        				if(result >= 1){
+        					swal("", "찜하기 성공", "success");					
+        				}else {
+        					swal("", "찜하기 실패.", "error");
+        				}
+        			}
+            
+                });
+                swal("", "관심 분양단지로 등록되었습니다.", "success");
+            };
+            
+        }else{
+            swal("", "로그인 후 이용하실 수 있습니다.", "error");
+        } 
+		
+	}
 </script>
 </html>

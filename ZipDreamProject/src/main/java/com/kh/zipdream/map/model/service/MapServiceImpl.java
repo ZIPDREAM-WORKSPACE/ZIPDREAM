@@ -27,4 +27,8 @@ public class MapServiceImpl implements MapService{
 		return mapdao.searchKeyword(search);
 	}
 	
+	public String selectPullAddress(int liId) {
+		return mapdao.selectPullAddress(liId);
+	}
+	
 }

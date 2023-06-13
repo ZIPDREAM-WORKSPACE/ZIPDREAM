@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Report" alias="report"/>
 		<typeAlias type="com.kh.zipdream.admin.model.vo.Coupon" alias="coupon"/>
 		<typeAlias type="com.kh.zipdream.member.model.vo.Member" alias="member"/>
+		<typeAlias type="com.kh.zipdream.member.model.vo.userSelectList" alias="userselectlist"/>
 		<typeAlias type="com.kh.zipdream.mail.model.vo.MailAuth" alias="mailAuth"/>
 
 		<typeAlias type="com.kh.zipdream.sell.model.vo.SellDetail" alias="sellDetail"/>
@@ -24,6 +25,7 @@
 		<typeAlias type="com.kh.zipdream.attachment.model.vo.Attachment" alias="attachment"/>
 		<typeAlias type="com.kh.zipdream.sell.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.zipdream.sell.model.vo.Reply" alias="reply"/>
+		<typeAlias type="com.kh.zipdream.sell.model.vo.Counsle" alias="counsle"/>
 
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/>
 		<typeAlias type="com.kh.zipdream.chat.model.vo.ChatRoom" alias="chatRoom"/>
@@ -33,8 +35,12 @@
 		
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
 		<typeAlias type="com.kh.zipdream.mypage.model.vo.MyRoomSell" alias="myroomsell"/>
+
+		<typeAlias type="com.kh.zipdream.sales.model.vo.Calender" alias="calender"/>
+
 		
 		<typeAlias type="com.kh.zipdream.notice.model.vo.Notice" alias="notice"/>
+
 	</typeAliases>
 	
 	<mappers>

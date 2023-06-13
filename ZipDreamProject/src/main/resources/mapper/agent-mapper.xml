@@ -41,5 +41,15 @@
 		WHERE USER_SR_NO = #{userSrNo}
 	</update>
 	
+	<update id="applyCounsle">
+		UPDATE COUNSLE
+		SET ACCEPT = 'O'
+		WHERE REF_UNO = #{refUno} AND REF_TNO=#{refTno} AND SELL_NO =#{sellNo}
+	</update>
 	
+	<update id="Xcounsle" parameterType="hashMap">
+		UPDATE COUNSLE
+		SET ACCEPT = 'X'
+		WHERE REF_UNO = #{refUno} AND REF_TNO=#{refTno} AND SELL_NO =#{sellNo}
+	</update>
 </mapper>

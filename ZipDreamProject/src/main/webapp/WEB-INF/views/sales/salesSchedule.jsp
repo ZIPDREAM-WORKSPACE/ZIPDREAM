@@ -308,10 +308,7 @@
     position: absolute;
     top: calc(100% + 5px);
     left: 0px;
-
     display:none;
-
-
 }
 .stepBox>h1{
 	color: rgb(34, 34, 34);
@@ -718,6 +715,8 @@
 				<li><a href="<%=request.getContextPath()%>/sales/schedule">분양일정</a></li>
 				<li><a>|</a></li>
 				<li><a href="<%=request.getContextPath()%>/sales/guide">분양가이드</a></li>
+				<li><a>|</a></li>
+                <li><a href="<%=request.getContextPath()%>/sales/calender">분양일정</a></li>
 			</ul>
 		</div>
 		<div class="sellHouseTitleWrap">
