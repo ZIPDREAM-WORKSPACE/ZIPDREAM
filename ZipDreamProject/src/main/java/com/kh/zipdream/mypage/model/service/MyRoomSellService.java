@@ -1,6 +1,7 @@
 package com.kh.zipdream.mypage.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.kh.zipdream.admin.model.vo.Coupon;
@@ -17,7 +18,7 @@ public interface MyRoomSellService {
 
 	public void selectCouponList(int currentPage, int userNo, Map<String, Object> map);
 	public void deleteUserCoupon(Coupon coupon);
-	public ArrayList<SellDetail> recentRoomList(int sellNo);
+	public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList);
 
 	
 
