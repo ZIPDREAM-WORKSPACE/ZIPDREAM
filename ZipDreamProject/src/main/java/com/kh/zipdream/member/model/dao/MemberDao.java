@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 
 @Repository
 public class MemberDao {
@@ -84,6 +85,10 @@ public class MemberDao {
 	public int deleteMember(int userNo) {
 		return sqlSession.delete("member-mapper.deleteMember",userNo);
 
+	}
+	
+	public List<userSelectList> myBookmarkList(int uno){
+		return sqlSession.selectList("member-mapper.myBookmarkList", uno);
 	}
 }
 

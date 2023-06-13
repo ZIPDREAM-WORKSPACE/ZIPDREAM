@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="selectRequestUser" resultMap="myroomsellResultSet">
-		SELECT USER_SR_NO, ROOM_TYPE, BUILDING_TYPE, U.ADDRESS, DEAL_TYPE, M.USER_NAME, M.PHONE
+		SELECT REF_UNO, REF_RUNO, USER_SR_NO, ROOM_TYPE, BUILDING_TYPE, U.ADDRESS, DEAL_TYPE, M.USER_NAME, M.PHONE
 		FROM USER_ROOM_SELL U
 		JOIN MEMBER M ON (M.USER_NO = REF_UNO)
 		WHERE USER_SR_NO = #{userSrNo}
@@ -41,5 +41,15 @@
 		WHERE USER_SR_NO = #{userSrNo}
 	</update>
 	
+	<update id="applyCounsle">
+		UPDATE COUNSLE
+		SET ACCEPT = 'O'
+		WHERE REF_UNO = #{refUno} AND REF_TNO=#{refTno} AND SELL_NO =#{sellNo}
+	</update>
 	
+	<update id="Xcounsle" parameterType="hashMap">
+		UPDATE COUNSLE
+		SET ACCEPT = 'X'
+		WHERE REF_UNO = #{refUno} AND REF_TNO=#{refTno} AND SELL_NO =#{sellNo}
+	</update>
 </mapper>

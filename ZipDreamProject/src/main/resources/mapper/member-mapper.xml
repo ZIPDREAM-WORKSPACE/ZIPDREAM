@@ -25,6 +25,11 @@
 		<result column="IS_AUTH" property="isAuth" />
 	</resultMap>
 	
+	<resultMap type="userselectlist" id="bookmarkResultSet">
+		<result column="USER_NO" property="userNo" />
+		<result column="SELL_NO" property="sellNo" />
+	</resultMap>
+	
 	
 	<select id="loginMember" parameterType="member"
 		resultMap="memberResultSet">
@@ -171,5 +176,11 @@
 	<delete id="deleteMember" parameterType="_int">
 		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
 	</delete>
+
+	<select id="myBookmarkList" resultMap="bookmarkResultSet">
+		SELECT SELL_NO
+		FROM USERSELECT_LIST
+		WHERE USER_NO = #{uno}
+	</select>
 
 </mapper>

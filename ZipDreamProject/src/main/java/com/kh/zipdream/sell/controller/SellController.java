@@ -68,7 +68,6 @@ public class SellController {
 	
 	//sell입력
 	@PostMapping("/sellInsert")
-	@ResponseBody
 	public String sellInsert(SellDetail sd, HttpServletRequest request, HttpSession session,
 							 @RequestParam(value="imges", required=false ) List<MultipartFile> imgList) {
 		
@@ -83,11 +82,10 @@ public class SellController {
 				e.printStackTrace();
 				System.out.println("업로드 에러");
 			}
-		String url ="";
 		if(result >0) {
 			System.out.println("업로드 성공");
-			url="redirect:/../agent/RegistrationList";
-			return url;
+			
+			return "redirect:/agent/list";
 		}else {
 			System.out.println("업로드 실패");
 			return "main/main";
@@ -124,6 +122,7 @@ public class SellController {
 		Member seller = memberService.selectMember(detail.getRefUno());
 		model.addAttribute("sd", detail);
 		model.addAttribute("seller", seller);
+		
 		return "sell/sellDetail";
 	}
 	
@@ -136,6 +135,20 @@ public class SellController {
 		model.addAttribute("sdList", sdList);
 		System.out.println("sdL:"+sdList);
 		return new Gson().toJson(sdList);
+	}
+	
+	@GetMapping("/sellList2")
+	@ResponseBody
+	public List<SellDetail> sellList2(@RequestParam("sellNo") int sellNo, Model model) {
+		
+		List<SellDetail> sdList = sellService.selectSellList2(sellNo);
+		
+		model.addAttribute("sdList", sdList);
+		for(int i = 0; i < sdList.size(); i++) {
+			
+			System.out.println("sdL"+i+" : "+sdList.get(i));
+		}
+		return sdList;
 	}
 	
 	//상담신청

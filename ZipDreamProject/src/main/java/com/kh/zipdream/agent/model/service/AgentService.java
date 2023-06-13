@@ -9,4 +9,6 @@ public interface AgentService {
 	public void selectRequestList(int currentPage, int userNo, Map<String, Object> map);
 	public MyRoomSell selectRequestUser(int userSrNo);
 	public int updateMyRoomSell(MyRoomSell ms);
+	int applyCounsle(Map<String , Object> map);
+	int Xcounsle(Map<String , Object> map);
 }

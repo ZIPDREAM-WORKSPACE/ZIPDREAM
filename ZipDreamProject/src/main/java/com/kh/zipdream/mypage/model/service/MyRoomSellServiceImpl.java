@@ -12,6 +12,7 @@ import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.dao.MyRoomSellDao;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 @Service
 public class MyRoomSellServiceImpl implements MyRoomSellService{
@@ -82,6 +83,14 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 	public void deleteUserCoupon(Coupon coupon) {
 		myroomSellDao.deleteUserCoupon(coupon);
 		
+	}
+
+	@Override
+	public ArrayList<SellDetail> recentRoomList(int sellNo) {
+		
+		ArrayList<SellDetail > recentRoomList = myroomSellDao.recentRoomList(sellNo);
+		
+		return recentRoomList;
 	}
 
 }

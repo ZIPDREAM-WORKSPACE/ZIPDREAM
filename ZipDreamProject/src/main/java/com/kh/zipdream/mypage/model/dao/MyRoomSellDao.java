@@ -12,6 +12,7 @@ import com.kh.zipdream.admin.model.vo.Coupon;
 import com.kh.zipdream.common.model.vo.PageInfo;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 @Repository
 public class MyRoomSellDao {
@@ -75,4 +76,8 @@ public class MyRoomSellDao {
 
 	}
 	
+	public ArrayList<SellDetail> recentRoomList(int sellNo){
+		
+		return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList", sellNo);
+	}
 }
