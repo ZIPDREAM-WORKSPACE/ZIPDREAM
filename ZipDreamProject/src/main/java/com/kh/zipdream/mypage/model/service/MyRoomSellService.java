@@ -18,7 +18,9 @@ public interface MyRoomSellService {
 
 	public void selectCouponList(int currentPage, int userNo, Map<String, Object> map);
 	public void deleteUserCoupon(Coupon coupon);
+
 	public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList);
+
 
 	
 

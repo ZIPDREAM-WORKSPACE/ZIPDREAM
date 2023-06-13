@@ -1,6 +1,7 @@
 package com.kh.zipdream.agent.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,5 +41,15 @@ public class AgentDao {
 		
 		return sqlSession.update("agent-mapper.updateMyRoomSell", ms);
 	}
+	
+	public int applyCounsle(Map<String, Object> map) {
+		return sqlSession.update("agent-mapper.applyCounsle", map);
+	}
+	
+	public int Xcounsle(Map<String, Object> map) {
+		return sqlSession.update("agent-mapper.Xcounsle", map);
+	}
+	
+	
 	
 }

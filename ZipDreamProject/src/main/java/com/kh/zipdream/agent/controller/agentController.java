@@ -21,6 +21,7 @@ import com.kh.zipdream.agent.model.service.AgentService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
 import com.kh.zipdream.sell.model.service.SellService;
+import com.kh.zipdream.sell.model.vo.Counsle;
 
 @Controller
 @RequestMapping("/agent")
@@ -36,18 +37,6 @@ public class agentController {
 	@GetMapping("/page")
 	public String main() {
 		return "agent/agentPage";
-	}
-	
-	@GetMapping("/list")
-	public String list(Model model, @ModelAttribute("loginUser") Member loginUser) { 
-		Map<String, Object> map = new HashMap();
-		
-		int refUno = loginUser.getUserNo();
-		System.out.println(refUno);
-		sellService.selectSellList(map, refUno);
-		
-		model.addAttribute("map", map);
-		return "agent/agentRegistrationList";
 	}
 	
 	
@@ -68,9 +57,28 @@ public class agentController {
 		
 		return "agent/agentRequestList";
 	}
+	@GetMapping("/list")
+	public String list(Model model, @ModelAttribute("loginUser") Member loginUser) { 
+		Map<String, Object> map = new HashMap();
+		
+		int refUno = loginUser.getUserNo();
+		System.out.println(refUno);
+		sellService.selectSellList(map, refUno);
+		
+		model.addAttribute("map", map);
+		return "agent/agentRegistrationList";
+	}
+	
 	
 	@GetMapping("/counsel")
-	public String counselList() {
+	public String counselList(Model model, @ModelAttribute("loginUser") Member loginUser) {
+		Map<String, Object> map = new HashMap();
+		
+		int refTno = loginUser.getUserNo();
+		sellService.selectCounsel(map, refTno);
+		
+		model.addAttribute("map", map);
+		
 		return "agent/agentCounselList";
 	}
 	
@@ -104,5 +112,29 @@ public class agentController {
 		
 	}
 	
+	@PostMapping("/applyCounsle")
+	@ResponseBody
+	public int applyCounsle(Model model, int refUno, int refTno, int sellNo) {
+		Map<String, Object> map = new HashMap();
+		map.put("refUno", refUno);
+		map.put("refTno", refTno);
+		map.put("sellNo", sellNo);
+		
+		model.addAttribute("map", map);
+		
+		return agentService.applyCounsle(map);
+	}
 	
+	@PostMapping("/Xcounsle")
+	@ResponseBody
+	public int Xcounsle(Model model, int refUno, int refTno, int sellNo) {
+		Map<String, Object> map = new HashMap();
+		map.put("refUno", refUno);
+		map.put("refTno", refTno);
+		map.put("sellNo", sellNo);
+		
+		model.addAttribute("map", map);
+		
+		return agentService.Xcounsle(map);
+	}
 }

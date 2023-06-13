@@ -363,6 +363,7 @@
 			/* 현재 조회한 매물번호를 담아서 함수로보내기 */
 			const sellNo = '${sd.sellNo}';
 		 	saveRecentRoom(sellNo);
+
 			
 		});
 	

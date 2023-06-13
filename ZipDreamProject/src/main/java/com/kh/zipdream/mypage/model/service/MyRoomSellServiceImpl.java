@@ -90,6 +90,7 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 	public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList) {
 		
 		ArrayList<SellDetail > recentRoomList = myroomSellDao.recentRoomList(sellNoList);
+
 		
 		return recentRoomList;
 	}

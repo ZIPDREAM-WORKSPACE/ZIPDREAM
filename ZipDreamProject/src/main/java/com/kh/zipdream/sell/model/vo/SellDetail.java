@@ -70,6 +70,9 @@ public class SellDetail {
 	
 	private ArrayList<Attachment> imgList;	//매물이미지
 	private String address; //공인중개사 주소
+	private String filePath; // 이미지 경로;
+	
+	private String filePath; // 최근본방에 들어갈 이미지 주소
 	
 	private String filePath; // 최근본방에 들어갈 이미지 주소
 	
