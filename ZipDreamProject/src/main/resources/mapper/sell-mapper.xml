@@ -163,6 +163,7 @@
 		WHERE KAPT_ADDRESS LIKE CONCAT(CONCAT('%',#{kaptAddress}),'%') AND KAPT_NAME LIKE CONCAT(CONCAT('%',#{kaptName}),'%')
 	</select>
 
+
 	<insert id="insertCounsle" parameterType="counsle">
 		INSERT INTO COUNSLE
 		VALUES(#{counsleMethod}, #{counsleContent}, SYSDATE(), 'N', #{refTuno}, #{refUno}, #{sellNo})
@@ -177,4 +178,5 @@
 		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
 	</delete>
 	
+
 </mapper>

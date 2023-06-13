@@ -483,6 +483,8 @@
     	function addApiList(){
    		$(function({
     		let sidoCode = '${sda.sidoCode}';
+
+
     		$.ajax({
     			url : "<%=request.getContextPath()%>/sell/addApi",
     			method : "get",
@@ -532,6 +534,7 @@
     				console.log("api접근 실패")
     			}
     		})
+
     	}
   
     	$(function(){
@@ -565,6 +568,9 @@
     	})
     	
     	
+
+    
+
     </script>
     
     
