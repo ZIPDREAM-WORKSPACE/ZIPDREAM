@@ -141,13 +141,16 @@ public class SellController {
 	
 	@GetMapping("/sellList2")
 	@ResponseBody
-	public String sellList2(@RequestParam("sellNo") int sellNo, Model model) {
+	public List<SellDetail> sellList2(@RequestParam("sellNo") int sellNo, Model model) {
 		
 		List<SellDetail> sdList = sellService.selectSellList2(sellNo);
 		
 		model.addAttribute("sdList", sdList);
-		System.out.println("sdL:"+sdList);
-		return new Gson().toJson(sdList);
+		for(int i = 0; i < sdList.size(); i++) {
+			
+			System.out.println("sdL"+i+" : "+sdList.get(i));
+		}
+		return sdList;
 	}
 	
 	//상담신청
