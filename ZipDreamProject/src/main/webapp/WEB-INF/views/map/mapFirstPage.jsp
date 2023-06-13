@@ -1055,10 +1055,14 @@ $("#comOkOj").click(function(){
 			for(let i=0; i<result.length; i++){
 				var listLiTag = document.createElement("li");
 				listLiTag.setAttribute("id", result[i].sellNo);
-			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
+				listLiTag.setAttribute("class", "goDetail2");
+				
+				
+				
+				listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
 					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
-					"중개사 소재지 : "+result[i].address.substring(4);
+					"중개사 소재지 : "+result[i].address.substring(5);
 		  		listEl.appendChild(listLiTag);
 			}
 			
@@ -1071,6 +1075,17 @@ $("#comOkOj").click(function(){
 		
 		
 	});
+});
+
+$(document).on('click', '.goDetail2',
+function(e){
+	e.preventDefault();
+	
+	let sellNo = $(".goDetail2").attr("id");
+	
+	location.href="<%= request.getContextPath() %>/sell/detail/"+sellNo;
+	
+	
 });
 
 let plusLi = "";
