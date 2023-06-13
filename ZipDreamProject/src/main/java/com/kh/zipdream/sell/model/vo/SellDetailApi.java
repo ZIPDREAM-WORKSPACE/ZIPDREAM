@@ -42,16 +42,17 @@ public class SellDetailApi {
 	private String kaptEnrollDate;
 	private String kaptWingCount;
 	private String kaptHousehold;
-	private String maintenanace;
+	private String management;
 	private String kaptHeating;
 	private String kaptEntrance;
 	private String kaptBuildCompany;
+	private String securityCount;
 	private String securityCompany;
-	private String cleanCompany;
 	private String buildStructure;
 	private String liftCount;
 	private String kaptParkingCount;
 	private String cctvCount;
+	private String kaptSecurityAddress;
 	private String kaptAllFloor;
 	
 	
