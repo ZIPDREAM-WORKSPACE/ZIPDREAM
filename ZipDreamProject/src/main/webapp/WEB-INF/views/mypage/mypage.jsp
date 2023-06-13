@@ -99,7 +99,7 @@
 		<div style="height: 250px;">
 			<div class="mypageTitle">MY DREAM</div>
             <ul class="listWrap">
-                <li class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage"">최근 본 방</a></li>
+                <li class="list"><a href="<%=request.getContextPath()%>/mypage/currentPage">최근 본 방</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/myroomlist">내 매물</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/mybookmarklist">찜하기</a></li>
                 <li class="list"><a href="<%=request.getContextPath()%>/mypage/myInfo">내 정보</a></li>
