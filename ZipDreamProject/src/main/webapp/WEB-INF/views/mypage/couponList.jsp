@@ -297,11 +297,15 @@
 	<script>
 		const modal = document.getElementById('modalWrap');
 		var html = "";
+		const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+		const origin = window.location.origin;
+
+		const contextPath = origin + pathname;
 		function showModal(no, path, title, content) {
 			/* console.log(no + path + title + content); */
 			modal.style.display = 'block';
 			
-			html = "<img src='path'/><h4>" + title + "</h4><div>" + content + "</div>";
+			html = "<img src='"+ contextPath + path + "'/><h4>" + title + "</h4><div>" + content + "</div>";
 			
 			$(".modalHeader").html(html);
 			$(".btn").attr("value", no);
