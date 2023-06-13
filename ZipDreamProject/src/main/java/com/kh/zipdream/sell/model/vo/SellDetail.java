@@ -74,4 +74,6 @@ public class SellDetail {
 	
 	private String filePath; // 최근본방에 들어갈 이미지 주소
 	
+	private String filePath; // 최근본방에 들어갈 이미지 주소
+	
 }

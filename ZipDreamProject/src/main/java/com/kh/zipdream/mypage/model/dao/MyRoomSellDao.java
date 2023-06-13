@@ -77,6 +77,7 @@ public class MyRoomSellDao {
 
 	}
 	
+
 	
 	 public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList){
 		 
@@ -86,4 +87,5 @@ public class MyRoomSellDao {
 		 return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList",map);
 	 }
 	 
+
 }
