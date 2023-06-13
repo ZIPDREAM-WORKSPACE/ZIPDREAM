@@ -332,38 +332,38 @@
 
 	<script>
 		/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
-		$(function(){
-			/* 로그인한 유저 정보 가져오기  */
-			var userNo = '${loginUser.userNo}';
-			/* 로그인한 유저의 회원번호로 저장된 localstorage 배열 가져오기  */
-			var recentRoom = JSON.parse(localStorage.getItem(userNo));
-			/* 현재 조회한 매물번호 */
-			var sellNo = '${sd.sellNo}';
-			const arr = [];
+		function saveRecentRoom(sellNo){
+			/* userNo를 키값으로 사용  */
+			const userNo = "${loginUser.userNo}";
+			/* 현재 로그인된 사용자의 회원번호(키)로 localStorage 조회  */
+			let recentRooms = localStorage.getItem(userNo);
 			
-			console.log(recentRoom);
-			
-			/* console.log(userNo + "의 최근본 : " + sellNo); */
-			
-			/* 객체로 매물번호와 만료기한 저장 */
-			/* const obj = {
-					sellNo : sellNo,
-					expire: Date.now() + (1000 * 60 * 60 * 24)
-			}
-			
-			const objString = "";
-			if(recentRoom != null){
-				recentRoom.push(obj);
-				objString = JSON.stringify(recentRoom);
+			/* 로컬스토리지에 값이 있다면 배열 추가 */
+			if(recentRooms){
+				recentRooms = JSON.parse(recentRooms); //로컬스토리지는 String타입이므로 무조건 json으로 형변환해서 꺼내오기
+				const index = $.inArray(sellNo,recentRooms);
+				
+				/* 현재 인덱스가 0이면 1로 바꾸기 */
+				if(index > -1){
+					recentRooms.splice(index,1);
+				}
+				
+				recentRooms.unshift(sellNo);
+				if(recentRooms.length > 5){ // 5개 이상이면 첫번째 배열값 삭제
+					recentRooms.pop();
+				}
 			}else{
-				arr.push(obj);
-				objString = JSON.stringify(arr);
+				recentRooms = [sellNo];
 			}
 			
-			
-			if(userNo != ''){
-				window.localStorage.setItem(userNo, objString);
-			}  */
+			localStorage.setItem(userNo,JSON.stringify(recentRooms));
+		}
+	
+		$(function(){
+			/* 현재 조회한 매물번호를 담아서 함수로보내기 */
+			const sellNo = '${sd.sellNo}';
+		 	saveRecentRoom(sellNo);
+
 			
 		});
 	
@@ -936,7 +936,7 @@
 			data : {refSno : '${sd.sellNo}'},
 			dataType : 'json',
 			success : function(result){
-				console.log(result);
+				/* console.log(result); */
 				let html = "";
 				for(let board of result){
 					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+

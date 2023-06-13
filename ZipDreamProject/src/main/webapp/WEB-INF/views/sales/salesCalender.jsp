@@ -105,7 +105,7 @@
     width: 1200px;
 	display: flex;
 	align-items: center;
-	flex-direction: column;
+    flex-direction: row;
 	margin:0 auto;
 }
 
@@ -219,7 +219,7 @@ a{
                 selectable: true, 
                 nowIndicator: true, // 현재 시간 마크
                 locale: 'ko', // 한국어 설정
-
+                dayMaxEvents: true,
                 select: function(info) {
                     console.log(info.startStr);
                     var calenderStart = info.startStr;

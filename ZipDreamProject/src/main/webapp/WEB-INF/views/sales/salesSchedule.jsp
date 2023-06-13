@@ -712,7 +712,7 @@
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
 			<ul class="sellHouseNavi">
-				<li><a href="<%=request.getContextPath()%>/sales/schedule">분양일정</a></li>
+				<li><a href="<%=request.getContextPath()%>/sales/schedule">청약정보</a></li>
 				<li><a>|</a></li>
 				<li><a href="<%=request.getContextPath()%>/sales/guide">분양가이드</a></li>
 				<li><a>|</a></li>
@@ -720,7 +720,7 @@
 			</ul>
 		</div>
 		<div class="sellHouseTitleWrap">
-			<h1 class="sellHouseTitle">분양일정</h1>
+			<h1 class="sellHouseTitle">청약정보</h1>
 		</div>
 		<div style="margin-bottom: 100px;">
 			<div class="sellHouseCalendar">
