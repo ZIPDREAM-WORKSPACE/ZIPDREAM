@@ -34,6 +34,7 @@
 		
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
 		<typeAlias type="com.kh.zipdream.mypage.model.vo.MyRoomSell" alias="myroomsell"/>
+		<typeAlias type="com.kh.zipdream.sales.model.vo.Calender" alias="calender"/>
 	</typeAliases>
 	
 	<mappers>
