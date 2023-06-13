@@ -25,4 +25,8 @@ public class MapDao {
 	public List<beopjeongdong> searchKeyword(String search) {
 		return sqlSession.selectList("mapMapper.searchKeyword", search);
 	}
+	
+	public String selectPullAddress(int liId) {
+		return sqlSession.selectOne("mapMapper.selectPullAddress", liId);
+	}
 }

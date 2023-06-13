@@ -232,7 +232,6 @@
 	margin-top: -5px;
 }
 
-
 .box {
 	margin-top: 20px;
 }

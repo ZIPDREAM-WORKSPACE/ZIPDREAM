@@ -29,4 +29,11 @@
 		WHERE BJD_NAME LIKE CONCAT('%', #{search},'%')
 		AND STATUS like '존%'
 	</select>
+	
+	<select id="selectPullAddress" resultType="string">
+		SELECT BJD_NAME
+		FROM USER.BEOPJEONGDONG
+		WHERE BJD_CODE = #{liId}
+		AND STATUS like '존%'
+	</select>
 </mapper>

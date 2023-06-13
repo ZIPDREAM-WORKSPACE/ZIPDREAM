@@ -11,4 +11,6 @@ public interface MapService {
 	public List<beopjeongdong> selectAddress(String adCode);
 	
 	public List<beopjeongdong> searchKeyword(String search);
+	
+	public String selectPullAddress(int liId);
 }
