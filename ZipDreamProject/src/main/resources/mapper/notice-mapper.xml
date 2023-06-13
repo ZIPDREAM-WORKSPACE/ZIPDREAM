@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice-mapper">
+	<insert id="insertSaleNotice" >
+		INSERT INTO NOTICE(NOTICE_TYPE,NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME)
+		VALUES (2,#{noticeContent},#{noticeTitle},#{noticeUrl},#{refUno},#{createDateTime} )
+	
+	</insert>
+	
+	<delete id="deleteSaleNotice" >
+		DELETE FROM NOTICE 
+		WHERE NOTICE_URL = #{noticeUrl} AND REF_UNO = #{refUno};
+	
+	</delete>
+	
+		<insert id="insertNotice" parameterType="notice">
+		INSERT INTO NOTICE(NOTICE_TYPE, NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME, RESULT, TYPE)
+		VALUES (#{noticeType},#{noticeContent},#{noticeTitle},#{noticeUrl},#{refUno},SYSDATE(),#{result},#{type} )
+	
+	</insert>
+</mapper>

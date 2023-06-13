@@ -30,5 +30,10 @@ public interface SellService {
 	
 	public int deleteUserSelect(Map<String,Integer> map);
 	
+
+	void selectCounsel(Map<String, Object> map, int refTno);
+	
+
 	public List<SellDetail> selectSellList2(int sellNo);
+
 }

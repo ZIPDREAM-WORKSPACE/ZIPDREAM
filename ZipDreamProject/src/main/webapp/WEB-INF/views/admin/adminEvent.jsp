@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -128,7 +129,7 @@
 							</table>
 							
 							<div align="center" style="margin-top:20px;">
-								<button type="submit" class="btn btn-primary">등록하기</button>
+								<button type="submit" class="btn btn-primary" >등록하기</button>
 								<button type="reset"  class="btn btn-danger">취소하기</button>
 							</div>				
 						</form>
@@ -192,7 +193,7 @@
 						<div class="select-arrow" style="position:relative;top:-55px;left:100px;"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">등록하기</button>
+						<button type="button" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
 	                        data-dismiss="modal">닫기</button>
       				</div>
@@ -203,6 +204,7 @@
 	</section>
 </section>
 <script>
+let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 let userCheck = document.getElementsByName("userCheck");
 
 for(let i = 0; i<userCheck.length; i++){
@@ -321,8 +323,29 @@ const inputImage = document.getElementById("img")
 inputImage.addEventListener("change", e => {
     readImage(e.target)
 });
+function eventSubmit(){
+	
+	let no = $(".coupon-select option:selected").val();
+	let coupon = $(".coupons[data-couponNo="+no +"]")[0];
+	let couponUserNos = document.getElementById("coupon-userNo").value.split(",");
+	for(let i = 0; i<couponUserNos.length ; i++){
+		let couponUserNo =couponUserNos[i];
+		console.log(couponUserNo);
+		var conponContent = coupon.dataset.couponcontent;
+		var conponDate = coupon.dataset.coupondate;
+		var conponTitle = coupon.dataset.coupontitle;
+		sendMessage3(conponContent,conponDate,conponTitle,couponUserNo); 
+	}
+
+	 
+}
+
+/* let no = $(".coupon-select option:selected").val();
+let coupon = $(".coupons[data-couponNo="+no +"]")[0];
+console.log(coupon.dataset); */
+
 
 </script>
 		
-	
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>	
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

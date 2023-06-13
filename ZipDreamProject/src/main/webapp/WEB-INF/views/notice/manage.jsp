@@ -52,16 +52,15 @@ tbody::-webkit-scrollbar {
 		
 		text-align: center;
 	}
-	.num{
-		width:100px;
-	}
 	.title{
-		width:300px;
+		width:200px;
 	}
 	.content{
 		width:600px;
 	}
-	
+	.time{
+		width:200px;
+	}
 </style>
 <body>
 <jsp:include page="notice_header.jsp"/>
@@ -69,60 +68,34 @@ tbody::-webkit-scrollbar {
 		<table>
 			<thead>
 				<tr>
-					<th class="num">번호</th>
 					<th class="title">제목</th>
 					<th class="content">내용</th>
+					<th class="time">날짜</th>
 				</tr>
 			</thead>
-			<tbody >
-				<tr>
+			<tbody class="noticeThead">
+				<!-- <tr>
 					<td class="num">1</td>
 					<td class="title">첫 가입 이벤트 혜택</td>
 					<td class="content">복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
-					<tr>
-					<td>2</td>
-					<td>첫 가입 이벤트 혜택</td>
-					<td>복비 10% 할인 쿠폰 지급되었습니다.</td>
-				</tr>
+				</tr> -->
+			
 			</tbody>
 		</table>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
+	<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<script>
+var refUno ='${loginUser.userNo}';
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock2 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock3 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock4 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	addEventMessage2(refUno);
+	addEventMessage3(refUno);
+	addEventMessage4(refUno);
+	addEventMessage5(refUno);
+
+</script>
 </body>
 
