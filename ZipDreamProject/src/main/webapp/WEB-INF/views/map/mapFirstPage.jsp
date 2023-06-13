@@ -1058,7 +1058,7 @@ $("#comOkOj").click(function(){
 			  	listLiTag.innerHTML = result[i].sellPrice +"<br>"+
 					result[i].sellName+"<br>"+
 					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
-					"중개사 소재지 : "+result[i].brokerAdd;
+					"중개사 소재지 : "+result[i].address.substring(4);
 		  		listEl.appendChild(listLiTag);
 			}
 			
