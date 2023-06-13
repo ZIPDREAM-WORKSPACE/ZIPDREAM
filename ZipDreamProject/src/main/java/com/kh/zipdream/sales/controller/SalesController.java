@@ -206,6 +206,7 @@ public class SalesController {
 		
 		return "sales/salesCalender";
 	}
+
 	
 	@ResponseBody
 	@GetMapping("/select")
@@ -217,5 +218,6 @@ public class SalesController {
 		return selectinfoList;
 	}
 	
+
 
 }

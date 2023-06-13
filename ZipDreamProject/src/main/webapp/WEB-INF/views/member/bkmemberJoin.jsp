@@ -223,6 +223,15 @@
         background-color: #4C69A2;
         color: white;
     }
+    
+    #emailCheck{
+    	position: absolute;
+	    width: 100px;
+	    height: 45px;
+	    left: 450px;
+	    background-color: #4C69A2;
+	    color: white;
+    }
 
     #password{
         position: absolute;
@@ -334,11 +343,12 @@
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option></select>
-                    <button type="button" id="emailcheck" name="emailcheck" >인증번호 전송</button><br><br>
+                    <button type="button" id="emailCheck" name="emailCheck" >중복확인</button><br><br>
+                    <button type="button" id="emailcheck" name="emailcheck" style="display:none;">인증번호 전송</button><br><br>
                     
                     <input type="hidden" id="userEmail" name="userId">
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                   <button  type="button" id="ok" >확인</button><br><br>
+                   <button  type="button" id="ok" >확인</button>
                     
                 <h4>비밀번호</h4>
                 <input type="password" id="password"  name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
@@ -656,6 +666,31 @@
                               }
                            }).open();
                   };
+                  
+                  $("#emailCheck").on("click",function(){
+                	     let email = document.getElementById("emailct");
+                	     let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
+                	     $.ajax({
+                	         url : "<%= request.getContextPath()%>/member/emailCheck"
+                	          ,data : {id : value}
+                	         ,method : "get"
+                	          
+                	          ,success: function(data){
+                	            if(data==1){
+                	               alert("이미 가입된 아이디 입니다.");
+                	               $("#id-text").val("");
+                	            }else{
+                	               alert("사용가능한 아이디입니다");
+                	               $("#emailCheck").css("display","none");
+                	               $("#emailcheck").css("display","block");
+
+                	            }
+                	          },error : function(req,status,err){
+                	              console.log(req);
+                	          }
+                	      });//ajax
+                	    
+                	  });
     
       </script>
 </html>

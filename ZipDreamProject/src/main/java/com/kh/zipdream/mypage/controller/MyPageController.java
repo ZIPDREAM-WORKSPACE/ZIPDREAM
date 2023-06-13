@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.service.MyRoomSellService;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
@@ -25,6 +26,9 @@ public class MyPageController {
 	
 	@Autowired
 	private MyRoomSellService myroomSellService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@GetMapping("/mypage")
 	public String moveMypageController(){
@@ -58,7 +62,12 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/myInfo")
-	public String moveMyInfoController(){
+	public String moveMyInfoController(@ModelAttribute("loginUser") Member loginUser, Member m,
+							Model model){
+				m  = memberService.selectMember(loginUser.getUserNo());
+				
+				model.addAttribute("m", m);
+				
 		return "mypage/myInfo";
 	}
 	
