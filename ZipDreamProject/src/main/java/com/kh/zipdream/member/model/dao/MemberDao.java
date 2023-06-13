@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 
 @Repository
 public class MemberDao {
@@ -43,7 +44,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member inputMember) {
-		System.out.println("ss"+inputMember);
+		
 		return sqlSession.insert("member-mapper.insertMember", inputMember);
 	}
 	
@@ -54,12 +55,11 @@ public class MemberDao {
 	}
 
 	
-	   public int emailCheck(String id) {
+	public int emailCheck(String id) {
 		      return sqlSession.selectOne("member-mapper.emailCheck",id);
 		   }
 	
 	public int insertapply(int userNo) {
-		System.out.println("ss"+userNo);
 		return sqlSession.insert("member-mapper.insertbkMember", userNo);
 	}
 	
@@ -68,14 +68,27 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);
 	}
 	
-
+	public int updateMember(Member m) {
+		return sqlSession.update("member-mapper.updateMember", m);
+	}
+	
 	
 	public Member searchId(Map<String, String> map) {
 		return sqlSession.selectOne("member-mapper.searchId",map);
 	}
 	
+
+	public int searchPwd(Member m) {
+		return sqlSession.update("member-mapper.searchPwd",m);
+    }
+	
 	public int deleteMember(int userNo) {
 		return sqlSession.delete("member-mapper.deleteMember",userNo);
+
+	}
+	
+	public List<userSelectList> myBookmarkList(int uno){
+		return sqlSession.selectList("member-mapper.myBookmarkList", uno);
 	}
 }
 

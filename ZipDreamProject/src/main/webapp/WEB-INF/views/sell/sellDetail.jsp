@@ -327,9 +327,50 @@
 </style>
 </head>
 <body>
+
 	<jsp:include page="../../views/common/header.jsp" />
 
- <div class="content1 margin">
+	<script>
+		/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
+		$(function(){
+			/* 로그인한 유저 정보 가져오기  */
+			var userNo = '${loginUser.userNo}';
+			/* 로그인한 유저의 회원번호로 저장된 localstorage 배열 가져오기  */
+			var recentRoom = JSON.parse(localStorage.getItem(userNo));
+			/* 현재 조회한 매물번호 */
+			var sellNo = '${sd.sellNo}';
+			const arr = [];
+			
+			console.log(recentRoom);
+			
+			/* console.log(userNo + "의 최근본 : " + sellNo); */
+			
+			/* 객체로 매물번호와 만료기한 저장 */
+			/* const obj = {
+					sellNo : sellNo,
+					expire: Date.now() + (1000 * 60 * 60 * 24)
+			}
+			
+			const objString = "";
+			if(recentRoom != null){
+				recentRoom.push(obj);
+				objString = JSON.stringify(recentRoom);
+			}else{
+				arr.push(obj);
+				objString = JSON.stringify(arr);
+			}
+			
+			
+			if(userNo != ''){
+				window.localStorage.setItem(userNo, objString);
+			}  */
+			
+		});
+	
+	</script>
+
+
+	<div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
                 <span>매물번호 : ${sd.sellNo} </span>
