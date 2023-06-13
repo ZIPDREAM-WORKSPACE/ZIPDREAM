@@ -205,7 +205,7 @@
        
         </div>
         <div class="modal-body" id="findPasswordInner" >
-           전화번호 : <input  class="signin_pass" id="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
+           전화번호 : <input  class="signin_pass" id="phone" type="text" name="phone"  placeholder="전화번호 입력해주세요">
            <br>
         
             
@@ -258,11 +258,11 @@
 $(function(){
 	//아이디 찾기
      $("#findId").click(function(){
-    	 let phoneNumber = $("#phoneNumber").val();
+    	 let phone = $("#phone").val();
     	 let name = $("#name").val();
  		$.ajax({
              url:"<%=request.getContextPath()%>/member/searchId", 
-             data: {name,phoneNumber }, // 전송할 ㅔ이터값
+             data: {name,phone }, // 전송할 ㅔ이터값
              success:function(data){
             	 console.log(data);
                  if(data.userId == null){ 

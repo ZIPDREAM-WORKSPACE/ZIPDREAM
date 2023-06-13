@@ -238,8 +238,8 @@
                         <td>${sda.sellName}</td>
                     </tr>
                     <tr>
-                    	<th>방종류</th>
-                    	<td></td>
+                    	<th>건물종류</th>
+                    	<td>${sda2.kaptType }</td>
                     </tr>
                     <tr>
                         <th>전용 면적</th>
@@ -251,10 +251,6 @@
                     </tr>
                     <tr>
                     	<th>방 수 / 욕실 수</th>
-                    	<td></td>
-                    </tr>
-                    <tr>
-                    	<th>방향</th>
                     	<td></td>
                     </tr>
                     <tr>

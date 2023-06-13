@@ -42,7 +42,6 @@
 			, USER_PWD
 			, USER_NAME
 			, PHONE
-			, PWD
 			, ADDRESS
 			, ENROLL_DATETIME
 			, MODIFY_DATETIME
@@ -54,7 +53,6 @@
 			, #{userPwd}
 			, #{userName}
 			, #{phone}
-			, #{pwd}
 			, #{address}
 			, SYSDATE()
 			, SYSDATE()
@@ -147,6 +145,7 @@
 			USER_PWD = #{userPwd}
       WHERE USER_ID = #{userId} AND PHONE = #{phone} 
    </update> 
+
    <!-- 일반회원 수정 -->
    <update id="updateMember" parameterType="member">
 	    UPDATE MEMBER SET 

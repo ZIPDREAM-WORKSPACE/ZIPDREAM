@@ -259,7 +259,7 @@ public class MemberController {
 	public Member searchId(HttpSession session,
 							
 							 @RequestParam(value = "name", required = false) String name,
-							 @RequestParam(value = "phoneNumber", required = false) String phone) {
+							 @RequestParam(value = "phone", required = false) String phone) {
 		Map<String, String> map = new HashMap();
 		map.put("name", name);
 		map.put("phone", phone);
@@ -309,28 +309,34 @@ public class MemberController {
 	@PostMapping("/updateMember")
 	@ResponseBody
 	public int updateMember(
-			HttpSession session, Model model,
-			@RequestParam(value = "phone" ) String phone,
+			@RequestParam(value = "phone") String phone,
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "address") String address,
-			@RequestParam(value = "userNo" ) int userNo ) {
-		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("userName", userName);
-		map.put("phone", phone);
-		map.put("address", address);
-		map.put("userNo", userNo+"");
-		System.out.println(map);
-		/* int result = memberService.updateMember(m); */
-		
-
-		
-		/* session.setAttribute("loginUser", loginUser); */
-		
+			@RequestParam(value = "userNo") int userNo,
 			
+			  HttpSession session, Model model 
+			) {
+		
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setPhone(phone);
+		m.setAddress(address);
+		m.setUserNo(userNo);
+		
+		int result = memberService.updateMember(m);
+		
+		String url = "";
+		if (result > 0) { // 성공시 - 메인페이지로
+			session.setAttribute("alertMsg", "수정성공");
+			url = "redirect:/";
+		} else { // 실패 - 에러페이지
+			model.addAttribute("errorMsg", "수정실패");
+			url = "common/errorPage";
+		}
+		System.out.println(m);
 		
 		
-		return 1;
+		return result;
 	}
 
 
