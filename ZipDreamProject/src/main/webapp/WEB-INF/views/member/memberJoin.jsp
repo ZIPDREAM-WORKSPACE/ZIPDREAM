@@ -95,6 +95,15 @@
        background-color: #4C69A2;
        color: white;
     }
+    
+    #emailCheck{
+    	position: absolute; 
+       width: 114px;
+       height: 45px;
+      left: 440px; 
+       background-color: #4C69A2;
+       color: white;
+    }
 
     #pwd-text{
         width: 450px;
@@ -279,7 +288,7 @@
                     
                     <input type="hidden" id="userEmail" name="userId">
                     <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                   <button  type="button" id="ok" >확인</button><br><br>
+                   <button  type="button" id="ok" >확인</button>
                     
          <!-- <div class="login2"></div> -->
                 <h4>비밀번호</h4>
@@ -392,13 +401,6 @@ function ok(){
         });//ajax
     });//mailCheck 
     
-    
-    //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
-    
-     /* document.getElementById("emailcheck").addEventListener("click", function() {
-    document.getElementById("emailchecknumber").style.display = "block";
-    document.getElementById("ok").style.display = "block";
-  });  */
     
     //인증번호 유효성 검사
     document.getElementById("ok").addEventListener("click", function() {

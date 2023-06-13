@@ -89,11 +89,6 @@ public class MemberServiceImpl implements MemberService {
 		return userNo;
 	}
 	
-	
-	
-	
-	
-	
 	@Override
 	public int insertapply(int userNo) {
 
@@ -101,11 +96,6 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
-	
-	
-	
-	
-	
 	
 	
 	 @Override
@@ -152,8 +142,22 @@ public class MemberServiceImpl implements MemberService {
 		Member result=memberDao.searchId(map);
         return result;
     }
-
 	
+	@Override
+    public Member searchPwd(Map<String, String> map) {
+		Member result=memberDao.searchPwd(map);
+		
+        return result;
+    }
+	
+	@Override
+    public int updateMember(Member m) {
+		
+		
+        return memberDao.updateMember(m);
+    }
+	
+
 	 @Override
 	    public int emailCheck(String id) {
 	        int result=memberDao.emailCheck(id);

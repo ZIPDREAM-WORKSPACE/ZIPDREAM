@@ -8,8 +8,10 @@
 		<result column="USER_PWD" property="userPwd" />
 		<result column="USER_NAME" property="userName" />
 		<result column="PHONE" property="phone"/>
-		<result column="EMAIL" property="email" />
+		<result column="PWD" property="pwd" />
 		<result column="ADDRESS" property="address"/>
+		<result column="ADDR2" property="addr2"/>
+		<result column="ADDR3" property="addr3"/>
 		<result column="OFFICE" property="office"/>
 		<result column="ENROLL_DATE_TIME" property="enrollDateTime" />
 		<result column="MODIFY_DATE_TIME" property="modifyDateTime" />
@@ -41,6 +43,7 @@
 			, USER_PWD
 			, USER_NAME
 			, PHONE
+			, PWD
 			, ADDRESS
 			, ENROLL_DATETIME
 			, MODIFY_DATETIME
@@ -52,6 +55,7 @@
 			, #{userPwd}
 			, #{userName}
 			, #{phone}
+			, #{pwd}
 			, #{address}
 			, SYSDATE()
 			, SYSDATE()
@@ -100,11 +104,12 @@
 		SELECT * FROM MEMBER WHERE USER_NO = #{userNo}
 	</select>
 	
+	 <!-- 아이디 찾기 -->
 	<select id="emailCheck" resultType="int">
       SELECT count(USER_ID)
       FROM MEMBER
       WHERE USER_ID=#{id}
-   </select>
+   </select>  
 	
 	<!-- 이메일 -->
 	<insert id="insertMailAuth" parameterType="mailAuth">
@@ -130,12 +135,38 @@
 	    WHERE mail=#{mail}
 	</update>
 	
-	
 	<select id="searchId" resultMap="memberResultSet">
-	   SELECT USER_ID
-		FROM MEMBER
-		WHERE USER_NAME  = #{name} AND PHONE = #{phone}
+	    SELECT USER_ID
+	    FROM MEMBER
+	    WHERE USER_NAME = #{name} AND PHONE = #{phone}   
 	</select>
+	
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPwd" resultMap="memberResultSet">
+      SELECT PWD
+      FROM MEMBER
+      WHERE USER_ID = #{idText} AND PHONE = #{phoneNumber} 
+   </select> 
+   <!-- 일반회원 수정 -->
+   <update id="updateMember" parameterType="member">
+	    UPDATE MEMBER SET 
+			  
+			  USER_NAME = #{userName}
+			, PHONE = #{phone}
+			, ADDRESS = #{address}
+	    WHERE USER_NO = #{userNo} 
+	</update>
+	
+	<!-- <update id="updateMemberPwd" parameterType="member">
+	    UPDATE MEMBER SET 
+			 
+			, USER_PWD = ${userPwd}
+			
+			
+	    WHERE USER_NO = ${userNo} 
+	</update> -->
+	
 	
 	
 </mapper>
