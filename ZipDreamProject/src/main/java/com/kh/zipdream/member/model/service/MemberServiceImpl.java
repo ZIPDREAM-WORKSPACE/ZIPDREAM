@@ -144,8 +144,8 @@ public class MemberServiceImpl implements MemberService {
     }
 	
 	@Override
-    public Member searchPwd(Map<String, String> map) {
-		Member result=memberDao.searchPwd(map);
+    public int searchPwd(Member m) {
+		int result = memberDao.searchPwd(m);
 		
         return result;
     }
