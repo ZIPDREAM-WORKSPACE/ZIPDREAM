@@ -7,7 +7,7 @@
 <title>ZIPDREAM</title>
 <style>
 div{
-	/* border: 1px solid red; */
+	border: 1px solid red; 
 }
 .recentContent {
 	width: 100%;
@@ -40,6 +40,11 @@ div{
 	height: 200px;
 	border: 1px solid lightgray;
 }
+
+.imgStyle, .divStWrap:hover{
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -81,15 +86,17 @@ div{
 							let sellName = result[0].sellName;
 							let sellPrice = result[0].sellPrice;
 							let filePath = result[0].filePath;
+							let sellNo = result[0].sellNo;
 							console.log(result[0]);
 							
 								const element = document.getElementById("listWrap");
-								element.innerHTML += '<img class="imgStyle" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'">'
-												  + '<div class="divStWrap"><div class="divStyle" style="font-size:20px; font-weight: 500;">'+sellPrice+'억</div>'
-												  + '<div class="divStyle">'+sellName+', '+sellFloor+'</div>'
-												  + '<div class="divStyle">'+sellAddress+'</div>'+'</div>';
+								element.innerHTML += '<div id="'+sellNo+'" class="infoWrap">'
+												  + '<img class="imgStyle goDet" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'">'
+												  + '<div class="divStWrap goDet"><div class="divStyle" style="font-size:20px; font-weight: 500; margin-top: 10px;">'+sellPrice+'억</div>'
+												  + '<div class="divStyle" style="font-size:14px;">'+sellName+', '+sellFloor+'</div>'
+												  + '<div class="divStyle">'+sellAddress+'</div>'+'</div></div>';
 						
-							
+							  
 						},
 						error: function(result){
 							console.log("에러");
@@ -104,6 +111,14 @@ div{
 			
 		})
 	})
+	
+	$(document).on('click', '.infoWrap', function(e){
+		let sno = $(".infoWrap").attr("id");
+		
+		e.preventDefault();
+		location.href="<%= request.getContextPath() %>/sell/detail/"+sno;
+	});
+
 </script>
 
 </html>
