@@ -32,7 +32,7 @@ public interface MemberService {
 	
 	public Member searchId(Map<String, String> map);
 	
-	public Member searchPwd(Map<String, String> map);
+	public int searchPwd(Member m);
 	
 	public int updateMember(Member m);
 

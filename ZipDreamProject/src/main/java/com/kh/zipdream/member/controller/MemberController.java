@@ -4,17 +4,22 @@ package com.kh.zipdream.member.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,7 +66,10 @@ public class MemberController {
 	// 이메일
 	@Autowired
 	MailSendService mailSendService; 
-
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
 	// 로그인 회원가입
 	@Autowired
 	private MemberService memberService;
@@ -123,7 +131,6 @@ public class MemberController {
 		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 		m.setAddress(address);
-		m.setPwd(m.getUserPwd());
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
 		// 암호화된 pwd를 m의 userPwd다시 대입
@@ -254,7 +261,7 @@ public class MemberController {
 	public Member searchId(HttpSession session,
 							
 							 @RequestParam(value = "name", required = false) String name,
-							 @RequestParam(value = "phoneNumber", required = false) String phone) {
+							 @RequestParam(value = "phone", required = false) String phone) {
 		Map<String, String> map = new HashMap();
 		map.put("name", name);
 		map.put("phone", phone);
@@ -265,16 +272,38 @@ public class MemberController {
 	//비밀번호찾기
 	@ResponseBody
 	@GetMapping("/searchPwd")
-	public Member searchPwd(HttpSession session,
+	public int searchPwd(HttpSession session,
 							
 					@RequestParam(value = "phone", required = false) String phoneNumber,
-					@RequestParam(value = "idText", required = false) String idText) {
-		Map<String, String> map = new HashMap();
-		map.put("idText",idText );
-		map.put("phoneNumber", phoneNumber);
+					@RequestParam(value = "idText", required = false) String idText)throws MessagingException {
+		Member m = new Member();
+		m.setPhone(phoneNumber);
+		m.setUserId(idText);
 		
-		Member result = memberService.searchPwd(map);
-		 
+		int leftLimit = 97; // letter 'a'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = 10;
+		
+		Random random = new Random();
+		StringBuilder buffer = new StringBuilder(targetStringLength);
+		for (int i = 0; i < targetStringLength; i++) {
+		    int randomLimitedInt = leftLimit + (int)
+		            (random.nextFloat() * (rightLimit - leftLimit + 1));
+		    buffer.append((char) randomLimitedInt);
+		}
+		String generatedString = buffer.toString();
+		
+		m.setUserPwd(bcryptPasswordEncoder.encode(generatedString));
+		
+		int result = memberService.searchPwd(m);
+		
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		mailMessage.setFrom(new InternetAddress("minifkaus@naver.com"));
+		mailMessage.setSubject("귀하의 " + m.getUserId() + " 비밀번호입니다.", "utf-8");
+		mailMessage.setText("귀하의 ZIPDREAM 비밀번호는 " + generatedString + "입니다.", "utf-8", "html");
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(m.getUserId()));
+		mailSender.send(mailMessage);
+		
 		return result;
 	}
 	
@@ -282,28 +311,34 @@ public class MemberController {
 	@PostMapping("/updateMember")
 	@ResponseBody
 	public int updateMember(
-			HttpSession session, Model model,
-			@RequestParam(value = "phone" ) String phone,
+			@RequestParam(value = "phone") String phone,
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "address") String address,
-			@RequestParam(value = "userNo" ) int userNo ) {
-		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("userName", userName);
-		map.put("phone", phone);
-		map.put("address", address);
-		map.put("userNo", userNo+"");
-		System.out.println(map);
-		/* int result = memberService.updateMember(m); */
-		
-
-		
-		/* session.setAttribute("loginUser", loginUser); */
-		
+			@RequestParam(value = "userNo") int userNo,
 			
+			  HttpSession session, Model model 
+			) {
+		
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setPhone(phone);
+		m.setAddress(address);
+		m.setUserNo(userNo);
+		
+		int result = memberService.updateMember(m);
+		
+		String url = "";
+		if (result > 0) { // 성공시 - 메인페이지로
+			session.setAttribute("alertMsg", "수정성공");
+			url = "redirect:/";
+		} else { // 실패 - 에러페이지
+			model.addAttribute("errorMsg", "수정실패");
+			url = "common/errorPage";
+		}
+		System.out.println(m);
 		
 		
-		return 1;
+		return result;
 	}
 
 	@GetMapping("/mybookmarklist")

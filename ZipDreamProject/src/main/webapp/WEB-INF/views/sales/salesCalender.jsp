@@ -148,8 +148,6 @@
 	font-size: 15px;
 	font-weight: 400;
 	white-space: nowrap;
-	/* overflow: hidden;
-	text-overflow: ellipsis; */
 	display: inline-block;
 	width: 455px;
 	height: 22px;
@@ -193,7 +191,9 @@ a{
                         
                         <!-- 캘린더 날짜 선택시 상세 일정 넣기  -->
                         <div class="schedule">
-                            <ul>
+
+                            <!-- <ul>
+
                                 <li>
                                     <p class="scheduleName">접수</p>
                                     <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
@@ -214,7 +214,9 @@ a{
                                     <p class="scheduleName">접수</p>
                                     <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
                                 </li>
-                            </ul>
+
+                            </ul> -->
+
                         </div>
                     </div>
                 </div>
@@ -224,9 +226,10 @@ a{
 
     </div>
 
+
+
     <script>
-    
-	    
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -243,6 +246,39 @@ a{
                 selectable: true, 
                 nowIndicator: true, // 현재 시간 마크
                 locale: 'ko', // 한국어 설정
+
+                select: function(info) {
+                    console.log(info.startStr);
+                    var calenderStart = info.startStr;
+                    
+                    $.ajax({
+                    	url:"<%= request.getContextPath()%>/sales/select",
+                    	method:"get",
+                    	data:{calenderStart},
+                    	success:function(result){
+                    		console.log(result);
+                    		var html = "";
+                    		if(result.length != 0){
+                    			html = "<ul>";
+                    			for(var i = 0; i<result.length; i++){
+                    				html += "<li><p class='scheduleName'>"+ result[i].calenderTitle +"</p>";
+                    				html += "<a href='"+ result[i].url+"'>"+result[i].calenderMemo + "</a></li>";
+                    			
+                    			}
+                    			html += "</ul>";
+                    		}else{
+                    			html = "<ul>해당 날짜에 분양일정이 없습니다.</ul>"
+                    		}
+                    		
+                    		$(".schedule").html(html);
+                    	},
+                    	error:function(){
+                    		console.log(result);
+                    	}
+                    });
+                    
+                  },
+
                	events:[
                		<%List<Calender> calenderList = (List<Calender>) request.getAttribute("calenderList");%>
                		<%if(calenderList != null) {%>
@@ -257,8 +293,11 @@ a{
            		}%>
                	] 
             });
+
+            
             calendar.render();
         });
+        
 
     </script>
 	
