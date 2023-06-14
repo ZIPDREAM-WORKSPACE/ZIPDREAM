@@ -745,6 +745,7 @@
 
 	<!-- 공인중개사에게 매물 신청하기  -->
 	<script>
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 		function listReset(){
 			$(".agentList").remove();
 			/* location.reload(); */
@@ -774,7 +775,7 @@
 				method:"get",
 				data:{refRuno, refUno, roomType, buildingType, dealType, address},
 				success:function(result){
-					
+					sendMessage6(refRuno,dealType);
 					swal({
 						  title: "신청 완료",
 						  text: "공인중개사가 확인 후 직접 연락드립니다.\n진행사항은 마이페이지 내 매물에서 확인하실 수 있습니다.",
@@ -886,6 +887,6 @@
 	</script>
 
 	<jsp:include page="../common/footer.jsp" />
-
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 </html>

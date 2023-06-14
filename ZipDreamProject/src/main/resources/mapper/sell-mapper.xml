@@ -180,7 +180,6 @@
 	<delete id="deleteUserSelect" parameterType="HashMap">
 		DELETE FROM USERSELECT_LIST WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
 	</delete>
-	
 
 	<select id="selectCounsel" resultMap="counsleReustSet">
 		SELECT C.*, S.SELL_NAME, M.USER_NAME
@@ -212,5 +211,9 @@
 		AND AT.FILE_LEVEL = 0
 	</select>
 
+	<select id="countUserSelect" parameterType="HashMap" resultType="_int">
+		SELECT COUNT(*) FROM USERSELECT_LIST
+		WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
+	</select>
 
 </mapper>

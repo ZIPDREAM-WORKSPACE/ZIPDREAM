@@ -79,4 +79,8 @@ public class SellDao {
 	public List<SellDetail> selectSellList2(int sellNo){
 		return sqlSession.selectList("sell-mapper.selectSellList2", sellNo);
 	}
+	
+	public int countUserSelect(Map<String,Integer>map) {
+		return sqlSession.selectOne("sell-mapper.countUserSelect", map);
+	}
 }
