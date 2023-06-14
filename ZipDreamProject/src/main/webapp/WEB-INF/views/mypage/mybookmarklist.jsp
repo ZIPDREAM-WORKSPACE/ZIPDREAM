@@ -77,14 +77,13 @@ div{
 .scrollBar::-webkit-scrollbar-thumb {
 	width:10%;
 	height:10%;
-	background: #171F45; /* 스크롤바의 색상 */
+	background: black; /* 스크롤바의 색상 */
 	border-radius: 5px;
 	/* border: 10px solid #171F45; */
 }
 /* .scrollBar::-webkit-scrollbar-track{
 	background-color: rgba(0,0,0,0); /* 스크롤바 뒷 배경을 투명 처리한다 */
 }  */
-
 </style>
 </head>
 <body>
@@ -110,6 +109,8 @@ div{
 			success: function(result){
 				console.log("성공");
 				console.log(result);
+				
+				if(result.length>0){
 				
 				for(let i=0; i<result.length; i++){
 					let sellNo = result[i].sellNo;
@@ -142,6 +143,11 @@ div{
 							console.log("에러");
 						}
 					})
+				}
+				}else{
+					const element = document.getElementById("listWrap");
+					element.innerHTML += '<p style="font-weight:500; color: gray;">찜한 매물이 없습니다.</p>';
+					
 				}
 				
 			},
