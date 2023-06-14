@@ -30,7 +30,11 @@ public interface SellService {
 	
 	public int deleteUserSelect(Map<String,Integer> map);
 	
+
 	void selectCounsel(Map<String, Object> map, int refTno);
 	
 	int deleteSell(Map<String, Object> map);
+
+	public List<SellDetail> selectSellList2(int sellNo);
+
 }

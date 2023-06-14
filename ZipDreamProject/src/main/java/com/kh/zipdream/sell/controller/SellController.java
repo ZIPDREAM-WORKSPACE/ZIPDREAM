@@ -122,6 +122,7 @@ public class SellController {
 		Member seller = memberService.selectMember(detail.getRefUno());
 		model.addAttribute("sd", detail);
 		model.addAttribute("seller", seller);
+		
 		return "sell/sellDetail";
 	}
 	
@@ -134,6 +135,20 @@ public class SellController {
 		model.addAttribute("sdList", sdList);
 		System.out.println("sdL:"+sdList);
 		return new Gson().toJson(sdList);
+	}
+	
+	@GetMapping("/sellList2")
+	@ResponseBody
+	public List<SellDetail> sellList2(@RequestParam("sellNo") int sellNo, Model model) {
+		
+		List<SellDetail> sdList = sellService.selectSellList2(sellNo);
+		
+		model.addAttribute("sdList", sdList);
+		for(int i = 0; i < sdList.size(); i++) {
+			
+			System.out.println("sdL"+i+" : "+sdList.get(i));
+		}
+		return sdList;
 	}
 	
 	//상담신청

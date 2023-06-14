@@ -203,12 +203,6 @@
 
 	<jsp:include page="mypage.jsp" />
 
-	<script>
-		$(function() {
-			console.log('${couponList}');
-		});
-	</script>
-
 
 	<div class="recentContent">
 		<div>
@@ -281,7 +275,7 @@
 				</div>
 				<div class="modalBody">
 					<div>
-						쿠폰을 사용하실 경우<br>담당 공인중개사의 코드를 입력해주세요.
+						쿠폰을 사용하실 경우<br>담당 공인중개사의 아이디를 입력해주세요.
 					</div>
 					<input type="text">
 				</div>
@@ -297,11 +291,15 @@
 	<script>
 		const modal = document.getElementById('modalWrap');
 		var html = "";
+		const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+		const origin = window.location.origin;
+
+		const contextPath = origin + pathname;
 		function showModal(no, path, title, content) {
 			/* console.log(no + path + title + content); */
 			modal.style.display = 'block';
 			
-			html = "<img src='path'/><h4>" + title + "</h4><div>" + content + "</div>";
+			html = "<img src='"+ contextPath + path + "'/><h4>" + title + "</h4><div>" + content + "</div>";
 			
 			$(".modalHeader").html(html);
 			$(".btn").attr("value", no);
@@ -315,7 +313,7 @@
 		
 		$(function(){
 			$(".bb").on("click", function(e){
-				console.log(e.target.id);
+				/* console.log(e.target.id); */
 				$("#modalWrap").hide();
 				if(e.target.id == "use"){
 					let couponNo = e.target.value;
