@@ -9,25 +9,24 @@
 div{
 	/* border: 1px solid red;  */
 }
-.recentContent{
-	height: 450px;
+.recentContent {
+	width: 100%;
+	/* height: 300px; */
 }
+
 .recentContent>div {
 	display: flex;
+	flex-direction: column;
 	min-height: 400px;
 	padding: 50px 10px 150px;
-	/* width: 1200px; */
-	width: 1110px;
+	width: 1200px;
 	/* height: 100%; */
 	margin: 0px auto;
-	/* padding-left: 50px; */
+	padding-left: 50px;
 	padding-right: 50px;
     padding-top: 20px;
-	flex-direction: row;
-	
 }
 .imgStyle{
-	object-fit: cover;
 	width: 300px;
 	height: 200px;
 	border-radius: 5px 5px 0px 0px;
@@ -45,7 +44,6 @@ div{
 	width: 300px;
 	height: 200px;
 	border: 1px solid lightgray;
-	border-top: 1px solid white;
 }
 
 .imgStyle, .divStWrap:hover{
@@ -54,44 +52,15 @@ div{
 .infoWrap{
 	width: 300px;
 	height: 400px;
-	margin-right: 30px;
-	margin-left: 30px;
+	
 }
-#listWrap{
-	margin-left: 400px;
-}
-
-.scrollBar {
-	width: 1110px;
-    height: 200px;
-	overflow-x:scroll;
-	overflow-y: hidden;
-	margin-top: 10px;
-}
-
-
-.scrollBar::-webkit-scrollbar {
-	 width:1110px ;  /* 스크롤바의 너비 */
-}
-
-.scrollBar::-webkit-scrollbar-thumb {
-	width:10%;
-	height:10%;
-	background: #171F45; /* 스크롤바의 색상 */
-	border-radius: 5px;
-	/* border: 10px solid #171F45; */
-}
-/* .scrollBar::-webkit-scrollbar-track{
-	background-color: rgba(0,0,0,0); /* 스크롤바 뒷 배경을 투명 처리한다 */
-}  */
-
 </style>
 </head>
 <body>
 	<jsp:include page="mypage.jsp"/>
 	
 	<div class="recentContent">
-        <div id="listWrap" class="rc scrollBar">
+        <div id="listWrap" class="rc">
         	
         </div>
     </div>
@@ -153,7 +122,7 @@ div{
 	})
 	
 	$(document).on('click', '.infoWrap', function(e){
-		let sno = $(this).attr("id");
+		let sno = $(".infoWrap").attr("id");
 		
 		e.preventDefault();
 		location.href="<%= request.getContextPath() %>/sell/detail/"+sno;
