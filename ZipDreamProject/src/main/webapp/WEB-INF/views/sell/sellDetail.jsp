@@ -383,7 +383,7 @@
                 </div>
                 <div class="sell_like">
                     <div class="radius" id="sellLike" onclick="insertUserSelect();">
-                        <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
+                        <img id="like_img" src="${isUserSelect == 0 ? 'https://ifh.cc/g/8v70Mm.png' : 'https://ifh.cc/g/Wa4bRl.png'}" width="25px">
                         <span>찜하기</span>
                     </div>
                 </div>
