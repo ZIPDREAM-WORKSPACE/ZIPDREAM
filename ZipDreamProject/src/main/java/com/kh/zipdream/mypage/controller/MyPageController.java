@@ -2,7 +2,10 @@ package com.kh.zipdream.mypage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,10 +105,14 @@ public class MyPageController {
 	
 	@ResponseBody
 	@GetMapping("/recentRoomList")
-	public ArrayList<SellDetail> recentRoomList(int sellNo){
+
+	public ArrayList<SellDetail> recentRoomList(@RequestParam(value="sellNoList") List<Integer> sellNoList){
 		
-		System.out.println(sellNo);
-		ArrayList<SellDetail> recentRoomList = myroomSellService.recentRoomList(sellNo);
+	
+		ArrayList<SellDetail> recentRoomList = myroomSellService.recentRoomList(sellNoList);
+		
+		System.out.println(recentRoomList);
+
 		
 		return recentRoomList;
 		

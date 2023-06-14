@@ -36,5 +36,7 @@ public interface SellService {
 	int deleteSell(Map<String, Object> map);
 
 	public List<SellDetail> selectSellList2(int sellNo);
+	
+	public int countUserSelect(Map<String,Integer>map);
 
 }

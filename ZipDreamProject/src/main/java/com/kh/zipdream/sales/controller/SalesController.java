@@ -212,11 +212,11 @@ public class SalesController {
 	@GetMapping("/select")
 	public ArrayList<Calender> selectinfoList(String calenderStart){
 		
-//		System.out.println(calenderStart);
 		ArrayList<Calender> selectinfoList = mysaleService.selectinfoList(calenderStart);
 		
 		return selectinfoList;
 	}
+	
 	
 
 

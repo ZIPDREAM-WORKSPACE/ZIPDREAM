@@ -236,7 +236,7 @@
 					<c:if test="${!empty clist}">
 						<c:forEach items="${clist}" var="c">
 							
-							<tr class="cList" onclick="acceptModal(${c.sellNo});" data-sellNo="${c.sellNo}" data-refUno="${c.refUno}" data-content="${c.counsleContent }">
+							<tr class="cList" onclick="acceptModal(${c.sellNo});" data-sellNo="${c.sellNo}" data-refUno="${c.refUno}" data-content="${c.counsleContent }" data-method="${c.counsleMethod}">
 								<td>${c.sellNo}</td>
 								<td>${c.sellName}</td>
 								<td>${c.userName}</td>
@@ -246,7 +246,7 @@
 									<c:if test="${c.counsleMethod==2}">비대면상담</c:if>
 								</td>
 								<td>
-									<c:if test="${c.accept == 'Y' }">대기</c:if>
+									<c:if test="${c.accept == 'N' }">대기</c:if>
 									<c:if test="${c.accept == 'O' }">수락</c:if>
 									<c:if test="${c.accept == 'X'}">거절</c:if>
 								</td>
@@ -300,18 +300,20 @@
     
     
     <jsp:include page="../../views/common/footer.jsp" />
+    <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
 	refUno = 0; 
 	sellNo = 0;
-	
+	method = 0;
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	function acceptModal(sno){
 		$("#reportInsertModal").modal("show");
 		let currentList = $(".cList[data-sellNo="+ sno +"]")[0];
 		$(".reportContent").val(currentList.dataset.content);
 		sellNo = currentList.dataset.sellno;
 		refUno = currentList.dataset.refuno;
-		
+		method = currentList.dataset.method;
 	};
 
 	
@@ -327,6 +329,8 @@
 					console.log("신청상태 수락 완료");
 					alert("수락이 완료되었습니다");
 					$("#reportInsertModal").modal("hide");
+					console.log(refUno);
+					sendMessage5(method,refUno);
 				}else{
 					console.log("불가");
 				}

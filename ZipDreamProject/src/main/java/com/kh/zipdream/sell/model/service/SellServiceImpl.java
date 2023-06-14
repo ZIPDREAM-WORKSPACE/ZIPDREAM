@@ -115,5 +115,9 @@ public class SellServiceImpl implements SellService {
 	public List<SellDetail> selectSellList2(int sellNo){
 		return sellDao.selectSellList2(sellNo);
 	}
+	
+	public int countUserSelect(Map<String,Integer>map) {
+		return sellDao.countUserSelect(map);
+	}
 
 }

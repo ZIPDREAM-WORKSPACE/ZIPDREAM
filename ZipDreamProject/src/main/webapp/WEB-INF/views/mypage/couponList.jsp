@@ -12,7 +12,9 @@
 <style>
 .recentContent {
 	width: 100%;
-	height: 100%;
+	margin-top: 40px;
+	min-height: 450px;
+
 }
 
 .recentContent>div {
@@ -84,11 +86,6 @@
 	width: 1200px;
 	margin: 0px auto;
 	align-items: center;
-}
-
-.btnArea {
-	align-items: center;
-	text-align: center;
 }
 
 #useBtn {
@@ -194,8 +191,24 @@
 	margin: 30px 0px;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+ 	justify-content: center;
 
+}
+.agentId{
+	width: 300px;
+	height: 40px;
+	font-size: 15px;
+	color: rgb(34, 34, 34);
+	border-width: initial;
+	border: 1px solid rgb(209, 209, 209);
+	border-radius:20px;
+	outline: none;
+	padding: 0px 14px;
+}
+.bb{
+	margin-right:10px;
+	margin-left:10px;
+    width: 100px;
 }
 </style>
 </head>
@@ -277,11 +290,11 @@
 					<div>
 						쿠폰을 사용하실 경우<br>담당 공인중개사의 아이디를 입력해주세요.
 					</div>
-					<input type="text">
+					<input class="agentId" type="text" placeholder="정확한 아이디를 입력해주세요.">
 				</div>
 				<div class="btnArea">
-					<button class="btn btn-secondary bb" type="button" id="cancel">취소</button>
 					<button class="btn btn-outline-primary bb" type="button" id="use">사용하기</button>
+					<button class="btn btn-secondary bb" type="button" id="cancel">취소</button>
 				</div>
 			</div>
 		</div>
