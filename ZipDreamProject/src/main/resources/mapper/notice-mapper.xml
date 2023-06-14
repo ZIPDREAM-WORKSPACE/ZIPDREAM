@@ -13,8 +13,8 @@
 	
 	</delete>
 	
-		<insert id="insertNotice" parameterType="notice">
-		INSERT INTO NOTICE(NOTICE_TYPE, NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME, RESULT, TYPE)
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO NOTICE(NOTICE_TYPE, NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME,RESULT ,TYPE)
 		VALUES (#{noticeType},#{noticeContent},#{noticeTitle},#{noticeUrl},#{refUno},SYSDATE(),#{result},#{type} )
 	
 	</insert>

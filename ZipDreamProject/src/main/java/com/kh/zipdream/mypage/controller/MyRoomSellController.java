@@ -73,6 +73,7 @@ public class MyRoomSellController {
 		
 		int result = myroomsellService.checkAgent(agentId);
 		
+		/* System.out.println("검색한 공인중개사는 몇명? " + result); */
 		return result;
 	}
 	
