@@ -451,12 +451,276 @@ html::-webkit-scrollbar {
 
 
 <script>
-	console.log(${searchcode});
+
+
+	address = "";
+	addressX = 0;
+	addressY = 0;
+	var positions = [];
 	if(${!empty searchcode }){
+		let searchcode = ${searchcode}+"";
+		let firstCode = searchcode.substring(0, 5);
+		address="${bjdName}";
+		console.log(firstCode);
 		
+		$.ajax({
+			url : "<%=request.getContextPath()%>/map/getXmlCode",
+			data: {'code' : firstCode},
+			method: "get",
+		    dataType: "text",
+            contentType : "text/plain; charset:UTF-8",
+			success: function(resultData){
+				  console.log(resultData);
+				  let result = JSON.parse(resultData);
+                     let result0 = JSON.parse(result[0]);
+                     let keys = Object.keys(result0);
+
+                     let areaCode = result0["지역코드"];
+                    
+                     for(var i=0; result.length ;i++){
+                       	  let addressToXy = JSON.parse(result[i]);
+                    	  roadName = addressToXy['도로명'];
+                         	  
+                         	  
+                         	  listView(addressToXy, roadName);
+                         	  
+                         	  bjdSggCode = addressToXy['법정동시군구코드'];
+                    	  bjdEmdCode = addressToXy['법정동읍면동코드'];
+						  
+                    	  aptName = addressToXy['아파트'];
+                      	 
+                    	  
+                    	  
+                          var callback = function(result, status) {
+	                        	 
+                              if (status === kakao.maps.services.Status.OK) {
+                                  
+	    	                         
+	    	                       	  for(var i=0; i<result.length;i++){
+	    	                       		  let tagNameStr = result[i].y+""+result[i].x;
+	    	                       		  let min = "";
+	    	                       		  let max = "";
+	    	                       		  let minToMax = "";
+	    	                       		 
+	    	                       		  for(var j=0 ; j<30 ; j++){
+	    	                       			
+		    	                       			  // 모든 li태그를 배열에 담는다
+		    	                       			  let tagArr = document.getElementsByName(tagNameStr);
+	    	                       			  
+	    	                       			  let tagMoney = "";
+	    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
+	    	                       			 for(var k=0; k<tagArr.length; k++){
+	    	                       				 if(k==tagArr.length-1){
+	    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+	    	                       				 }else{
+		    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+	    	                       				 }
+	    	                       				 
+	    	                       			 }
+	    	                       			 
+	    	                       			 let tagMarr = tagMoney.split(" ");
+	    	                       			 let tagParr =  tagMarr.map(Number);
+	    	                       			 console.log("?"+tagMarr);
+	    	                       			 
+	    	                       			  max = Math.max.apply(null,tagParr);
+	    	                       			  
+	    	                       			  min = Math.min.apply(null,tagParr);
+	    	                       			
+		    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
+		    	                       			  
+		    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
+		    	                       			  
+		    	                       			  if(max == 0 && min == 0){
+		    	                       				 minToMax = "실거래 평균 시세 없음";
+		    	                       			  }
+		    	                       			  
+		    	                       			  break;
+		    	                       				/* } */
+	    	                       		  }  
+	    	                       			positions.push({
+	    	                       				// content안에 주소정보랑 최소금액~최대금액 표시하기
+	    	                       				// content div안에 min과 max를 넣어준다.
+	    	                       				content: "<div class='infoAdd'>"+"주소 : "+result[i].address_name+'</div>'
+	    	                       						+ '<div class="price">'+minToMax+"</div>",
+	    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
+	    	                       			})
+	    	                       	  		
+	    	                       	  } 
+	    	                         
+	                                   for (var i = 0; i < positions.length; i ++) {
+	                                	   removeMarker();
+	    	                        	    // 마커를 생성합니다
+	    	                        	    const marker = new kakao.maps.Marker({
+	    	                        	        map: map, // 마커를 표시할 지도
+	    	                        	        position: positions[i].latlng, // 마커의 위치
+	    	                        	        clickable: true 
+	    	                        	        
+	    	                        	        
+	    	                        	    });
+	    	                        	    
+	    	                        	    kakao.maps.event.addListener(marker, 'click', function() {
+	    	                        	        // 마커 위에 인포윈도우를 표시합니다
+	    	                        	        let markerPosit = marker.getPosition()+"";
+	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
+	    	                        	        /* location.href="#"+markerPosit; */
+	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
+	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
+	    	                        	        
+	    	                        	        
+	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
+	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
+	    	                        	        	$(backgroundTag).css("color", "white");
+	    	                        	        }
+	    	                        	    });
+	    	                        	    
+	    	                        	    var markerImage = new kakao.maps.MarkerImage(
+    	                        	        	    'https://ifh.cc/g/1Q2VfY.png',
+    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
+    	                        	     
+    	                        	        marker.setImage(markerImage);
+	    	                        	    
+	    	                        	    var infowindow = new kakao.maps.InfoWindow({
+	    	                        	        content: positions[i].content // 인포윈도우에 표시할 내용
+	    	                        	    });
+	    	                        	    kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+	    	                        	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	    	                         }
+	                                 
+                          			}
+	                              }
+                         
+                           // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+                              function makeOverListener(map, marker, infowindow) {
+                                  return function() {
+                                      infowindow.open(map, marker);
+                                  };
+                              }
+
+                              // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+                              function makeOutListener(infowindow) {
+                                  return function() {
+                                      infowindow.close();
+                                  };
+                              }
+                              
+                              
+                              // 제대로된 주소 필요함
+                              geocoder.addressSearch(roadName, callback);
+                              
+                              geocoder.addressSearch(address, function(result, status){
+                      	  		
+                      	  		if (status === kakao.maps.services.Status.OK) {
+
+                      	  			addressY = result[0].y;
+                      	  			addressX = result[0].x;
+                      				
+                      				var moveLatLon = new kakao.maps.LatLng(addressY,addressX);
+
+                      				map.panTo(moveLatLon, {
+                      				    animate: {
+                      				        duration: 550
+                      				    }
+                      				});
+                      				
+                      	  		}
+                         		});
+				}
+			},
+			error: function(result){
+				console.log("에러");
+			}
+		});
+		console.log("address"+address);
+		
+		
+		
+		function listView(addressToXy, roadName){
+			  	listEl = document.getElementById('placesList');
+			  	var listLiTag = document.createElement("li");
+			  	listLiTag.setAttribute("class", "goDetail");
+			  	
+		  	
+			  	$("#allOj").css("background-color", "#1F4B6B").css("color", "white");
+			  	$("#comOkOj").css("background-color", "#F0F0F0").css("color", "black");
+			  	
+			  	
+			  	/* listLiTag.setAttribute("name", 해당li의 정보를 주는 좌표); */
+			  	// x y를 넣어서 <li name="134.25252, 145.12321321">
+			  	// marker.click() => location.href="#134.25252,145.12321321"
+			    
+			  	
+			  	geocoder.addressSearch(roadName, function(result, status){
+			  		
+			  		if (status === kakao.maps.services.Status.OK) {
+			  			let xy = result[0].y+result[0].x;
+			  			listLiTag.setAttribute("name", xy);
+						
+			  			
+			  		}
+			  		
+			  		
+			  		
+			  		
+			  		
+			  	});
+			  	
+			  	var str = addressToXy["거래금액"].trim();
+			  
+			    var arr = [...str];
+			    var arrLeng = arr.length-5;  
+
+			  	arr.splice(arrLeng, 0, "억");
+			  	
+			  	var resultStr = arr.join('');
+			  				  	
+			  	listLiTag.innerHTML = resultStr+"<br> "+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+			  	listEl.appendChild(listLiTag);
+		  		
+			  	listLiTag.addEventListener('click', function(){
+			  		let add = addressToXy["지역코드"];
+			  		let sidoCode = add.substring(0,2);
+			        
+			  		document.getElementById("sidoCode").value = sidoCode;
+			  		document.getElementById("sellSno").value = addressToXy["일련번호"];
+			  		document.getElementById("sellName").value = addressToXy["아파트"];
+			  		document.getElementById("sellAddress").value = addressToXy["도로명"];
+			  		document.getElementById("sellPrice").value = resultStr;
+			  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
+			  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
+			  		document.getElementById("sellFloor").value = addressToXy["층"];
+			  		document.getElementById("ymd").value = addressToXy["년"]+" / "+addressToXy["월"]+" / "+addressToXy["일"];
+			  		document.getElementById("sellApprovalDatetime").value = addressToXy["건축년도"];
+			  		document.getElementById("realYn").value = addressToXy["해제여부"];
+			  		document.getElementById("realYnDate").value = addressToXy["해제사유발생일"];
+			  	
+			  		document.getElementById("gtSellDetail").submit();
+			  	});
+			  	
+			  	
+		  	}
+		  
+		  function removeAllChildNods(el) {   
+			    while (el.hasChildNodes()) {
+			        el.removeChild (el.lastChild);
+			    }
+			}
+			// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+			  function removeMarker() {
+			      for ( var i = 0; i < markers.length; i++ ) {
+			          markers[i].setMap(null);
+			      }   
+			      markers = [];
+			  }
+			  removeAllChildNods(listEl);
+			  
+			  
 	}else{
 		console.log("에러");
 	}
+
+
+	
+	
 </script>
 
 <script>
@@ -1438,6 +1702,7 @@ function(e){
 	});
 
 })
+
 
 </script>
 <script>
