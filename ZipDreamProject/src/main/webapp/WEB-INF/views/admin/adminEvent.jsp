@@ -150,7 +150,7 @@
 		
 		<form id="couponInsertForm" action="<%= request.getContextPath() %>/admin/event/couponToUser" method="get">
 		<div class="modal fade" id="couponInsertModal" tabindex="-1" aria-labelledby="couponInsertModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
+		  <div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">쿠폰 보내기</h5>
@@ -164,7 +164,7 @@
 						<table align="center" style="width:100%;margin-bottom:30px;">
 							<tbody>
 								<tr>
-									<th width="5%"><label for="coupon-userNo">번호</label></th>
+									<th width="10%"><label for="coupon-userNo">번호</label></th>
 									<td><input type="text" id="coupon-userNo" name="userNo" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
@@ -281,9 +281,9 @@ function ArrayInsertModal(){
 			document.getElementById("coupon-createDate").value += userInfo[5].innerText;
 		}else {
 			document.getElementById("coupon-userNo").value += userCheck[i].value + ",";			
-			document.getElementById("coupon-userId").value += userInfo[2].innerText + ",";
-			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ",";
-			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ",";
+			document.getElementById("coupon-userId").value += userInfo[2].innerText + ", ";
+			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ", ";
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ", ";
 		}
 	}
 	$('#couponInsertModal').modal("show");
