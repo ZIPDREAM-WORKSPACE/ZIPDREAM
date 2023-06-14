@@ -2,6 +2,7 @@ package com.kh.zipdream.mypage.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -76,8 +77,20 @@ public class MyRoomSellDao {
 
 	}
 	
-	public ArrayList<SellDetail> recentRoomList(int sellNo){
+
+	
+	 public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList){
+		 
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+		 map.put("sellNoList",sellNoList);
+	  
+		 return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList",map);
+	 }
+	 
+	public int checkAgent(String agentId) {
 		
-		return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList", sellNo);
+		return sqlSession.selectOne("myroomsell-mapper.checkAgent", agentId);
+		
 	}
+
 }

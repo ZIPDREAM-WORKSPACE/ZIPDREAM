@@ -67,5 +67,14 @@ public class MyRoomSellController {
 		myroomsellService.deleteUserCoupon(coupon);
 	}
 
+	@ResponseBody
+	@GetMapping("/checkAgent")
+	public int checkAgent(String agentId) {
+		
+		int result = myroomsellService.checkAgent(agentId);
+		
+		return result;
+	}
+	
 
 }
