@@ -133,7 +133,6 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE USER_ID = #{agentId} AND USER_LEVEL = '2'
-		
 	</select>
 	
 	

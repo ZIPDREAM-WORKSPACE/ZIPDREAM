@@ -1362,9 +1362,7 @@ $(document).on('click', '.goDetail2',
 function(e){
 	e.preventDefault();
 	
-
 	let sellNo = $(this).attr("id");
-
 
 	location.href="<%= request.getContextPath() %>/sell/detail/"+sellNo;
 	

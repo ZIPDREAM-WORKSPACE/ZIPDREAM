@@ -133,7 +133,7 @@
 							if(result[i].filePath != null){
 								html += "<img src='${pageContext.request.contextPath}"+ "/resources/sellupfiles/"+result[i].filePath +"' class='card-img-top'>";
 							}else{
-								html += "<img src='https://ifh.cc/g/FN1rY5.png' class='card-img-top'>";
+								html += "<img src='https://ifh.cc/g/dtv18m.png' class='card-img-top'>";
 							}
 							html += "<div class='card-body'><h5 class='card-title'>" + result[i].sellName +"</h5>";
 							html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "</p>";

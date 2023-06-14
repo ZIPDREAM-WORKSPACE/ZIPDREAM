@@ -331,31 +331,48 @@
 				if(e.target.id == "use"){
 					let couponNo = e.target.value;
 					let userNo = "${loginUser.userNo}";
+					let agentId = $(".agentId").val(); //쿠폰 사용시 공인중개사 아이디 입력
 					swal({
 						title:"사용하시겠습니까?",
-					 	buttons: ["취소", "삭제"],
 					  	buttons: true,
 					  	dangerMode: true,
 					})
 					.then((willDelete) => {
 						if(willDelete){
+							/* ok 클릭시 입력한 공인중개사 아이디 일치하는 값이 있는지 실행*/
 							$.ajax({
-								url:"<%=request.getContextPath()%>/myroomsell/deleteuUserCoupon",
+								url:"<%=request.getContextPath()%>/myroomsell/checkAgent",
 								method:"get",
-								data:{couponNo, userNo},
-								success:function(){
-									swal({
-										text:"사용완료되었습니다.",
-										icon:"success",
-										button:"확인"
-									}).then(function(){
-										location.href = "<%=request.getContextPath()%>/mypage/couponlist";
-									})
+								data:{agentId},
+								success:function(result){
+									/* ajax 통신 성공시 result 값이 1이상이면 올바른 아이디 입력 */
+									if(result>0){
+										/* 삭제 로직 시작  */
+										$.ajax({
+											url:"<%=request.getContextPath()%>/myroomsell/deleteuUserCoupon",
+											method:"get",
+											data:{couponNo, userNo},
+											success:function(){
+												swal({
+													text:"사용완료되었습니다.",
+													icon:"success",
+													button:"확인"
+												}).then(function(){
+													location.href = "<%=request.getContextPath()%>/mypage/couponlist";
+												})
+											},
+											error:function(){
+												console.log("에러발생");
+											}
+										});
+									}else{
+										swal("", "아이디를 잘못 입력하셨습니다.", "error");
+									}
 								},
 								error:function(){
-									console.log("에러발생");
+									console.log("에러");
 								}
-							})
+							});
 						}
 					})
 				}
