@@ -379,6 +379,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -605,7 +606,7 @@ function getListItem(index, places) {
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
-    var imageSrc = 'https://ifh.cc/g/phtlAJ.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    var imageSrc = 'https://ifh.cc/g/1Q2VfY.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(31, 35),  // 마커 이미지의 크기
         imgOptions = new kakao.maps.Point(13, 34), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         
@@ -860,7 +861,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
     	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
+    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5").css("color", "black");
     	    	    	                        	        
     	    	    	                        	        
     	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
@@ -870,7 +871,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	    	    	                        	    });
     	    	    	                        	    
     	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-	    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+	    	    	                        	        	    'https://ifh.cc/g/1Q2VfY.png',
 	    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 	    	    	                        	     
 	    	    	                        	        marker.setImage(markerImage);
@@ -1037,6 +1038,11 @@ function displayCenterInfo(result, status) {
         }
     }    
 } 
+
+$("#allOj").click(function(){
+	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
+	swal("지도를 드래그하여 집드림의 모든 매물을 확인해보세요!");
+});
 
 $("#comOkOj").click(function(){
   	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
@@ -1242,7 +1248,7 @@ $("#keyword").keyup(function(){
 	    	    	    	                        	    });
 	    	    	    	                        	    
 	    	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-		    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+		    	    	                        	        	    'https://ifh.cc/g/1Q2VfY.png',
 		    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 		    	    	                        	     
 		    	    	                        	        marker.setImage(markerImage);
