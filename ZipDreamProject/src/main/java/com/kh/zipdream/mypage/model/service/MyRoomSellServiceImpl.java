@@ -95,4 +95,12 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 		return recentRoomList;
 	}
 
+	
+	@Override
+	public int checkAgent(String agentId) {
+		
+		int result = myroomSellDao.checkAgent(agentId);
+		
+		return result;
+	}
 }

@@ -20,7 +20,7 @@ public interface MyRoomSellService {
 	public void deleteUserCoupon(Coupon coupon);
 
 	public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList);
-
+	public int checkAgent(String agentId);
 
 	
 

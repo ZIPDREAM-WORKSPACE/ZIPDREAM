@@ -729,7 +729,7 @@
         });
 
         function filter(){
-            let search = document.getElementById("search").value.toLowerCase();
+            let search = document.getElementById("search").value;
             let question = document.getElementsByClassName("Hquestion");
             let title = document.getElementsByClassName("questionTitle");
 

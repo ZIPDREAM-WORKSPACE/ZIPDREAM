@@ -203,5 +203,4 @@
 		WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
 	</select>
 
-
 </mapper>
