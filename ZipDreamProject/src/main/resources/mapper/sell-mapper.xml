@@ -129,16 +129,16 @@
 	
 	<select id="selectSellList" resultMap="sellResultSet" >
 		SELECT SELL_NO, REF_UNO,SELL_NAME,SELL_TYPE, CREATE_DATE
-		FROM SELLDETAIL
+		FROM SELLDETAIL S
 		JOIN MEMBER ON(USER_NO = REF_UNO)
-		WHERE USER_NO = #{refUno}
+		WHERE USER_NO = #{refUno} AND S.STATUS='Y'
 	</select>
 	
 	<select id="sellDetail" resultMap="sellDetailResultSet">
 		SELECT *, USER_NAME
-		FROM SELLDETAIL
+		FROM SELLDETAIL S
 		JOIN MEMBER ON(USER_NO = REF_UNO)
-		WHERE SELL_NO = #{sellNo}
+		WHERE SELL_NO = #{sellNo} AND S.STATUS='Y'
 	</select>
  	
  	<select id="selectImgList" resultMap="attachmentReustSet">
@@ -188,5 +188,17 @@
 		WHERE REF_TNO =#{refTno}
 	</select>
 	
-
+	<select id="findkaptCode" resultMap="apiResultSet">
+		SELECT KAPT_CODE
+		FROM API2
+		WHERE KAPT_ADDRESS LIKE CONCAT(CONCAT('%',#{kaptAddress}),'%') AND KAPT_NAME LIKE CONCAT(CONCAT('%',#{kaptName}),'%')
+	</select>
+	
+	<update id="deleteSell" parameterType="_int">
+		UPDATE SELLDETAIL
+		SET STATUS='N'
+		WHERE SELL_NO = #{sellNo} AND REF_UNO=#{userNo}
+	</update>
+	
+	
 </mapper>

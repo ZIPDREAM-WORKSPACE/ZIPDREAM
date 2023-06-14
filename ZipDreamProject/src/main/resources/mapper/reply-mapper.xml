@@ -18,11 +18,18 @@
 		VALUES(REPLY_NO, #{replyContent}, SYSDATE(), 'Y', #{detailBoardNo}, #{replyRefUno});
  	</insert>
  	
- 	<select id="selectList" resultMap="replyResultSet">
+ 	<select id="replyList" resultMap="replyResultSet">
  		SELECT R.*, M.USER_NAME
  		FROM REPLY R
  		JOIN MEMBER M ON(USER_NO = REPLY_REF_UNO)
  		WHERE DETAIL_BOARD_NO = #{detailBoardNo} AND R.STATUS='Y'
  	</select>
+ 	
+ 	<update id="deleteReply" parameterType="reply">
+ 		UPDATE REPLY
+ 		SET STATUS='N'
+ 		WHERE REPLY_NO = #{refRno} AND REPLY_REF_UNO=#{replyRefUno}
+ 	</update>
+ 
  
 </mapper>

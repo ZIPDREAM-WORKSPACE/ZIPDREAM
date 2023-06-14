@@ -32,4 +32,5 @@ public interface SellService {
 	
 	void selectCounsel(Map<String, Object> map, int refTno);
 	
+	int deleteSell(Map<String, Object> map);
 }
