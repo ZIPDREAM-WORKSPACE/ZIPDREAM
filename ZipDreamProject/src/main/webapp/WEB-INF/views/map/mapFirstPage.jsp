@@ -379,6 +379,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -870,7 +871,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	    	    	                        	    });
     	    	    	                        	    
     	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-	    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+	    	    	                        	        	    'https://ifh.cc/g/1Q2VfY.png',
 	    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 	    	    	                        	     
 	    	    	                        	        marker.setImage(markerImage);
@@ -1037,6 +1038,11 @@ function displayCenterInfo(result, status) {
         }
     }    
 } 
+
+$("#allOj").click(function(){
+	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
+	swal("지도를 드래그하여 집드림의 모든 매물을 확인해보세요!");
+});
 
 $("#comOkOj").click(function(){
   	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
@@ -1242,7 +1248,7 @@ $("#keyword").keyup(function(){
 	    	    	    	                        	    });
 	    	    	    	                        	    
 	    	    	    	                        	    var markerImage = new kakao.maps.MarkerImage(
-		    	    	                        	        	    'https://ifh.cc/g/7NYHtl.png',
+		    	    	                        	        	    'https://ifh.cc/g/1Q2VfY.png',
 		    	    	                        	        	    new kakao.maps.Size(40,40), new kakao.maps.Point(13, 34));
 		    	    	                        	     
 		    	    	                        	        marker.setImage(markerImage);
