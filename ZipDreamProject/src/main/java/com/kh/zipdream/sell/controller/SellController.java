@@ -276,5 +276,18 @@ public class SellController {
 		return result;
 		
 	}
+	
+	
+	@PostMapping("/deleteSell")
+	@ResponseBody
+	public int deleteSell(Model model, int sellNo, int userNo) {
+		Map<String, Object> map = new HashMap();
+		map.put("sellNo", sellNo);
+		map.put("userNo", userNo);
+		
+		model.addAttribute("map", map);
+		return sellService.deleteSell(map);
+	}
+
 
 }
