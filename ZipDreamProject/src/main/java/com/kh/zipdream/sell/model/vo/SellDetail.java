@@ -72,8 +72,5 @@ public class SellDetail {
 	private String address; //공인중개사 주소
 	private String filePath; // 이미지 경로;
 	
-	private String filePath; // 최근본방에 들어갈 이미지 주소
-	
-	private String filePath; // 최근본방에 들어갈 이미지 주소
 	
 }

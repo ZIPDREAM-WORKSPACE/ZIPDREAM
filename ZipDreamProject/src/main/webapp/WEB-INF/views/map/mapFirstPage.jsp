@@ -1082,7 +1082,7 @@ function(e){
 	e.preventDefault();
 	
 	let sellNo = $(".goDetail2").attr("id");
-	
+
 	location.href="<%= request.getContextPath() %>/sell/detail/"+sellNo;
 	
 	
