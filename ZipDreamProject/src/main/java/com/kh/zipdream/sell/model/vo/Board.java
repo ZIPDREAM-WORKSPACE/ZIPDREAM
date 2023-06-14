@@ -21,7 +21,7 @@ public class Board {
 	private String status;
 	private String delStatus;
 	private int refSno;
-	
+
 	private String userName;
 	
 	

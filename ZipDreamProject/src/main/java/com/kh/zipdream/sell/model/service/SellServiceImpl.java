@@ -1,6 +1,6 @@
 package com.kh.zipdream.sell.model.service;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +105,10 @@ public class SellServiceImpl implements SellService {
 
 	public int deleteUserSelect(Map<String, Integer> map) {
 		return sellDao.deleteUserSelect(map);
+	}
+	
+	public int deleteSell(Map<String, Object> map) {
+		return sellDao.deleteSell(map);
 	}
 	
 
