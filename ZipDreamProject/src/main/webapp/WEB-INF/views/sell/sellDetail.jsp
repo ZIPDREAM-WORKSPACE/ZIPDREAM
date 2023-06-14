@@ -743,12 +743,9 @@
 <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
-
 /* 	const loremIpsum = document.getElementById("lorem-ipsum")
-
 let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	const loremIpsum = document.getElementById("lorem-ipsum")
-
 	fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
 	    .then(response => response.text())
 	    .then(result => loremIpsum.innerHTML = result) */
@@ -813,7 +810,6 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				 let html = "";
 				let url="https://ifh.cc/g/26CZDZ.png";
 				let url2="https://ifh.cc/g/s78355.png";
-
 				for(let board of result){
 					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
@@ -938,10 +934,8 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 
 	
 	/* 신고 등록 함수 */
-
 	function insertReport(type,refTuno) {
 		let reportContent = $(".reportContent").val();
-
 		$.ajax({
 			url : "<%=request.getContextPath()%>/sell/report",
 			data : {
@@ -958,9 +952,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 					swal("", "신고 등록 실패.", "error");
 				}
 			}
-
 		});
-
 	}
 
 	function insertCounsle(counsleMethod) {
@@ -969,10 +961,8 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			data : {
 					counsleMethod : counsleMethod,
 					counsleContent :  $(".applyContent").val(),
-
 					refTuno : ${seller.userNo},
 					refUno : ${loginUser.userNo}, 
-
 					sellNo: ${sd.sellNo}
 					},
 			type: "post",
