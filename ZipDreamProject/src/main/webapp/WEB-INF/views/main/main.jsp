@@ -1224,8 +1224,9 @@ display:  block;
 		});
 		
 		$("#s_icon_image").click(function(){
-			if(keyword==null){
-				alert("ㅎ");
+			let kw = document.getElementById("s_input").value;
+			if(kw==""){
+				alert("키워드를 입력해주세요.");
 			}else{
 				$.ajax({
 					url: "<%= request.getContextPath()%>/map/searchKeyword",
@@ -1234,7 +1235,8 @@ display:  block;
 					dataType: "json",
 					success: function(result){
 						let searchcode = result[0].bjdCode;
-						console.log(result[0].bjdCode);
+						let bjdName = result[0].bjdName;
+						console.log(result[0].bjdName);
 						<%-- $.ajax({
 							url: "<%= request.getContextPath()%>/map/maintosearch",
 							method: "get",
@@ -1243,7 +1245,7 @@ display:  block;
 								console.log("이동 성공");
 							}
 						}); --%>
-						location.href="<%= request.getContextPath()%>/map/maintosearch?searchcode="+searchcode;
+						location.href="<%= request.getContextPath()%>/map/maintosearch?searchcode="+searchcode+"&bjdName="+bjdName;
 					},
 					error: function(result){
 						console.log("main에서 map 이동 실패");

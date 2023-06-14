@@ -194,10 +194,11 @@ public class MapController {
 	   
 	   @GetMapping("/maintosearch")
 	   public String mainToSearch(@RequestParam("searchcode") int searchcode,
+			   						@RequestParam("bjdName") String bjdName,
 			   						RedirectAttributes attributes) {
 
 		   attributes.addFlashAttribute("searchcode", searchcode);
-		   
+		   attributes.addFlashAttribute("bjdName",bjdName);
 	      return "redirect:/map/main";
 	   }
 }
