@@ -876,8 +876,10 @@
 
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
+let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	const loremIpsum = document.getElementById("lorem-ipsum")
 	fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
 	    .then(response => response.text())
@@ -1008,7 +1010,7 @@
 	
 	/* 신고 등록 함수 */
 	function insertReport(type) {
-		<%-- let reportContent = $(".reportContent").val();
+		 let reportContent = $(".reportContent").val();
 		$.ajax({
 			url : "<%=request.getContextPath()%>/sell/report",
 			data : {
@@ -1025,7 +1027,7 @@
 					swal("", "신고 등록 실패.", "error");
 				}
 			}
-		}); --%>
+		}); 
 	}
 
 	function insertCounsle(counsleMethod) {
@@ -1034,14 +1036,15 @@
 			data : {
 					counsleMethod : counsleMethod,
 					counsleContent :  $(".applyContent").val(),
-					refTuno : ${loginUser.userNo},
-					refUno : ${seller.userNo}, 
+					refTuno :${seller.userNo},  
+					refUno : ${loginUser.userNo},
 					sellNo: ${sd.sellNo}
 					},
 			type: "post",
 			success : function(result){
 				if(result >= 1){
-					swal("", "상담신청이 완료되었습니다.", "success");					
+					swal("", "상담신청이 완료되었습니다.", "success");	
+					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
 				}else {
 					swal("", "상담신청 등록 실패.", "error");
 				}
