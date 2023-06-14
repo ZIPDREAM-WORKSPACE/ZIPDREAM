@@ -12,9 +12,7 @@
 <style>
 .recentContent {
 	width: 100%;
-
-	min-height: 450px;
-
+	height: 100%;
 }
 
 .recentContent>div {

@@ -4,7 +4,7 @@
 
 	.listWrap>div{
 		font-size: 25px;
-		width: 500px;
+		width: 400px;
 		height: 70px;
 		text-align:center;
 		line-height:70px;
@@ -65,6 +65,5 @@
 	menu.addClass("clicked");	
 	menu.css('background-color', 'black');
 	menu.children()[0].style.color = '#FFFFFF';
-
 
 </script>

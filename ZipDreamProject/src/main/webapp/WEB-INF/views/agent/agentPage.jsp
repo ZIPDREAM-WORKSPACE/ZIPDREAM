@@ -108,7 +108,6 @@
 			</ul>
 		</div>
 	</div>
-	
 
 	<script>
 		// 클릭 css
@@ -138,7 +137,6 @@
 		menu.css('background-color', '#171F45');
 		menu.children()[0].style.color = '#FFFFFF';
 	</script>
-	
 
 </body>
 </html>

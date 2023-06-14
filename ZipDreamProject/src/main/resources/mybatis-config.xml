@@ -35,12 +35,7 @@
 		
 		<typeAlias type="com.kh.zipdream.sales.model.vo.MySale" alias="mysale"/>
 		<typeAlias type="com.kh.zipdream.mypage.model.vo.MyRoomSell" alias="myroomsell"/>
-
 		<typeAlias type="com.kh.zipdream.sales.model.vo.Calender" alias="calender"/>
-
-		
-		<typeAlias type="com.kh.zipdream.notice.model.vo.Notice" alias="notice"/>
-
 	</typeAliases>
 	
 	<mappers>
@@ -58,7 +53,6 @@
 		
 		<mapper resource="/mapper/myroomsell-mapper.xml" />
 		<mapper resource="/mapper/agent-mapper.xml"/>
-		<mapper resource="/mapper/notice-mapper.xml"/>
 
 	</mappers>
 

@@ -327,53 +327,12 @@
 </style>
 </head>
 <body>
-
 	<jsp:include page="../../views/common/header.jsp" />
 
-	<script>
-		/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
-		function saveRecentRoom(sellNo){
-			/* userNo를 키값으로 사용  */
-			const userNo = "${loginUser.userNo}";
-			/* 현재 로그인된 사용자의 회원번호(키)로 localStorage 조회  */
-			let recentRooms = localStorage.getItem(userNo);
-			
-			/* 로컬스토리지에 값이 있다면 배열 추가 */
-			if(recentRooms){
-				recentRooms = JSON.parse(recentRooms); //로컬스토리지는 String타입이므로 무조건 json으로 형변환해서 꺼내오기
-				const index = $.inArray(sellNo,recentRooms);
-				
-				/* 현재 인덱스가 0이면 1로 바꾸기 */
-				if(index > -1){
-					recentRooms.splice(index,1);
-				}
-				
-				recentRooms.unshift(sellNo);
-				if(recentRooms.length > 5){ // 5개 이상이면 첫번째 배열값 삭제
-					recentRooms.pop();
-				}
-			}else{
-				recentRooms = [sellNo];
-			}
-			
-			localStorage.setItem(userNo,JSON.stringify(recentRooms));
-		}
-	
-		$(function(){
-			/* 현재 조회한 매물번호를 담아서 함수로보내기 */
-			const sellNo = '${sd.sellNo}';
-		 	saveRecentRoom(sellNo);
-
-			
-		});
-	
-	</script>
-
-
-	<div class="content1 margin">
+ <div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellNo} </span>
+                <span>매물번호 : ${sd.sellSno} </span>
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>
@@ -383,7 +342,7 @@
                 </div>
                 <div class="sell_like">
                     <div class="radius" id="sellLike" onclick="insertUserSelect();">
-                        <img id="like_img" src="${isUserSelect == 0 ? 'https://ifh.cc/g/8v70Mm.png' : 'https://ifh.cc/g/Wa4bRl.png'}" width="25px">
+                        <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
                         <span>찜하기</span>
                     </div>
                 </div>
@@ -936,7 +895,7 @@
 			data : {refSno : '${sd.sellNo}'},
 			dataType : 'json',
 			success : function(result){
-				/* console.log(result); */
+				console.log(result);
 				let html = "";
 				for(let board of result){
 					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+

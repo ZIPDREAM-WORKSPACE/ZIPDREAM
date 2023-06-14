@@ -426,7 +426,6 @@
 <jsp:include page="../common/header.jsp" />
 	
 	<script>
-	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 		mysaleList = [];
 		myhouseList = [];
 		$(function(){
@@ -592,7 +591,7 @@
 	               }
 	            }
 	            
-	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\",\""+value.HOUSE_NM+"\");' src='" + src + "'></td></tr>";
+	            html += "<td id='" + houseCode+ "'><img class='sellHousealarm' onclick='mySale("+houseCode+","+startDateTime+",\""+hsUrl+"\");' src='" + src + "'></td></tr>";
 			});
 			
 			html += "</tbody>"
@@ -642,13 +641,7 @@
 		});
 		
 		/* 분양정보 찜하기 */
-		function mySale(houseCode, startDateTime, hsUrl,title){
-			
-				var hu = hsUrl;
-				var hc = houseCode;
-				var time = startDateTime;
-				var uno = '${loginUser.userNo}';
-				
+		function mySale(houseCode, startDateTime, hsUrl){
 	            var h = document.getElementById(houseCode).firstChild;
 	            
 	           /*  console.log("클릭"+mysaleList); */
@@ -666,7 +659,7 @@
 	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
 	                            console.log(result);
-	                            deleteSaleNotice("<%=request.getContextPath()%>",hu, uno);
+	                            
 	                        },
 	                        error:function(){
 	                            console.log("에러발생");
@@ -677,18 +670,13 @@
 	                    swal("", "분양일정 알림을 취소했습니다.", "warning");
 	                }else{
 	                    h.src = "https://ifh.cc/g/bNnQCj.png";
-	                   /* 찜하기 등록하기 */
+	                    /* 찜하기 등록하기 */
 	                    $.ajax({
 	                        url: "<%=request.getContextPath()%>/sales/mySaleHouse",
 	                        method:"post",
 	                        data:{startDateTime,userNo,houseCode,hsUrl},
 	                        success:function(result){
-	                        
-	                        
-	                        	console.log(houseSock);
-	                        	sendMessage1(hu, hc, uno, time, title);
-	                            /* console.log(result); */
-	                          
+	                            console.log(result);
 	                            
 	                        },
 	                        error:function(){
@@ -707,12 +695,12 @@
 
 	
 	</script>
-
+	
 
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
 			<ul class="sellHouseNavi">
-				<li><a href="<%=request.getContextPath()%>/sales/schedule">청약정보</a></li>
+				<li><a href="<%=request.getContextPath()%>/sales/schedule">분양일정</a></li>
 				<li><a>|</a></li>
 				<li><a href="<%=request.getContextPath()%>/sales/guide">분양가이드</a></li>
 				<li><a>|</a></li>
@@ -720,7 +708,7 @@
 			</ul>
 		</div>
 		<div class="sellHouseTitleWrap">
-			<h1 class="sellHouseTitle">청약정보</h1>
+			<h1 class="sellHouseTitle">분양일정</h1>
 		</div>
 		<div style="margin-bottom: 100px;">
 			<div class="sellHouseCalendar">
@@ -879,8 +867,8 @@
 	</script>
 	
 
-		<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 	<jsp:include page="../common/footer.jsp" />
+	
 	
 </body>
 </html>

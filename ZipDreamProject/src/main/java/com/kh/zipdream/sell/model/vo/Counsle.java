@@ -13,8 +13,4 @@ public class Counsle {
 	private int refTuno;
 	private int refUno;
 	private int sellNo;
-	
-	private String userName;
-	private String sellName;
-	
 }

@@ -57,16 +57,5 @@ public class AgentServiceImpl implements AgentService {
 		
 		return result;
 	}
-	
-	
-	public int applyCounsle(Map<String , Object> map) {
-		int result = agentDao.applyCounsle(map);
-		return result;
-	}
-	
-	public int Xcounsle(Map<String , Object> map) {
-		int result = agentDao.Xcounsle(map);
-		return result;
-	}
 
 }
