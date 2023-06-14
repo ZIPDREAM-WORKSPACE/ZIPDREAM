@@ -449,7 +449,17 @@ html::-webkit-scrollbar {
 	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5cf092d014fa143b1ab25b8a119f9ee7"></script> -->
 
-	<script>
+
+<script>
+	console.log(${searchcode});
+	if(${!empty searchcode }){
+		
+	}else{
+		console.log("에러");
+	}
+</script>
+
+<script>
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -1429,7 +1439,6 @@ function(e){
 
 })
 
- 
 </script>
 <script>
 var selectBtn = document.getElementsByClassName("selectBtn");
