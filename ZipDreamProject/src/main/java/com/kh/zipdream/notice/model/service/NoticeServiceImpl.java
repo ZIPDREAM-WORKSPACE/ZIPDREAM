@@ -27,14 +27,14 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<Notice> selectManageList() {
-		List<Notice> result = noticeDao.selectManageList();
+	public List<Notice> selectManageList(int refUno) {
+		List<Notice> result = noticeDao.selectManageList(refUno);
 		return result;
 	}
 	
 	@Override
-	public List<Notice> selectInterestList() {
-		List<Notice> result = noticeDao.selectInterestList();
+	public List<Notice> selectInterestList(int refUno) {
+		List<Notice> result = noticeDao.selectInterestList(refUno);
 		return result;
 	}
 

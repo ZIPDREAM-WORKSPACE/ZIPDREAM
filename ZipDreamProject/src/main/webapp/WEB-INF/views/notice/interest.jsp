@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -54,13 +55,13 @@ tbody::-webkit-scrollbar {
 		text-align: center;
 	}
 	.title{
-		width:400px;
+		width:300px;
 	}
 	.content{
 		width:400px;
 	}
 	.time{
-		width:200px;
+		width:300px;
 	}
 	.link{
 		cursor:pointer;
@@ -74,12 +75,19 @@ tbody::-webkit-scrollbar {
 		<table>
 			<thead >
 				<tr>
-					<th class="title">제목</th>
-					<th class="content">내용</th>
-					<th class="time">청약 접수일</th>
+					<th class="title">단지명</th>
+					<th class="content">알림</th>
+					<th class="time">시간</th>
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
+			<c:choose>
+                  <c:when test="${fn: length(list) == 0}">
+                     <tr>
+                        <td style="text-align:center; width:1000px;">새로운 알림이 없습니다.</td>
+                     </tr>
+                  </c:when>
+	           <c:otherwise>
 				  <c:forEach items="${list}" var="interestList" >
 	               <tr onClick="clickLink('${interestList.noticeUrl}')" class="link">
 	               	 <td  class="title">${interestList.noticeTitle} </td>
@@ -87,7 +95,8 @@ tbody::-webkit-scrollbar {
 	               	 <td class="time">${interestList.createDateTime} </td>
 	               </tr>
 	           </c:forEach>
-		
+			</c:otherwise>
+	       </c:choose>
 			</tbody>
 		</table>
 	</div>

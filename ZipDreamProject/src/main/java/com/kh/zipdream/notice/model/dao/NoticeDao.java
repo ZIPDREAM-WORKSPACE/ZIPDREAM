@@ -22,11 +22,11 @@ public class NoticeDao {
 		return sqlSession.delete("notice-mapper.deleteSaleNotice", notice);
 	}
 
-	public List<Notice> selectManageList() {
-		return sqlSession.selectList("notice-mapper.selectManageList");
+	public List<Notice> selectManageList(int refUno) {
+		return sqlSession.selectList("notice-mapper.selectManageList",refUno);
 	}
 	
-	public List<Notice> selectInterestList() {
-		return sqlSession.selectList("notice-mapper.selectInterestList");
+	public List<Notice> selectInterestList(int refUno) {
+		return sqlSession.selectList("notice-mapper.selectInterestList",refUno);
 	}
 }

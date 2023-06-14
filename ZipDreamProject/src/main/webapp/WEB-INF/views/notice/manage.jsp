@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -57,10 +58,10 @@ tbody::-webkit-scrollbar {
 		width:200px;
 	}
 	.content{
-		width:600px;
+		width:550px;
 	}
 	.time{
-		width:200px;
+		width:250px;
 	}
 </style>
 <body>
@@ -69,12 +70,13 @@ tbody::-webkit-scrollbar {
 		<table>
 			<thead>
 				<tr>
-					<th class="title">제목</th>
-					<th class="content">내용</th>
-					<th class="time">날짜</th>
+					<th class="title">유형</th>
+					<th class="content">알림</th>
+					<th class="time">시간</th>
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
+			
 			  <c:forEach items="${list}" var="manageList" >
 	               <tr >
 	               	 <td  class="title">${manageList.noticeTitle} </td>
@@ -82,7 +84,7 @@ tbody::-webkit-scrollbar {
 	               	 <td class="time">${manageList.createDateTime} </td>
 	               </tr>
 	           </c:forEach>
-				
+			
 			
 			</tbody>
 		</table>
@@ -94,11 +96,15 @@ var refUno ='${loginUser.userNo}';
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	let houseSock2 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	let houseSock3 = new SockJS("<%=request.getContextPath()%>/notice"); 
-	let houseSock4 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	let houseSock4 = new SockJS("<%=request.getContextPath()%>/notice");
+	let houseSock5 = new SockJS("<%=request.getContextPath()%>/notice");
+	let houseSock6 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	addEventMessage2(refUno);
 	addEventMessage3(refUno);
 	addEventMessage4(refUno);
 	addEventMessage5(refUno);
+	addEventMessage6(refUno);
+	addEventMessage7(refUno);
 
 </script>
 </body>

@@ -70,16 +70,44 @@
  }
 
    // 공인중개사 상담 매칭 알림 함수
- function sendMessage5(refUno,method){
-		console.log("이벤트메세지6");
+ function sendMessage5(method,refUno){
+		console.log("이벤트메세지0");
  		
  		 const counselMessage = {
-		 			"method" : method,
+		 			"counsleMethod" : method,
  					"refUno" : refUno
  		};
  		
  		
  		houseSock.send( JSON.stringify(counselMessage));
+ 	
+ }
+ 
+     // 공인중개사 매물 신청 알림 함수
+ function sendMessage6(refRuno,dealType){
+		console.log("그만하고싶다22");
+ 		
+ 		 const requestAgentMessage = {
+		 			"refRuno":refRuno,
+		 			"dealType" : dealType
+ 		};
+ 		
+ 		houseSock.send( JSON.stringify(requestAgentMessage));
+ 	
+ }
+ 
+    // 공인중개사 상담 신청 알림 함수
+ function sendMessage7(counsleMethod,refTuno,refUno){
+		console.log("그만하고싶다");
+ 		
+ 		 const counsleAgentMessage = {
+		 			"refTuno":refTuno,
+		 			"counsleMethod" : counsleMethod,
+ 					"refUno" : refUno
+ 		};
+ 		
+ 		
+ 		houseSock.send( JSON.stringify(counsleAgentMessage));
  	
  }
 		
@@ -105,14 +133,14 @@ function addEventMessage(refUno){
  	td3.classList.add("time");
  		td1.innerHTML = houseMessage.title +" 분양 정보";
  		td2.innerHTML = "관심 분양에 등록했습니다."
- 		td3.innerHTML = houseMessage.startDateTime;
+ 		td3.innerHTML = currentTime();
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
- 	display.append(tr1); 
+ 	display.prepend(tr1); 
  	
- 	display.scrollTop = display.scrollHeight;
+ 	
  	 }
  
  	
@@ -137,7 +165,7 @@ function clickLink(url){
 
 
 
-            if (refUno == reportMessage.refRuno ) {
+            if (refUno == reportMessage.refRuno && reportMessage.dealType == null) {
                 const tr1 = document.createElement("tr");
                  tr1.classList.add("manage");
                 const td1 = document.createElement("td");
@@ -147,7 +175,7 @@ function clickLink(url){
                 const td3 = document.createElement("td");
                 td3.classList.add("time");
 
-                if (reportMessage.reportType == 1) {
+                if (reportMessage.reportType == 1 && reportMessage.dealType==null) {
                     td1.innerHTML = "허위매물 신고"
 
                     
@@ -162,16 +190,16 @@ function clickLink(url){
                  
                         td2.innerHTML = "신고하신 회원 신고가 " + reportMessage.reportResult;
 
-                    td3.innerHTML = reportMessage.reportDate;
+                    td3.innerHTML = currentTime();
                     tr1.append(td1, td2, td3);
                 }
 
 
                 const display = document.getElementsByClassName("noticeThead")[0];
 
-                display.append(tr1);
+                display.prepend(tr1);
 
-                display.scrollTop = display.scrollHeight;
+            
 
             }
 
@@ -201,15 +229,15 @@ function clickLink(url){
  	
  	 	td1.innerHTML = eventMessage.couponTitle;
  	 	td2.innerHTML = eventMessage.couponContent;
- 		td3.innerHTML = eventMessage.couponDate;
+ 		td3.innerHTML = currentTime();
  	 	tr1.append(td1, td2,td3);
  	 	
  	
  	const display = document.getElementsByClassName("noticeThead")[0];
  	
- 	display.append(tr1); 
+ 	display.prepend(tr1); 
  	
- 	display.scrollTop = display.scrollHeight;
+ 
  	
 		
 		
@@ -226,7 +254,7 @@ function clickLink(url){
  	
  
  	
- 	if(refUno == requestMessage.refUno){
+ 	if(refUno == requestMessage.refUno &&requestMessage.counsleMethod ==null ){
  		const tr1 = document.createElement("tr");
  	tr1.classList.add("manage");
  	const td1 = document.createElement("td");
@@ -235,16 +263,16 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
- 		td1.innerHTML = "매물 매칭";
+ 		td1.innerHTML = "매물";
  		td2.innerHTML = requestMessage.dealType+" 타입의 매물이 공인중개사와 매칭되었습니다.";
  		td3.innerHTML = currentTime();
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
- 	display.append(tr1); 
+ 	display.prepend(tr1); 
  	
- 	display.scrollTop = display.scrollHeight;
+ 
  	 }
  
  	
@@ -260,11 +288,11 @@ function clickLink(url){
 
  houseSock4.onmessage = function(e){
 
- 	const counsleMessage = JSON.parse(e.data); 
+ 	const counselMessage = JSON.parse(e.data); 
  	
  
  	
- 	if(counsleMessage.counsle.content != null && refUno == counsleMessage.refUno){
+ 	if(refUno == counselMessage.refUno&&counselMessage.counsleMethod != null && counselMessage.dealType==null){
  		const tr1 = document.createElement("tr");
  	tr1.classList.add("manage");
  	const td1 = document.createElement("td");
@@ -273,26 +301,80 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
- 		td1.innerHTML = "상담 매칭";
- 		td2.innerHTML = "신청하신 "+ (counselMessage.method ? 1 == "대면" : "비대면") +"상담이 공인중개사와 매칭되었습니다.";
- 		td3.innerHTML = counselMessage.applyDate;
+ 		td1.innerHTML = "상담";
+ 		td2.innerHTML = "신청하신 "+ (counselMessage.counsleMethod ==1 ? "대면" : "비대면") +"상담이 공인중개사와 매칭되었습니다.";
+ 		td3.innerHTML = currentTime();
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
- 	display.append(tr1); 
+ 	display.prepend(tr1); 
  	
- 	display.scrollTop = display.scrollHeight;
  	 }
- 
- 	
- 	 	
  	}
- 	
-
- 	
  }
  
+  function addEventMessage6(refUno){
+	console.log("살려주세요");
+
+ houseSock5.onmessage = function(e){
+
+ 	const requestAgentMessage = JSON.parse(e.data); 
+ 	
+ 
+ 	
+ 	if(refUno == requestAgentMessage.refRuno&& requestAgentMessage.dealType!=null && requestAgentMessage.reportStatus ==null){
+ 		const tr1 = document.createElement("tr");
+ 	tr1.classList.add("manage");
+ 	const td1 = document.createElement("td");
+ 	td1.classList.add("title");
+ 	const td2 = document.createElement("td");
+ 	td2.classList.add("content");
+ 	const td3 = document.createElement("td");
+ 	td3.classList.add("time");
+ 		td1.innerHTML = "매물";
+ 		td2.innerHTML = requestAgentMessage.dealType +" 타입의 매물 신청이 들어왔습니다.";
+ 		td3.innerHTML = currentTime();
+ 	
+ 		tr1.append(td1, td2,td3);
+ 		const display = document.getElementsByClassName("noticeThead")[0];
+ 	
+ 	display.prepend(tr1); 
+ 	
+ 	 }
+ 	}
+ }
+  
+ function addEventMessage7(refUno){
+	console.log("살려주세요");
+
+ houseSock6.onmessage = function(e){
+
+ 	const counsleAgentMessage = JSON.parse(e.data); 
+ 	
+ 
+ 	
+ 	if(refUno == counsleAgentMessage.refTuno&& counsleAgentMessage.dealType==null){
+ 		const tr1 = document.createElement("tr");
+ 	tr1.classList.add("manage");
+ 	const td1 = document.createElement("td");
+ 	td1.classList.add("title");
+ 	const td2 = document.createElement("td");
+ 	td2.classList.add("content");
+ 	const td3 = document.createElement("td");
+ 	td3.classList.add("time");
+ 		td1.innerHTML = "상담";
+ 		td2.innerHTML = (counsleAgentMessage.counsleMethod ==1 ? "대면 " : "비대면 ") +"상담 요청이 들어왔습니다.";
+ 		td3.innerHTML = currentTime();
+ 	
+ 		tr1.append(td1, td2,td3);
+ 		const display = document.getElementsByClassName("noticeThead")[0];
+ 	
+ 	display.prepend(tr1); 
+ 	
+ 	 }
+ 	}
+ }
  
  
 
@@ -340,9 +422,9 @@ function clickLink(url){
  function currentTime() {
  	
  	const now = new Date();
- 	const time = now.getFullYear() +"년 "
- 			   + addZero(now.getMonth() + 1) +"월 "
- 			   + addZero(now.getDate()) +"일 " 
+ 	const time = now.getFullYear() +"-"
+ 			   + addZero(now.getMonth() + 1) +"-"
+ 			   + addZero(now.getDate()) +" " 
  			   + addZero(now.getHours()) + ":"
  			   + addZero(now.getMinutes()) +":"
  			   + addZero(now.getSeconds());
