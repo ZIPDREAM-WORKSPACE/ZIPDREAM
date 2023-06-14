@@ -105,7 +105,7 @@
     width: 1200px;
 	display: flex;
 	align-items: center;
-	flex-direction: column;
+    flex-direction: row;
 	margin:0 auto;
 }
 
@@ -189,35 +189,8 @@ a{
                     	<!--캘린더 라이브러리를 이용한 풀캘린더가 들어갈 자리  -->
                         <div id='calendar'></div>
                         
-                        <!-- 캘린더 날짜 선택시 상세 일정 넣기  -->
-                        <div class="schedule">
-
-                            <!-- <ul>
-
-                                <li>
-                                    <p class="scheduleName">접수</p>
-                                    <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
-                                </li>
-                                <li>
-                                    <p class="scheduleName">접수</p>
-                                    <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
-                                </li>
-                                <li>
-                                    <p class="scheduleName">접수</p>
-                                    <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
-                                </li>
-                                <li>
-                                    <p class="scheduleName">접수</p>
-                                    <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
-                                </li>
-                                <li>
-                                    <p class="scheduleName">접수</p>
-                                    <a href="">[청약접수] 경기 [무순위] 현대 프라힐스 소사역 더프라임(임의공급) (~06/13)</a>
-                                </li>
-
-                            </ul> -->
-
-                        </div>
+                        <!-- 캘린더 날짜 선택시 상세 정보 넣기  -->
+                        <div class="schedule"></div>
                     </div>
                 </div>
             </div>
@@ -246,7 +219,7 @@ a{
                 selectable: true, 
                 nowIndicator: true, // 현재 시간 마크
                 locale: 'ko', // 한국어 설정
-
+                dayMaxEvents: true,
                 select: function(info) {
                     console.log(info.startStr);
                     var calenderStart = info.startStr;
@@ -262,7 +235,7 @@ a{
                     			html = "<ul>";
                     			for(var i = 0; i<result.length; i++){
                     				html += "<li><p class='scheduleName'>"+ result[i].calenderTitle +"</p>";
-                    				html += "<a href='"+ result[i].url+"'>"+result[i].calenderMemo + "</a></li>";
+                    				html += "<a target='_blank' href='"+ result[i].url+"'>"+result[i].calenderMemo + "</a></li>";
                     			
                     			}
                     			html += "</ul>";

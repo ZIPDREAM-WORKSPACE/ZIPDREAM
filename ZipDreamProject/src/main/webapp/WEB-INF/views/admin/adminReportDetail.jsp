@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -134,9 +135,24 @@
 					<div class="select-arrow"></div>
 				</form>
 			</div>
-			<button type="submit" class="report-submit btn btn-success" onclick=" document.getElementById('report-result-update').submit();">처리 완료</button>
+			<button type="submit" class="report-submit btn btn-success" onclick="reportSubmit();">처리 완료</button>
 		</section>
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 <script>
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+function reportSubmit(){
+
+	document.getElementById('report-result-update').submit();
+	var reportContent = '${report.reportContent }';
+	var reportDate = '${report.reportDate }';
+	var refRuno = ${report.refRuno };
+	var reportStatus = '${report.reportStatus }';
+	var reportResult = $(".result-value").val();
+	var reportType = '${report.reportType }';
+	console.log(reportResult);
+	sendMessage2(reportContent,reportDate,refRuno, reportStatus,reportResult,reportType );
+	insertReportNotice("<%=request.getContextPath()%>",reportContent,reportDate,refRuno, reportResult,reportType );
+}
 </script>
 </section>
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

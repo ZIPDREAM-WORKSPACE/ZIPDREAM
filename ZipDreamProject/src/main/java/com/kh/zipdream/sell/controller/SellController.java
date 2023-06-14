@@ -3,43 +3,36 @@ package com.kh.zipdream.sell.controller;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Date;
-
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 import com.google.gson.Gson;
 import com.kh.zipdream.admin.model.vo.Report;
 import com.kh.zipdream.member.model.service.MemberService;
@@ -52,6 +45,7 @@ import com.kh.zipdream.sell.model.vo.SellDetailApi;
   
 @Controller
 @RequestMapping("/sell")
+@SessionAttributes({"loginUser"})
 public class SellController {
 	
 	@Autowired
@@ -68,7 +62,6 @@ public class SellController {
 	
 	//sell입력
 	@PostMapping("/sellInsert")
-	@ResponseBody
 	public String sellInsert(SellDetail sd, HttpServletRequest request, HttpSession session,
 							 @RequestParam(value="imges", required=false ) List<MultipartFile> imgList) {
 		
@@ -83,11 +76,10 @@ public class SellController {
 				e.printStackTrace();
 				System.out.println("업로드 에러");
 			}
-		String url ="";
 		if(result >0) {
 			System.out.println("업로드 성공");
-			url="redirect:/../agent/RegistrationList";
-			return url;
+			
+			return "redirect:/agent/list";
 		}else {
 			System.out.println("업로드 실패");
 			return "main/main";
@@ -118,12 +110,20 @@ public class SellController {
 	
 	
 	@GetMapping("/detail/{sellNo}")	
-	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo){
+	public String sellDetail(Model model, @PathVariable(value="sellNo") int sellNo,@ModelAttribute("loginUser") Member loginUser){
 
 		SellDetail detail = sellService.sellDetail(sellNo);
 		Member seller = memberService.selectMember(detail.getRefUno());
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("userNo",loginUser.getUserNo());
+		map.put("sellNo", sellNo);
+		
+		int isUserSelect = sellService.countUserSelect(map);
 		model.addAttribute("sd", detail);
 		model.addAttribute("seller", seller);
+		model.addAttribute("isUserSelect", isUserSelect);
+		
 		return "sell/sellDetail";
 	}
 	
