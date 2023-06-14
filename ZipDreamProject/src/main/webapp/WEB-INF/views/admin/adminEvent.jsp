@@ -44,7 +44,7 @@
 					<c:choose>
 						<c:when test="${fn: length(userList.list) == 0}">
 							<tr>
-								<td colspan="4" style="text-align:center;">회원이 없습니다.</td>
+								<td colspan="7" style="text-align:center;">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -161,23 +161,23 @@
 						</button>
 					</div>
 					<div class="modal-body" align="center" style="position:relative;">
-						<table align="center" style="width:100%">
+						<table align="center" style="width:100%;margin-bottom:30px;">
 							<tbody>
 								<tr>
 									<th width="5%"><label for="coupon-userNo">번호</label></th>
-									<td><input type="text" id="coupon-userNo" name="userNo" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userNo" name="userNo" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userId">이름</label></th>
-									<td><input type="text" id="coupon-userId" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userId" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userPhone">아이디</label></th>
-									<td><input type="text" id="coupon-userPhone" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userPhone" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-createDate">가입일</label></th>
-									<td><input type="text" id="coupon-createDate" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-createDate" class="form-control" readonly style="width:100%"></td>
 								</tr>
 							</tbody>
 						</table>

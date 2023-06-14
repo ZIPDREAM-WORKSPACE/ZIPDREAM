@@ -239,13 +239,16 @@
 				  }else {
 					html = "<tr><td>신고자</td><td>신고내용</td><td>처리여부</td><td>처리내용</td><td>타입</td><td>신고일자</td></tr>";  
 				  }
-				  
-				  for(let i = 0; i < result.array.length; i++){
-					let report = result.array[i];
-				  	html += "<tr onclick=\"location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo="+report.reportNo+"'\"><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
-				  	html += "<td>"+report.reportStatus+"</td><td>"+report.reportResult+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
-					  
-				  }
+				  if(result.array.length == 0) {
+					  html += "<tr align='center'><td colspan='6'>신고 내역이 없습니다.</td><tr>"
+				  }else {
+					  for(let i = 0; i < result.array.length; i++){
+						let report = result.array[i];
+					  	html += "<tr onclick=\"location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo="+report.reportNo+"'\"><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
+					  	html += "<td>"+report.reportStatus+"</td><td>"+report.reportResult+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
+						  
+					  }
+			  	  }
 				  $(".user-tbody").html(html);
 				  
 				  let userPage = "";
@@ -291,13 +294,15 @@
 				  
 				  let html = "<tr><td>번호</td><td>제목</td><td>내용</td><td>유효기간</td></tr>";					  
 				  
-				  
-				  for(let i = 0; i < result.array.length; i++){
-					let coupon = result.array[i];
-				  	html += "<tr><td>"+ coupon.couponNo +"</td><td>"+ coupon.couponTitle+"</td>";
-				  	html += "<td>"+coupon.couponContent+"</td><td>"+ new Date(coupon.couponDate).toISOString().slice(0, 10); +"</td></tr>";
-					  
-				  }
+				  if(result.array.length == 0) {
+					  html += "<tr align='center'><td colspan='4'>쿠폰이 없습니다.</td><tr>"
+				  }else {
+					  for(let i = 0; i < result.array.length; i++){
+						let coupon = result.array[i];
+					  	html += "<tr><td>"+ coupon.couponNo +"</td><td>"+ coupon.couponTitle+"</td>";
+					  	html += "<td>"+coupon.couponContent+"</td><td>"+ new Date(coupon.couponDate).toISOString().slice(0, 10); +"</td></tr>";
+					  }
+			  	  }
 				  $(".user-tbody").html(html);
 				  
 				  let userPage = "";
