@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
+html::-webkit-scrollbar {
+  display: none;
+}
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -94,6 +97,7 @@
 .scrollBar {
 	width: 200px;
 	height: 50px;
+	overflow-x: hidden;
 	overflow-y: scroll;
 }
 
@@ -413,15 +417,12 @@
 								<button id="comOkOj" class="selectBtn" type="button" >상담 가능 매물</button>
 							</div>
 						</form>
-						<!-- <div style="margin-bottom: 5px;">
-							키워드를 입력하여 <br>원하는 매물을 검색해보세요.
-						</div> -->
+						
 					</div>
 				</div>
 				<br><br><hr>
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
-				<!-- <div class="keywordPlaceList"></div> -->
 				
 			</div>
 			
