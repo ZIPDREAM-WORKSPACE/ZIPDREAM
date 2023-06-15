@@ -239,7 +239,7 @@
 .lastBox {
 	
 	border: 1px solid gray;
-	width: 90%;
+	width: 95%;
 	height: 15rem;
 	display: flex;
 }
@@ -273,6 +273,7 @@
 	margin-left: 15px;
 	width: 95%;
 	height: 70%;
+	padding: 10px 10px;
 }
 .rBox{
 	display:flex;
@@ -310,6 +311,11 @@
 #inputReply, #insertReplyBtn {
 	height: 35px;
 }
+#inputReply{
+    text-overflow : clip;
+	overflow : hidden;
+	padding : 3px;
+}
 #deleteBoard{
 	font-size :  0.3rem;
 	height : 30px;
@@ -322,6 +328,7 @@
 	vertical-align: baseline;
 	margin-left : 10px;
 }
+
 
 /* modal css */
 
@@ -810,12 +817,14 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				 let html = "";
 				let url="https://ifh.cc/g/26CZDZ.png";
 				let url2="https://ifh.cc/g/s78355.png";
+				let url3="https://ifh.cc/g/zv71S7.png";
 				for(let board of result){
 					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
 								  "<div class='boardHead'>"+
 									"<span class='writer'>"+board.userName+"</span>";
 									if(board.refUno == ${loginUser.userNo}){
+										html +="<img src='"+url3+"' width='10' height='5' class='deleteMsg'>";
 										html +="<img src='"+url+"' width='20' height='20' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
 									}else{
 										html += "<img src='"+url2+"' width='20' height='20' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
@@ -832,7 +841,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 									"<div class='replyContent'>"+
 									"</div>"+
 									"<div class='inputReply'>"+
-		        					"<textarea rows='1' cols='58' id='inputReply' style='resize: none;'placeholder='50자 내로 작성해주세요'>"+"</textarea>"+
+		        					"<textarea rows='1' cols='61' id='inputReply' style='resize: none;'placeholder='50자 내로 작성해주세요' maxlength='50'>"+"</textarea>"+
 		        					"<input type='hidden' id='refBno' name='refBno' value='"+board.detailBoardNo+"'>"+
 		        					"<button onclick='insertReply("+board.detailBoardNo+");replyList("+board.detailBoardNo+")' id='insertReplyBtn' class='btn btn-outline-primary'>"+"작성"+"</button>"+
 		        				"</div>"+"</div>"+"</div>"
@@ -848,7 +857,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 						rel+="<div class='rBox'>";
 						rel += "<p id='reply'>"+list[j].userName+" : "+list[j].replyContent+"</p>";
 						if(${loginUser.userNo} == list[j].replyRefUno){
-							rel+="<img src='"+url+"' width='15' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
+							rel+="<img src='"+url+"' width='18' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
 						}else{
 							rel+="<img src='"+url2+"' width='15' height='15' class='deleteReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
 						}
@@ -882,7 +891,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 					console.log("댓글작성 성공");
 					
 					replyList(detailBoardNo);
-					
+					location.reload();
 				}else{
 					console.log("댓글작성 실패");
 				}
@@ -922,8 +931,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			data : {detailBoardNo},
 			type: "post",
 			success : function(result){
-				alert("게시글이 삭제되었습니다.");
-				
+				swal("삭제 완료", "등록된 게시글을 삭제하였습니다.", "success");
 			},
 			complete : function(){
 				boardList();
@@ -1038,11 +1046,12 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type : "post",
 			success : function(data){
 				console.log("게시글 삭제 완료");
-				alert("삭제완료");
+				swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
 				move();
 			},
 			error : function(){
 				console.log("게시글 삭제 실패");
+				swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
 			}
 		})
 	}
@@ -1059,11 +1068,13 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type :"post",
 			success : function(result){
 				console.log("댓글 삭제 완료");
-				alert("댓글이 삭제 되었습니다. ");
-				location.reload();
+				swal("삭제 완료", "등록된 댓글을 삭제하였습니다.", "success");
 			},
 			error : function(){
-				console.log("댓글 삭제 실패");
+				swal("삭제 완료", "댓글삭제를 실패하였습니다..", "error");
+			},
+			complete : function(){
+				location.reload();
 			}
 		})
 	}
