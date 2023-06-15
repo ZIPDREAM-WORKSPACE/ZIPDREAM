@@ -25,6 +25,17 @@
 		<result column="IS_AUTH" property="isAuth" />
 	</resultMap>
 	
+
+	<resultMap type="attachment" id="attachmentResultSet">
+		<id column="ATTACHMENT_NO" property="attachmentNo" />
+		<result column="REF_UNO" property="refUno" />
+		<result column="REF_SNO" property="refSno" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="FILE_PATH" property="filePath" />
+		<result column="FILE_LEVEL" property="fileLevel" />
+	</resultMap>
+	
 	<resultMap type="userselectlist" id="bookmarkResultSet">
 		<result column="USER_NO" property="userNo" />
 		<result column="SELL_NO" property="sellNo" />
@@ -35,7 +46,7 @@
 		resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER
-		WHERE USER_ID = #{userId} AND STATUS = 'Y'
+		WHERE USER_ID = #{userId} AND STATUS = 'Y' AND WITHDRAW = 'Y'
 	</select>
 	
 	<!-- 일반회원 회원가입 -->
@@ -152,7 +163,7 @@
    </update> 
 
    <!-- 일반회원 수정 -->
-   <update id="updateMember" parameterType="member">
+   <update id="updateMember" parameterType="HashMap">
 	    UPDATE MEMBER SET 
 			  
 			  USER_NAME = #{userName}
@@ -161,26 +172,35 @@
 	    WHERE USER_NO = #{userNo} 
 	</update>
 	
-	<!-- <update id="updateMemberPwd" parameterType="member">
-	    UPDATE MEMBER SET 
-			 
-			, USER_PWD = ${userPwd}
-			
-			
-	    WHERE USER_NO = ${userNo} 
-	</update> -->
+	<update id="updateMemberPwd" parameterType="member">
+	    UPDATE MEMBER SET 	 
+			USER_PWD = #{userPwd}		
+	    WHERE USER_NO = #{userNo} 
+	</update>
 	
 	
-	
-
 	<delete id="deleteMember" parameterType="_int">
 		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
 	</delete>
+	
+	<update id="updatebkImages" parameterType="Attachment">
+		UPDATE ATTACHMENT SET
+		ORIGIN_FILE = #{originFile},
+		CHANGE_NAME = #{changeName}
+		WHERE REF_UNO = #{refUno} AND FILE_LEVEL = #{fileLevel}
+	</update>
+	
+	<select id="selectAttachmentList" parameterType="_int" resultMap="attachmentResultSet">
+	    SELECT *
+	    FROM ATTACHMENT
+	    WHERE REF_UNO = #{userNo}   
+	</select>
 
 	<select id="myBookmarkList" resultMap="bookmarkResultSet">
 		SELECT SELL_NO
 		FROM USERSELECT_LIST
 		WHERE USER_NO = #{uno}
+		ORDER BY SELL_NO
 	</select>
 
 </mapper>

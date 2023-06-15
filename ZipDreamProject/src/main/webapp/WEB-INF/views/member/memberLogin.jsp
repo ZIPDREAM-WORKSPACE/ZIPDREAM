@@ -339,6 +339,30 @@ $(function(){
        
    }); 
 }); 
+
+//체크박스 상태 변경 감지
+var checkbox = document.getElementsByName("saveId")[0];
+checkbox.addEventListener('change', function() {
+    var id = document.getElementById("id-text").value;
+    
+    // 체크가 되어있으면 로컬 스토리지에 아이디 저장
+    if (checkbox.checked) {
+        localStorage.setItem("savedId", id);
+    } else {
+        localStorage.removeItem("savedId");
+    }
+});
+
+// 페이지 로드 시 저장된 아이디 불러오기
+window.addEventListener('load', function() {
+    var savedId = localStorage.getItem("savedId");
+    
+    // 저장된 아이디가 있을 경우 입력 필드에 표시
+    if (savedId) {
+        document.getElementById("id-text").value = savedId;
+        document.getElementsByName("saveId")[0].checked = true;
+    }
+});
 </script>
 </body>
 </html>

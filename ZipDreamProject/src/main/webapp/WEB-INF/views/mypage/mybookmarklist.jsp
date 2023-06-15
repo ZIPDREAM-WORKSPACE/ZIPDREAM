@@ -27,10 +27,11 @@ div{
 	
 }
 .imgStyle{
+	border: 1px solid lightgray;
 	object-fit: cover;
 	width: 300px;
 	height: 200px;
-	border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 2px 2px;
 }
 .imgStyle:hover{
 	
@@ -46,6 +47,7 @@ div{
 	height: 200px;
 	border: 1px solid lightgray;
 	border-top: 1px solid white;
+	box-shadow: 0px 15px 5px -2px gray;
 }
 
 .imgStyle, .divStWrap:hover{
@@ -79,11 +81,8 @@ div{
 	height:10%;
 	background: black; /* 스크롤바의 색상 */
 	border-radius: 5px;
-	/* border: 10px solid #171F45; */
 }
-/* .scrollBar::-webkit-scrollbar-track{
-	background-color: rgba(0,0,0,0); /* 스크롤바 뒷 배경을 투명 처리한다 */
-}  */
+
 </style>
 </head>
 <body>

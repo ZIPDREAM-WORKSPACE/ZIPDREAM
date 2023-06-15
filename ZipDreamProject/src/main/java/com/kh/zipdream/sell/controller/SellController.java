@@ -88,21 +88,22 @@ public class SellController {
 	
 	//sell_detail페이지 이동
 	@PostMapping("/detailapi")	
-	public String sellDetailApi(Model model, SellDetailApi sda /* ,SellDetailApi sda2 */){
-		/*
-		 * Map<String, String> map = new HashMap();
-		 * 
-		 * String addressArr[] = sda.getSellAddress().split(" "); String kaptAddress =
-		 * addressArr[0]+" "+addressArr[1]+" "+addressArr[3]; String kaptName =
-		 * sda.getSellName().substring(0,4);
-		 * 
-		 * map.put("kaptAddress", kaptAddress); map.put("kaptName", kaptName); sda2 =
-		 * sellService.detailApiSecond(map);
-		 * 
-		 * model.addAttribute("sda2" , sda2);
-		 */
-		model.addAttribute("sda", sda);
-
+	public String sellDetailApi(Model model, SellDetailApi sda ,SellDetailApi sda2 ){
+		System.out.println(sda);
+		
+		try {
+			Map<String, String> map = new HashMap();
+			String addressArr[] = sda.getSellAddress().split(" "); 
+			String kaptAddress = addressArr[0]+" "+addressArr[1]+" "+addressArr[3]; 
+			String kaptName = sda.getSellName().substring(0,4);
+			 
+			map.put("kaptAddress", kaptAddress); map.put("kaptName", kaptName); sda2 = sellService.detailApiSecond(map);
+			model.addAttribute("sda2" , sda2);
+			model.addAttribute("sda", sda);
+		}catch(Exception e) {
+			model.addAttribute("sda", sda);
+		}
+		
 		return "sell/sellDetailApi";
 	}
 	
@@ -276,5 +277,18 @@ public class SellController {
 		return result;
 		
 	}
+	
+	
+	@PostMapping("/deleteSell")
+	@ResponseBody
+	public int deleteSell(Model model, int sellNo, int userNo) {
+		Map<String, Object> map = new HashMap();
+		map.put("sellNo", sellNo);
+		map.put("userNo", userNo);
+		
+		model.addAttribute("map", map);
+		return sellService.deleteSell(map);
+	}
+
 
 }

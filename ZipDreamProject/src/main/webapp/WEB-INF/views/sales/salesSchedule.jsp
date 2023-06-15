@@ -418,6 +418,9 @@
 #noneList svg{
     margin-bottom: 20px;
 }
+* p{
+	margin:7px!important;
+}
 
 </style>
 </head>
@@ -513,7 +516,7 @@
 			}
 			
 			if(aptList.length == 0){
-				console.log("분양정보 없음");
+				/* console.log("분양정보 없음"); */
 				$("#noneList").css("display", "block");
 			}else{
 				$("#noneList").css("display", "none");
@@ -673,7 +676,7 @@
 	                    
 	                    });
 	                    
-	                    swal("", "분양일정 알림을 취소했습니다.", "warning");
+	                    swal("", "관심분양 알림을 취소했습니다.", "warning");
 	                }else{
 	                    h.src = "https://ifh.cc/g/bNnQCj.png";
 	                   /* 찜하기 등록하기 */
@@ -731,7 +734,7 @@
 							<img src="https://ifh.cc/g/sjwW64.png">
 						</span> 
 						<span class="calendar-yearmonth" id="yearmonth"> 
-							<!-- 여기는 오늘이 있는 연도와 월 표시-->
+							<!-- 여기는 오늘 연도와 월 표시-->
 
 						</span>
 
@@ -801,6 +804,7 @@
 		
 		 // 이전 달로 이동하는 함수
         function goToPreviousMonth() {
+            $("#noneList").css("display", "none");
 	       	if(currentMonth == 1) {
 	                return;
          	} 
@@ -819,6 +823,7 @@
 
         // 다음 달로 이동하는 함수
         function goToNextMonth() {
+            $("#noneList").css("display", "none");
         	
         	if(currentMonth == 12) {
                 return;

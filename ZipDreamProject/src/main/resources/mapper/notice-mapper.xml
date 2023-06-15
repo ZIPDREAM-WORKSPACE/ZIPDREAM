@@ -21,6 +21,7 @@
 	
 	</delete>
 	
+
 	<delete id="deleteManageNotice" >
 		DELETE FROM NOTICE 
 		WHERE NOTICE_NO = #{noticeNo};

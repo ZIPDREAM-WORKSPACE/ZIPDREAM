@@ -44,7 +44,7 @@
 					<c:choose>
 						<c:when test="${fn: length(userList.list) == 0}">
 							<tr>
-								<td colspan="4" style="text-align:center;">회원이 없습니다.</td>
+								<td colspan="7" style="text-align:center;">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -135,9 +135,23 @@
 						</form>
 						
 						<div class="coupon-list" style="margin-top:20px;padding:10px 5px;border:1px solid #999;">
-							<c:forEach items="${couponList}" var="coupon">
-								<img class="coupons" width="300px" height="150px" src="<%= request.getContextPath() %>${coupon.couponPath }" data-couponNo="${coupon.couponNo }" data-couponTitle="${coupon.couponTitle }" data-couponContent="${coupon.couponContent }" data-couponDate="${coupon.couponDate }" data-couponpath="${coupon.couponPath }" style="object-fit:cover;">	
-							</c:forEach>
+							<c:choose>
+								<c:when test="${fn: length(couponList) == 0}">
+									쿠폰이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${couponList}" var="coupon">
+										<img class="coupons" width="300px" height="150px"
+											src="<%= request.getContextPath() %>${coupon.couponPath }"
+											data-couponNo="${coupon.couponNo }"
+											data-couponTitle="${coupon.couponTitle }"
+											data-couponContent="${coupon.couponContent }"
+											data-couponDate="${coupon.couponDate }"
+											data-couponpath="${coupon.couponPath }"
+											style="object-fit: cover;">
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -150,7 +164,7 @@
 		
 		<form id="couponInsertForm" action="<%= request.getContextPath() %>/admin/event/couponToUser" method="get">
 		<div class="modal fade" id="couponInsertModal" tabindex="-1" aria-labelledby="couponInsertModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
+		  <div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">쿠폰 보내기</h5>
@@ -161,23 +175,23 @@
 						</button>
 					</div>
 					<div class="modal-body" align="center" style="position:relative;">
-						<table align="center" style="width:100%">
+						<table align="center" style="width:100%;margin-bottom:30px;">
 							<tbody>
 								<tr>
-									<th width="5%"><label for="coupon-userNo">번호</label></th>
-									<td><input type="text" id="coupon-userNo" name="userNo" readonly style="width:100%"></td>
+									<th width="10%"><label for="coupon-userNo">번호</label></th>
+									<td><input type="text" id="coupon-userNo" name="userNo" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userId">이름</label></th>
-									<td><input type="text" id="coupon-userId" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userId" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userPhone">아이디</label></th>
-									<td><input type="text" id="coupon-userPhone" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userPhone" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-createDate">가입일</label></th>
-									<td><input type="text" id="coupon-createDate" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-createDate" class="form-control" readonly style="width:100%"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -186,10 +200,17 @@
 						<img id="coupon-preview" src="" style="object-fit:cover;">
 						
 						<select class="result-value coupon-select" name="couponNo" style="display:block;width:300px;height:100px;">
-							<c:forEach items="${couponList}" var="coupon">
-								<option value="${coupon.couponNo }">${coupon.couponTitle }</option>
-							</c:forEach>
-						</select>
+								<c:choose>
+									<c:when test="${fn: length(couponList) == 0}">
+										<option value="">쿠폰이 없습니다.</option>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${couponList}" var="coupon">
+											<option value="${coupon.couponNo }">${coupon.couponTitle }</option>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</select>
 						<div class="select-arrow" style="position:relative;top:-55px;left:100px;"></div>
 					</div>
 					<div class="modal-footer">
@@ -281,9 +302,9 @@ function ArrayInsertModal(){
 			document.getElementById("coupon-createDate").value += userInfo[5].innerText;
 		}else {
 			document.getElementById("coupon-userNo").value += userCheck[i].value + ",";			
-			document.getElementById("coupon-userId").value += userInfo[2].innerText + ",";
-			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ",";
-			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ",";
+			document.getElementById("coupon-userId").value += userInfo[2].innerText + ", ";
+			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ", ";
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ", ";
 		}
 	}
 	$('#couponInsertModal').modal("show");
@@ -330,7 +351,7 @@ function eventSubmit(){
 	let couponUserNos = document.getElementById("coupon-userNo").value.split(",");
 	for(let i = 0; i<couponUserNos.length ; i++){
 		let couponUserNo =couponUserNos[i];
-		console.log(couponUserNo);
+		console.log(coupon.dataset);
 		var conponContent = coupon.dataset.couponcontent;
 		var conponDate = coupon.dataset.coupondate;
 		var conponTitle = coupon.dataset.coupontitle;

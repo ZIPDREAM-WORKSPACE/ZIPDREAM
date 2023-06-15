@@ -119,8 +119,8 @@
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px;
 	background-color: rgb(255, 255, 255);
 	padding: 40px 25px;
-    margin-top: 85px;
-    margin-bottom: 20px;
+	margin-top: 85px;
+	margin-bottom: 20px;
 	overflow-y: scroll;
 	padding-top: 10px;
 }
@@ -185,8 +185,8 @@
 	line-height: 22px;
 	vertical-align: middle;
 	outline: none;
-   	overflow: hidden;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .fc {
@@ -200,7 +200,7 @@
 }
 
 .fc-daygrid-event-harness-abs a {
-	color: color: rgb(228, 90, 100);
+	color: rgb(228, 90, 100);
 }
 
 .fc-daygrid-day-frame {
@@ -255,6 +255,7 @@
                     center: 'title',
                     end: 'prev next'
                 },
+                firstDay:1,
                 titleFormat: function (date) {
                     return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
                 },
@@ -287,22 +288,17 @@
 	               		{
 	               			title:'<%= vo.getCalenderTitle()%>',
 	               			start:'<%= vo.getCalenderStart()%>',
+	            			<%if(vo.getCalenderTitle().equals("발표")){%>
+	            				color: '#007bff'
+	            			<%}else if(vo.getCalenderTitle().equals("접수")){%>
+	            				color: 'rgb(228, 90, 100)'
+	            			<%}else {%>
+	            				color: '#6c757d'
+	            			<% } %>
 	               		},
                			<%}
            			}%>
-               	], 
-               	eventDidMount: function(info) {				
-              		var gColor = 'lightGreen';
-              		var bColor = 'lightBlue';
-              		var cColor = 'black';
-              		if (info.event.extendedProps.title == '발표') {
-              			info.el.style.backgroundColor = gColor;
-              		} else if(info.event.extendedProps.title == '접수') {
-              			info.el.style.backgroundColor = bColor;
-              		} else if(info.event.extendedProps.title == '계약'){
-              			info.el.style.backgroundColor = cColor;
-              		}		
-              	}
+               	]
             });
 
             

@@ -24,7 +24,7 @@
 					<c:choose>
 						<c:when test="${fn: length(reportList.list) == 0}">
 							<tr>
-								<td colspan="6" style="text-align:center;">게시글이 없습니다.</td>
+								<td colspan="7" style="text-align:center;">게시글이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -33,9 +33,9 @@
 									<td>${report.rname }</td>
 									<td>${report.tname }</td>
 									<td>${fn:substring(report.reportContent,0,15) }</td>
-									<td>${report.reportType }</td>
+									<td>${report.reportType == 1 ? "이용자" : "허위매물" }</td>
 									<td>${report.reportStatus }</td>
-									<td>${report.reportResult }</td>
+									<td>${report.reportResult== "null" ? " " : report.reportResult}</td>
 									<td>${report.reportDate }</td>
 								</tr>
 							</c:forEach>
