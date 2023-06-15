@@ -419,6 +419,9 @@
 #noneList svg{
     margin-bottom: 20px;
 }
+* p{
+	margin:7px!important;
+}
 
 </style>
 </head>
@@ -674,7 +677,7 @@
 	                    
 	                    });
 	                    
-	                    swal("", "분양일정 알림을 취소했습니다.", "warning");
+	                    swal("", "관심분양 알림을 취소했습니다.", "warning");
 	                }else{
 	                    h.src = "https://ifh.cc/g/bNnQCj.png";
 	                   /* 찜하기 등록하기 */

@@ -459,7 +459,7 @@ html::-webkit-scrollbar {
 		let firstCode = searchcode.substring(0, 5);
 		address="${bjdName}";
 		console.log(firstCode);
-		
+				
 		$.ajax({
 			url : "<%=request.getContextPath()%>/map/getXmlCode",
 			data: {'code' : firstCode},
@@ -476,8 +476,9 @@ html::-webkit-scrollbar {
                     
                      for(var i=0; result.length ;i++){
                        	  let addressToXy = JSON.parse(result[i]);
+                       	  console.log("??"+addressToXy['도로명']);
                     	  roadName = addressToXy['도로명'];
-                         	  
+                         
                          	  
                          	  listView(addressToXy, roadName);
                          	  
@@ -561,8 +562,7 @@ html::-webkit-scrollbar {
 	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
 	    	                        	        /* location.href="#"+markerPosit; */
 	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5").css("color", "black");
-	    	                        	        
+	    	                        	       
 	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
 	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
 	    	                        	        	$(backgroundTag).css("color", "white");
@@ -626,7 +626,7 @@ html::-webkit-scrollbar {
 				console.log("에러");
 			}
 		});
-		console.log("address"+address);
+		console.log("address"+address + " detailAddrClob"+detailAddrClob);
 		
 		
 		
@@ -675,11 +675,11 @@ html::-webkit-scrollbar {
 			  	listLiTag.addEventListener('click', function(){
 			  		let add = addressToXy["지역코드"];
 			  		let sidoCode = add.substring(0,2);
-			        
+			  		console.log(address+" "+addressToXy["도로명"])
 			  		document.getElementById("sidoCode").value = sidoCode;
 			  		document.getElementById("sellSno").value = addressToXy["일련번호"];
 			  		document.getElementById("sellName").value = addressToXy["아파트"];
-			  		document.getElementById("sellAddress").value = addressToXy["도로명"];
+			  		document.getElementById("sellAddress").value = address+" "+addressToXy["도로명"];
 			  		document.getElementById("sellPrice").value = resultStr;
 			  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
 			  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
@@ -961,7 +961,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
            
            let adressNameArray = result[0].address.address_name.split(' ');
            var detailAddrClob = adressNameArray[0] + ' ' + adressNameArray[1] + ' ' + adressNameArray[2];
-           
+          
            switch(detailAddrClob.split(" ")[0]){
 	           case "서울":
 	        	   detailAddrClob = detailAddrClob.replace("서울","서울특별시");
@@ -1133,7 +1133,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
     	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
+    	    	    	                        	        $(backgroundTag).siblings().css({"background-color":"#f0f3f5","color":"black"});
     	    	    	                        	        
     	    	    	                        	        
     	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
@@ -1516,7 +1516,6 @@ $("#keyword").keyup(function(){
 	    	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
 	    	    	    	                        	        $(backgroundTag).siblings().css({"background-color":"#f0f3f5","color":"black"});
 	    	    	    	                        	        
-	    	    	    	                        	        
 	    	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
 	    	    	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
 	    	    	    	                        	        	$(backgroundTag).css("color", "white");
@@ -1613,7 +1612,7 @@ $("#keyword").keyup(function(){
   						  		document.getElementById("sidoCode").value = sidoCode;
   						  		document.getElementById("sellSno").value = addressToXy["일련번호"];
   						  		document.getElementById("sellName").value = addressToXy["아파트"];
-  						  		document.getElementById("sellAddress").value = addressToXy["도로명"];
+  						  		document.getElementById("sellAddress").value = result[i].bjdName+" "+addressToXy["도로명"];
   						  		document.getElementById("sellPrice").value = resultStr;
   						  		document.getElementById("brokerAdd").value = addressToXy["중개사소재지"];
   						  		document.getElementById("sellPrivateArea").value = addressToXy["전용면적"]+"㎡";
