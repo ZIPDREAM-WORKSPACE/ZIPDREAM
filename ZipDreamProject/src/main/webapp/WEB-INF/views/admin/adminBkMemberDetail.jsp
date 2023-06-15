@@ -73,11 +73,20 @@ $(function() {
 		draggable : true, //드래그 가능 여부 
 	});
 	
+	currentIndex = 0;
+	if($(".bk-user-list").length > 10){
+		$(".bk-user-list").each(function(index){
+			if($(this).data('uno') == currentUserNo){
+				currentIndex = index;
+			}
+		});
+	}
+	
 	$('#bk-list-slick').slick({
 		slide : 'div', //슬라이드 되어야 할 태그 ex) div, li 
 		infinite : true, //무한 반복 옵션	 
 		slidesToShow : 10, // 한 화면에 보여질 컨텐츠 개수
-		slidesToScroll : 1, //스크롤 한번에 움직일 컨텐츠 개수
+		slidesToScroll : 10,//스크롤 한번에 움직일 컨텐츠 개수
 		speed : 1000, // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
 		arrows : false, // 옆으로 이동하는 화살표 표시 여부
 		dots : false, // 스크롤바 아래 점으로 페이지네이션 여부
@@ -86,17 +95,11 @@ $(function() {
 		pauseOnHover : false, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
 		vertical : true, // 세로 방향 슬라이드 옵션
 		verticalSwiping: true,
-		draggable : true //드래그 가능 여부 
+		draggable : true, //드래그 가능 여부 
+		initialSlide : currentIndex
 	});
 	$(".bk-user-list[data-uno="+ ${member.userNo } +"]").css('background-color','#0069D9').css('color','#fff');
 	
-	if($(".bk-user-list").length > 10){
-		$(".bk-user-list").each(function(index){
-			if($(this).data('uno') == currentUserNo){
-				$('#bk-list-slick').slick('goTo', index-1);
-			}
-		});
-	}
 });
 	currentUserNo = ${member.userNo};
 

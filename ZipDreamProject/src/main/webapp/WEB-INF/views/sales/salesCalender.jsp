@@ -200,7 +200,7 @@
 }
 
 .fc-daygrid-event-harness-abs a {
-	color: color: rgb(228, 90, 100);
+	color: rgb(228, 90, 100);
 }
 
 .fc-daygrid-day-frame {
@@ -287,22 +287,17 @@
 	               		{
 	               			title:'<%= vo.getCalenderTitle()%>',
 	               			start:'<%= vo.getCalenderStart()%>',
+	            			<%if(vo.getCalenderTitle().equals("발표")){%>
+	            				color: '#007bff'
+	            			<%}else if(vo.getCalenderTitle().equals("접수")){%>
+	            				color: 'rgb(228, 90, 100)'
+	            			<%}else {%>
+	            				color: '#6c757d'
+	            			<% } %>
 	               		},
                			<%}
            			}%>
-               	], 
-               	eventDidMount: function(info) {				
-              		var gColor = 'lightGreen';
-              		var bColor = 'lightBlue';
-              		var cColor = 'black';
-              		if (info.event.extendedProps.title == '발표') {
-              			info.el.style.backgroundColor = gColor;
-              		} else if(info.event.extendedProps.title == '접수') {
-              			info.el.style.backgroundColor = bColor;
-              		} else if(info.event.extendedProps.title == '계약'){
-              			info.el.style.backgroundColor = cColor;
-              		}		
-              	}
+               	]
             });
 
             

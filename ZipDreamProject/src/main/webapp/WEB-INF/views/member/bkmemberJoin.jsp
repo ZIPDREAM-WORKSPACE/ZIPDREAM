@@ -122,7 +122,6 @@
         height: 250px;
         left: 24px;
         top: 420px;
-
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
     }

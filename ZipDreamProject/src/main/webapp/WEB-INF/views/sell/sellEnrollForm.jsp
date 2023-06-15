@@ -183,6 +183,7 @@
                 </div>
                 <div class="sell_last">
                     <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="해당 매물의 주소를 입력해주세요" size="80" required>
+                     <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
                     </div>
                 </div>
                  <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
