@@ -170,11 +170,22 @@ public class AdminController {
 	}
 	
 	@GetMapping("/changeMemberStatus")
-	public String changeMemberStatus(int userNo,String status) {
+	public String changeMemberStatus(int userNo,String status,RedirectAttributes ra) {
 		Member m = new Member();
 		m.setUserNo(userNo);
 		m.setStatus(status.equals("Y")?"N":"Y");
-		service.updateMemberStatus(m);
+		int result = service.updateMemberStatus(m);
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1 && status.equals("Y")) {
+			alertMsg.put("message", "회원 비활성화 성공");
+			alertMsg.put("type", "success");
+		}else if(result >= 1 && status.equals("N")){
+			alertMsg.put("message", "회원 활성화 성공");
+			alertMsg.put("type", "success");
+		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		
 		return "redirect:/admin/user";
 	}
@@ -213,10 +224,21 @@ public class AdminController {
 	}
 	
 	@GetMapping("/report/update")
-	public String reportUpdate(Model model,
-								Report report) {
+	public String reportUpdate(Model model,Report report,
+								RedirectAttributes ra) {
 		
 		int result = service.updateReportResult(report);
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1) {
+			alertMsg.put("message", "신고 처리 성공");
+			alertMsg.put("type", "success");
+		}else {
+			alertMsg.put("message", "신고 처리 실패");
+			alertMsg.put("type", "error");
+		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		
 		return "redirect:/admin/report";
 	}
@@ -243,8 +265,7 @@ public class AdminController {
 				Model model,
 				ChatRoomJoin join,
 				@PathVariable("chatRoomNo") int chatRoomNo,
-				RedirectAttributes ra
-			) {
+				RedirectAttributes ra) {
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("cno", join.getChatRoomNo());
 		map.put("uno", loginUser.getUserNo());
@@ -300,7 +321,7 @@ public class AdminController {
 	@PostMapping("/event/insert")
 	public String eventInsert(Model model,
 							  @RequestParam(value="images", required=false) MultipartFile img,
-							  Coupon coupon, HttpSession session) {
+							  Coupon coupon, HttpSession session,RedirectAttributes ra) {
 		
 		String webPath = "/resources/images/coupons/";
 		String serverFolderPath = session.getServletContext().getRealPath(webPath);
@@ -313,23 +334,45 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		
-		if(result > 0) {
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1) {
+			alertMsg.put("message", "쿠폰 등록 성공");
+			alertMsg.put("type", "success");
 		}else {
+			alertMsg.put("message", "쿠폰 등록 실패");
+			alertMsg.put("type", "error");
 		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
+		
 		return "redirect:/admin/event";
 	}
 	
 	@GetMapping("/event/couponToUser")
 	public String couponToUser(@RequestParam(value="couponNo", required=false) int couponNo,
-							   @RequestParam(value="userNo", required=false) int[] userNo) {
-
+							   @RequestParam(value="userNo", required=false) int[] userNo,
+							   RedirectAttributes ra) {
+		int result = 0;
 		for(int i = 0; i < userNo.length; i++) {
 			Map<String,Integer> map = new HashMap<String,Integer>();
 			map.put("couponNo", couponNo);
 			map.put("userNo", userNo[i]);
 			
-			service.insertCouponToUser(map);
+			result = service.insertCouponToUser(map);
+			if(result < 1) {
+				break;
+			}
 		}
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1) {
+			alertMsg.put("message", "쿠폰 보내기 성공");
+			alertMsg.put("type", "success");
+		}else {
+			alertMsg.put("message", "쿠폰 보내기 실패");
+			alertMsg.put("type", "error");
+		}
+		
 		return "redirect:/admin/event";
 	}
 	
@@ -355,7 +398,7 @@ public class AdminController {
 		Member m = memberService.selectMember(userNo);
 		List<Attachment> at = service.selectAttachmentList(userNo);
 		
-		List<Map<String,String>> list = service.selectApplyListLimit5(1);
+		List<Map<String,String>> list = service.selectApplyListLimit5(2);
 		
 		model.addAttribute("member", m);
 		model.addAttribute("attachment", at);
@@ -420,9 +463,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/selldetail/del")
-	public String deleteSellDetail(@RequestParam(value="sellNo") int sellNo) {
+	public String deleteSellDetail(@RequestParam(value="sellNo") int sellNo,
+									RedirectAttributes ra) {
 		
 		int result = service.deleteSellDetail(sellNo);
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1) {
+			alertMsg.put("message", "삭제 성공");
+			alertMsg.put("type", "success");
+		}else {
+			alertMsg.put("message", "삭제 실패");
+			alertMsg.put("type", "error");
+		}
 		
 		return "redirect:/admin/selldetail";
 	}

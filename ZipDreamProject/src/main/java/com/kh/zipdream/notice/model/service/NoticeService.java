@@ -10,6 +10,8 @@ public interface NoticeService {
 	
 	public int deleteSaleNotice(Notice notice);
 	
+	public int deleteManageNotice(int noticeNo);
+	
 	public List<Notice> selectManageList(int refUno);
 	
 	public List<Notice> selectInterestList(int refUno);

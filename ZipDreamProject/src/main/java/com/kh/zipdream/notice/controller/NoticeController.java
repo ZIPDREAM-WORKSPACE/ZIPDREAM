@@ -70,5 +70,18 @@ public class NoticeController {
 		return result;
 	}
 	
+	@ResponseBody
+	@GetMapping("/deleteManageNotice")
+	public int deleteManageNotice(HttpSession session, Model model,
+			@RequestParam(value="noticeNo", required=false) int noticeNo
+			
+			){
+		
+		
+		int result = noticeService.deleteManageNotice(noticeNo);
+		
+		return result;
+	}
+	
 
 }

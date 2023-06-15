@@ -703,10 +703,12 @@
 
 						}
 						
-						html += "</tbody>"
+						html += "</tbody>";
+						$("#request").attr('disabled',false);
 					}else{
 						
 						html = "<div class='nonAgent'>조회된 공인중개사가 없습니다.</div>"
+						$("#request").attr('disabled',true);
 					}
 					
 					$(".modal-body").append(html);
@@ -736,7 +738,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="listReset();">닫기</button>
-					<button type="button" class="btn btn-primary" onclick="myroomInsert();" data-dismiss="modal">신청하기</button>
+					<button type="button" class="btn btn-primary" id="request" onclick="myroomInsert();" data-dismiss="modal" disabled>신청하기</button>
 				</div>
 			</div>
 		</div>
@@ -765,10 +767,8 @@
 			if($('input[name=address4]').val()!= ""){
 				address += $('input[name=address4]').val()+"호";
 			}
-			 
 
-			
-			console.log("보낼정보는 = 공인중개사 : "+refRuno+", 회원정보 :"+refUno+", 룸타입" + roomType + buildingType + dealType + address);
+			/* console.log("보낼정보는 = 공인중개사 : "+refRuno+", 회원정보 :"+refUno+", 룸타입" + roomType + buildingType + dealType + address); */
 			
 			$.ajax({
 				url:"<%=request.getContextPath()%>/myroomsell/insert",
