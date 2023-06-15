@@ -37,10 +37,6 @@ html::-webkit-scrollbar {
 	float: left;
 }
 
-/* #search {
-	border-bottom: 1px solid lightgray;
-} */
-
 #imgArea {
 	margin: 10px;
 	float: left;
@@ -366,6 +362,7 @@ html::-webkit-scrollbar {
 	background-color: #F0F0F0;
 	cursor: pointer;
 }
+
 </style>
 
 
@@ -564,8 +561,7 @@ html::-webkit-scrollbar {
 	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
 	    	                        	        /* location.href="#"+markerPosit; */
 	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
-	    	                        	        
+	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5").css("color", "black");
 	    	                        	        
 	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
 	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
@@ -1105,13 +1101,14 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
       			    	                       			  if(max == 0 && min == 0){
       			    	                       				 minToMax = "실거래 평균 시세 없음";
       			    	                       			  }
-      			    	                       			  
+      			    	                       					  
       			    	                       			  break;
-      			    	                       				/* } */
+      			    	                       			
     			    	                       		  }  
     			    	                       			positions.push({
     			    	                       				// content안에 주소정보랑 최소금액~최대금액 표시하기
     			    	                       				// content div안에 min과 max를 넣어준다.
+    			    	                       				
     			    	                       				content: "<div class='infoAdd'>"+"주소 : "+result[i].address_name+'</div>'
     			    	                       						+ '<div class="price">'+minToMax+"</div>",
     			    	                       				latlng: new kakao.maps.LatLng(result[i].y, result[i].x)
@@ -1320,42 +1317,46 @@ $("#allOj").click(function(){
 });
 
 $("#comOkOj").click(function(){
-  	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
-  	$("#comOkOj").css("background-color", "#1F4B6B").css("color", "white");
-	
-	$.ajax({
-		type: "get",
-		url: "<%= request.getContextPath() %>/sell/sellList",
-		dataType: "json",
-		success: function(result){
-			console.log(result);
-			console.log(result.length);
-			var listEl = document.getElementById('placesList');
-			listEl.innerHTML = "";
-		  	
-			for(let i=0; i<result.length; i++){
-				var listLiTag = document.createElement("li");
-				listLiTag.setAttribute("id", result[i].sellNo);
-				listLiTag.setAttribute("class", "goDetail2");
+	if(${!empty loginUser}){
+	  	$("#allOj").css("background-color", "#F0F0F0").css("color", "black");
+	  	$("#comOkOj").css("background-color", "#1F4B6B").css("color", "white");
+		
+		$.ajax({
+			type: "get",
+			url: "<%= request.getContextPath() %>/sell/sellList",
+			dataType: "json",
+			success: function(result){
+				console.log(result);
+				console.log(result.length);
+				var listEl = document.getElementById('placesList');
+				listEl.innerHTML = "";
+			  	
+				for(let i=0; i<result.length; i++){
+					var listLiTag = document.createElement("li");
+					listLiTag.setAttribute("id", result[i].sellNo);
+					listLiTag.setAttribute("class", "goDetail2");
+					
+					
+					
+					listLiTag.innerHTML = result[i].sellPrice +"<br>"+
+						result[i].sellName+"<br>"+
+						result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
+						"중개사 소재지 : "+result[i].address.substring(5);
+			  		listEl.appendChild(listLiTag);
+				}
 				
-				
-				
-				listLiTag.innerHTML = result[i].sellPrice +"<br>"+
-					result[i].sellName+"<br>"+
-					result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
-					"중개사 소재지 : "+result[i].address.substring(5);
-		  		listEl.appendChild(listLiTag);
+			  	
+			},
+			error: function(result){
+				console.log("에러");
 			}
 			
-		  	
-		},
-		error: function(result){
-			console.log("에러");
-		}
-		
-		
-		
-	});
+			
+			
+		});
+	}else{
+		swal("로그인 후 이용 가능한 서비스입니다.");
+	}
 });
 
 $(document).on('click', '.goDetail2',
@@ -1513,7 +1514,7 @@ $("#keyword").keyup(function(){
 	    	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
 	    	    	    	                        	        /* location.href="#"+markerPosit; */
 	    	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-	    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
+	    	    	    	                        	        $(backgroundTag).siblings().css({"background-color":"#f0f3f5","color":"black"});
 	    	    	    	                        	        
 	    	    	    	                        	        
 	    	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
