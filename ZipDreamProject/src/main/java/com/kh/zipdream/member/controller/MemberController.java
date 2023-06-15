@@ -401,24 +401,8 @@ public class MemberController {
 	  return "redirect:/"; 
 	  }
 	 
-	  //
 	  
-			
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+
 
 	@GetMapping("/mybookmarklist")
 	@ResponseBody
@@ -428,7 +412,7 @@ public class MemberController {
 		return uslist;
 	}
 
-
+}
 
 
 

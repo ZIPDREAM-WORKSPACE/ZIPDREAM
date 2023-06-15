@@ -154,9 +154,6 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-	public int deleteMember(int userNo) {
-		return memberDao.deleteMember(userNo);
-	}
 
 	// 비밀번호 변경
 	public int updateMemberPwd(Member m) {
@@ -172,9 +169,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = 0;
 		if (list != null) {
 
-	 public int deleteMember(int userNo) {
-		 return memberDao.deleteMember(userNo);
-	 }
+	
 	 
 	 public  List<userSelectList> myBookmarkList(int uno) {
 		 return memberDao.myBookmarkList(uno);
@@ -210,7 +205,7 @@ public class MemberServiceImpl implements MemberService {
 				}
 
 			}
-		}
+		
 		return result;
 	}
 	
