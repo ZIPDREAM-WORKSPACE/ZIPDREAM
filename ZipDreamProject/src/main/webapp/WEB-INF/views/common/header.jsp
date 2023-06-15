@@ -295,7 +295,13 @@ position: absolute;
 	let houseSock1 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	houseSock1.onmessage = function(e){
 		let message = JSON.parse(e.data);
-		if(message.userNo==currentUserNo || message.refRuno==currentUserNo || (message.refUno==currentUserNo&&message.dealType!=null) || (message.refUno==currentUserNo&&message.counsleMethod !=null) ||message.refTuno==currentUserNo || (message.refRuno==currentUserNo && message.dealType != null)){
+		if((message.userNo==currentUserNo && message.hsUrl !=null)|| 
+				(message.refRuno==currentUserNo && message.reportType !=null)|| 
+				(message.userNo==currentUserNo && message.couponContent !=null)|| 
+				(message.refUno==currentUserNo&&message.dealType!=null&&message.refRuno!=null) || 
+				(message.refUno==currentUserNo&&message.counsleMethod !=null &&message.refTuno==0) ||
+				(message.refTuno==currentUserNo&&message.counsleMethod !=null&&message.refUno!=null) || 
+				(message.refRuno==currentUserNo && message.dealType != null)){
 			
 			createNotice();
 		}

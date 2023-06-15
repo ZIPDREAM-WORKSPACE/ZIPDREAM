@@ -83,9 +83,10 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(report) ));
 			}
-		}else if(message.getPayload().charAt(4)=='p') {
-			
+		}else if(message.getPayload().charAt(5)=='p') {
+			System.out.println("왜저래진짜");
 			Coupon coupon = objectMapper.readValue(message.getPayload(), Coupon.class);
+			
 			n.setNoticeContent(coupon.getCouponContent());
 			n.setNoticeTitle(coupon.getCouponTitle());
 			n.setRefUno(coupon.getUserNo());
@@ -115,7 +116,7 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			}
 			
 			
-		}else if(message.getPayload().charAt(5)=='n') {
+		}else if(message.getPayload().charAt(6)=='s') {
 			System.out.println("???");
 			Counsle counsle = objectMapper.readValue(message.getPayload(), Counsle.class);
 			int method = counsle.getCounsleMethod();

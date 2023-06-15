@@ -92,15 +92,19 @@
 	    width: 203px;
 	    height: 250px;
 	    left: 425px;
-	    top: 580px;
+	    top: 640px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;
+	    
+	    
     }
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
         width: 100%;
-        height:  100%;
+        height: 100%;
         object-fit: cover;
         margin-top: 25px;
+        overflow: hidden;
+       
     }
 
     #license{
@@ -114,7 +118,7 @@
 	    width: 203px;
 	    height: 250px;
 	    left: 665px;
-	    top: 580px;
+	    top: 640px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;
     }
@@ -132,7 +136,7 @@
 	    width: 203px;
 	    height: 250px;
 	    left: 900;
-	    top: 580px;
+	    top: 640px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;	
     }
@@ -162,59 +166,64 @@
     }
     
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
-        width: 100%;
-        height:  100%;
+        width: 90%;
+        height:  90%;
         object-fit: cover;
-        margin-top: 25px;
+        margin-top: 0px;
     }
 </style>
 <body>
 <jsp:include page="agentPage.jsp"/>
+	 <form action="<%= request.getContextPath() %>/member/updatebkMember" method="post" enctype="multipart/form-data">
 	<div class="myInfo_wrap">
 		<div class="myInfo_wrap1">
 		<label class="myInfo_title">아이디</label><br>
-	    <input class="myInfo_content read_only" type="text" name="userEmail" value="${user.userName}" size="55" readonly><br><br>
+	    <input class="myInfo_content read_only" type="text" name="userId" value="${m.userId}" size="55" readonly><br><br>
 	    <label class="myInfo_title" >비밀번호</label><br>
 	    <input class="myInfo_content myInfo_button" type="button"  name="password" value="비밀번호 변경" style="width:508px;" data-toggle="modal" data-target="#password_modal"><br><br>
 	   	</div>
 	    <h5 id="license">사업자 등록증 등록</h5>
+               
                 <div class="licensewrap">
-                <input type="file" class="real-upload" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox" ></div>
+                <input type="file" class="real-upload images" accept="images/*"   style="display: none;" name="images" >
+                <div class="licensebox" ><li><img src="<%= request.getContextPath()%>/${images[0].filePath}/${images[0].changeName}"></li></div>
                     
                 
                <!--  <div class="licensewrap2"> -->
                 <h5 id="license1-1">중개등록증 등록</h5>
-                <input type="file" class="real-upload1" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-1"></div>
+                <input type="file" class="real-upload1 images" accept="images/*"   style="display: none;" name="images">
+                <div class="licensebox1-1"><li><img src="<%= request.getContextPath()%>/${images[1].filePath}/${images[1].changeName}"></li></div>
                 <!-- </div> -->
                 
                <!--  <div class="licensewrap3"> -->
                 <h5 id="license1-2">증명사진 등록</h5>
-                <input type="file" class="real-upload3" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-2" ></div>
+                <input type="file" class="real-upload3 images" accept="images/*"   style="display: none;" name="images">
+                <div class="licensebox1-2" ><li><img src="<%= request.getContextPath()%>/${images[2].filePath}/${images[2].changeName}"></li></div>
                 </div>
                  
 	    <br><br><br><br><br><br><br><br><br><br><br><br>   
 	    <div class="info">
+	    <input type="hidden" value="${m.userNo}" name="userNo">
 	    <label class="myInfo_title ">이름</label><br>
-	    <input class="myInfo_content read_only" type="text"  name="userName" value="오현지" size="55" readonly><br><br>
+	    <input class="myInfo_content" type="text"  id="userName" name="userName" value="${m.userName}" size="55"><br><br>
 	    <label class="myInfo_title">전화번호</label><br>
-	    <input class="myInfo_content" type="text" name="phone" value="010-1111-2222" size="46" >
+	    <input class="myInfo_content" type="text" id="phone" name="phone" value="${m.phone}" size="46" >
 	    <input class="myInfo_content myInfo_button" type="button" value="변경"><br><br>
 	    <label class="myInfo_title ">주소</label><br>
-	    <input class="myInfo_content" type="text"  value="서울특별시 테헤란로 23-567" size="46" >
+	    <input class="myInfo_content" type="text"  value="${m.address}" size="46" id="addr" name="address">
 	    <input class="myInfo_content myInfo_button" type="button" value="변경" data-toggle="modal" data-target="#address_modal"><br><br>
 	    </div>
-		<a href="" ><button type="submit" id="signchangebtn">변경하기</button></a>   
-	    <a href="" ><button type="submit" id="signdeletebtn">회원탈퇴</button></a>
+		<button type="submit" id="signchangebtn">변경하기</button>  
+	    <button type="button" id="signdeletebtn">회원탈퇴</button>
 	</div>
+	</form>
 	
 
 
 <!-- 비밀번호 모달 -->
 <div class="modal fade" id="password_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <form action="<%= request.getContextPath() %>/member/changePw" method="post">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
@@ -237,9 +246,10 @@
       </div>
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="confirm" >변경</button>
+        <button type="submit" class="btn btn-primary" id="confirm" >변경</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 
@@ -267,7 +277,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="confirm" >변경</button>
+        <button type="button" class="btn btn-primary" id="addConfirm" name="updateButton" data-dismiss="modal" aria-label="Close"  >변경</button>
       </div>
     </div>
   </div>
@@ -380,6 +390,7 @@ function checkPasswordValidity() {
 
                // 파일 갯수 검사
                if ([...files].length < 7) {
+            	   licensebox.innerHTML = "";
                uploadFiles.push(file);
                const reader = new FileReader();
                reader.onload = (e) => {
@@ -430,6 +441,7 @@ function checkPasswordValidity() {
 
                    // 파일 갯수 검사
                    if ([...files].length < 7) {
+                	   licensebox1.innerHTML = "";
                    uploadFiles.push(file);
                    const reader = new FileReader();
                    reader.onload = (e) => {
@@ -479,6 +491,7 @@ function checkPasswordValidity() {
 
                        // 파일 갯수 검사
                        if ([...files].length < 7) {
+                    	   licensebox2.innerHTML = "";
                        uploadFiles.push(file);
                        const reader = new FileReader();
                        reader.onload = (e) => {
@@ -506,5 +519,51 @@ function checkPasswordValidity() {
                    upload3.addEventListener('click', () => realUpload3.click());
 
                    realUpload3.addEventListener('change', getImageFiles3);
-
+                   
+                   
+                   $("#addConfirm").click(function(){
+                  	 let add1 = document.getElementById('addr1').value;
+                  	let add2 = document.getElementById('addr2').value;
+                  	let add3 = document.getElementById('addr3').value;
+                  	let address = add1 + add2 + add3;
+                  	document.getElementById('addr').value = address;
+                  	console.log(document.getElementById('addr').value);
+                  	$('#addr').attr("value",address);
+                  	console.log($('#addr').val());
+                  });
+                              
+                   $(function(){
+                		
+                	  <%--  $("#signchangebtn").click(function(){
+                	   	 let phone = $("#phone").val();
+                	   	 let images = $(".images").val();
+               	   	 	 console.log(images);
+                	   	 let userNo = ${loginUser.userNo};
+                		   	let add1 = document.getElementById('addr1').value;
+                			let add2 = document.getElementById('addr2').value;
+                			let add3 = document.getElementById('addr3').value;
+                			
+                		  
+                			let address = add1 + add2 + add3;
+                	   	 let userName = $("#userName").val();
+                			$.ajax({
+                	            url:"<%=request.getContextPath()%>/member/updatebkMember", 
+                	            method:"post",
+                	            dataType : "TEXT",
+                	            data: {phone, address, userName, userNo, images}, 
+                	            success:function(data){
+                	                if(data == null){ 
+                	                    alert("정보수정 실패.");
+                	                }else{                  
+                	                    alert("정보수정 성공");
+                	                }
+                	            },error : function(err){
+                	            	console.log(err)
+                	            }
+                	            
+                	        });
+                	       
+                	    });   --%>
+                   });
+                	 
 </script>
