@@ -448,7 +448,12 @@ html::-webkit-scrollbar {
 
 
 <script>
-
+	$('input[name="s"]').keydown(function() {
+	  if (event.keyCode === 13) {
+	    event.preventDefault();
+	  };
+	});
+	
 
 	address = "";
 	addressX = 0;
