@@ -27,6 +27,12 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
+	public int deleteManageNotice(int noticeNo) {
+		int result = noticeDao.deleteManageNotice(noticeNo);
+		return result;
+	}
+	
+	@Override
 	public List<Notice> selectManageList(int refUno) {
 		List<Notice> result = noticeDao.selectManageList(refUno);
 		return result;

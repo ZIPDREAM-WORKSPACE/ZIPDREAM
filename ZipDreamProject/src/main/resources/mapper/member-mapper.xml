@@ -34,7 +34,8 @@
 		<result column="CHANGE_NAME" property="changeName" />
 		<result column="FILE_PATH" property="filePath" />
 		<result column="FILE_LEVEL" property="fileLevel" />
-
+	</resultMap>
+	
 	<resultMap type="userselectlist" id="bookmarkResultSet">
 		<result column="USER_NO" property="userNo" />
 		<result column="SELL_NO" property="sellNo" />
@@ -199,6 +200,7 @@
 		SELECT SELL_NO
 		FROM USERSELECT_LIST
 		WHERE USER_NO = #{uno}
+		ORDER BY SELL_NO
 	</select>
 
 </mapper>

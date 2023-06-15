@@ -135,9 +135,23 @@
 						</form>
 						
 						<div class="coupon-list" style="margin-top:20px;padding:10px 5px;border:1px solid #999;">
-							<c:forEach items="${couponList}" var="coupon">
-								<img class="coupons" width="300px" height="150px" src="<%= request.getContextPath() %>${coupon.couponPath }" data-couponNo="${coupon.couponNo }" data-couponTitle="${coupon.couponTitle }" data-couponContent="${coupon.couponContent }" data-couponDate="${coupon.couponDate }" data-couponpath="${coupon.couponPath }" style="object-fit:cover;">	
-							</c:forEach>
+							<c:choose>
+								<c:when test="${fn: length(couponList) == 0}">
+									쿠폰이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${couponList}" var="coupon">
+										<img class="coupons" width="300px" height="150px"
+											src="<%= request.getContextPath() %>${coupon.couponPath }"
+											data-couponNo="${coupon.couponNo }"
+											data-couponTitle="${coupon.couponTitle }"
+											data-couponContent="${coupon.couponContent }"
+											data-couponDate="${coupon.couponDate }"
+											data-couponpath="${coupon.couponPath }"
+											style="object-fit: cover;">
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -186,14 +200,21 @@
 						<img id="coupon-preview" src="" style="object-fit:cover;">
 						
 						<select class="result-value coupon-select" name="couponNo" style="display:block;width:300px;height:100px;">
-							<c:forEach items="${couponList}" var="coupon">
-								<option value="${coupon.couponNo }">${coupon.couponTitle }</option>
-							</c:forEach>
-						</select>
+								<c:choose>
+									<c:when test="${fn: length(couponList) == 0}">
+										<option value="">쿠폰이 없습니다.</option>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${couponList}" var="coupon">
+											<option value="${coupon.couponNo }">${coupon.couponTitle }</option>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</select>
 						<div class="select-arrow" style="position:relative;top:-55px;left:100px;"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
+						<button type="submit" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
 	                        data-dismiss="modal">닫기</button>
       				</div>
@@ -330,7 +351,7 @@ function eventSubmit(){
 	let couponUserNos = document.getElementById("coupon-userNo").value.split(",");
 	for(let i = 0; i<couponUserNos.length ; i++){
 		let couponUserNo =couponUserNos[i];
-		console.log(couponUserNo);
+		console.log(coupon.dataset);
 		var conponContent = coupon.dataset.couponcontent;
 		var conponDate = coupon.dataset.coupondate;
 		var conponTitle = coupon.dataset.coupontitle;

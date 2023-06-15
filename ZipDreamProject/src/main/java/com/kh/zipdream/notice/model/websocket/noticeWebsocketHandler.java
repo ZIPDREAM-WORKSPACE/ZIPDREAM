@@ -48,7 +48,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
 		ObjectMapper objectMapper = new ObjectMapper();
 		Notice n = new Notice();
-		System.out.println("??"+message.getPayload());
 		if(message.getPayload().charAt(2)=='h') {
 			
 		MySale mySale = objectMapper.readValue(message.getPayload(), MySale.class);
@@ -83,9 +82,9 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			for( WebSocketSession s: sessions) {
 				s.sendMessage(new TextMessage(new Gson().toJson(report) ));
 			}
-		}else if(message.getPayload().charAt(4)=='p') {
-			
+		}else if(message.getPayload().charAt(5)=='p') {
 			Coupon coupon = objectMapper.readValue(message.getPayload(), Coupon.class);
+			
 			n.setNoticeContent(coupon.getCouponContent());
 			n.setNoticeTitle(coupon.getCouponTitle());
 			n.setRefUno(coupon.getUserNo());
@@ -115,8 +114,7 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			}
 			
 			
-		}else if(message.getPayload().charAt(5)=='n') {
-			System.out.println("???");
+		}else if(message.getPayload().charAt(6)=='s') {
 			Counsle counsle = objectMapper.readValue(message.getPayload(), Counsle.class);
 			int method = counsle.getCounsleMethod();
 			if(method == 1) {
@@ -136,7 +134,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			}
 			
 		}else if(message.getPayload().charAt(5)=='T' ) {
-			System.out.println("???");
 			Counsle counsle = objectMapper.readValue(message.getPayload(), Counsle.class);
 			int method = counsle.getCounsleMethod();
 			if(method == 1) {
@@ -157,7 +154,6 @@ private Set<WebSocketSession> sessions = Collections.synchronizedSet( new HashSe
 			
 		}
 		else if(message.getPayload().charAt(5)=='R' ) {
-			System.out.println("???");
 			MyRoomSell myRoomSell = objectMapper.readValue(message.getPayload(), MyRoomSell.class);
 			String deal = myRoomSell.getDealType();
 			n.setNoticeContent(deal+" 타입의 매물 신청이 들어왔습니다.");

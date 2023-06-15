@@ -60,6 +60,11 @@ public class SalesController {
 		return "sales/salesFaq";
 	}
 	
+	@GetMapping("/calculator")
+	public String moveSalesCalculator() {
+		return "sales/salesCalculator";
+	}
+	
 	@GetMapping("/rule")
 	public String moveSaleRule() {
 		return "sales/saleRule";

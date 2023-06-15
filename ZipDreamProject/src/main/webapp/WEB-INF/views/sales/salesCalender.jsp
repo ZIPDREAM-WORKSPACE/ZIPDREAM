@@ -119,8 +119,8 @@
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px;
 	background-color: rgb(255, 255, 255);
 	padding: 40px 25px;
-    margin-top: 85px;
-    margin-bottom: 20px;
+	margin-top: 85px;
+	margin-bottom: 20px;
 	overflow-y: scroll;
 	padding-top: 10px;
 }
@@ -185,8 +185,8 @@
 	line-height: 22px;
 	vertical-align: middle;
 	outline: none;
-   	overflow: hidden;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .fc {
@@ -255,6 +255,7 @@
                     center: 'title',
                     end: 'prev next'
                 },
+                firstDay:1,
                 titleFormat: function (date) {
                     return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
                 },

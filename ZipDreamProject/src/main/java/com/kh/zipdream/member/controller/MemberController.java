@@ -401,7 +401,13 @@ public class MemberController {
 	  return "redirect:/"; 
 	  }
 	 
-	  //
+	  @GetMapping("/mybookmarklist")
+		@ResponseBody
+		public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
+			List<userSelectList> uslist = memberService.myBookmarkList(uno);
+	
+			return uslist;
+		}
 	  
 			
 	
@@ -420,13 +426,6 @@ public class MemberController {
 	
 }
 
-	@GetMapping("/mybookmarklist")
-	@ResponseBody
-	public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
-		List<userSelectList> uslist = memberService.myBookmarkList(uno);
-
-		return uslist;
-	}
 
 
 
