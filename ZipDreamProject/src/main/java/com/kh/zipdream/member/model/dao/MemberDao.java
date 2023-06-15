@@ -1,5 +1,6 @@
 package com.kh.zipdream.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -67,8 +68,20 @@ public class MemberDao {
 		return sqlSession.selectOne("member-mapper.selectMember",userNo);
 	}
 	
+	public Member selectbkMember(int userNo) {
+		return sqlSession.selectOne("member-mapper.selectbkMember",userNo);
+	}
+	
 	public int updateMember(Map<String, String> map) {
 		return sqlSession.update("member-mapper.updateMember", map);
+	}
+	
+	public int updatebkImages(Attachment img) {
+		return sqlSession.update("member-mapper.updatebkImages",img);
+	}
+	
+	public List<Attachment> selectAttachmentList(int userNo) {
+		return (ArrayList)sqlSession.selectList("member-mapper.selectAttachmentList",userNo);
 	}
 	
 	
@@ -80,6 +93,12 @@ public class MemberDao {
 	public int searchPwd(Member m) {
 		return sqlSession.update("member-mapper.searchPwd",m);
     }
+	
+	
+	public int updateMemberPwd(Member m) {
+		return sqlSession.update("member-mapper.updateMemberPwd", m);
+	}
+	
 	
 	public int deleteMember(int userNo) {
 		return sqlSession.delete("member-mapper.deleteMember",userNo);

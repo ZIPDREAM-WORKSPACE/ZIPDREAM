@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
 
@@ -34,8 +35,15 @@ public interface MemberService {
 	public int searchPwd(Member m);
 	
 	public int updateMember(Map<String, String> map);
+	
+	public int updatebkImages(Map<String, String> map, List<MultipartFile> imgList, String webPath,String serverFolderPath)  throws Exception;
+	
+	public List<Attachment> selectAttachmentList(int userNo);
+	
+	public int updateMemberPwd(Member m);
 
 	public int emailCheck(String id);
-
+	
+	 public int deleteMember(int userNo);
 }
 

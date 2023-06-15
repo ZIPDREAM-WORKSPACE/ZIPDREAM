@@ -10,6 +10,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +62,7 @@ public class MemberController {
 		return "mypage/myInfo";
 	}
 	
+	
 
 	// 이메일
 	@Autowired
@@ -96,12 +99,21 @@ public class MemberController {
 	         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 	         @RequestParam(value = "saveId", required = false) String saveId) {
 
-	      // 암호화 전 loginUser처리
 	      Member loginUser = memberService.loginMember(m);
 	    
-	      System.out.println(m.getUserPwd());
 	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
 	    	  	session.setAttribute("loginUser", loginUser);
+	    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
+				
+				if(saveId != null) { //아이디 저장이 체크 되었을때
+					cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
+				}else { // 아이디저장 체크하지 않았을때
+					cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
+				}
+					
+				cookie.setPath("/memberLogin");
+				resp.addCookie(cookie);
+				
 		         if(loginUser.getUserLevel() == 3) {
 		            mv.setViewName("redirect:/admin/main");
 		         }else {            
@@ -327,8 +339,68 @@ public class MemberController {
 			
 	}
 	
-	//비밀번호 변경
+	//중개사회원 정보수정
+		@PostMapping("/updatebkMember")
+		
+		public String updatebkMember(
+				HttpSession session, Model model,
+				@RequestParam(value = "phone") String phone,
+				@RequestParam(value = "userName") String userName,
+				@RequestParam(value = "address") String address,
+				@RequestParam(value = "userNo") String userNo, 
+				@RequestParam(value = "images" , required = false) List<MultipartFile> imgList) {
+																
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("userName", userName);
+				map.put("phone", phone);
+				map.put("address", address);
+				map.put("userNo", userNo+"");
+				System.out.println(map);
+				String webPath = "/resources/bkupfiles/";
+				String serverFolderPath = session.getServletContext().getRealPath(webPath);
+				
+			
+				int result = memberService.updateMember(map);
+				try {
+					result = memberService.updatebkImages(map,imgList,webPath,serverFolderPath);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				
+				
+				return  "redirect:/";
+				
+		}
+		
 	
+	//일반비밀번호 변경
+	  @PostMapping("/changePw") 
+	  public String changePw(@RequestParam Map<String, Object> paramMap,
+	  
+	  @ModelAttribute("loginUser") Member loginUser, RedirectAttributes ra, SessionStatus status) {
+			
+		 
+		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
+
+		 
+		 int result = 0;
+		 if(bcryptPasswordEncoder.matches(paramMap.get("currentPw")+"", loginUser.getUserPwd())) {
+			 Member m = new Member();
+			 m.setUserNo(loginUser.getUserNo());
+			 m.setUserPwd(newPw);
+			 
+			 result = memberService.updateMemberPwd(m);
+		 }
+		 	status.setComplete(); 
+				
+		 
+			 
+	  return "redirect:/"; 
+	  }
+	 
+	  //
+	  
 			
 	
 	

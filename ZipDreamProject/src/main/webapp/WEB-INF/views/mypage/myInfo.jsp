@@ -113,7 +113,7 @@
 <!-- 비밀번호 모달 -->
 <div class="modal fade" id="password_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="changePw" method="post"></form>
+   <form action="<%= request.getContextPath() %>/member/changePw" method="post">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
@@ -136,9 +136,10 @@
       </div>
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="confirm" >변경</button>
+        <button type="submit" class="btn btn-primary" id="confirm" >변경</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 

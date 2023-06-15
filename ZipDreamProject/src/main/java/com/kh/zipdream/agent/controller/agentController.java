@@ -1,6 +1,7 @@
 package com.kh.zipdream.agent.controller;
 
-import java.util.HashMap; 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.zipdream.agent.model.service.AgentService;
+import com.kh.zipdream.attachment.model.vo.Attachment;
+import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
 import com.kh.zipdream.sell.model.service.SellService;
@@ -30,13 +33,18 @@ public class agentController {
 	@Autowired
 	private SellService sellService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@Autowired 
 	private AgentService agentService;
 	
-	@GetMapping("/page")
-	public String main() {
-		return "agent/agentPage";
+	
+	 @GetMapping("/page") 
+	 public String main() { 
+		 return "agent/agentPage"; 
 	}
+	 
 	
 	@GetMapping("/list")
 	public String list(Model model, @ModelAttribute("loginUser") Member loginUser) { 
@@ -75,7 +83,14 @@ public class agentController {
 	}
 	
 	@GetMapping("/mypage")
-	public String agentPage() {
+	public String agentPage(@ModelAttribute("loginUser") Member loginUser, Member m,
+			Model model) {
+		m  = memberService.selectMember(loginUser.getUserNo());
+		List<Attachment> images = memberService.selectAttachmentList(loginUser.getUserNo()); 
+		
+		
+		model.addAttribute("m", m);
+		model.addAttribute("images", images);
 		return "agent/agentMypage";
 	}
 	
@@ -103,6 +118,7 @@ public class agentController {
 		}
 		
 	}
+	
 	
 	
 }
