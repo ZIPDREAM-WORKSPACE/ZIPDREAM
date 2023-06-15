@@ -207,7 +207,12 @@ position: absolute;
 				<li class="h_text"><a href="<%=request.getContextPath()%>/map/main">지도</a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/sales/schedule">분양</a></li>
 				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
-				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				<c:if test="${empty sessionScope.loginUser}">
+					<li class="h_text"><a href="" onclick="swal('로그인 후 이용하실 수 있습니다.'); return false;">알림</a></li>
+				</c:if>
+				<c:if test="${!empty sessionScope.loginUser}">
+					<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				</c:if>
 				<c:if test="${sessionScope.loginUser != null }">
 					<c:if test="${sessionScope.loginUser.userLevel == 1 }">
 						<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
@@ -290,7 +295,7 @@ position: absolute;
 	let houseSock1 = new SockJS("<%=request.getContextPath()%>/notice"); 
 	houseSock1.onmessage = function(e){
 		let message = JSON.parse(e.data);
-		if(message.userNo==currentUserNo || message.refRuno==currentUserNo || (message.refUno==currentUserNo&&message.dealType!=null)){
+		if(message.userNo==currentUserNo || message.refRuno==currentUserNo || (message.refUno==currentUserNo&&message.dealType!=null) || (message.refUno==currentUserNo&&message.counsleMethod !=null) ||message.refTuno==currentUserNo || (message.refRuno==currentUserNo && message.dealType != null)){
 			
 			createNotice();
 		}

@@ -79,11 +79,32 @@
 }
 .card{
    cursor: pointer;
+   width:100%;
+   transition:transform .2s;
+   transition-timing-function:cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card:hover{
+	transform:scale(1.05);
+
+}
+.card-img-top{
+	height:160px;
+	objecf-fit:cover;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="mypage.jsp"/>
+	
+    <script>
+   		/* 최근본방 카드 클릭시 디테일뷰로 이동하는 함수  */
+    	function moveDetail(e){
+    		var sellNo = $(e).attr('id');
+    		
+    		location.href="<%=request.getContextPath()%>/sell/detail/"+sellNo;
+    	}
+    </script>
 	
 	<script>
 		$(function(){
@@ -108,12 +129,11 @@
 						var html = "";
 						html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 5개까지 저장됩니다.</p></div><div class='row row-cols-1 row-cols-md-5 g-4'>";
 						for(var i = 0; i<result.length; i++){
-							console.log(result[i]);
-							html += "<div class='col'><div class='card h-100'>";
+							html += "<div class='col'><div onclick='moveDetail(this);' class='card h-100' id='"+result[i].sellNo+"'>";
 							if(result[i].filePath != null){
 								html += "<img src='${pageContext.request.contextPath}"+ "/resources/sellupfiles/"+result[i].filePath +"' class='card-img-top'>";
 							}else{
-								html += "<img src='https://ifh.cc/g/FN1rY5.png' class='card-img-top'>";
+								html += "<img src='https://ifh.cc/g/dtv18m.png' class='card-img-top'>";
 							}
 							html += "<div class='card-body'><h5 class='card-title'>" + result[i].sellName +"</h5>";
 							html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "</p>";
@@ -162,6 +182,7 @@
             </ul>
         </nav>
     </div> -->
+    
 	
 	<jsp:include page="../common/footer.jsp" />
 

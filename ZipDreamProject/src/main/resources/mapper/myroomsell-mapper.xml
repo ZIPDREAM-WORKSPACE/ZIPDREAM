@@ -129,4 +129,11 @@
 		WHERE USER_NO = #{userNo} AND COUPON_NO = #{couponNo}
 	</delete>
 	
+	<select id="checkAgent" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_ID = #{agentId} AND USER_LEVEL = '2'
+	</select>
+	
+	
 </mapper>

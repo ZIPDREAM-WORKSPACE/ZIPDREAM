@@ -87,5 +87,10 @@ public class MyRoomSellDao {
 		 return (ArrayList)sqlSession.selectList("myroomsell-mapper.recentRoomList",map);
 	 }
 	 
+	public int checkAgent(String agentId) {
+		
+		return sqlSession.selectOne("myroomsell-mapper.checkAgent", agentId);
+		
+	}
 
 }

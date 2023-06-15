@@ -98,15 +98,14 @@
 	height: 100%;
 	margin: 0px auto;
 	padding: 0px 10px;
-	
 }
 
 .calenderWrap {
-    width: 1200px;
+	width: 1200px;
 	display: flex;
 	align-items: center;
-    flex-direction: row;
-	margin:0 auto;
+	flex-direction: row;
+	margin: 0 auto;
 }
 
 #calendar {
@@ -114,13 +113,34 @@
 }
 
 .schedule {
-	width: 100%;
-	height: 100%;
+	width: 800px;
+	height: 500px;
+	border: 1px solid rgb(206 206 206/ 19%);
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px;
 	background-color: rgb(255, 255, 255);
-	padding: 0px 31px;
-	border-radius: 3px;
-	margin-bottom: 40px;
+	padding: 40px 25px;
+    margin-top: 85px;
+    margin-bottom: 20px;
+	overflow-y: scroll;
+	padding-top: 10px;
+}
+
+/* 스크롤바전체부분 */
+.schedule::-webkit-scrollbar {
+	width: 10px;
+}
+/* 스크롤바막대 */
+.schedule::-webkit-scrollbar-thumb {
+	background-color: #2C3E50;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+/*스크롤바 여백  */
+.schedule::-webkit-scrollbar-track {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
 }
 
 .schedule>ul {
@@ -130,17 +150,30 @@
 
 .schedule>ul>li {
 	display: flex;
-    align-items: flex-start;
+	align-items: flex-start;
 	width: 100%;
 	height: 56px;
 	padding: 17px 0px 17px 24px;
+	padding-left: 5px;
 	border-bottom: 1px solid rgb(231, 231, 231);
 }
 
 .scheduleName {
 	display: inline;
 	color: rgb(228, 90, 100);
-	margin-right: 31px;
+	margin-right: 10px;
+}
+
+.announceName {
+	display: inline;
+	color: #007bff;
+	margin-right: 10px;
+}
+
+.closeName {
+	display: inline;
+	color: #6c757;
+	margin-right: 10px;
 }
 
 .schedule>ul>li>a {
@@ -149,19 +182,29 @@
 	font-weight: 400;
 	white-space: nowrap;
 	display: inline-block;
-	width: 455px;
-	height: 22px;
 	line-height: 22px;
 	vertical-align: middle;
 	outline: none;
+   	overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .fc {
 	width: 100%;
 	color: black;
 }
-a{
+
+#calendar a {
 	color: black;
+	text-decoration: none;
+}
+
+.fc-daygrid-event-harness-abs a {
+	color: rgb(228, 90, 100);
+}
+
+.fc-daygrid-day-frame {
+	cursor: pointerd;
 }
 </style>
 </head>
@@ -221,7 +264,6 @@ a{
                 locale: 'ko', // 한국어 설정
                 dayMaxEvents: true,
                 select: function(info) {
-                    console.log(info.startStr);
                     var calenderStart = info.startStr;
                     
                     $.ajax({
@@ -229,24 +271,10 @@ a{
                     	method:"get",
                     	data:{calenderStart},
                     	success:function(result){
-                    		console.log(result);
-                    		var html = "";
-                    		if(result.length != 0){
-                    			html = "<ul>";
-                    			for(var i = 0; i<result.length; i++){
-                    				html += "<li><p class='scheduleName'>"+ result[i].calenderTitle +"</p>";
-                    				html += "<a target='_blank' href='"+ result[i].url+"'>"+result[i].calenderMemo + "</a></li>";
-                    			
-                    			}
-                    			html += "</ul>";
-                    		}else{
-                    			html = "<ul>해당 날짜에 분양일정이 없습니다.</ul>"
-                    		}
-                    		
-                    		$(".schedule").html(html);
+                    		infoList(result);
                     	},
                     	error:function(){
-                    		console.log(result);
+                    		console.log("에러발생");
                     	}
                     });
                     
@@ -259,18 +287,70 @@ a{
 	               		{
 	               			title:'<%= vo.getCalenderTitle()%>',
 	               			start:'<%= vo.getCalenderStart()%>',
-	               			end:'<%= vo.getCalenderEnd()%>',
-	               			color : '#' + Math.round(Math.random() * 0xffffff).toString(16)
+	            			<%if(vo.getCalenderTitle().equals("발표")){%>
+	            				color: '#007bff'
+	            			<%}else if(vo.getCalenderTitle().equals("접수")){%>
+	            				color: 'rgb(228, 90, 100)'
+	            			<%}else {%>
+	            				color: '#6c757d'
+	            			<% } %>
 	               		},
-               		<%}
-           		}%>
-               	] 
+               			<%}
+           			}%>
+               	]
             });
 
             
             calendar.render();
         });
         
+       
+        function infoList(result){
+    		var html = "";
+    		if(result.length != 0){
+    			html = "<ul>";
+    			for(var i = 0; i<result.length; i++){
+    				if(result[i].calenderTitle == "접수"){
+        				html += "<li><p class='scheduleName'>"+ result[i].calenderTitle +"</p>";
+    				}else if(result[i].calenderTitle == "발표"){
+    					html += "<li><p class='announceName'>"+ result[i].calenderTitle +"</p>";
+    				}else if(result[i].calenderTitle == "계약"){
+    					html += "<li><p class='closeName'>"+ result[i].calenderTitle +"</p>";
+    				}
+    				html += "<a target='_blank' href='"+ result[i].url+"'>"+result[i].calenderMemo + "</a></li>";
+    			
+    			}
+    			html += "</ul>";
+    		}else{
+    			html = "<ul style='color:rgb(101, 101, 101);'><li style='border:none;'>해당 날짜에 분양일정이 없습니다.</.li></ul>"
+    		}
+    		
+    		$(".schedule").html(html);
+			        	
+        };
+        
+        $(function(){
+        	var today = new Date();
+
+        	var year = today.getFullYear();
+        	var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        	var day = ('0' + today.getDate()).slice(-2);
+        	var calenderStart = year + '-' + month  + '-' + day;
+        	
+        	$.ajax({
+            	url:"<%= request.getContextPath()%>/sales/select",
+            	method:"get",
+            	data:{calenderStart},
+            	success:function(result){
+            		
+            		infoList(result);
+            	},
+            	error:function(){
+            		console.log("에러발생");
+            	}
+            });
+
+        });
 
     </script>
 	
