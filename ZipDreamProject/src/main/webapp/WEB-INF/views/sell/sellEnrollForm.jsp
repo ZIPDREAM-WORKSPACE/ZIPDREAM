@@ -10,6 +10,7 @@
  <!-- JavaScript Bundle with Popper -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
 	.content1 {
 		border-bottom: 4px solid #6E7C7C;
@@ -102,6 +103,9 @@
 		display: flex;
 		justify-content: center;
 	} 
+	.price_msg{
+	display: flex;
+	}
 	.picture_one, .picture_two {
 		display: inline-block;
 	}
@@ -139,51 +143,14 @@
 		height: 15rem;
 		margin-top : 20px;
 	}
-	
+	.content6{
+		margin-top : 100px;
+	}
 	.table>tbody>tr>th {
 		width: 15%;
 	}
 	
-	/*주변정보*/
-	.btn-group {
-		display: flex;
-		justify-content: center;
-	}
 	
-	.button {
-		width: 200px;
-		height: 3rem;
-		border: 1px solid gray;
-		border-radius: 20px;
-		background-color: white;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-	}
-	
-	span {
-		font-size: 1.5rem;
-		margin-left: 15px;
-	}
-	
-	.button:hover {
-		background-color: #0A2647;
-		color: white;
-		font-weight: 900;
-	}
-	
-	.info {
-		margin-top: 20px;
-	}
-	
-	.info_table>tbody>tr>th {
-		width: 10%;
-	}
-	
-	.hospital_info, .school_info, .subway_info {
-		display: none;
-	}
 	
 	.content9 {
 		text-align: center;
@@ -218,6 +185,7 @@
                     <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="해당 매물의 주소를 입력해주세요" size="80" required>
                     </div>
                 </div>
+                 <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
             </div>
             <!-- <div class="line"></div> -->
            <%--  <div class="seller">
@@ -318,25 +286,28 @@
 
         <div class="content3 margin content">
             <p class="price_name">[가격정보]</p>
-            <hr class="hr">
+            <div class="price_msg">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">매물에 대한 정보를 필수로 입력해주셔야 하며, 정보가 없을 경우 "-"를 입력해주세요.</p>
+            </div>
             <div class="price margin">
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>매매가</th>
-                            <td><input type="text" name="sellPrice" required size="100" placeholder="해당 매물의 매매가를 입력해주세요."></td>
+                            <th>*매매가</th>
+                            <td><input type="text" name="sellPrice" required size="100" placeholder="해당 매물의 매매가를 '만단위'로 입력해주세요.(ex. 17억 5000만원 => 170005000)"></td>
                         </tr>
                         <tr>
-                            <th>관리비</th>
-                            <td><input type="text" name="sellMaintenance"  size="100" placeholder="해당 매물의 관리비를 입력해주세요."></td>
+                            <th>*관리비</th>
+                            <td><input type="text" name="sellMaintenance"  required size="100" placeholder="해당 매물의 관리비를 입력해주세요."></td>
                         </tr>
                         <tr>
-                            <th>주차</th>
-                            <td><input type="text" name="sellParking"  size="100" placeholder="해당 매물의 주차가능여부를 입력해주세요."></td>
+                            <th>*주차</th>
+                            <td><input type="text" name="sellParking" required  size="100" placeholder="해당 매물의 주차가능여부를 입력해주세요(정보가 없을 경우 '-'입력)"></td>
                         </tr>
                         <tr>
-                            <th>단기임대</th>
-                            <td><input type="text" name="sellShortterm"  size="100" placeholder="해당 매물의 단기임대가능여부를 입력해주세요."></td>
+                            <th>*단기임대</th>
+                            <td><input type="text" name="sellShortterm"  required size="100" placeholder="해당 매물의 단기임대가능여부를 입력해주세요.(정보가 없을 경우 '-'입력)"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -345,7 +316,10 @@
 
         <div class="content4 margin content">
             <p class="info_name">[상세정보]</p>
-            <hr class="hr">
+             <div class="price_msg">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">매물에 대한 상세정보 입련란입니다.</p>
+            </div>
             <div class="margin">
             	<input type="file" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
             	<img id="secondImg" width="900" height="500">
@@ -416,7 +390,10 @@
 
         <div class="content5 margin content">
             <p class="arround_name">[단지정보]</p>
-            <hr class="hr">
+             <div class="price_msg">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당 매물의 단지정보 입력란입니다.</p>
+            </div>
             <div class="arround margin">
                 <table class="table">
                     <tbody>
@@ -439,7 +416,10 @@
 
         <div class="content6 margin content">
             <p class="option_name">[옵션정보]</p>
-            <hr class="hr">
+             <div class="price_msg">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당 매물의 옵션 및 보안시설 정보입니다.</p>
+            </div>
             <div class="option margin">
                 <table class="table">
                     <tbody>
@@ -456,138 +436,6 @@
             </div>
         </div>
 
-        <div class="content8 margin content">
-            <img src="https://ifh.cc/g/RorFkp.png" width="50px">
-            <span class="othier_info">[주변정보]</span>
-            <hr class="hr">
-            <div class="btn-group margin">
-            	<div class="market button radius">
-            		<img src="https://ifh.cc/g/sOFp8v.png" width="34px">
-                    <span>편의시설</span>
-            	</div>
-                <div class="subway button radius">
-                    <img src="https://ifh.cc/g/bfoaJM.png" width="40px">
-                    <span>대중교통</span>
-                </div>
-                <div class="hospital button radius">
-                    <img src="https://ifh.cc/g/r0Ta4O.png" width="40px">
-                    <span>병원시설</span>
-                </div>
-                <div class="school button radius">
-                    <img src="https://ifh.cc/g/27sfFC.png" width="40px" height="35px">
-                    <span>학교정보</span>
-                </div>
-            </div>
-            <div class="infogroup">
-                <div class="market_info info margin" name="1">
-                    <table class="table info_table">
-                        <tbody>
-                            <tr>
-                                <th>슈퍼1</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>슈퍼2</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>슈퍼3</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>슈퍼4</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>슈퍼5</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            
-                <div class="hospital_info info margin" name="2">
-                    <table class="table info_table">
-                        <tbody>
-                            <tr>
-                                <th>병원1</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>병원2</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>병원3</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>병원4</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>병원5</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            
-                <div class="subway_info info margin" name="3">
-                    <table class="table info_table">
-                        <tbody>
-                            <tr>
-                                <th>전철1</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>전철2</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>전철3</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>전철4</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>전철5</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            
-                <div class="school_info info margin" name="4">
-                    <table class="table info_table">
-                        <tbody>
-                            <tr>
-                                <th>학교1</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>학교2</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>학교3</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>학교4</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                            <tr>
-                                <th>학교5</th>
-                                <td>거리가어쩌구저쩌구 주소가 이렇고저렇고</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         <div class="content9 content margin">
             <button type="submit" class="submit last_btn">등록하기</button>
             <input type="button" class="cansle last_btn" value="뒤로가기">
