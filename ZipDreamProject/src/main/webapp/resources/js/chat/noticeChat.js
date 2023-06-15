@@ -75,7 +75,9 @@
  		
  		 const counselMessage = {
 		 			"counsleMethod" : method,
- 					"refUno" : refUno
+ 					"refUno" : refUno,
+ 					"refTuno":0
+ 					
  		};
  		
  		
@@ -175,14 +177,14 @@ function clickLink(url){
                 const td3 = document.createElement("td");
                 td3.classList.add("time");
 
-                if (reportMessage.reportType == 1 && reportMessage.dealType==null) {
+                if (reportMessage.reportType == 2 && reportMessage.dealType==null) {
                     td1.innerHTML = "허위매물 신고"
 
                     
                         td2.innerHTML = "신고하신 허위매물이 " + reportMessage.reportResult;
 
                  
-                    td3.innerHTML = reportMessage.reportDate;
+                    td3.innerHTML =  currentTime();
                     tr1.append(td1, td2, td3);
                 } else {
                     td1.innerHTML = "회원 신고"
@@ -213,7 +215,8 @@ function clickLink(url){
  houseSock2.onmessage = function(e){
  	
  	const eventMessage = JSON.parse(e.data); // JSON-> JS Object
-	if(refUno == eventMessage.userNo && eventMessage.title == null){
+ 	console.log(eventMessage);
+	if(refUno == eventMessage.userNo && eventMessage.title == null && eventMessage.couponContent != null){
  
  	
  	const tr1 = document.createElement("tr");
@@ -292,7 +295,7 @@ function clickLink(url){
  	
  
  	
- 	if(refUno == counselMessage.refUno&&counselMessage.counsleMethod != null && counselMessage.dealType==null){
+ 	if(refUno == counselMessage.refUno&&counselMessage.counsleMethod != null && counselMessage.dealType==null &&counselMessage.refTuno==0){
  		const tr1 = document.createElement("tr");
  	tr1.classList.add("manage");
  	const td1 = document.createElement("td");
@@ -354,7 +357,7 @@ function clickLink(url){
  	
  
  	
- 	if(refUno == counsleAgentMessage.refTuno&& counsleAgentMessage.dealType==null){
+ 	if(refUno == counsleAgentMessage.refTuno&& counsleAgentMessage.dealType==null ){
  		const tr1 = document.createElement("tr");
  	tr1.classList.add("manage");
  	const td1 = document.createElement("td");

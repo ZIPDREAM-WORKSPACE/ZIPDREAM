@@ -193,7 +193,7 @@
 						<div class="select-arrow" style="position:relative;top:-55px;left:100px;"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
+						<button type="submit" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
 	                        data-dismiss="modal">닫기</button>
       				</div>

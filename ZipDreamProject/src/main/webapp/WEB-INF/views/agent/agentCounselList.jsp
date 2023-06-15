@@ -325,7 +325,7 @@
 			data : {refUno, sellNo, refTno},
 			type : "POST",
 			success : function(result){
-				if(result == 1){
+				if(result >= 1){
 					console.log("신청상태 수락 완료");
 					alert("수락이 완료되었습니다");
 					$("#reportInsertModal").modal("hide");
