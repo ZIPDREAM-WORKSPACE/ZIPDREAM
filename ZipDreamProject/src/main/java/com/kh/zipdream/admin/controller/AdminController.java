@@ -355,7 +355,7 @@ public class AdminController {
 		Member m = memberService.selectMember(userNo);
 		List<Attachment> at = service.selectAttachmentList(userNo);
 		
-		List<Map<String,String>> list = service.selectApplyListLimit5(1);
+		List<Map<String,String>> list = service.selectApplyListLimit5(2);
 		
 		model.addAttribute("member", m);
 		model.addAttribute("attachment", at);

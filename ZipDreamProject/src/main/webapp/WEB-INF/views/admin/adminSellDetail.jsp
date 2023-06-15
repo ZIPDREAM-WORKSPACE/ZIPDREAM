@@ -40,7 +40,7 @@
 					<c:choose>
 						<c:when test="${fn: length(sellDetailList.list) == 0} ">
 							<tr>
-								<td colspan="4">회원이 없습니다.</td>
+								<td colspan="7">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>

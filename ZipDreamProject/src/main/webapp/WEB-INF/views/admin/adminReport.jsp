@@ -24,7 +24,7 @@
 					<c:choose>
 						<c:when test="${fn: length(reportList.list) == 0}">
 							<tr>
-								<td colspan="6" style="text-align:center;">게시글이 없습니다.</td>
+								<td colspan="7" style="text-align:center;">게시글이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
