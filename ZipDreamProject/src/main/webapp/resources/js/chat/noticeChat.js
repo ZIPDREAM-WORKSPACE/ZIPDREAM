@@ -409,16 +409,25 @@ function clickLink(url){
   function createNotice(){
 		 
 		 const div1 = document.createElement("div");
-		 const img1 = document.createElement("img");
-		 img1.classList.add("alarmImg");
-		 img1.setAttribute("src","https://ifh.cc/g/AaFKr9.png");
+		 var img = document.createElement('img'); 
+    img.src = 'https://ifh.cc/g/LMAgCc.png'; 
+		 img.classList.add("alarmImg");
 		 		div1.classList.add("notice1");
-		 		div1.append(img1);
 		 		div1.innerHTML= "새로운 알림이 도착했습니다.";
+		 		div1.appendChild(img);
 		 		const header1 = document.getElementsByClassName("header")[0];
 		 		header1.append(div1);
-		 		   $( '.notice1' ).fadeOut( 3000, 'swing' );
-		 			 
+		 		  
+		 		   setTimeout(function() {
+ 					 $( '.notice1' ).fadeOut( 2000, 'linear' );
+						}, 3000);
+		 			 setTimeout(function() {
+ 						div1.remove();
+						}, 6000);
+						
+						 $( '.notice1' ).click(function(){
+						 	location.href='http://localhost:8006/zipdream/notice/manage';
+						 });
 		 };
 
  function currentTime() {
