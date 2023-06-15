@@ -89,19 +89,21 @@ public class SellController {
 	//sell_detail페이지 이동
 	@PostMapping("/detailapi")	
 	public String sellDetailApi(Model model, SellDetailApi sda ,SellDetailApi sda2 ){
+		System.out.println(sda);
 		
-		Map<String, String> map = new HashMap();
-		String addressArr[] = sda.getSellAddress().split(" "); String kaptAddress =
-		addressArr[0]+" "+addressArr[1]+" "+addressArr[3]; String kaptName =
-		sda.getSellName().substring(0,4);
-		 
-		map.put("kaptAddress", kaptAddress); map.put("kaptName", kaptName); sda2 =
-		sellService.detailApiSecond(map);
-		 
-		model.addAttribute("sda2" , sda2);
+		try {
+			Map<String, String> map = new HashMap();
+			String addressArr[] = sda.getSellAddress().split(" "); 
+			String kaptAddress = addressArr[0]+" "+addressArr[1]+" "+addressArr[3]; 
+			String kaptName = sda.getSellName().substring(0,4);
+			 
+			map.put("kaptAddress", kaptAddress); map.put("kaptName", kaptName); sda2 = sellService.detailApiSecond(map);
+			model.addAttribute("sda2" , sda2);
+			model.addAttribute("sda", sda);
+		}catch(Exception e) {
+			model.addAttribute("sda", sda);
+		}
 		
-		model.addAttribute("sda", sda);
-
 		return "sell/sellDetailApi";
 	}
 	
