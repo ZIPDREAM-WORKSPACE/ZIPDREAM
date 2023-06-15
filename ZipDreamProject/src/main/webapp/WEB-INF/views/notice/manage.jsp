@@ -55,13 +55,16 @@ tbody::-webkit-scrollbar {
 		text-align: center;
 	}
 	.title{
-		width:200px;
+		width:150px;
 	}
 	.content{
-		width:550px;
+		width:500px;
 	}
 	.time{
 		width:250px;
+	}
+	.check{
+		width:100px;
 	}
 </style>
 <body>
@@ -73,6 +76,7 @@ tbody::-webkit-scrollbar {
 					<th class="title">유형</th>
 					<th class="content">알림</th>
 					<th class="time">시간</th>
+					<th class="check">확인</th>
 				</tr>
 			</thead>
 			<tbody class="noticeThead">
@@ -82,6 +86,7 @@ tbody::-webkit-scrollbar {
 	               	 <td  class="title">${manageList.noticeTitle} </td>
 	               	 <td class="content">${manageList.noticeContent} </td>
 	               	 <td class="time">${manageList.createDateTime} </td>
+	               	 <td class="check" onclick="noticeCheck(${manageList.noticeNo});"> <button type="button" class="btn btn-primary deleteChat" >확인</button></td>
 	               </tr>
 	           </c:forEach>
 			
@@ -106,6 +111,29 @@ var refUno ='${loginUser.userNo}';
 	addEventMessage6(refUno);
 	addEventMessage7(refUno);
 
+	function noticeCheck(noticeNo){
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/notice/deleteManageNotice",
+			data:{ noticeNo},
+			success : function(result){
+				// result == 1 나가기 성공
+				if(result == 1){
+					alert("확인");
+					location.href="<%=request.getContextPath()%>/notice/manage";
+				}else{
+					alert("실패");
+				}
+				// result == 0 실패 
+				
+			},
+	 		error : function(request){
+	 			console.log("에러발생");
+	 			console.log("에러코드 : "+request.status);
+	 			
+	 		}
+		})
+	}
 </script>
 </body>
 

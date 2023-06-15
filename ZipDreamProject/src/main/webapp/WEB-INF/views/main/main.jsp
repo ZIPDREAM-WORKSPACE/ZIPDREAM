@@ -745,7 +745,7 @@ display:  block;
 		<div class="chatting_inner">
 			<c:choose>  	
 				<c:when test="${empty sessionScope.loginUser}">
-					<div class="login_service">로그인 후 이용가능한 서비스입니다.</div>
+					<div class="login_service" >로그인 후 이용가능한 서비스입니다.</div>
 				</c:when> 
 				<c:otherwise> 
 				
@@ -862,7 +862,7 @@ display:  block;
      				data-aos-offset="100" data-aos-easing="ease-in-sine" ><img class="ad_image" src='https://ifh.cc/g/Nqrk4w.png'><br>다양한 이벤트를<br>만나보세요.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">첫 가입시 10% 복비 할인</h5>
 					<h5 class="main_h5" data-aos="flip-up"> 첫 거래시 복비 할인 쿠폰</h5><br>
-					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up">더 알아보기</div>
+					<div class="more_btn" style="position:absolute; right:22%;" data-aos="zoom-in-up" id="coupon">더 알아보기</div>
 				</div>
 		</div>
 		
@@ -1145,7 +1145,7 @@ display:  block;
 	 	
 	 	if(!url.equals(currentUrl)){
 	 		
-	 		exitChatRoom();
+	 		exitChatRoom();s
 	 	}  --%>
 	 	
 		$("#login_btn").click(function(){
@@ -1158,6 +1158,14 @@ display:  block;
 	 	
 		$("#sales").click(function(){
 			location.href="<%=request.getContextPath()%>/sales/schedule";
+		});
+		
+		$("#coupon").click(function(){
+			if(${empty sessionScope.loginUser}){
+				location.href="<%=request.getContextPath()%>/member/login";
+			}else{
+				location.href="<%=request.getContextPath()%>/mypage/couponlist";
+			}
 		});
 		
 	
@@ -1179,7 +1187,7 @@ display:  block;
 		
 		function exitChatRoom(){
 			let data= 0;
-			if(confirm("대화를 종료하시겠습니까?")){
+			if(confirm("문의를 종료하시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
 					data:{ chatRoomNo},
@@ -1188,9 +1196,9 @@ display:  block;
 						// result == 1 나가기 성공
 						if(result == 1){
 							data = result;
-							alert("채팅방 나가기에 성공했습니다.");
+							alert("문의가 종료되었습니다.");
 						}else{
-							alert("채팅방 나가기에 실패했습니다.");
+							alert("문의 종료가 실패했습니다.");
 						}
 						// result == 0 실패 
 						

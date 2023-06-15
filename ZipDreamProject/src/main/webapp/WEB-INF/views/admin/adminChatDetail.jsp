@@ -70,8 +70,8 @@
 	font-size:20px;
 }
 .chat_header>img{
-	width:17px;
-	height:17px;
+	width:23px;
+	height:23px;
 	margin-bottom:3px;
 }
 #x{
@@ -108,7 +108,7 @@
 	width:30px;
 	height:30px;
 	cursor: pointer;
-	margin-bottom:23px;
+	margin-bottom:10px;
 }
 .chat_btn{
 	display: flex;
@@ -128,6 +128,11 @@ background: grey;
 .display-chatting::-webkit-scrollbar{
 width: 10px;  
 }
+.mlistImage{
+	width:23px;
+	height:23px;
+	margin-right:7px;
+}
 </style>
 <section class="content">
    <section class="content-wrap">
@@ -141,19 +146,19 @@ width: 10px;
 	</div>
 	<div style="display:flex; margin-left:200px;">
 	<div style="width:200px; height:200px; box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 20px; padding:10px;">
-		<h4>참여자 : </h4>
-		<ul>
+		<h5>참여자 : </h5>
+		<ul style="padding-left:10px;">
 			<c:forEach items="${mlist}" var="mlist">
-				<li >
+				<li style="list-style:none;" >
 					<c:choose>
 					<c:when test="${mlist.userLevel == 1 }">
-						${mlist.userName } 님
+						<img src="https://ifh.cc/g/YX6YxA.png" class="mlistImage">${mlist.userName } 님
 					</c:when>
 					<c:when test="${mlist.userLevel == 2 }">
-						${mlist.userName } 님
+						<img src="https://ifh.cc/g/YX6YxA.png" class="mlistImage">${mlist.userName } 님
 					</c:when>
 					<c:otherwise>
-						${mlist.userId } 관리자
+						<img src="https://ifh.cc/g/YX6YxA.png" class="mlistImage">${mlist.userId } 관리자
 					</c:otherwise>
 				</c:choose>
 				</li>
@@ -190,7 +195,7 @@ width: 10px;
 			</ul>
 		 </div>
 		<div class="chat_bottom">
-				<textarea id="chat_msg" style="width:350px; height:30px; resize:none;"></textarea>
+				<input type="text" id="chat_msg" style="width:350px; height:30px; resize:none;">
 		<img id="send" src='https://ifh.cc/g/FCqYra.png'></div>
 	</div>
 	</div>
