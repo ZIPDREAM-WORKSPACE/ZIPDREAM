@@ -100,7 +100,7 @@
 	text-align: center;
 	color: rgb(102, 102, 102);
 	white-space: nowrap;
-	min-width: 392px;
+	min-width: 300px;
 }
 
 .category_button:hover {
@@ -319,7 +319,9 @@
 			if (location.href.indexOf('<%=request.getContextPath()%>/sales/guide') > -1){ 
 	        	$('#guide').addClass('current');
 	        }   
-	        
+			if (location.href.indexOf('<%=request.getContextPath()%>/sales/calculator') > -1){ 
+	        	$('#calculator').addClass('current');
+	        } 
 	    });
     </script>
 	
@@ -347,6 +349,9 @@
 				</div>
 				<div class="category_swiper">
 					<a href="<%=request.getContextPath()%>/sales/faq"  class="category_button" type="button" id="faq">자주하는질문</a>
+				</div>
+				 <div class="category_swiper">
+					<a href="<%=request.getContextPath()%>/sales/calculator"  class="category_button" type="button" id="calculator">청약가점계산기</a>
 				</div>
 			</div>
 		</div>
