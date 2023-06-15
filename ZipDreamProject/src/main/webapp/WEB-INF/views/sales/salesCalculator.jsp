@@ -507,7 +507,9 @@
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+
+			<div class="modal-dialog modal-dialog-centered">
+
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight:700;">청약가점계산결과</h1>
@@ -559,7 +561,9 @@
 		<!-- 부양가족수 모달  -->
 		<div class="modal fade" id="familyModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+
+			<div class="modal-dialog modal-dialog-centered">
+
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight:700;">부양가족수 적용기준</h1>
@@ -587,7 +591,7 @@
 		<!-- 무주택기간 모달  -->
 		<div class="modal fade" id="nohouseModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight:700;">무주택기간 산정</h1>
@@ -615,7 +619,9 @@
 		<!-- 청약통장가입 모달  -->
 		<div class="modal fade" id="periodModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+
+			<div class="modal-dialog modal-dialog-centered">
+
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight:700;">청약통장 가입기간 산정</h1>
