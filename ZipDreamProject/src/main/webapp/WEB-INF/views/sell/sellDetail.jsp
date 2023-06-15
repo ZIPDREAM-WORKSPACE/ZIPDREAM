@@ -747,7 +747,6 @@
 
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
 /* 	const loremIpsum = document.getElementById("lorem-ipsum")

@@ -50,9 +50,6 @@
     }
    
     #login-text{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 270px;
         font-size: 43px;
         display: flex;
         align-items: center;
@@ -82,6 +79,7 @@
     #login_search{
             text-align: left;
             border: none;
+            margin-top:10px;
         }
 
         #loginbtn{
@@ -103,7 +101,6 @@
 
         #btn1{
             margin-left: -9px;
-            margin-bottom: 8px;
         }
     
         .modal-body{
@@ -233,10 +230,10 @@
                 <h4>비밀번호</h4>
                 <input type="password" id="pwd-text" name="userPwd" placeholder="비밀번호를 입력해주세요"><br><br>
 
-                <input type="checkbox" name="saveId">아이디저장<br></input>
+                <input type="checkbox" name="saveId">&nbsp;&nbsp;아이디저장<br></input>
 
                 <div id="login_search">
-                    <button type="button" id="btn1" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
+                    <button type="button" id="btn1" onclick="" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
                     <button type="button" id="btn2" onclick="" data-toggle="modal" data-target="#searchId">아이디 찾기</button>
                      <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>

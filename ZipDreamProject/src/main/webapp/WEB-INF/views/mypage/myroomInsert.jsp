@@ -887,6 +887,5 @@
 	</script>
 
 	<jsp:include page="../common/footer.jsp" />
-<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 </html>

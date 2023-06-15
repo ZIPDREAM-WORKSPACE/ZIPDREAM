@@ -129,7 +129,6 @@
         width: 100%;
         height:  100%;
         object-fit: cover;
-        margin-top: 25px;
     }
 
     #license{
@@ -289,6 +288,10 @@
     li{
         list-style-type: none;
     }
+    
+    .licenseImg{
+    	overflow:hidden;
+    }
 </style>
 <body>
 <jsp:include page="../common/header.jsp" />
@@ -318,20 +321,20 @@
 
                 <h5 id="license">사업자 등록증 등록</h5>
                 <input type="file" class="real-upload" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox" ></div>
+                <div class="licensebox licenseImg" ></div>
                     
          
 
                   
                 <h5 id="license1-1">중개등록증 등록</h5>
                 <input type="file" class="real-upload1" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-1"></div>
+                <div class="licensebox1-1 licenseImg"></div>
                 
 
 
                 <h5 id="license1-2">증명사진 등록</h5>
                 <input type="file" class="real-upload3" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-2" ></div> 
+                <div class="licensebox1-2 licenseImg" ></div> 
                     
                 
             
