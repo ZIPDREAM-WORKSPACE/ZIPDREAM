@@ -32,10 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.kh.zipdream.mail.model.service.MailSendService;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 
 @SessionAttributes({ "loginUser" })
 @Controller
@@ -418,6 +420,13 @@ public class MemberController {
 	
 }
 
+	@GetMapping("/mybookmarklist")
+	@ResponseBody
+	public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
+		List<userSelectList> uslist = memberService.myBookmarkList(uno);
+
+		return uslist;
+	}
 
 
 

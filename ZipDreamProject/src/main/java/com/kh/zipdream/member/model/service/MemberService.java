@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.mail.model.vo.MailAuth;
 import com.kh.zipdream.member.model.vo.Member;
+import com.kh.zipdream.member.model.vo.userSelectList;
 
 public interface MemberService {
 	
@@ -43,7 +44,14 @@ public interface MemberService {
 	public int updateMemberPwd(Member m);
 
 	public int emailCheck(String id);
+
 	
 	 public int deleteMember(int userNo);
+
+
+	
+	
+	public List<userSelectList> myBookmarkList(int uno);
+
 }
 

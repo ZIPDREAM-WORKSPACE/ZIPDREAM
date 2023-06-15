@@ -1,6 +1,7 @@
 package com.kh.zipdream.mypage.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.kh.zipdream.common.template.Pagination;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.mypage.model.dao.MyRoomSellDao;
 import com.kh.zipdream.mypage.model.vo.MyRoomSell;
+import com.kh.zipdream.sell.model.vo.SellDetail;
 
 @Service
 public class MyRoomSellServiceImpl implements MyRoomSellService{
@@ -84,4 +86,21 @@ public class MyRoomSellServiceImpl implements MyRoomSellService{
 		
 	}
 
+	@Override
+	public ArrayList<SellDetail> recentRoomList(List<Integer> sellNoList) {
+		
+		ArrayList<SellDetail > recentRoomList = myroomSellDao.recentRoomList(sellNoList);
+
+		
+		return recentRoomList;
+	}
+
+	
+	@Override
+	public int checkAgent(String agentId) {
+		
+		int result = myroomSellDao.checkAgent(agentId);
+		
+		return result;
+	}
 }

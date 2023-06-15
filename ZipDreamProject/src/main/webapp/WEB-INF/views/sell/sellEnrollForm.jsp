@@ -89,12 +89,19 @@
 		font-size: 2rem;
 		font-weight: 500;
 	}
-	
-/* 	.content2 {
-		height: 40rem;
-		margin-top: 50px;
-	} */
-	
+
+	.content2.5{
+		margin-top:50px;
+		text-align:center;
+	}
+	#p{
+		font-size: 1rem;
+		font-weight: 600;
+	}
+	.con2Text1, .con2Text2{
+		display: flex;
+		justify-content: center;
+	} 
 	.picture_one, .picture_two {
 		display: inline-block;
 	}
@@ -114,11 +121,10 @@
 		height: 20rem;
 	}
 	
-	.price_name, .info_name, .arround_name, .option_name, .othier_infom, .sale_name {
+	.price_name, .info_name, .arround_name, .option_name, .othier_infom, .sale_name{
 		font-size: 1.5rem;
 		font-weight: 600;
 	}
-	
 	.price, .info, .arround, .option, .sale {
 		width: 90%;
 	}
@@ -131,7 +137,7 @@
 
 	.content5 {
 		height: 15rem;
-		margin-top : 100px;
+		margin-top : 20px;
 	}
 	
 	.table>tbody>tr>th {
@@ -209,15 +215,15 @@
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
                 <div class="sell_last">
-                    <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="매물주소를 입력해주세요" size="80" required>
+                    <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="해당 매물의 주소를 입력해주세요" size="80" required>
                     </div>
                 </div>
             </div>
-            <div class="line"></div>
-            <div class="seller">
+            <!-- <div class="line"></div> -->
+           <%--  <div class="seller">
                 <div class="seller_title">
                 	 <p>내돈내산공인중개소</p> 
-                   <%--  <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }"> --%>
+                    <input type="text" size="15" name="sellAgent" value="${sessionScope.loginUser.office }">
                 </div>
                 <div class="seller_name">
                 	<p>김예진</p> 
@@ -225,10 +231,28 @@
                 </div>
                 <div class="seller_address">
                 	 <p>서울특별시 강남구 테헤란로 14길 6 남도빌딩</p> 
-                   <%--  <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }"> --%>
+                    <input type="text" size="50" name="sellerAddress" value="${sessionScope.loginUser.address }">
                 </div>
-            </div>
+            </div> --%>
         </div>
+        
+        <div class="content2.5 margin content">
+		<div >
+			<div class="con2Text1 ">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">공인중개사님이 직접 매물을 등록할 수 있는 페이지 입니다.</p>
+			</div>
+			<div class="con2Text2">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당 매물이 허위매물로 의심이 되거나 신고가 접수될 경우 검토를 통해 제재를 가할예정입니다.</p>
+			</div>
+			<div class="con2Text2">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당 정보 제공에 대한 책임은 공인중개사에게 있으므로, 정확한 정보를 입력해주시길 바랍니다.</p>
+			</div>
+		</div>
+	</div>
+        
         <div class="content2 margin picture content">
             <div id="picture">
                 <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;">
@@ -299,20 +323,20 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>월세</th>
-                            <td><input type="text" name="sellPrice" required size="100"></td>
+                            <th>매매가</th>
+                            <td><input type="text" name="sellPrice" required size="100" placeholder="해당 매물의 매매가를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>관리비</th>
-                            <td><input type="text" name="sellMaintenance"  size="100"></td>
+                            <td><input type="text" name="sellMaintenance"  size="100" placeholder="해당 매물의 관리비를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>주차</th>
-                            <td><input type="text" name="sellParking"  size="100"></td>
+                            <td><input type="text" name="sellParking"  size="100" placeholder="해당 매물의 주차가능여부를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>단기임대</th>
-                            <td><input type="text" name="sellShortterm"  size="100"></td>
+                            <td><input type="text" name="sellShortterm"  size="100" placeholder="해당 매물의 단기임대가능여부를 입력해주세요."></td>
                         </tr>
                     </tbody>
                 </table>
@@ -329,65 +353,61 @@
             <div class="info margin">
                 <table class="table">
                     <tbody>
-<!--                         <tr>
-                            <th>건물이름</th>
-                            <td><input type="text"  name="sellName" required size="100"></td>
-                        </tr> -->
                         <tr>
-                            <th>방종류</th>
-                            <td><input type="text" name="sellType"  size="100"></td>
+                            <th>건물 종류</th>
+                            <td><input type="text" name="sellType"  size="100" placeholder="해당 매물의 건물유형을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>전용/공급면적</th>
-                            <td><input type="text" name="sellPrivateArea"  size="45">/<input type="text" name="sellProvideArea"  size="45"></td>
+                            <td><input type="text" name="sellPrivateArea" size="45" placeholder="해당 매물의 전용면적을 입력해주세요.">/<input type="text" name="sellProvideArea"  size="45" placeholder="해당 매물의 공급면적을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>해당층/건물층</th>
-                            <td><input type="text" name="sellFloor"  size="45">/<input type="text" name="sellAllFloor"  size="45"></td>
+                            <td><input type="text" name="sellFloor" size="45" placeholder="해당 매물의 층 수를 입력해주세요.">/<input type="text" name="sellAllFloor" size="45" placeholder="해당 매물의 건물 층 수를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount"  size="45">/<input type="text" name="sellToiletCount"  size="45"></td>
+                            <td><input type="text" name="sellRoomCount" size="45" placeholder="해당 매물의 방 개수를 입력해주세요.">/<input type="text" name="sellToiletCount"  size="45" placeholder="해당 매물의 건물 층 수를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>방향</th>
-                            <td><input type="text" name="sellWay"  size="100"></td>
+                            <td><input type="text" name="sellWay"  size="100" placeholder="해당 매물이 향해있는 방향을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>해당 면적 세대수</th>
-                            <td><input type="text" name="sellHousehold"  size="100"></td>
+                            <td><input type="text" name="sellHousehold"  size="100" placeholder="해당 매물의 면적 세대수를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>현관타입</th>
-                            <td><input type="text" name="sellEntrance"  size="100"></td>
+                            <td><input type="text" name="sellEntrance"  size="100" placeholder="해당 매물의 현관/복도 타입을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>입주가능일</th>
-                            <td><input type="text" name="sellMoveDatetime"  size="100"></td>
+                            <td><input type="text" name="sellMoveDatetime"  size="100" placeholder="해당 매물의 입주가능한 일자를 입력해주세요. ex)즉시입주, 2023.06.14.."></td>
                         </tr>
                         <tr>
                             <th>건축물용도</th>
-                            <td><input type="text" name="sellBuldtype"  size="100"></td>
+                            <td><input type="text" name="sellBuldtype"  size="100" placeholder="해당 매물의 건축물 용도를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>승강시설</th>
-                            <td><input type="text" name="sellInstallation"  size="100"></td>
+                            <td><input type="text" name="sellInstallation"  size="100" placeholder="해당 매물의 승강시설을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>냉/난방시설</th>
-                            <td><input type="text" name="sellAircondition"  size="45">/<input type="text" name="sellHeating" size="45"></td>
+                            <td><input type="text" name="sellAircondition"  size="45" placeholder="해당 매물의 냉방시설을 입력해주세요.">/<input type="text" name="sellHeating" size="45" placeholder="해당 매물의 난방시설을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>세대주차대수</th>
-                            <td><input type="text" name="parkingCount" size="100"></td>
+                            <td><input type="text" name="parkingCount" size="100" placeholder="해당 매물의 세대별 주차가능한 수를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>사용승인일</th>
-                            <td><input type="text" name="sellApprovalDatetime"  size="100"></td>
+                            <td><input type="text" name="sellApprovalDatetime"  size="100" placeholder="해당 매물의 사용승인일을 입력해주세요. ex)2023.06.14"></td>
                         </tr>
                         <tr>
                             <th>최초등록일</th>
-                            <td><input type="text" name="sellEnrollDatetime"  size="100"></td>
+                            <td><input type="text" name="sellEnrollDatetime"  size="100" placeholder="해당 매물의 최초등록일을 입력해주세요. ex)2023.06.14"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -402,15 +422,15 @@
                     <tbody>
                         <tr>
                             <th>단지사용승인일</th>
-                            <td><input type="text" name="complexApplyDatetime"  size="100"></td>
+                            <td><input type="text" name="complexApplyDatetime"  size="100" placeholder="해당 매물이 속해있는 단지사용승인일을 입력해주세요. ex)2023.06.14"></td>
                         </tr>
                         <tr>
                             <th>총 동 수</th>
-                            <td><input type="text" name="wingCount"  size="100"></td>
+                            <td><input type="text" name="wingCount"  size="100" placeholder="해당 매물이 속해있는 단지의 총 동수를 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="householdCount"  size="100"></td>
+                            <td><input type="text" name="householdCount"  size="100" placeholder="해당 매물이 속해있는 총 세대 수를 입력해주세요."></td>
                         </tr>
                     </tbody>
                 </table>
@@ -425,52 +445,16 @@
                     <tbody>
                         <tr>
                             <th>기본옵션</th>
-                            <td><input type="text" name="option"  size="100"></td>
+                            <td><input type="text" name="option"  size="100" placeholder="해당 매물에서 기본적으로 제공하고 있는 옵션을 입력해주세요."></td>
                         </tr>
                         <tr>
                             <th>보안시설</th>
-                            <td><input type="text" name="security"  size="100"></td>
+                            <td><input type="text" name="security"  size="100" placeholder="해당 매물에서 제공하고 있는 보안시설을 입력해주세요."></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="content7 margin content">
-          <p class="sale_name">[실매매가]</p>
-            <hr>
-            <div class="sale margin">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th>2022년 4월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                        <tr>
-                            <th>2021년 5월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                        <tr>
-                            <th>2021년 3월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                        <tr>
-                            <th>2021년 2월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                        <tr>
-                            <th>2020년 12월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                        <tr>
-                            <th>2020년 11월</th>
-                            <td>13억 8,000 (10층)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-   
 
         <div class="content8 margin content">
             <img src="https://ifh.cc/g/RorFkp.png" width="50px">

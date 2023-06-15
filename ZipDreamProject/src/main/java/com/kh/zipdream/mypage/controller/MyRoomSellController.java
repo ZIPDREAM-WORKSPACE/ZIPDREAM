@@ -67,5 +67,15 @@ public class MyRoomSellController {
 		myroomsellService.deleteUserCoupon(coupon);
 	}
 
+	@ResponseBody
+	@GetMapping("/checkAgent")
+	public int checkAgent(String agentId) {
+		
+		int result = myroomsellService.checkAgent(agentId);
+		
+		/* System.out.println("검색한 공인중개사는 몇명? " + result); */
+		return result;
+	}
+	
 
 }

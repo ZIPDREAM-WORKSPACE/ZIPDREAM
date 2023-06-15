@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <!--  공통적으로사용할 라이브러리 추가 -->
+<!-- 소켓 -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <!-- alert창 꾸미기  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -39,8 +41,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 
 
-<!--sockjs 라이브러리 -->
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
 
 
 <style>
@@ -170,7 +171,26 @@ position: absolute;
 	padding-bottom:5px;
 	margin-right:5px;
 }
-
+	.notice1{
+		width:250px;
+		height:60px;
+		line-height:60px;
+		position: absolute;
+		background:white;
+		top:150%;
+		right:10%;
+		border-radius: 30px;
+		border : 3px solid black;
+		z-index : 99;
+		 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+		 text-align: center;
+		 padding:0px;
+		
+	}
+	.alarmImg{
+		width:30px;
+		height:30px;
+	}
 </style>
 </head>
 <body>
@@ -187,7 +207,12 @@ position: absolute;
 				<li class="h_text"><a href="<%=request.getContextPath()%>/map/main">지도</a></li>
 				<li class="h_text"><a href="<%=request.getContextPath()%>/sales/schedule">분양</a></li>
 				<li class="h_list"><a href="<%=request.getContextPath()%>"><img id="logo"src="<%=request.getContextPath()%>/resources/images/logo1.png"></a></li>
-				<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				<c:if test="${empty sessionScope.loginUser}">
+					<li class="h_text"><a href="" onclick="swal('로그인 후 이용하실 수 있습니다.'); return false;">알림</a></li>
+				</c:if>
+				<c:if test="${!empty sessionScope.loginUser}">
+					<li class="h_text"><a href="<%=request.getContextPath()%>/notice/manage">알림</a></li>
+				</c:if>
 				<c:if test="${sessionScope.loginUser != null }">
 					<c:if test="${sessionScope.loginUser.userLevel == 1 }">
 						<li class="h_text"><a href="<%=request.getContextPath()%>/mypage/currentPage">마이페이지</a></li>
@@ -265,9 +290,19 @@ position: absolute;
 		location.href="<%=request.getContextPath()%>/member/login";
 	});
 	
+	var currentUserNo ='${loginUser.userNo}';
 	
+	let houseSock1 = new SockJS("<%=request.getContextPath()%>/notice"); 
+	houseSock1.onmessage = function(e){
+		let message = JSON.parse(e.data);
+		if(message.userNo==currentUserNo || message.refRuno==currentUserNo || (message.refUno==currentUserNo&&message.dealType!=null) || (message.refUno==currentUserNo&&message.counsleMethod !=null) ||message.refTuno==currentUserNo || (message.refRuno==currentUserNo && message.dealType != null)){
+			
+			createNotice();
+		}
+	}
 	
 
 	</script>
+	<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 </html>

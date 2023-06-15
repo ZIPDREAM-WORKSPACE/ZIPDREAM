@@ -112,7 +112,7 @@
 	font-weight: 500;
 }
 
-.contect {
+.contect, .deleteSell {
 	width: 160px;
 	margin-right: 50px;
 	background-color: #0A2647;
@@ -237,21 +237,24 @@
 }
 
 .lastBox {
+	
 	border: 1px solid gray;
 	width: 90%;
 	height: 15rem;
 	display: flex;
 }
-
+.Boardbox{
+	margin-top : 20px;
+}
 .boardBox {
-	margin-top: 10px;
+	padding-top : 20px;
 	border-right: 1px solid gray;
 	width: 55%;
 	height: 15rem;
 }
 
 .writer {
-	margin: 20px 0px 10px 30px;
+	margin: 30px 0px 10px 30px;
 	font-size: 1.5rem;
 }
 
@@ -265,12 +268,18 @@
 }
 
 #boardContent {
+	margin-top : 15px;
 	border: 1px solid gray;
 	margin-left: 15px;
 	width: 95%;
-	height: 60%;
+	height: 70%;
 }
-
+.rBox{
+	display:flex;
+	justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.3px solid gray;
+}
 .replyBox {
 	/* 	border: 1px solid blue; */
 	height: 100%;
@@ -283,21 +292,35 @@
 
 .replyContent {
 	overflow: auto;
-	height: 55%;
+	height: 61.5%;
 }
 
 #reply {
-	border-bottom: 0.3px solid gray;
+	
 	margin-top: 10px;
+	margin :  10px 0px 1px 0px;
+	padding-left :  10px;
 }
 
 .inputReply {
-	height: 20%;
+	height: 15%;
 	display: flex;
 }
 
-#inputReply {
+#inputReply, #insertReplyBtn {
 	height: 35px;
+}
+#deleteBoard{
+	font-size :  0.3rem;
+	height : 30px;
+}
+#insertReplyBtn{
+	width : 50px;
+	font-size : 0.8rem;
+}
+.deleteImg, .reportImg{
+	vertical-align: baseline;
+	margin-left : 10px;
 }
 
 /* modal css */
@@ -327,12 +350,53 @@
 </style>
 </head>
 <body>
+
 	<jsp:include page="../../views/common/header.jsp" />
 
- <div class="content1 margin">
+	<script>
+		/* 디테일뷰 이동시 로그인된 사용자인 경우 해당 매물의 디테일 정보를 localstorage에 저장하기*/
+		function saveRecentRoom(sellNo){
+			/* userNo를 키값으로 사용  */
+			const userNo = "${loginUser.userNo}";
+			/* 현재 로그인된 사용자의 회원번호(키)로 localStorage 조회  */
+			let recentRooms = localStorage.getItem(userNo);
+			
+			/* 로컬스토리지에 값이 있다면 배열 추가 */
+			if(recentRooms){
+				recentRooms = JSON.parse(recentRooms); //로컬스토리지는 String타입이므로 무조건 json으로 형변환해서 꺼내오기
+				const index = $.inArray(sellNo,recentRooms);
+				
+				/* 현재 인덱스가 0이면 1로 바꾸기 */
+				if(index > -1){
+					recentRooms.splice(index,1);
+				}
+				
+				recentRooms.unshift(sellNo);
+				if(recentRooms.length > 5){ // 5개 이상이면 첫번째 배열값 삭제
+					recentRooms.pop();
+				}
+			}else{
+				recentRooms = [sellNo];
+			}
+			
+			localStorage.setItem(userNo,JSON.stringify(recentRooms));
+		}
+	
+		$(function(){
+			/* 현재 조회한 매물번호를 담아서 함수로보내기 */
+			const sellNo = '${sd.sellNo}';
+		 	saveRecentRoom(sellNo);
+
+			
+		});
+	
+	</script>
+
+
+	<div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellSno} </span>
+                <span>매물번호 : ${sd.sellNo} </span>
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>
@@ -340,12 +404,14 @@
             <div class="sell_last">
                 <div class="sell_address">매물주소 : ${sd.sellAddress}
                 </div>
+                <c:if test="${sd.refUno != loginUser.userNo }">
                 <div class="sell_like">
                     <div class="radius" id="sellLike" onclick="insertUserSelect();">
-                        <img id="like_img" src="https://ifh.cc/g/8v70Mm.png" width="25px">
+                        <img id="like_img" src="${isUserSelect == 0 ? 'https://ifh.cc/g/8v70Mm.png' : 'https://ifh.cc/g/Wa4bRl.png'}" width="25px">
                         <span>찜하기</span>
                     </div>
                 </div>
+                </c:if>
             </div>
         </div>
         <div class="line"></div>
@@ -360,7 +426,13 @@
                 소재지 : ${seller.address }
             </div>
             <div class="seller_contect">
-                <input type="button"  class="contect radius" value="공인중개사 연락하기">
+            	<c:if test="${sd.refUno == loginUser.userNo}">
+            		<input type="button"  class="deleteSell radius" onclick="deleteSell();" value="매물삭제하기">
+            	</c:if>
+            	<c:if test="${sd.refUno != loginUser.userNo}">
+	                <input type="button"  class="contect radius" value="공인중개사 연락하기">
+            	
+            	</c:if>
             </div>
         </div>
     </div>
@@ -559,182 +631,28 @@
             </table>
         </div>
     </div>
-
-    <div class="content7 margin content">
-        <p class="option_name">[실매매가]</p>
-        <hr class="hr">
-    </div>
-
-    <div class="content8 margin content">
-        <img src="https://ifh.cc/g/RorFkp.png" width="50px">
-        <span class="othier_info">[주변정보]</span>
-        <hr class="hr">
-        <div class="btn-group">
-            <button class="market button">
-                <img src="https://ifh.cc/g/XXq5Xh.png" width="34px">
-                <span>편의시설</span>
-            </button>
-            <button class="subway button">
-                <img src="https://ifh.cc/g/bfoaJM.png" width="40px">
-                <span>대중교통</span>
-            </button>
-            <button class="hospital button">
-                <img src="https://ifh.cc/g/r0Ta4O.png" width="40px">
-                <span>병원시설</span>
-            </button>
-            <button class="school button">
-                <img src="https://ifh.cc/g/27sfFC.png" width="40px" height="35px">
-                <span>학교정보</span>
-            </button>
-        </div>
-        <div class="infogroup">
-            <div class="market_info info margin">
-                <table class="table info_table">
-                    <tbody>
-                        <tr>
-                            <th>이마트</th>
-                            <td>서울특별시 여기저기저기정로이괴외괴왹</td>
-                        </tr>
-                        <tr>
-                            <th>홈플러스</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>롯데마트</th>
-                            <td>에어컨, 냉장고, TV 등등...................</td>
-                        </tr>
-                        <tr>
-                            <th>노브랜드</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>지에스마트</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            <div class="hospital_info info margin">
-                <table class="table info_table">
-                    <tbody>
-                        <tr>
-                            <th>치과</th>
-                            <td>서울특별시 여기저기저기정로이괴외괴왹</td>
-                        </tr>
-                        <tr>
-                            <th>피부과</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>정형외과</th>
-                            <td>에어컨, 냉장고, TV 등등...................</td>
-                        </tr>
-                        <tr>
-                            <th>이비인후과</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>내과</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            <div class="subway_info info margin">
-                <table class="table info_table">
-                    <tbody>
-                        <tr>
-                            <th>역삼역</th>
-                            <td>서울특별시 여기저기저기정로이괴외괴왹</td>
-                        </tr>
-                        <tr>
-                            <th>강남역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>선릉역</th>
-                            <td>에어컨, 냉장고, TV 등등...................</td>
-                        </tr>
-                        <tr>
-                            <th>잠실역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>신논현역</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            <div class="school_info info margin">
-                <table class="table info_table">
-                    <tbody>
-                        <tr>
-                            <th>여기초등학교</th>
-                            <td>서울특별시 여기저기저기정로이괴외괴왹</td>
-                        </tr>
-                        <tr>
-                            <th>저기초등학교</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>여기중학교</th>
-                            <td>에어컨, 냉장고, TV 등등...................</td>
-                        </tr>
-                        <tr>
-                            <th>여기고등학교</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                        <tr>
-                            <th>저기유치원</th>
-                            <td>이것저것...모두다....</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="content9 content margin">
-        <input type="button"  class="contect radius " value="공인중개사 연락하기">
-        <input type="button" class="notify radius last_btn" value="허위매물 신고하기">
-    </div>
+	
+	<c:if test="${sd.refUno != loginUser.userNo }">
+	    <div class="content9 content margin">
+	        <input type="button"  class="contect radius " value="공인중개사 연락하기">
+	        <input type="button" class="notify radius last_btn" value="허위매물 신고하기">
+	    </div>
+	</c:if>
+	<c:if test="${sd.refUno == loginUser.userNo }">
+		<div class="content9 content margin">
+			<input type="button"  class="deleteSell radius" onclick="deleteSell();" value="매물삭제하기">
+	    </div>
+	</c:if>
 	
 	<div class="content10_name content margin">
 		<img src="https://ifh.cc/g/KN4Qnw.png" width="50px"> <span class="talk">[담소나누기]</span>
 		<hr class="hr">
 	</div>
 	<div class="content10 content board margin">
-		<!-- <div class="lastBox margin">
-			<div class="boardBox">
-				<p class="writer">임*훈님</p>
-				<div id="boardContent">
-					<span>안녕하세요 여기집 좋아요 많이많이 사세요</span>
-				</div>
-			</div>
-			<div class="replyBox">
-				<div class="replyName">
-					<p class="reply">한줄댓글</p>
-					<hr class="hr2">
-				</div>
-				<div class="replyContent">
-					<p id="reply">김*진 : 굉굉광광이쥠봐보바뫄뫔</p>
-					<p id="reply">장*은 : 우르로캌이ㅏ러니ㅏㅇ린ㅇㄹ</p>
-					<p id="reply">김*진 : 굉굉광광이쥠봐보바뫄뫔</p>
-					<p id="reply">장*은 : 우르로캌이ㅏ러니ㅏㅇ린ㅇㄹ</p>
-				</div>
-				<div class="inputReply">
-	        		<textarea rows="1" cols="53" id="inputReply" style="resize: none;"></textarea>
-	        		<button type="submit">작성</button>
-	        	</div> 
-			</div>
-
-		</div> -->
 		<hr>
 	</div>
+	
+	
 	
 	<div class="content content11 margin" id="writer">
 			<img src="https://ifh.cc/g/HHdrA0.png" width="40px"> <span
@@ -795,19 +713,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 
- 		 <div class="modalLast" style="display: none;">
-						      	<div class="x">
-						          <img class="modalX" src="https://ifh.cc/g/7lzZoV.png" width="30">
-						        </div>
-						        <div class="modalHead">
-						            <div class="head1">
-						                <img src="https://ifh.cc/g/Hyz5zg.png" width="40px">
-						                <span id="modalname">신청완료</span>
-						            </div>
-						            <span>공인중개사의 연락을 기다려주세요*^^*</span>
-						        </div>
-						      </div> -->
 		<!-- 신고 모달 창 -->
 	   <div class="modal fade" id="reportInsertModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-xl">
@@ -825,7 +730,7 @@
 						<textarea rows="3" cols="80" class="reportContent" placeholder="내용을 작성해주세요."></textarea>
 					</div>
 					<div class="modal-footer">
-						<button type="button" onclick="insertReport(2)" class="btn btn-success">등록하기</button>
+						<button type="button" class="btn btn-success reportInsertBtn">등록하기</button>
 						<button type="button" class="btn btn-primary"
 	                        onclick="$('#reportInsertModal').modal('hide');">닫기</button>
       				</div>
@@ -835,12 +740,15 @@
 
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
+/* 	const loremIpsum = document.getElementById("lorem-ipsum")
+let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	const loremIpsum = document.getElementById("lorem-ipsum")
 	fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
 	    .then(response => response.text())
-	    .then(result => loremIpsum.innerHTML = result)
+	    .then(result => loremIpsum.innerHTML = result) */
 	
 	$(function(){
 	    $(".contect").click(function(){
@@ -857,12 +765,15 @@
 	    	$(".modalLast").show();
 	    })
 	    $(".notify").click(function(){
+	    	$(".reportInsertBtn").attr("onclick","insertReport(2,${seller.userNo})");
+	    	
+			$("#reportInsertModal .modal-title").text("허위매물 신고");
+			
 	    	$("#reportInsertModal").modal("show");
 	    })
 	})
 	$(function(){
 		boardList();
-		
 	})
 	
  	function insertboard(){
@@ -896,29 +807,55 @@
 			dataType : 'json',
 			success : function(result){
 				console.log(result);
-				let html = "";
+				 let html = "";
+				let url="https://ifh.cc/g/26CZDZ.png";
+				let url2="https://ifh.cc/g/s78355.png";
 				for(let board of result){
 					html += "<div class='Boardbox'>"+"<div class='lastBox margin'>"+
 								"<div class='boardBox'>"+
-									"<span class='writer'>"+board.userName+"</span>"+
-									"<button onclick='deleteBoard("+board.detailBoardNo+");'>"+"삭제"+"</button>"+
+								  "<div class='boardHead'>"+
+									"<span class='writer'>"+board.userName+"</span>";
+									if(board.refUno == ${loginUser.userNo}){
+										html +="<img src='"+url+"' width='20' height='20' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
+									}else{
+										html += "<img src='"+url2+"' width='20' height='20' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+									}
+									html +="</div>"+
 									"<div id='boardContent'>"+
 									"<span>"+board.content+"</span>"+
 								"</div>"+"</div>"+
 								"<div class='replyBox'>"+
 									"<div class='replyName'>"+
-										"<p class='reply'>"+"한줄댓글"+"</p>"+
+										"<p class='reply' onchange='' data-boardNo='"+board.detailBoardNo+"'>"+"한줄댓글"+"</p>"+
 										"<hr class='hr2'>"+
 									"</div>"+
 									"<div class='replyContent'>"+
 									"</div>"+
 									"<div class='inputReply'>"+
-		        					"<textarea rows='1' cols='53' id='inputReply' style='resize: none;''>"+"</textarea>"+
+		        					"<textarea rows='1' cols='58' id='inputReply' style='resize: none;'placeholder='50자 내로 작성해주세요'>"+"</textarea>"+
 		        					"<input type='hidden' id='refBno' name='refBno' value='"+board.detailBoardNo+"'>"+
-		        					"<button onclick='insertReply("+board.detailBoardNo+");'>"+"작성"+"</button>"+
+		        					"<button onclick='insertReply("+board.detailBoardNo+");replyList("+board.detailBoardNo+")' id='insertReplyBtn' class='btn btn-outline-primary'>"+"작성"+"</button>"+
 		        				"</div>"+"</div>"+"</div>"
-				}
+				}  
+				
 				$(".content10").html(html);
+				for(let i=0; i<result.length; i++){
+					let list =replyList(result[i].detailBoardNo);
+						let rel = "";
+						let url="https://ifh.cc/g/26CZDZ.png";
+						let url2="https://ifh.cc/g/s78355.png";
+					for(let j=0; j<list.length; j++){
+						rel+="<div class='rBox'>";
+						rel += "<p id='reply'>"+list[j].userName+" : "+list[j].replyContent+"</p>";
+						if(${loginUser.userNo} == list[j].replyRefUno){
+							rel+="<img src='"+url+"' width='15' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
+						}else{
+							rel+="<img src='"+url2+"' width='15' height='15' class='deleteReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+						}
+						rel += "</div>";
+					}
+						$(".replyContent").eq(i).html(rel);
+				}
 			},
 			error : function(result){
 				console.log("리스트조회 실패");
@@ -926,9 +863,11 @@
 		})
 	}
 	
+	
+	
+	
 	let detailBoardNo ="";
 	function insertReply(refBno){
-		console.log(refBno);
 		detailBoardNo  = refBno;
 		$.ajax({
 			url : "<%=request.getContextPath()%>/reply/replyInsert",
@@ -941,6 +880,9 @@
 			success : function(result){
 				if(result ==1){
 					console.log("댓글작성 성공");
+					
+					replyList(detailBoardNo);
+					
 				}else{
 					console.log("댓글작성 실패");
 				}
@@ -951,14 +893,40 @@
 		})
 	}  
 	
+	function replyList(detailBoardNo){
+		
+		let replyList ="";
+		$.ajax({
+			url : "<%=request.getContextPath()%>/reply/replyList",
+			data : {detailBoardNo},
+			type : "POST",
+			dataType : "json",
+			async:false,
+			success : function(data){
+				console.log(data);
+				console.log("댓글불러오기 성공");
+				replyList = data;
+			},
+			error : function(){
+				console.log("댓글불러오기 실패");
+			}
+		});
+		return replyList;
+	}
+	
 	function deleteBoard(refBno){
+		console.log(refBno);
 		detailBoardNo  = refBno;
 		$.ajax({
-			url : "<%=request.getContextPath()%>/board/deleteBoard/"+detailBoardNo,
+			url : "<%=request.getContextPath()%>/board/deleteBoard",
 			data : {detailBoardNo},
 			type: "post",
 			success : function(result){
 				alert("게시글이 삭제되었습니다.");
+				
+			},
+			complete : function(){
+				boardList();
 			}
 		})
 	}
@@ -966,12 +934,12 @@
 
 	
 	/* 신고 등록 함수 */
-	function insertReport(type) {
-		<%-- let reportContent = $(".reportContent").val();
+	function insertReport(type,refTuno) {
+		let reportContent = $(".reportContent").val();
 		$.ajax({
 			url : "<%=request.getContextPath()%>/sell/report",
 			data : {
-					refTuno : ${seller.userNo}, 
+					refTuno : refTuno, 
 					refRuno : ${loginUser.userNo},
 					reportContent : reportContent,
 					reportType: type
@@ -984,7 +952,7 @@
 					swal("", "신고 등록 실패.", "error");
 				}
 			}
-		}); --%>
+		});
 	}
 
 	function insertCounsle(counsleMethod) {
@@ -993,14 +961,15 @@
 			data : {
 					counsleMethod : counsleMethod,
 					counsleContent :  $(".applyContent").val(),
-					refTuno : ${loginUser.userNo},
-					refUno : ${seller.userNo}, 
+					refTuno : ${seller.userNo},
+					refUno : ${loginUser.userNo}, 
 					sellNo: ${sd.sellNo}
 					},
 			type: "post",
 			success : function(result){
 				if(result >= 1){
-					swal("", "상담신청이 완료되었습니다.", "success");					
+					swal("", "상담신청이 완료되었습니다.", "success");	
+					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
 				}else {
 					swal("", "상담신청 등록 실패.", "error");
 				}
@@ -1053,7 +1022,6 @@
         					swal("", "찜하기 실패.", "error");
         				}
         			}
-            
                 });
                 swal("", "관심 분양단지로 등록되었습니다.", "success");
             };
@@ -1061,7 +1029,44 @@
         }else{
             swal("", "로그인 후 이용하실 수 있습니다.", "error");
         } 
-		
 	}
+	/* 게시글 삭제하기  */
+	function deleteSell(){
+		$.ajax({
+			url : "<%=request.getContextPath()%>/sell/deleteSell",
+			data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
+			type : "post",
+			success : function(data){
+				console.log("게시글 삭제 완료");
+				alert("삭제완료");
+				move();
+			},
+			error : function(){
+				console.log("게시글 삭제 실패");
+			}
+		})
+	}
+	function move(){
+		location.href='<%=request.getContextPath()%>/agent/list';
+	};
+	
+	let refRno ="";
+	function deleteReply(refRno){
+		refRno = refRno;
+		$.ajax({
+			url : "<%=request.getContextPath()%>/reply/deleteReply",
+			data : {refRno, replyRefUno : ${loginUser.userNo} },
+			type :"post",
+			success : function(result){
+				console.log("댓글 삭제 완료");
+				alert("댓글이 삭제 되었습니다. ");
+				location.reload();
+			},
+			error : function(){
+				console.log("댓글 삭제 실패");
+			}
+		})
+	}
+	
 </script>
 </html>

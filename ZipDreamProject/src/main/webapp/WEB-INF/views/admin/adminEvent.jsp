@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp" />
 <jsp:include page="/WEB-INF/views/common/adminSideBar.jsp" />
 <section class="content">
@@ -43,7 +44,7 @@
 					<c:choose>
 						<c:when test="${fn: length(userList.list) == 0}">
 							<tr>
-								<td colspan="4" style="text-align:center;">회원이 없습니다.</td>
+								<td colspan="7" style="text-align:center;">회원이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -128,7 +129,7 @@
 							</table>
 							
 							<div align="center" style="margin-top:20px;">
-								<button type="submit" class="btn btn-primary">등록하기</button>
+								<button type="submit" class="btn btn-primary" >등록하기</button>
 								<button type="reset"  class="btn btn-danger">취소하기</button>
 							</div>				
 						</form>
@@ -149,7 +150,7 @@
 		
 		<form id="couponInsertForm" action="<%= request.getContextPath() %>/admin/event/couponToUser" method="get">
 		<div class="modal fade" id="couponInsertModal" tabindex="-1" aria-labelledby="couponInsertModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-xl" style="max-width:1500px;">
+		  <div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">쿠폰 보내기</h5>
@@ -160,23 +161,23 @@
 						</button>
 					</div>
 					<div class="modal-body" align="center" style="position:relative;">
-						<table align="center" style="width:100%">
+						<table align="center" style="width:100%;margin-bottom:30px;">
 							<tbody>
 								<tr>
-									<th width="5%"><label for="coupon-userNo">번호</label></th>
-									<td><input type="text" id="coupon-userNo" name="userNo" readonly style="width:100%"></td>
+									<th width="10%"><label for="coupon-userNo">번호</label></th>
+									<td><input type="text" id="coupon-userNo" name="userNo" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userId">이름</label></th>
-									<td><input type="text" id="coupon-userId" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userId" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-userPhone">아이디</label></th>
-									<td><input type="text" id="coupon-userPhone" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-userPhone" class="form-control" readonly style="width:100%"></td>
 								</tr>
 								<tr>
 									<th><label for="coupon-createDate">가입일</label></th>
-									<td><input type="text" id="coupon-createDate" readonly style="width:100%"></td>
+									<td><input type="text" id="coupon-createDate" class="form-control" readonly style="width:100%"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -192,7 +193,7 @@
 						<div class="select-arrow" style="position:relative;top:-55px;left:100px;"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">등록하기</button>
+						<button type="button" class="btn btn-success" onclick="eventSubmit();">등록하기</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
 	                        data-dismiss="modal">닫기</button>
       				</div>
@@ -203,6 +204,7 @@
 	</section>
 </section>
 <script>
+let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 let userCheck = document.getElementsByName("userCheck");
 
 for(let i = 0; i<userCheck.length; i++){
@@ -279,9 +281,9 @@ function ArrayInsertModal(){
 			document.getElementById("coupon-createDate").value += userInfo[5].innerText;
 		}else {
 			document.getElementById("coupon-userNo").value += userCheck[i].value + ",";			
-			document.getElementById("coupon-userId").value += userInfo[2].innerText + ",";
-			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ",";
-			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ",";
+			document.getElementById("coupon-userId").value += userInfo[2].innerText + ", ";
+			document.getElementById("coupon-userPhone").value += userInfo[3].innerText + ", ";
+			document.getElementById("coupon-createDate").value += userInfo[5].innerText + ", ";
 		}
 	}
 	$('#couponInsertModal').modal("show");
@@ -321,8 +323,29 @@ const inputImage = document.getElementById("img")
 inputImage.addEventListener("change", e => {
     readImage(e.target)
 });
+function eventSubmit(){
+	
+	let no = $(".coupon-select option:selected").val();
+	let coupon = $(".coupons[data-couponNo="+no +"]")[0];
+	let couponUserNos = document.getElementById("coupon-userNo").value.split(",");
+	for(let i = 0; i<couponUserNos.length ; i++){
+		let couponUserNo =couponUserNos[i];
+		console.log(couponUserNo);
+		var conponContent = coupon.dataset.couponcontent;
+		var conponDate = coupon.dataset.coupondate;
+		var conponTitle = coupon.dataset.coupontitle;
+		sendMessage3(conponContent,conponDate,conponTitle,couponUserNo); 
+	}
+
+	 
+}
+
+/* let no = $(".coupon-select option:selected").val();
+let coupon = $(".coupons[data-couponNo="+no +"]")[0];
+console.log(coupon.dataset); */
+
 
 </script>
 		
-	
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>	
 <jsp:include page="/WEB-INF/views/common/adminFooter.jsp" />

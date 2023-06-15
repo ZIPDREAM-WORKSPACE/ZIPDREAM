@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 tbody::-webkit-scrollbar {
     width: 10px;  
@@ -52,53 +54,65 @@ tbody::-webkit-scrollbar {
 		
 		text-align: center;
 	}
-	.num{
-		width:100px;
-	}
 	.title{
 		width:300px;
 	}
 	.content{
-		width:600px;
+		width:400px;
 	}
+	.time{
+		width:300px;
+	}
+	.link{
+		cursor:pointer;
+	}
+
 	
 </style>
 <body>
 <jsp:include page="notice_header.jsp"/>
 	<div class="notice_table">
 		<table>
-			<thead>
+			<thead >
 				<tr>
-					<th class="num">번호</th>
-					<th class="title">제목</th>
-					<th class="content">내용</th>
+					<th class="title">단지명</th>
+					<th class="content">알림</th>
+					<th class="time">시간</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td class="num">1</td>
-					<td class="title">역삼 디오빌 분양 정보</td>
-					<td class="content">찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>역삼 디오빌 분양 정보</td>
-					<td>찜한 매물의 분양 정보가 도착하였습니다. 확인 부탁드립니다.</td>
-				</tr>
-		
+			<tbody class="noticeThead">
+			<c:choose>
+                  <c:when test="${fn: length(list) == 0}">
+                     <tr>
+                        <td style="text-align:center; width:1000px;">새로운 알림이 없습니다.</td>
+                     </tr>
+                  </c:when>
+	           <c:otherwise>
+				  <c:forEach items="${list}" var="interestList" >
+	               <tr onClick="clickLink('${interestList.noticeUrl}')" class="link">
+	               	 <td  class="title">${interestList.noticeTitle} </td>
+	               	 <td class="content">${interestList.noticeContent} </td>
+	               	 <td class="time">${interestList.createDateTime} </td>
+	               </tr>
+	           </c:forEach>
+			</c:otherwise>
+	       </c:choose>
 			</tbody>
 		</table>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
+
+<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<script>
+var refUno ='${loginUser.userNo}';
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
+	addEventMessage(refUno);
+	
+function clickLink(url){
+	window.open('about:blank').location.href =url;
+	
+}
+
+</script>
 </body>
 

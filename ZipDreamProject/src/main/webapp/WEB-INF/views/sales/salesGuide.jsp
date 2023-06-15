@@ -326,7 +326,7 @@
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
 			<ul class="sellHouseNavi">
-				<li><a href="<%=request.getContextPath()%>/sales/schedule">분양일정</a></li>
+				<li><a href="<%=request.getContextPath()%>/sales/schedule">청약정보</a></li>
 				<li><a>|</a></li>
 				<li><a href="<%=request.getContextPath()%>/sales/guide">분양가이드</a></li>
 				<li><a>|</a></li>
@@ -729,7 +729,7 @@
         });
 
         function filter(){
-            let search = document.getElementById("search").value.toLowerCase();
+            let search = document.getElementById("search").value;
             let question = document.getElementsByClassName("Hquestion");
             let title = document.getElementsByClassName("questionTitle");
 
