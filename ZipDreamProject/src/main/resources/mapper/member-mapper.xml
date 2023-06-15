@@ -181,6 +181,7 @@
 		SELECT SELL_NO
 		FROM USERSELECT_LIST
 		WHERE USER_NO = #{uno}
+		ORDER BY SELL_NO
 	</select>
 
 </mapper>
