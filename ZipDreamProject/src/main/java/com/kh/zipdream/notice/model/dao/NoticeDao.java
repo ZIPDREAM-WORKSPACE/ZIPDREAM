@@ -21,6 +21,10 @@ public class NoticeDao {
 	public int deleteSaleNotice(Notice notice) {
 		return sqlSession.delete("notice-mapper.deleteSaleNotice", notice);
 	}
+	
+	public int deleteManageNotice(int noticeNo) {
+		return sqlSession.delete("notice-mapper.deleteManageNotice", noticeNo);
+	}
 
 	public List<Notice> selectManageList(int refUno) {
 		return sqlSession.selectList("notice-mapper.selectManageList",refUno);

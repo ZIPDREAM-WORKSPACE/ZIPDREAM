@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- alert창 꾸미기  -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <title>ZIPDREAM</title>
 <style>
 * {

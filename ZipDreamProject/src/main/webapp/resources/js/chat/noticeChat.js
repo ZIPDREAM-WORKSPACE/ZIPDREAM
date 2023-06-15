@@ -133,6 +133,7 @@ function addEventMessage(refUno){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
+ 
  		td1.innerHTML = houseMessage.title +" 분양 정보";
  		td2.innerHTML = "관심 분양에 등록했습니다."
  		td3.innerHTML = currentTime();
@@ -369,6 +370,7 @@ function clickLink(url){
  		td1.innerHTML = "상담";
  		td2.innerHTML = (counsleAgentMessage.counsleMethod ==1 ? "대면 " : "비대면 ") +"상담 요청이 들어왔습니다.";
  		td3.innerHTML = currentTime();
+ 		
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
