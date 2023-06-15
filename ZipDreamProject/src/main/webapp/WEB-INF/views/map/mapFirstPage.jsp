@@ -561,8 +561,7 @@ html::-webkit-scrollbar {
 	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
 	    	                        	        /* location.href="#"+markerPosit; */
 	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5").css("color", "black");
-	    	                        	        
+	    	                        	       
 	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
 	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
 	    	                        	        	$(backgroundTag).css("color", "white");
@@ -1133,7 +1132,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     	    	    	                        	        markerPosit = markerPosit.replace(" ", "").replace("(","").replace(")", "").replace("," , "");
     	    	    	                        	        /* location.href="#"+markerPosit; */
     	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
-    	    	    	                        	        $(backgroundTag).siblings().css("background-color","#f0f3f5");
+    	    	    	                        	        $(backgroundTag).siblings().css({"background-color":"#f0f3f5","color":"black"});
     	    	    	                        	        
     	    	    	                        	        
     	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
@@ -1515,7 +1514,6 @@ $("#keyword").keyup(function(){
 	    	    	    	                        	        /* location.href="#"+markerPosit; */
 	    	    	    	                        	        var backgroundTag = $("[name='"+markerPosit+"']");
 	    	    	    	                        	        $(backgroundTag).siblings().css({"background-color":"#f0f3f5","color":"black"});
-	    	    	    	                        	        
 	    	    	    	                        	        
 	    	    	    	                        	        if($(backgroundTag).css("background-color") != "rgb(75 100 119)"){
 	    	    	    	                        	        	$(backgroundTag).css("background-color", "rgb(75 100 119)");
