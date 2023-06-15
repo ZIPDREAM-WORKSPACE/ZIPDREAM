@@ -27,6 +27,9 @@ rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"> 
 
+<!-- alert창 꾸미기  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminSideBar.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminFooter.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/admin/adminMain.css">
@@ -139,6 +142,12 @@ div {
 </style>
 </head>
 <body>
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			swal("", '${alertMsg.message}','${alertMsg.type}');
+		</script>
+		<c:remove var="alertMsg" />
+	</c:if>
 	<header class="header">
 		<nav class="logo" onclick="location.href='<%=request.getContextPath()%>/admin/main'">
 			<img src="<%=request.getContextPath()%>/resources/images/logo4.png" height="43">
