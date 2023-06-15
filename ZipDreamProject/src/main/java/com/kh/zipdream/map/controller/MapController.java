@@ -19,10 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -40,8 +42,9 @@ public class MapController {
    private MapService mapService;
    
    @GetMapping("/main")
-   public String moveMapController() {
-      return "map/mapFirstPage";
+   public String moveMapController(Model model) {
+	  
+	   return "map/mapFirstPage";
    }
    
    @ResponseBody
@@ -187,5 +190,15 @@ public class MapController {
 		   System.out.println(address);
 		   return new Gson().toJson(address);
 		   
+	   }
+	   
+	   @GetMapping("/maintosearch")
+	   public String mainToSearch(@RequestParam("searchcode") int searchcode,
+			   						@RequestParam("bjdName") String bjdName,
+			   						RedirectAttributes attributes) {
+
+		   attributes.addFlashAttribute("searchcode", searchcode);
+		   attributes.addFlashAttribute("bjdName",bjdName);
+	      return "redirect:/map/main";
 	   }
 }

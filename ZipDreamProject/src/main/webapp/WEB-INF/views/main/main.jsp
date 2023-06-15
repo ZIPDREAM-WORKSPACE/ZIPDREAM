@@ -814,7 +814,7 @@ display:  block;
 		<div id="s_bottom">
 			<div id="s_bottom_inner">
 				<div id="s_text">
-					<input type="text" id="s_input" placeholder="지역, 또는 아파트명을 입력하세요.">
+					<input type="text" id="s_input" placeholder="찾고자 하는 매물의 지역을 입력하세요.">
 				</div>
 				<div id="s_icon">
 					<a href='#'><img id="s_icon_image"
@@ -1217,7 +1217,44 @@ display:  block;
 			}
 		});
 		
-	
+		let keyword="";
+		$("#s_input").keyup(function(){
+			keyword = document.getElementById("s_input").value;
+			
+		});
+		
+		$("#s_icon_image").click(function(){
+			let kw = document.getElementById("s_input").value;
+			if(kw==""){
+				alert("키워드를 입력해주세요.");
+			}else{
+				$.ajax({
+					url: "<%= request.getContextPath()%>/map/searchKeyword",
+					method: "get",
+					data: {keyword : keyword},
+					dataType: "json",
+					success: function(result){
+						let searchcode = result[0].bjdCode;
+						let bjdName = result[0].bjdName;
+						console.log(result[0].bjdName);
+						<%-- $.ajax({
+							url: "<%= request.getContextPath()%>/map/maintosearch",
+							method: "get",
+							data: {searchcode: searchcode},
+							success:function(result){
+								console.log("이동 성공");
+							}
+						}); --%>
+						location.href="<%= request.getContextPath()%>/map/maintosearch?searchcode="+searchcode+"&bjdName="+bjdName;
+					},
+					error: function(result){
+						console.log("main에서 map 이동 실패");
+					}
+					
+				});
+			
+			}
+		});
 		
 	</script>
 	

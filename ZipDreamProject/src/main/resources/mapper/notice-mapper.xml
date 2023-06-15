@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="notice-mapper">
-	<insert id="insertSaleNotice" >
-		INSERT INTO NOTICE(NOTICE_TYPE,NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME)
-		VALUES (2,#{noticeContent},#{noticeTitle},#{noticeUrl},#{refUno},#{createDateTime} )
-	
-	</insert>
-	
+
+	<resultMap type="notice" id="selectNoticeList">
+		<result property="noticeNo" column="NOTICE_NO"/>
+		<result property="noticeType" column="NOTICE_TYPE"/>
+		<result property="noticeContent" column="NOTICE_CONTENT"/>
+		<result property="noticeTitle" column="NOTICE_TITLE"/>
+		<result property="noticeUrl" column="NOTICE_URL"/>
+		<result property="refUno" column="REF_UNO"/>
+		<result property="createDateTime" column="CREATE_DATETIME"/>
+		<result property="result" column="RESULT"/>
+		<result property="type" column="TYPE"/>
+		
+	</resultMap>
+
 	<delete id="deleteSaleNotice" >
 		DELETE FROM NOTICE 
 		WHERE NOTICE_URL = #{noticeUrl} AND REF_UNO = #{refUno};
 	
 	</delete>
 	
-		<insert id="insertNotice" parameterType="notice">
-		INSERT INTO NOTICE(NOTICE_TYPE, NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME, RESULT, TYPE)
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO NOTICE(NOTICE_TYPE, NOTICE_CONTENT, NOTICE_TITLE, NOTICE_URL, REF_UNO, CREATE_DATETIME,RESULT ,TYPE)
 		VALUES (#{noticeType},#{noticeContent},#{noticeTitle},#{noticeUrl},#{refUno},SYSDATE(),#{result},#{type} )
 	
 	</insert>
+	
+	<select id="selectManageList" resultMap="selectNoticeList" parameterType="_int">
+		SELECT * FROM NOTICE WHERE NOTICE_TYPE = 1 AND REF_UNO = #{refUno} ORDER BY CREATE_DATETIME DESC
+	</select>
+	
+	<select id="selectInterestList" resultMap="selectNoticeList" parameterType="_int">
+		SELECT * FROM NOTICE WHERE NOTICE_TYPE = 2 AND REF_UNO = #{refUno} ORDER BY CREATE_DATETIME DESC
+	</select>
 </mapper>

@@ -43,21 +43,26 @@
 
 	<!-- 최근본 방 조회를 위한 resultMap  -->
 	<resultMap type="sellDetail" id="recentRoomResultSet">
+		<result column="SELL_NO" property="sellNo"/>
  		<result column="SELL_NAME" property="sellName"/>
  		<result column="SELL_ADDRESS" property="sellAddress"/>
  		<result column="SELL_PRICE" property="sellPrice"/>
  		<result column="SELL_TYPE" property="sellType"/>
- 		<result column="FILE_PATH" property="filePath"/>
+ 		<result column="CHANGE_NAME" property="filePath"/>
  	</resultMap>
  	
- 	<select id="recentRoomList" resultMap="recentRoomResultSet">
-		SELECT SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_TYPE,FILE_PATH, CONCAT(CHANGE_NAME, FILE_PATH) FILE_FATH
-		FROM SELLDETAIL SD
-		LEFT JOIN ATTACHMENT AT ON (SELL_NO = REF_SNO)
-		WHERE SELL_NO = '2' AND FILE_LEVEL = 0
+ 	<select id="recentRoomList" resultMap="recentRoomResultSet" parameterType="hashmap">
+		SELECT SELL_NO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_TYPE, CHANGE_NAME
+		FROM ATTACHMENT AT
+		RIGHT JOIN SELLDETAIL SD ON (SELL_NO = REF_SNO)
+		WHERE (FILE_LEVEL = 0 OR FILE_LEVEL IS NULL) 
+		AND SELL_NO IN
+		<foreach collection="sellNoList" item="sellNo" open="(" close=")" separator=",">
+			#{sellNo}
+		</foreach>		
 	</select>
 
-	<select id="selectAgent" parameterType="hashmap" resultMap="memberResultSet">
+	<select id="selectAgent" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE USER_LEVEL = '2' AND STATUS = 'Y'
 		AND
@@ -123,5 +128,12 @@
 		DELETE FROM USER_COUPON
 		WHERE USER_NO = #{userNo} AND COUPON_NO = #{couponNo}
 	</delete>
+	
+	<select id="checkAgent" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_ID = #{agentId} AND USER_LEVEL = '2'
+	</select>
+	
 	
 </mapper>

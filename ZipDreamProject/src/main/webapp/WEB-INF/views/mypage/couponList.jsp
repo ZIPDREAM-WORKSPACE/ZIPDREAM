@@ -12,7 +12,7 @@
 <style>
 .recentContent {
 	width: 100%;
-
+	margin-top: 40px;
 	min-height: 450px;
 
 }
@@ -86,11 +86,6 @@
 	width: 1200px;
 	margin: 0px auto;
 	align-items: center;
-}
-
-.btnArea {
-	align-items: center;
-	text-align: center;
 }
 
 #useBtn {
@@ -196,8 +191,24 @@
 	margin: 30px 0px;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+ 	justify-content: center;
 
+}
+.agentId{
+	width: 300px;
+	height: 40px;
+	font-size: 15px;
+	color: rgb(34, 34, 34);
+	border-width: initial;
+	border: 1px solid rgb(209, 209, 209);
+	border-radius:20px;
+	outline: none;
+	padding: 0px 14px;
+}
+.bb{
+	margin-right:10px;
+	margin-left:10px;
+    width: 100px;
 }
 </style>
 </head>
@@ -279,11 +290,11 @@
 					<div>
 						쿠폰을 사용하실 경우<br>담당 공인중개사의 아이디를 입력해주세요.
 					</div>
-					<input type="text">
+					<input class="agentId" type="text" placeholder="정확한 아이디를 입력해주세요.">
 				</div>
 				<div class="btnArea">
-					<button class="btn btn-secondary bb" type="button" id="cancel">취소</button>
 					<button class="btn btn-outline-primary bb" type="button" id="use">사용하기</button>
+					<button class="btn btn-secondary bb" type="button" id="cancel">취소</button>
 				</div>
 			</div>
 		</div>
@@ -320,31 +331,48 @@
 				if(e.target.id == "use"){
 					let couponNo = e.target.value;
 					let userNo = "${loginUser.userNo}";
+					let agentId = $(".agentId").val(); //쿠폰 사용시 공인중개사 아이디 입력
 					swal({
 						title:"사용하시겠습니까?",
-					 	buttons: ["취소", "삭제"],
 					  	buttons: true,
 					  	dangerMode: true,
 					})
 					.then((willDelete) => {
 						if(willDelete){
+							/* ok 클릭시 입력한 공인중개사 아이디 일치하는 값이 있는지 실행*/
 							$.ajax({
-								url:"<%=request.getContextPath()%>/myroomsell/deleteuUserCoupon",
+								url:"<%=request.getContextPath()%>/myroomsell/checkAgent",
 								method:"get",
-								data:{couponNo, userNo},
-								success:function(){
-									swal({
-										text:"사용완료되었습니다.",
-										icon:"success",
-										button:"확인"
-									}).then(function(){
-										location.href = "<%=request.getContextPath()%>/mypage/couponlist";
-									})
+								data:{agentId},
+								success:function(result){
+									/* ajax 통신 성공시 result 값이 1이상이면 올바른 아이디 입력 */
+									if(result>0){
+										/* 삭제 로직 시작  */
+										$.ajax({
+											url:"<%=request.getContextPath()%>/myroomsell/deleteuUserCoupon",
+											method:"get",
+											data:{couponNo, userNo},
+											success:function(){
+												swal({
+													text:"사용완료되었습니다.",
+													icon:"success",
+													button:"확인"
+												}).then(function(){
+													location.href = "<%=request.getContextPath()%>/mypage/couponlist";
+												})
+											},
+											error:function(){
+												console.log("에러발생");
+											}
+										});
+									}else{
+										swal("", "아이디를 잘못 입력하셨습니다.", "error");
+									}
 								},
 								error:function(){
-									console.log("에러발생");
+									console.log("에러");
 								}
-							})
+							});
 						}
 					})
 				}
