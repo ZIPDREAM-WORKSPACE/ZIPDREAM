@@ -116,6 +116,7 @@
 			
 			if(recentRooms){
 				recentRooms = JSON.parse(recentRooms);
+				var emptyhtml = "<div class='emptyContent'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-x-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg><p>최근 본 방이 존재하지 않습니다.</p></div>";
 				
 				$.ajax({
 					url:"<%=request.getContextPath()%>/mypage/recentRoomList",
@@ -127,21 +128,25 @@
 					},
 					success:function(result){
 						var html = "";
-						html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 5개까지 저장됩니다.</p></div><div class='row row-cols-1 row-cols-md-5 g-4'>";
-						for(var i = 0; i<result.length; i++){
-							html += "<div class='col'><div onclick='moveDetail(this);' class='card h-100' id='"+result[i].sellNo+"'>";
-							if(result[i].filePath != null){
-								html += "<img src='${pageContext.request.contextPath}"+ "/resources/sellupfiles/"+result[i].filePath +"' class='card-img-top'>";
-							}else{
-								html += "<img src='https://ifh.cc/g/dtv18m.png' class='card-img-top'>";
+						if(result != ""){
+							html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 5개까지 저장됩니다.</p></div><div class='row row-cols-1 row-cols-md-5 g-4'>";
+							for(var i = 0; i<result.length; i++){
+								html += "<div class='col'><div onclick='moveDetail(this);' class='card h-100' id='"+result[i].sellNo+"'>";
+								if(result[i].filePath != null){
+									html += "<img src='${pageContext.request.contextPath}"+ "/resources/sellupfiles/"+result[i].filePath +"' class='card-img-top'>";
+								}else{
+									html += "<img src='https://ifh.cc/g/dtv18m.png' class='card-img-top'>";
+								}
+								html += "<div class='card-body'><h5 class='card-title'>" + result[i].sellName +"</h5>";
+								html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "</p>";
+								html += "<p class='card-text'>" + result[i].sellAddress + "</p></div></div></div>";
 							}
-							html += "<div class='card-body'><h5 class='card-title'>" + result[i].sellName +"</h5>";
-							html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "</p>";
-							html += "<p class='card-text'>" + result[i].sellAddress + "</p></div></div></div>";
+							html += "</div></div>";
+							
+							$('.rc').append(html);
+						}else{
+							$('.rc').append(emptyhtml);
 						}
-						html += "</div></div>";
-						
-						$('.rc').append(html);
 					},
 					error:function(result){
 						console.log("에러발생");
@@ -150,7 +155,6 @@
 				});
 
 			}else{
-				var emptyhtml = "<div class='emptyContent'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-x-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg><p>최근 본 방이 존재하지 않습니다.</p></div>";
 				$('.rc').append(emptyhtml);
 			}
 		

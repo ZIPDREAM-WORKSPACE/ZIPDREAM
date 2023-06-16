@@ -423,7 +423,7 @@
             const licensebox = document.querySelector('.licensebox');
             const docFrag = new DocumentFragment();
 
-            if ([...files].length >= 4) {
+            if ([...files].length >= 2) {
                 alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
                 return;
             }
@@ -437,6 +437,7 @@
 
                 // 파일 갯수 검사
                 if ([...files].length < 7) {
+                	licensebox.innerHTML = "";
                 uploadFiles.push(file);
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -473,8 +474,8 @@
                 const licensebox1 = document.querySelector('.licensebox1-1');
                 const docFrag = new DocumentFragment();
 
-                if ([...files].length >= 4) {
-                    alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                if ([...files].length >= 2) {
+                    alert('이미지는 최대 1개 까지 업로드가 가능합니다.');
                     return;
                 }
 
@@ -487,6 +488,7 @@
 
                     // 파일 갯수 검사
                     if ([...files].length < 7) {
+                    	licensebox1.innerHTML = "";
                     uploadFiles.push(file);
                     const reader = new FileReader();
                     reader.onload = (e) => {
@@ -536,6 +538,7 @@
 
                         // 파일 갯수 검사
                         if ([...files].length < 7) {
+                        	licensebox2.innerHTML = "";
                         uploadFiles.push(file);
                         const reader = new FileReader();
                         reader.onload = (e) => {
