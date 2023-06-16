@@ -196,7 +196,7 @@ position: absolute;
 <body>
 	<c:if test="${ not empty alertMsg }">
 		<script>
-			alert("서비스 요청 성공", '${alertMsg}');
+			swal("", '${alertMsg.message}','${alertMsg.type}');
 		</script>
 		<c:remove var="alertMsg" />
 	</c:if>

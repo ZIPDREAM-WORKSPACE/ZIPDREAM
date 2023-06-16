@@ -72,7 +72,7 @@
 			<label class="myInfo_title">아이디</label><br>
 		    <input class="read_only form-control" type="text" name="userId" value="${m.userId}" readonly><br>
 		    <label class="myInfo_title" >비밀번호</label><br>
-		    <button class="btn  btn-dark form-control" type="button" style="width:518px;" data-toggle="modal" data-target="#password_modal">비밀번호 변경</button><br><br>
+		    <button class="btn btn-dark form-control" type="button" style="width:518px;" data-toggle="modal" data-target="#password_modal">비밀번호 변경</button><br><br>
 		    <label class="myInfo_title ">이름</label><br>
 		    <input class="form-control" type="text"  id="userName" name="userName" value="${m.userName }" ><br>
 		    <label class="myInfo_title">전화번호</label><br>
