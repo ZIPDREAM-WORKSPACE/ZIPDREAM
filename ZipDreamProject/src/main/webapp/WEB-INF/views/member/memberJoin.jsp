@@ -7,7 +7,7 @@
 
 <title>Insert title here</title>
 </head>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <style>
     div{
         box-sizing: border-box;
@@ -38,7 +38,7 @@
          position: absolute; 
         width: 600px;
         height: 1100px;
-        right: 540px;
+        right: 640px;
         margin-top: 100px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
@@ -452,17 +452,17 @@ function ok(){
          }).open();
      }
   
-  $("#emailCheck").on("click",function(){
+  $("#id-text").on("click",function(){
      let email = document.getElementById("emailct");
      let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
      $.ajax({
          url : "<%= request.getContextPath()%>/member/emailCheck"
-          ,data : {id : value}
+         ,data : {id : value}
          ,method : "get"
           
           ,success: function(data){
-            if(data==1){
-               alert("이미 가입된 아이디 입니다.");
+            if(data==0){
+               alert(".");
                $("#id-text").val("");
             }else{
                alert("사용가능한 아이디입니다");

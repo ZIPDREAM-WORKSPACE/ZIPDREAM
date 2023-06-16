@@ -157,7 +157,7 @@
 					<div class="modal-footer" style="justify-content:space-between;">
 						<button class="btn btn-danger" onclick="deleteMember();">회원 상태 변경</button>
 						<button type="button" id="btn_register" class="btn btn-primary"
-	                        data-dismiss="modal">닫기</button>
+	                        data-dismiss="modal" onclick="$('.user-tbody').html('');$('.user-pagination').html('')">닫기</button>
       				</div>
 				</div>
 			</div>
@@ -191,7 +191,10 @@
 					$(".user-modifyDateTime").text("${user.modifyDateTime}");
 				}
 			</c:forEach>
-			getReportList(userNo,uPage,1);
+			
+			$("#reportHistory").off("click");
+			$("#reportedHistory").off("click");
+			$("#userCouponList").off("click");
 			
 			$("#reportHistory").on('click',function(){
 				$(this).addClass("btn-primary");
@@ -215,8 +218,9 @@
 				$("#reportedHistory").removeClass("btn-primary");
 				$(".user-content").css({'border-radius':"8px"});
 				getCouponList(userNo,uPage);
-			})
+			});
 			
+			$("#reportHistory").trigger("click");
 			$('#userModal').modal("show");
 		});
 	}
@@ -231,7 +235,6 @@
 			  success : function(result){
 				  $(".user-tbody").html("");
 				  $(".user-pagination").html("");
-				  
 				  
 				  let html = "";
 				  if(type == 1){
