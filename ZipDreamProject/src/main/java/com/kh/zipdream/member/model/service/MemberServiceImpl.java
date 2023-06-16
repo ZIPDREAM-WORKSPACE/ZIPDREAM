@@ -219,7 +219,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
-	
+	public int deleteMember(int userNo) {
+		return memberDao.deleteMember(userNo);
+	}
 	
 	
 	

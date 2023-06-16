@@ -92,13 +92,25 @@ public class AdminController {
 	}
 	
 	@PostMapping("/notice/enroll")
-	public String noticeEnroll(NoticeBoard nb) {
+	public String noticeEnroll(NoticeBoard nb, RedirectAttributes ra) {
 		
+		int result = 0;
 		if(nb.getNoticeBoardNo() == 0) {
-			int result = service.insertNoticeBoard(nb);
+			result = service.insertNoticeBoard(nb);
 		}else {
-			int result = service.updateNoticeBoard(nb);
+			result = service.updateNoticeBoard(nb);
 		}
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1 ) {
+			alertMsg.put("message", "공지 등록 성공");
+			alertMsg.put("type", "success");
+		}else{
+			alertMsg.put("message", "공지 등록 실패");
+			alertMsg.put("type", "error");
+		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		
 		return "redirect:/admin/notice";
 	}
@@ -113,9 +125,21 @@ public class AdminController {
 	}
 	
 	@GetMapping("/notice/delete")
-	public String noticeDelte(@RequestParam(value="boardNo", required=false, defaultValue="0") int boardNo) {
+	public String noticeDelte(@RequestParam(value="boardNo", required=false, defaultValue="0") int boardNo,
+							  RedirectAttributes ra) {
 		
-		service.deleteNoticeBoard(boardNo);
+		int result = service.deleteNoticeBoard(boardNo);
+		
+		Map<String,String> alertMsg = new HashMap<String,String>();
+		if(result >= 1 ) {
+			alertMsg.put("message", "공지 삭제 성공");
+			alertMsg.put("type", "success");
+		}else{
+			alertMsg.put("message", "공지 삭제 실패");
+			alertMsg.put("type", "error");
+		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		
 		return "redirect:/admin/notice";
 	}
@@ -373,6 +397,8 @@ public class AdminController {
 			alertMsg.put("type", "error");
 		}
 		
+		ra.addFlashAttribute("alertMsg",alertMsg);
+		
 		return "redirect:/admin/event";
 	}
 	
@@ -476,6 +502,8 @@ public class AdminController {
 			alertMsg.put("message", "삭제 실패");
 			alertMsg.put("type", "error");
 		}
+		
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		
 		return "redirect:/admin/selldetail";
 	}
