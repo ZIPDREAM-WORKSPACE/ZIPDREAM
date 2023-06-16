@@ -22,13 +22,13 @@
 }
 .imgStyle{
 	border: 1px solid lightgray;
-	object-fit: cover;
+	object-fit: contain;
 	width: 300px;
 	height: 200px;
 	border-radius: 5px 5px 2px 2px;
 }
 .imgStyle:hover{
-	
+	border: 1px solid lightgray;
 	transform: scale(1.4);
 	transition: all 0.5s linear;
 }
