@@ -412,6 +412,44 @@ public class MemberController {
 
 	  
 
+	@PostMapping("/deleteMember")
+	@ResponseBody
+	public int deleteMember(@RequestParam (value="userPwd2") String userPwd2,@ModelAttribute("loginUser") Member loginUser) {
+		int result = 0;
+		
+		String pwd = loginUser.getUserPwd();
+		int userNo = loginUser.getUserNo();
+		System.out.println(userPwd2 + ": "+pwd);
+		
+		if(bcryptPasswordEncoder.matches(userPwd2, pwd)) {
+			result= memberService.deleteMember(userNo); 
+		}
+		
+		return result;
+	}
+	
+	
+	@GetMapping("/sessionOut")
+	@ResponseBody
+	public void sessionOut(HttpSession session, SessionStatus status) {
+		 
+		status.setComplete(); // 세션 할일이 완료됨 -> 없앰 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
 
 
 }

@@ -181,9 +181,11 @@
 	</update>
 	
 	
-	<delete id="deleteMember" parameterType="_int">
-		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
-	</delete>
+	<update id="deleteMember">
+		UPDATE MEMBER
+		SET STATUS='N', WITHDRAW='N'
+		WHERE USER_NO =#{userNo}
+	</update>
 	
 	<update id="updatebkImages" parameterType="Attachment">
 		UPDATE ATTACHMENT SET

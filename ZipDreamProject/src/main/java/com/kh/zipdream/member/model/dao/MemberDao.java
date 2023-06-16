@@ -102,7 +102,7 @@ public class MemberDao {
 	
 	
 	public int deleteMember(int userNo) {
-		return sqlSession.delete("member-mapper.deleteMember",userNo);
+		return sqlSession.update("member-mapper.deleteMember",userNo);
 
 	}
 	
