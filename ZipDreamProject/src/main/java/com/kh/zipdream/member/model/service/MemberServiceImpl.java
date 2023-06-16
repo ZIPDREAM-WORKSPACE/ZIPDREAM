@@ -154,9 +154,6 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-	public int deleteMember(int userNo) {
-		return memberDao.deleteMember(userNo);
-	}
 
 	// 비밀번호 변경
 	public int updateMemberPwd(Member m) {
@@ -175,8 +172,6 @@ public class MemberServiceImpl implements MemberService {
 		List<String> reNameList = new ArrayList();
 		int result = 0;
 		if (list != null) {
-
-
 
 			for (int i = 0; i < list.size(); i++) {
 
@@ -208,12 +203,23 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 		return result;
+		
 	}
 	
 	//중개사 사진 미리보기
 	public List<Attachment> selectAttachmentList(int userNo) {
 		return memberDao.selectAttachmentList(userNo);
 	}
+	
+	
+	public int deleteMember(int userNo) {
+		return memberDao.deleteMember(userNo);
+	}
+	
+	public Member loginCheckMember(Map<String, String> map) {
+		return memberDao.loginCheckMember(map);
+	} 
+	
 	
 }
 	

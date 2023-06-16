@@ -153,6 +153,7 @@
 	border: 0px;
 	font: inherit;
 	vertical-align: baseline;
+	
 }
 
 .selectFamilyWrap>h1 {
@@ -164,6 +165,7 @@
 	text-align: left;
 	display: flex;
     gap: 5px;
+    align-items: center;
 }
 
 .selectFamilyWrap>svg {
@@ -216,6 +218,8 @@
 	text-align: left;
 	display: flex;
     gap: 5px;
+    align-items: center;
+
 }
 
 .nohomePeriod>svg {
@@ -245,6 +249,8 @@
 	text-align: left;
 	display: flex;
     gap: 5px;
+    align-items: center;
+
 }
 
 .joinWrap>svg {
@@ -358,7 +364,7 @@
 		<div class="calculatorWrap">
 			<div>
 				<div class="NoticeWrap">
-					<p>청약가점제에 의해 청약신청 할 때에는 청약자 본인이 직접 소유주택수,무주택기간 및 부양가족수를 산정해야
+					<p style="margin-top: 16px;">청약가점제에 의해 청약신청 할 때에는 청약자 본인이 직접 소유주택수,무주택기간 및 부양가족수를 산정해야
 						하므로</p>
 					<p>신청 전에 청약 신청시 유의사항 및 가점제도 내용을 충분히 이해해야만 착오에 따른 불이익을 피할 수
 						있습니다.</p>
