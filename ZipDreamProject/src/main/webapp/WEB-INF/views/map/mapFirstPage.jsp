@@ -301,8 +301,6 @@ html::-webkit-scrollbar {
 }
 
 #placesList>li {
-	/* width: 600px;
-	font-size: 15px; */
 	font-weight: 600;
 	margin: 20px;
 	background-color: #f0f3f5;
@@ -1359,6 +1357,7 @@ $("#comOkOj").click(function(){
 			
 		});
 	}else{
+		$(this).css("background-color", "#F0F0F0").css("color", "black");
 		swal("로그인 후 이용 가능한 서비스입니다.");
 	}
 });

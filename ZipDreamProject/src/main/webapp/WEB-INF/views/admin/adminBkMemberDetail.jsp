@@ -111,8 +111,15 @@ $(function() {
 			data:{userNo : currentUserNo, answer, userId : $(".bk-userId").val()},
 			dataType:"text",
 			success:function(result){
-				if(result = 1){					
-					location.href="<%= request.getContextPath()%>/admin/bkmember";
+				if(result = 1){		
+					swal({
+						text: "처리 완료",
+						icon : "success",
+						closeOnClickOutside :false
+					}).then(function(){
+						location.href="<%= request.getContextPath()%>/admin/bkmember";
+						
+					});
 				}else{
 					console.log("error");
 				}

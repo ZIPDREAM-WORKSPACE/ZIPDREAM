@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
-div{
-	/* border: 1px solid red;  */
-}
 .recentContent{
 	height: 450px;
 }
@@ -16,11 +13,8 @@ div{
 	display: flex;
 	min-height: 400px;
 	padding: 50px 10px 150px;
-	/* width: 1200px; */
 	width: 1110px;
-	/* height: 100%; */
 	margin: 0px auto;
-	/* padding-left: 50px; */
 	padding-right: 50px;
     padding-top: 20px;
 	flex-direction: row;
@@ -128,10 +122,18 @@ div{
 							let filePath = result[0].filePath;
 							let sellNo = result[0].sellNo;
 							console.log(result[0]);
-							
+
+								let url = ""; 
 								const element = document.getElementById("listWrap");
+								if(filePath != null){
+									url = "<%= request.getContextPath() %>/resources/sellupfiles/"+filePath;
+								}else{
+									url = 'https://ifh.cc/g/dtv18m.png';	
+								}
 								element.innerHTML += '<div id="'+sellNo+'" class="infoWrap" style="display: inline-block;">'
-												  + '<div style="overflow: hidden;"><img class="imgStyle goDet" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'"></div>'
+												  + '<div style="overflow: hidden;">'
+												  	+'<img class="imgStyle goDet" src="'+url+'">'
+												  + '</div>'
 												  + '<div class="divStWrap goDet"><div class="divStyle" style="font-size:20px; font-weight: 500; margin-top: 10px;">'+sellPrice+'억</div>'
 												  + '<div class="divStyle" style="font-size:14px;">'+sellName+', '+sellFloor+'</div>'
 												  + '<div class="divStyle">'+sellAddress+'</div>'+'</div></div>';
@@ -144,7 +146,7 @@ div{
 					})
 				}
 				}else{
-					const element = document.getElementById("listWrap");
+					let element = document.getElementById("listWrap");
 					element.innerHTML += '<p style="font-weight:500; color: gray;">찜한 매물이 없습니다.</p>';
 					
 				}
@@ -154,7 +156,7 @@ div{
 				console.log("실패");
 			}
 			
-		})
+		});
 	})
 	
 	$(document).on('click', '.infoWrap', function(e){

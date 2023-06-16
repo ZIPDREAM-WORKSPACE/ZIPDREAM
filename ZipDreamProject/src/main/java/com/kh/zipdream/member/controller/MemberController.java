@@ -401,6 +401,7 @@ public class MemberController {
 	  return "redirect:/"; 
 	  }
 	 
+
 	  @GetMapping("/mybookmarklist")
 		@ResponseBody
 		public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
@@ -408,7 +409,9 @@ public class MemberController {
 	
 			return uslist;
 		}
+
 	  
+
 	@PostMapping("/deleteMember")
 	@ResponseBody
 	public int deleteMember(@RequestParam (value="userPwd2") String userPwd2,@ModelAttribute("loginUser") Member loginUser) {
@@ -448,6 +451,8 @@ public class MemberController {
 
 
 
+
+}
 
 
 
