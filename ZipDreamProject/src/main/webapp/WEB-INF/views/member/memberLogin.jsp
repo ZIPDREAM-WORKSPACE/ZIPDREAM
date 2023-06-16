@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
 <style>
     div{
         box-sizing: border-box;
@@ -244,7 +245,7 @@
                 <button type="submit" id="loginbtn">로그인</button><br><br>
                 
                 <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
-                <a href=""><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
+                <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
 
 
             </div>
@@ -364,5 +365,55 @@ window.addEventListener('load', function() {
     }
 });
 </script>
+
+ <script>
+            Kakao.init('597148a4792f11606a885d22718bb101'); //발급받은 키 중 javascript키를 사용해준다.
+            console.log(Kakao.isInitialized()); // sdk초기화여부판단
+            
+            //카카오로그인
+            function kakaoLogin() {
+             /* Kakao.Auth.login( */
+                Kakao.Auth.loginForm({
+                success: function (response) {
+                    Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                       let accessToken = Kakao.Auth.getAccessToken();
+                       Kakao.Auth.setAccessToken(accessToken);
+                    	
+                       console.log(response);
+                       console.log(response.id);
+                       console.log(response.properties.nickname);
+                       console.log(response.kakao_account.email);
+                        let snsId = response.id;
+                        let snsName = response.properties.nickname;
+                        let snsType = 1;
+                        
+                       <%--  $.ajax({
+                           url : "<%= request.getContextPath()%>/apinsert.me",
+                           data : {snsId, snsName, snsType},
+                           method : 'post',
+                           success: function(data){
+                        	   alertMsg("카카오로 정상 로그인되었습니다.");
+                        	   
+                        	   setTimeout(()=> location.replace("<%= request.getContextPath() %>/mainpage.me"), 1500);
+                           },
+                           error: function(){
+                              error("카카오 로그인 실패");
+                           }
+                        }); --%>
+                        
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                    })
+                },
+                fail: function (error) {
+                    console.log(error)
+                }
+                });
+            } 
+        </script>
 </body>
 </html>
