@@ -32,12 +32,13 @@
          
     }
 
+
     .login1{
         box-sizing: border-box;
          position: absolute; 
         width: 600px;
-        height: 1200px;
-        right: 440px;
+        height: 1100px;
+        right: 540px;
         margin-top: 100px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
@@ -46,15 +47,15 @@
     }
    
     #login-text{
-        font-family: 'Inter';
         font-style: normal;
         font-weight: 270px;
-        font-size: 43px;
+        font-size: 35px;
         display: flex;
         align-items: center;
         text-align: center;
         color: #326CF9;
         margin-left: -5px;
+        margin-top:15px;
  
     }
 
@@ -63,16 +64,16 @@
         height: 45px;
         left: 5px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
     }
 
     #emailct{
         width: 186px;
        height: 45px;
-       left: 5px;
+       left: 250px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
        text-align: center;
+       top:138.5px;
+       position: absolute;
    }
     
 
@@ -81,20 +82,17 @@
        width: 114px;
        height: 44px;
        left: 440px;
-       top: 135px;
-       background-color: #4C69A2;
-       color: white;
-       font-size: 10px;
+       top: 138px;
+       font-size: 15px;
     }
-        #emailCheck{
+       #emailCheck{
       position: absolute;
        width: 114px;
        height: 44px;
        left: 440px;
-       top: 135px;
-       background-color: #4C69A2;
-       color: white;
-       font-size: 10px;
+       top: 138px;
+       font-size: 15px;
+       
     }
 
     #ok{
@@ -103,25 +101,16 @@
        height: 45px;
       left: 440px;
        top: 190px; 
-       background-color: #4C69A2;
        color: white;
     }
     
-    #emailCheck{
-    	position: absolute; 
-       width: 114px;
-       height: 45px;
-      left: 440px; 
-       background-color: #4C69A2;
-       color: white;
-    }
+   
 
     #pwd-text{
         width: 450px;
         height: 50px;
         left: 5px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
 
     }
 
@@ -130,7 +119,6 @@
         width: 24px;
         height: 24px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
     }
 
     #loginbtn{
@@ -154,7 +142,6 @@
           height: 45px;
           top: 190px;
           background: #FFFFFF;
-          border: 0.5px solid #000000;
     }
 
     #password{
@@ -163,7 +150,6 @@
        height: 45px;
       top: 290px; 
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
 
     #confirmPassword{
@@ -172,7 +158,6 @@
        height: 45px;
        top: 430px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
 
     #name{
@@ -182,7 +167,6 @@
        bottom: 480px;
        top: 540px; 
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
 
     #phone{
@@ -192,7 +176,6 @@
        top: 650px;
        bottom: 510px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
 
     #addr1{
@@ -202,7 +185,6 @@
        bottom: 340px;
        top: 755px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
     
     #addr2{
@@ -212,7 +194,6 @@
        bottom: 340px;
        top: 810px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
     
     #addr3{
@@ -222,7 +203,6 @@
        bottom: 340px;
        top: 865px;
        background: #FFFFFF;
-       border: 0.5px solid #000000;
     }
     
 
@@ -230,9 +210,8 @@
              position: absolute; 
           width: 114px;
           height: 45px;
-           left: 315px; 
+           left: 320px; 
            top: 755px; 
-          background: #4C69A2;
           color: white;
           font-size: 15px;
     }
@@ -243,7 +222,6 @@
           height: 45px;
           top: 810px; 
           background: #FFFFFF;
-          border: 0.5px solid #000000;
 
     }
 
@@ -252,16 +230,11 @@
           height: 48px;
           right: 520px;
           bottom: 100px;
-          background: #B9B9B9;
-          border-radius: 8px;
           align-items: center;
           margin-left: 65px;
           margin-top: 240px;  
     }
 
-    h4{
-        margin-top: 18px;
-    }
     
   /*  .login2{
        position: absolute; 
@@ -287,42 +260,42 @@
             <div class="login1">
               <form id="signUpform" action="insert" method="post" name="sign-up" >
                 <h2 id="login-text">회원정보입력</h2> 
-                <p>서비스 이용을 위해 아래내용을 입력해주세요.</p>
+                <p style="font-size:14px; color:grey;"> 서비스 이용을 위해 아래내용을 입력해주세요.</p>
 
                 <h4>아이디</h4>
-                <input type="text" id="id-text" class="userEmail" name="userEmail" required> <select id="emailct" class="userEmail2" name="userEmail2">
+                <input type="text" id="id-text" class="userEmail form-control" name="userEmail" required> <select id="emailct" class="userEmail2 form-control" name="userEmail2">
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option></select>
-                     <button type="button" id="emailCheck" name="emailCheck" >중복확인</button><br><br>
-                    <button type="button" id="emailcheck" name="emailcheck" style="display:none;">인증번호 전송</button><br><br>
+                     <button type="button" id="emailCheck" name="emailCheck" class="btn btn-secondary">중복확인</button><br><br>
+                    <button type="button" id="emailcheck" name="emailcheck"  class="btn btn-secondary" style="display:none;">인증번호 전송</button><br><br>
                     
                     <input type="hidden" id="userEmail" name="userId">
-                    <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                   <button  type="button" id="ok" >확인</button>
+                    <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요." class="form-control">
+                   <button  type="button" id="ok" class="btn btn-secondary">확인</button>
                     
          <!-- <div class="login2"></div> -->
-                <h4>비밀번호</h4>
-                <input type="password" id="password" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
+                <h4 style="margin-top:-25px !important;">비밀번호</h4>
+                <input type="password" id="password" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required class="form-control"><br><br>
                 <label style="font-size: 13px; color: gray;">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
                 <span id="passwordError" style="color: red; font-size: 13px;" ></span>
                 <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
                 
 
                 <h4>비밀번호 확인</h4>
-                <input type="password" id="confirmPassword" name="userPwdCheck" onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required><br><br>
+                <input type="password" id="confirmPassword" name="userPwdCheck" onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required class="form-control"><br><br>
                 <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
 
                 <h4>이름</h4>
-                <input type="text" id="name" name="userName" placeholder="이름을 입력해주세요."><br><br><br>
+                <input type="text" id="name" name="userName" placeholder="이름을 입력해주세요." class="form-control"><br><br><br>
 
                 <h4>전화번호</h4>
-                <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
+                <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요." class="form-control"><br><br><br>
       
                 <h4>주소</h4>
             <div class="form-group">                   
             <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
-                <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+                <button type="button" class="btn btn-secondary"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
             </div>
             <div class="form-group">
                 <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
@@ -331,7 +304,7 @@
                 <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
             </div>
 
-                <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
+                <a href="" ><button type="submit" id="signupbtn" class="btn btn-secondary">가입하기</button></a>
             
             </form>
                </div>
