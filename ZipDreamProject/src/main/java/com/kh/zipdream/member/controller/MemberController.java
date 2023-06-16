@@ -104,7 +104,6 @@ public class MemberController {
 			int emailcheck = memberService.emailCheck(m.getUserId());
 			if(emailcheck == 1) {
 		      Member loginUser = memberService.loginMember(m);
-		    
 		      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
 		    	  	session.setAttribute("loginUser", loginUser);
 		    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
@@ -125,16 +124,19 @@ public class MemberController {
 			         }
 						/* System.out.println(session.getAttribute("loginUser")); */
 		      } else { 
-		    	  System.out.println(m);
-					/*
-					 * mv.addObject("errorMsg", "로그인 실패"); mv.setViewName("common/errorPage");
-					 */
+					Map<String, String> alertMsg = new HashMap<String, String>();
+					alertMsg.put("message", "로그인에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
+					mv.addObject("errorMsg", "로그인 실패");
+					mv.setViewName("redirect:/");
+					 
 		         
 		      }
-		      
 			}else if(emailcheck >1) {
 				
 				boolean isEnrolled = false;
+
 				for(int i = 1; i<= emailcheck; i++) {
 					Map<String,String> map = new HashMap<String,String>();
 					
@@ -156,7 +158,6 @@ public class MemberController {
 							
 						cookie.setPath("/memberLogin");
 						resp.addCookie(cookie);
-						
 				         if(loginUser.getUserLevel() == 3) {
 				            mv.setViewName("redirect:/admin/main");
 				         }else {            
@@ -166,10 +167,13 @@ public class MemberController {
 					}
 				}
 				if(! isEnrolled) { 
-				 /* mv.addObject("errorMsg", "로그인 실패");
-				 * mv.setViewName("common/errorPage"); 
-				 */
-					System.out.println("1");
+					Map<String, String> alertMsg = new HashMap<String, String>();
+					alertMsg.put("message", "로그인에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
+					mv.addObject("errorMsg", "로그인 실패");
+					mv.setViewName("redirect:/");
+				 
 				}
 		    }
 	      return mv;  
@@ -184,7 +188,7 @@ public class MemberController {
 	//일반회원가입
 	@PostMapping("/insert")
 	public String insertMember( 
-			Member m, HttpSession session, Model model, RedirectAttributes ra) {
+			Member m, HttpSession session, Model model) {
 		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 		m.setAddress(address);
@@ -201,15 +205,16 @@ public class MemberController {
 		Map<String,String> alertMsg = new HashMap<String,String>();
 		String url = "";
 		if (result > 0) { // 성공시 - 메인페이지로
-			alertMsg.put("message", "회원가입이 되었습니다.");
+			alertMsg.put("message", "회원가입에 성공했습니다.");
 			alertMsg.put("type", "success");
 			url = "redirect:/";
 		} else { // 실패 - 에러페이지
-			alertMsg.put("message", "회원가입에 실패했습니다");
+			alertMsg.put("message", "회원가입에 실패했습니다.");
 			alertMsg.put("type", "error");
-			url = "common/errorPage";
+			url = "redirect:/";
 		}
-		ra.addFlashAttribute("alertMsg",alertMsg);
+		session.setAttribute("alertMsg", alertMsg);
+		
 		return url;
 	}
 	
@@ -218,7 +223,7 @@ public class MemberController {
 		public String insertbkMember( 
 				Member m, HttpSession session, Model model,
 				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList
-				 ,RedirectAttributes ra){
+				 ){
 			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 			m.setAddress(address);
@@ -226,11 +231,10 @@ public class MemberController {
 			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 			String webPath = "resources/bkupfiles/";
 			String serverFolderPath = session.getServletContext().getRealPath(webPath);
-			
+			Map<String,String> alertMsg = new HashMap<String,String>();
 			// 암호화된 pwd를 m의 userPwd다시 대입
 			
 			m.setUserPwd(encPwd);
-			Map<String,String> alertMsg = new HashMap<String,String>();
 			int result =0;
 			
 			try {
@@ -243,19 +247,18 @@ public class MemberController {
 	
 			String url = "";
 		if(result >0) {
-			System.out.println("업로드 성공");
-			alertMsg.put("message", "회원가입이 되었습니다.");
+			alertMsg.put("message", "업로드를 성공했습니다.");
 			alertMsg.put("type", "success");
 			url = "redirect:/";
 			
+			
 		}else {
-			System.out.println("업로드 실패");
-			alertMsg.put("message", "회원가입에 실패했습니다");
+			alertMsg.put("message", "업로드를 실패했습니다.");
 			alertMsg.put("type", "error");
-			url = "common/errorPage";
+			url = "redirect:/";
 			
 		}
-		ra.addFlashAttribute("alertMsg",alertMsg);
+		session.setAttribute("alertMsg", alertMsg);
 		return url;
 		}
 
@@ -435,7 +438,6 @@ public class MemberController {
 		 
 		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
 
-		 Map<String,String> alertMsg = new HashMap<String,String>();
 		 int result = 0;
 		 if(bcryptPasswordEncoder.matches(paramMap.get("currentPw")+"", loginUser.getUserPwd())) {
 			 Member m = new Member();
@@ -443,11 +445,9 @@ public class MemberController {
 			 m.setUserPwd(newPw);
 			 
 			 result = memberService.updateMemberPwd(m);
-			 alertMsg.put("message", "비밀번호 변경이 완료되었습니다.");
-			 alertMsg.put("type", "success");
+			
 		 }else {
-			 alertMsg.put("message", "기존 비밀번호가 다릅니다.");
-			 alertMsg.put("type", "error");
+			
 			 if(loginUser.getUserLevel()==1) {
 				
 				 return "redirect:/mypage/myInfo";
@@ -458,7 +458,7 @@ public class MemberController {
 			
 			 
 		 }
-		 ra.addFlashAttribute("alertMsg",alertMsg);
+	
 		 	status.setComplete(); 
 		 
 			 
