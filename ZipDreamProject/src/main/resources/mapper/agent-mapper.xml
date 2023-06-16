@@ -26,6 +26,7 @@
 		FROM USER_ROOM_SELL U
 		JOIN MEMBER M ON (M.USER_NO = REF_UNO)
 		WHERE U.STATUS IN (1,2) AND REF_RUNO = #{userNo} 
+		ORDER BY U.USER_SR_NO DESC
 	</select>
 	
 	<select id="selectRequestUser" resultMap="myroomsellResultSet">
