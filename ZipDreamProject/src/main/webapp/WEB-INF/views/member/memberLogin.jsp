@@ -243,6 +243,7 @@
                 </div><br>
                 
                 <button type="submit" id="loginbtn">로그인</button><br><br>
+                <div id="message"></div>
                 
                 <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
                 <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
@@ -255,6 +256,18 @@
        
     </div>
 <script>
+
+
+function login() {
+  // 로그인 실패 조건을 확인하는 코드 작성
+  var loginFailed = true; // 로그인 실패 여부를 나타내는 변수 (임시로 true로 설정)
+
+  if (loginFailed) {
+    var messageDiv = document.getElementById("message");
+    messageDiv.textContent = "로그인 실패 "; // 실패 메시지 설정
+  }
+}
+
 //아이디 찾기
 $(function(){
 	//아이디 찾기
@@ -364,6 +377,24 @@ window.addEventListener('load', function() {
         document.getElementsByName("saveId")[0].checked = true;
     }
 });
+
+document.getElementById("emailsamecheck").addEventListener("click", function() {
+	 let inputNumber = $("#emailchecknumber").val();
+
+// 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
+
+if (inputNumber === verificationNumber && verificationNumber != "") {
+  
+  $("#emailsamecheck").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
+  /* $("#emailct").attr('disabled',true); */ 
+  alert("인증번호가 일치합니다.");
+} else {
+  alert("인증번호가 일치하지 않습니다.");
+} 
+  
+}); 
+}); 
+
 </script>
 
  <script>
@@ -380,7 +411,7 @@ window.addEventListener('load', function() {
                     success: function (response) {
                        let accessToken = Kakao.Auth.getAccessToken();
                        Kakao.Auth.setAccessToken(accessToken);
-                    	console.log(accessToken);
+                       console.log(accessToken);
                        console.log(response);
                        console.log(response.id);
                        console.log(response.properties.nickname);

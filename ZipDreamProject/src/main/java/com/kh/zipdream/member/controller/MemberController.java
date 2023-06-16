@@ -126,9 +126,9 @@ public class MemberController {
 						/* System.out.println(session.getAttribute("loginUser")); */
 		      } else { 
 		    	  System.out.println(m);
-					/*
-					 * mv.addObject("errorMsg", "로그인 실패"); mv.setViewName("common/errorPage");
-					 */
+					
+					  mv.addObject("errorMsg", "로그인 실패"); 
+					 
 		         
 		      }
 		      
@@ -166,10 +166,10 @@ public class MemberController {
 					}
 				}
 				if(! isEnrolled) { 
-				 /* mv.addObject("errorMsg", "로그인 실패");
-				 * mv.setViewName("common/errorPage"); 
-				 */
-					System.out.println("1");
+				 mv.addObject("errorMsg", "로그인 실패");
+				  
+				 
+					
 				}
 		    }
 	      return mv;  
@@ -322,7 +322,7 @@ public class MemberController {
 		Map<String, String> map = new HashMap();
 		map.put("name", name);
 		map.put("phone", phone);
-		 Member result = memberService.searchId(map);
+		Member result = memberService.searchId(map);
 		return result;
 	}
 	
@@ -503,12 +503,8 @@ public class MemberController {
 					memberService.insertMember(m);
 					session.setAttribute("loginUser", m);
 				}
-			/*
-			 * 
-			 * 
-			 * int result = memberService.snslogin(m);
-			 */
-			System.out.println(m);
+		
+			
 			return "true";
 		}
 	  
