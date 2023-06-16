@@ -45,13 +45,9 @@ public interface MemberService {
 
 	public int emailCheck(String id);
 
-	
-	 public int deleteMember(int userNo);
-
-
-	
-	
 	public List<userSelectList> myBookmarkList(int uno);
+	
+	public int deleteMember(int userNo);
 
 }
 
