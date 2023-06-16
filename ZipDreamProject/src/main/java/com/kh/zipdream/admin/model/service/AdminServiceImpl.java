@@ -192,7 +192,7 @@ public class AdminServiceImpl implements AdminService{
 		if(type == 1) {
 			listCount = dao.countUser(2);
 		}else {
-			listCount = dao.countLicenseUser(2);
+			listCount = dao.countLicenseUser(1);
 		}
 		int pageLimit = 10;
 		int boardLimit = 10;

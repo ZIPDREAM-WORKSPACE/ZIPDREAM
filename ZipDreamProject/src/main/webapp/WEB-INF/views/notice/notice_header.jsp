@@ -1,27 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-.listWrap>div {
-	font-size: 25px;
-	width: 500px;
-	height: 70px;
-	text-align: center;
-	line-height: 70px;
-	color: gray;
-	border: 1px solid lightgray;
-}
-
-.listWrap {
-	margin-top: 30px;
-	justify-content: center;
-	height: 70px;
-	display: flex;
+.noticeHeader {
 	width: 100%;
+	flex: 0 0 auto;
 }
 
+.noticeHeader>div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 250px;
+	position: relative;
+	width: 1000px;
+	height: 100%;
+	margin: 0px auto;
+}
+.listWrap>li {
+	display: list-item;
+	color: rgb(174, 174, 174);
+	border: 1px solid lightgray;
+	flex-grow: 1;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	display: list-item;
+}
+.listWrap {
+flex: 0 0 auto;
+	display: flex;
+	width: 1000px;
+	height: 64px;
+	margin: 0px auto;
+	list-style: none;
+	padding: 0px;
+}
+.listWrap>li>a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 16px;
+	line-height: 26px;
+	border: 1px solid rgb(237, 237, 237);
+	font-weight: 600;
+}
 .list>a {
-	text-decoration-line: none;
-	color: gray;
+		text-decoration-line: none;
+	color: rgb(174, 174, 174);
 }
 
 .list>a:hover {
@@ -47,15 +76,14 @@
 
 <body>
 	<jsp:include page="../common/header.jsp" />
+	<div class="noticeHeader">
+		<div style="height: 250px;">
 	<div class="noticeHeaderTitle">알림</div>
-	<div class="listWrap">
-		<div class="list">
-			<a href="<%=request.getContextPath()%>/notice/manage">운영 알림</a>
-		</div>
-		<div class="list">
-			<a href="<%=request.getContextPath()%>/notice/interest">관심 분양 알림</a>
-		</div>
-
+	<ul class="listWrap">
+		<li class="list"><a href="<%=request.getContextPath()%>/notice/manage">운영 알림</a></li>
+		<li class="list"><a href="<%=request.getContextPath()%>/notice/interest">관심 분양 알림</a></li>
+	</ul>
+		</div>	
 	</div>
 </body>
 

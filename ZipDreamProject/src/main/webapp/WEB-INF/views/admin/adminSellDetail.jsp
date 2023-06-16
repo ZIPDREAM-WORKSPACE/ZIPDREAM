@@ -38,8 +38,8 @@
 						<th>상태</th>
 					</tr>
 					<c:choose>
-						<c:when test="${fn: length(sellDetailList.list) == 0} ">
-							<tr>
+						<c:when test="${fn: length(sellDetailList.list) == 0}">
+							<tr align="center">
 								<td colspan="7">회원이 없습니다.</td>
 							</tr>
 						</c:when>

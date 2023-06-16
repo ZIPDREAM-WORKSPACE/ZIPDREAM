@@ -94,10 +94,10 @@ public class MemberServiceImpl implements MemberService {
 	public void registMailAuth(MailAuth mailAuth) throws Exception {
 		MailAuth mailAuth1 = memberDao.getMailAuth(mailAuth.getMail());
 
-		if (mailAuth1 == null)
+		if (mailAuth1 == null) {
 			memberDao.insertMailAuth(mailAuth);
 
-		else {
+		}else {
 			memberDao.updateMailAuth(mailAuth);
 		}
 	}
@@ -159,7 +159,11 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMemberPwd(Member m) {
 		return memberDao.updateMemberPwd(m);
 	}
-
+	
+	 public  List<userSelectList> myBookmarkList(int uno) {
+		 return memberDao.myBookmarkList(uno);
+	 }
+	 
 	@Transactional(rollbackFor = { Exception.class })
 	public int updatebkImages(Map<String, String> map, List<MultipartFile> list, String webPath,
 			String serverFolderPath) throws Exception {
@@ -169,12 +173,12 @@ public class MemberServiceImpl implements MemberService {
 		int result = 0;
 		if (list != null) {
 
+
 	
 	 
-	 public  List<userSelectList> myBookmarkList(int uno) {
-		 return memberDao.myBookmarkList(uno);
-	 }
+	 
 }
+
 
 
 			for (int i = 0; i < list.size(); i++) {
@@ -220,3 +224,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 }
+	
+	
+	
+	
+
