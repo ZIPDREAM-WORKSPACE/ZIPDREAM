@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <title>ZIPDREAM</title>
 <style>
-div{
-	/* border: 1px solid red;  */
-}
 .recentContent{
 	width: 100%;
 	height: 450px;
@@ -21,7 +18,6 @@ div{
 	/* width: 1110px; */
 	/* height: 100%; */
 	margin: 0px auto;
-	/* padding-left: 50px; */
 	padding-right: 50px;
     padding-top: 20px;
 	flex-direction: row;
@@ -29,13 +25,13 @@ div{
 }
 .imgStyle{
 	border: 1px solid lightgray;
-	object-fit: cover;
+	object-fit: contain;
 	width: 300px;
 	height: 200px;
 	border-radius: 5px 5px 2px 2px;
 }
 .imgStyle:hover{
-	
+	border: 1px solid lightgray;
 	transform: scale(1.4);
 	transition: all 0.5s linear;
 }
@@ -176,7 +172,7 @@ div{
 				console.log("실패");
 			}
 			
-		})
+		});
 	})
 	
 	$(document).on('click', '.infoWrap', function(e){

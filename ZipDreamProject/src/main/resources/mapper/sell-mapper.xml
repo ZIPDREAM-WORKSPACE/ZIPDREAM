@@ -63,21 +63,24 @@
  		<result column="EUPMYEON" property="eupmyeon"/>
  		<result column="KAPT_CODE" property="kaptCode"/>
  		<result column="KAPT_NAME" property="kaptName"/>
+ 		<result column="KAPT_TYPE" property="kaptType"/>
+ 		<result column="KAPT_ADDRESS" property="kaptAddress"/>
  		<result column="KAPT_APPROVAL_DATE" property="kaptApprovalDate"/>
  		<result column="KAPT_ENROLL_DATE" property="kaptEnrollDate"/>
  		<result column="KAPT_WING_COUNT" property="kaptWingCount"/>
  		<result column="KAPT_HOUSEHOLD" property="kaptHousehold"/>
- 		<result column="MAINTENANACE" property="maintenanace"/>
+ 		<result column="MANAGEMENT" property="management"/>
  		<result column="KAPT_HEATING" property="kaptHeating"/>
  		<result column="KAPT_ENTRANCE" property="kaptEntrance"/>
  		<result column="KAPT_BUILD_COMPANY" property="kaptBuildCompany"/>
+ 		<result column="SECURITY_COUNT" property="securityCount"/>
  		<result column="SECURITY_COMPANY" property="securityCompany"/>
- 		<result column="CLEAN_COMPANY" property="cleanCompany"/>
  		<result column="BUILD_STRUCTURE" property="buildStructure"/>
  		<result column="LIFT_COUNT" property="liftCount"/>
  		<result column="KAPT_PARKING_COUNT" property="kaptParkingCount"/>
  		<result column="CCTV_COUNT" property="cctvCount"/>
- 		<result column="KAPT_ALL_FLOOR" property="kaptAllFloor"/>
+ 		<result column="KAPT_SECURITY_ADDRESS" property="kaptSecurityAddress"/>
+  		<result column="KAPT_ALL_FLOOR" property="kaptAllFloor"/>
  	</resultMap>
  	
  	<resultMap type="report" id="reportResultSet">
@@ -213,8 +216,8 @@
 		SELECT SELL_NO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_FLOOR, CHANGE_NAME AS FILE_PATH
 		FROM SELLDETAIL SD
 		LEFT JOIN ATTACHMENT AT ON (SELL_NO = REF_SNO)
-		WHERE SELL_NO = #{sellNo} AND SD.STATUS = 'Y'
-		AND AT.FILE_LEVEL = 0
+		WHERE SELL_NO = #{sellNo}
+		AND (AT.FILE_LEVEL = 0 OR AT.FILE_LEVEL IS NULL) 
 	</select>
 
 	<select id="countUserSelect" parameterType="HashMap" resultType="_int">
