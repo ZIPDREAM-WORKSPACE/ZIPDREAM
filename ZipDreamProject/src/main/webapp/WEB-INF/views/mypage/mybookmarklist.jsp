@@ -136,7 +136,6 @@
 							method: "get",
 							data: {sellNo},
 							success: function(result){
-								/* console.log("내가 찜한: "+result.length); */
 								
 								if(result.length > 0){
 									let sellAddress = result[0].sellAddress;
@@ -145,9 +144,17 @@
 									let sellPrice = result[0].sellPrice;
 									let filePath = result[0].filePath;
 									let sellNo = result[0].sellNo;
-									/* console.log(result[0]); */
+									
+									let url = "";
+									if(filePath != null){
+										url = "<%= request.getContextPath() %>/resources/sellupfiles/"+filePath;
+									}else{
+										url = 'https://ifh.cc/g/dtv18m.png';	
+									}
 									element.innerHTML += '<div id="'+sellNo+'" class="infoWrap" style="display: inline-block;">'
-													  + '<div style="overflow: hidden;"><img class="imgStyle goDet" src="<%= request.getContextPath() %>/resources/sellupfiles/'+filePath+'"></div>'
+													  + '<div style="overflow: hidden;">'
+													  	+ '<img class="imgStyle goDet" src="'+url+'">'
+													  +'</div>'
 													  + '<div class="divStWrap goDet"><div class="divStyle" style="font-size:20px; font-weight: 500; margin-top: 10px;">'+sellPrice+'억</div>'
 													  + '<div class="divStyle" style="font-size:14px;">'+sellName+', '+sellFloor+'</div>'
 													  + '<div class="divStyle">'+sellAddress+'</div>'+'</div></div>';
