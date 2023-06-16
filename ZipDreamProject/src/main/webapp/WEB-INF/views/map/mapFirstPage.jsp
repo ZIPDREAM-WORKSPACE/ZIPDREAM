@@ -360,7 +360,6 @@ html::-webkit-scrollbar {
 	background-color: #F0F0F0;
 	cursor: pointer;
 }
-
 </style>
 
 
@@ -671,7 +670,7 @@ html::-webkit-scrollbar {
 			  	
 			  	var resultStr = arr.join('');
 			  				  	
-			  	listLiTag.innerHTML = resultStr+"<br> "+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+			  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
 			  	listEl.appendChild(listLiTag);
 		  		
 			  	listLiTag.addEventListener('click', function(){
@@ -1231,7 +1230,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  	
     						  	var resultStr = arr.join('');
     						  				  	
-    						  	listLiTag.innerHTML = resultStr+"<br> "+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+    						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
     						  	listLiTag.addEventListener('click', function(){
@@ -1605,7 +1604,7 @@ $("#keyword").keyup(function(){
   						  	
   						  	var resultStr = arr.join('');
   						  				  	
-  						  	listLiTag.innerHTML = resultStr+"<br> "+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+  						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
   						  	listEl.appendChild(listLiTag);
   					  		
   						  	listLiTag.addEventListener('click', function(){
