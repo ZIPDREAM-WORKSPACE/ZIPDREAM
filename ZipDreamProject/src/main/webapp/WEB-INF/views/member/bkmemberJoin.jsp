@@ -14,7 +14,6 @@
     .wrap{
         width:1500px;
         height:1500px;
-        /* margin : auto; */
     }
   
     .wrap>div {
@@ -37,7 +36,6 @@
         width: 680px;
         height: 1450px;
         right: 620px;
-        
         margin-top: 20px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
@@ -189,13 +187,22 @@
 
     #emailcheck{
         position: absolute;
-        width: 100px;
+        width: 120px;
         height: 45px;
         left: 450px;
-        top: 720px;
         background-color: #4C69A2;
         color: white;
         font-size: 12px;
+        top: 726px;
+    }
+    
+    #emailCheck{
+    	position: absolute;
+	    width: 120px;
+	    height: 45px;
+	    left: 450px;
+	    background-color: #4C69A2;
+	    color: white;
     }
 
     #id{
@@ -212,22 +219,15 @@
 
     #ok{
         position: absolute;
-        width: 100px;
-        height: 47px;
+        width: 120px;
+	    height: 45px;
         left: 450px;
-        top: 775px;
+        top: 780px;
         background-color: #4C69A2;
         color: white;
     }
     
-    #emailCheck{
-    	position: absolute;
-	    width: 100px;
-	    height: 45px;
-	    left: 450px;
-	    background-color: #4C69A2;
-	    color: white;
-    }
+    
 
     #password{
         position: absolute;
