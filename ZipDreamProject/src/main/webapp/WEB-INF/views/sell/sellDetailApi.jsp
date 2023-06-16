@@ -37,7 +37,6 @@
 	    display: flex;
 	    flex-direction: column;
 	    justify-content: flex-end;
-	    border : 1px solid red;
 	}
 	
 	.sell_no{
@@ -56,12 +55,11 @@
 	    color: #0A2647;
 	}
 	.sell_last{
-		border : 1px solid blue;
 	    display: flex;
 	    flex-direction: column;
 	}
 	.sell_address, .seller_address{
-	    font-size: 1rem;
+	    font-size: 1.2rem;
 	    color: #6E7C7C;
 	}
 	.line{
@@ -163,7 +161,13 @@
 	.hospital_info, .school_info, .subway_info {
 		display: none;
 	}
-	
+	.aprtImg, .sellerImg{
+		display: flex;
+		margin-top : 10px;
+	}
+	.address{
+		margin-top : 120px;
+	}
 	</style>
 </head>
 <body>
@@ -180,8 +184,14 @@
 	    </div>
         <div class="sell_last">
         	<div class="address">
-            	<div class="sell_address">매물주소 : ${sda.sellAddress}</div>
-            	<div class="seller_address">중개사소재지 : ${sda.brokerAdd }</div>
+        		<div class="aprtImg">
+        			<img src="https://ifh.cc/g/DkBby6.png" width="35">
+             		<div class="sell_address">매물주소 : ${sda.sellAddress}</div>
+            	</div>
+            	<div class="sellerImg">
+            		<img src="https://ifh.cc/g/OZoZzR.png" width="35">
+            		<div class="seller_address">중개사소재지 : ${sda.brokerAdd }</div>
+            	</div>
             </div>
         </div>
     </div>
@@ -210,15 +220,15 @@
                         <td>${sda.sellPrice}</td>
                     </tr>
                     <tr>
-                    	<th>관리비</th>
-                    	<th></th>
+                    	<th>관리방식</th>
+                    	<th>${sda2.management}</th>
                     </tr>
                     <tr>
-                    	<td>주차</td>
+                    	<th>주차</th>
                     	<td>가능</td>
                     </tr>
                     <tr>
-                    	<td>단기임대</td>
+                    	<th>단기임대</th>
                     	<td>불가능</td>
                     </tr>
                 </tbody>
@@ -234,12 +244,12 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>건물이름</th>
+                        <th>아파트 명</th>
                         <td>${sda.sellName}</td>
                     </tr>
                     <tr>
                     	<th>건물종류</th>
-                    	<td>${sda2.kaptType }</td>
+                    	<td>${sda2.kaptType}</td>
                     </tr>
                     <tr>
                         <th>전용 면적</th>
@@ -247,11 +257,7 @@
                     </tr>
                     <tr>
                         <th>해당 층/전체 층</th>
-                        <td>${sda.sellFloor}/ ${sda2.kaptAllFloor}</td>
-                    </tr>
-                    <tr>
-                    	<th>방 수 / 욕실 수</th>
-                    	<td></td>
+                        <td>${sda.sellFloor}층/ ${sda2.kaptAllFloor}층</td>
                     </tr>
                     <tr>
                     	<th>현관타입</th>
@@ -262,23 +268,31 @@
                         <td>${sda.ymd}</td>
                     </tr>
                     <tr>
+                    	<th>가입일</th>
+                    	<td>${sda2.kaptEnrollDate}</td>
+                    </tr>
+                    <tr>
                         <th>건축년도</th>
                         <td>${sda.sellApprovalDatetime}년</td>
                     </tr>
                     <tr>
-                    	<th>입주가능일</th>
-                    	<td></td>
+                    	<th>시공사</th>
+                    	<td>${sda2.kaptBuildCompany}</td>
                     </tr>
                     <tr>
-                    	<th>건축 시공사</th>
+                    	<th>건물구조</th>
                     	<td>${sda2.buildStructure }</td>
                     </tr>
                     <tr>
-                    	<th>승강시설</th>
-                    	<th></th>
+                    	<th>승강시설 수</th>
+                    	<th>${sda2.liftCount }대</th>
                     </tr>
                     <tr>
-                    	<th>냉/난방시설</th>
+                    	<th>총 주차대 수</th>
+                    	<td>${sda2.kaptParkingCount }대</td>
+                    </tr>
+                    <tr>
+                    	<th>난방시설</th>
                     	<td>${sda2.kaptHeating}</td>
                     </tr>	
                     <tr>
@@ -323,12 +337,12 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>기본옵션</th>
-                        <td>${sd.option }</td>
+                        <th>관리사무소 주소</th>
+                        <td>${sd2.kaptSecurityAddress }</td>
                     </tr>
                     <tr>
                         <th>보안시설</th>
-                        <td>cctv(${sda2.cctvCount })</td>
+                        <td>cctv(${sda2.cctvCount}대), 경비원 수(${securityCount}명), 관리업체(${sda2.securityCompany})</td>
                     </tr>
                 </tbody>
             </table>
