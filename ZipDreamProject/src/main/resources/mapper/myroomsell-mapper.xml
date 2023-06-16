@@ -101,6 +101,7 @@
 		SELECT * 
 		FROM USER_ROOM_SELL
 		WHERE REF_UNO = #{userNo}
+		ORDER BY USER_SR_NO DESC
 	</select>
 	
 	<delete id="myroomSellDelete">
