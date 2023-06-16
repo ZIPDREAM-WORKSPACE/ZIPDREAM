@@ -16,7 +16,7 @@
 .content1 {
 	margin-top: 500px;
 	border-bottom: 4px solid #6E7C7C;
-	width: 80%;
+	width: 90%;
 	height: 15rem;
 	display: flex;
 	justify-content: center;
@@ -45,7 +45,7 @@
 
 .sell_no {
 	border: 1px solid lightgray;
-	width: 20%;
+	width: 10%;
 	height: 10%;
 	margin-top: 20px;
 }
@@ -69,7 +69,6 @@
 }
 
 .sell_address, .seller_address {
-	width: 70%;
 	font-size: 1rem;
 	color: #6E7C7C;
 }
@@ -118,6 +117,10 @@
 	background-color: #0A2647;
 	color: white;
 }
+.sellerImg, .aprtImg{
+	display: flex;
+	margin-top : 10px;
+}
 /*허위매물신고*/
 .notify {
 	width: 150px;
@@ -133,6 +136,7 @@
 
 #picture {
 	display: flex;
+	    justify-content: center;
 	align-items: center;
 }
 
@@ -226,13 +230,30 @@
 }
 
 .content10 {
-	border: 1px solid black;
-	height: 40rem;
+	height: 30rem;
 	overflow: auto;
 	margin-top: -5px;
+	box-shadow: 0 4px 4px -4px lightgray; 
+}
+  .content10::-webkit-scrollbar {
+    width: 10px;
+  }
+  .content10::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  .content10::-webkit-scrollbar-track {
+    background-color: lightgray;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+.content11{
+	height : 10rem;
 }
 
-.box {
+.box, .content11 {
 	margin-top: 20px;
 }
 
@@ -328,6 +349,10 @@
 	vertical-align: baseline;
 	margin-left : 10px;
 }
+.boardWriter{
+	display : flex;
+	justify-content: center;
+}
 
 
 /* modal css */
@@ -353,6 +378,9 @@
 
 .modalFooter>.btn-success {
 	margin-left: 30px;
+}
+.block{
+	height : 20rem;
 }
 </style>
 </head>
@@ -409,8 +437,12 @@
                 <p>${sd.sellName }</p>
             </div>
             <div class="sell_last">
-                <div class="sell_address">매물주소 : ${sd.sellAddress}
-                </div>
+            	<div class="aprtImg">
+        			<img src="https://ifh.cc/g/DkBby6.png" width="35">
+             		<div class="sell_address">매물주소 :${sd.sellAddress}</div>
+            	</div>
+                <%-- <div class="sell_address">매물주소 : ${sd.sellAddress}
+                </div> --%>
                 <c:if test="${sd.refUno != loginUser.userNo }">
                 <div class="sell_like">
                     <div class="radius" id="sellLike" onclick="insertUserSelect();">
@@ -429,9 +461,14 @@
             <div class="seller_name">
                 대표  : ${seller.userName }
             </div>
-            <div class="seller_address">
+            <div class="sellerImg">
+            		<img src="https://ifh.cc/g/OZoZzR.png" width="25" height="25">
+            		<div class="seller_address">중개사소재지 :  ${seller.address }</div>
+            	</div>
+            
+            <%-- <div class="seller_address">
                 소재지 : ${seller.address }
-            </div>
+            </div> --%>
             <div class="seller_contect">
             	<c:if test="${sd.refUno == loginUser.userNo}">
             		<input type="button"  class="deleteSell radius" onclick="deleteSell();" value="매물삭제하기">
@@ -453,16 +490,70 @@
  						<c:if test="${!empty sd.imgList}"> 
  							<tr>
                             	<td colspan="3" rowspan="3" align="center">
-                            	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="400" height="600">
+                            	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="600" height="600">
                             	</td>
                         	</tr>
- 							<c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}">
+ 							<%-- <c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}"> --%>
 			 						<tr>
-			                            <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="contentImg1" width="300" height="300"></td>
-			                            <!-- <td><img src="https://ifh.cc/g/hzl9HR.jpg" id="contentImg2" width="300" height="300"></td>
-			                            <td><img src="https://ifh.cc/g/mT64PY.jpg" id="contentImg3" width="300" height="300"></td> -->
+			 							<td>
+			 								<c:if test="${!empty sd.imgList[1].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[1].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			 							<td>
+			 								<c:if test="${!empty sd.imgList[2].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[2].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			 							<td>
+			 								<c:if test="${!empty sd.imgList[3].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[3].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			 							<%-- 
+			 							<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300"></td>
+                               			<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg2" width="300" height="300"></td>
+                                		<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg3" width="300" height="300"></td> --%>
 			                        </tr>
-		                  	</c:forEach>	
+			                        <tr>
+			                        	<td>
+			 								<c:if test="${!empty sd.imgList[4].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[4].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			 							<td>
+			 								<c:if test="${!empty sd.imgList[5].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[5].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			 							<td>
+			 								<c:if test="${!empty sd.imgList[6].changeName }">
+			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 								<c:if test="${empty sd.imgList[6].changeName }">
+			 									<img id="contentImg1" width="300" height="300">
+			 								</c:if>
+			 							</td>
+			                        	<%-- <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300"></td>
+                               			<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg2" width="300" height="300"></td>
+                                		<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg3" width="300" height="300"></td> --%>
+			                        </tr>
+		                  <%-- </c:forEach> --%>	
  						</c:if>	
  						<c:if test="${empty sd.imgList}" >
  							<tr><td>등록된 이미지가 없습니다.</td></tr>
@@ -470,7 +561,7 @@
                         
                     </table>
                 </div>
-                <div class="picture_two" style="display: none;">
+<!--                 <div class="picture_two" style="display: none;">
                     <table>
                         <tr>
                             <td><img id="contentImg7" width="300" height="300"></td>
@@ -486,9 +577,9 @@
         
                         </tr>
                     </table>
-                </div>
+                </div> -->
             </div>
-            <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50">
+        <!--     <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50"> -->
         </div>
     </div>
 
@@ -655,21 +746,23 @@
 		<img src="https://ifh.cc/g/KN4Qnw.png" width="50px"> <span class="talk">[담소나누기]</span>
 		<hr class="hr">
 	</div>
+	
 	<div class="content10 content board margin">
 		<hr>
+	
 	</div>
+		<div class="content content11 margin" id="writer">
+				<img src="https://ifh.cc/g/HHdrA0.png" width="40px"> <span
+					class="talkWriter">[게시글 작성하기]</span>
+					<hr class="hr">
+				<div class="boardWriter ">
+					<textarea rows="3" cols="150" style="resize: none;"
+						id="board_Content"></textarea>
+					<button onclick="insertboard();" class="btn btn-outline-primary">작성</button>
+				</div>
+		</div>
 	
 	
-	
-	<div class="content content11 margin" id="writer">
-			<img src="https://ifh.cc/g/HHdrA0.png" width="40px"> <span
-				class="talkWriter">[게시글 작성하기]</span>
-			<div class="boardWriter ">
-				<textarea rows="3" cols="150" style="resize: none;"
-					id="board_Content"></textarea>
-				<button onclick="insertboard();">작성</button>
-			</div>
-	</div>
     
     <!-- 모달창 -->
 	<div class="modal fade" id="modal" tabindex="-1"
@@ -744,10 +837,13 @@
 				</div>
 			</div>
 		</div>   
-
+	<div class="block"></div>
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+
 <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
+<jsp:include page="../../views/common/footer.jsp" />
+
 </body>
 <script>
 /* 	const loremIpsum = document.getElementById("lorem-ipsum")
@@ -814,7 +910,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			dataType : 'json',
 			success : function(result){
 				console.log(result);
-				 let html = "";
+				let html = "";
 				let url="https://ifh.cc/g/26CZDZ.png";
 				let url2="https://ifh.cc/g/s78355.png";
 				let url3="https://ifh.cc/g/zv71S7.png";
@@ -824,7 +920,6 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 								  "<div class='boardHead'>"+
 									"<span class='writer'>"+board.userName+"</span>";
 									if(board.refUno == ${loginUser.userNo}){
-										html +="<img src='"+url3+"' width='10' height='5' class='deleteMsg'>";
 										html +="<img src='"+url+"' width='20' height='20' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
 									}else{
 										html += "<img src='"+url2+"' width='20' height='20' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";

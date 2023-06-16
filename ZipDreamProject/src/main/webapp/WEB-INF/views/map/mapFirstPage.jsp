@@ -306,7 +306,7 @@ html::-webkit-scrollbar {
 	background-color: #f0f3f5;
 	border-radius: 3px;
 	border: 1px solid lightgray;
-	border-bottom: 2px solid #1A1A3A; 
+	/* border-bottom: 2px solid #1A1A3A; */ 
 	cursor: pointer;
 	padding: 10px;
 }

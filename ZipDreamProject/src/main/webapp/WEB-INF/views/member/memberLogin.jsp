@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
+
 <style>
     div{
         box-sizing: border-box;
@@ -51,15 +50,13 @@
     }
    
     #login-text{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 270px;
         font-size: 43px;
         display: flex;
         align-items: center;
         text-align: center;
         color: #326CF9;
         margin-left: -5px;
+        margin-top:20px;
  
     }
 
@@ -67,8 +64,7 @@
         width: 450px;
         height: 50px;
         left: 5px;
-        background: #FFFFFF;
-        border: 0.5px solid #000000;
+       
 
     }
 
@@ -83,17 +79,17 @@
     #login_search{
             text-align: left;
             border: none;
+            margin-top:10px;
         }
 
         #loginbtn{
             width: 330px;
             height: 48px;
             right: 520px;
-            background: #326CF9;
-            border-radius: 8px;
+          
             align-items: center;
             margin-left: 65px;
-            color: white;
+            
         }
 
         #btn1, #btn2, #btn3{
@@ -104,13 +100,19 @@
 
         #btn1{
             margin-left: -9px;
-            margin-bottom: 8px;
         }
     
         .modal-body{
             text-align: center;
         }
-        
+        .modal-body>a{
+           color:grey;
+        }
+         .modal-body>a:hover{
+         color:black;
+            
+            text-decoration: none;
+        }
         #exampleModal{
            margin-top: 250px;
         }
@@ -123,13 +125,14 @@
         
         #kakaologo{
            width: 330px;
-          height: 55px;
+          height: 48px;
           bottom: 100px;
           margin-left: 65px;
         }
         #findPasswordInner{
            text-align: left;
            margin-left:30px;
+           position:relative;
            
         }
         #findPasswordInner>*{
@@ -140,7 +143,26 @@
            margin-bottom:13px;
            
         }
-   
+   		h2,h4{
+   			font-weight: 600 !important;
+   		}
+   		.textTitle{
+   			font-weight:500;
+   			font-size:20px;
+   		}
+   		#emailCheck{
+   			position:absolute;
+   			left:74%;
+   			top:51%;
+   			width:75px;
+   		}
+   		#emailsamecheck{
+   			position:absolute;
+   			left:74%;
+   			top:80%;
+   				width:75px;
+   		}
+   		
 </style>
 </head>
 <body>
@@ -152,7 +174,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">알림창</h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">회원가입</h5>
        
         </div>
         <div class="modal-body">
@@ -161,7 +183,7 @@
             <a href="<%=request.getContextPath()%>/member/bkjoin" role="button" class="sign-up2" >공인중개사 회원가입</a>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
           
         </div>
       </div>
@@ -169,29 +191,28 @@
   </div>
   
     <div class="modal fade" id="findPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel" style="text-align:center;">비밀번호 찾기 </h5>
        
         </div>
         <div class="modal-body" id="findPasswordInner" >
-           전화번호 : <input  class="signin_pass" id="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요">
-            <br>
+          <p class="textTitle"> 전화번호</p><input  class="signin_pass form-control" id="phoneNumber" type="text" name="phoneNumber"  placeholder="전화번호 입력해주세요" style="width:400px;">
+            
         
             
-            아이디 &nbsp;&nbsp;&nbsp;:  <input  class="signin_pass" id="idText" type="text" name="idText"  placeholder="아이디를 입력해주세요">
-            <button type="button" class="btn btn-primary" id="emailCheck" >인증번호 전송</button>
-            <br>
+            <p class="textTitle">아이디</p><input  class="signin_pass form-control" id="idText" type="text" name="idText"  placeholder="아이디를 입력해주세요" style="width:320px;">
+            <button type="button" class="btn btn-outline-secondary" id="emailCheck" >인증번호</button>
             
-            인증번호 :  <input  class="emailchecknumber" id="emailchecknumber" type="text" name="emailchecknumber"  placeholder="인증번호를 입력해주세요">
-            <button type="button" class="btn btn-primary" id="emailsamecheck" >중복확인</button>
-            <br>
+            <p class="textTitle">인증번호</p><input  class="emailchecknumber form-control" id="emailchecknumber" type="text" name="emailchecknumber"  placeholder="인증번호를 입력해주세요" style="width:320px;">
+            <button type="button" class="btn btn-outline-secondary" id="emailsamecheck" >중복확인</button>
+           
            
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="findPwd">확인</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-primary" id="findPwd">확인</button>
+          <button type="button" class="btn btn-outline-warning" data-dismiss="modal">취소</button>
           
         </div>
       </div>
@@ -199,23 +220,23 @@
   </div>
   
    <div class="modal fade" id="searchId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-dialog-centered" >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">아이디 찾기 </h5>
        
         </div>
         <div class="modal-body" id="findPasswordInner" >
-           전화번호 : <input  class="signin_pass" id="phone" type="text" name="phone"  placeholder="전화번호 입력해주세요">
+           <p class="textTitle">전화번호</p><input  class="signin_pass form-control" id="phone" type="text" name="phone"  placeholder="전화번호 입력해주세요" style="width:400px;">
            <br>
         
             
-            이름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <input  class="signin_pass" id="name" type="text" name="name"  placeholder="이름을 입력해주세요">
+            <p class="textTitle">이름</p><input  class="signin_pass form-control" id="name" type="text" name="name"  placeholder="이름을 입력해주세요" style="width:400px;">
            
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="findId">확인</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-primary" id="findId">확인</button>
+          <button type="button" class="btn btn-outline-warning" data-dismiss="modal">취소</button>
           
         </div>
       </div>
@@ -226,27 +247,33 @@
         <div class="content" id="content">
             <div class="login1">
                 <h2 id="login-text">로그인</h2> 
-                <p>서비스 이용을 위해 로그인 해주세요.</p>
+                <p style="font-size:14px; color:grey;">서비스 이용을 위해 로그인 해주세요.</p>
 
                 <h4>아이디</h4>
-                <input type="text" id="id-text" name="userId" placeholder="아이디를 입력해주세요."><br><br>
+                <input type="text" class="form-control" id="id-text" name="userId" placeholder="아이디를 입력해주세요."><br>
 
                 <h4>비밀번호</h4>
-                <input type="password" id="pwd-text" name="userPwd" placeholder="비밀번호를 입력해주세요"><br><br>
+                <input type="password" class="form-control" id="pwd-text" name="userPwd" placeholder="비밀번호를 입력해주세요"><br>
 
-                <input type="checkbox" name="saveId">아이디저장<br></input>
+                <input type="checkbox" name="saveId">&nbsp;&nbsp;아이디저장<br></input>
 
                 <div id="login_search">
-                    <button type="button" id="btn1" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
+                    <button type="button" id="btn1" onclick="" data-toggle="modal" data-target="#exampleModal" style="color: #000000;">회원가입</button> |
                     <button type="button" id="btn2" onclick="" data-toggle="modal" data-target="#searchId">아이디 찾기</button>
                      <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>
                 
+
                 <button type="submit" id="loginbtn">로그인</button><br><br>
-                <div id="message"></div>
+                
+
+                <button type="submit" id="loginbtn" class="btn btn-primary">로그인</button><br><br>
+
                 
                 <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
-                <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/MAcZ8R.png" id="kakaologo"></a>
+
+                <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/yQkCA0.png" id="kakaologo"></a>
+
 
 
             </div>
@@ -256,17 +283,6 @@
        
     </div>
 <script>
-
-
-function login() {
-  // 로그인 실패 조건을 확인하는 코드 작성
-  var loginFailed = true; // 로그인 실패 여부를 나타내는 변수 (임시로 true로 설정)
-
-  if (loginFailed) {
-    var messageDiv = document.getElementById("message");
-    messageDiv.textContent = "로그인 실패 "; // 실패 메시지 설정
-  }
-}
 
 //아이디 찾기
 $(function(){
@@ -318,7 +334,7 @@ $(function(){
            isMailAuthed=true;
            let memMail = $("#idText").val();
          	console.log(memMail);
-           $("#emailCheck").text("인증번호 재전송");
+           $("#emailCheck").text("재전송");
 
            $.ajax({
               url : "<%= request.getContextPath()%>/member/mailAuth"
@@ -397,6 +413,7 @@ if (inputNumber === verificationNumber && verificationNumber != "") {
 
 </script>
 
+
  <script>
             Kakao.init('597148a4792f11606a885d22718bb101'); //발급받은 키 중 javascript키를 사용해준다.
             console.log(Kakao.isInitialized()); // sdk초기화여부판단
@@ -447,5 +464,4 @@ if (inputNumber === verificationNumber && verificationNumber != "") {
                 });
             } 
         </script>
-</body>
-</html>
+

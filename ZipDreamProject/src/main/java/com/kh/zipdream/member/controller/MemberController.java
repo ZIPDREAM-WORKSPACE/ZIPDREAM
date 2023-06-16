@@ -184,7 +184,7 @@ public class MemberController {
 	//일반회원가입
 	@PostMapping("/insert")
 	public String insertMember( 
-			Member m, HttpSession session, Model model) {
+			Member m, HttpSession session, Model model, RedirectAttributes ra) {
 		String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 		m.setAddress(address);
@@ -198,16 +198,18 @@ public class MemberController {
 		System.out.println(m.getUserId());
 		
 		int result = memberService.insertMember(m);
-		
+		Map<String,String> alertMsg = new HashMap<String,String>();
 		String url = "";
 		if (result > 0) { // 성공시 - 메인페이지로
-			session.setAttribute("alertMsg", "회원가입");
+			alertMsg.put("message", "회원가입이 되었습니다.");
+			alertMsg.put("type", "success");
 			url = "redirect:/";
 		} else { // 실패 - 에러페이지
-			model.addAttribute("errorMsg", "회원가입 실패");
+			alertMsg.put("message", "회원가입에 실패했습니다");
+			alertMsg.put("type", "error");
 			url = "common/errorPage";
 		}
-
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		return url;
 	}
 	
@@ -215,7 +217,8 @@ public class MemberController {
 		@PostMapping("/bkinsert")
 		public String insertbkMember( 
 				Member m, HttpSession session, Model model,
-				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList){
+				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList
+				 ,RedirectAttributes ra){
 			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 			m.setAddress(address);
@@ -227,7 +230,7 @@ public class MemberController {
 			// 암호화된 pwd를 m의 userPwd다시 대입
 			
 			m.setUserPwd(encPwd);
-			
+			Map<String,String> alertMsg = new HashMap<String,String>();
 			int result =0;
 			
 			try {
@@ -241,16 +244,18 @@ public class MemberController {
 			String url = "";
 		if(result >0) {
 			System.out.println("업로드 성공");
-			session.setAttribute("alertMsg", "회원가입");
+			alertMsg.put("message", "회원가입이 되었습니다.");
+			alertMsg.put("type", "success");
 			url = "redirect:/";
 			
 		}else {
 			System.out.println("업로드 실패");
-			model.addAttribute("errorMsg", "회원가입 실패");
+			alertMsg.put("message", "회원가입에 실패했습니다");
+			alertMsg.put("type", "error");
 			url = "common/errorPage";
 			
 		}
-
+		ra.addFlashAttribute("alertMsg",alertMsg);
 		return url;
 		}
 
@@ -430,7 +435,7 @@ public class MemberController {
 		 
 		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
 
-		 
+		 Map<String,String> alertMsg = new HashMap<String,String>();
 		 int result = 0;
 		 if(bcryptPasswordEncoder.matches(paramMap.get("currentPw")+"", loginUser.getUserPwd())) {
 			 Member m = new Member();
@@ -438,9 +443,23 @@ public class MemberController {
 			 m.setUserPwd(newPw);
 			 
 			 result = memberService.updateMemberPwd(m);
-		 }
-		 	status.setComplete(); 
+			 alertMsg.put("message", "비밀번호 변경이 완료되었습니다.");
+			 alertMsg.put("type", "success");
+		 }else {
+			 alertMsg.put("message", "기존 비밀번호가 다릅니다.");
+			 alertMsg.put("type", "error");
+			 if(loginUser.getUserLevel()==1) {
 				
+				 return "redirect:/mypage/myInfo";
+			 }else {
+				
+				 return "redirect:/agent/mypage";
+			 }
+			
+			 
+		 }
+		 ra.addFlashAttribute("alertMsg",alertMsg);
+		 	status.setComplete(); 
 		 
 			 
 	  return "redirect:/"; 
@@ -509,9 +528,47 @@ public class MemberController {
 		}
 	  
 
-
-
+	@PostMapping("/deleteMember")
+	@ResponseBody
+	public int deleteMember(@RequestParam (value="userPwd2") String userPwd2,@ModelAttribute("loginUser") Member loginUser) {
+		int result = 0;
+		
+		String pwd = loginUser.getUserPwd();
+		int userNo = loginUser.getUserNo();
+		System.out.println(userPwd2 + ": "+pwd);
+		
+		if(bcryptPasswordEncoder.matches(userPwd2, pwd)) {
+			result= memberService.deleteMember(userNo); 
+		}
+		
+		return result;
+	}
+	
+	
+	@GetMapping("/sessionOut")
+	@ResponseBody
+	public void sessionOut(HttpSession session, SessionStatus status) {
+		 
+		status.setComplete(); // 세션 할일이 완료됨 -> 없앰 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
 
 
 

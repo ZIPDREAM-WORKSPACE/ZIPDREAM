@@ -12,13 +12,17 @@
 		margin-bottom:50px;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
+		position: relative;
 	}
 	.myInfo_title{
 		font-weight: 600;
 		font-size:17px;
 	}
-	.myInfo_content{
-		padding:5px;
+
+	.myInfo_button{
+		position: absolute;
+		left:83.5%;
+		bottom:9.1%;
 	}
 	.delete_account{
 		widht:70%; 
@@ -34,29 +38,13 @@
 	#delete_account:hover{
 		color:rgb(70, 78, 217);
 	}
-	.myInfo_button{
-		background: rgb(34, 34, 91);
-		color:white;
-		border: 2px solid rgb(169, 169, 169);
-		width:70px;
-		text-align: center;
-	}
+
 	.read_only{
 		background: rgb(239, 239, 239);
 		border : 1px solid rgb(223, 223, 223);
 	}
-	#confirm{
-		margin: auto;
-		background: rgb(34, 34, 91);
-		border : 2px solid rgb(169, 169, 169);
-		width: 70px;
-		justify-content: center;
-		
-	}
-	.password_content{
-		width:460px;
-		padding:5px;
-	}
+
+
 	.address_content{
 		width:387px;
 		padding:5px;
@@ -64,25 +52,13 @@
 	
 	#signchangebtn{
         width: 100px;
-	    height: 48px;
-	    right: 520px;
-	    bottom: 100px;
-	    background: white;
-	    border-radius: 8px;
-	    align-items: center;
 	    margin-left: 400px;
-	    margin-top: 30px;   
+	      margin-top: -20px;
     }
     
     #signdeletebtn{
-        margin-top: -48px;
+        margin-top: -37.5px;
 	    width: 100px;
-	    height: 48px;
-	    right: 520px;
-	    bottom: 100px;
-	    background: white;
-	    border-radius: 8px;
-	    align-items: center;
 	    margin-left: 510px;  
     }
     
@@ -91,10 +67,10 @@
 	    position: absolute;
 	    width: 203px;
 	    height: 250px;
-	    left: 425px;
-	    top: 640px;
+	    left: -30px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;
+	    overflow:hidden;
 	    
 	    
     }
@@ -108,7 +84,7 @@
     }
 
     #license{
-        margin-left: -20px;
+     margin-top: 33px;
         font-size: large;
     }
 
@@ -117,14 +93,14 @@
 	    position: absolute;
 	    width: 203px;
 	    height: 250px;
-	    left: 665px;
-	    top: 640px;
+	    left: 190px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;
+	      overflow:hidden;
     }
 
     #license1-1{
-        margin-top: -33px;
+        margin-top: -30px;
     	margin-left: 230px;
     	font-size: large;
             
@@ -135,15 +111,15 @@
 	    position: absolute;
 	    width: 203px;
 	    height: 250px;
-	    left: 900;
-	    top: 640px;
+	    left: 410px;
 	    background: #FFFFFF;
 	    border: 1px solid #B9B9B9;	
+	      overflow:hidden;
     }
 
     #license1-2{
         margin-top: -30px;
-    	margin-left: 470px;
+    	margin-left: 460px;
     	font-size: large;
             
     }
@@ -166,11 +142,30 @@
     }
     
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
-        width: 90%;
-        height:  90%;
+        width: 100%;
+        height:  100%;
         object-fit: cover;
         margin-top: 0px;
+        
     }
+    .licensewrap{
+    	width:100%;
+    	position: absolute;
+    	
+    }
+.signchangebtn {
+	width: 100px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+.closedelete{
+	width: 60px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+    
 </style>
 <body>
 <jsp:include page="agentPage.jsp"/>
@@ -178,43 +173,41 @@
 	<div class="myInfo_wrap">
 		<div class="myInfo_wrap1">
 		<label class="myInfo_title">아이디</label><br>
-	    <input class="myInfo_content read_only" type="text" name="userId" value="${m.userId}" size="55" readonly><br><br>
+	    <input class="read_only form-control" type="text" name="userId" value="${m.userId}" size="55" readonly><br>
 	    <label class="myInfo_title" >비밀번호</label><br>
-	    <input class="myInfo_content myInfo_button" type="button"  name="password" value="비밀번호 변경" style="width:508px;" data-toggle="modal" data-target="#password_modal"><br><br>
+	    <button class="form-control btn btn-dark" type="button"  name="password"  data-toggle="modal" data-target="#password_modal">비밀번호 변경</button><br><br>
 	   	</div>
 	    <h5 id="license">사업자 등록증 등록</h5>
                
                 <div class="licensewrap">
-                <input type="file" class="real-upload images" accept="images/*"   style="display: none;" name="images" >
-                <div class="licensebox" ><li><img src="<%= request.getContextPath()%>/${images[0].filePath}/${images[0].changeName}"></li></div>
-                    
-                
-               <!--  <div class="licensewrap2"> -->
-                <h5 id="license1-1">중개등록증 등록</h5>
-                <input type="file" class="real-upload1 images" accept="images/*"   style="display: none;" name="images">
-                <div class="licensebox1-1"><li><img src="<%= request.getContextPath()%>/${images[1].filePath}/${images[1].changeName}"></li></div>
-                <!-- </div> -->
-                
-               <!--  <div class="licensewrap3"> -->
-                <h5 id="license1-2">증명사진 등록</h5>
-                <input type="file" class="real-upload3 images" accept="images/*"   style="display: none;" name="images">
-                <div class="licensebox1-2" ><li><img src="<%= request.getContextPath()%>/${images[2].filePath}/${images[2].changeName}"></li></div>
+	                <input type="file" class="real-upload images" accept="images/*"   style="display: none;" name="images" >
+	                <div class="licensebox" ><li><img src="<%= request.getContextPath()%>/${images[0].filePath}/${images[0].changeName}"></li></div>
+	                    
+	                
+	               <!--  <div class="licensewrap2"> -->
+	                <h5 id="license1-1">중개등록증 등록</h5>
+	                <input type="file" class="real-upload1 images" accept="images/*"   style="display: none;" name="images">
+	                <div class="licensebox1-1"><li><img src="<%= request.getContextPath()%>/${images[1].filePath}/${images[1].changeName}"></li></div>
+	                <!-- </div> -->
+	                
+	               <!--  <div class="licensewrap3"> -->
+	                <h5 id="license1-2">증명사진 등록</h5>
+	                <input type="file" class="real-upload3 images" accept="images/*"   style="display: none;" name="images">
+	                <div class="licensebox1-2" ><li><img src="<%= request.getContextPath()%>/${images[2].filePath}/${images[2].changeName}"></li></div>
                 </div>
-                 
 	    <br><br><br><br><br><br><br><br><br><br><br><br>   
 	    <div class="info">
 	    <input type="hidden" value="${m.userNo}" name="userNo">
 	    <label class="myInfo_title ">이름</label><br>
-	    <input class="myInfo_content" type="text"  id="userName" name="userName" value="${m.userName}" size="55"><br><br>
+	    <input class="form-control" type="text"  id="userName" name="userName" value="${m.userName}"><br>
 	    <label class="myInfo_title">전화번호</label><br>
-	    <input class="myInfo_content" type="text" id="phone" name="phone" value="${m.phone}" size="46" >
-	    <input class="myInfo_content myInfo_button" type="button" value="변경"><br><br>
+	    <input class="form-control" type="text" id="phone" name="phone" value="${m.phone}"  ><br>
 	    <label class="myInfo_title ">주소</label><br>
-	    <input class="myInfo_content" type="text"  value="${m.address}" size="46" id="addr" name="address">
-	    <input class="myInfo_content myInfo_button" type="button" value="변경" data-toggle="modal" data-target="#address_modal"><br><br>
+	    <input class="form-control" type="text"  value="${m.address}" id="addr" name="address" style="width:470px">
+	    <button class="btn btn-dark myInfo_button" type="button" data-toggle="modal" data-target="#address_modal">변경</button><br><br>
 	    </div>
-		<button type="submit" id="signchangebtn">변경하기</button>  
-	    <button type="button" id="signdeletebtn">회원탈퇴</button>
+		<button type="submit" id="signchangebtn" class="btn  btn-outline-primary">변경하기</button>  
+	    <button type="button" id="signdeletebtn" class="btn  btn-outline-danger">회원탈퇴</button>
 	</div>
 	</form>
 	
@@ -226,27 +219,27 @@
     <form action="<%= request.getContextPath() %>/member/changePw" method="post">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+        <h5 class="modal-title " id="exampleModalLabel">비밀번호 변경</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="border:none; background: white; font-size:20px;">
         	<span aria-hidden="true" >&times;</span>
         </button>
       </div>
       <div class="modal-body">
        	<label class="myInfo_title">기존 비밀번호</label><br>
-	    <input class="password_content" type="text"  ><br><br>
+	    <input class="form-control" type="password"  name="currentPw" id="currentPw"><br>
 	    
 	    <label class="myInfo_title">비밀번호 재설정</label><br>
-	    <input class="password_content" type="password"  id="password" onkeyup="checkPasswordValidity()"><br>
+	    <input class="form-control" type="password"  id="password" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
 	    <span id="passwordError" style="color: red; font-size: 13px;" ></span>
         <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
         
 	    <label class="myInfo_title">비밀번호 확인</label><br>
-	    <input class="password_content" type="password" id="confirmPassword" onkeyup="checkPasswordMatch()" ><br>
-	    <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
+	    <input class="form-control" type="password" id="confirmPassword" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
+	    <span id="confirmMessage" style="color: red; font-size: 13px;"></span><br>
       </div>
       
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" id="confirm" >변경</button>
+        <button type="submit" class="btn btn-outline-dark" id="confirm" >변경</button>
       </div>
     </div>
     </form>
@@ -282,6 +275,31 @@
     </div>
   </div>
 </div>
+
+<!-- 탈퇴 모달 -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+	 <div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">회원탈퇴</h5>
+				<button type="button" class="btn-close" onclick="$('#deleteModal').modal('hide');"
+					aria-label="Close"
+					style="border: none; background: white; font-size: 20px;">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h3>비밀번호 입력</h3>
+				<input type="password" size="60" name="userPwd" class="deleteContent"  placeholder="현재 비밀번호를 입력해주세요.">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="signchangebtn">탈퇴하기</button>
+				<button type="button" class="closedelete"
+	                      onclick="$('#deleteModal').modal('hide');">닫기</button>
+    				</div>
+		</div>
+	</div>
+</div>   
 	
 	<jsp:include page="../common/footer.jsp"/>
 </body>
@@ -565,5 +583,51 @@ function checkPasswordValidity() {
                 	       
                 	    });   --%>
                    });
+  
+  $(function(){
+	  $("#signdeletebtn").click(function(){
+		  $("#deleteModal").modal("show");
+	  })
+  })
+  $(function(){
+	$(".signchangebtn").click(function(){
+		let userPwd2 = $(".deleteContent").val();
+		$.ajax({
+			url : "<%=request.getContextPath()%>/member/deleteMember",
+			type : "post",
+			data : {userPwd2 },
+			success : function(result){
+				if(result ==1){
+					console.log("탈퇴성공");
+					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
+					
+					$.ajax({
+						url : "<%=request.getContextPath()%>/member/sessionOut",
+						success : function(data){
+							console.log("성공");
+							move();
+						},
+						error : function(){
+							console.log("에러");
+						}
+						
+					})
+					
+				}else{
+					console.log("탈퇴실패");
+					swal("탈퇴 실패", "비밀번호가 일치하지 않습니다. 다시입력해주세요.", "error");
+					$("#deleteModal").modal("hide");
+				}
+			},
+			error : function(){
+				console.log("컨트롤러 못감씨앙");
+			}
+		})
+	})
+})
+
+function move(){
+	  location.href="<%=request.getContextPath()%>";
+  }
                 	 
 </script>
