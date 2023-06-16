@@ -401,6 +401,7 @@ public class MemberController {
 	  return "redirect:/"; 
 	  }
 	 
+
 	  @GetMapping("/mybookmarklist")
 		@ResponseBody
 		public List<userSelectList> mybookmarklist(@RequestParam("uno") int uno, Model model) {
@@ -408,26 +409,12 @@ public class MemberController {
 	
 			return uslist;
 		}
+
 	  
-			
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
 }
-
-
-
 
 
 
