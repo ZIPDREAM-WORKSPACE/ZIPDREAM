@@ -380,28 +380,29 @@ window.addEventListener('load', function() {
                     success: function (response) {
                        let accessToken = Kakao.Auth.getAccessToken();
                        Kakao.Auth.setAccessToken(accessToken);
-                    	
+                    	console.log(accessToken);
                        console.log(response);
                        console.log(response.id);
                        console.log(response.properties.nickname);
                        console.log(response.kakao_account.email);
+                        let snsEmail = response.kakao_account.email;
                         let snsId = response.id;
                         let snsName = response.properties.nickname;
                         let snsType = 1;
                         
-                       <%--  $.ajax({
-                           url : "<%= request.getContextPath()%>/apinsert.me",
-                           data : {snsId, snsName, snsType},
+                       $.ajax({
+                           url : "<%= request.getContextPath()%>/member/snslogin",
+                           data : { userId : snsEmail, userPwd : snsId, userName : snsName, userLevel: snsType},
                            method : 'post',
                            success: function(data){
-                        	   alertMsg("카카오로 정상 로그인되었습니다.");
-                        	   
-                        	   setTimeout(()=> location.replace("<%= request.getContextPath() %>/mainpage.me"), 1500);
+                        	   /* alertMsg("카카오로 정상 로그인되었습니다."); */
+                        	    
+                        	  setTimeout(()=> location.href="<%= request.getContextPath()%>/", 500);
                            },
                            error: function(){
                               error("카카오 로그인 실패");
                            }
-                        }); --%>
+                        });
                         
                     },
                     fail: function (error) {

@@ -109,5 +109,10 @@ public class MemberDao {
 	public List<userSelectList> myBookmarkList(int uno){
 		return sqlSession.selectList("member-mapper.myBookmarkList", uno);
 	}
+	
+	public Member loginCheckMember(Map<String, String> map) {
+		return sqlSession.selectOne("member-mapper.loginCheckMember", map);
+	}
+	
 }
 
