@@ -34,7 +34,9 @@
 		<result column="CHANGE_NAME" property="changeName" />
 		<result column="FILE_PATH" property="filePath" />
 		<result column="FILE_LEVEL" property="fileLevel" />
-	</resultMap>
+	</resultMap>	
+
+
 	
 	<resultMap type="userselectlist" id="bookmarkResultSet">
 		<result column="USER_NO" property="userNo" />
@@ -179,9 +181,11 @@
 	</update>
 	
 	
-	<delete id="deleteMember" parameterType="_int">
-		DELETE FROM MEMBER WHERE USER_NO = #{userNo}
-	</delete>
+	<update id="deleteMember">
+		UPDATE MEMBER
+		SET STATUS='N', WITHDRAW='N'
+		WHERE USER_NO =#{userNo}
+	</update>
 	
 	<update id="updatebkImages" parameterType="Attachment">
 		UPDATE ATTACHMENT SET
@@ -202,5 +206,13 @@
 		WHERE USER_NO = #{uno}
 		ORDER BY SELL_NO
 	</select>
-
+	
+	<select id="loginCheckMember" parameterType="HashMap" resultMap="memberResultSet">
+	SELECT M.*
+	FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, M.*
+	FROM MEMBER M , (SELECT @ROWNUM := 0) TMP
+	ORDER BY ENROLL_DATETIME ASC) M	
+	WHERE USER_ID = #{userId} AND ROWNUM = #{rowNum}
+	
+	</select>
 </mapper>

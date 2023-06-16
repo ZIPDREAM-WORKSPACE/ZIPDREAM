@@ -593,10 +593,10 @@
 										<input class="addressDetail" placeholder="상세주소를 입력하세요." name="address2">
 										<div class="appInfo">
 											<div class="dong">
-												<input class="inputDong" placeholder="예)101동" name="address3">
+												<input class="inputDong" placeholder="예)101" name="address3">
 											</div>
 											<div class="ho">
-												<input class="inputHo" placeholder="예)201호" name="address4">
+												<input class="inputHo" placeholder="예)201" name="address4">
 											</div>
 										</div>
 									</div>
@@ -749,7 +749,7 @@
 	<script>
 	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 		function listReset(){
-			$(".agentList").remove();
+			$(".modal-body").html("");
 			/* location.reload(); */
 		}
 	

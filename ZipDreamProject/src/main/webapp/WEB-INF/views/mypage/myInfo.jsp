@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-	.myInfo_wrap{
-		width:600px;
-		height:590px;
-		border: 1px solid rgb(223, 223, 223);
-		margin: auto;
-		padding:40px;
-		margin-top:50px;
-		margin-bottom:50px;
-		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+.myInfo_wrap {
+	width: 600px;
+	height: 590px;
+	border: 1px solid rgb(223, 223, 223);
+	margin: auto;
+	padding: 40px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
 		position: relative;
 	}
@@ -63,6 +63,10 @@
 		    width: 100px;
 		    margin-left: 425px;  
     }
+
+
+
+
 </style>
 <body>
 <jsp:include page="mypage.jsp"/>
@@ -152,6 +156,31 @@
     </div>
   </div>
 </div>
+
+<!-- 탈퇴 모달 -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+	 <div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">회원탈퇴</h5>
+				<button type="button" class="btn-close" onclick="$('#deleteModal').modal('hide');"
+					aria-label="Close"
+					style="border: none; background: white; font-size: 20px;">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h3>비밀번호 입력</h3>
+				<input type="password" size="60" name="userPwd" class="deleteContent"  placeholder="현재 비밀번호를 입력해주세요.">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="signchangebtn">탈퇴하기</button>
+				<button type="button" class="closedelete"
+	                      onclick="$('#deleteModal').modal('hide');">닫기</button>
+    				</div>
+		</div>
+	</div>
+</div>   
 	
 	<jsp:include page="../common/footer.jsp"/>
 </body>
@@ -266,10 +295,15 @@ $(function(){
             dataType : "TEXT",
             data: {phone, address, userName, userNo}, 
             success:function(data){
-                if(data == 0){ 
-                	swal("", "회원 정보가 변경되지 않았습니다.", "error");
+
+                if(data == null){ 
+                    alert("정보수정 실패.");
+                    swal("정보 수정 실패", "잘못된 정보입니다. 다시 진행해주세요.", "error");
+                    
                 }else{                  
-                	swal("", "회원 정보를 변경하였습니다.", "success");
+                    alert("정보수정 성공");
+                    swal("정보 수정 완료", "정보 수정이 완료되었습니다.", "success");
+
                 }
             },error : function(err){
             	console.log(err)
@@ -279,5 +313,53 @@ $(function(){
        
     });  
 });
+
+$(function(){
+	$("#signdeletebtn").click(function(){
+		$("#deleteModal").modal("show");
+	})
+})
+
+$(function(){
+	$(".signchangebtn").click(function(){
+		let userPwd2 = $(".deleteContent").val();
+		
+		$.ajax({
+			url : "<%=request.getContextPath()%>/member/deleteMember",
+			type : "post",
+			data : {userPwd2 },
+			success : function(result){
+				if(result ==1){
+					console.log("탈퇴성공");
+					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
+					
+					$.ajax({
+						url : "<%=request.getContextPath()%>/member/sessionOut",
+						success : function(data){
+							move();
+						},
+						error : function(){
+							console.log("에러");
+						}
+						
+					})
+					
+				}else{
+					console.log("탈퇴실패");
+					swal("탈퇴 실패", "비밀번호가 일치하지 않습니다. 다시입력해주세요.", "error");
+					$("#deleteModal").modal("hide");
+				}
+			},
+			error : function(){
+				console.log("컨트롤러 못감씨앙");
+			}
+		})
+	})
+})
+
+function move(){
+	
+	location.href="<%=request.getContextPath()%>";
+}
 
 </script>

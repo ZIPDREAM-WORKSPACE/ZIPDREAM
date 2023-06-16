@@ -153,6 +153,19 @@
     	position: absolute;
     	
     }
+.signchangebtn {
+	width: 100px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+.closedelete{
+	width: 60px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+    
 </style>
 <body>
 <jsp:include page="agentPage.jsp"/>
@@ -262,6 +275,31 @@
     </div>
   </div>
 </div>
+
+<!-- 탈퇴 모달 -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="reportInsertModalLabel" aria-hidden="true">
+	 <div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">회원탈퇴</h5>
+				<button type="button" class="btn-close" onclick="$('#deleteModal').modal('hide');"
+					aria-label="Close"
+					style="border: none; background: white; font-size: 20px;">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h3>비밀번호 입력</h3>
+				<input type="password" size="60" name="userPwd" class="deleteContent"  placeholder="현재 비밀번호를 입력해주세요.">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="signchangebtn">탈퇴하기</button>
+				<button type="button" class="closedelete"
+	                      onclick="$('#deleteModal').modal('hide');">닫기</button>
+    				</div>
+		</div>
+	</div>
+</div>   
 	
 	<jsp:include page="../common/footer.jsp"/>
 </body>
@@ -545,5 +583,51 @@ function checkPasswordValidity() {
                 	       
                 	    });   --%>
                    });
+  
+  $(function(){
+	  $("#signdeletebtn").click(function(){
+		  $("#deleteModal").modal("show");
+	  })
+  })
+  $(function(){
+	$(".signchangebtn").click(function(){
+		let userPwd2 = $(".deleteContent").val();
+		$.ajax({
+			url : "<%=request.getContextPath()%>/member/deleteMember",
+			type : "post",
+			data : {userPwd2 },
+			success : function(result){
+				if(result ==1){
+					console.log("탈퇴성공");
+					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
+					
+					$.ajax({
+						url : "<%=request.getContextPath()%>/member/sessionOut",
+						success : function(data){
+							console.log("성공");
+							move();
+						},
+						error : function(){
+							console.log("에러");
+						}
+						
+					})
+					
+				}else{
+					console.log("탈퇴실패");
+					swal("탈퇴 실패", "비밀번호가 일치하지 않습니다. 다시입력해주세요.", "error");
+					$("#deleteModal").modal("hide");
+				}
+			},
+			error : function(){
+				console.log("컨트롤러 못감씨앙");
+			}
+		})
+	})
+})
+
+function move(){
+	  location.href="<%=request.getContextPath()%>";
+  }
                 	 
 </script>

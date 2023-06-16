@@ -14,7 +14,7 @@
     .wrap{
         width:1500px;
         height:1500px;
-        margin : auto;
+        /* margin : auto; */
     }
   
     .wrap>div {
@@ -31,12 +31,13 @@
     }
 
     .login1{
+    	position: absolute;
         box-sizing: border-box;
         position: absolute;
         width: 680px;
         height: 1450px;
-        right: 440px;
-        /* top: calc(50% - 799px/2 - 114.31px); */
+        right: 620px;
+        
         margin-top: 20px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
@@ -45,16 +46,15 @@
     }
    
     #brokerlogin-text{
-        font-family: 'Inter';
         font-style: normal;
         font-weight: 270px;
-        font-size: 43px;
+        font-size: 35px;
         display: flex;
         align-items: center;
         text-align: center;
         color: #326CF9;
-        margin-left: -5px;
- 
+        margin-left: 90px;
+ 		margin-top: 15px;
     }
 
     #confirmPassword{
@@ -63,7 +63,6 @@
         height: 45px;
         top: 535px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
     }
 
 
@@ -73,7 +72,6 @@
         height: 45px;
         top: 140px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
     }
     
     #addr1{
@@ -82,7 +80,7 @@
 	    height: 45px;
 	    top: 245px;
 	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+	    
     }
 
     #addr2{
@@ -90,9 +88,9 @@
 	    width: 300px;
 	    height: 45px;
 	    top: 245px;
-	    left: 250px;
+	    left: 270px;
 	    background: #FFFFFF;
-	    border: 0.5px solid #000000;
+	    
     }
 
     #addr3{
@@ -101,14 +99,14 @@
         height: 45px;
         top: 300px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
+        
     }
 
     #adsearch{
         position: absolute;
 	    width: 110px;
-	    height: 47px;
-	    left: 440px;
+	    height: 45px;
+	    left: 460px;
 	    top: 300px;
 	    background: #4C69A2;
 	    color: white;
@@ -132,7 +130,7 @@
     }
 
     #license{
-        margin-left: -20px;
+        margin-left: -40px;
     }
 
     .licensebox1-1{
@@ -149,7 +147,7 @@
 
     #license1-1{
         margin-top: -33px;
-        margin-left: 205px;
+        margin-left: 187px;
             
     }
 
@@ -167,25 +165,26 @@
 
     #license1-2{
         margin-top: -30px;
-        margin-left: 430px;
+        margin-left: 413px;
             
     }
 
     #id-text{
+    	position: absolute;
         width: 150px;
         height: 44px;
-        left: 5px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
     }
 
     #emailct{
+    	position: absolute;
         width: 180px;
         height: 45px;
-        left: 5px;
+        left: 250px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
         text-align: center;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
     }
 
     #emailcheck{
@@ -205,11 +204,10 @@
 
     #emailchecknumber{
         position: absolute;
-       width: 333px;
-       height: 45px;
-       top: 780px;
-       background: #FFFFFF;
-       border: 0.5px solid #000000;
+       	width: 344px;
+       	height: 45px;
+       	top: 780px;
+       	background: #FFFFFF;
     }
 
     #ok{
@@ -235,9 +233,9 @@
         position: absolute;
         width: 360px;
         height: 45px;
-        top: 870px;
+        top: 880px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
+         
     }
 
     #confirmPassword{
@@ -246,7 +244,7 @@
         height: 45px;
         top: 1020px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
+         
     }
 
    
@@ -257,7 +255,7 @@
         height: 45px;
         bottom: 275px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
+         
     }
 
     #phone{
@@ -266,7 +264,7 @@
         height: 45px;
         bottom: 165px;
         background: #FFFFFF;
-        border: 0.5px solid #000000;
+         
     }
 
     #signupbtn{
@@ -274,7 +272,9 @@
         height: 48px;
         right: 520px;
         bottom: 100px;
-        background: #B9B9B9;
+        background: darkblue;
+        border: none;
+        color: white;
         border-radius: 8px;
         align-items: center;
         margin-left: 100px;
@@ -300,11 +300,11 @@
         <div class="content" id="content">
             <div class="login1">
                 <form id="signApplyform" action="bkinsert" enctype="multipart/form-data" method="post" name="signApplyform" >
-                <h2 id="brokerlogin-text">중개사회원정보입력</h2> 
-                <p>서비스 이용을 위해 아래내용을 입력해주세요.</p>
+                <h3 id="brokerlogin-text">중개사 회원정보 입력</h3> 
+                <p style="margin-left:95px;">서비스 이용을 위해 아래내용을 입력해주세요.</p>
 
                 <h4>중개사무소명</h4>             
-                <input type="text" id="brokeraddress" name="office" placeholder="사무소명을 입력해주세요."><br><br><br>
+                <input type="text" id="brokeraddress" class="form-control" name="office" placeholder="사무소명을 입력해주세요."><br><br><br>
                 
 
                 <h4>소재지</h4>
@@ -320,15 +320,19 @@
 				</div><br><br><br><br><br>
 
                 <h5 id="license">사업자 등록증 등록</h5>
-                <input type="file" class="real-upload" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox licenseImg" ></div>
+
+                <input type="file" class="real-upload form-control" accept="images/*"   style="display: none;" name="imges">
+                <div class="licensebox" ></div>
+
                     
          
 
                   
                 <h5 id="license1-1">중개등록증 등록</h5>
-                <input type="file" class="real-upload1" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-1 licenseImg"></div>
+
+                <input type="file" class="real-upload1 form-control" accept="images/*"   style="display: none;" name="imges">
+                <div class="licensebox1-1"></div>
+
                 
 
 
@@ -341,35 +345,36 @@
                 <br><br><br><br><br><br><br><br><br><br><br><br>
                 
                 <h4 id="id">아이디</h4>
-                <input type="text" id="id-text" class="userEmail" name="userEmail" required> <select id="emailct" class="userEmail2" name="userEmail2">
+                <input type="text" id="id-text" style="display: block;" class="userEmail form-control" name="userEmail" required> 
+                <select id="emailct" class="userEmail2" name="userEmail2">
                     <option value="선택안함">선택안함</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@gmail.com">@gmail.com</option></select>
-                    <button type="button" id="emailCheck" name="emailCheck" >중복확인</button><br><br>
-                    <button type="button" id="emailcheck" name="emailcheck" style="display:none;">인증번호 전송</button><br><br>
+                    <button type="button" id="emailCheck" class="btn btn-default" name="emailCheck" >중복확인</button><br><br>
+                    <button type="button" id="emailcheck" class="btn btn-default" name="emailcheck" style="display:none;">인증번호 전송</button><br><br>
                     
-                    <input type="hidden" id="userEmail" name="userId">
-                    <input type="text" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
-                   <button  type="button" id="ok" >확인</button>
-                    
+                    <input type="hidden" class="form-control" id="userEmail" name="userId">
+                    <input type="text" class="form-control" id="emailchecknumber" name="emailCheckNumber" placeholder="인증번호를 입력해주세요.">
+                   <button  type="button" class="btn btn-default" id="ok" >확인</button>
+                <br> 
                 <h4>비밀번호</h4>
-                <input type="password" id="password"  name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
+                <input type="password" id="password" class="form-control" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required><br><br>
                 <label style="font-size: 13px; color: gray;">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
                 <span id="passwordError" style="color: red; font-size: 13px;" ></span>
                 <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
                 
 
                 <h4>비밀번호 확인</h4>
-                <input type="password" id="confirmPassword"  name="userPwdCheck"onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required><br><br>
+                <input type="password" id="confirmPassword" class="form-control" name="userPwdCheck"onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required><br><br>
                 <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
 
                 <h4>이름</h4>
-                <input type="text" id="name" name="userName" placeholder="이름을 입력해주세요."><br><br><br>
+                <input type="text" id="name" class="form-control" name="userName" placeholder="이름을 입력해주세요."><br><br><br>
 
                 <h4>전화번호</h4>
-                <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
+                <input type="text" id="phone" class="form-control" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
 
-                <a href="" ><button type="submit" id="signupbtn">가입하기</button></a>
+                <a href="" ><button type="submit" class="btn btn-default" id="signupbtn">가입하기</button></a>
 
                 </form>
             </div>
@@ -426,7 +431,7 @@
             const licensebox = document.querySelector('.licensebox');
             const docFrag = new DocumentFragment();
 
-            if ([...files].length >= 4) {
+            if ([...files].length >= 2) {
                 alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
                 return;
             }
@@ -440,6 +445,7 @@
 
                 // 파일 갯수 검사
                 if ([...files].length < 7) {
+                	licensebox.innerHTML = "";
                 uploadFiles.push(file);
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -476,8 +482,8 @@
                 const licensebox1 = document.querySelector('.licensebox1-1');
                 const docFrag = new DocumentFragment();
 
-                if ([...files].length >= 4) {
-                    alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                if ([...files].length >= 2) {
+                    alert('이미지는 최대 1개 까지 업로드가 가능합니다.');
                     return;
                 }
 
@@ -490,6 +496,7 @@
 
                     // 파일 갯수 검사
                     if ([...files].length < 7) {
+                    	licensebox1.innerHTML = "";
                     uploadFiles.push(file);
                     const reader = new FileReader();
                     reader.onload = (e) => {
@@ -539,6 +546,7 @@
 
                         // 파일 갯수 검사
                         if ([...files].length < 7) {
+                        	licensebox2.innerHTML = "";
                         uploadFiles.push(file);
                         const reader = new FileReader();
                         reader.onload = (e) => {
