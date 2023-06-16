@@ -38,7 +38,7 @@
          position: absolute; 
         width: 600px;
         height: 1100px;
-        right: 540px;
+        right: 640px;
         margin-top: 100px;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
