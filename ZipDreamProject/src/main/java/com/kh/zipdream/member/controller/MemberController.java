@@ -100,33 +100,78 @@ public class MemberController {
 	   public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
 	         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 	         @RequestParam(value = "saveId", required = false) String saveId) {
-
-	      Member loginUser = memberService.loginMember(m);
-	    
-	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
-	    	  	session.setAttribute("loginUser", loginUser);
-	    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
-				
-				if(saveId != null) { //아이디 저장이 체크 되었을때
-					cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
-				}else { // 아이디저장 체크하지 않았을때
-					cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
-				}
+		
+			int emailcheck = memberService.emailCheck(m.getUserId());
+			if(emailcheck == 1) {
+		      Member loginUser = memberService.loginMember(m);
+		    
+		      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+		    	  	session.setAttribute("loginUser", loginUser);
+		    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
 					
-				cookie.setPath("/memberLogin");
-				resp.addCookie(cookie);
+					if(saveId != null) { //아이디 저장이 체크 되었을때
+						cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
+					}else { // 아이디저장 체크하지 않았을때
+						cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
+					}
+						
+					cookie.setPath("/memberLogin");
+					resp.addCookie(cookie);
+					
+			         if(loginUser.getUserLevel() == 3) {
+			            mv.setViewName("redirect:/admin/main");
+			         }else {            
+			            mv.setViewName("redirect:/");
+			         }
+						/* System.out.println(session.getAttribute("loginUser")); */
+		      } else { 
+		    	  System.out.println(m);
+					/*
+					 * mv.addObject("errorMsg", "로그인 실패"); mv.setViewName("common/errorPage");
+					 */
+		         
+		      }
+		      
+			}else if(emailcheck >1) {
 				
-		         if(loginUser.getUserLevel() == 3) {
-		            mv.setViewName("redirect:/admin/main");
-		         }else {            
-		            mv.setViewName("redirect:/");
-		         }
-		         System.out.println(session.getAttribute("loginUser"));
-	      } else { // 성공
-	    	  mv.addObject("errorMsg", "로그인 실패");
-		      mv.setViewName("common/errorPage");
-	         
-	      }
+				boolean isEnrolled = false;
+				for(int i = 1; i<= emailcheck; i++) {
+					Map<String,String> map = new HashMap<String,String>();
+					
+					map.put("rowNum", i+"");
+					map.put("userId", m.getUserId());
+					
+					Member loginUser = memberService.loginCheckMember(map);
+					System.out.println(loginUser);
+					if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+						isEnrolled = true;
+						session.setAttribute("loginUser", loginUser);
+			    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
+						
+						if(saveId != null) { //아이디 저장이 체크 되었을때
+							cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
+						}else { // 아이디저장 체크하지 않았을때
+							cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
+						}
+							
+						cookie.setPath("/memberLogin");
+						resp.addCookie(cookie);
+						
+				         if(loginUser.getUserLevel() == 3) {
+				            mv.setViewName("redirect:/admin/main");
+				         }else {            
+				            mv.setViewName("redirect:/");
+				         }
+						
+					}
+				}
+				if(! isEnrolled) { 
+				 /* mv.addObject("errorMsg", "로그인 실패");
+				 * mv.setViewName("common/errorPage"); 
+				 */
+					System.out.println("1");
+				}
+		    }
 	      return mv;  
 	   }
 	
@@ -409,7 +454,63 @@ public class MemberController {
 	
 			return uslist;
 		}
-
+		
+		@PostMapping("/snslogin")
+		@ResponseBody
+		public String snslogin(Model model, Member m, HttpSession session, RedirectAttributes ra,
+		         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv) {
+		
+				int emailcheck = memberService.emailCheck(m.getUserId());
+				if(emailcheck == 1) {
+					
+					Member loginUser = memberService.loginMember(m);
+					System.out.println( bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd()));
+					if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+				
+						session.setAttribute("loginUser", loginUser);
+						
+					}else {
+						m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+						memberService.insertMember(m);
+						session.setAttribute("loginUser", m);
+					}
+					
+				}else if(emailcheck > 1) {
+					boolean isEnrolled = false;
+					
+					for(int i = 0; i<emailcheck; i++) {
+						Map<String,String> map = new HashMap<String,String>();
+						
+						map.put("rowNum", i+"");
+						map.put("userId", m.getUserId());
+						
+						Member loginUser = memberService.loginCheckMember(map);
+						
+						if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+							isEnrolled = true;
+							session.setAttribute("loginUser", loginUser);
+							
+						}
+					}
+					
+					if(! isEnrolled) {
+						m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+						memberService.insertMember(m);
+						session.setAttribute("loginUser", m);
+					}
+				}else {
+					m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+					memberService.insertMember(m);
+					session.setAttribute("loginUser", m);
+				}
+			/*
+			 * 
+			 * 
+			 * int result = memberService.snslogin(m);
+			 */
+			System.out.println(m);
+			return "true";
+		}
 	  
 	@PostMapping("/deleteMember")
 	@ResponseBody

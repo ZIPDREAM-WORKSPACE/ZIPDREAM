@@ -173,14 +173,6 @@ public class MemberServiceImpl implements MemberService {
 		int result = 0;
 		if (list != null) {
 
-
-	
-	 
-	 
-}
-
-
-
 			for (int i = 0; i < list.size(); i++) {
 
 				if (list.get(i).getSize() > 0) {
@@ -209,8 +201,9 @@ public class MemberServiceImpl implements MemberService {
 				}
 
 			}
-		
+		}
 		return result;
+		
 	}
 	
 	//중개사 사진 미리보기
@@ -223,6 +216,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.deleteMember(userNo);
 	}
 	
+	public Member loginCheckMember(Map<String, String> map) {
+		return memberDao.loginCheckMember(map);
+	} 
 	
 	
 }
