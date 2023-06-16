@@ -897,8 +897,10 @@
 	<div class="block"></div>
    
     <script src="<%=request.getContextPath()%>/resources/js/sell/sellDetail.js"></script>
+
 <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 <jsp:include page="../../views/common/footer.jsp" />
+
 </body>
 <script>
 /* 	const loremIpsum = document.getElementById("lorem-ipsum")

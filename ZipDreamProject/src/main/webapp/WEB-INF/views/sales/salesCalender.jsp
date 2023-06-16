@@ -150,7 +150,7 @@
 
 .schedule>ul>li {
 	display: flex;
-	align-items: flex-start;
+    align-items: baseline;
 	width: 100%;
 	height: 56px;
 	padding: 17px 0px 17px 24px;

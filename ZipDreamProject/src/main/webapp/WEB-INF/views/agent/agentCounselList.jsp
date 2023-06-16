@@ -298,7 +298,6 @@
     
     
     <jsp:include page="../../views/common/footer.jsp" />
-    <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
 	refUno = 0; 

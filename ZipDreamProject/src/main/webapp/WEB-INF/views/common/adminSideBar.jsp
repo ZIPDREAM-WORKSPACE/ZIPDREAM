@@ -50,9 +50,7 @@
 	</aside>
 	<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="150.000000pt" height="130.000000pt"
          viewBox="0 0 150.000000 130.000000" preserveAspectRatio="xMidYMid meet" style="opacity: 0.15;position: absolute;top:1050px;">
-
          <g transform="translate(0.000000,130.000000) scale(0.100000,-0.100000)" fill="#0048B3" stroke="none">
-
             <path d="M637 1014 c-4 -4 -7 -15 -7 -25 0 -28 -48 -77 -88 -89 -20 -6 -43
             -13 -49 -15 -21 -7 -2 -35 24 -35 53 0 113 -55 113 -103 0 -19 27 -29 37 -14
             4 7 13 25 18 41 12 35 51 66 96 75 50 10 48 34 -3 48 -58 16 -76 31 -92 78

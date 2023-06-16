@@ -12,101 +12,60 @@
 	margin-bottom: 50px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
 		rgba(0, 0, 0, 0.23);
-}
+		position: relative;
+	}
+	.myInfo_title{
+		font-weight: 600;
+		font-size:17px;
+	}
 
-.myInfo_title {
-	font-weight: 600;
-	font-size: 17px;
-}
+	.delete_account{
+		widht:70%; 
+		text-align:right; 
+		margin-top:15px;  
+		margin-right:10px;
+	}
+	#delete_account{
+		padding:0;
+		cursor: pointer;
+		font-weight: 500;
+	}
+	#delete_account:hover{
+		color:rgb(70, 78, 217);
+	}
+	.myInfo_button{
+		position: absolute;
+		left:85%;
+		bottom:16.3%;
+	}
+	.read_only{
+		background: rgb(239, 239, 239);
+		border : 1px solid rgb(223, 223, 223);
+	}
 
-.myInfo_content {
-	padding: 5px;
-}
+	.password_content{
+		width:460px;
+		padding:5px;
+	}
+	.address_content{
+		width:387px;
+		padding:5px;
+	}
+	
+	#signchangebtn{
+        width: 100px;
+	    margin-left: 316px;
+	    /* margin-top: px; */  
+    }
+    
+    #signdeletebtn{
+            margin-top: -37.8px;
+		    width: 100px;
+		    margin-left: 425px;  
+    }
 
-.delete_account {
-	widht: 70%;
-	text-align: right;
-	margin-top: 15px;
-	margin-right: 10px;
-}
 
-#delete_account {
-	padding: 0;
-	cursor: pointer;
-	font-weight: 500;
-}
 
-#delete_account:hover {
-	color: rgb(70, 78, 217);
-}
-
-.myInfo_button {
-	background: rgb(34, 34, 91);
-	color: white;
-	border: 2px solid rgb(169, 169, 169);
-	width: 70px;
-	text-align: center;
-}
-
-.read_only {
-	background: rgb(239, 239, 239);
-	border: 1px solid rgb(223, 223, 223);
-}
-
-#confirm {
-	margin: auto;
-	background: rgb(34, 34, 91);
-	border: 2px solid rgb(169, 169, 169);
-	width: 70px;
-	justify-content: center;
-}
-
-.password_content {
-	width: 460px;
-	padding: 5px;
-}
-
-.address_content {
-	width: 387px;
-	padding: 5px;
-}
-
-#signchangebtn {
-	width: 100px;
-	height: 48px;
-	right: 520px;
-	bottom: 100px;
-	background: white;
-	border-radius: 8px;
-	align-items: center;
-	margin-left: 330px;
-	/* margin-top: px; */
-}
-
-#signdeletebtn {
-	margin-top: -48px;
-	width: 100px;
-	height: 48px;
-	right: 520px;
-	bottom: 100px;
-	background: white;
-	border-radius: 8px;
-	align-items: center;
-	margin-left: 440px;
-}
-
-.signchangebtn {
-	width: 100px;
-	height: 48px;
-	background: white;
-	border-radius: 8px;
-}
-.closedelete{
-	width: 60px;
-	height: 48px;
-	background: white;
-	border-radius: 8px;
-}
 
 </style>
 <body>
@@ -115,19 +74,21 @@
 	<div class="myInfo_wrap">
 		
 			<label class="myInfo_title">아이디</label><br>
-		    <input class="myInfo_content read_only" type="text" name="userId" value="${m.userId}" size="55" readonly><br><br>
+		    <input class="read_only form-control" type="text" name="userId" value="${m.userId}" readonly><br>
 		    <label class="myInfo_title" >비밀번호</label><br>
-		    <input class="myInfo_content myInfo_button" type="button" value="비밀번호 변경" style="width:508px;" data-toggle="modal" data-target="#password_modal"><br><br>
+		    <button class="btn btn-dark form-control" type="button" style="width:518px;" data-toggle="modal" data-target="#password_modal">비밀번호 변경</button><br><br>
 		    <label class="myInfo_title ">이름</label><br>
-		    <input class="myInfo_content " type="text"  id="userName" name="userName" value="${m.userName }" size="55" ><br><br>
+		    <input class="form-control" type="text"  id="userName" name="userName" value="${m.userName }" ><br>
 		    <label class="myInfo_title">전화번호</label><br>
-		    <input class="myInfo_content" type="text"  id ="phone" name="phone" value="${m.phone}" size="46" >
-		    <input class="myInfo_content myInfo_button" type="button" value="변경"><br><br>
+		    <input class="form-control" type="text"  id ="phone" name="phone" value="${m.phone}" ><br>
 		    <label class="myInfo_title ">주소</label><br>
-		    <input class="myInfo_content" type="text"  value="${m.address }" size="46" id="addr" name="address">
-		    <input class="myInfo_content myInfo_button" type="button" value="변경" data-toggle="modal" data-target="#address_modal"><br><br>
-			<button type="button" id="signchangebtn">변경하기</button>  
-		    <button type="button" id="signdeletebtn">회원탈퇴</button>
+		    <div >
+		    <input class=" form-control read_only" type="text"  value="${m.address }" id="addr" name="address" readonly style="width:460px; ">  
+		    <button class="btn myInfo_button btn-dark" type="button" data-toggle="modal" data-target="#address_modal" >변경</button><br>
+		  
+		    </div>
+			<button type="button" id="signchangebtn" class="btn  btn-outline-primary" >변경하기</button>  
+		    <button type="button" id="signdeletebtn" class="btn  btn-outline-danger">회원탈퇴</button>
 	    
 	</div>
 	
@@ -146,20 +107,20 @@
       </div>
       <div class="modal-body">
        	<label class="myInfo_title">기존 비밀번호</label><br>
-	    <input class="password_content" type="password" name="currentPw" id="currentPw"><br><br>
+	    <input class="form-control" type="password" name="currentPw" id="currentPw"><br>
 	    
 	    <label class="myInfo_title">비밀번호 재설정</label><br>
-	    <input class="password_content" type="password"  name="newPw" id="password" onkeyup="checkPasswordValidity()"><br>
+	    <input class="form-control" type="password"  name="newPw" id="password" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
 	    <span id="passwordError" style="color: red; font-size: 13px;" ></span>
         <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
         
 	    <label class="myInfo_title">비밀번호 확인</label><br>
-	    <input class="password_content" type="password" name="newPwdConfirm" id="confirmPassword" onkeyup="checkPasswordMatch()" ><br>
-	    <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
+	    <input class="form-control" type="password" name="newPwdConfirm" id="confirmPassword" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
+	    <span id="confirmMessage" style="color: red; font-size: 13px;"></span><br>
       </div>
       
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" id="confirm" >변경</button>
+        <button type="submit" class="btn btn-outline-dark" id="confirm" >변경</button>
       </div>
     </div>
     </form>
@@ -180,7 +141,7 @@
       <div class="modal-body">
        	<div class="form-group">                   
             <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
-                <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+                <button type="button" class="btn btn-outline-dark"  id="adsearch" style="margin-bottom : 5px;" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
             </div>
             <div class="form-group">
                 <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
@@ -190,7 +151,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="addConfirm" name="updateButton" data-dismiss="modal" aria-label="Close"  >변경</button>
+        <button type="button" class="btn btn-outline-dark" id="addConfirm" name="updateButton" data-dismiss="modal" aria-label="Close"  >변경</button>
       </div>
     </div>
   </div>
@@ -334,6 +295,7 @@ $(function(){
             dataType : "TEXT",
             data: {phone, address, userName, userNo}, 
             success:function(data){
+
                 if(data == null){ 
                     alert("정보수정 실패.");
                     swal("정보 수정 실패", "잘못된 정보입니다. 다시 진행해주세요.", "error");
@@ -341,6 +303,7 @@ $(function(){
                 }else{                  
                     alert("정보수정 성공");
                     swal("정보 수정 완료", "정보 수정이 완료되었습니다.", "success");
+
                 }
             },error : function(err){
             	console.log(err)

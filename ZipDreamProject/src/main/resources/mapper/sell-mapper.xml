@@ -216,13 +216,15 @@
 		SELECT SELL_NO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_FLOOR, CHANGE_NAME AS FILE_PATH
 		FROM SELLDETAIL SD
 		LEFT JOIN ATTACHMENT AT ON (SELL_NO = REF_SNO)
+
 		WHERE SELL_NO = #{sellNo}
 		AND (AT.FILE_LEVEL = 0 OR AT.FILE_LEVEL IS NULL) 
+
 	</select>
 
 	<select id="countUserSelect" parameterType="HashMap" resultType="_int">
 		SELECT COUNT(*) FROM USERSELECT_LIST
-		WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo}
+		WHERE USER_NO = #{userNo} AND SELL_NO = #{sellNo} 
 	</select>
 
 </mapper>
