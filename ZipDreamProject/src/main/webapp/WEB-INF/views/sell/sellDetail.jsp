@@ -995,7 +995,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 									"<div class='inputReply'>"+
 		        					"<textarea rows='1' cols='61' id='inputReply' style='resize: none;'placeholder='50자 내로 작성해주세요' maxlength='50'>"+"</textarea>"+
 		        					"<input type='hidden' id='refBno' name='refBno' value='"+board.detailBoardNo+"'>"+
-		        					"<button onclick='insertReply("+board.detailBoardNo+");replyList("+board.detailBoardNo+")' id='insertReplyBtn' class='btn btn-outline-primary'>"+"작성"+"</button>"+
+		        					"<button onclick='insertReply("+board.detailBoardNo+",this);replyList("+board.detailBoardNo+")' id='insertReplyBtn' class='btn btn-outline-primary'>"+"작성"+"</button>"+
 		        				"</div>"+"</div>"+"</div>"
 				}  
 				
@@ -1028,14 +1028,15 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 	
 	
 	let detailBoardNo ="";
-	function insertReply(refBno){
+	function insertReply(refBno,div){
+		replyContent = div.previousSibling.previousSibling.value;
 		detailBoardNo  = refBno;
 		$.ajax({
 			url : "<%=request.getContextPath()%>/reply/replyInsert",
 			data : {
 				detailBoardNo,
 				replyRefUno : '${loginUser.userNo}',
-				replyContent : $("#inputReply").val()
+				replyContent
 			},
 			type : "POST",
 			success : function(result){
@@ -1107,9 +1108,9 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type: "post",
 			success : function(result){
 				if(result >= 1){
-					swal("", "신고가 등록되었습니다.", "success");					
+					swal("", "신고가 등록되었습니다.", "success").then($("#reportInsertModal").modal("hide"));					
 				}else {
-					swal("", "신고 등록 실패.", "error");
+					swal("", "신고 등록 실패.", "error").then($("#reportInsertModal").modal("hide"));
 				}
 			}
 		});
@@ -1128,12 +1129,11 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type: "post",
 			success : function(result){
 				if(result >= 1){
-					swal("", "상담신청이 완료되었습니다.", "success");	
+					swal("", "상담신청이 완료되었습니다.", "success").then($("#modal").modal("hide"));
 					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
 				}else {
-					swal("", "상담신청 등록 실패.", "error");
+					swal("", "상담신청 등록 실패.", "error").then($("#modal").modal("hide"));
 				}
-				$("#modal").modal("hide");
 			}
 		});
 	}
@@ -1220,13 +1220,24 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type :"post",
 			success : function(result){
 				console.log("댓글 삭제 완료");
-				swal("삭제 완료", "등록된 댓글을 삭제하였습니다.", "success");
+				swal("삭제 완료", "등록된 댓글을 삭제하였습니다.", "success")
+				/* swal({
+					title: "삭제 완료",
+					text : "등록된 댓글을 삭제하였습니다.",
+					icon: "success",
+					button: "확인"
+				}) */
+				.then( function (isConfirm) {
+					if (!isConfirm) return;
+					location.reload();
+				});
 			},
 			error : function(){
-				swal("삭제 완료", "댓글삭제를 실패하였습니다..", "error");
-			},
-			complete : function(){
-				location.reload();
+				swal("삭제 완료", "댓글삭제를 실패하였습니다..", "error")
+				.then( function (isConfirm) {
+					if (!isConfirm) return;
+					location.reload();
+				});;
 			}
 		})
 	}
