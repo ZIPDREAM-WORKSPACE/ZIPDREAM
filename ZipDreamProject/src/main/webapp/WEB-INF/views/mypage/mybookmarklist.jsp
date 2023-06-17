@@ -8,13 +8,13 @@
 <style>
 .recentContent{
 	width: 100%;
-	height: 450px;
+	height: 550px;
 }
 .recentContent>div {
 	display: flex;
-	min-height: 400px;
+	min-height: 500px;
 	padding: 50px 10px 150px;
-	width: 1200px;
+	/* width: 1200px; */
 	/* width: 1110px; */
 	/* height: 100%; */
 	margin: 0px auto;
@@ -25,7 +25,7 @@
 }
 .imgStyle{
 	border: 1px solid lightgray;
-	object-fit: contain;
+	object-fit: cover;
 	width: 300px;
 	height: 200px;
 	border-radius: 5px 5px 2px 2px;
@@ -53,13 +53,9 @@
 .infoWrap{
 	width: 300px;
 	height: 400px;
-	margin-right: 30px;
-	margin-left: 30px;
+	margin-right: 10px;
+	margin-left: 10px;
 }
-/* #listWrap{
-	width: 100%;
-} */
-
 .scrollBar {
 	width: 1110px;
     height: 200px;
