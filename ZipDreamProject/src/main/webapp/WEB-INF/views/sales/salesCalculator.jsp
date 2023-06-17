@@ -37,6 +37,7 @@
 	height: 60px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
+    padding-left: 0px;
 }
 
 .sellHouseNavi>li {
