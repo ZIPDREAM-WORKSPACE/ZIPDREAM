@@ -100,33 +100,86 @@ public class MemberController {
 	   public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
 	         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 	         @RequestParam(value = "saveId", required = false) String saveId) {
-
-	      Member loginUser = memberService.loginMember(m);
-	    
-	      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
-	    	  	session.setAttribute("loginUser", loginUser);
-	    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
-				
-				if(saveId != null) { //아이디 저장이 체크 되었을때
-					cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
-				}else { // 아이디저장 체크하지 않았을때
-					cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
-				}
+		
+			int emailcheck = memberService.emailCheck(m.getUserId());
+			if(emailcheck == 1) {
+		      Member loginUser = memberService.loginMember(m);
+		      if (loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+		    	  	session.setAttribute("loginUser", loginUser);
+		    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
 					
-				cookie.setPath("/memberLogin");
-				resp.addCookie(cookie);
+					if(saveId != null) { //아이디 저장이 체크 되었을때
+						cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
+					}else { // 아이디저장 체크하지 않았을때
+						cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
+					}
+						
+					cookie.setPath("/memberLogin");
+					resp.addCookie(cookie);
+					
+			         if(loginUser.getUserLevel() == 3) {
+			            mv.setViewName("redirect:/admin/main");
+			         }else {            
+			            mv.setViewName("redirect:/");
+			         }
+						/* System.out.println(session.getAttribute("loginUser")); */
+		      } else { 
+
+					Map<String, String> alertMsg = new HashMap<String, String>();
+					alertMsg.put("message", "로그인에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
+					mv.addObject("errorMsg", "로그인 실패");
+					mv.setViewName("redirect:/");
+
+					 
+		         
+		      }
+			}else if(emailcheck >1) {
 				
-		         if(loginUser.getUserLevel() == 3) {
-		            mv.setViewName("redirect:/admin/main");
-		         }else {            
-		            mv.setViewName("redirect:/");
-		         }
-		         System.out.println(session.getAttribute("loginUser"));
-	      } else { // 성공
-	    	  mv.addObject("errorMsg", "로그인 실패");
-		      mv.setViewName("common/errorPage");
-	         
-	      }
+				boolean isEnrolled = false;
+
+				for(int i = 1; i<= emailcheck; i++) {
+					Map<String,String> map = new HashMap<String,String>();
+					
+					map.put("rowNum", i+"");
+					map.put("userId", m.getUserId());
+					
+					Member loginUser = memberService.loginCheckMember(map);
+					System.out.println(loginUser);
+					if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+						isEnrolled = true;
+						session.setAttribute("loginUser", loginUser);
+			    	  	Cookie cookie = new Cookie("saveId",loginUser.getUserId());
+						
+						if(saveId != null) { //아이디 저장이 체크 되었을때
+							cookie.setMaxAge(60 * 60 * 24 * 365);// 초단위지정(1년)
+						}else { // 아이디저장 체크하지 않았을때
+							cookie.setMaxAge(0); // 유효시간 0초 -> 생성되자마자 소멸
+						}
+							
+						cookie.setPath("/memberLogin");
+						resp.addCookie(cookie);
+				         if(loginUser.getUserLevel() == 3) {
+				            mv.setViewName("redirect:/admin/main");
+				         }else {            
+				            mv.setViewName("redirect:/");
+				         }
+						
+					}
+				}
+				if(! isEnrolled) { 
+
+					Map<String, String> alertMsg = new HashMap<String, String>();
+					alertMsg.put("message", "로그인에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
+					mv.addObject("errorMsg", "로그인 실패");
+					mv.setViewName("redirect:/");
+				 
+
+				}
+		    }
 	      return mv;  
 	   }
 	
@@ -153,16 +206,19 @@ public class MemberController {
 		System.out.println(m.getUserId());
 		
 		int result = memberService.insertMember(m);
-		
+		Map<String,String> alertMsg = new HashMap<String,String>();
 		String url = "";
 		if (result > 0) { // 성공시 - 메인페이지로
-			session.setAttribute("alertMsg", "회원가입");
+			alertMsg.put("message", "회원가입에 성공했습니다.");
+			alertMsg.put("type", "success");
 			url = "redirect:/";
 		} else { // 실패 - 에러페이지
-			model.addAttribute("errorMsg", "회원가입 실패");
-			url = "common/errorPage";
+			alertMsg.put("message", "회원가입에 실패했습니다.");
+			alertMsg.put("type", "error");
+			url = "redirect:/";
 		}
-
+		session.setAttribute("alertMsg", alertMsg);
+		
 		return url;
 	}
 	
@@ -170,7 +226,8 @@ public class MemberController {
 		@PostMapping("/bkinsert")
 		public String insertbkMember( 
 				Member m, HttpSession session, Model model,
-				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList){
+				 @RequestParam(value="imges", required=false) List<MultipartFile> imgList
+				 ){
 			String address = m.getAddress()+m.getAddr2()+m.getAddr3();
 		
 			m.setAddress(address);
@@ -178,11 +235,10 @@ public class MemberController {
 			String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 			String webPath = "resources/bkupfiles/";
 			String serverFolderPath = session.getServletContext().getRealPath(webPath);
-			
+			Map<String,String> alertMsg = new HashMap<String,String>();
 			// 암호화된 pwd를 m의 userPwd다시 대입
 			
 			m.setUserPwd(encPwd);
-			
 			int result =0;
 			
 			try {
@@ -195,17 +251,18 @@ public class MemberController {
 	
 			String url = "";
 		if(result >0) {
-			System.out.println("업로드 성공");
-			session.setAttribute("alertMsg", "회원가입");
+			alertMsg.put("message", "업로드를 성공했습니다.");
+			alertMsg.put("type", "success");
 			url = "redirect:/";
 			
+			
 		}else {
-			System.out.println("업로드 실패");
-			model.addAttribute("errorMsg", "회원가입 실패");
-			url = "common/errorPage";
+			alertMsg.put("message", "업로드를 실패했습니다.");
+			alertMsg.put("type", "error");
+			url = "redirect:/";
 			
 		}
-
+		session.setAttribute("alertMsg", alertMsg);
 		return url;
 		}
 
@@ -277,7 +334,7 @@ public class MemberController {
 		Map<String, String> map = new HashMap();
 		map.put("name", name);
 		map.put("phone", phone);
-		 Member result = memberService.searchId(map);
+		Member result = memberService.searchId(map);
 		return result;
 	}
 	
@@ -385,7 +442,6 @@ public class MemberController {
 		 
 		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
 
-		 
 		 int result = 0;
 		 if(bcryptPasswordEncoder.matches(paramMap.get("currentPw")+"", loginUser.getUserPwd())) {
 			 Member m = new Member();
@@ -393,9 +449,21 @@ public class MemberController {
 			 m.setUserPwd(newPw);
 			 
 			 result = memberService.updateMemberPwd(m);
-		 }
-		 	status.setComplete(); 
+			
+		 }else {
+			
+			 if(loginUser.getUserLevel()==1) {
 				
+				 return "redirect:/mypage/myInfo";
+			 }else {
+				
+				 return "redirect:/agent/mypage";
+			 }
+			
+			 
+		 }
+	
+		 	status.setComplete(); 
 		 
 			 
 	  return "redirect:/"; 
@@ -409,13 +477,96 @@ public class MemberController {
 	
 			return uslist;
 		}
-
+		
+		@PostMapping("/snslogin")
+		@ResponseBody
+		public String snslogin(Model model, Member m, HttpSession session, RedirectAttributes ra,
+		         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv) {
+		
+				int emailcheck = memberService.emailCheck(m.getUserId());
+				if(emailcheck == 1) {
+					
+					Member loginUser = memberService.loginMember(m);
+					System.out.println( bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd()));
+					if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+				
+						session.setAttribute("loginUser", loginUser);
+						
+					}else {
+						m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+						memberService.insertMember(m);
+						session.setAttribute("loginUser", m);
+					}
+					
+				}else if(emailcheck > 1) {
+					boolean isEnrolled = false;
+					
+					for(int i = 0; i<emailcheck; i++) {
+						Map<String,String> map = new HashMap<String,String>();
+						
+						map.put("rowNum", i+"");
+						map.put("userId", m.getUserId());
+						
+						Member loginUser = memberService.loginCheckMember(map);
+						
+						if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { 
+							isEnrolled = true;
+							session.setAttribute("loginUser", loginUser);
+							
+						}
+					}
+					
+					if(! isEnrolled) {
+						m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+						memberService.insertMember(m);
+						session.setAttribute("loginUser", m);
+					}
+				}else {
+					m.setUserPwd(bcryptPasswordEncoder.encode(m.getUserPwd()));
+					memberService.insertMember(m);
+					session.setAttribute("loginUser", m);
+				}
+		
+			
+			return "true";
+		}
 	  
-
-
-
+	@PostMapping("/deleteMember")
+	@ResponseBody
+	public int deleteMember(@RequestParam (value="userPwd2") String userPwd2,@ModelAttribute("loginUser") Member loginUser) {
+		int result = 0;
+		
+		String pwd = loginUser.getUserPwd();
+		int userNo = loginUser.getUserNo();
+		System.out.println(userPwd2 + ": "+pwd);
+		
+		if(bcryptPasswordEncoder.matches(userPwd2, pwd)) {
+			result= memberService.deleteMember(userNo); 
+		}
+		
+		return result;
+	}
+	
+	
+	@GetMapping("/sessionOut")
+	@ResponseBody
+	public void sessionOut(HttpSession session, SessionStatus status) {
+		 
+		status.setComplete(); // 세션 할일이 완료됨 -> 없앰 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
-
 
 
 

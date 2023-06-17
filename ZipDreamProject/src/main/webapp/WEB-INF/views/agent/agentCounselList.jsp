@@ -259,15 +259,13 @@
 
 			<!-- 상담 신청이 없을때 -->
 			
-			<!-- <div class="myRoomList">
+			<div class="myRoomList">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-					fill="currentColor" class="bi bi-exclamation-circle-fill"
-					viewBox="0 0 16 16">
-                    	<path
-						d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+					fill="currentColor" class="bi bi-exclamation-circle-fill"viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                 	</svg>
 				<span>등록된 게시글이 없습니다.</span>
-			</div> -->
+			</div>
 
 		</div>
 	</div>
@@ -287,7 +285,7 @@
 					<div class="modal-body" align="center">
 						<h3>매물상담 수락하기</h3>
 						<p>공인중개사님이 등록한 매물에 상담을 신청하셨습니다.</p>
-							<textarea rows="3" cols="80" class="reportContent" style="resize: none;"></textarea>
+							<textarea rows="3" cols="80" class="reportContent" style="resize: none; " readonly="readonly"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button onclick="applyCounsle();" class="apply btn btn-success" >수락하기</button>
@@ -300,7 +298,6 @@
     
     
     <jsp:include page="../../views/common/footer.jsp" />
-    <script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 </body>
 <script>
 	refUno = 0; 
@@ -327,12 +324,13 @@
 			success : function(result){
 				if(result >= 1){
 					console.log("신청상태 수락 완료");
-					alert("수락이 완료되었습니다");
+					swal("", "상담신청을 수락하였습니다.", "success");
 					$("#reportInsertModal").modal("hide");
 					console.log(refUno);
 					sendMessage5(method,refUno);
 				}else{
 					console.log("불가");
+					swal("", "수락여부를 다시 설정해주세요.", "error");
 				}
 			},
 			error : function(){
@@ -349,11 +347,14 @@
 			type : "POST",
 			success : function(result){
 				if(result == 1){
-				console.log("신청상태 거절 완료");
-				alert("신청 거절 완료");
-				$("#reportInsertModal").modal("hide");
+					console.log("신청상태 거절 완료");
+					swal("", "상담신청을 거절하였습니다.", "success");
+					$("#reportInsertModal").modal("hide");
+					
+					location.reload();
 				}else{
 					console.log("신청상태 거절 실패");
+					swal("", "수락여부를 다시 설정해주세요.", "error");
 				}
 			},
 			error :  function(){

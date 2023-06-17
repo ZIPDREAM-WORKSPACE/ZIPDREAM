@@ -105,14 +105,10 @@ public class MyPageController {
 	
 	@ResponseBody
 	@GetMapping("/recentRoomList")
-
 	public ArrayList<SellDetail> recentRoomList(@RequestParam(value="sellNoList") List<Integer> sellNoList){
 		
 	
 		ArrayList<SellDetail> recentRoomList = myroomSellService.recentRoomList(sellNoList);
-		
-		System.out.println(recentRoomList);
-
 		
 		return recentRoomList;
 		

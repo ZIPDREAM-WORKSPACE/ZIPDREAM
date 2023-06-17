@@ -55,7 +55,7 @@
 		SELECT SELL_NO, SELL_NAME, SELL_ADDRESS, SELL_PRICE, SELL_TYPE, CHANGE_NAME
 		FROM ATTACHMENT AT
 		RIGHT JOIN SELLDETAIL SD ON (SELL_NO = REF_SNO)
-		WHERE (FILE_LEVEL = 0 OR FILE_LEVEL IS NULL) 
+		WHERE (FILE_LEVEL = 0 OR FILE_LEVEL IS NULL) AND SD.STATUS = 'Y'
 		AND SELL_NO IN
 		<foreach collection="sellNoList" item="sellNo" open="(" close=")" separator=",">
 			#{sellNo}
@@ -101,6 +101,7 @@
 		SELECT * 
 		FROM USER_ROOM_SELL
 		WHERE REF_UNO = #{userNo}
+		ORDER BY USER_SR_NO DESC
 	</select>
 	
 	<delete id="myroomSellDelete">

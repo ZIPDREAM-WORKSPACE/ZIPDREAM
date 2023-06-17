@@ -418,7 +418,7 @@
 #noneList svg{
     margin-bottom: 20px;
 }
-* p{
+.appInfo p{
 	margin:7px!important;
 }
 
@@ -449,8 +449,6 @@
 					async: false,
 					success:function(result){
 					    mysaleList = result.replace("[","").replace("]","").split(",");
-						
-						console.log(mysaleList);
 					},
 					error:function(){
 						console.log("에러발생");
@@ -567,8 +565,8 @@
 				} else{
 					html += "<td><p class='not'>분양예정</p></td>";
 				}
-				html += "<td><p>" + value.HOUSE_SECD_NM + "</p></td>";
-				html += "<td><p>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
+				html += "<td><p style='margin:7px;'>" + value.HOUSE_SECD_NM + "</p></td>";
+				html += "<td><p style='margin:7px;'>"+value.HOUSE_DTL_SECD_NM + "</p></td>";
 				html += "<td><div class='appInfo'><p class='appInfoTitle'><a target='_blank' href='"+value.PBLANC_URL+"'>"+ value.HOUSE_NM + "</a></p>";
 				html += "<p class='appLocation'>" + value.HSSPLY_ADRES + "</p>";
 				
@@ -582,9 +580,9 @@
 				/* 추가 정보(가격,세대수,면적) 불러오기위해 함수 실행 */
 				var info = aptInfo(houseCode);
 				
-				html += "<td><p>" + info[0] + "</p></td>";
-				html += "<td><p>" + info[1] + "세대</p></td>";
-				html += "<td><p>" + info[2] + "m²</p></td>";
+				html += "<td><p style='margin:7px;'>" + info[0] + "</p></td>";
+				html += "<td><p style='margin:7px;'>" + info[1] + "세대</p></td>";
+				html += "<td><p style='margin:7px;'>" + info[2] + "m²</p></td>";
 				
 				let src = "https://ifh.cc/g/hqaYN5.png";
 	            
@@ -883,7 +881,6 @@
 	</script>
 	
 
-		<script src="<%=request.getContextPath()%>/resources/js/chat/noticeChat.js"></script>
 	<jsp:include page="../common/footer.jsp" />
 	
 </body>

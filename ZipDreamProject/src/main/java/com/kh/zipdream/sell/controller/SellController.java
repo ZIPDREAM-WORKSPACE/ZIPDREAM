@@ -82,7 +82,7 @@ public class SellController {
 			return "redirect:/agent/list";
 		}else {
 			System.out.println("업로드 실패");
-			return "main/main";
+			return "redirect:/sell/error";
 		}
 	}
 	
@@ -144,8 +144,8 @@ public class SellController {
 		List<SellDetail> sdList = sellService.selectSellList2(sellNo);
 		
 		model.addAttribute("sdList", sdList);
+	
 		for(int i = 0; i < sdList.size(); i++) {
-			
 			System.out.println("sdL"+i+" : "+sdList.get(i));
 		}
 		return sdList;
