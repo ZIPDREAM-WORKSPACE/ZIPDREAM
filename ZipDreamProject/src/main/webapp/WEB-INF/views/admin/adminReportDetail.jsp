@@ -18,7 +18,7 @@
 			</div>
 			<div class="item tTable">
 				<h3 style="padding:25px 0px 0px 25px;">대상자 피신고기록</h3>
-				<table class="rwd-table">
+				<table class="rwd-table" style="margin-top:20px;">
 					<tbody>
 						<tr>
 							<th>신고자</th>
@@ -41,7 +41,7 @@
 					</tbody>
 				</table>
 				<c:set var="url" value='detail?reportNo=${report.reportNo}&cpage='/>
-				<div id="pagingArea">
+				<div id="pagingArea" style="margin: 20px auto;">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ reportList.pi.currentPage eq 1 }">
