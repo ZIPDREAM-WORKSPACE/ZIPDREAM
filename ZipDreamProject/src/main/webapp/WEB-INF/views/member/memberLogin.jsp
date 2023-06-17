@@ -263,8 +263,6 @@
                      <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>
                 
-
-                <button type="submit" id="loginbtn">로그인</button><br><br>
                 
 
                 <button type="submit" id="loginbtn" class="btn btn-primary">로그인</button><br><br>
