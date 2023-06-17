@@ -12,12 +12,11 @@
 }
 .recentContent>div {
 	display: flex;
-	min-height: 400px;
+	min-height: 500px;
 	padding: 50px 10px 150px;
-	width: 1200px;
+	/* width: 1200px; */
 	/* width: 1110px; */
 	/* height: 100%; */
-
 	margin: 0px auto;
 	padding-right: 50px;
     padding-top: 20px;
@@ -26,7 +25,7 @@
 }
 .imgStyle{
 	border: 1px solid lightgray;
-	object-fit: contain;
+	object-fit: cover;
 	width: 300px;
 	height: 200px;
 	border-radius: 5px 5px 2px 2px;
@@ -54,13 +53,9 @@
 .infoWrap{
 	width: 300px;
 	height: 400px;
-	margin-right: 30px;
-	margin-left: 30px;
+	margin-right: 10px;
+	margin-left: 10px;
 }
-/* #listWrap{
-	width: 100%;
-} */
-
 .scrollBar {
 	width: 1110px;
     height: 450px;
@@ -161,7 +156,8 @@
 								} else{
 									element = document.getElementById("listWrap");
 									element.innerHTML += "<div class='emptyContent'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-x-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/></svg><p>찜한매물이 없습니다.</p></div>";
-                }
+								}
+							
 								  
 							},
 							error: function(result){
