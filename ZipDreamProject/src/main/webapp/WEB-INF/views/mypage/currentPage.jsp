@@ -8,7 +8,7 @@
 <style>
 .recentContent {
 	width: 100%;
-	/* height: 300px; */
+	height: 490px;
 }
 
 .recentContent>div {
