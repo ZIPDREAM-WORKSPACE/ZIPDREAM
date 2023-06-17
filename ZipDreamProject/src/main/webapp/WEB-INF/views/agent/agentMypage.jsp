@@ -7,7 +7,7 @@
 		height:930px;
 		border: 1px solid rgb(223, 223, 223);
 		margin: auto;
-		padding:60px;
+		padding:60px 80px 60px 60px;
 		margin-top:50px;
 		margin-bottom:50px;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
@@ -21,7 +21,7 @@
 
 	.myInfo_button{
 		position: absolute;
-		left:83.5%;
+		left:80.5%;
 		bottom:9.1%;
 	}
 	.delete_account{
@@ -203,7 +203,7 @@
 	    <label class="myInfo_title">전화번호</label><br>
 	    <input class="form-control" type="text" id="phone" name="phone" value="${m.phone}"  ><br>
 	    <label class="myInfo_title ">주소</label><br>
-	    <input class="form-control" type="text"  value="${m.address}" id="addr" name="address" style="width:470px">
+	    <input class="form-control" type="text"  value="${m.address}" id="addr" name="address" style="width:450px" readonly>
 	    <button class="btn btn-dark myInfo_button" type="button" data-toggle="modal" data-target="#address_modal">변경</button><br><br>
 	    </div>
 		<button type="submit" id="signchangebtn" class="btn  btn-outline-primary">변경하기</button>  
@@ -260,7 +260,7 @@
       <div class="modal-body">
        	<div class="form-group">                   
             <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="address" id="addr1" type="text" readonly="readonly" >
-                <button type="button" class="btn btn-default"  id="adsearch" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+                <button type="button" class="btn btn-outline-dark"  id="adsearch" onclick="execPostCode();" style="margin-bottom : 5px;"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
             </div>
             <div class="form-group">
                 <input class="form-control"  placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
@@ -270,7 +270,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="addConfirm" name="updateButton" data-dismiss="modal" aria-label="Close"  >변경</button>
+        <button type="button" class="btn btn-outline-dark" id="addConfirm" name="updateButton" data-dismiss="modal" aria-label="Close"  >변경</button>
       </div>
     </div>
   </div>
@@ -395,14 +395,14 @@ function checkPasswordValidity() {
            const docFrag = new DocumentFragment();
 
            if ([...files].length >= 4) {
-               alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+               swal("","이미지는 최대 3개까지 업로드가 가능합니다.","warning");
                return;
            }
 
            // 파일 타입 검사
            [...files].forEach(file => {
                if (!file.type.match("image/.*")) {
-               alert('이미지 파일만 업로드가 가능합니다.');
+               swal("","이미지 파일만 업로드가 가능합니다.","warning");
                return
                }
 
@@ -446,14 +446,14 @@ function checkPasswordValidity() {
                const docFrag = new DocumentFragment();
 
                if ([...files].length >= 4) {
-                   alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+            	   swal("","이미지는 최대 3개까지 업로드가 가능합니다.","warning");
                    return;
                }
 
                // 파일 타입 검사
                [...files].forEach(file => {
                    if (!file.type.match("image/.*")) {
-                   alert('이미지 파일만 업로드가 가능합니다.');
+                   swal("","이미지 파일만 업로드가 가능합니다.","warning");
                    return
                    }
 
@@ -496,14 +496,14 @@ function checkPasswordValidity() {
                    const docFrag = new DocumentFragment();
 
                    if ([...files].length >= 4) {
-                       alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                	   swal("","이미지는 최대 3개 까지 업로드가 가능합니다.","warning");
                        return;
                    }
 
                    // 파일 타입 검사
                    [...files].forEach(file => {
                        if (!file.type.match("image/.*")) {
-                       alert('이미지 파일만 업로드가 가능합니다.');
+                    	   swal("","이미지 파일만 업로드가 가능합니다.","warning");
                        return
                        }
 

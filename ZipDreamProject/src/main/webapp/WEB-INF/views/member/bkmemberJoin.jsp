@@ -432,14 +432,14 @@
             const docFrag = new DocumentFragment();
 
             if ([...files].length >= 2) {
-                alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+            	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                 return;
             }
 
             // 파일 타입 검사
             [...files].forEach(file => {
                 if (!file.type.match("image/.*")) {
-                alert('이미지 파일만 업로드가 가능합니다.');
+                	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                 return
                 }
 
@@ -483,14 +483,14 @@
                 const docFrag = new DocumentFragment();
 
                 if ([...files].length >= 2) {
-                    alert('이미지는 최대 1개 까지 업로드가 가능합니다.');
+                	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                     return;
                 }
 
                 // 파일 타입 검사
                 [...files].forEach(file => {
                     if (!file.type.match("image/.*")) {
-                    alert('이미지 파일만 업로드가 가능합니다.');
+                    	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                     return
                     }
 
@@ -533,14 +533,14 @@
                     const docFrag = new DocumentFragment();
 
                     if ([...files].length >= 4) {
-                        alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                    	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                         return;
                     }
 
                     // 파일 타입 검사
                     [...files].forEach(file => {
                         if (!file.type.match("image/.*")) {
-                        alert('이미지 파일만 업로드가 가능합니다.');
+                        	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                         return
                         }
 
@@ -594,7 +594,7 @@
                             ,dataType : "TEXT"    
                             ,async:false
                               ,success: function(data){
-                                 alert("인증번호를 전송완료.");
+                                 swal("","인증번호가 전송되었습니다.","success");
                                  verificationNumber = data;
                               },error : function(req,status,err){
                                   console.log(req);
@@ -627,9 +627,9 @@
                         $("#id-text").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailchecknumber").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailct").attr('disabled',true); 
-                        alert("인증번호가 일치합니다.");
+                        swal("","인증번호가 일치합니다.","success");
                       } else {
-                        alert("인증번호가 일치하지 않습니다.");
+                        swal("","인증번호가 일치하지 않습니다.","error");
                       } 
                         
                     }); 
@@ -687,10 +687,10 @@
                 	          
                 	          ,success: function(data){
                 	            if(data==1){
-                	               alert("이미 가입된 아이디 입니다.");
+                	               swal("","이미 가입된 아이디 입니다.","information");
                 	               $("#id-text").val("");
                 	            }else{
-                	               alert("사용가능한 아이디입니다");
+                	               swal("","사용가능한 아이디입니다.","success");
                 	               $("#emailCheck").css("display","none");
                 	               $("#emailcheck").css("display","block");
 

@@ -377,7 +377,7 @@ function ok(){
           ,dataType : "TEXT"    
           ,async:false
             ,success: function(data){
-               alert("인증번호를 전송완료.");
+               swal("","인증번호이 전송되었습니다.","success");
                verificationNumber = data;
             },error : function(req,status,err){
                 console.log(req);
@@ -401,9 +401,9 @@ function ok(){
       $("#id-text").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
       $("#emailchecknumber").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
       $("#emailct").attr('disabled',true); 
-      alert("인증번호가 일치합니다.");
+      swal("","인증번호가 일치합니다.","success");
     } else {
-      alert("인증번호가 일치하지 않습니다.");
+      swal("","인증번호가 일치하지 않습니다.","error");
     } 
       
   }); 
@@ -462,10 +462,10 @@ function ok(){
           
           ,success: function(data){
             if(data==0){
-               alert(".");
+            	swal("","이미 가입된 아이디 입니다.","information");
                $("#id-text").val("");
             }else{
-               alert("사용가능한 아이디입니다");
+               swal("","사용가능한 아이디입니다.","success");
                $("#emailCheck").css("display","none");
                $("#emailcheck").css("display","block");
 

@@ -233,10 +233,10 @@ function exitChatRoom(){
 			success : function(result){
 				// result == 1 나가기 성공
 				if(result == 1){
-					alert("채팅방 나가기에 성공했습니다.");
+					swal("","채팅방 나가기에 성공했습니다.","success");
 					location.href="<%=request.getContextPath()%>/admin/chat";
 				}else{
-					alert("채팅방 나가기에 실패했습니다.");
+					swal("","채팅방 나가기에 실패했습니다.","error");
 				}
 				// result == 0 실패 
 				
