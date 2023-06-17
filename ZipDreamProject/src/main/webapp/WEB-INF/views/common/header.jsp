@@ -176,15 +176,15 @@ position: absolute;
 		height:60px;
 		line-height:60px;
 		position: absolute;
-		background:white;
+		background:lightyellow;
 		top:150%;
 		right:10%;
-		border-radius: 30px;
-		border : 3px solid black;
+		border : 1px solid rgb(237, 237, 237);
 		z-index : 99;
 		 box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 		 text-align: center;
 		 padding:0px;
+		 cursor: pointer;
 		
 	}
 	.alarmImg{
@@ -194,13 +194,12 @@ position: absolute;
 </style>
 </head>
 <body>
-	<c:if test="${ not empty alertMsg }">
+<c:if test="${ not empty alertMsg }">
 		<script>
-			alert("서비스 요청 성공", '${alertMsg}');
+			swal("", '${alertMsg.message}','${alertMsg.type}');
 		</script>
 		<c:remove var="alertMsg" />
 	</c:if>
-
 	<div class="header">
 		<div class="header_inner">
 			<ul class="header_list">
@@ -237,9 +236,8 @@ position: absolute;
 		</div>
 		
 	</div>
-	
-	<script>
 
+	<script>
 	let currentURL = "<%=request.getRequestURI()%>";
 	let URL = "<%=request.getContextPath()%>/";
 	
@@ -259,7 +257,7 @@ position: absolute;
 							if(data == 1){
 								console.log("채팅방에서 나갔습니다");
 							}else{
-								alert("채팅방 나가기에 실패했습니다.");
+								console.log("채팅방 나가기에 실패했습니다.");
 							}
 							
 						},

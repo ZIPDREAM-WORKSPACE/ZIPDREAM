@@ -8,7 +8,7 @@
 <style>
 .recentContent{
 	width: 100%;
-	height: 550px;
+	height: 490px;
 }
 .recentContent>div {
 	display: flex;
@@ -58,7 +58,7 @@
 }
 .scrollBar {
 	width: 1110px;
-    height: 200px;
+    height: 450px;
 	overflow-x:scroll;
 	overflow-y: hidden;
 	margin-top: 10px;
