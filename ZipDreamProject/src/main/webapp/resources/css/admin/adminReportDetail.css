@@ -35,7 +35,6 @@
 	padding: 25px;
 	overflow: auto;
 	border-radius: 10px;
-	background-clip: content-box;
 	background-color: #F9F9F9;
 }
 

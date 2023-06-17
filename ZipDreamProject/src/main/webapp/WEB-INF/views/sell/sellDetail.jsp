@@ -846,9 +846,9 @@
 							</div>
 							<hr>
 							<div class="modalContent">
-								<img class="rig" src="https://ifh.cc/g/6BoQCw.jpg" width="150px"
-									style="border-radius: 50%;">
-								<div class="modalBody" align="left" style="border:1px solid black;">
+								<img class="rig" src="<%= request.getContextPath() %>/${attachment.filePath}/${attachment.changeName}" width="150px"
+									style="object-fit:cover;border-radius:10px;">
+								<div class="modalBody" align="left" style="border:1px solid black;padding:10px;">
 									<p id="seller_name">${seller.office }</p>
 									<p id="seller_address">소재지 : ${seller.address }</p>
 									<p id="seller_number">이름 : ${seller.userName }</p>
@@ -884,7 +884,7 @@
 					</div>
 					<div class="modal-body" align="center">
 						<h3>신고 내용 작성</h3>
-						<textarea rows="3" cols="80" class="reportContent" placeholder="내용을 작성해주세요."></textarea>
+						<textarea rows="10" cols="80" class="reportContent" placeholder="내용을 작성해주세요." style="resize:none;"></textarea>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success reportInsertBtn">등록하기</button>

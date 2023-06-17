@@ -122,7 +122,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="item result-select">
+			<div class="item result-select" style="box-shadow:none;background-color:#E5E5E5;">
 				<form id="report-result-update" action="<%= request.getContextPath() %>/admin/report/update" method="get">
 					<input type="hidden" name="reportNo" value="${report.reportNo }">
 					<select class="result-value" name="reportResult">
