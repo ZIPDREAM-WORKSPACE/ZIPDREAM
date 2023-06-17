@@ -65,22 +65,28 @@
 
 .sell_last {
 	display: flex;
-	justify-content: flex-start;
+    justify-content: space-between;
 }
 
-.sell_address, .seller_address {
+ .seller_address {
 	font-size: 1rem;
+	color: #6E7C7C;
+}
+.sell_address{
+	font-size: 1.5rem;
 	color: #6E7C7C;
 }
 
 .sell_like {
 	width: 12%;
+	margin-right : 50px;
 }
 
 #sellLike {
 	border: 1px solid black;
 	width:6rem;
 	height: 2.3rem;
+	
 }
 
 #sellLike>span {
@@ -519,10 +525,7 @@
 			 									<img id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
-			 							<%-- 
-			 							<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300"></td>
-                               			<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg2" width="300" height="300"></td>
-                                		<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg3" width="300" height="300"></td> --%>
+			 							
 			                        </tr>
 			                        <tr>
 			                        	<td>
@@ -549,11 +552,9 @@
 			 									<img id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
-			                        	<%-- <td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300"></td>
-                               			<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg2" width="300" height="300"></td>
-                                		<td><img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg3" width="300" height="300"></td> --%>
+			                        	
 			                        </tr>
-		                  <%-- </c:forEach> --%>	
+		            
  						</c:if>	
  						<c:if test="${empty sd.imgList}" >
  							<tr><td>등록된 이미지가 없습니다.</td></tr>
@@ -561,25 +562,81 @@
                         
                     </table>
                 </div>
-<!--                 <div class="picture_two" style="display: none;">
+<%--                  <div class="picture_two" style="display: none;">
                     <table>
                         <tr>
-                            <td><img id="contentImg7" width="300" height="300"></td>
-                            <td><img id="contentImg8" width="300" height="300"></td>
-                            <td><img id="contentImg9" width="300" height="300"></td>
-                            <td><img id="contentImg10" width="300" height="300"></td>
+                        	<td>
+								<c:if test="${!empty sd.imgList[7].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[7].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[8].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[8].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[9].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[9].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[10].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[10].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+                            
                         </tr>
                         <tr>
-                            <td><img id="contentImg11" width="300" height="300"></td>
-                            <td><img id="contentImg12" width="300" height="300"></td>
-                            <td><img id="contentImg13" width="300" height="300"></td>
-                            <td><img id="contentImg14" width="300" height="300"></td>
-        
+                        	<td>
+								<c:if test="${!empty sd.imgList[11].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[11].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[12].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[12].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[13].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[13].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${!empty sd.imgList[14].changeName }">
+									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+								</c:if>
+								<c:if test="${empty sd.imgList[14].changeName }">
+									<img id="contentImg1" width="300" height="300">
+								</c:if>
+							</td>
                         </tr>
                     </table>
-                </div> -->
+                </div> --%>
             </div>
-        <!--     <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50"> -->
+            <!-- <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50"> -->
         </div>
     </div>
 
@@ -749,7 +806,7 @@
 	
 	<div class="content10 content board margin">
 		<hr>
-	
+
 	</div>
 		<div class="content content11 margin" id="writer">
 				<img src="https://ifh.cc/g/HHdrA0.png" width="40px"> <span

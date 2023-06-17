@@ -82,7 +82,7 @@ public class SellController {
 			return "redirect:/agent/list";
 		}else {
 			System.out.println("업로드 실패");
-			return "main/main";
+			return "redirect:/sell/error";
 		}
 	}
 	

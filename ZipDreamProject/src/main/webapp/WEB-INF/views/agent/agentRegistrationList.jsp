@@ -123,7 +123,6 @@
 						<th id="sellType">매물타입</th>
 						<th id="sellName">매물이름(상가명, 아파트명)</th>
 						<th id="date">작성날짜</th>
-						<th id="count">찜 횟수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -134,7 +133,6 @@
 										<td>${sell.sellType}</td>
 										<td>${sell.sellName}</td>
 										<td>${sell.createDate} </td>
-										<td>22</td>
 									</tr>
 						</c:forEach>
 					</c:if>

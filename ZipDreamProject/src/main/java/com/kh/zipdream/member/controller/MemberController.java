@@ -531,7 +531,6 @@ public class MemberController {
 			return "true";
 		}
 	  
-
 	@PostMapping("/deleteMember")
 	@ResponseBody
 	public int deleteMember(@RequestParam (value="userPwd2") String userPwd2,@ModelAttribute("loginUser") Member loginUser) {
@@ -568,12 +567,6 @@ public class MemberController {
 	
 	
 }
-
-
-
-
-
-
 
 
 

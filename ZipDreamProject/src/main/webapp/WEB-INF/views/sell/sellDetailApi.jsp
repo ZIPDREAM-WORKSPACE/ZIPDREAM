@@ -104,7 +104,7 @@
 		margin-top:80px;
 	}
 	/*주변정보*/
-	.btn-group, .con2Text1, .con2Text2{
+	.other-group, .con2Text1, .con2Text2{
 	    display: flex;
 	    justify-content: center;
 	}
@@ -353,7 +353,7 @@
         <img src="https://ifh.cc/g/RorFkp.png" width="50px">
         <span class="othier_info">[주변정보]</span>
         <hr class="hr">
-        <div class="btn-group">
+        <div class="other-group">
             <button class="market button">
                 <img src="https://ifh.cc/g/XXq5Xh.png" width="34px">
                 <span>편의시설</span>
