@@ -18,7 +18,7 @@
 			</div>
 			<div class="item tTable">
 				<h3 style="padding:25px 0px 0px 25px;">대상자 피신고기록</h3>
-				<table class="rwd-table">
+				<table class="rwd-table" style="margin-top:20px;">
 					<tbody>
 						<tr>
 							<th>신고자</th>
@@ -33,7 +33,7 @@
 								<td>${report.rname }</td>
 								<td>${report.tname }</td>
 								<td>${fn:substring(report.reportContent,0,6) }</td>
-								<td>${report.reportType }</td>
+								<td>${report.reportType == 1 ? "이용자" : "허위매물" }</td>
 								<td>${report.reportStatus }</td>
 								<td>${report.reportDate }</td>
 							</tr>
@@ -41,7 +41,7 @@
 					</tbody>
 				</table>
 				<c:set var="url" value='detail?reportNo=${report.reportNo}&cpage='/>
-				<div id="pagingArea">
+				<div id="pagingArea" style="margin: 20px auto;">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ reportList.pi.currentPage eq 1 }">
@@ -122,7 +122,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="item result-select">
+			<div class="item result-select" style="box-shadow:none;background-color:#E5E5E5;">
 				<form id="report-result-update" action="<%= request.getContextPath() %>/admin/report/update" method="get">
 					<input type="hidden" name="reportNo" value="${report.reportNo }">
 					<select class="result-value" name="reportResult">

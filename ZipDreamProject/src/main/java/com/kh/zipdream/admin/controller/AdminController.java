@@ -54,6 +54,7 @@ public class AdminController {
 	@Autowired
 	private JavaMailSenderImpl mailSender;
 	
+//  메인페이지 이동
 	@GetMapping("/main")
 	public String main(Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -75,6 +76,7 @@ public class AdminController {
 		return "admin/adminMain";
 	}
 	
+//	공지사항 페이지 이동
 	@GetMapping("/notice")
 	public String notice(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -85,12 +87,13 @@ public class AdminController {
 		return "admin/adminNotice";
 	}
 	
-
+//  공지사항 등록 페이지 이동
 	@GetMapping("/notice/enrollForm")
 	public String noticeEnrollForm() {
 		return "admin/adminNoticeEnrollForm";
 	}
 	
+//	공지사항 등록
 	@PostMapping("/notice/enroll")
 	public String noticeEnroll(NoticeBoard nb, RedirectAttributes ra) {
 		
@@ -115,6 +118,7 @@ public class AdminController {
 		return "redirect:/admin/notice";
 	}
 	
+//	공지사항 수정 페이지 이동
 	@GetMapping("/notice/detail")
 	public String noticeDetail(Model model,
 							   @RequestParam(value="boardNo", required=false, defaultValue="0") int boardNo) {
@@ -124,6 +128,7 @@ public class AdminController {
 		return "admin/adminNoticeDetail";
 	}
 	
+//	공지사항 삭제
 	@GetMapping("/notice/delete")
 	public String noticeDelte(@RequestParam(value="boardNo", required=false, defaultValue="0") int boardNo,
 							  RedirectAttributes ra) {
@@ -144,6 +149,7 @@ public class AdminController {
 		return "redirect:/admin/notice";
 	}
 	
+//	공지사항 리스트 가져오기
 	@ResponseBody
 	@GetMapping("/noticeList")
 	public Map<String, Object> notice(Model model) {
@@ -153,6 +159,7 @@ public class AdminController {
 		return map;
 	}
 	
+//	회원관리 페이지 이동
 	@GetMapping("/user")
 	public String user(Model model,
 					   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
@@ -172,6 +179,7 @@ public class AdminController {
 		return "admin/adminUser";
 	}
 	
+//	신고 리스트 가져오기
 	@GetMapping("/getReportList")
 	@ResponseBody
 	public JSONObject getReportList(int userNo, int cPage, int type) {
@@ -184,6 +192,7 @@ public class AdminController {
 		return result;
 	}
 	
+//	쿠폰 리스트 가져오기
 	@GetMapping("/getCouponList")
 	@ResponseBody
 	public JSONObject getCouponList(int userNo, int cPage) {
@@ -193,6 +202,7 @@ public class AdminController {
 		return result;
 	}
 	
+//	회원 상태 변경
 	@GetMapping("/changeMemberStatus")
 	public String changeMemberStatus(int userNo,String status,RedirectAttributes ra) {
 		Member m = new Member();
@@ -214,6 +224,7 @@ public class AdminController {
 		return "redirect:/admin/user";
 	}
 	
+//	신고관리 페이지 이동
 	@GetMapping("/report")
 	public String report(Model model,
 						@RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -225,6 +236,7 @@ public class AdminController {
 		return "admin/adminReport";
 	}
 	
+//	신고 상세 페이지 이동
 	@GetMapping("/report/detail")
 	public String reportDetail(Model model,
 							   @RequestParam(value="reportNo", required=false, defaultValue="0") int reportNo,
@@ -247,6 +259,7 @@ public class AdminController {
 		return "admin/adminReportDetail";
 	}
 	
+//	신고 처리
 	@GetMapping("/report/update")
 	public String reportUpdate(Model model,Report report,
 								RedirectAttributes ra) {
@@ -267,6 +280,7 @@ public class AdminController {
 		return "redirect:/admin/report";
 	}
 	
+//	채팅 페이지 이동
 	@GetMapping("/chat")
 	public String chat(Model model,
 						 @RequestParam(value="cpage", required=false, defaultValue="1") int cp
@@ -280,7 +294,7 @@ public class AdminController {
 		return "admin/adminChat";
 	}
 	
-
+//	채팅방 이동
 	@GetMapping("/chat/room/{chatRoomNo}")
 	public  String selectChatMessage(
 				@ModelAttribute("loginUser") Member loginUser,
@@ -320,6 +334,7 @@ public class AdminController {
 		}
 	}
 
+//	쿠폰 관리 페이지 이동
 	@GetMapping("/event")
 	public String event(Model model,
 					    @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
@@ -342,6 +357,7 @@ public class AdminController {
 
 	}
 	
+//	쿠폰 등록
 	@PostMapping("/event/insert")
 	public String eventInsert(Model model,
 							  @RequestParam(value="images", required=false) MultipartFile img,
@@ -372,6 +388,7 @@ public class AdminController {
 		return "redirect:/admin/event";
 	}
 	
+//	쿠폰 보내기
 	@GetMapping("/event/couponToUser")
 	public String couponToUser(@RequestParam(value="couponNo", required=false) int couponNo,
 							   @RequestParam(value="userNo", required=false) int[] userNo,
@@ -402,6 +419,7 @@ public class AdminController {
 		return "redirect:/admin/event";
 	}
 	
+//	공인중개사 승인 페이지 이동
 	@GetMapping("/bkmember")
 	public String bkMember(Model model,
 						   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
@@ -418,6 +436,7 @@ public class AdminController {
 		return "admin/adminBkMember";
 	}
 	
+//	공인중개사 승인 상세 페이지 이동
 	@GetMapping("/bkmember/detail")
 	public String bkMemberDetail (Model model, @RequestParam(value="userNo") int userNo) {
 		
@@ -441,6 +460,7 @@ public class AdminController {
 		return result;
 	}
 	
+//	공인중개사 승인 처리
 	@GetMapping("/bkAccept")
 	@ResponseBody
 	public int bkAccept(int userNo, String answer, String userId)throws MessagingException {
@@ -471,6 +491,7 @@ public class AdminController {
 		return result;
 	}
 	
+//	매물 관리 페이지 이동
 	@GetMapping("/selldetail")
 	public String sellDetail(Model model,
 			   @RequestParam(value="cpage", required=false, defaultValue="1") int cp,
@@ -488,6 +509,7 @@ public class AdminController {
 		return "admin/adminSellDetail";
 	}
 	
+//	매물 삭제
 	@GetMapping("/selldetail/del")
 	public String deleteSellDetail(@RequestParam(value="sellNo") int sellNo,
 									RedirectAttributes ra) {

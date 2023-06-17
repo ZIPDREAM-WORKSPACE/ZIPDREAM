@@ -14,7 +14,6 @@
     .wrap{
         width:1500px;
         height:1500px;
-        /* margin : auto; */
     }
   
     .wrap>div {
@@ -31,14 +30,11 @@
     }
 
     .login1{
-    	position: absolute;
+    	position: relative;
         box-sizing: border-box;
-        position: absolute;
         width: 680px;
         height: 1450px;
-        right: 620px;
-        
-        margin-top: 20px;
+        margin: 30px auto;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -127,7 +123,6 @@
         width: 100%;
         height:  100%;
         object-fit: cover;
-        margin-top: 25px;
     }
 
     #license{
@@ -190,13 +185,22 @@
 
     #emailcheck{
         position: absolute;
-        width: 100px;
+        width: 120px;
         height: 45px;
         left: 450px;
-        top: 720px;
         background-color: #4C69A2;
         color: white;
         font-size: 12px;
+        top: 726px;
+    }
+    
+    #emailCheck{
+    	position: absolute;
+	    width: 120px;
+	    height: 45px;
+	    left: 450px;
+	    background-color: #4C69A2;
+	    color: white;
     }
 
     #id{
@@ -213,22 +217,15 @@
 
     #ok{
         position: absolute;
-        width: 100px;
-        height: 47px;
+        width: 120px;
+	    height: 45px;
         left: 450px;
-        top: 775px;
+        top: 780px;
         background-color: #4C69A2;
         color: white;
     }
     
-    #emailCheck{
-    	position: absolute;
-	    width: 100px;
-	    height: 45px;
-	    left: 450px;
-	    background-color: #4C69A2;
-	    color: white;
-    }
+    
 
     #password{
         position: absolute;
@@ -289,6 +286,10 @@
     li{
         list-style-type: none;
     }
+    
+    .licenseImg{
+    	overflow:hidden;
+    }
 </style>
 <body>
 <jsp:include page="../common/header.jsp" />
@@ -317,21 +318,25 @@
 				</div><br><br><br><br><br>
 
                 <h5 id="license">사업자 등록증 등록</h5>
+
                 <input type="file" class="real-upload form-control" accept="images/*"   style="display: none;" name="imges">
                 <div class="licensebox" ></div>
+
                     
          
 
                   
                 <h5 id="license1-1">중개등록증 등록</h5>
+
                 <input type="file" class="real-upload1 form-control" accept="images/*"   style="display: none;" name="imges">
                 <div class="licensebox1-1"></div>
+
                 
 
 
                 <h5 id="license1-2">증명사진 등록</h5>
                 <input type="file" class="real-upload3" accept="images/*"   style="display: none;" name="imges">
-                <div class="licensebox1-2" ></div> 
+                <div class="licensebox1-2 licenseImg" ></div> 
                     
                 
             

@@ -7,7 +7,6 @@
 		
  // 매물 찜 알림 함수
  function sendMessage1(hu, hc, uno, time, title){
-		console.log("이벤트메세지2");
  		 const houseMessage = {
  					"hsUrl" : hu,
 		 			"houseCode" : hc,
@@ -23,7 +22,6 @@
  
   // 신고 알림 함수
  function sendMessage2(reportContent,reportDate,refRuno,reportStatus,reportResult,reportType){
-		console.log("이벤트메세지3");
  		
  		 const reportMessage = {
  					"reportContent" : reportContent,
@@ -40,7 +38,6 @@
  }
   // 이벤트 알림 함수
  function sendMessage3(couponContent,couponDate,couponTitle,couponUserNo){
-		console.log("이벤트메세지5");
  		
  		 const eventMessage = {
  					"couponContent" : couponContent,
@@ -56,7 +53,6 @@
  
    // 공인중개사 매물 매칭 알림 함수
  function sendMessage4(refUno,refRuno,dealType){
-		console.log("이벤트메세지6");
  		
  		 const requestMessage = {
 		 			"dealType" : dealType,
@@ -71,7 +67,6 @@
 
    // 공인중개사 상담 매칭 알림 함수
  function sendMessage5(method,refUno){
-		console.log("이벤트메세지0");
  		
  		 const counselMessage = {
 		 			"counsleMethod" : method,
@@ -87,7 +82,6 @@
  
      // 공인중개사 매물 신청 알림 함수
  function sendMessage6(refRuno,dealType){
-		console.log("그만하고싶다22");
  		
  		 const requestAgentMessage = {
 		 			"refRuno":refRuno,
@@ -100,7 +94,6 @@
  
     // 공인중개사 상담 신청 알림 함수
  function sendMessage7(counsleMethod,refTuno,refUno){
-		console.log("그만하고싶다");
  		
  		 const counsleAgentMessage = {
 		 			"refTuno":refTuno,
@@ -114,12 +107,10 @@
  }
 		
 function addEventMessage(refUno){
-	console.log("이벤트메세지");
 
  houseSock.onmessage = function(e){
 
  	const houseMessage = JSON.parse(e.data); 
- 	console.log(houseMessage);
  	
  
  	
@@ -134,9 +125,11 @@ function addEventMessage(refUno){
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
  
+ 
  		td1.innerHTML = houseMessage.title +" 분양 정보";
  		td2.innerHTML = "관심 분양에 등록했습니다."
  		td3.innerHTML = currentTime();
+ 		
  	
  		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
@@ -177,26 +170,20 @@ function clickLink(url){
                 td2.classList.add("content");
                 const td3 = document.createElement("td");
                 td3.classList.add("time");
+                const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 				td4.classList.add("checkNotice");
 
-                if (reportMessage.reportType == 2 && reportMessage.dealType==null) {
-                    td1.innerHTML = "허위매물 신고"
-
-                    
-                        td2.innerHTML = "신고하신 허위매물이 " + reportMessage.reportResult;
-
-                 
-                    td3.innerHTML =  currentTime();
-                    tr1.append(td1, td2, td3);
-                } else {
-                    td1.innerHTML = "회원 신고"
-
-                 
-                        td2.innerHTML = "신고하신 회원 신고가 " + reportMessage.reportResult;
-
-                    td3.innerHTML = currentTime();
-                    tr1.append(td1, td2, td3);
-                }
-
+	                if (reportMessage.reportType == 2 && reportMessage.dealType==null) {
+	                    td1.innerHTML = "허위매물 신고"
+	                    td2.innerHTML = "신고하신 허위매물이 " + reportMessage.reportResult;
+	                } else {
+	                    td1.innerHTML = "회원 신고"
+	                    td2.innerHTML = "신고하신 회원 신고가 " + reportMessage.reportResult;
+	                }
+				td3.innerHTML =  currentTime();
+                td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
 
                 const display = document.getElementsByClassName("noticeThead")[0];
 
@@ -216,7 +203,6 @@ function clickLink(url){
  houseSock2.onmessage = function(e){
  	
  	const eventMessage = JSON.parse(e.data); // JSON-> JS Object
- 	console.log(eventMessage);
 	if(refUno == eventMessage.userNo && eventMessage.title == null && eventMessage.couponContent != null){
  
  	
@@ -228,13 +214,15 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
- 	
- 	
+ 	 const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 	td4.classList.add("checkNotice");
  	
  	 	td1.innerHTML = eventMessage.couponTitle;
  	 	td2.innerHTML = eventMessage.couponContent;
  		td3.innerHTML = currentTime();
- 	 	tr1.append(td1, td2,td3);
+ 		   td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
  	 	
  	
  	const display = document.getElementsByClassName("noticeThead")[0];
@@ -267,11 +255,14 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
+ 	 const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 				td4.classList.add("checkNotice");
  		td1.innerHTML = "매물";
  		td2.innerHTML = requestMessage.dealType+" 타입의 매물이 공인중개사와 매칭되었습니다.";
  		td3.innerHTML = currentTime();
- 	
- 		tr1.append(td1, td2,td3);
+ 	   td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
  	display.prepend(tr1); 
@@ -288,7 +279,6 @@ function clickLink(url){
  }
  
  function addEventMessage5(refUno){
-	console.log("이벤트메세지8");
 
  houseSock4.onmessage = function(e){
 
@@ -305,11 +295,14 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
+ 	 const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 				td4.classList.add("checkNotice");
  		td1.innerHTML = "상담";
  		td2.innerHTML = "신청하신 "+ (counselMessage.counsleMethod ==1 ? "대면" : "비대면") +"상담이 공인중개사와 매칭되었습니다.";
  		td3.innerHTML = currentTime();
- 	
- 		tr1.append(td1, td2,td3);
+ 	   td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
  	display.prepend(tr1); 
@@ -319,7 +312,6 @@ function clickLink(url){
  }
  
   function addEventMessage6(refUno){
-	console.log("살려주세요");
 
  houseSock5.onmessage = function(e){
 
@@ -336,11 +328,14 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
+ 	 const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 				td4.classList.add("checkNotice");
  		td1.innerHTML = "매물";
  		td2.innerHTML = requestAgentMessage.dealType +" 타입의 매물 신청이 들어왔습니다.";
  		td3.innerHTML = currentTime();
- 	
- 		tr1.append(td1, td2,td3);
+ 	   td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
  	display.prepend(tr1); 
@@ -350,7 +345,6 @@ function clickLink(url){
  }
   
  function addEventMessage7(refUno){
-	console.log("살려주세요");
 
  houseSock6.onmessage = function(e){
 
@@ -367,12 +361,15 @@ function clickLink(url){
  	td2.classList.add("content");
  	const td3 = document.createElement("td");
  	td3.classList.add("time");
+ 	 const td4 = document.createElement("td");
+ 				td4.classList.add("check");
+ 				td4.classList.add("checkNotice");
  		td1.innerHTML = "상담";
  		td2.innerHTML = (counsleAgentMessage.counsleMethod ==1 ? "대면 " : "비대면 ") +"상담 요청이 들어왔습니다.";
  		td3.innerHTML = currentTime();
- 		
+ 		   td4.innerHTML = "New";
+                tr1.append(td1, td2, td3,td4);
  	
- 		tr1.append(td1, td2,td3);
  		const display = document.getElementsByClassName("noticeThead")[0];
  	
  	display.prepend(tr1); 
@@ -412,16 +409,25 @@ function clickLink(url){
   function createNotice(){
 		 
 		 const div1 = document.createElement("div");
-		 const img1 = document.createElement("img");
-		 img1.classList.add("alarmImg");
-		 img1.setAttribute("src","https://ifh.cc/g/AaFKr9.png");
+		 var img = document.createElement('img'); 
+    img.src = 'https://ifh.cc/g/LMAgCc.png'; 
+		 img.classList.add("alarmImg");
 		 		div1.classList.add("notice1");
-		 		div1.append(img1);
 		 		div1.innerHTML= "새로운 알림이 도착했습니다.";
+		 		div1.appendChild(img);
 		 		const header1 = document.getElementsByClassName("header")[0];
 		 		header1.append(div1);
-		 		   $( '.notice1' ).fadeOut( 3000, 'swing' );
-		 			 
+		 		  
+		 		   setTimeout(function() {
+ 					 $( '.notice1' ).fadeOut( 2000, 'linear' );
+						}, 3000);
+		 			 setTimeout(function() {
+ 						div1.remove();
+						}, 6000);
+						
+						 $( '.notice1' ).click(function(){
+						 	location.href='http://localhost:8006/zipdream/notice/manage';
+						 });
 		 };
 
  function currentTime() {
