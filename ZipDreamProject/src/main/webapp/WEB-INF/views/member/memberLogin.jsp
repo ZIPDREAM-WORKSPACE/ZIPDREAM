@@ -263,7 +263,12 @@
                      <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>
                 
+
+                <button type="submit" id="loginbtn">로그인</button><br><br>
+                
+
                 <button type="submit" id="loginbtn" class="btn btn-primary">로그인</button><br><br>
+
                 
                 <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
 
@@ -278,6 +283,7 @@
        
     </div>
 <script>
+
 //아이디 찾기
 $(function(){
 	//아이디 찾기
@@ -387,6 +393,24 @@ window.addEventListener('load', function() {
         document.getElementsByName("saveId")[0].checked = true;
     }
 });
+
+document.getElementById("emailsamecheck").addEventListener("click", function() {
+	 let inputNumber = $("#emailchecknumber").val();
+
+// 인증번호를 받은 후 이 변수에 해당 인증번호를 할당해야 합니다.
+
+if (inputNumber === verificationNumber && verificationNumber != "") {
+  
+  $("#emailsamecheck").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
+  /* $("#emailct").attr('disabled',true); */ 
+  alert("인증번호가 일치합니다.");
+} else {
+  alert("인증번호가 일치하지 않습니다.");
+} 
+  
+}); 
+}); 
+
 </script>
 
 
@@ -404,7 +428,7 @@ window.addEventListener('load', function() {
                     success: function (response) {
                        let accessToken = Kakao.Auth.getAccessToken();
                        Kakao.Auth.setAccessToken(accessToken);
-                    	console.log(accessToken);
+                       console.log(accessToken);
                        console.log(response);
                        console.log(response.id);
                        console.log(response.properties.nickname);

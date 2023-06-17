@@ -33,7 +33,7 @@
 								<td>${report.rname }</td>
 								<td>${report.tname }</td>
 								<td>${fn:substring(report.reportContent,0,6) }</td>
-								<td>${report.reportType }</td>
+								<td>${report.reportType == 1 ? "이용자" : "허위매물" }</td>
 								<td>${report.reportStatus }</td>
 								<td>${report.reportDate }</td>
 							</tr>
