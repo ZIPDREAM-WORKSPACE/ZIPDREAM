@@ -82,8 +82,11 @@ public class SellController {
 			
 			return "redirect:/agent/list";
 		}else {
-			System.out.println("업로드 실패");
-			return "redirect:/sell/error";
+			Map<String, String> alertMsg = new HashMap();
+			alertMsg.put("message", "업로드에 실패했습니다. 다시 시도해주세요");
+			alertMsg.put("type", "error");
+			session.setAttribute("alertMsg", alertMsg);
+			return "redirect:/sell/insert";
 		}
 	}
 	
