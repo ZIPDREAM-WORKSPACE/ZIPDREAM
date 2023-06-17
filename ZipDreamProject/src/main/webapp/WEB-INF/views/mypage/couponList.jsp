@@ -359,6 +359,7 @@
 													button:"확인"
 												}).then(function(){
 													location.href = "<%=request.getContextPath()%>/mypage/couponlist";
+													$(".agentId").val("");
 												})
 											},
 											error:function(){
@@ -367,6 +368,7 @@
 										});
 									}else{
 										swal("", "아이디를 잘못 입력하셨습니다.", "error");
+										$(".agentId").val("");
 									}
 								},
 								error:function(){
