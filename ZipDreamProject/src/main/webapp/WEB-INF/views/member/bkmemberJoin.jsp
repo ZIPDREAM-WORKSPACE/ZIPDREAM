@@ -287,7 +287,7 @@
         object-fit: cover;
     }
 
-    li{
+   .licensebox li, .licensebox1-1 li ,.licensebox1-2 li{
         list-style-type: none;
         width:100%;
         height:100%;
