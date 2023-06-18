@@ -104,7 +104,7 @@ $(".deleteChat").click(function(){
 		 deleteRoom(checkedList[i].value);
 		 
 	 }
-	 alert("채팅방을 삭제했습니다.");
+	 swal("","채팅방을 삭제했습니다.","success");
 });
 
 
@@ -130,7 +130,7 @@ function deleteRoom(chatRoomNo){
 				
 				location.href="<%=request.getContextPath()%>/admin/chat";
 			}else{
-				alert("채팅방 삭제가 실패했습니다.");
+				swal("","채팅방 삭제가 실패했습니다.","error")
 			}
 			// result == 0 실패 
 			

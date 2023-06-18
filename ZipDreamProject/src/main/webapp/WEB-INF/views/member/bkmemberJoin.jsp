@@ -118,11 +118,13 @@
         top: 420px;
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
+        overflow:hidden;
     }
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
         width: 100%;
         height:  100%;
         object-fit: cover;
+         margin-top: 0px;
     }
 
     #license{
@@ -139,6 +141,7 @@
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
         margin-left: 165px;
+         overflow:hidden;
     }
 
     #license1-1{
@@ -157,6 +160,7 @@
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
         margin-left: 165px;
+        overflow: hidden;
     }
 
     #license1-2{
@@ -283,13 +287,15 @@
         object-fit: cover;
     }
 
-    li{
+   .licensebox li, .licensebox1-1 li ,.licensebox1-2 li{
         list-style-type: none;
+        width:100%;
+        height:100%;
     }
     
-    .licenseImg{
+  /*   .licenseImg{
     	overflow:hidden;
-    }
+    } */
 </style>
 <body>
 <jsp:include page="../common/header.jsp" />
@@ -430,14 +436,14 @@
             const docFrag = new DocumentFragment();
 
             if ([...files].length >= 2) {
-                alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+            	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                 return;
             }
 
             // 파일 타입 검사
             [...files].forEach(file => {
                 if (!file.type.match("image/.*")) {
-                alert('이미지 파일만 업로드가 가능합니다.');
+                	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                 return
                 }
 
@@ -481,14 +487,14 @@
                 const docFrag = new DocumentFragment();
 
                 if ([...files].length >= 2) {
-                    alert('이미지는 최대 1개 까지 업로드가 가능합니다.');
+                	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                     return;
                 }
 
                 // 파일 타입 검사
                 [...files].forEach(file => {
                     if (!file.type.match("image/.*")) {
-                    alert('이미지 파일만 업로드가 가능합니다.');
+                    	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                     return
                     }
 
@@ -531,14 +537,14 @@
                     const docFrag = new DocumentFragment();
 
                     if ([...files].length >= 4) {
-                        alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                    	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                         return;
                     }
 
                     // 파일 타입 검사
                     [...files].forEach(file => {
                         if (!file.type.match("image/.*")) {
-                        alert('이미지 파일만 업로드가 가능합니다.');
+                        	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                         return
                         }
 
@@ -592,7 +598,7 @@
                             ,dataType : "TEXT"    
                             ,async:false
                               ,success: function(data){
-                                 alert("인증번호를 전송완료.");
+                                 swal("","인증번호가 전송되었습니다.","success");
                                  verificationNumber = data;
                               },error : function(req,status,err){
                                   console.log(req);
@@ -600,13 +606,6 @@
                           });//ajax
                       });//mailCheck 
                       
-                      
-                      //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
-                      
-                       /* document.getElementById("emailcheck").addEventListener("click", function() {
-                      document.getElementById("emailchecknumber").style.display = "block";
-                      document.getElementById("ok").style.display = "block";
-                    });  */
                       
                       //인증번호 유효성 검사
                       document.getElementById("ok").addEventListener("click", function() {
@@ -625,9 +624,9 @@
                         $("#id-text").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailchecknumber").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailct").attr('disabled',true); 
-                        alert("인증번호가 일치합니다.");
+                        swal("","인증번호가 일치합니다.","success");
                       } else {
-                        alert("인증번호가 일치하지 않습니다.");
+                        swal("","인증번호가 일치하지 않습니다.","error");
                       } 
                         
                     }); 
@@ -675,30 +674,41 @@
                            }).open();
                   };
                   
-                  $("#emailCheck").on("click",function(){
-                	     let email = document.getElementById("emailct");
-                	     let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
-                	     $.ajax({
-                	         url : "<%= request.getContextPath()%>/member/emailCheck"
-                	          ,data : {id : value}
-                	         ,method : "get"
-                	          
-                	          ,success: function(data){
-                	            if(data==1){
-                	               alert("이미 가입된 아이디 입니다.");
-                	               $("#id-text").val("");
-                	            }else{
-                	               alert("사용가능한 아이디입니다");
-                	               $("#emailCheck").css("display","none");
-                	               $("#emailcheck").css("display","block");
 
-                	            }
-                	          },error : function(req,status,err){
-                	              console.log(req);
-                	          }
-                	      });//ajax
-                	    
-                	  });
+                  //아이디 중복검사
+                	  $("#emailCheck").on("click", function() {
+                		  let idInput = $("#id-text").val();
+                		  if (idInput.trim() === "") {
+                			  swal("","아이디를 입력해주세요.","warning");
+                		    return;
+                		  }
+
+                		  let email = document.getElementById("emailct");
+                		  let value = idInput + email.options[email.selectedIndex].value;
+
+                		  $.ajax({
+                		    url: "<%= request.getContextPath() %>/member/emailCheck",
+                		    data: { id: value },
+                		    method: "get",
+                		    success: function(data) {
+                		      if (data == 1) {
+                		    	swal("","이미 가입된 아이디입니다.","warning");
+                		        $("#id-text").val("");
+                		      } else {
+                		    	  swal("","사용 가능한 아이디입니다.","success");
+                		        $("#emailCheck").css("display", "none");
+                		        $("#emailcheck").css("display", "block");
+                		      }
+                		    },
+                		    error: function(req, status, err) {
+                		      console.log(req);
+                		    }
+                		  });
+                		});
+                  
+                 
+
+                 
     
       </script>
 </html>

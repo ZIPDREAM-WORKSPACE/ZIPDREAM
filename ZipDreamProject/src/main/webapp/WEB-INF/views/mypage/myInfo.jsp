@@ -297,11 +297,9 @@ $(function(){
             success:function(data){
 
                 if(data == null){ 
-                    alert("정보수정 실패.");
                     swal("정보 수정 실패", "잘못된 정보입니다. 다시 진행해주세요.", "error");
                     
                 }else{                  
-                    alert("정보수정 성공");
                     swal("정보 수정 완료", "정보 수정이 완료되었습니다.", "success");
 
                 }

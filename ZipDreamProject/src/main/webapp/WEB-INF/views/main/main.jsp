@@ -872,7 +872,7 @@ display:  block;
 			<div class="main_ad_text" id="main_ad3"><div class="text_size"  data-aos="fade-down" data-aos-duration="1500"
      				data-aos-offset="100" data-aos-easing="ease-in-sine"><img class="ad_image" src='https://ifh.cc/g/W8ptpC.png'><br>지역 내<br>베테랑 부동산이<br>당신의 거래를<br>책임집니다.</div><br>
 					<h5 class="main_h5" data-aos="flip-up">집드림과 지역 전문 중개사들이</h5><h5 class="main_h5" data-aos="flip-up">함께합니다.</h5><br>
-					<div class="more_btn" data-aos="zoom-in-up">더 알아보기</div>
+					<div class="more_btn" data-aos="zoom-in-up" id="agentMore">더 알아보기</div>
 				</div>
 			<div class="main_ad_image"  data-aos="fade-left"
 									     data-aos-easing="linear"
@@ -1115,13 +1115,8 @@ display:  block;
 		 				addEventChat();
 		 				$("#x").click(function(){
 		 					
-		 					let result2 = exitChatRoom();
-		 					console.log(result2);
-		 					if(result2 == 1){
-		 						$(".chat_open").css("display","block");
-		 					 	$(".display-chatting").css({"display":"none","border":"none"});
-		 					 	$(".display-chatting").html('');
-		 					}
+		 					exitChatRoom();
+		 					
 		 				});
 		 		},
 		 		error : function(request){
@@ -1160,6 +1155,10 @@ display:  block;
 			location.href="<%=request.getContextPath()%>/sales/schedule";
 		});
 		
+		$("#agentMore").click(function(){
+			location.href="<%=request.getContextPath()%>/map/main";
+		});
+		
 		$("#coupon").click(function(){
 			if(${empty sessionScope.loginUser}){
 				location.href="<%=request.getContextPath()%>/member/login";
@@ -1167,6 +1166,8 @@ display:  block;
 				location.href="<%=request.getContextPath()%>/mypage/couponlist";
 			}
 		});
+		
+		
 		
 	
 	/* 	$("#chat_btn").click(function(){
@@ -1186,19 +1187,59 @@ display:  block;
 		
 		
 		function exitChatRoom(){
-			let data= 0;
-			if(confirm("문의를 종료하시겠습니까?")){
+			const exitResult = swal({
+				title:"문의를 종료하시겠습니까?",
+				icon:"warning",
+				buttons:true,
+				dangerMode:true,
+			})
+			.then(function(willDelete) {
+				if(willDelete){
+					$.ajax({
+						url:"<%=request.getContextPath()%>/chat/exit",
+						data:{ chatRoomNo},
+					 	async:false,
+						success : function(result){
+							// result == 1 나가기 성공
+							if(result == 1){
+								swal("","문의가 종료되었습니다.","success");
+		 						$(".chat_open").css("display","block");
+		 					 	$(".display-chatting").css({"display":"none","border":"none"});
+		 					 	$(".display-chatting").html('');
+		 					 	
+		 					 	$("#x").off("click");
+		 					 	$(".x").click(function(){
+		 					 		$(".chatting").css("display","none");
+		 							$(".chat").css("display","block");
+		 						});
+							}else{
+								swal("","문의 종료가 실패했습니다.","error");
+							}
+							// result == 0 실패 
+							
+						},
+				 		error : function(request){
+				 			console.log("에러발생");
+				 			console.log("에러코드 : "+request.status);
+				 		}
+					})
+				}else{
+					$(".chatting").css("display","block");
+				 	$(".display-chatting").css({"display":"block","border":"none"});
+				}
+			})
+			<%-- if(confirm("문의를 종료하시겠습니까?")){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/chat/exit",
 					data:{ chatRoomNo},
-					 async:false,
+					async:false,
 					success : function(result){
 						// result == 1 나가기 성공
 						if(result == 1){
 							data = result;
-							alert("문의가 종료되었습니다.");
+							swal("","문의가 종료되었습니다.","success");
 						}else{
-							alert("문의 종료가 실패했습니다.");
+							swal("","문의 종료가 실패했습니다.","error");
 						}
 						// result == 0 실패 
 						
@@ -1213,8 +1254,8 @@ display:  block;
 				$(".chatting").css("display","block");
 			 	$(".display-chatting").css({"display":"block","border":"none"});
 				
-			}	
-			return data;
+			} --%>
+			
 		};
 		
 		
@@ -1234,7 +1275,7 @@ display:  block;
 		$("#s_icon_image").click(function(){
 			let kw = document.getElementById("s_input").value;
 			if(kw==""){
-				alert("키워드를 입력해주세요.");
+				swal("","키워드를 입력해주세요.","warning");
 			}else{
 				$.ajax({
 					url: "<%= request.getContextPath()%>/map/searchKeyword",
@@ -1267,6 +1308,7 @@ display:  block;
 	</script>
 	
 <script src="<%=request.getContextPath()%>/resources/js/chat/chat.js"></script>
+
 
 	<jsp:include page="../common/footer.jsp" />
 	

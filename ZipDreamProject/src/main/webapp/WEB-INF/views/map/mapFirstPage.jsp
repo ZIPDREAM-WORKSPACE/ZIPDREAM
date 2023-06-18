@@ -71,7 +71,7 @@ html::-webkit-scrollbar {
 .searchBtn>svg {
 	position: absolute;
 	top: 16px;
-	right: 10px;
+	right: 15px;
 }
 
 #keyword {
@@ -81,7 +81,7 @@ html::-webkit-scrollbar {
 	height: 30px;
 	width: 180px;
 	margin: 10px 0;
-	margin-right: 10px;
+	margin-right: 30px;
 	
 }
 
@@ -449,7 +449,12 @@ html::-webkit-scrollbar {
 	    event.preventDefault();
 	  };
 	});
-	
+	 function removeAllChildNods(el) {   
+		   /*  while (el.hasChildNodes) {
+		        el.removeChild(el.lastChild);
+		    } */
+		    el.innerHTML = "";
+		}
 
 	address = "";
 	addressX = 0;
@@ -510,21 +515,20 @@ html::-webkit-scrollbar {
 	    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
 	    	                       			 for(var k=0; k<tagArr.length; k++){
 	    	                       				 if(k==tagArr.length-1){
-	    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+	    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
 	    	                       				 }else{
-		    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+		    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
 	    	                       				 }
 	    	                       				 
 	    	                       			 }
 	    	                       			 
 	    	                       			 let tagMarr = tagMoney.split(" ");
 	    	                       			 let tagParr =  tagMarr.map(Number);
-	    	                       			 console.log("?"+tagMarr);
 	    	                       			 
 	    	                       			  max = Math.max.apply(null,tagParr);
 	    	                       			  
 	    	                       			  min = Math.min.apply(null,tagParr);
-	    	                       			
+	    	                       			console.log("최소:"+min+"최대:"+max);
 		    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 		    	                       			  
 		    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
@@ -665,12 +669,12 @@ html::-webkit-scrollbar {
 			  
 			    var arr = [...str];
 			    var arrLeng = arr.length-5;  
-
+			   
 			  	arr.splice(arrLeng, 0, "억");
 			  	
 			  	var resultStr = arr.join('');
 			  				  	
-			  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+			  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+"<p style='font-size : 15px;'>"+addressToXy["아파트"]+"</p>"+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
 			  	listEl.appendChild(listLiTag);
 		  		
 			  	listLiTag.addEventListener('click', function(){
@@ -696,11 +700,7 @@ html::-webkit-scrollbar {
 			  	
 		  	}
 		  
-		  function removeAllChildNods(el) {   
-			    while (el.hasChildNodes()) {
-			        el.removeChild (el.lastChild);
-			    }
-			}
+		  
 			// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 			  function removeMarker() {
 			      for ( var i = 0; i < markers.length; i++ ) {
@@ -709,7 +709,7 @@ html::-webkit-scrollbar {
 			      markers = [];
 			  }
 			  removeAllChildNods(listEl);
-			  
+			  removeMarker();
 			  
 	}else{
 		console.log("에러");
@@ -773,12 +773,11 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.');
+        swal("",'검색 결과가 존재하지 않습니다.',"warning");
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
-
-        alert('검색 결과 중 오류가 발생했습니다.');
+    	 swal("",'검색 결과 중 오류가 발생했습니다.',"error");
         return;
 
     }
@@ -936,12 +935,6 @@ function displayInfowindow(marker, title) {
     infowindow.open(map, marker);
 }
 
- // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-function removeAllChildNods(el) {   
-    while (el.hasChildNodes()) {
-        el.removeChild (el.lastChild);
-    }
-}
  
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -1080,21 +1073,19 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
     			    	                       			 for(var k=0; k<tagArr.length; k++){
     			    	                       				 if(k==tagArr.length-1){
-    			    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+    			    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
     			    	                       				 }else{
-	    			    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+	    			    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
     			    	                       				 }
     			    	                       				 
     			    	                       			 }
-    			    	                       			 
     			    	                       			 let tagMarr = tagMoney.split(" ");
     			    	                       			 let tagParr =  tagMarr.map(Number);
-    			    	                       			 console.log("?"+tagMarr);
     			    	                       			 
     			    	                       			  max = Math.max.apply(null,tagParr);
     			    	                       			  
     			    	                       			  min = Math.min.apply(null,tagParr);
-    			    	                       			
+    			    	                       			console.log("최소:"+min+"최대:"+max);
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
       			    	                       			  
       			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
@@ -1225,12 +1216,12 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  
     						    var arr = [...str];
     						    var arrLeng = arr.length-5;  
-
+      						    
     						  	arr.splice(arrLeng, 0, "억");
     						  	
     						  	var resultStr = arr.join('');
     						  				  	
-    						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+    						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+"<p style='font-size : 15px;'>"+addressToXy["아파트"]+"</p>"+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
     						  	listLiTag.addEventListener('click', function(){
@@ -1256,11 +1247,6 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  	
     					  }
     					  
-    					  function removeAllChildNods(el) {   
-    						    while (el.hasChildNodes()) {
-    						        el.removeChild (el.lastChild);
-    						    }
-    						}
     					// 지도 위에 표시되고 있는 마커를 모두 제거합니다
     					  function removeMarker() {
     					      for ( var i = 0; i < markers.length; i++ ) {
@@ -1270,7 +1256,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     					  }
     					  
     					  removeAllChildNods(listEl);
-    			  		  
+    					  removeMarker();
     				  }
     			
               });
@@ -1337,10 +1323,21 @@ $("#comOkOj").click(function(){
 					listLiTag.setAttribute("id", result[i].sellNo);
 					listLiTag.setAttribute("class", "goDetail2");
 					
+						var str = result[i].sellPrice;
+					  
+					    var arr = [...str];
+					    var arrLeng = arr.length-4;  
+						
+					    if(str.slice(-4) == '0,000'){
+					    	arr.pop();arr.pop();arr.pop();arr.pop();
+					    }
+					    
+					  	arr.splice(arrLeng, 0, "억");
+					  	
+					  	var resultStr = arr.join('');
 					
-					
-					listLiTag.innerHTML = result[i].sellPrice +"<br>"+
-						result[i].sellName+"<br>"+
+					listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+
+						"<p style='font-size : 15px;'>"+result[i].sellName+"</p>"+
 						result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
 						"중개사 소재지 : "+result[i].address.substring(5);
 			  		listEl.appendChild(listLiTag);
@@ -1463,21 +1460,20 @@ $("#keyword").keyup(function(){
 	    			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
 	    			    	                       			 for(var k=0; k<tagArr.length; k++){
 	    			    	                       				 if(k==tagArr.length-1){
-	    			    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+	    			    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
 	    			    	                       				 }else{
-		    			    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+		    			    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
 	    			    	                       				 }
 	    			    	                       				 
 	    			    	                       			 }
 	    			    	                       			 
 	    			    	                       			 let tagMarr = tagMoney.split(" ");
 	    			    	                       			 let tagParr =  tagMarr.map(Number);
-	    			    	                       			 console.log("?"+tagMarr);
 	    			    	                       			 
 	    			    	                       			  max = Math.max.apply(null,tagParr);
 	    			    	                       			  
 	    			    	                       			  min = Math.min.apply(null,tagParr);
-	    			    	                       			
+	    			    	                       			console.log("최소:"+min+"최대:"+max);
 	      			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 	      			    	                       			  
 	      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
@@ -1599,7 +1595,7 @@ $("#keyword").keyup(function(){
   						  
   						    var arr = [...str];
   						    var arrLeng = arr.length-5;  
-
+  						  
   						  	arr.splice(arrLeng, 0, "억");
   						  	
   						  	var resultStr = arr.join('');
@@ -1630,11 +1626,7 @@ $("#keyword").keyup(function(){
   						  	
   					  	}
 						  
-						  function removeAllChildNods(el) {   
-  						    while (el.hasChildNodes()) {
-  						        el.removeChild (el.lastChild);
-  						    }
-  						}
+						 
 	  					// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 	  					  function removeMarker() {
 	  					      for ( var i = 0; i < markers.length; i++ ) {
@@ -1644,6 +1636,7 @@ $("#keyword").keyup(function(){
 	  					  }
 	  					  
 	  					  removeAllChildNods(listEl);
+	  					removeMarker();
 					}
 					  
 				  }
