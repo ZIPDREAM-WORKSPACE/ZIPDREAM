@@ -41,8 +41,9 @@
 	
 	.sell_no{
 	    border: 1px solid lightgray;
-	    width: 20%;
-	    height: 10%;
+	    width: 250px;
+	    height: 13%;
+	    text-align: center;
 	}
 	.sell_no>span{
 	    font-size: 0.5rem;
@@ -59,7 +60,7 @@
 	    flex-direction: column;
 	}
 	.sell_address, .seller_address{
-	    font-size: 1.2rem;
+	    font-size: 1.1rem;
 	    color: #6E7C7C;
 	}
 	.line{
@@ -90,18 +91,18 @@
 	    width: 90%;
 	}
 	.content4{
-		margin-top : 60px;
+		margin-top : 150px;
 	    height: 30rem;
 	}
 	.content5{
-		margin-top: 380px;	
+		margin-top: 430px;	
 	    height: 15rem;
 	}
 	.table>tbody>tr>th {
 		width: 15%;
 	}
 	.content6, .content8{
-		margin-top:80px;
+		margin-top:100px;
 	}
 	/*주변정보*/
 	.other-group, .con2Text1, .con2Text2{
@@ -168,6 +169,9 @@
 	.address{
 		margin-top : 120px;
 	}
+	.block{
+		height : 15rem;
+	}
 	</style>
 </head>
 <body>
@@ -176,7 +180,7 @@
  <div class="content1 margin content">
         <div class="sell_title">
 	            <div class="sell_no radius">
-	                <span>매물번호 : ${sda.sellSno} </span>
+	                매물번호 : ${sda.sellSno} 
 	            </div>
 	            <div class="sell_name">
 	                <p>${sda.sellName }</p>
@@ -338,7 +342,7 @@
                 <tbody>
                     <tr>
                         <th>관리사무소 주소</th>
-                        <td>${sd2.kaptSecurityAddress }</td>
+                        <td>${sda2.kaptSecurityAddress }</td>
                     </tr>
                     <tr>
                         <th>보안시설</th>
@@ -354,8 +358,8 @@
         <span class="othier_info">[주변정보]</span>
         <hr class="hr">
         <div class="other-group">
-            <button class="market button">
-                <img src="https://ifh.cc/g/XXq5Xh.png" width="34px">
+            <button class="market button" style="background-color: #0A2647; color:white; font-weight: 600;">
+                <img src="https://ifh.cc/g/zF1Glv.png" width="34px">
                 <span>편의시설</span>
             </button>
             <button class="subway button">
@@ -363,17 +367,17 @@
                 <span>대중교통</span>
             </button>
             <button class="hospital button">
-                <img src="https://ifh.cc/g/wssk5H.png" width="40px">
+                <img src="https://ifh.cc/g/JstgyK.png" width="40px">
                 <span>부대시설</span>
             </button>
             <button class="school button">
-                <img src="https://ifh.cc/g/27sfFC.png" width="40px" height="35px">
+                <img src="https://ifh.cc/g/GhhJRs.png" width="40px" height="35px">
                 <span>학교정보</span>
             </button>
         </div>
         <div class="infogroup">
             <div class="market_info info margin">
-                <table class="table con info_table">
+                <table class="table info_table">
                     <tbody class="market_tbody">
                     </tbody> 
                 </table>
@@ -401,6 +405,7 @@
             </div>
         </div>
     </div>
+    <div class="block"></div>
    <jsp:include page="../../views/common/footer.jsp" />
     
     <script>
@@ -474,27 +479,56 @@
   
     	$(function(){
     	    $(".market").on("click", function(){
-    	    	$(".market").css({"background-color":"#0A2647", "color":"white", "font-weight":"900"});
+    	    	$(".market").css({"background-color":"#0A2647", "color":"white", "font-weight":"600"});
     	    	$(".market>img").attr("src","https://ifh.cc/g/zF1Glv.png");
+    	    	$(".subway").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".subway>img").attr("src","https://ifh.cc/g/bfoaJM.png");
+    	    	$(".school").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".school>img").attr("src","https://ifh.cc/g/GhhJRs.png");
+    	    	$(".hospital").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".hospital>img").attr("src","https://ifh.cc/g/JstgyK.png");
     	        $(".market_info").show();
     	        $(".subway_info").hide();
     	        $(".school_info").hide();
     	        $(".hospital_info").hide();
     	    })
     	    $(".subway").on("click", function(){
-    	    	
+    	    	$(".subway").css({"background-color":"#0A2647", "color":"white", "font-weight":"600"});
+    	    	$(".subway>img").attr("src","https://ifh.cc/g/zPGjOm.png");
+    	    	$(".market").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".market>img").attr("src","https://ifh.cc/g/XXq5Xh.png");
+    	    	$(".hospital").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".hospital>img").attr("src","https://ifh.cc/g/JstgyK.png");
+    	    	$(".school").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".school>img").attr("src","https://ifh.cc/g/GhhJRs.png");
     	        $(".market_info").hide();
     	        $(".subway_info").show();
     	        $(".school_info").hide();
     	        $(".hospital_info").hide();
     	    })
     	    $(".hospital").on("click", function(){
+    	    	$(".hospital").css({"background-color":"#0A2647", "color":"white", "font-weight":"600"});
+    	    	$(".hospital>img").attr("src","https://ifh.cc/g/LXjmpD.png");
+    	    	$(".subway").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".subway>img").attr("src","https://ifh.cc/g/bfoaJM.png");
+    	    	$(".school").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".school>img").attr("src","https://ifh.cc/g/GhhJRs.png");
+    	    	$(".market").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".market").attr("src","https://ifh.cc/g/XXq5Xh.png");
     	        $(".market_info").hide();
     	        $(".subway_info").hide();
     	        $(".school_info").hide();
     	        $(".hospital_info").show();
     	    })
     	    $(".school").on("click", function(){
+    	    	$(".school").css({"background-color":"#0A2647", "color":"white", "font-weight":"600"});
+    	    	$(".school>img").attr("src","https://ifh.cc/g/SfJJgf.png");
+    	    	$(".hospital").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".hospital>img").attr("src","https://ifh.cc/g/JstgyK.png");
+    	    	$(".market").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".market>img").attr("src","https://ifh.cc/g/XXq5Xh.png");
+    	    	$(".subway").css({"background-color":"white", "color":"black", "font-weight":"300"});
+    	    	$(".subway>img").attr("src","https://ifh.cc/g/bfoaJM.png");
     	        $(".market_info").hide();
     	        $(".subway_info").hide();
     	        $(".school_info").show();
@@ -507,7 +541,6 @@
     
 
     </script>
-    
     
     
     

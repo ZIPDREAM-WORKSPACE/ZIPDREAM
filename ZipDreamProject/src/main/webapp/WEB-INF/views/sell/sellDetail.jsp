@@ -45,9 +45,10 @@
 
 .sell_no {
 	border: 1px solid lightgray;
-	width: 10%;
+	width: 150px;
 	height: 10%;
 	margin-top: 20px;
+	text-align: center;
 }
 
 .sell_no>span {
@@ -158,12 +159,16 @@
 	    justify-content: center;
 	align-items: center;
 }
+.object{
+	object-fit : cover;
+}
 
 .content {
 	width: 70%;
 }
 
 .content3 {
+	margin-top : 100px;
 	width: 70%;
 	height: 20rem;
 }
@@ -179,6 +184,7 @@
 }
 
 .content4 {
+	margin-top : 100px;
 	height: 80rem;
 }
 
@@ -196,7 +202,7 @@
 	width: 15%;
 }
 
-.content6, .content7, .content8, .content10 {
+.content4,.content6, .content7, .content8, .content10 {
 	margin-top: 80px;
 }
 /*주변정보*/
@@ -367,10 +373,15 @@
 .deleteImg, .reportImg{
 	vertical-align: baseline;
 	margin-left : 10px;
+	cursor: pointer;
 }
 .boardWriter{
 	display : flex;
 	justify-content: center;
+}
+.deleteReply, .reportReply{
+	cursor: pointer;
+	margin-right : 8px;
 }
 
 
@@ -453,7 +464,7 @@
 	<div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellNo} </span>
+                매물번호 : ${sd.sellNo}
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>
@@ -527,33 +538,33 @@
  						<c:if test="${!empty sd.imgList}"> 
  							<tr>
                             	<td colspan="3" rowspan="3" align="center">
-                            	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="600" height="600">
+                            	<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="600" height="600">
                             	</td>
                         	</tr>
  							<%-- <c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}"> --%>
 			 						<tr>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[1].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[1].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[2].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[2].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[3].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[3].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							
@@ -561,26 +572,26 @@
 			                        <tr>
 			                        	<td>
 			 								<c:if test="${!empty sd.imgList[4].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[4].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[5].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[5].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img  class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[6].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[6].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			                        	
@@ -1007,9 +1018,9 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 								  "<div class='boardHead'>"+
 									"<span class='writer'>"+board.userName+"</span>";
 									if(board.refUno == ${loginUser.userNo}){
-										html +="<img src='"+url+"' width='20' height='20' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
+										html +="<img src='"+url+"' width='16' height='18' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
 									}else{
-										html += "<img src='"+url2+"' width='20' height='20' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+										html += "<img src='"+url2+"' width='18' height='18' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
 									}
 									html +="</div>"+
 									"<div id='boardContent'>"+
@@ -1039,9 +1050,9 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 						rel+="<div class='rBox'>";
 						rel += "<p id='reply'>"+list[j].userName+" : "+list[j].replyContent+"</p>";
 						if(${loginUser.userNo} == list[j].replyRefUno){
-							rel+="<img src='"+url+"' width='18' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
+							rel+="<img src='"+url+"' width='13' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
 						}else{
-							rel+="<img src='"+url2+"' width='15' height='15' class='deleteReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+							rel+="<img src='"+url2+"' width='15' height='15' class='reportReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
 						}
 						rel += "</div>";
 					}

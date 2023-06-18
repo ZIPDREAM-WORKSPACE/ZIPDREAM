@@ -8,6 +8,8 @@
 <style>
 .recentContent {
 	width: 100%;
+	height:450px;
+	margin-top:40px;
 }
 .recentContent>div {
 	display: flex;
@@ -242,7 +244,7 @@
 	
 	
 	/* 찜목록 내부 스크롤 마우스 휠 */
-	function row_scroll(){
+	/* function row_scroll(){
         $(".nav ul").on('mousewheel', function(e){
             var wheelDelta = e.originalEvent.wheelDelta;
             
@@ -255,7 +257,7 @@
         });
     }
 
-    row_scroll();
+    row_scroll(); */
 
 </script>
 
