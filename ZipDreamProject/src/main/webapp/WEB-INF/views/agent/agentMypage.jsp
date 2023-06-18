@@ -139,6 +139,7 @@
 
     li{
         list-style-type: none;
+       
     }
     
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
