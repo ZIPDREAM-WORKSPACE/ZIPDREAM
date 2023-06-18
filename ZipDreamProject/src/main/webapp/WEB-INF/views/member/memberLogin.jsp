@@ -297,7 +297,7 @@ $(function(){
                  if(data.userId == null){ 
                      swal("","가입된 아이디가 없습니다.","warning");
                  }else{                  
-                     swal("","아이디는 "+data.userId+"입니다.","information");
+                     swal("","아이디는 "+data.userId+"입니다.","info");
                  }
              }
              

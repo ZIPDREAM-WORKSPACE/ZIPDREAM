@@ -83,7 +83,7 @@
        height: 44px;
        left: 440px;
        top: 138px;
-       font-size: 15px;
+       font-size: 12px;
     }
        #emailCheck{
       position: absolute;
@@ -462,7 +462,7 @@ function ok(){
           
           ,success: function(data){
             if(data==0){
-            	swal("","이미 가입된 아이디 입니다.","information");
+            	swal("","이미 가입된 아이디 입니다.","info");
                $("#id-text").val("");
             }else{
                swal("","사용가능한 아이디입니다.","success");

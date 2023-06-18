@@ -687,7 +687,7 @@
                 	          
                 	          ,success: function(data){
                 	            if(data==1){
-                	               swal("","이미 가입된 아이디 입니다.","information");
+                	               swal("","이미 가입된 아이디 입니다.","info");
                 	               $("#id-text").val("");
                 	            }else{
                 	               swal("","사용가능한 아이디입니다.","success");
