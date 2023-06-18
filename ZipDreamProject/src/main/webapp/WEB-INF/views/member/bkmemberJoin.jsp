@@ -603,13 +603,6 @@
                       });//mailCheck 
                       
                       
-                      //인증하기 버튼 클릭시 숨겨진 박스 나오기(시간날떄 작업)
-                      
-                       /* document.getElementById("emailcheck").addEventListener("click", function() {
-                      document.getElementById("emailchecknumber").style.display = "block";
-                      document.getElementById("ok").style.display = "block";
-                    });  */
-                      
                       //인증번호 유효성 검사
                       document.getElementById("ok").addEventListener("click", function() {
                       var inputNumber = document.getElementById("emailchecknumber").value;
@@ -677,30 +670,38 @@
                            }).open();
                   };
                   
-                  $("#emailCheck").on("click",function(){
-                	     let email = document.getElementById("emailct");
-                	     let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
-                	     $.ajax({
-                	         url : "<%= request.getContextPath()%>/member/emailCheck"
-                	          ,data : {id : value}
-                	         ,method : "get"
-                	          
-                	          ,success: function(data){
-                	            if(data==1){
-                	               alert("이미 가입된 아이디 입니다.");
-                	               $("#id-text").val("");
-                	            }else{
-                	               alert("사용가능한 아이디입니다");
-                	               $("#emailCheck").css("display","none");
-                	               $("#emailcheck").css("display","block");
+                  //아이디 중복검사
+                	  $("#emailCheck").on("click", function() {
+                		  let idInput = $("#id-text").val();
+                		  if (idInput.trim() === "") {
+                			  swal("","아이디를 입력해주세요.","warning");
+                		    return;
+                		  }
 
-                	            }
-                	          },error : function(req,status,err){
-                	              console.log(req);
-                	          }
-                	      });//ajax
-                	    
-                	  });
+                		  let email = document.getElementById("emailct");
+                		  let value = idInput + email.options[email.selectedIndex].value;
+
+                		  $.ajax({
+                		    url: "<%= request.getContextPath() %>/member/emailCheck",
+                		    data: { id: value },
+                		    method: "get",
+                		    success: function(data) {
+                		      if (data == 1) {
+                		        alert("이미 가입된 아이디입니다.");
+                		        $("#id-text").val("");
+                		      } else {
+                		        alert("사용 가능한 아이디입니다.");
+                		        $("#emailCheck").css("display", "none");
+                		        $("#emailcheck").css("display", "block");
+                		      }
+                		    },
+                		    error: function(req, status, err) {
+                		      console.log(req);
+                		    }
+                		  });
+                		});
+                  
+                 
     
       </script>
 </html>
