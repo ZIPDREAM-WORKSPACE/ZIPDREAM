@@ -194,13 +194,12 @@ position: absolute;
 </style>
 </head>
 <body>
-	<c:if test="${ not empty alertMsg }">
+<c:if test="${ not empty alertMsg }">
 		<script>
 			swal("", '${alertMsg.message}','${alertMsg.type}');
 		</script>
 		<c:remove var="alertMsg" />
 	</c:if>
-
 	<div class="header">
 		<div class="header_inner">
 			<ul class="header_list">
@@ -237,9 +236,8 @@ position: absolute;
 		</div>
 		
 	</div>
-	
-	<script>
 
+	<script>
 	let currentURL = "<%=request.getRequestURI()%>";
 	let URL = "<%=request.getContextPath()%>/";
 	

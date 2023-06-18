@@ -30,13 +30,11 @@
     }
 
     .login1{
-    	position: absolute;
+    	position: relative;
         box-sizing: border-box;
-        position: absolute;
         width: 680px;
         height: 1450px;
-        right: 620px;
-        margin-top: 20px;
+        margin: 30px auto;
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -432,14 +430,14 @@
             const docFrag = new DocumentFragment();
 
             if ([...files].length >= 2) {
-                alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+            	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                 return;
             }
 
             // 파일 타입 검사
             [...files].forEach(file => {
                 if (!file.type.match("image/.*")) {
-                alert('이미지 파일만 업로드가 가능합니다.');
+                	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                 return
                 }
 
@@ -483,14 +481,14 @@
                 const docFrag = new DocumentFragment();
 
                 if ([...files].length >= 2) {
-                    alert('이미지는 최대 1개 까지 업로드가 가능합니다.');
+                	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                     return;
                 }
 
                 // 파일 타입 검사
                 [...files].forEach(file => {
                     if (!file.type.match("image/.*")) {
-                    alert('이미지 파일만 업로드가 가능합니다.');
+                    	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                     return
                     }
 
@@ -533,14 +531,14 @@
                     const docFrag = new DocumentFragment();
 
                     if ([...files].length >= 4) {
-                        alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
+                    	 swal("","이미지는 최대 1개까지 업로드가 가능합니다.","warning");
                         return;
                     }
 
                     // 파일 타입 검사
                     [...files].forEach(file => {
                         if (!file.type.match("image/.*")) {
-                        alert('이미지 파일만 업로드가 가능합니다.');
+                        	swal("","이미지 파일만 업로드가 가능합니다.","warning");
                         return
                         }
 
@@ -594,7 +592,7 @@
                             ,dataType : "TEXT"    
                             ,async:false
                               ,success: function(data){
-                                 alert("인증번호를 전송완료.");
+                                 swal("","인증번호가 전송되었습니다.","success");
                                  verificationNumber = data;
                               },error : function(req,status,err){
                                   console.log(req);
@@ -620,9 +618,9 @@
                         $("#id-text").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailchecknumber").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
                         $("#emailct").attr('disabled',true); 
-                        alert("인증번호가 일치합니다.");
+                        swal("","인증번호가 일치합니다.","success");
                       } else {
-                        alert("인증번호가 일치하지 않습니다.");
+                        swal("","인증번호가 일치하지 않습니다.","error");
                       } 
                         
                     }); 
@@ -670,6 +668,7 @@
                            }).open();
                   };
                   
+
                   //아이디 중복검사
                 	  $("#emailCheck").on("click", function() {
                 		  let idInput = $("#id-text").val();
@@ -701,6 +700,8 @@
                 		  });
                 		});
                   
+                 
+
                  
     
       </script>

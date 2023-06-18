@@ -95,6 +95,7 @@
 		margin-top:50px;
 		text-align:center;
 	}
+	
 	#p{
 		font-size: 1rem;
 		font-weight: 600;
@@ -149,9 +150,6 @@
 	.table>tbody>tr>th {
 		width: 15%;
 	}
-	
-	
-	
 	.content9 {
 		text-align: center;
 	}
@@ -182,7 +180,7 @@
                     <p><input type="text" name="sellName" size="20" placeholder="매물명을 입력해주세요" required ></p>
                 </div>
                 <div class="sell_last">
-                    <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="해당 매물의 주소를 입력해주세요" size="80" required>
+                    <div class="sell_address">매물주소 : <input type="text" name="sellAddress" placeholder="해당 매물의 주소를 입력해주세요" size="100" required>
                      <input type="hidden" size="10" name="refUno" value="${sessionScope.loginUser.userNo }">
                     </div>
                 </div>
@@ -228,7 +226,7 @@
         
         <div class="content2 margin picture content">
             <div id="picture">
-                <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;">
+               <!--  <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;"> -->
                 <div id="file-area" style="display:none;">
                     <input type="file" id="file1" name="imges" accept="images/*" required onchange="loadImg(this, 1);" >
                     <input type="file" id="file2" name="imges" accept="images/*" onchange="loadImg(this, 2);" >
@@ -267,7 +265,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="picture_two" style="display: none;">
+                  <!--   <div class="picture_two" style="display: none;">
                         <table>
                             <tr>
                                 <td><img id="contentImg7" width="300" height="300"></td>
@@ -283,9 +281,9 @@
             
                             </tr>
                         </table>
-                    </div>
+                    </div>  -->
                 </div>
-                <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50">
+                 <!-- <img class="right arrow" src="https://ifh.cc/g/JLqn6q.png" width="50">  -->
             </div>
         </div>
 
@@ -304,7 +302,7 @@
                         </tr>
                         <tr>
                             <th>*관리비</th>
-                            <td><input type="text" name="sellMaintenance"  required size="100" placeholder="해당 매물의 관리비를 입력해주세요."></td>
+                            <td><input type="text" name="sellMaintenance"  required size="100" placeholder="해당 매물의 관리비를 입력해주세요. (ex. 10만원, 20만원)"></td>
                         </tr>
                         <tr>
                             <th>*주차</th>
@@ -571,21 +569,7 @@
 		}
 	}
 
-	$(function() {
-		$(".right").click(function() {
-			$(".picture_two").show();
-			$(".picture_one").hide();
-			$(".left").show();
-			$(".right").hide();
-		})
-		$(".left").click(function() {
-			$(".picture_one").show();
-			$(".picture_two").hide();
-			$(".right").show();
-			$(".left").hide();
-		})
-	})
-	
+
 	$(function(){
 		$(".cansle").click(function(){
 			location.href="<%=request.getContextPath()%>/agent/list";

@@ -35,6 +35,7 @@ import org.xml.sax.InputSource;
 
 import com.google.gson.Gson;
 import com.kh.zipdream.admin.model.vo.Report;
+import com.kh.zipdream.attachment.model.vo.Attachment;
 import com.kh.zipdream.member.model.service.MemberService;
 import com.kh.zipdream.member.model.vo.Member;
 import com.kh.zipdream.sell.model.service.SellService;
@@ -81,8 +82,11 @@ public class SellController {
 			
 			return "redirect:/agent/list";
 		}else {
-			System.out.println("업로드 실패");
-			return "main/main";
+			Map<String, String> alertMsg = new HashMap();
+			alertMsg.put("message", "업로드에 실패했습니다. 다시 시도해주세요");
+			alertMsg.put("type", "error");
+			session.setAttribute("alertMsg", alertMsg);
+			return "redirect:/sell/insert";
 		}
 	}
 	
@@ -114,7 +118,7 @@ public class SellController {
 		SellDetail detail = sellService.sellDetail(sellNo);
 		Member seller = memberService.selectMember(detail.getRefUno());
 		Map<String,Integer> map = new HashMap<String,Integer>();
-		
+		List<Attachment> atList = memberService.selectAttachmentList(seller.getUserNo());
 		map.put("userNo",loginUser.getUserNo());
 		map.put("sellNo", sellNo);
 		
@@ -122,6 +126,7 @@ public class SellController {
 		model.addAttribute("sd", detail);
 		model.addAttribute("seller", seller);
 		model.addAttribute("isUserSelect", isUserSelect);
+		model.addAttribute("attachment", atList.get(2));
 		
 		return "sell/sellDetail";
 	}

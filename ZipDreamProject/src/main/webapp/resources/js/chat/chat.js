@@ -25,7 +25,7 @@
  	
  	if(chatMsg.value.trim().length== 0){
  		// 입력이 되지 않은 경우 
- 		alert("입력되지 않았습니다.");
+ 		swal("","입력되지 않았습니다.","warning");
  		
  		chatMsg.value=""; // 공백문자 삭제 
  		chatMsg.focus();

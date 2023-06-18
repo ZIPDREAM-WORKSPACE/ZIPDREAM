@@ -266,12 +266,13 @@
                      <button type="button" id="btn3" onclick="" data-toggle="modal" data-target="#findPassword">비밀번호 찾기</button>
                 </div><br>
                 
+
                 <button type="submit" id="loginbtn" class="btn btn-primary">로그인</button><br><br>
             
 
                 <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/yQkCA0.png" id="kakaologo"></a>&nbsp;&nbsp;&nbsp;
 
-				<img src="https://ifh.cc/g/vppHg7.png" id="warningimg" style="width:40px">
+				        <img src="https://ifh.cc/g/vppHg7.png" id="warningimg" style="width:40px">
 
             </div>
             
@@ -293,9 +294,9 @@ $(function(){
              success:function(data){
             	 console.log(data);
                  if(data.userId == null){ 
-                     alert("가입된 아이디가 없습니다.");
+                     swal("","가입된 아이디가 없습니다.","warning");
                  }else{                  
-                     alert("아이디는 "+data.userId+"입니다.");
+                     swal("","아이디는 "+data.userId+"입니다.","info");
                  }
              }
              
@@ -312,9 +313,9 @@ $(function(){
                  data: {idText, phone }, 
                  success:function(data){
                      if(data < 1){ 
-                         alert("실패.");
-                     }else{                  
-                         alert("비밀번호를 이메일로 전송했습니다.");
+                    	 swal("","비밀번호 찾기에 실패했습니다.","warning");
+                     }else{
+                    	 swal("","비밀번호를 이메일로 전송했습니다.","success");
 	                     $("#findPassword").modal("hide");
                      }
                  }
@@ -340,7 +341,7 @@ $(function(){
              ,dataType : "TEXT"    
              ,async:false
                ,success: function(data){
-                  alert("인증번호를 전송완료.");
+            	   swal("","인증번호를 전송하였습니다.","success");
                   verificationNumber = data;
                },error : function(req,status,err){
                    console.log(req);
@@ -359,9 +360,10 @@ $(function(){
        
        $("#emailsamecheck").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
        /* $("#emailct").attr('disabled',true); */ 
-       alert("인증번호가 일치합니다.");
+       swal("","인증번호가 일치합니다.","success");
+       
      } else {
-       alert("인증번호가 일치하지 않습니다.");
+       swal("","인증번호가 일치하지 않습니다.","error");
      } 
        
    }); 
@@ -400,9 +402,9 @@ if (inputNumber === verificationNumber && verificationNumber != "") {
   
   $("#emailsamecheck").attr("readonly",true).css("background-color", "rgb(237, 237, 237)");
   /* $("#emailct").attr('disabled',true); */ 
-  alert("인증번호가 일치합니다.");
+  swal("","인증번호가 일치합니다.","success");
 } else {
-  alert("인증번호가 일치하지 않습니다.");
+	 swal("","인증번호가 일치하지 않습니다.","error");
 } 
   
 }); 

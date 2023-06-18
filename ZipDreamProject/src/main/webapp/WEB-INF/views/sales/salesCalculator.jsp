@@ -37,6 +37,7 @@
 	height: 60px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px;
+    padding-left: 0px;
 }
 
 .sellHouseNavi>li {
@@ -335,7 +336,7 @@
 	<div class="sellHouseContentWrap">
 		<div class="sellHouseNavWrap">
 			<ul class="sellHouseNavi">
-				<li><a href="<%=request.getContextPath()%>/sales/schedule">분양일정</a></li>
+				<li><a href="<%=request.getContextPath()%>/sales/schedule">청약정보</a></li>
 				<li><a>|</a></li>
 				<li><a href="<%=request.getContextPath()%>/sales/guide">분양가이드</a></li>
 				<li><a>|</a></li>
