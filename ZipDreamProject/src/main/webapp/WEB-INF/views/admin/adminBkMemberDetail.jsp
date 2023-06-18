@@ -70,8 +70,8 @@ $(function() {
 		autoplaySpeed : 3000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
 		pauseOnHover : false, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
 		vertical : false, // 세로 방향 슬라이드 옵션
-		prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
-		nextArrow : "<button type='button' class='slick-next'>Next</button>",	 	// 다음 화살표 모양 설정
+		prevArrow : "<button type='button' class='btn btn-info' style='position: absolute;top: 50%;left: -100px;'>이전</button>",		// 이전 화살표 모양 설정
+		nextArrow : "<button type='button' class='btn btn-info' style='position: absolute;top: 50%;right: -100px;'>다음</button>",	 	// 다음 화살표 모양 설정
 		draggable : true, //드래그 가능 여부 
 	});
 	
