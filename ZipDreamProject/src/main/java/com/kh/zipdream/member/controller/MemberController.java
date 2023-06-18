@@ -251,13 +251,13 @@ public class MemberController {
 	
 			String url = "";
 		if(result >0) {
-			alertMsg.put("message", "업로드를 성공했습니다.");
+			alertMsg.put("message", "회원가입에 성공했습니다. 관리자의 승인을 기다리세요.");
 			alertMsg.put("type", "success");
 			url = "redirect:/";
 			
 			
 		}else {
-			alertMsg.put("message", "업로드를 실패했습니다.");
+			alertMsg.put("message", "회원가입에 실패했습니다.");
 			alertMsg.put("type", "error");
 			url = "redirect:/";
 			

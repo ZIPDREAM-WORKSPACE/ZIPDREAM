@@ -71,7 +71,7 @@ html::-webkit-scrollbar {
 .searchBtn>svg {
 	position: absolute;
 	top: 16px;
-	right: 10px;
+	right: 15px;
 }
 
 #keyword {
@@ -81,7 +81,7 @@ html::-webkit-scrollbar {
 	height: 30px;
 	width: 180px;
 	margin: 10px 0;
-	margin-right: 10px;
+	margin-right: 30px;
 	
 }
 
@@ -519,12 +519,11 @@ html::-webkit-scrollbar {
 	    	                       			 
 	    	                       			 let tagMarr = tagMoney.split(" ");
 	    	                       			 let tagParr =  tagMarr.map(Number);
-	    	                       			 console.log("?"+tagMarr);
 	    	                       			 
 	    	                       			  max = Math.max.apply(null,tagParr);
 	    	                       			  
 	    	                       			  min = Math.min.apply(null,tagParr);
-	    	                       			
+	    	                       			console.log("최소:"+min+"최대:"+max);
 		    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 		    	                       			  
 		    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
@@ -670,7 +669,7 @@ html::-webkit-scrollbar {
 			  	
 			  	var resultStr = arr.join('');
 			  				  	
-			  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+			  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+"<p style='font-size : 15px;'>"+addressToXy["아파트"]+"</p>"+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
 			  	listEl.appendChild(listLiTag);
 		  		
 			  	listLiTag.addEventListener('click', function(){
@@ -1088,12 +1087,11 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     			    	                       			 
     			    	                       			 let tagMarr = tagMoney.split(" ");
     			    	                       			 let tagParr =  tagMarr.map(Number);
-    			    	                       			 console.log("?"+tagMarr);
     			    	                       			 
     			    	                       			  max = Math.max.apply(null,tagParr);
     			    	                       			  
     			    	                       			  min = Math.min.apply(null,tagParr);
-    			    	                       			
+    			    	                       			console.log("최소:"+min+"최대:"+max);
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
       			    	                       			  
       			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
@@ -1229,7 +1227,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  	
     						  	var resultStr = arr.join('');
     						  				  	
-    						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+addressToXy["아파트"]+"<br> "+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
+    						  	listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+"<p style='font-size : 15px;'>"+addressToXy["아파트"]+"</p>"+addressToXy["전용면적"]+"㎡ | "+addressToXy["층"]+"층<br> 중개사소재지 : "+addressToXy["중개사소재지"];
     						  	listEl.appendChild(listLiTag);
     					  		
     						  	listLiTag.addEventListener('click', function(){
@@ -1336,10 +1334,17 @@ $("#comOkOj").click(function(){
 					listLiTag.setAttribute("id", result[i].sellNo);
 					listLiTag.setAttribute("class", "goDetail2");
 					
+						var str = result[i].sellPrice;
+					  
+					    var arr = [...str];
+					    var arrLeng = arr.length-5;  
+
+					  	arr.splice(arrLeng, 0, "억");
+					  	
+					  	var resultStr = arr.join('');
 					
-					
-					listLiTag.innerHTML = result[i].sellPrice +"<br>"+
-						result[i].sellName+"<br>"+
+					listLiTag.innerHTML = "<p style='font-size : 20px; margin-bottom: 10px;'>"+resultStr+"</p>"+
+						"<p style='font-size : 15px;'>"+result[i].sellName+"</p>"+
 						result[i].sellPrivateArea+"㎡ | "+ result[i].sellFloor+"층<br>"+
 						"중개사 소재지 : "+result[i].address.substring(5);
 			  		listEl.appendChild(listLiTag);
@@ -1471,12 +1476,11 @@ $("#keyword").keyup(function(){
 	    			    	                       			 
 	    			    	                       			 let tagMarr = tagMoney.split(" ");
 	    			    	                       			 let tagParr =  tagMarr.map(Number);
-	    			    	                       			 console.log("?"+tagMarr);
 	    			    	                       			 
 	    			    	                       			  max = Math.max.apply(null,tagParr);
 	    			    	                       			  
 	    			    	                       			  min = Math.min.apply(null,tagParr);
-	    			    	                       			
+	    			    	                       			console.log("최소:"+min+"최대:"+max);
 	      			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 	      			    	                       			  
 	      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
