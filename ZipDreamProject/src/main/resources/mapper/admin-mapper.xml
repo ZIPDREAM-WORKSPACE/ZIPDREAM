@@ -141,7 +141,7 @@
 	
 	<select id="countObjectYesterday" resultType="_int">
 		SELECT COUNT(*) FROM SELLDETAIL
-		<![CDATA[WHERE SELL_ENROLL_DATE < CURDATE()]]>
+		<![CDATA[WHERE CREATE_DATE < CURDATE()]]>
 	</select>
 	
 	<select id="countObjectSearch" parameterType="HashMap" resultType="_int">
