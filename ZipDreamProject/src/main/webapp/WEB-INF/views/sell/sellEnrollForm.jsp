@@ -95,6 +95,7 @@
 		margin-top:50px;
 		text-align:center;
 	}
+	
 	#p{
 		font-size: 1rem;
 		font-weight: 600;
@@ -301,7 +302,7 @@
                         </tr>
                         <tr>
                             <th>*관리비</th>
-                            <td><input type="text" name="sellMaintenance"  required size="100" placeholder="해당 매물의 관리비를 입력해주세요."></td>
+                            <td><input type="text" name="sellMaintenance"  required size="100" placeholder="해당 매물의 관리비를 입력해주세요. (ex. 10만원, 20만원)"></td>
                         </tr>
                         <tr>
                             <th>*주차</th>
@@ -568,21 +569,7 @@
 		}
 	}
 
-	$(function() {
-		$(".right").click(function() {
-			$(".picture_two").show();
-			$(".picture_one").hide();
-			$(".left").show();
-			$(".right").hide();
-		})
-		$(".left").click(function() {
-			$(".picture_one").show();
-			$(".picture_two").hide();
-			$(".right").show();
-			$(".left").hide();
-		})
-	})
-	
+
 	$(function(){
 		$(".cansle").click(function(){
 			location.href="<%=request.getContextPath()%>/agent/list";

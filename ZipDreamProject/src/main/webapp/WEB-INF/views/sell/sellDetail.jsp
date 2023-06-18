@@ -16,8 +16,8 @@
 .content1 {
 	margin-top: 500px;
 	border-bottom: 4px solid #6E7C7C;
-	width: 90%;
-	height: 15rem;
+	width: 85%;
+	height: 20rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -51,7 +51,7 @@
 }
 
 .sell_no>span {
-	font-size: 0.5rem;
+	font-size: 0.85rem;
 	margin-left: 5px;
 	vertical-align: text-top;
 }
@@ -69,11 +69,11 @@
 }
 
  .seller_address {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	color: #6E7C7C;
 }
 .sell_address{
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	color: #6E7C7C;
 }
 
@@ -99,12 +99,13 @@
 }
 
 .line {
+	margin-left : 50px;
 	border: 1px solid #6E7C7C;
 	height: 80%;
 }
 /*공인중개사 연락하기*/
 .seller {
-	width: 30%;
+	width: 35%;
 	height: 70%;
 	margin-left: 60px;
 	display: flex;
@@ -133,10 +134,22 @@
 	background-color: #2C74B3;
 	color: white;
 }
+.detail_info{
+	margin-top : 80px;
+	text-align:center;
+}
+.con2Text1{
+	display: flex;
+	justify-content: center;
+}
+	#p{
+		font-size: 1rem;
+		font-weight: 600;
+	}
 
 /*사진*/
 .content2 {
-	margin-top: 50px;
+	margin-top: 130px;
 	height: 40rem;
 }
 
@@ -214,7 +227,7 @@
 	margin-left: 100px;
 }
 
-.info {
+.info, .seller_contect {
 	margin-top: 20px;
 }
 
@@ -388,6 +401,9 @@
 .block{
 	height : 20rem;
 }
+
+/* 이미지 마우스 올리면 커지게  */
+
 </style>
 </head>
 <body>
@@ -445,7 +461,7 @@
             <div class="sell_last">
             	<div class="aprtImg">
         			<img src="https://ifh.cc/g/DkBby6.png" width="35">
-             		<div class="sell_address">매물주소 :${sd.sellAddress}</div>
+             		<div class="sell_address">주소 :${sd.sellAddress}</div>
             	</div>
                 <%-- <div class="sell_address">매물주소 : ${sd.sellAddress}
                 </div> --%>
@@ -465,11 +481,11 @@
                 ${seller.office }
             </div>
             <div class="seller_name">
-                대표  : ${seller.userName }
+                중개인 : ${seller.userName }
             </div>
             <div class="sellerImg">
             		<img src="https://ifh.cc/g/OZoZzR.png" width="25" height="25">
-            		<div class="seller_address">중개사소재지 :  ${seller.address }</div>
+            		<div class="seller_address">소재지 :  ${seller.address }</div>
             	</div>
             
             <%-- <div class="seller_address">
@@ -486,7 +502,22 @@
             </div>
         </div>
     </div>
-
+	
+	<div class="detail_info margin content">
+		<div class="con2Text1 ">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">"집드림"에 등록된 공인중개사들이 직접 등록한 매물입니다.</p>
+		</div>
+		<div class="con2Text1 ">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">해당매물에 관심이 있을 경우 "상담하기" 신청을 통해 직접 상담을 신청할 수 있습니다.</p>
+		</div>
+		<div class="con2Text1 ">
+				<img src="https://ifh.cc/g/LZwHml.png" width="25" height="25">
+				<p id="p">허위매물로 소개를 받으셨거나, 의심이 되는 매물은 "허위매물 신고하기"로 신고해주시면 적절한 조취를 취하겠습니다.</p>
+		</div>
+	</div>
+	
     <div class="content2 margin picture content">
         <div id="picture">
             <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;">
@@ -903,12 +934,13 @@
 
 </body>
 <script>
-/* 	const loremIpsum = document.getElementById("lorem-ipsum")
+<%-- /* 	const loremIpsum = document.getElementById("lorem-ipsum")
 let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 
 	const loremIpsum = document.getElementById("lorem-ipsum")
 	fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
 	    .then(response => response.text())
-	    .then(result => loremIpsum.innerHTML = result) */
+	    .then(result => loremIpsum.innerHTML = result) */ --%>
+
 	
 	$(function(){
 	    $(".contect").click(function(){
@@ -926,9 +958,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 	    })
 	    $(".notify").click(function(){
 	    	$(".reportInsertBtn").attr("onclick","insertReport(2,${seller.userNo})");
-	    	
 			$("#reportInsertModal .modal-title").text("허위매물 신고");
-			
 	    	$("#reportInsertModal").modal("show");
 	    })
 	})
