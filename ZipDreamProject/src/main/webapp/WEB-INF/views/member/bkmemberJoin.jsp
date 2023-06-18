@@ -118,11 +118,13 @@
         top: 420px;
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
+        overflow:hidden;
     }
     .licensebox img, .licensebox1-1 img, .licensebox1-2 img{
         width: 100%;
         height:  100%;
         object-fit: cover;
+         margin-top: 0px;
     }
 
     #license{
@@ -139,6 +141,7 @@
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
         margin-left: 165px;
+         overflow:hidden;
     }
 
     #license1-1{
@@ -157,6 +160,7 @@
         background: #FFFFFF;
         border: 1px solid #B9B9B9;
         margin-left: 165px;
+        overflow: hidden;
     }
 
     #license1-2{
@@ -283,13 +287,15 @@
         object-fit: cover;
     }
 
-    li{
+   .licensebox li, .licensebox1-1 li ,.licensebox1-2 li{
         list-style-type: none;
+        width:100%;
+        height:100%;
     }
     
-    .licenseImg{
+  /*   .licenseImg{
     	overflow:hidden;
-    }
+    } */
 </style>
 <body>
 <jsp:include page="../common/header.jsp" />
@@ -686,10 +692,10 @@
                 		    method: "get",
                 		    success: function(data) {
                 		      if (data == 1) {
-                		        alert("이미 가입된 아이디입니다.");
+                		    	swal("","이미 가입된 아이디입니다.","warning");
                 		        $("#id-text").val("");
                 		      } else {
-                		        alert("사용 가능한 아이디입니다.");
+                		    	  swal("","사용 가능한 아이디입니다.","success");
                 		        $("#emailCheck").css("display", "none");
                 		        $("#emailcheck").css("display", "block");
                 		      }

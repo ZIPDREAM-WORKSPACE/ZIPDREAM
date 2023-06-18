@@ -130,7 +130,7 @@ public class MemberController {
 					alertMsg.put("type", "error");
 					session.setAttribute("alertMsg", alertMsg);
 					mv.addObject("errorMsg", "로그인 실패");
-					mv.setViewName("redirect:/");
+					mv.setViewName("redirect:/member/login");
 
 					 
 		         
@@ -175,7 +175,7 @@ public class MemberController {
 					alertMsg.put("type", "error");
 					session.setAttribute("alertMsg", alertMsg);
 					mv.addObject("errorMsg", "로그인 실패");
-					mv.setViewName("redirect:/");
+					mv.setViewName("redirect:/member/login");
 				 
 
 				}
@@ -437,26 +437,32 @@ public class MemberController {
 	  @PostMapping("/changePw") 
 	  public String changePw(@RequestParam Map<String, Object> paramMap,
 	  
-	  @ModelAttribute("loginUser") Member loginUser, RedirectAttributes ra, SessionStatus status) {
+	  @ModelAttribute("loginUser") Member loginUser, RedirectAttributes ra, SessionStatus status, HttpSession session) {
 			
 		 
 		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
-
+		 Map<String,String> alertMsg = new HashMap<String,String>();
 		 int result = 0;
 		 if(bcryptPasswordEncoder.matches(paramMap.get("currentPw")+"", loginUser.getUserPwd())) {
 			 Member m = new Member();
 			 m.setUserNo(loginUser.getUserNo());
 			 m.setUserPwd(newPw);
-			 
+			 alertMsg.put("message", "비밀번호 변경에 성공했습니다.");
+				alertMsg.put("type", "success");
+				session.setAttribute("alertMsg", alertMsg);
 			 result = memberService.updateMemberPwd(m);
 			
 		 }else {
 			
 			 if(loginUser.getUserLevel()==1) {
-				
+				 alertMsg.put("message", "비밀번호 변경에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
 				 return "redirect:/mypage/myInfo";
 			 }else {
-				
+				 alertMsg.put("message", "비밀번호 변경에 실패했습니다.");
+					alertMsg.put("type", "error");
+					session.setAttribute("alertMsg", alertMsg);
 				 return "redirect:/agent/mypage";
 			 }
 			

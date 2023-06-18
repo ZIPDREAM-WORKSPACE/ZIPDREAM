@@ -277,14 +277,14 @@
          <!-- <div class="login2"></div> -->
                 <h4 style="margin-top:-25px !important;">비밀번호</h4>
                 <input type="password" id="password" name="userPwd" onkeyup="checkPasswordValidity()" placeholder="비밀번호를 입력해주세요." required class="form-control"><br><br>
-                <label style="font-size: 13px; color: gray;">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
+                <label style="font-size: 13px; color: gray; margin:0">※영문자, 숫자, 특수문자(!@#$%^)로 총 8~15자로 입력하세요.</label><br>
                 <span id="passwordError" style="color: red; font-size: 13px;" ></span>
                 <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
                 
 
                 <h4>비밀번호 확인</h4>
                 <input type="password" id="confirmPassword" name="userPwdCheck" onkeyup="checkPasswordMatch()" placeholder="비밀번호 확인을해주세요." required class="form-control"><br><br>
-                <span id="confirmMessage" style="color: red; font-size: 14px;"></span><br>
+                <span id="confirmMessage" style="color: red; font-size: 13px;"></span><br>
 
                 <h4>이름</h4>
                 <input type="text" id="name" name="userName" placeholder="이름을 입력해주세요." class="form-control"><br><br><br>
@@ -452,30 +452,38 @@ function ok(){
          }).open();
      }
   
-  $("#id-text").on("click",function(){
-     let email = document.getElementById("emailct");
-     let value = document.getElementById("id-text").value + (email.options[email.selectedIndex].value);
-     $.ajax({
-         url : "<%= request.getContextPath()%>/member/emailCheck"
-         ,data : {id : value}
-         ,method : "get"
-          
-          ,success: function(data){
-            if(data==0){
-            	swal("","이미 가입된 아이디 입니다.","info");
-               $("#id-text").val("");
-            }else{
-               swal("","사용가능한 아이디입니다.","success");
-               $("#emailCheck").css("display","none");
-               $("#emailcheck").css("display","block");
+  //아이디 중복검사
+  $("#emailCheck").on("click", function() {
+	  let idInput = $("#id-text").val();
+	  if (idInput.trim() === "") {
+		  swal("","아이디를 입력해주세요.","warning");
+	    return;
+	  }
 
-            }
-          },error : function(req,status,err){
-              console.log(req);
-          }
-      });//ajax
-    
-  });
+	  let email = document.getElementById("emailct");
+	  let value = idInput + email.options[email.selectedIndex].value;
+
+	  $.ajax({
+	    url: "<%= request.getContextPath() %>/member/emailCheck",
+	    data: { id: value },
+	    method: "get",
+	    success: function(data) {
+	      if (data == 1) {
+	    	swal("","이미 가입된 아이디입니다.","warning");
+	        $("#id-text").val("");
+	      } else {
+	    	  swal("","사용 가능한 아이디입니다.","success");
+	        $("#emailCheck").css("display", "none");
+	        $("#emailcheck").css("display", "block");
+	      }
+	    },
+	    error: function(req, status, err) {
+	      console.log(req);
+	    }
+	  });
+	});
+  
+  
   
 
    

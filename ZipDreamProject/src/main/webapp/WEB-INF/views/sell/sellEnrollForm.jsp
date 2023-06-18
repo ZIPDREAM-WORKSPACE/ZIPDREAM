@@ -110,6 +110,9 @@
 	.picture_one, .picture_two {
 		display: inline-block;
 	}
+	.object{
+		object-fit : cover;	
+	}
 	
 	#picture {
 		display: flex;
@@ -250,18 +253,18 @@
                         <table>
                             <tr>
                                 <td colspan="3" rowspan="3" align="center"> <!-- 미리보기 -->
-                                <img id="titleImg" width="400" height="600">
+                                <img id="titleImg" class="object" width="400" height="600">
                                 </td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg1" width="300" height="300"></td>
-                                <td><img id="contentImg2" width="300" height="300"></td>
-                                <td><img id="contentImg3" width="300" height="300"></td>
+                                <td><img id="contentImg1 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg2 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg3 " class="object" width="300" height="300"></td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg4" width="300" height="300"></td>
-                                <td><img id="contentImg5" width="300" height="300"></td>
-                                <td><img id="contentImg6" width="300" height="300"></td>
+                                <td><img id="contentImg4 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg5 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg6 " class="object" width="300" height="300"></td>
                             </tr>
                         </table>
                     </div>
