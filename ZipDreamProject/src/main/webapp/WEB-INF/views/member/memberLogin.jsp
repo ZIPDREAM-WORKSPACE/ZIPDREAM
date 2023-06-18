@@ -117,11 +117,6 @@
            margin-top: 250px;
         }
         
-        /* #naverlogo{
-            width: 150px;
-            bottom: 100px;
-            margin-left: 65px;
-        } */
         
         #kakaologo{
            width: 330px;
@@ -162,6 +157,14 @@
    			top:80%;
    				width:75px;
    		}
+   		
+   		#warningimg:hover {
+		  cursor: pointer;
+		}
+   		
+   		
+   		
+   		
    		
 </style>
 </head>
@@ -264,16 +267,12 @@
                 </div><br>
                 
 
-                
-
                 <button type="submit" id="loginbtn" class="btn btn-primary">로그인</button><br><br>
+            
 
-                
-                <!-- <a href=""><img src="https://ifh.cc/g/zH06zo.png" id="naverlogo"></a><br><br>-->
+                <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/yQkCA0.png" id="kakaologo"></a>&nbsp;&nbsp;&nbsp;
 
-                <a href="javascript:void(0)" onclick="kakaoLogin();"><img src="https://ifh.cc/g/yQkCA0.png" id="kakaologo"></a>
-
-
+				        <img src="https://ifh.cc/g/vppHg7.png" id="warningimg" style="width:40px">
 
             </div>
             
@@ -463,5 +462,12 @@ if (inputNumber === verificationNumber && verificationNumber != "") {
                 }
                 });
             } 
+            
+            //카카오 로그인 물음표 클릭시 나오는 알랏창
+            var img = document.getElementById("warningimg");
+
+            img.addEventListener("click", function() {
+            	swal("","카카오 로그인은 이메일 형식만 가능합니다!","warning");
+            });
         </script>
 
