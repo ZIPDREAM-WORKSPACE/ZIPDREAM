@@ -230,12 +230,12 @@
 	    <input class="form-control" type="password"  name="currentPw" id="currentPw"><br>
 	    
 	    <label class="myInfo_title">비밀번호 재설정</label><br>
-	    <input class="form-control" type="password"  id="password" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
+	    <input class="form-control" type="password"  id="password"  name="newPw" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
 	    <span id="passwordError" style="color: red; font-size: 13px;" ></span>
         <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
         
 	    <label class="myInfo_title">비밀번호 확인</label><br>
-	    <input class="form-control" type="password" id="confirmPassword" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
+	    <input class="form-control" type="password" id="confirmPassword" name="newPwdConfirm" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
 	    <span id="confirmMessage" style="color: red; font-size: 13px;"></span><br>
       </div>
       
@@ -345,7 +345,7 @@ function execPostCode() {
            $("[name=addr2]").val(fullRoadAddr);
            
            document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
-           document.getElementById('addr2').value = fullAddr;
+           document.getElementById('addr2').value = fullRoadAddr;
        }
     }).open();
 }
@@ -600,13 +600,18 @@ function checkPasswordValidity() {
 			success : function(result){
 				if(result ==1){
 					console.log("탈퇴성공");
-					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
-					
 					$.ajax({
 						url : "<%=request.getContextPath()%>/member/sessionOut",
 						success : function(data){
 							console.log("성공");
-							move();
+							swal({
+								title : "탈퇴완료",
+								text : "그동안 이용해주셔서 감사합니다.",
+								icon : "success",
+								closeOnclickOutside : false
+							}).then(function(){
+								  location.href="<%=request.getContextPath()%>";
+							})
 						},
 						error : function(){
 							console.log("에러");
@@ -627,8 +632,6 @@ function checkPasswordValidity() {
 	})
 })
 
-function move(){
-	  location.href="<%=request.getContextPath()%>";
-  }
+
                 	 
 </script>

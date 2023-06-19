@@ -97,6 +97,9 @@
 	justify-content: center;
  	margin-top: 30px;
 }
+.swal-text{
+	text-align:center;
+}
 </style>
 </head>
 <body>
@@ -209,7 +212,7 @@
 					let userSrNo = e.target.value;
 					swal({
 						  title: "삭제하시겠습니까?",
-						  text: "공인중개사로부터 승인거절당한 매물입니다. 해당 매물 정보를 삭제하시겠습니까?",
+						  text: "공인중개사로부터 승인거절당한 매물입니다.\n해당 매물 정보를 삭제하시겠습니까?",
 						  icon: "warning",
 						  buttons: ["취소", "삭제"],
 						  buttons: true,

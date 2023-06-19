@@ -225,29 +225,50 @@ $("#back").click(function(){
 });
 
 function exitChatRoom(){
-	if(confirm("채팅방을 나가시겠습니까?")){
-		$.ajax({
-			url:"<%=request.getContextPath()%>/chat/exit",
-			data:{ chatRoomNo},
-			 async:false,
-			success : function(result){
-				// result == 1 나가기 성공
-				if(result == 1){
-					swal("","채팅방 나가기에 성공했습니다.","success");
-					location.href="<%=request.getContextPath()%>/admin/chat";
-				}else{
-					swal("","채팅방 나가기에 실패했습니다.","error");
-				}
-				// result == 0 실패 
-				
-			},
-	 		error : function(request){
-	 			console.log("에러발생");
-	 			console.log("에러코드 : "+request.status);
-	 			
-	 		}
-		})
-	}	
+	const exitResult = swal({
+		title:"채팅방을 나가시겠습니까?",
+		icon:"warning",
+		buttons:true,
+		dangerMode:true,
+		confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+		   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	})
+		   .then(function(willDelete) {
+				if(willDelete){
+			   $.ajax({
+					url:"<%=request.getContextPath()%>/chat/exit",
+					data:{ chatRoomNo},
+					 async:false,
+					success : function(result){
+						// result == 1 나가기 성공
+						if(result == 1){
+							swal({
+								text : "채팅방 나가기에 성공했습니다.",
+							    	icon  : "success",
+							    	closeOnClickOutside : false
+							}).then(function(){
+								location.href="<%=request.getContextPath()%>/admin/chat";
+							});
+					
+						}else{
+							swal("","채팅방 나가기에 실패했습니다.","error");
+						}
+						// result == 0 실패 
+						
+					},
+			 		error : function(request){
+			 			console.log("에러발생");
+			 			console.log("에러코드 : "+request.status);
+			 			
+			 		}
+				})
+		   
+		   }
+		});
+	
+	
+	
+	
 };
 
 $("#chat_msg").keyup(function(event){
