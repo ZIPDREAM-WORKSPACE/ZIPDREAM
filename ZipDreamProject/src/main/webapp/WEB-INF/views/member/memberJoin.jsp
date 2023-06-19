@@ -60,10 +60,11 @@
     }
 
     #id-text{
-        width: 170px;
+        width: 160px;
         height: 45px;
         left: 5px;
         background: #FFFFFF;
+    	margin-right: 20px;
     }
 
     #emailct{
@@ -138,7 +139,7 @@
     
     #emailchecknumber{
            position: absolute; 
-          width: 360px;
+          width: 350px;
           height: 45px;
           top: 190px;
           background: #FFFFFF;
@@ -180,7 +181,7 @@
 
     #addr1{
        position: absolute; 
-       width: 360px;
+       width: 340px;
        height: 45px;
        bottom: 340px;
        top: 755px;
@@ -210,7 +211,7 @@
              position: absolute; 
           width: 114px;
           height: 45px;
-           left: 320px; 
+           left: 333px; 
            top: 755px; 
           color: white;
           font-size: 15px;
@@ -407,8 +408,7 @@ function ok(){
     } 
       
   }); 
-    
-  
+
   //주소 가져오기
   function execPostCode() {
          new daum.Postcode({
@@ -447,10 +447,15 @@ function ok(){
                 $("[name=addr2]").val(fullRoadAddr);
                 
                 document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('addr2').value = fullAddr;
+                document.getElementById('addr2').value = fullRoadAddr;
+
             }
          }).open();
+ 		
      }
+ 
+	
+	  
   
   //아이디 중복검사
   $("#emailCheck").on("click", function() {

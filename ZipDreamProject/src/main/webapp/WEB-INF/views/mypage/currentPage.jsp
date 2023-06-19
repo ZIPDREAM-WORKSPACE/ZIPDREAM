@@ -130,6 +130,8 @@
 						if(result != ""){
 							html = "<div class='recentRoomList'><div class='sliderinfor'><p>최근 본 방은 최대 5개까지 저장됩니다.</p></div><div class='row row-cols-1 row-cols-md-5 g-4'>";
 							for(var i = 0; i<result.length; i++){
+								console.log("최근본방 가격: "+result[i].sellPrice);
+								/* var sp = result[i].sellPrice */
 								html += "<div class='col'><div onclick='moveDetail(this);' class='card h-100' id='"+result[i].sellNo+"'>";
 								if(result[i].filePath != null){
 									html += "<img src='${pageContext.request.contextPath}"+ "/resources/sellupfiles/"+result[i].filePath +"' class='card-img-top'>";
@@ -137,7 +139,7 @@
 									html += "<img src='https://ifh.cc/g/dtv18m.png' class='card-img-top'>";
 								}
 								html += "<div class='card-body'><h5 class='card-title'>" + result[i].sellName +"</h5>";
-								html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "</p>";
+								html += "<p class='card-text'>" + result[i].sellType+ "/" + result[i].sellPrice + "(단위:만원)</p>";
 								html += "<p class='card-text'>" + result[i].sellAddress + "</p></div></div></div>";
 							}
 							html += "</div></div>";

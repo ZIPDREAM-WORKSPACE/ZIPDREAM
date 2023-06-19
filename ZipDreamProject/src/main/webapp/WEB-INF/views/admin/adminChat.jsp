@@ -102,9 +102,17 @@ $(".deleteChat").click(function(){
 	 console.log(checkedList.length);
 	 for(let i = 0; i<checkedList.length; i++){
 		 deleteRoom(checkedList[i].value);
-		 
 	 }
-	 swal("","채팅방을 삭제했습니다.","success");
+	if(checkedList.length != 0){
+	 swal({
+			text : "채팅방을 삭제했습니다.",
+		    	icon  : "success",
+		    	closeOnClickOutside : false
+		}).then(function(){
+			 location.href="<%=request.getContextPath()%>/admin/chat";
+		});
+	 
+	};
 });
 
 
@@ -127,8 +135,6 @@ function deleteRoom(chatRoomNo){
 		success : function(result){
 			// result == 1 나가기 성공
 			if(result >= 1){
-				
-				location.href="<%=request.getContextPath()%>/admin/chat";
 			}else{
 				swal("","채팅방 삭제가 실패했습니다.","error")
 			}
