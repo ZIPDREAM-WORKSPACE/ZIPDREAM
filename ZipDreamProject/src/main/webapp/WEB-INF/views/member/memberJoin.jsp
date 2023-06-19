@@ -447,9 +447,14 @@ function ok(){
                 
                 document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('addr2').value = fullRoadAddr;
+
             }
          }).open();
+ 		
      }
+ 
+	
+	  
   
   //아이디 중복검사
   $("#emailCheck").on("click", function() {

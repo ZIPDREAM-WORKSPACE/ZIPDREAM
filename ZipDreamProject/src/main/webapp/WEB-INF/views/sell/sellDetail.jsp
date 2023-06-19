@@ -12,6 +12,8 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <style>
 .content1 {
 	margin-top: 500px;
@@ -846,7 +848,7 @@
 	</c:if>
 	<c:if test="${sd.refUno == loginUser.userNo }">
 		<div class="content9 content margin">
-			<input type="button"  class="deleteSell radius" onclick="deleteSell();" value="매물삭제하기">
+			<input type="button"  class="radius" onclick="deleteSell();" value="매물삭제하기">
 	    </div>
 	</c:if>
 	
@@ -1160,8 +1162,11 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				if(result >= 1){
 					swal("", "신고가 등록되었습니다.", "success").then($("#reportInsertModal").modal("hide"));					
 				}else {
-					swal("", "신고 등록 실패.", "error").then($("#reportInsertModal").modal("hide"));
+					swal("신고 등록 실패", "다시 신고를 진행해주세요.", "error").then($("#reportInsertModal").modal("hide"));
 				}
+			},
+			complete : function(){
+				$(".reportContent").val("");
 			}
 		});
 	}
@@ -1244,26 +1249,97 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
             swal("", "로그인 후 이용하실 수 있습니다.", "error");
         } 
 	}
-	/* 게시글 삭제하기  */
-	function deleteSell(){
-		$.ajax({
-			url : "<%=request.getContextPath()%>/sell/deleteSell",
-			data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
-			type : "post",
-			success : function(data){
-				console.log("게시글 삭제 완료");
-				swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
-				move();
-			},
-			error : function(){
-				console.log("게시글 삭제 실패");
-				swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
-			}
+	<%-- $(function(){
+		$(".deleteSell").on("click",function(){
+			console.log("클릭?");
+			Swal.fire({
+				   title: '매물 삭제',
+				   text: '매물을 삭제하시겠습니까?',
+				   icon: 'warning',
+				   
+				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+				   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+				   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+				   confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+				   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+				   
+				   reverseButtons: true, // 버튼 순서 거꾸로
+				   
+				}).then(result => {
+				   // 만약 Promise리턴을 받으면,
+				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+					   function deleteSellBaord(){
+							$.ajax({
+								url : "<%=request.getContextPath()%>/sell/deleteSell",
+								data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
+								type : "post",
+								success : function(data){
+									console.log("게시글 삭제 완료");
+									swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
+									move();
+								},
+								error : function(){
+									console.log("게시글 삭제 실패");
+									swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
+								}
+							})
+						}
+						function move(){
+							location.href='<%=request.getContextPath()%>/agent/list';
+						};
+				      /* Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success'); */
+				   }
+				});
 		})
+	}) --%>
+	function deleteSell(){
+		Swal.fire({
+			   title: '매물 삭제',
+			   text: '매물을 삭제하시겠습니까?',
+			   icon: 'warning',
+			   
+			   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+			   confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+			   
+			   reverseButtons: true, // 버튼 순서 거꾸로
+			   
+			}).then(result => {
+			   // 만약 Promise리턴을 받으면,
+			   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+				
+						$.ajax({
+							url : "<%=request.getContextPath()%>/sell/deleteSell",
+							data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
+							type : "post",
+							success : function(data){
+								console.log("게시글 삭제 완료");
+								swal({
+									title : "삭제 완료",
+									text : "매물이 삭제되었습니다.",
+									icon : "success",
+									closeOnclickOutside : false
+								}).then(function(){
+									location.href='<%=request.getContextPath()%>/agent/list';
+								})
+								
+							},
+							error : function(){
+								console.log("게시글 삭제 실패");
+								swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
+							}
+						})
+					
+					<%-- function move(){
+						location.href='<%=request.getContextPath()%>/agent/list';
+					};
+			      /* Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success'); */ --%>
+			   }
+			});
 	}
-	function move(){
-		location.href='<%=request.getContextPath()%>/agent/list';
-	};
+	
 	
 	let refRno ="";
 	function deleteReply(refRno){
