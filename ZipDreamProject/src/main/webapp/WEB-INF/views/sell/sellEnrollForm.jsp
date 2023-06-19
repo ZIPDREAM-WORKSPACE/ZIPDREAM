@@ -110,6 +110,9 @@
 	.picture_one, .picture_two {
 		display: inline-block;
 	}
+	.object{
+		object-fit : cover;	
+	}
 	
 	#picture {
 		display: flex;
@@ -250,18 +253,18 @@
                         <table>
                             <tr>
                                 <td colspan="3" rowspan="3" align="center"> <!-- 미리보기 -->
-                                <img id="titleImg" width="400" height="600">
+                                <img id="titleImg" class="object" width="400" height="600">
                                 </td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg1" width="300" height="300"></td>
-                                <td><img id="contentImg2" width="300" height="300"></td>
-                                <td><img id="contentImg3" width="300" height="300"></td>
+                                <td><img id="contentImg1 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg2 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg3 " class="object" width="300" height="300"></td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg4" width="300" height="300"></td>
-                                <td><img id="contentImg5" width="300" height="300"></td>
-                                <td><img id="contentImg6" width="300" height="300"></td>
+                                <td><img id="contentImg4 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg5 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg6 " class="object" width="300" height="300"></td>
                             </tr>
                         </table>
                     </div>
@@ -298,7 +301,7 @@
                     <tbody>
                         <tr>
                             <th>*매매가</th>
-                            <td><input type="text" name="sellPrice" required size="100" placeholder="해당 매물의 매매가를 '만단위'로 입력해주세요.(ex. 17억 5000만원 => 170005000)"></td>
+                            <td><input type="text" name="sellPrice" required size="100" placeholder="해당 매물의 매매가를 '만단위'로 입력해주세요.(ex. 17억 5000만원 => 175000)"></td>
                         </tr>
                         <tr>
                             <th>*관리비</th>
@@ -324,7 +327,7 @@
 				<p id="p">매물에 대한 상세정보 입련란입니다.</p>
             </div>
             <div class="margin">
-            	<input type="file" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
+            	<input type="file" class="object" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
             	<img id="secondImg" width="900" height="500">
             </div>
             <div class="info margin">
@@ -336,15 +339,15 @@
                         </tr>
                         <tr>
                             <th>전용/공급면적</th>
-                            <td><input type="text" name="sellPrivateArea" size="45" placeholder="해당 매물의 전용면적을 입력해주세요.">/<input type="text" name="sellProvideArea"  size="45" placeholder="해당 매물의 공급면적을 입력해주세요."></td>
+                            <td><input type="text" name="sellPrivateArea" size="40" placeholder="해당 매물의 전용면적을 숫자만 입력해주세요.">m²/<input type="text" name="sellProvideArea"  size="40" placeholder="해당 매물의 공급면적을 숫자만 입력해주세요.">m²</td>
                         </tr>
                         <tr>
                             <th>해당층/건물층</th>
-                            <td><input type="text" name="sellFloor" size="45" placeholder="해당 매물의 층 수를 입력해주세요.">/<input type="text" name="sellAllFloor" size="45" placeholder="해당 매물의 건물 층 수를 입력해주세요."></td>
+                            <td><input type="text" name="sellFloor" size="45" placeholder="해당 매물의 층 수를 숫자만 입력해주세요.">층/<input type="text" name="sellAllFloor" size="45" placeholder="해당 매물의 건물 층 수를 입력해주세요.">층</td>
                         </tr>
                         <tr>
                             <th>방수/욕실수</th>
-                            <td><input type="text" name="sellRoomCount" size="45" placeholder="해당 매물의 방 개수를 입력해주세요.">/<input type="text" name="sellToiletCount"  size="45" placeholder="해당 매물의 건물 층 수를 입력해주세요."></td>
+                            <td><input type="text" name="sellRoomCount" size="45" placeholder="해당 매물의 방 개수를 입력해주세요.">개/<input type="text" name="sellToiletCount"  size="45" placeholder="해당 매물의 건물 층 수를 숫자만 입력해주세요.">개</td>
                         </tr>
                         <tr>
                             <th>방향</th>
@@ -352,7 +355,7 @@
                         </tr>
                         <tr>
                             <th>해당 면적 세대수</th>
-                            <td><input type="text" name="sellHousehold"  size="100" placeholder="해당 매물의 면적 세대수를 입력해주세요."></td>
+                            <td><input type="text" name="sellHousehold"  size="100" placeholder="해당 매물의 면적 세대수를 입력해주세요.">세대</td>
                         </tr>
                         <tr>
                             <th>현관타입</th>
@@ -376,7 +379,7 @@
                         </tr>
                         <tr>
                             <th>세대주차대수</th>
-                            <td><input type="text" name="parkingCount" size="100" placeholder="해당 매물의 세대별 주차가능한 수를 입력해주세요."></td>
+                            <td><input type="text" name="parkingCount" size="100" placeholder="해당 매물의 세대별 주차가능한 수를 입력해주세요.">대</td>
                         </tr>
                         <tr>
                             <th>사용승인일</th>
@@ -406,11 +409,11 @@
                         </tr>
                         <tr>
                             <th>총 동 수</th>
-                            <td><input type="text" name="wingCount"  size="100" placeholder="해당 매물이 속해있는 단지의 총 동수를 입력해주세요."></td>
+                            <td><input type="text" name="wingCount"  size="100" placeholder="해당 매물이 속해있는 단지의 총 동수를 입력해주세요.">동</td>
                         </tr>
                         <tr>
                             <th>총 세대 수</th>
-                            <td><input type="text" name="householdCount"  size="100" placeholder="해당 매물이 속해있는 총 세대 수를 입력해주세요."></td>
+                            <td><input type="text" name="householdCount"  size="100" placeholder="해당 매물이 속해있는 총 세대 수를 입력해주세요.">세대</td>
                         </tr>
                     </tbody>
                 </table>

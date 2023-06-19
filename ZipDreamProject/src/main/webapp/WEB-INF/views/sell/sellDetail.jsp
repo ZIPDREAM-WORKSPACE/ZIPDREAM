@@ -45,9 +45,10 @@
 
 .sell_no {
 	border: 1px solid lightgray;
-	width: 10%;
+	width: 150px;
 	height: 10%;
 	margin-top: 20px;
+	text-align: center;
 }
 
 .sell_no>span {
@@ -79,18 +80,20 @@
 
 .sell_like {
 	width: 12%;
-	margin-right : 50px;
+	margin : 15px 30px 0px 10px;
+	
 }
 
 #sellLike {
-	border: 1px solid black;
-	width:6rem;
+	border: 1px solid lightgray;
+	width:100px;
 	height: 2.3rem;
 	
 }
 
 #sellLike>span {
 	font-size: 0.8rem;
+	vertical-align: inherit;
 }
 
 #like_img {
@@ -158,12 +161,16 @@
 	    justify-content: center;
 	align-items: center;
 }
+.object{
+	object-fit : cover;
+}
 
 .content {
 	width: 70%;
 }
 
 .content3 {
+	margin-top : 100px;
 	width: 70%;
 	height: 20rem;
 }
@@ -179,6 +186,7 @@
 }
 
 .content4 {
+	margin-top : 100px;
 	height: 80rem;
 }
 
@@ -196,7 +204,7 @@
 	width: 15%;
 }
 
-.content6, .content7, .content8, .content10 {
+.content4,.content6, .content7, .content8, .content10 {
 	margin-top: 80px;
 }
 /*주변정보*/
@@ -278,17 +286,18 @@
 
 .lastBox {
 	
-	border: 1px solid gray;
+	border : 2px solid lightgray;
 	width: 95%;
 	height: 15rem;
 	display: flex;
 }
 .Boardbox{
+ 
 	margin-top : 20px;
 }
 .boardBox {
 	padding-top : 20px;
-	border-right: 1px solid gray;
+	border-right: 1px solid lightgray;
 	width: 55%;
 	height: 15rem;
 }
@@ -309,7 +318,7 @@
 
 #boardContent {
 	margin-top : 15px;
-	border: 1px solid gray;
+	border: 1px solid lightgray;
 	margin-left: 15px;
 	width: 95%;
 	height: 70%;
@@ -367,15 +376,23 @@
 .deleteImg, .reportImg{
 	vertical-align: baseline;
 	margin-left : 10px;
+	cursor: pointer;
 }
 .boardWriter{
 	display : flex;
 	justify-content: center;
 }
+.deleteReply, .reportReply{
+	cursor: pointer;
+	margin-right : 8px;
+}
 
 
 /* modal css */
-
+#modalname{
+	font-size: 1.5rem;
+	font-weight: 900;
+}
 .modalContent {
 	display:flex;
 	align-items:center;
@@ -385,6 +402,7 @@
 
 .modalBody {
 	max-width: 600px;
+	border-radius: 10px;
 }
 
 .modalFooter {
@@ -401,7 +419,9 @@
 .block{
 	height : 20rem;
 }
-
+.applyContent{
+	padding : 10px 10px;
+}
 /* 이미지 마우스 올리면 커지게  */
 
 </style>
@@ -453,7 +473,7 @@
 	<div class="content1 margin">
         <div class="sell_title">
             <div class="sell_no radius">
-                <span>매물번호 : ${sd.sellNo} </span>
+                매물번호 : ${sd.sellNo}
             </div>
             <div class="sell_name">
                 <p>${sd.sellName }</p>
@@ -527,33 +547,33 @@
  						<c:if test="${!empty sd.imgList}"> 
  							<tr>
                             	<td colspan="3" rowspan="3" align="center">
-                            	<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="600" height="600">
+                            	<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[0].changeName}" id="titleImg" width="600" height="600">
                             	</td>
                         	</tr>
  							<%-- <c:forEach var="i" begin="1" end="${(fn:length(sd.imgList)-1) < 2 ? fn:length(sd.imgList)-1 : fn:length(sd.imgList)-2}"> --%>
 			 						<tr>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[1].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[1].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[1].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[2].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[2].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[2].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[3].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[3].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[3].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							
@@ -561,26 +581,26 @@
 			                        <tr>
 			                        	<td>
 			 								<c:if test="${!empty sd.imgList[4].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[4].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[4].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[5].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[5].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[5].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img  class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			 							<td>
 			 								<c:if test="${!empty sd.imgList[6].changeName }">
-			 									<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg1" width="300" height="300">
+			 									<img class="object" src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[6].changeName}" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 								<c:if test="${empty sd.imgList[6].changeName }">
-			 									<img id="contentImg1" width="300" height="300">
+			 									<img class="object" id="contentImg1" width="300" height="300">
 			 								</c:if>
 			 							</td>
 			                        	
@@ -704,7 +724,7 @@
 		        <div class="info_pic margin">
 		        <c:if test="${!empty sd.imgList }">
 		        	<c:forEach begin="${fn:length(sd.imgList)-1}" var="i" end="${fn:length(sd.imgList)-1}">
-		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" class="object" id="secondImg" width="900" height="500">
 		        	</c:forEach>
 		        </c:if>
 		        </div>
@@ -721,15 +741,15 @@
                     </tr>
                     <tr>
                         <th>전용/공급면적</th>
-                        <td>${sd.sellPrivateArea}/${sd.sellProvideArea }</td>
+                        <td>${sd.sellPrivateArea}m²/${sd.sellProvideArea }m²</td>
                     </tr>
                     <tr>
                         <th>해당층/건물층</th>
-                        <td>${sd.sellFloor} /${sd.sellAllFloor }</td>
+                        <td>${sd.sellFloor}층 /${sd.sellAllFloor }층</td>
                     </tr>
                     <tr>
                         <th>방수/욕실수</th>
-                        <td>${sd.sellRoomCount } /${sd.sellToiletCount }</td>
+                        <td>${sd.sellRoomCount }개 /${sd.sellToiletCount }개</td>
                     </tr>
                     <tr>
                         <th>방향</th>
@@ -737,7 +757,7 @@
                     </tr>
                     <tr>
                         <th>해당 면적 세대수</th>
-                        <td>${sd.sellHousehold }</td>
+                        <td>${sd.sellHousehold }세대</td>
                     </tr>
                     <tr>
                         <th>현관타입</th>
@@ -761,7 +781,7 @@
                     </tr>
                     <tr>
                         <th>세대주차대수</th>
-                        <td>${sd.parkingCount }</td>
+                        <td>${sd.parkingCount }대</td>
                     </tr>
                     <tr>
                         <th>사용승인일</th>
@@ -787,12 +807,12 @@
                         <td>${sd.complexApplyDatetime }</td>
                     </tr>
                     <tr>
-                        <th>방종류</th>
-                        <td>${sd.wingCount }</td>
+                        <th>총 동 수</th>
+                        <td>${sd.wingCount }동</td>
                     </tr>
                     <tr>
                         <th>총 세대 수</th>
-                        <td>${sd.householdCount }</td>
+                        <td>${sd.householdCount }세대</td>
                     </tr>
                 </tbody>
             </table>
@@ -879,7 +899,7 @@
 							<div class="modalContent">
 								<img class="rig" src="<%= request.getContextPath() %>/${attachment.filePath}/${attachment.changeName}" width="150px"
 									style="object-fit:cover;border-radius:10px;">
-								<div class="modalBody" align="left" style="border:1px solid black;padding:10px;">
+								<div class="modalBody" align="left" style="border:0.8px solid lightgray; padding:10px;">
 									<p id="seller_name">${seller.office }</p>
 									<p id="seller_address">소재지 : ${seller.address }</p>
 									<p id="seller_number">이름 : ${seller.userName }</p>
@@ -1007,9 +1027,9 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 								  "<div class='boardHead'>"+
 									"<span class='writer'>"+board.userName+"</span>";
 									if(board.refUno == ${loginUser.userNo}){
-										html +="<img src='"+url+"' width='20' height='20' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
+										html +="<img src='"+url+"' width='16' height='18' class='deleteImg' onclick='deleteBoard("+board.detailBoardNo+");'>";
 									}else{
-										html += "<img src='"+url2+"' width='20' height='20' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+										html += "<img src='"+url2+"' width='18' height='18' class='reportImg' onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ board.refUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
 									}
 									html +="</div>"+
 									"<div id='boardContent'>"+
@@ -1039,9 +1059,9 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 						rel+="<div class='rBox'>";
 						rel += "<p id='reply'>"+list[j].userName+" : "+list[j].replyContent+"</p>";
 						if(${loginUser.userNo} == list[j].replyRefUno){
-							rel+="<img src='"+url+"' width='18' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
+							rel+="<img src='"+url+"' width='13' height='15' class='deleteReply' onclick='deleteReply("+list[j].replyNo+");'>";
 						}else{
-							rel+="<img src='"+url2+"' width='15' height='15' class='deleteReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
+							rel+="<img src='"+url2+"' width='15' height='15' class='reportReply'  onclick='$(\".reportInsertBtn\").attr(\"onclick\",\"insertReport(1,"+ list[j].replyRefUno +")\");$(\"#reportInsertModal .modal-title\").text(\"사용자 신고\");$(\"#reportInsertModal\").modal(\"show\");'>";
 						}
 						rel += "</div>";
 					}
@@ -1105,7 +1125,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 		});
 		return replyList;
 	}
-	
+<%-- 	
 	function deleteBoard(refBno){
 		console.log(refBno);
 		detailBoardNo  = refBno;
@@ -1121,7 +1141,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			}
 		})
 	}
-	
+	 --%>
 
 	
 	/* 신고 등록 함수 */
@@ -1161,9 +1181,13 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				if(result >= 1){
 					swal("", "상담신청이 완료되었습니다.", "success").then($("#modal").modal("hide"));
 					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
+					
 				}else {
 					swal("", "상담신청 등록 실패.", "error").then($("#modal").modal("hide"));
 				}
+			},
+			complete : function(){
+				$(".applyContent").val("");
 			}
 		});
 	}
@@ -1272,5 +1296,22 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 		})
 	}
 	
+	/* 게시글 삭제 확인창  */
+	
+	 function deleteBoard(refBno){
+			console.log(refBno);
+			detailBoardNo  = refBno;
+			$.ajax({
+				url : "<%=request.getContextPath()%>/board/deleteBoard",
+				data : {detailBoardNo},
+				type: "post",
+				success : function(result){
+					swal("삭제 완료", "등록된 게시글을 삭제하였습니다.", "success");
+				},
+				complete : function(){
+					boardList();
+				}
+			})
+		}
 </script>
 </html>

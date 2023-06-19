@@ -449,7 +449,12 @@ html::-webkit-scrollbar {
 	    event.preventDefault();
 	  };
 	});
-	
+	 function removeAllChildNods(el) {   
+		   /*  while (el.hasChildNodes) {
+		        el.removeChild(el.lastChild);
+		    } */
+		    el.innerHTML = "";
+		}
 
 	address = "";
 	addressX = 0;
@@ -510,9 +515,9 @@ html::-webkit-scrollbar {
 	    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
 	    	                       			 for(var k=0; k<tagArr.length; k++){
 	    	                       				 if(k==tagArr.length-1){
-	    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+	    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
 	    	                       				 }else{
-		    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+		    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
 	    	                       				 }
 	    	                       				 
 	    	                       			 }
@@ -664,7 +669,7 @@ html::-webkit-scrollbar {
 			  
 			    var arr = [...str];
 			    var arrLeng = arr.length-5;  
-
+			   
 			  	arr.splice(arrLeng, 0, "억");
 			  	
 			  	var resultStr = arr.join('');
@@ -695,11 +700,7 @@ html::-webkit-scrollbar {
 			  	
 		  	}
 		  
-		  function removeAllChildNods(el) {   
-			    while (el.hasChildNodes()) {
-			        el.removeChild (el.lastChild);
-			    }
-			}
+		  
 			// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 			  function removeMarker() {
 			      for ( var i = 0; i < markers.length; i++ ) {
@@ -708,7 +709,7 @@ html::-webkit-scrollbar {
 			      markers = [];
 			  }
 			  removeAllChildNods(listEl);
-			  
+			  removeMarker();
 			  
 	}else{
 		console.log("에러");
@@ -772,12 +773,11 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.');
+        swal("",'검색 결과가 존재하지 않습니다.',"warning");
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
-
-        alert('검색 결과 중 오류가 발생했습니다.');
+    	 swal("",'검색 결과 중 오류가 발생했습니다.',"error");
         return;
 
     }
@@ -935,12 +935,6 @@ function displayInfowindow(marker, title) {
     infowindow.open(map, marker);
 }
 
- // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-function removeAllChildNods(el) {   
-    while (el.hasChildNodes()) {
-        el.removeChild (el.lastChild);
-    }
-}
  
 //주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -1079,13 +1073,12 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
     			    	                       			 for(var k=0; k<tagArr.length; k++){
     			    	                       				 if(k==tagArr.length-1){
-    			    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+    			    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
     			    	                       				 }else{
-	    			    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+	    			    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
     			    	                       				 }
     			    	                       				 
     			    	                       			 }
-    			    	                       			 
     			    	                       			 let tagMarr = tagMoney.split(" ");
     			    	                       			 let tagParr =  tagMarr.map(Number);
     			    	                       			 
@@ -1223,7 +1216,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  
     						    var arr = [...str];
     						    var arrLeng = arr.length-5;  
-
+      						    
     						  	arr.splice(arrLeng, 0, "억");
     						  	
     						  	var resultStr = arr.join('');
@@ -1254,11 +1247,6 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     						  	
     					  }
     					  
-    					  function removeAllChildNods(el) {   
-    						    while (el.hasChildNodes()) {
-    						        el.removeChild (el.lastChild);
-    						    }
-    						}
     					// 지도 위에 표시되고 있는 마커를 모두 제거합니다
     					  function removeMarker() {
     					      for ( var i = 0; i < markers.length; i++ ) {
@@ -1268,7 +1256,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     					  }
     					  
     					  removeAllChildNods(listEl);
-    			  		  
+    					  removeMarker();
     				  }
     			
               });
@@ -1338,8 +1326,12 @@ $("#comOkOj").click(function(){
 						var str = result[i].sellPrice;
 					  
 					    var arr = [...str];
-					    var arrLeng = arr.length-5;  
-
+					    var arrLeng = arr.length-4;  
+						
+					    if(str.slice(-4) == '0,000'){
+					    	arr.pop();arr.pop();arr.pop();arr.pop();
+					    }
+					    
 					  	arr.splice(arrLeng, 0, "억");
 					  	
 					  	var resultStr = arr.join('');
@@ -1468,9 +1460,9 @@ $("#keyword").keyup(function(){
 	    			    	                       			 // 해당 li태그의 모든 시세값을 가져온다.
 	    			    	                       			 for(var k=0; k<tagArr.length; k++){
 	    			    	                       				 if(k==tagArr.length-1){
-	    			    	                       					 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","");
+	    			    	                       					 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","");
 	    			    	                       				 }else{
-		    			    	                       				 tagMoney += tagArr[k].innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
+		    			    	                       				 tagMoney += tagArr[k].firstChild.innerHTML.split("<br>")[0].replace("억","").replace(",","")+" ";
 	    			    	                       				 }
 	    			    	                       				 
 	    			    	                       			 }
@@ -1603,7 +1595,7 @@ $("#keyword").keyup(function(){
   						  
   						    var arr = [...str];
   						    var arrLeng = arr.length-5;  
-
+  						  
   						  	arr.splice(arrLeng, 0, "억");
   						  	
   						  	var resultStr = arr.join('');
@@ -1634,11 +1626,7 @@ $("#keyword").keyup(function(){
   						  	
   					  	}
 						  
-						  function removeAllChildNods(el) {   
-  						    while (el.hasChildNodes()) {
-  						        el.removeChild (el.lastChild);
-  						    }
-  						}
+						 
 	  					// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 	  					  function removeMarker() {
 	  					      for ( var i = 0; i < markers.length; i++ ) {
@@ -1648,6 +1636,7 @@ $("#keyword").keyup(function(){
 	  					  }
 	  					  
 	  					  removeAllChildNods(listEl);
+	  					removeMarker();
 					}
 					  
 				  }
