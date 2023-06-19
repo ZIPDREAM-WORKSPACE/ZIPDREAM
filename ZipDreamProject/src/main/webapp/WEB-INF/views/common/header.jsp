@@ -299,7 +299,7 @@ position: absolute;
 				(message.refUno==currentUserNo&&message.dealType!=null&&message.refRuno!=null) || 
 				(message.refUno==currentUserNo&&message.counsleMethod !=null &&message.refTuno==0) ||
 				(message.refTuno==currentUserNo&&message.counsleMethod !=null&&message.refUno!=null) || 
-				(message.refRuno==currentUserNo && message.dealType != null)){
+				(message.refUno==0&&message.refRuno==currentUserNo && message.dealType != null)){
 			
 			createNotice();
 		}

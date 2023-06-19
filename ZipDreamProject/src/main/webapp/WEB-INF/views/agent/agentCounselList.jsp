@@ -323,7 +323,7 @@
 			type : "POST",
 			success : function(result){
 				if(result >= 1){
-					console.log("신청상태 거절 완료");
+					sendMessage5(method,refUno);
 					swal("", "상담신청을 수락하였습니다.", "success")
 					.then( function (isConfirm) {
 						if (!isConfirm) return;
