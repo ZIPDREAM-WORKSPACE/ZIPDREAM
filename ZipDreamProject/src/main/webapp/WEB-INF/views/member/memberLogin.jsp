@@ -277,9 +277,9 @@
             </div>
             
         </div>
-   </form>
-       
+   </form>    
     </div>
+    <jsp:include page="../common/footer.jsp" />
 <script>
 
 //아이디 찾기
