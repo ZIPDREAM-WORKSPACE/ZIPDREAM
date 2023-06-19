@@ -963,7 +963,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 	    .then(response => response.text())
 	    .then(result => loremIpsum.innerHTML = result) */ --%>
 
-	
+	let houseSock = new SockJS("<%=request.getContextPath()%>/notice"); 	
 	$(function(){
 	    $(".contect").click(function(){
 	        /* $(".modal-overlay").show();
@@ -1184,8 +1184,8 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			type: "post",
 			success : function(result){
 				if(result >= 1){
-					swal("", "상담신청이 완료되었습니다.", "success").then($("#modal").modal("hide"));
 					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
+					swal("", "상담신청이 완료되었습니다.", "success").then($("#modal").modal("hide"));
 					
 				}else {
 					swal("", "상담신청 등록 실패.", "error").then($("#modal").modal("hide"));
