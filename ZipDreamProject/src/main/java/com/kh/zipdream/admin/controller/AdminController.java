@@ -303,11 +303,12 @@ public class AdminController {
 				Model model,
 				ChatRoomJoin join,
 				@PathVariable("chatRoomNo") int chatRoomNo,
-				RedirectAttributes ra) {
+				RedirectAttributes ra,
+				 HttpSession session) {
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("cno", join.getChatRoomNo());
 		map.put("uno", loginUser.getUserNo());
-		
+		Map<String,String> alertMsg = new HashMap<String,String>();
 		int result = chatService.selectChatRoomjoin(map);
 		
 	if(result<1) {
@@ -329,8 +330,10 @@ public class AdminController {
 			model.addAttribute("mlist",mlist);
 			return "admin/adminChatDetail";
 		}else {
-			ra.addFlashAttribute("alertMsg","채팅방이 존재하지 않습니다.");
-			return  "admin/chat";
+			 alertMsg.put("message", "채팅방이 존재하지 않습니다.");
+				alertMsg.put("type", "warning");
+				ra.addFlashAttribute("alertMsg",alertMsg);
+			return  "redirect:/admin/chat";
 		}
 	}
 

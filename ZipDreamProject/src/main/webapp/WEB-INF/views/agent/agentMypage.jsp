@@ -230,12 +230,12 @@
 	    <input class="form-control" type="password"  name="currentPw" id="currentPw"><br>
 	    
 	    <label class="myInfo_title">비밀번호 재설정</label><br>
-	    <input class="form-control" type="password"  id="password" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
+	    <input class="form-control" type="password"  id="password"  name="newPw" onkeyup="checkPasswordValidity()" style="margin-bottom:5px;">
 	    <span id="passwordError" style="color: red; font-size: 13px;" ></span>
         <span id="passwordMessage" style="color: green; font-size: 13px;"></span><br>
         
 	    <label class="myInfo_title">비밀번호 확인</label><br>
-	    <input class="form-control" type="password" id="confirmPassword" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
+	    <input class="form-control" type="password" id="confirmPassword" name="newPwdConfirm" onkeyup="checkPasswordMatch()"  style="margin-bottom:5px;">
 	    <span id="confirmMessage" style="color: red; font-size: 13px;"></span><br>
       </div>
       
