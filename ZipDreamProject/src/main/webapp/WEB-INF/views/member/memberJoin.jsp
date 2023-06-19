@@ -60,10 +60,11 @@
     }
 
     #id-text{
-        width: 170px;
+        width: 160px;
         height: 45px;
         left: 5px;
         background: #FFFFFF;
+    	margin-right: 20px;
     }
 
     #emailct{
@@ -138,7 +139,7 @@
     
     #emailchecknumber{
            position: absolute; 
-          width: 360px;
+          width: 350px;
           height: 45px;
           top: 190px;
           background: #FFFFFF;
@@ -180,7 +181,7 @@
 
     #addr1{
        position: absolute; 
-       width: 360px;
+       width: 340px;
        height: 45px;
        bottom: 340px;
        top: 755px;
@@ -210,7 +211,7 @@
              position: absolute; 
           width: 114px;
           height: 45px;
-           left: 320px; 
+           left: 333px; 
            top: 755px; 
           color: white;
           font-size: 15px;
