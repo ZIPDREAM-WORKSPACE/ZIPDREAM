@@ -209,7 +209,7 @@
             <button type="button" class="btn btn-outline-secondary" id="emailCheck" >인증번호</button>
             
             <p class="textTitle">인증번호</p><input  class="emailchecknumber form-control" id="emailchecknumber" type="text" name="emailchecknumber"  placeholder="인증번호를 입력해주세요" style="width:320px;">
-            <button type="button" class="btn btn-outline-secondary" id="emailsamecheck" >중복확인</button>
+            <button type="button" class="btn btn-outline-secondary" id="emailsamecheck" >확인</button>
            
            
         </div>

@@ -832,7 +832,7 @@ display:  block;
 		<div class="news_slider">
 		</div>
 		<div id="more">
-			<a href="https://land.naver.com/news/headline.naver" id="more_text" >더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
+			<a href="https://land.naver.com/news/headline.naver"  target='_blank' id="more_text" >더보기&nbsp;&nbsp;<span><img id="arrow" src='https://ifh.cc/g/whCxm8.png' border='0'></span> </a>
 		</div>
 	</div>
 	<div class="main_ad2" style="margin-top:200px;">
@@ -1030,7 +1030,7 @@ display:  block;
 		 			
 		 			if(i%2==0){
 		 				text +=
-			 			'<div class="news" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+			 			'<div class="news" onclick='+'window.open("'+result.items[i].link+'")'+'><div class="news_list"><div class="news_inner">'+
 			 			'<div class="news_title">'+result.items[i].title+'</div>'+
 						'<div class="news_content">'+result.items[i].description+'</div>'+
 							'<hr class="hr_color">'+
@@ -1038,7 +1038,7 @@ display:  block;
 						'</div></div></div>';
 		 				}else{
 		 					text +=
-		 					'<div class="news news2" onclick='+'location.href="'+result.items[i].link+'"'+'><div class="news_list"><div class="news_inner">'+
+		 					'<div class="news news2" onclick='+'window.open("'+result.items[i].link+'")'+'><div class="news_list"><div class="news_inner">'+
 		 					'<div class="news_title">'+result.items[i].title+'</div>'+
 							'<div class="news_content">'+result.items[i].description+'</div>'+
 								'<hr class="hr_color">'+
