@@ -332,7 +332,7 @@
          
 
                   
-                <h5 id="license1-1">중개등록증 등록</h5>
+                <h5 id="license1-1">중개사자격증 등록</h5>
 
                 <input type="file" class="real-upload1 form-control" accept="images/*"   style="display: none;" name="imges">
                 <div class="licensebox1-1"></div>

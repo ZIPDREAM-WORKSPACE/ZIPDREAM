@@ -186,7 +186,7 @@
 	                    
 	                
 	               <!--  <div class="licensewrap2"> -->
-	                <h5 id="license1-1">중개등록증 등록</h5>
+	                <h5 id="license1-1">중개사자격증 등록</h5>
 	                <input type="file" class="real-upload1 images" accept="images/*"   style="display: none;" name="images">
 	                <div class="licensebox1-1"><li><img src="<%= request.getContextPath()%>/${images[1].filePath}/${images[1].changeName}"></li></div>
 	                <!-- </div> -->
