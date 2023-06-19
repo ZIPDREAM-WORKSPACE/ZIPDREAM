@@ -37,7 +37,8 @@
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        padding-left: 4.5%;
+        padding-left: 5.5%;
+        margin-left:630px;
     }
    
     #brokerlogin-text{

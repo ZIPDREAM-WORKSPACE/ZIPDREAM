@@ -248,7 +248,7 @@
 					  for(let i = 0; i < result.array.length; i++){
 						let report = result.array[i];
 					  	html += "<tr onclick=\"location.href='<%=request.getContextPath()%>/admin/report/detail?reportNo="+report.reportNo+"'\"><td>"+ (type == 1 ? report.tname : report.rname)+"</td><td>"+ report.reportContent+"</td>";
-					  	html += "<td>"+report.reportStatus+"</td><td>"+report.reportResult+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
+					  	html += "<td>"+report.reportStatus+"</td><td>"+(report.reportResult == null ? '' : report.reportResult)+"</td><td>"+report.reportType+"</td><td>"+report.reportDate+"</td></tr>";
 						  
 					  }
 			  	  }
