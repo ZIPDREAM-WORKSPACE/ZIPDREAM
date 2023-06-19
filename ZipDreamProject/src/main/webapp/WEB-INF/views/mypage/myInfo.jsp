@@ -312,6 +312,7 @@ $(function(){
                     
                 }else{                  
                     swal({
+
                     	title: "수정완료",
                     	text: "다시 로그인해주세요!",
                     	icon: "success",
@@ -319,7 +320,6 @@ $(function(){
                     }).then(function(){
                     	location.href="<%=request.getContextPath()%>/member/logout";
                     })
-
                 }
             },error : function(err){
             	console.log(err)
