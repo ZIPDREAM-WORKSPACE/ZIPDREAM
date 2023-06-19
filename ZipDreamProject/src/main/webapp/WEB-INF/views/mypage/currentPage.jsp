@@ -59,6 +59,9 @@
 
 .card-title {
 	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .card-text {
