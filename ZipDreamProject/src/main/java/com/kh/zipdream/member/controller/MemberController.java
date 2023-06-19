@@ -428,7 +428,7 @@ public class MemberController {
 				}
 				
 				
-				return  "redirect:/";
+				return  "redirect:/member/logout";
 				
 		}
 		
