@@ -205,7 +205,7 @@
 									element.innerHTML += '<li id="'+sellNo+'"><div style="position: relative;" calss="card" >'
 													  + '<div calss="icon" style="position: absolute;color: red;left: 90%;top: 4px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></div>'
 													  + '<img id="'+sellNo+'" class="card-img-top" src="'+url+'">'
-													  + '<div class="card-body" style="padding: 0px"><h5 class="card-title">'+sellPrice+'억</h5>'
+													  + '<div class="card-body" style="padding: 0px"><h5 class="card-title">'+sellPrice+'(단위:만원)</h5>'
 													  + '<p class="card-text">'+sellName+', '+sellFloor+'</p>'
 													  + '<p class="card-text">'+sellAddress+'</p>'+'</div></div>';
 								} else{

@@ -481,6 +481,9 @@
 .nonAgent{
 	text-align:center;
 }
+.swal-text{
+	text-align:center;
+}
 </style>
 
 </head>
