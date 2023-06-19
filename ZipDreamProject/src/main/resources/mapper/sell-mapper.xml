@@ -195,7 +195,7 @@
 		FROM COUNSLE C
 		JOIN MEMBER M ON (M.USER_NO = C.REF_UNO) 
 		JOIN SELLDETAIL S ON(S.SELL_NO = C.SELL_NO)
-		WHERE REF_TNO =#{refTno}
+		WHERE REF_TNO =#{refTno} AND S.STATUS ='Y'
 	</select>
 	
 	<select id="findkaptCode" resultMap="apiResultSet">

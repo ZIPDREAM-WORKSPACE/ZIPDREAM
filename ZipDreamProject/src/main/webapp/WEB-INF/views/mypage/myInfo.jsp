@@ -63,7 +63,18 @@
 		    width: 100px;
 		    margin-left: 425px;  
     }
-
+	.signchangebtn {
+	width: 100px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+.closedelete{
+	width: 60px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
 
 
 
@@ -225,7 +236,7 @@ function execPostCode() {
            $("[name=addr2]").val(fullRoadAddr);
            
            document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
-           document.getElementById('addr2').value = fullAddr;
+           document.getElementById('addr2').value = fullRoadAddr;
        }
     }).open();
 }
@@ -328,13 +339,20 @@ $(function(){
 			data : {userPwd2 },
 			success : function(result){
 				if(result ==1){
-					console.log("탈퇴성공");
-					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
+					
+					console.log("신청상태 거절 완료");
 					
 					$.ajax({
 						url : "<%=request.getContextPath()%>/member/sessionOut",
 						success : function(data){
-							move();
+							swal({
+								title : "탈퇴완료",
+								text : "그동안 이용해주셔서 감사합니다.",
+								icon : "success",
+								closeOnClickOutside : false
+							}).then(function(){
+								location.href="<%=request.getContextPath()%>";
+							})
 						},
 						error : function(){
 							console.log("에러");
@@ -342,6 +360,8 @@ $(function(){
 						
 					})
 					
+					
+						
 				}else{
 					console.log("탈퇴실패");
 					swal("탈퇴 실패", "비밀번호가 일치하지 않습니다. 다시입력해주세요.", "error");
@@ -355,9 +375,5 @@ $(function(){
 	})
 })
 
-function move(){
-	
-	location.href="<%=request.getContextPath()%>";
-}
 
 </script>

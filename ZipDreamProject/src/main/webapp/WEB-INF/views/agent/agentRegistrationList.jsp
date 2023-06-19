@@ -44,6 +44,7 @@
 	background-color: white;
 	border-radius: 30px;
 	margin-left: 25px;
+	border : 2px solid gray;
 }
 
 .myroomsellList {

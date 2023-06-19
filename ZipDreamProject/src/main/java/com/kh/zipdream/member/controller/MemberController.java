@@ -100,7 +100,7 @@ public class MemberController {
 	   public ModelAndView loginMember(Model model, Member m, HttpSession session, RedirectAttributes ra,
 	         HttpServletResponse resp, HttpServletRequest req, ModelAndView mv,
 	         @RequestParam(value = "saveId", required = false) String saveId) {
-		
+			
 			int emailcheck = memberService.emailCheck(m.getUserId());
 			if(emailcheck == 1) {
 		      Member loginUser = memberService.loginMember(m);
@@ -391,16 +391,16 @@ public class MemberController {
 			map.put("phone", phone);
 			map.put("address", address);
 			map.put("userNo", userNo+"");
-			
+						
 			int result = memberService.updateMember(map);
+			
 			
 			return  result;
 			
 	}
 	
 	//중개사회원 정보수정
-		@PostMapping("/updatebkMember")
-		
+		@PostMapping("/updatebkMember")	
 		public String updatebkMember(
 				HttpSession session, Model model,
 				@RequestParam(value = "phone") String phone,
@@ -417,9 +417,15 @@ public class MemberController {
 				System.out.println(map);
 				String webPath = "/resources/bkupfiles/";
 				String serverFolderPath = session.getServletContext().getRealPath(webPath);
+				Map<String,String> alertMsg = new HashMap<String,String>();
 				
-			
+				String url = "";
 				int result = memberService.updateMember(map);
+				System.out.println(imgList);
+				
+				
+								
+				
 				try {
 					result = memberService.updatebkImages(map,imgList,webPath,serverFolderPath);
 				} catch (Exception e) {
@@ -427,18 +433,31 @@ public class MemberController {
 					e.printStackTrace();
 				}
 				
-				
-				return  "redirect:/";
+				if(result > 0) {
+					alertMsg.put("message", "정보수정 완료!");
+					alertMsg.put("type", "success");
+					url = "redirect:/";
+					
+					
+				}else {
+					alertMsg.put("message", "정보수정 성공!");
+					alertMsg.put("type", "success");
+					url = "redirect:/";
+					
+				}
+				session.setAttribute("alertMsg", alertMsg);
+				return url;
 				
 		}
 		
 	
-	//일반비밀번호 변경
+	//비밀번호 변경
 	  @PostMapping("/changePw") 
 	  public String changePw(@RequestParam Map<String, Object> paramMap,
 	  
 	  @ModelAttribute("loginUser") Member loginUser, RedirectAttributes ra, SessionStatus status, HttpSession session) {
 			
+		 
 		 
 		 String newPw = bcryptPasswordEncoder.encode(paramMap.get("newPw")+"");
 		 Map<String,String> alertMsg = new HashMap<String,String>();
@@ -447,13 +466,26 @@ public class MemberController {
 			 Member m = new Member();
 			 m.setUserNo(loginUser.getUserNo());
 			 m.setUserPwd(newPw);
-			 alertMsg.put("message", "비밀번호 변경에 성공했습니다.");
-				alertMsg.put("type", "success");
-				session.setAttribute("alertMsg", alertMsg);
 			 result = memberService.updateMemberPwd(m);
 			
-		 }else {
-			
+			 if(result > 0 ) {			 
+				 alertMsg.put("message", "비밀번호 변경에 성공했습니다.");
+				 alertMsg.put("type", "success");
+				 session.setAttribute("alertMsg", alertMsg);
+			 }else {
+				 if(loginUser.getUserLevel()==1) {
+					 alertMsg.put("message", "비밀번호 변경에 실패했습니다.");
+						alertMsg.put("type", "error");
+						session.setAttribute("alertMsg", alertMsg);
+					 return "redirect:/mypage/myInfo";
+				 }else {
+					 alertMsg.put("message", "비밀번호 변경에 실패했습니다.");
+						alertMsg.put("type", "error");
+						session.setAttribute("alertMsg", alertMsg);
+					 return "redirect:/agent/mypage";
+				 }
+			 }
+		 }else {	
 			 if(loginUser.getUserLevel()==1) {
 				 alertMsg.put("message", "비밀번호 변경에 실패했습니다.");
 					alertMsg.put("type", "error");

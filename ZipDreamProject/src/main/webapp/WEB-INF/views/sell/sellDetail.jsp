@@ -12,6 +12,8 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <style>
 .content1 {
 	margin-top: 500px;
@@ -80,18 +82,20 @@
 
 .sell_like {
 	width: 12%;
-	margin-right : 50px;
+	margin : 15px 30px 0px 10px;
+	
 }
 
 #sellLike {
-	border: 1px solid black;
-	width:6rem;
+	border: 1px solid lightgray;
+	width:100px;
 	height: 2.3rem;
 	
 }
 
 #sellLike>span {
 	font-size: 0.8rem;
+	vertical-align: inherit;
 }
 
 #like_img {
@@ -284,17 +288,18 @@
 
 .lastBox {
 	
-	border: 1px solid gray;
+	border : 2px solid lightgray;
 	width: 95%;
 	height: 15rem;
 	display: flex;
 }
 .Boardbox{
+ 
 	margin-top : 20px;
 }
 .boardBox {
 	padding-top : 20px;
-	border-right: 1px solid gray;
+	border-right: 1px solid lightgray;
 	width: 55%;
 	height: 15rem;
 }
@@ -315,7 +320,7 @@
 
 #boardContent {
 	margin-top : 15px;
-	border: 1px solid gray;
+	border: 1px solid lightgray;
 	margin-left: 15px;
 	width: 95%;
 	height: 70%;
@@ -386,7 +391,10 @@
 
 
 /* modal css */
-
+#modalname{
+	font-size: 1.5rem;
+	font-weight: 900;
+}
 .modalContent {
 	display:flex;
 	align-items:center;
@@ -396,6 +404,7 @@
 
 .modalBody {
 	max-width: 600px;
+	border-radius: 10px;
 }
 
 .modalFooter {
@@ -412,7 +421,9 @@
 .block{
 	height : 20rem;
 }
-
+.applyContent{
+	padding : 10px 10px;
+}
 /* 이미지 마우스 올리면 커지게  */
 
 </style>
@@ -690,7 +701,7 @@
                 <tbody>
                     <tr>
                         <th>매매가</th>
-                        <td>${sd.sellPrice}</td>
+                        <td>${sd.sellPrice}만원</td>
                     </tr>
                     <tr>
                         <th>관리비</th>
@@ -715,7 +726,7 @@
 		        <div class="info_pic margin">
 		        <c:if test="${!empty sd.imgList }">
 		        	<c:forEach begin="${fn:length(sd.imgList)-1}" var="i" end="${fn:length(sd.imgList)-1}">
-		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" id="secondImg" width="900" height="500">
+		        		<img src="<%=request.getContextPath()%>/resources/sellupfiles/${sd.imgList[i].changeName}" class="object" id="secondImg" width="900" height="500">
 		        	</c:forEach>
 		        </c:if>
 		        </div>
@@ -732,15 +743,15 @@
                     </tr>
                     <tr>
                         <th>전용/공급면적</th>
-                        <td>${sd.sellPrivateArea}/${sd.sellProvideArea }</td>
+                        <td>${sd.sellPrivateArea}m²/${sd.sellProvideArea }m²</td>
                     </tr>
                     <tr>
                         <th>해당층/건물층</th>
-                        <td>${sd.sellFloor} /${sd.sellAllFloor }</td>
+                        <td>${sd.sellFloor}층 /${sd.sellAllFloor }층</td>
                     </tr>
                     <tr>
                         <th>방수/욕실수</th>
-                        <td>${sd.sellRoomCount } /${sd.sellToiletCount }</td>
+                        <td>${sd.sellRoomCount }개 /${sd.sellToiletCount }개</td>
                     </tr>
                     <tr>
                         <th>방향</th>
@@ -748,7 +759,7 @@
                     </tr>
                     <tr>
                         <th>해당 면적 세대수</th>
-                        <td>${sd.sellHousehold }</td>
+                        <td>${sd.sellHousehold }세대</td>
                     </tr>
                     <tr>
                         <th>현관타입</th>
@@ -772,7 +783,7 @@
                     </tr>
                     <tr>
                         <th>세대주차대수</th>
-                        <td>${sd.parkingCount }</td>
+                        <td>${sd.parkingCount }대</td>
                     </tr>
                     <tr>
                         <th>사용승인일</th>
@@ -798,12 +809,12 @@
                         <td>${sd.complexApplyDatetime }</td>
                     </tr>
                     <tr>
-                        <th>방종류</th>
-                        <td>${sd.wingCount }</td>
+                        <th>총 동 수</th>
+                        <td>${sd.wingCount }동</td>
                     </tr>
                     <tr>
                         <th>총 세대 수</th>
-                        <td>${sd.householdCount }</td>
+                        <td>${sd.householdCount }세대</td>
                     </tr>
                 </tbody>
             </table>
@@ -890,7 +901,7 @@
 							<div class="modalContent">
 								<img class="rig" src="<%= request.getContextPath() %>/${attachment.filePath}/${attachment.changeName}" width="150px"
 									style="object-fit:cover;border-radius:10px;">
-								<div class="modalBody" align="left" style="border:1px solid black;padding:10px;">
+								<div class="modalBody" align="left" style="border:0.8px solid lightgray; padding:10px;">
 									<p id="seller_name">${seller.office }</p>
 									<p id="seller_address">소재지 : ${seller.address }</p>
 									<p id="seller_number">이름 : ${seller.userName }</p>
@@ -1116,7 +1127,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 		});
 		return replyList;
 	}
-	
+<%-- 	
 	function deleteBoard(refBno){
 		console.log(refBno);
 		detailBoardNo  = refBno;
@@ -1132,7 +1143,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 			}
 		})
 	}
-	
+	 --%>
 
 	
 	/* 신고 등록 함수 */
@@ -1151,8 +1162,11 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				if(result >= 1){
 					swal("", "신고가 등록되었습니다.", "success").then($("#reportInsertModal").modal("hide"));					
 				}else {
-					swal("", "신고 등록 실패.", "error").then($("#reportInsertModal").modal("hide"));
+					swal("신고 등록 실패", "다시 신고를 진행해주세요.", "error").then($("#reportInsertModal").modal("hide"));
 				}
+			},
+			complete : function(){
+				$(".reportContent").val("");
 			}
 		});
 	}
@@ -1172,9 +1186,13 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 				if(result >= 1){
 					swal("", "상담신청이 완료되었습니다.", "success").then($("#modal").modal("hide"));
 					 sendMessage7(counsleMethod, ${seller.userNo},${loginUser.userNo});
+					
 				}else {
 					swal("", "상담신청 등록 실패.", "error").then($("#modal").modal("hide"));
 				}
+			},
+			complete : function(){
+				$(".applyContent").val("");
 			}
 		});
 	}
@@ -1231,26 +1249,97 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
             swal("", "로그인 후 이용하실 수 있습니다.", "error");
         } 
 	}
-	/* 게시글 삭제하기  */
-	function deleteSell(){
-		$.ajax({
-			url : "<%=request.getContextPath()%>/sell/deleteSell",
-			data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
-			type : "post",
-			success : function(data){
-				console.log("게시글 삭제 완료");
-				swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
-				move();
-			},
-			error : function(){
-				console.log("게시글 삭제 실패");
-				swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
-			}
+	<%-- $(function(){
+		$(".deleteSell").on("click",function(){
+			console.log("클릭?");
+			Swal.fire({
+				   title: '매물 삭제',
+				   text: '매물을 삭제하시겠습니까?',
+				   icon: 'warning',
+				   
+				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+				   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+				   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+				   confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+				   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+				   
+				   reverseButtons: true, // 버튼 순서 거꾸로
+				   
+				}).then(result => {
+				   // 만약 Promise리턴을 받으면,
+				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+					   function deleteSellBaord(){
+							$.ajax({
+								url : "<%=request.getContextPath()%>/sell/deleteSell",
+								data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
+								type : "post",
+								success : function(data){
+									console.log("게시글 삭제 완료");
+									swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
+									move();
+								},
+								error : function(){
+									console.log("게시글 삭제 실패");
+									swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
+								}
+							})
+						}
+						function move(){
+							location.href='<%=request.getContextPath()%>/agent/list';
+						};
+				      /* Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success'); */
+				   }
+				});
 		})
+	}) --%>
+	function deleteSell(){
+		Swal.fire({
+			   title: '매물 삭제',
+			   text: '매물을 삭제하시겠습니까?',
+			   icon: 'warning',
+			   
+			   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+			   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+			   confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+			   
+			   reverseButtons: true, // 버튼 순서 거꾸로
+			   
+			}).then(result => {
+			   // 만약 Promise리턴을 받으면,
+			   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+				
+						$.ajax({
+							url : "<%=request.getContextPath()%>/sell/deleteSell",
+							data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
+							type : "post",
+							success : function(data){
+								console.log("게시글 삭제 완료");
+								swal({
+									title : "삭제 완료",
+									text : "매물이 삭제되었습니다.",
+									icon : "success",
+									closeOnclickOutside : false
+								}).then(function(){
+									location.href='<%=request.getContextPath()%>/agent/list';
+								})
+								
+							},
+							error : function(){
+								console.log("게시글 삭제 실패");
+								swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
+							}
+						})
+					
+					<%-- function move(){
+						location.href='<%=request.getContextPath()%>/agent/list';
+					};
+			      /* Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success'); */ --%>
+			   }
+			});
 	}
-	function move(){
-		location.href='<%=request.getContextPath()%>/agent/list';
-	};
+	
 	
 	let refRno ="";
 	function deleteReply(refRno){
@@ -1283,5 +1372,22 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
 		})
 	}
 	
+	/* 게시글 삭제 확인창  */
+	
+	 function deleteBoard(refBno){
+			console.log(refBno);
+			detailBoardNo  = refBno;
+			$.ajax({
+				url : "<%=request.getContextPath()%>/board/deleteBoard",
+				data : {detailBoardNo},
+				type: "post",
+				success : function(result){
+					swal("삭제 완료", "등록된 게시글을 삭제하였습니다.", "success");
+				},
+				complete : function(){
+					boardList();
+				}
+			})
+		}
 </script>
 </html>
