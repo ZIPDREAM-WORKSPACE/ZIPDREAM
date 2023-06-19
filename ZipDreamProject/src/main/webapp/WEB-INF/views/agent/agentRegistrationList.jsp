@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록한 매물 리스트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .myRoomListWrap {
