@@ -376,7 +376,7 @@
                 <input type="text" id="name" class="form-control" name="userName" placeholder="이름을 입력해주세요."><br><br><br>
 
                 <h4>전화번호</h4>
-                <input type="text" id="phone" class="form-control" name="phone" placeholder="전화번호를 입력해주세요."><br><br><br>
+                <input type="text" id="phone" class="form-control" name="phone" placeholder="전화번호를 입력해주세요. ('-'도 같이 기입해주세요.)" style="font-size: 14.5px;"><br><br><br>
 
                 <a href="" ><button type="submit" class="btn btn-default" id="signupbtn">가입하기</button></a>
 
