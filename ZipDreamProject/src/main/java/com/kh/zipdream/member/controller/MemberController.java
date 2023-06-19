@@ -433,6 +433,7 @@ public class MemberController {
 					e.printStackTrace();
 				}
 				
+
 				if(result > 0) {
 					alertMsg.put("message", "정보수정 성공!");
 					alertMsg.put("type", "success");
@@ -447,6 +448,7 @@ public class MemberController {
 				}
 				session.setAttribute("alertMsg", alertMsg);
 				return url;
+
 				
 		}
 		
