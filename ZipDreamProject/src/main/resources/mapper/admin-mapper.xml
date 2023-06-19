@@ -207,7 +207,7 @@
 	<select id="selectApplyListLimit5" parameterType="_int" resultMap="memberResultSet">
 		SELECT USER_NO, USER_NAME, ENROLL_DATETIME 
 		FROM MEMBER
-		WHERE WITHDRAW='N'
+		WHERE WITHDRAW='N' AND USER_LEVEL=2
 		ORDER BY ENROLL_DATETIME DESC
 		<if test='type == 1'>
 		LIMIT 5
