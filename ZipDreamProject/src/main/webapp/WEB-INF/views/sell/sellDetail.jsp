@@ -701,7 +701,7 @@
                 <tbody>
                     <tr>
                         <th>매매가</th>
-                        <td>${sd.sellPrice}</td>
+                        <td>${sd.sellPrice}만원</td>
                     </tr>
                     <tr>
                         <th>관리비</th>
@@ -848,7 +848,7 @@
 	</c:if>
 	<c:if test="${sd.refUno == loginUser.userNo }">
 		<div class="content9 content margin">
-			<input type="button"  class="radius" onclick="deleteSell();" value="매물삭제하기">
+			<input type="button"  class="deleteSell radius" onclick="deleteSell();" value="매물삭제하기">
 	    </div>
 	</c:if>
 	
