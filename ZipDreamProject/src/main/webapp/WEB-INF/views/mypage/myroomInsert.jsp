@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <!-- alert창 꾸미기  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
