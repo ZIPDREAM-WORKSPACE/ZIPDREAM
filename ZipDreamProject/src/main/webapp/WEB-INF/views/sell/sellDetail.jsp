@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
@@ -1249,49 +1248,7 @@ let houseSock = new SockJS("<%=request.getContextPath()%>/notice");
             swal("", "로그인 후 이용하실 수 있습니다.", "error");
         } 
 	}
-	<%-- $(function(){
-		$(".deleteSell").on("click",function(){
-			console.log("클릭?");
-			Swal.fire({
-				   title: '매물 삭제',
-				   text: '매물을 삭제하시겠습니까?',
-				   icon: 'warning',
-				   
-				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-				   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-				   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-				   confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
-				   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
-				   
-				   reverseButtons: true, // 버튼 순서 거꾸로
-				   
-				}).then(result => {
-				   // 만약 Promise리턴을 받으면,
-				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-					   function deleteSellBaord(){
-							$.ajax({
-								url : "<%=request.getContextPath()%>/sell/deleteSell",
-								data : {sellNo : '${sd.sellNo}', userNo : '${sd.refUno}'},
-								type : "post",
-								success : function(data){
-									console.log("게시글 삭제 완료");
-									swal("삭제 완료", "등록된 매물을 삭제하였습니다.", "success");
-									move();
-								},
-								error : function(){
-									console.log("게시글 삭제 실패");
-									swal("삭제 완료", "매물삭제를 실패하였습니다. 다시 시도해주세요", "error");
-								}
-							})
-						}
-						function move(){
-							location.href='<%=request.getContextPath()%>/agent/list';
-						};
-				      /* Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success'); */
-				   }
-				});
-		})
-	}) --%>
+
 	function deleteSell(){
 		Swal.fire({
 			   title: '매물 삭제',

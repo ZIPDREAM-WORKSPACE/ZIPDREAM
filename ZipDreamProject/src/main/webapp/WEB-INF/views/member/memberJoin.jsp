@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
 </head>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> -->
 <style>
