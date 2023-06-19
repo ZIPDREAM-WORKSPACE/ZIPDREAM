@@ -10,6 +10,9 @@
 html::-webkit-scrollbar {
   display: none;
 }
+html {
+  overflow: hidden;
+}
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -318,11 +321,15 @@ html::-webkit-scrollbar {
 	font-weight: 600;
 	width: 200px;
 	height: 80px;
+	padding: 10px;
+	padding-bottom: 20px;
 }
 
 .infoAdd {
 	font-size: 13px;
 	font-weight: normal;
+	padding: 10px;
+	padding-bottom: 0px;
 }
 .wrap button{
 	height: 30px;
@@ -360,6 +367,7 @@ html::-webkit-scrollbar {
 	background-color: #F0F0F0;
 	cursor: pointer;
 }
+
 </style>
 
 
@@ -531,7 +539,7 @@ html::-webkit-scrollbar {
 	    	                       			console.log("최소:"+min+"최대:"+max);
 		    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 		    	                       			  
-		    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
+		    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"&nbsp;&nbsp;(단위 : 만)";
 		    	                       			  
 		    	                       			  if(max == 0 && min == 0){
 		    	                       				 minToMax = "실거래 평균 시세 없음";
@@ -1088,7 +1096,7 @@ kakao.maps.event.addListener(map, 'dragend', function (mouseEvent) {
     			    	                       			console.log("최소:"+min+"최대:"+max);
       			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
       			    	                       			  
-      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
+      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"&nbsp;&nbsp;(단위 : 만)";
       			    	                       			  
       			    	                       			  if(max == 0 && min == 0){
       			    	                       				 minToMax = "실거래 평균 시세 없음";
@@ -1476,7 +1484,7 @@ $("#keyword").keyup(function(){
 	    			    	                       			console.log("최소:"+min+"최대:"+max);
 	      			    	                       			  // 시세값을 비교해서 최소는 min에 최대는 max에 저장한다.
 	      			    	                       			  
-	      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"<br>(단위 : 만)";
+	      			    	                       			  minToMax = "최소 : "+min+"<br>최대 : "+max+"&nbsp;&nbsp;(단위 : 만)";
 	      			    	                       			  
 	      			    	                       			  if(max == 0 && min == 0){
 	      			    	                       				 minToMax = "실거래 평균 시세 없음";
