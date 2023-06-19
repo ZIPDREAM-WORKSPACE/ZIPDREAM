@@ -11,5 +11,5 @@ function donutAnimation(donut , color) {
         }
         number = (number+0.1).toFixed(12) * 1;
         donut.style.background = 'conic-gradient(' + color + ' 0' + number + '%, #DEDEDE 0' + number + '% 100% )';
-    }, 3);
+    }, 1);
 }

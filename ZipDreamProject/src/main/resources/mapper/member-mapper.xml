@@ -183,7 +183,7 @@
 	
 	<update id="deleteMember">
 		UPDATE MEMBER
-		SET STATUS='N', WITHDRAW='N'
+		SET STATUS='N'
 		WHERE USER_NO =#{userNo}
 	</update>
 	

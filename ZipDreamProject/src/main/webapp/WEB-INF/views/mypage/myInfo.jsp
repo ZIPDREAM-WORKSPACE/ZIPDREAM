@@ -63,7 +63,18 @@
 		    width: 100px;
 		    margin-left: 425px;  
     }
-
+	.signchangebtn {
+	width: 100px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
+.closedelete{
+	width: 60px;
+	height: 48px;
+	background: white;
+	border-radius: 8px;
+}
 
 
 
@@ -328,8 +339,10 @@ $(function(){
 			data : {userPwd2 },
 			success : function(result){
 				if(result ==1){
-					console.log("탈퇴성공");
-					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success");
+					/* console.log("탈퇴성공");
+					swal("탈퇴 완료", "탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.", "success"); */
+					
+					console.log("신청상태 거절 완료");
 					
 					$.ajax({
 						url : "<%=request.getContextPath()%>/member/sessionOut",
@@ -341,6 +354,10 @@ $(function(){
 						}
 						
 					})
+					swal("탈퇴 완료", "그동안 이용해주셔서 감사합니다.", "success")
+					.then( function (isConfirm) {
+						if (!isConfirm) return;
+					});
 					
 				}else{
 					console.log("탈퇴실패");
