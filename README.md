@@ -1,7 +1,4 @@
-# ZIPDREAM 프로젝트
+- [ZIPDREAM 프로젝트](#zipdream-----)
+- [목차](#--)
 
-![logo1](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/6dc09e7a-e755-46d9-aad4-f8ba983ed876)
-
-오현지(조장), 김예진, 류준하, 이유진, 임나훈, 장하은
-
-
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
