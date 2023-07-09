@@ -20,6 +20,7 @@
   - 분양 페이지
   - 알림 페이지
   - 마이 페이지
+  - 매물 페이지
   - [관리자 페이지](#관리자-페이지)
 <br/><br/><br/>
 <h2>프로젝트 배경</h2>
@@ -125,6 +126,65 @@
   <div markdown="1">
   </div>
 </details>
+
+<hr>
+<h4>[매물 페이지]</h4>
+<details>
+  <summary>매물페이지</summary>
+  <div markdown="1">
+    영상 들어갈 자리
+  </div>
+  </details>
+  <details>
+  <summary>매물 등록</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>매물 삭제</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>매물 상담 신청</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>허위매물 신고</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>신고 관리</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>매물 내 게시글 작성</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>매물 내 게시글 신고</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>게시글에 댓글 등록</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>게시글에 댓글 신고</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>게시글에 댓글 삭제제</summary>
+  <div markdown="1">
+  </div>
+  </details>
 
 <br/>
 
