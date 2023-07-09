@@ -18,7 +18,7 @@
   - 로그인 페이지
   - [지도 페이지](#지도-페이지)
   - 분양 페이지
-  - 알림 페이지
+  - [알림 페이지](#알림-페이지)
   - 마이 페이지
   - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
@@ -77,6 +77,11 @@
   <div markdown="1">
   </div>
 </details>
+<details>
+  <summary>반응형 뷰</summary>
+  <div markdown="1">
+  </div>
+</details>
 <hr>
 
 <h4>[지도 페이지]</h4>
@@ -102,6 +107,19 @@
 </details>
 <details>
   <summary>상세페이지로 이동</summary>
+  <div markdown="1">
+  </div>
+</details>
+
+<hr>
+<h4>[알림 페이지]</h4>
+<details>
+  <summary>운영 알림</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>관심 분양 알림</summary>
   <div markdown="1">
   </div>
 </details>
