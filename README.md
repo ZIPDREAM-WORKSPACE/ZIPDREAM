@@ -20,41 +20,83 @@
   - 분양 페이지
   - 알림 페이지
   - 마이 페이지
-  - 관리자 페이지
+  - 관리자 페이지(#[관리자-페이지])
 <br/><br/><br/>
-### 프로젝트 배경     
-* * *
+<h2>프로젝트 배경</h2>
+
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/1cfc2202-0ecc-4d6e-b8ed-b891680d91a1)
 <br/>
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/57eb9ece-3a63-4be3-a065-01044d3629d8)
 <br/>
-### 유사사이트 분석      
-* * *
+<h2>유사사이트 분석</h2>
+
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/9c5ebf91-dece-4f5d-b97c-0887b2cabb06)
 <br/>
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/0861fdb2-c5e9-4340-8657-c81747e6d1ec)
 <br/>
-### 실용적 근거      
-* * *
+<h2>실용적 근거</h2>      
+
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/ddd45e5a-01d7-4b13-ad9a-4738b4358841)
 <br/>
-### 유스케이스      
-* * *
+<h2>유스케이스</h2>      
+
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/a0197155-e8e7-461d-b23b-bb418c438eba)
 <br/>
-### ERD
-* * *
+<h2>ERD</h2>
+
 
 ![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
 <https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f>
 <br/>
-### 개발 환경
-* * *
+<h2>개발 환경</h2>
+
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/b1fc6228-0d4e-4017-bcac-58a86537d080)
 <br/>
-### 주요 기능
-* * *
+<h2>주요 기능</h2>
+
+<h4>[관리자 페이지]</h4>
+<details>
+  <summary>메인 페이지</summary>
+  <div markdown="1">
+    영상 들어갈 자리
+  </div>
+  </details>
+  <details>
+  <summary>회원 조회</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>공인중개사 승인</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>공지사항 관리</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>이벤트 관리</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>신고 관리</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>채팅 관리</summary>
+  <div markdown="1">
+  </div>
+  </details>
+  <details>
+  <summary>매물 관리</summary>
+  <div markdown="1">
+  </div>
+</details>
 
 <br/>
 
