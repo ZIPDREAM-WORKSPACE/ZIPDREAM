@@ -17,7 +17,7 @@
   - [메인 페이지](#메인-페이지)
   - 로그인 페이지
   - [지도 페이지](#지도-페이지)
-  - 분양 페이지
+  - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
   - 마이 페이지
   - [매물 페이지](#매물-페이지)
@@ -109,6 +109,29 @@
   <summary>상세페이지로 이동</summary>
   <div markdown="1">
   </div>
+</details>
+
+<hr>
+<h4>[분양 페이지]</h4>
+<details>
+  <summary>청약 정보 조회</summary>
+  <div markdown="1"></div>
+</details>
+<details>
+  <summary>청약 정보 찜하기</summary>
+  <div markdown="1"></div>
+</details>
+<details>
+  <summary>분양 가이드</summary>
+  <div markdown="1"></div>
+</details>
+<details>
+  <summary>청약가점계산기</summary>
+  <div markdown="1"></div>
+</details>
+<details>
+  <summary>분양 일정 조회</summary>
+  <div markdown="1"></div>
 </details>
 
 <hr>
