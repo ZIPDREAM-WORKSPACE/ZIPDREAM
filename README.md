@@ -16,7 +16,7 @@
 * [주요 기능](#주요-기능)
   - 메인 페이지
   - 로그인 페이지
-  - 지도 페이지
+  - [지도 페이지](#지도-페이지)
   - 분양 페이지
   - 알림 페이지
   - 마이 페이지
@@ -72,7 +72,7 @@
   </div>
 </details>
 <details>
-  <summary>법정동 검색</summary>
+  <summary>법정동 검색 후 조회</summary>
   <div markdown="1">
   </div>
 </details>
