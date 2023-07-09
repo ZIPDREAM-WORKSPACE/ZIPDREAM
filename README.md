@@ -14,19 +14,39 @@
 - [ERD](#ERD)
 - [개발 환경](#개발-환경)
 - [주요 기능](#주요-기능)
-<br/><br/>
+<br/><br/><br/>
 ### 프로젝트 배경     
+* * *
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/1cfc2202-0ecc-4d6e-b8ed-b891680d91a1)
+<br/>
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/57eb9ece-3a63-4be3-a065-01044d3629d8)
 
 ### 유사사이트 분석      
+* * *
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/9c5ebf91-dece-4f5d-b97c-0887b2cabb06)
+<br/>
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/0861fdb2-c5e9-4340-8657-c81747e6d1ec)
 
 ### 실용적 근거      
+* * *
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/ddd45e5a-01d7-4b13-ad9a-4738b4358841)
 
 ### 유스케이스      
+* * *
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/a0197155-e8e7-461d-b23b-bb418c438eba)
 
 ### ERD
+* * *
+
 ![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
 <https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f>
 ### 개발 환경
+* * *
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/b1fc6228-0d4e-4017-bcac-58a86537d080)
 
-### 주요 기능  
+
+### 주요 기능
+* * *
+
+
