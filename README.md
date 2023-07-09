@@ -130,7 +130,7 @@
 <hr>
 <h4>[매물 페이지]</h4>
 <details>
-  <summary>매물페이지</summary>
+  <summary>매물</summary>
   <div markdown="1">
     영상 들어갈 자리
   </div>
