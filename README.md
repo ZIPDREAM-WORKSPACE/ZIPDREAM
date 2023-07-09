@@ -14,7 +14,7 @@
 * [ERD](#ERD)
 * [개발 환경](#개발-환경)
 * [주요 기능](#주요-기능)
-  - 메인 페이지
+  - [메인 페이지](#메인-페이지)
   - 로그인 페이지
   - [지도 페이지](#지도-페이지)
   - 분양 페이지
@@ -55,6 +55,29 @@
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/b1fc6228-0d4e-4017-bcac-58a86537d080)
 <br/>
 <h2>주요 기능</h2>
+
+<h4>[메인 페이지]</h4>
+<details>
+  <summary>공지사항</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>지도 검색</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>부동산 뉴스</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>채팅</summary>
+  <div markdown="1">
+  </div>
+</details>
+<hr>
 
 <h4>[지도 페이지]</h4>
 <details>
