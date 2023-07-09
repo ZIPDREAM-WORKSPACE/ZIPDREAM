@@ -20,7 +20,7 @@
   - 분양 페이지
   - 알림 페이지
   - 마이 페이지
-  - 매물 페이지
+  - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
 <br/><br/><br/>
 <h2>프로젝트 배경</h2>
@@ -181,7 +181,7 @@
   </div>
   </details>
   <details>
-  <summary>게시글에 댓글 삭제제</summary>
+  <summary>게시글에 댓글 삭제</summary>
   <div markdown="1">
   </div>
   </details>
