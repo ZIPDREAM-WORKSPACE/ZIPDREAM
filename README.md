@@ -55,6 +55,34 @@
 <br/>
 <h2>주요 기능</h2>
 
+<h4>[지도 페이지]</h4>
+<details>
+  <summary>전체 조회</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>마커 클릭 이벤트</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>상담 가능 매물 조회</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>법정동 검색</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>상세페이지로 이동</summary>
+  <div markdown="1">
+  </div>
+</details>
+
+<hr>
 <h4>[관리자 페이지]</h4>
 <details>
   <summary>메인 페이지</summary>
