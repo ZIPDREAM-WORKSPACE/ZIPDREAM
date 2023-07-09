@@ -24,7 +24,9 @@
 ### 유스케이스      
 
 ### ERD
+![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
+<https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f>
 ### 개발 환경
 
 ### 주요 기능  
