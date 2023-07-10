@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
  <!-- CSS only -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  <!-- JavaScript Bundle with Popper -->
@@ -112,7 +111,7 @@
 	}
 	.object{
 		object-fit : cover;	
-	}
+	} 
 	
 	#picture {
 		display: flex;
@@ -232,7 +231,7 @@
                <!--  <img class="left arrow" src="https://ifh.cc/g/3FMvAh.png" width="50px" style="display: none;"> -->
                 <div id="file-area" style="display:none;">
                     <input type="file" id="file1" name="imges" accept="images/*" required onchange="loadImg(this, 1);" >
-                    <input type="file" id="file2" name="imges" accept="images/*" onchange="loadImg(this, 2);" >
+                    <input type="file" id="file2" name="imges" accept="images/*" required onchange="loadImg(this, 2);" >
                     <input type="file" id="file3" name="imges" accept="images/*" onchange="loadImg(this, 3);" >
                     <input type="file" id="file4" name="imges" accept="images/*" onchange="loadImg(this, 4);" >
                     <input type="file" id="file5" name="imges" accept="images/*" onchange="loadImg(this, 5);" >
@@ -257,14 +256,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg1 " class="object" width="300" height="300"></td>
-                                <td><img id="contentImg2 " class="object" width="300" height="300"></td>
-                                <td><img id="contentImg3 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg1" class="object" width="300" height="300"></td>
+                                <td><img id="contentImg2" class="object" width="300" height="300"></td>
+                                <td><img id="contentImg3" class="object" width="300" height="300"></td>
                             </tr>
                             <tr>
-                                <td><img id="contentImg4 " class="object" width="300" height="300"></td>
-                                <td><img id="contentImg5 " class="object" width="300" height="300"></td>
-                                <td><img id="contentImg6 " class="object" width="300" height="300"></td>
+                                <td><img id="contentImg4" class="object" width="300" height="300"></td>
+                                <td><img id="contentImg5" class="object" width="300" height="300"></td>
+                                <td><img id="contentImg6" class="object" width="300" height="300"></td>
                             </tr>
                         </table>
                     </div>
@@ -327,8 +326,8 @@
 				<p id="p">매물에 대한 상세정보 입련란입니다.</p>
             </div>
             <div class="margin">
-            	<input type="file" class="object" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
-            	<img id="secondImg" width="900" height="500">
+            	<input type="file" id="secondfile" name="imges" onchange="loadSeconImg(this, 1)" style="display:none;">
+            	<img id="secondImg" class="object"  width="900" height="500">
             </div>
             <div class="info margin">
                 <table class="table">
@@ -530,7 +529,7 @@
 			reader.onload = function(e) {
 
 				let url = e.target.result;
-
+	
 				switch (num) {
 				case 1:$("#titleImg").attr("src", url);break;
 				case 2:$("#contentImg1").attr("src", url);break;
@@ -567,7 +566,6 @@
 			case 13:$("#contentImg12").attr("src", url);break;
 			case 14:$("#contentImg13").attr("src", url);break;
 			case 15:$("#contentImg14").attr("src", url);break;
-			case 16:$("#secondImg").attr("src",url); break;
 			}
 		}
 	}

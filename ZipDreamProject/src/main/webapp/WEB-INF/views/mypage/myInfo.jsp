@@ -311,8 +311,15 @@ $(function(){
                     swal("정보 수정 실패", "잘못된 정보입니다. 다시 진행해주세요.", "error");
                     
                 }else{                  
-                    swal("정보 수정 완료", "정보 수정이 완료되었습니다.", "success");
+                    swal({
 
+                    	title: "수정완료",
+                    	text: "다시 로그인해주세요!",
+                    	icon: "success",
+                    	closeOnclickOutside : false
+                    }).then(function(){
+                    	location.href="<%=request.getContextPath()%>/member/logout";
+                    })
                 }
             },error : function(err){
             	console.log(err)

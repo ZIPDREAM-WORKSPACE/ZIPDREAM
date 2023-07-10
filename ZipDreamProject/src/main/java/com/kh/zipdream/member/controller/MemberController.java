@@ -433,20 +433,22 @@ public class MemberController {
 					e.printStackTrace();
 				}
 				
+
 				if(result > 0) {
-					alertMsg.put("message", "정보수정 완료!");
+					alertMsg.put("message", "정보수정 성공!");
 					alertMsg.put("type", "success");
-					url = "redirect:/";
+					url = "redirect:/member/logout";
 					
 					
 				}else {
-					alertMsg.put("message", "정보수정 성공!");
+					alertMsg.put("message", "정보수정 성공! 다시 로그인해주세요!");
 					alertMsg.put("type", "success");
-					url = "redirect:/";
+					url = "redirect:/member/logout";
 					
 				}
 				session.setAttribute("alertMsg", alertMsg);
 				return url;
+
 				
 		}
 		
@@ -469,7 +471,7 @@ public class MemberController {
 			 result = memberService.updateMemberPwd(m);
 			
 			 if(result > 0 ) {			 
-				 alertMsg.put("message", "비밀번호 변경에 성공했습니다.");
+				 alertMsg.put("message", "비밀번호 변경에 성공했습니다. 다시 로그인해주세요!");
 				 alertMsg.put("type", "success");
 				 session.setAttribute("alertMsg", alertMsg);
 			 }else {

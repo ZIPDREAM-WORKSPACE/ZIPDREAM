@@ -85,7 +85,8 @@
  		
  		 const requestAgentMessage = {
 		 			"refRuno":refRuno,
-		 			"dealType" : dealType
+		 			"dealType" : dealType,
+		 			"refUno" : 0
  		};
  		
  		houseSock.send( JSON.stringify(requestAgentMessage));

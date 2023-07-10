@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <style>
      div{
@@ -38,7 +37,8 @@
         background: #FFFFFF;
         border: 0.5px solid #A0A0A0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        padding-left: 4.5%;
+        padding-left: 5.5%;
+        margin-left:630px;
     }
    
     #brokerlogin-text{
@@ -332,7 +332,7 @@
          
 
                   
-                <h5 id="license1-1">중개등록증 등록</h5>
+                <h5 id="license1-1">중개사자격증 등록</h5>
 
                 <input type="file" class="real-upload1 form-control" accept="images/*"   style="display: none;" name="imges">
                 <div class="licensebox1-1"></div>
@@ -669,7 +669,7 @@
                                   $("[name=addr2]").val(fullRoadAddr);
                                   
                                   document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
-                                  document.getElementById('addr2').value = fullAddr;
+                                  document.getElementById('addr2').value = fullRoadAddr;
                               }
                            }).open();
                   };

@@ -80,7 +80,7 @@ div {
 	padding: 16px 32px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 }
 
@@ -159,7 +159,7 @@ div {
 					<b>${sessionScope.loginUser.userName}</b>
 					<div>관리자</div>				
 			</div>
-			<button type="button" class="btn btn-secondary" onclick="location.href='<%= request.getContextPath()%>/member/logout'" style="margin-left:100px;">로그아웃</button>
+			<button type="button" class="btn btn-secondary" onclick="location.href='<%= request.getContextPath()%>/member/logout'" style="margin-left:30px;">로그아웃</button>
 		</div>
 	</header>
 </body>
