@@ -19,7 +19,8 @@
   - [지도 페이지](#지도-페이지)
   - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
-  - [마이 페이지](#마이-페이지)
+  - [일반회원 마이 페이지](#일반회-페이지)
+  - [공인중개사 마이 페이지](#공인중개사-페이지)
   - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
 <br/><br/><br/>
@@ -253,42 +254,26 @@
   <summary>이벤트 관리</summary>
   <div markdown="1">
 
-![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/d087a5d9-7838-4c84-8194-5cb74e90d0fd)
-    
-  </div>
-  </details>
-  <details>
-  <summary>신고 관리</summary>
+![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WOR록</summary>
   <div markdown="1">
-
-![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/c55cf46f-9394-43a4-924c-c044d67d9958)
-    
-  </div>
-  </details>
-  <details>
-  <summary>채팅 관리</summary>
-  <div markdown="1">
-  </div>
-  </details>
-  <details>
-  <summary>매물 관리</summary>
-  <div markdown="1">
-
-![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/e20569e5-1fd4-44c7-8ed8-6471bbbc1e5b)
-
-    
   </div>
 </details>
+<details>
+  <summary>찜한 목록</summary>
+  <div markdown="1">
+  </div>
+</details>
+
 <hr>
 
-<h4>[마이 페이지]</h4>
+<h4>[공인중개사 회원 마이 페이지]</h4>
 <details>
-  <summary>일반 유저</summary>
+  <summary>등록한 매물</summary>
   <div markdown="1">
   </div>
 </details>
 <details>
-  <summary>공인중개사 유저</summary>
+  <summary>매물신청 리스트</summary>
   <div markdown="1">
   </div>
 </details>
