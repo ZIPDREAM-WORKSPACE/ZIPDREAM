@@ -15,7 +15,7 @@
 * [개발 환경](#개발-환경)
 * [주요 기능](#주요-기능)
   - [메인 페이지](#메인-페이지)
-  - 로그인 페이지
+  - [로그인 페이지](#로그인-페이지)
   - [지도 페이지](#지도-페이지)
   - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
@@ -48,13 +48,11 @@
 
 ![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
-<https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f>
-<br/>
-<h2>개발 환경</h2>
-
-![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/b1fc6228-0d4e-4017-bcac-58a86537d080)
-<br/>
-<h2>주요 기능</h2>
+<https://www.erdcloud.com/d/Nuu퇴</summary>
+  <div markdown="1">
+  </div>
+</details>
+<hr>
 
 <h4>[메인 페이지]</h4>
 <details>
