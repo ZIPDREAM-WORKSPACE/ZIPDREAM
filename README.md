@@ -206,11 +206,17 @@
 <details>
   <summary>운영 알림</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (6)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/1d55b6a2-388d-41d6-ad2f-72317745626e)
+
   </div>
 </details>
 <details>
   <summary>관심 분양 알림</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (7)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/ab8b645f-663a-4385-a047-f55c60306670)
+
   </div>
 </details>
 
