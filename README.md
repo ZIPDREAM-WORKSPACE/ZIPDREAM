@@ -308,6 +308,10 @@
 <details>
   <summary>등록한 매물</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (11)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/d2515f0b-0031-4a9d-a807-aa04868ad737)
+
+  
   </div>
 </details>
 <details>
@@ -322,6 +326,10 @@
 <details>
   <summary>상담신청 리스트</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (10)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/27f7a26b-e4c0-4089-b3b4-0578fe6c7a13)
+
+    
   </div>
 </details>
 <details>
