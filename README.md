@@ -117,11 +117,6 @@
   </div>
 </details>
 <details>
-  <summary>회원정보 변경</summary>
-  <div markdown="1">
-  </div>
-</details>
-<details>
   <summary>아이디 찾기</summary>
   <div markdown="1">
   </div>
