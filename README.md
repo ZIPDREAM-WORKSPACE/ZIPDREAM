@@ -209,6 +209,9 @@ https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42
   <details>
   <summary>공인중개사 승인</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/bef76c3e-3562-40ef-a52f-aa3564e0fa33)
+    
   </div>
   </details>
   <details>
