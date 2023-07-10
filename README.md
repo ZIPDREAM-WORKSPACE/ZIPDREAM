@@ -301,6 +301,24 @@
 <details>
   <summary>매물신청 리스트</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (9)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/aa229c9b-835a-4807-bb6c-cc6a38240460)
+
+    
+  </div>
+</details>
+<details>
+  <summary>상담신청 리스트</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>내 정보</summary>
+  <div markdown="1">
+
+![ezgif com-video-to-gif (8)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/a51ead6f-88a1-4bc2-a7d6-e0738bc4a379)
+
+    
   </div>
 </details>
 
