@@ -140,8 +140,9 @@
   <div markdown="1">
 
   ![1](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/45b7d76c-dec6-4427-b0e9-7fe28c16ebf6)
+  <br><br><br><br>
+  ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/7d5439c5-1ae6-4324-b3f0-27b6fe6b14c7)
 
-    
   </div>
 </details>
 <details>
@@ -158,9 +159,7 @@
   <summary>법정동 검색 후 조회</summary>
   <div markdown="1">
     
-  
-  <br><br><br><br>
-  ![3-2](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/6443e04a-9168-4215-a247-c008a9754b19)
+  ![법정동 검색](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/09a6daf5-ad1a-4fd3-8fdf-c15d6a5b281d)
 
   </div>
 </details>
