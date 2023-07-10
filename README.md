@@ -55,11 +55,13 @@
 <hr>
 
 <h4>[메인 페이지]</h4>
+
 ![ezgif com-video-to-gif (3)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/8e95e913-99a6-493c-9450-2ac486bba588)
 
 <details>
   <summary>공지사항</summary>
   <div markdown="1">
+    
     ![ezgif com-video-to-gif (4)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/ddc961d6-1e08-4b58-9588-a34c8b798daa)
 
   </div>
@@ -67,6 +69,7 @@
 <details>
   <summary>지도 검색</summary>
   <div markdown="1">
+    
     ![ezgif com-video-to-gif (2)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/cc33eb24-ffae-4ea0-8a42-a68a302d1ac2)
 
   </div>
@@ -74,6 +77,7 @@
 <details>
   <summary>부동산 뉴스</summary>
   <div markdown="1">
+    
     ![ezgif com-video-to-gif (1)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/dd3b163e-ec8c-45cc-8522-39b168722806)
 
   </div>
@@ -81,6 +85,7 @@
 <details>
   <summary>채팅</summary>
   <div markdown="1">
+    
     ![chatting](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a11bcde-bb31-4a42-be24-8eff0566355d)
 
   </div>
@@ -88,6 +93,9 @@
 <details>
   <summary>반응형 뷰</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (5)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/c84953c0-da98-4888-8420-4ec1101a9e1d)
+
     
   </div>
 </details>
