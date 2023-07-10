@@ -189,7 +189,9 @@
   <summary>메인 페이지</summary>
   <div markdown="1">
     영상 들어갈 자리
+    
   ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/0c223b29-a853-4eb3-acaa-a567e3b2fa67)
+  
   </div>
   </details>
   <details>
