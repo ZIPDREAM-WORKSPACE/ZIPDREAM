@@ -19,7 +19,7 @@
   - [지도 페이지](#지도-페이지)
   - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
-  - [일반회원 마이 페이지](#일반회-페이지)
+  - [일반회원 마이 페이지](#일반-회원-마이-페이지)
   - [공인중개사 마이 페이지](#공인중개사-회원-마이-페이지)
   - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
@@ -271,8 +271,19 @@
   </div>
 </details>
 <details>
-  <summary>내 매물 등록/삭제</summary>
+  <summary>내 매물 등록</summary>
   <div markdown="1">
+  
+  ![마이페이지-방내놓기](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/b01ad59a-3a2f-432d-aaab-416efff1b65e)
+  
+  </div>
+</details>
+<details>
+  <summary>내 매물 조회/삭제</summary>
+  <div markdown="1">
+
+  ![마이페이지-내매물목록](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/59ca10af-9650-4e89-a119-aa72e9c253f0)
+  
   </div>
 </details>
 <details>
@@ -290,6 +301,7 @@
   <div markdown="1">
   </div>
 </details>
+
 
 <hr>
 <h4>[공인중개사 회원 마이 페이지]</h4>
