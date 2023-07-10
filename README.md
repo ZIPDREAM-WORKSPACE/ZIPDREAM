@@ -156,23 +156,36 @@ https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42
 <h4>[분양 페이지]</h4>
 <details>
   <summary>청약 정보 조회</summary>
-  <div markdown="1"></div>
-</details>
-<details>
-  <summary>청약 정보 찜하기</summary>
-  <div markdown="1"></div>
+  <div markdown="1">
+  
+  ![분양-청약정보](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/5e47ef76-e900-4b2f-b20f-4a1b6f7579e4)
+  
+  </div>
 </details>
 <details>
   <summary>분양 가이드</summary>
-  <div markdown="1"></div>
+  <div markdown="1">
+    
+  ![분양-분양가이드](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/324a837f-e681-45c0-a146-56b8dcca935c)
+  
+  </div>
 </details>
 <details>
   <summary>청약가점계산기</summary>
-  <div markdown="1"></div>
+  <div markdown="1">
+  
+  ![분양-청약가점계산기](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/1049ed8b-1cee-4432-9b34-292296e7ed3d)
+
+  </div>
 </details>
 <details>
   <summary>분양 일정 조회</summary>
-  <div markdown="1"></div>
+  <div markdown="1">
+
+  ![분양-분양일정](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/0147d39d-5957-43e7-b607-5d93bb53acf9)
+
+    
+  </div>
 </details>
 
 <hr>
