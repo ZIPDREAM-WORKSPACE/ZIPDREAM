@@ -82,6 +82,44 @@
 </details>
 <hr>
 
+<h4>[로그인 페이지]</h4>
+<details>
+  <summary>회원가입</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>로그인</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>카카오 소셜 로그인</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>회원정보 변경</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>아이디 찾기</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>비밀번호 찾기</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>회원탈퇴</summary>
+  <div markdown="1">
+  </div>
+</details>
+<hr>
+
 <h4>[지도 페이지]</h4>
 <details>
   <summary>전체 조회</summary>
