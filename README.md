@@ -132,12 +132,12 @@
   </div>
 </details>
 <details>
-  <summary>상담 가능 매물 조회</summary>
+  <summary>법정동 검색 후 조회</summary>
   <div markdown="1">
   </div>
 </details>
 <details>
-  <summary>법정동 검색 후 조회</summary>
+  <summary>상담 가능 매물 조회</summary>
   <div markdown="1">
   </div>
 </details>
