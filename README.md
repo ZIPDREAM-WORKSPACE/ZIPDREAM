@@ -78,6 +78,11 @@
 <details>
   <summary>반응형 뷰</summary>
   <div markdown="1">
+    
+
+https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42b8-862b-c1c1bae91298
+
+
   </div>
 </details>
 <hr>
