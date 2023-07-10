@@ -258,14 +258,40 @@
   <div markdown="1">
   </div>
 </details>
+
+<hr>
+<h4>[일반 회원 마이 페이지]</h4>
+<details>
+  <summary>최근 본 방 목록</summary>
+  <div markdown="1">
+
+  ![마이페이지-최근본방](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/3a0658c0-2b78-400b-8f89-a62f180fca38)
+
+  
+  </div>
+</details>
+<details>
+  <summary>내 매물 등록/삭제</summary>
+  <div markdown="1">
+  </div>
+</details>
 <details>
   <summary>찜한 목록</summary>
   <div markdown="1">
   </div>
 </details>
+<details>
+  <summary>내 정보 수정하기</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>쿠폰 목록</summary>
+  <div markdown="1">
+  </div>
+</details>
 
 <hr>
-
 <h4>[공인중개사 회원 마이 페이지]</h4>
 <details>
   <summary>등록한 매물</summary>
