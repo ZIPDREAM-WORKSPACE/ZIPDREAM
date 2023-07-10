@@ -193,7 +193,6 @@ https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42
 <details>
   <summary>메인 페이지</summary>
   <div markdown="1">
-    영상 들어갈 자리
     
   ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/0c223b29-a853-4eb3-acaa-a567e3b2fa67)
   
@@ -202,6 +201,9 @@ https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42
   <details>
   <summary>회원 조회</summary>
   <div markdown="1">
+
+![ezgif com-gif-maker](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/bcf138a3-61ed-48c2-b0a3-809eefd0844a)
+    
   </div>
   </details>
   <details>
