@@ -19,7 +19,7 @@
   - [지도 페이지](#지도-페이지)
   - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
-  - 마이 페이지
+  - [마이 페이지](#마이-페이지)
   - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
 <br/><br/><br/>
@@ -187,6 +187,19 @@
   </details>
   <details>
   <summary>매물 관리</summary>
+  <div markdown="1">
+  </div>
+</details>
+<hr>
+
+<h4>[마이 페이지]</h4>
+<details>
+  <summary>일반 유저</summary>
+  <div markdown="1">
+  </div>
+</details>
+<details>
+  <summary>공인중개사 유저</summary>
   <div markdown="1">
   </div>
 </details>
