@@ -295,11 +295,6 @@ https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/7a75e5e4-2b3b-42
   </div>
   </details>
   <details>
-  <summary>신고 관리</summary>
-  <div markdown="1">
-  </div>
-  </details>
-  <details>
   <summary>매물 내 게시글 작성</summary>
   <div markdown="1">
   </div>
