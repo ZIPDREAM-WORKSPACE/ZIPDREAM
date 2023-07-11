@@ -394,54 +394,92 @@
 <hr>
 <h4>[매물 페이지]</h4>
 <details>
-  <summary>매물</summary>
+  <summary>매물상세페이지</summary>
   <div markdown="1">
-    영상 들어갈 자리
+
+![매물상세페이지gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/8f536907-61e8-494a-9e10-65b34ec4fdd2)
+
+    
   </div>
-  </details>
-  <details>
-  <summary>매물 등록</summary>
-  <div markdown="1">
-  </div>
-  </details>
+</details>
   <details>
   <summary>매물 삭제</summary>
   <div markdown="1">
+
+![매물삭제gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/35bcf6d9-a24b-499f-87ff-77277437786c)
+
+    
   </div>
   </details>
   <details>
   <summary>매물 상담 신청</summary>
   <div markdown="1">
+
+![상담신청gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/2f47b234-4f34-4a91-9d11-03ec8347e0a3)
+
+    
+  </div>
+  </details>
+  <details>
+  <summary>찜하기</summary>
+  <div markdown="1">
+
+![찜하기gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/3a106ebf-f8ca-4768-88b7-7c8c99f9155e)
+
+    
   </div>
   </details>
   <details>
   <summary>허위매물 신고</summary>
   <div markdown="1">
+
+![허위매물신고gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/5c6bc05b-560a-4145-969f-1e79e82adc1a)
+
+    
   </div>
   </details>
   <details>
   <summary>매물 내 게시글 작성</summary>
   <div markdown="1">
+
+
+    
   </div>
   </details>
   <details>
   <summary>매물 내 게시글 신고</summary>
   <div markdown="1">
+
+![게시글 신고하기gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/a5087444-e81e-4a2a-937a-15bede8018b6)
+
+  
   </div>
   </details>
   <details>
   <summary>게시글에 댓글 등록</summary>
   <div markdown="1">
+
+![댓글등록gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/c8568961-e9ec-4a08-a897-6f58a7287f37)
+
+    
   </div>
   </details>
   <details>
   <summary>게시글에 댓글 신고</summary>
   <div markdown="1">
+
+![댓글신고gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/5254a5a6-c1cb-4443-b8a3-2f552d1df9a3)
+
+    
   </div>
   </details>
   <details>
   <summary>게시글에 댓글 삭제</summary>
   <div markdown="1">
+
+![댓글삭제gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/0e8dd236-df76-4101-bdd6-c1a4972a22b8)
+
+    
   </div>
   </details>
 
