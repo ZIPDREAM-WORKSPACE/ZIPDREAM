@@ -457,6 +457,15 @@
   </div>
   </details>
   <details>
+  <summary>매물 내 게시글 삭제</summary>
+  <div markdown="1">
+
+![ezgif com-video-to-gif (1)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/b22743e0-8d79-47dd-8778-71973c62b975)
+
+
+  </div>
+  </details>
+  <details>
   <summary>게시글에 댓글 등록</summary>
   <div markdown="1">
 
