@@ -19,7 +19,7 @@
   - [지도 페이지](#지도-페이지)
   - [분양 페이지](#분양-페이지)
   - [알림 페이지](#알림-페이지)
-  - [일반회원 마이 페이지](#일반-회원-마이-페이지)
+  - [일반 회원 마이 페이지](#일반-회원-마이-페이지)
   - [공인중개사 마이 페이지](#공인중개사-회원-마이-페이지)
   - [매물 페이지](#매물-페이지)
   - [관리자 페이지](#관리자-페이지)
@@ -305,16 +305,25 @@
 <details>
   <summary>찜한 목록</summary>
   <div markdown="1">
+
+  ![마이페이지-찜목록](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/d36abc1b-5fb9-431c-8022-d27c2135c149)
+  
   </div>
 </details>
 <details>
   <summary>내 정보 수정하기</summary>
   <div markdown="1">
+
+  ![마이페이지-내정보수정](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/8d28514d-0f0f-4454-b98f-4ea09b6e4461)
+    
   </div>
 </details>
 <details>
   <summary>쿠폰 목록</summary>
   <div markdown="1">
+
+  ![마이페이지-쿠폰함](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423276/1f0e3a7e-b82a-4949-a62c-5cd3d9d2d22d)
+    
   </div>
 </details>
 
