@@ -442,6 +442,7 @@
   <summary>매물 내 게시글 작성</summary>
   <div markdown="1">
 
+![게시글 등록gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423376/20483280-1ea4-460d-bf2b-456f0f14cbd1)
 
     
   </div>
