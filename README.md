@@ -259,22 +259,43 @@
   </div>
   </details>
   <details>
-  <summary>공지사항 관리</summary>
+ <summary>공지사항 관리</summary>
   <div markdown="1">
 
 ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/cca323ec-1d5f-48a9-8a8f-b60303d87466)
-    
+
   </div>
   </details>
   <details>
   <summary>이벤트 관리</summary>
   <div markdown="1">
 
-![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WOR록</summary>
+![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/d087a5d9-7838-4c84-8194-5cb74e90d0fd)
+
+  </div>
+  </details>
+  <details>
+  <summary>신고 관리</summary>
+  <div markdown="1">
+
+![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/c55cf46f-9394-43a4-924c-c044d67d9958)
+
+  </div>
+  </details>
+  <details>
+  <summary>채팅 관리</summary>
   <div markdown="1">
   </div>
-</details>
+  </details>
+  <details>
+  <summary>매물 관리</summary>
+  <div markdown="1">
 
+![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/e20569e5-1fd4-44c7-8ed8-6471bbbc1e5b)
+
+
+  </div>
+</details>
 <hr>
 <h4>[일반 회원 마이 페이지]</h4>
 <details>
