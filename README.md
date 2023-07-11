@@ -285,6 +285,9 @@
   <details>
   <summary>채팅 관리</summary>
   <div markdown="1">
+
+![ezgif com-video-to-gif (2)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117423310/e0c3dd69-047e-4fd8-8211-88beb54cb969)
+    
   </div>
   </details>
   <details>
