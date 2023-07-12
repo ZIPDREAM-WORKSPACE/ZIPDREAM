@@ -49,10 +49,7 @@
 
 ![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
-<https://www.erdcloud.com/d/Nuu퇴</summary>
-  <div markdown="1">
-  </div>
-</details>
+[ERD Cloud에서 보기](https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f)
 <hr>
 
 <h4>[메인 페이지]</h4>
