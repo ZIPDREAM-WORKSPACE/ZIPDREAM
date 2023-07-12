@@ -12,6 +12,7 @@
 * [실용적 근거](#실용적-근거)
 * [유스케이스](#유스케이스)
 * [ERD](#ERD)
+* [사용한 API](#사용한-API)
 * [개발 환경](#개발-환경)
 * [주요 기능](#주요-기능)
   - [메인 페이지](#메인-페이지)
@@ -50,8 +51,16 @@
 ![집드림_ERD](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/4dae454c-850b-40f9-aa1e-5c097aa7b401)
 
 [ERD Cloud에서 보기](https://www.erdcloud.com/d/Nuu2H2SLNZexzin6f)
-<hr>
+<br/><br/>
+<h2>사용한 API</h2>
 
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/cd07518f-331c-4d05-adf7-7e38be550cc1)
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/db874895-5468-4aaf-9842-53c5a8dbdb57)
+
+![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/3f0c18e9-e59d-4357-85e8-2d89063b27d9)
+
+<br>
+<hr>
 <h4>[메인 페이지]</h4>
 
 ![ezgif com-video-to-gif (3)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/8e95e913-99a6-493c-9450-2ac486bba588)
