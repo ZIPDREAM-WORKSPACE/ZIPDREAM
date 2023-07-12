@@ -60,7 +60,9 @@
 ![image](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/3f0c18e9-e59d-4357-85e8-2d89063b27d9)
 
 <br>
-<hr>
+<h2>개발 환경</h2>
+<br>
+<h2>주요 기능</h2>
 <h4>[메인 페이지]</h4>
 
 ![ezgif com-video-to-gif (3)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117424784/8e95e913-99a6-493c-9450-2ac486bba588)
