@@ -174,6 +174,9 @@
 <details>
   <summary>상세페이지로 이동</summary>
   <div markdown="1">
+    
+  ![ezgif com-video-to-gif (2)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/1edb4554-2458-4887-af02-c69d07258005)
+
   </div>
 </details>
 
