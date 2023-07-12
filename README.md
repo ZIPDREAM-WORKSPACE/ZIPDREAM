@@ -63,8 +63,8 @@
 <h2>개발 환경</h2>
 
 <div>
-  <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
-  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+  <img src="https://img.shields.io/badge/spring-6DB33F?style=flat&logo=spring&logoColor=white">
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/ApacheTomcat-F8DC75?style=flat&logo=apachetomcat&logoColor=white"/>
 </div>
 
