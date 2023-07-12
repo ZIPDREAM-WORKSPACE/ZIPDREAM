@@ -155,8 +155,8 @@
 <details>
   <summary>법정동 검색 후 조회</summary>
   <div markdown="1">
-    
-  ![법정동 검색](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/09a6daf5-ad1a-4fd3-8fdf-c15d6a5b281d)
+
+
 
   </div>
 </details>
