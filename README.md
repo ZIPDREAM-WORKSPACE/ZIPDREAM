@@ -156,6 +156,7 @@
   <summary>법정동 검색 후 조회</summary>
   <div markdown="1">
 
+![법정동-min](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/5faa136a-5bfc-49e7-81aa-942656b20408)
 
 
   </div>
