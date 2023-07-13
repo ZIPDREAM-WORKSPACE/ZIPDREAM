@@ -128,17 +128,25 @@
 
 <h4>[로그인 페이지]</h4>
 <details>
-  <summary>회원가입</summary>
+  <summary>일반회원 회원가입</summary>
+  <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/60bf852e-5f2b-4c10-9ca8-e132bcc6f60c)
+  
+  </div>
+</details>
+<details>
+  <summary>일반회원 로그인</summary>
   <div markdown="1">
   </div>
 </details>
 <details>
-  <summary>로그인</summary>
+  <summary>중개사회원 회원가입</summary>
   <div markdown="1">
   </div>
 </details>
 <details>
-  <summary>카카오 소셜 로그인</summary>
+  <summary>중개사회원 로그인</summary>
   <div markdown="1">
   </div>
 </details>
