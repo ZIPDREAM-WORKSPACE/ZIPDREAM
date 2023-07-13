@@ -138,31 +138,49 @@
 <details>
   <summary>일반회원 로그인</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/be79262b-1d2b-4bb3-b70f-2f241d7849ce)
+
   </div>
 </details>
 <details>
   <summary>중개사회원 회원가입</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/b2d69bc8-6784-4a62-85f4-a2758b29e915)
+ 
   </div>
 </details>
 <details>
   <summary>중개사회원 로그인</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/efd2a3eb-fff2-4157-b6ee-0ba20ed23795)
+
   </div>
 </details>
 <details>
   <summary>아이디 찾기</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/6afc68b7-94ab-4715-841e-170c70c7208a)
+
   </div>
 </details>
 <details>
   <summary>비밀번호 찾기</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/13201dd7-ec03-4234-a449-14a19a45d76f)
+
   </div>
 </details>
 <details>
   <summary>회원탈퇴</summary>
   <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/63999021-7624-407e-89b7-64e59e3cefcc)
+ 
   </div>
 </details>
 <hr>
