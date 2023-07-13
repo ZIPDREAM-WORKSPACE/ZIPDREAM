@@ -160,6 +160,14 @@
   </div>
 </details>
 <details>
+  <summary>카카오 소셜 로그인</summary>
+  <div markdown="1">
+
+  ![ezgif com-video-to-gif](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/117425004/ae922902-54da-4605-9c13-62b3e51ae376)
+
+  </div>
+</details>
+<details>
   <summary>아이디 찾기</summary>
   <div markdown="1">
 
