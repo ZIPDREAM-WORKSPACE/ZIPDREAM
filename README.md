@@ -234,7 +234,7 @@
   </div>
 </details>
 <details>
-  <summary>상세페이지로 이동</summary>
+  <summary>상세페이지로 정보 전달하며 이동</summary>
   <div markdown="1">
 
 ![ezgif com-video-to-gif (3)](https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/assets/93081185/1f79215a-18b8-4977-969a-a2784c09598d)
