@@ -67,6 +67,7 @@
 
 <div>
   <img src="https://img.shields.io/badge/spring-6DB33F?style=flat&logo=spring&logoColor=white">
+  <img src="https://img.shields.io/badge/AmazonAws-000000?style=flat&logo=AmazonAws&logoColor=white">
   <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/ApacheTomcat-F8DC75?style=flat&logo=apachetomcat&logoColor=white"/>
 </div>
