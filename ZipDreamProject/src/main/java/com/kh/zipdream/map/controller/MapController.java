@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
 import com.google.gson.Gson;
 import com.kh.zipdream.map.model.service.MapService;
 import com.kh.zipdream.map.model.vo.beopjeongdong;
-@CrossOrigin(originPatterns = "http://localhost:8006")
+@CrossOrigin(originPatterns = "http://3.35.176.204:8080")
 @Controller
 @RequestMapping("/map")
 public class MapController {

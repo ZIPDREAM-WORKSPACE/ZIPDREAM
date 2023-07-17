@@ -427,7 +427,7 @@ function clickLink(url){
 						}, 6000);
 						
 						 $( '.notice1' ).click(function(){
-						 	location.href='http://localhost:8006/zipdream/notice/manage';
+						 	location.href='http://3.35.176.204:8080/zipdream/notice/manage';
 						 });
 		 };
 

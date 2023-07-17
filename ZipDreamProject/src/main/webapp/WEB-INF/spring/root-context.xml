@@ -12,9 +12,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<bean id="realDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/user?characterEncoding=UTF-8" />
+		<property name="url" value="jdbc:mysql://3.39.199.168:3306/user?characterEncoding=UTF-8" />
 		<property name="username" value="user" />
-		<property name="password" value="12345678!" />
+		<property name="password" value="zipdreamzip" />
 
 		<property name="defaultAutoCommit" value="false"/>
 

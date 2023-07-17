@@ -250,7 +250,7 @@
 	
 	<select id="selectNoticeList" resultMap="noticeBoardResultSet">
 		SELECT *
-		FROM USER.NOTICE_BOARD 
+		FROM NOTICE_BOARD 
 		ORDER BY CREATE_DATETIME DESC
 	</select>
 	
