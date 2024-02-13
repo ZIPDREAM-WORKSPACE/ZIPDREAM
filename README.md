@@ -6,7 +6,7 @@
 *조원 : 오현지(조장), 김예진, 류준하, 이유진, 임나훈, 장하은*  
 <br><a href="https://github.com/ZIPDREAM-WORKSPACE/ZIPDREAM/blob/main/ZIPDREAM_%EA%B5%AC%ED%98%84%EC%82%AC%ED%95%AD.pdf">[PPT 다운로드]</a>
 <br><br>
-<a href="http://3.35.176.204:8080/zipdream/">ZIPDREAM 바로가기</a>
+<a href="http://3.35.176.204:8080/zipdream/">ZIPDREAM 바로가기</a> (현재 AWS 인스턴스 종료)
 <br/><br/>
 
 ## 목차
